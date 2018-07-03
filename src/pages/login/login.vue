@@ -5,9 +5,9 @@
 
 </template>
 <script>
+
+import sysmanage from '../../iceMethod/sysManage'
 import { queryIce } from '@/iceMethod/iceClient.js'
-// var sysmanage = require('@/iceMethod/sysManage.js').sysmanage
-// import sys  from '@/iceMethod/sysManage.js'
 
 export default {
 
@@ -17,7 +17,7 @@ export default {
   methods: {
     icetest: function () {
       console.log('点击')
-      // var service = ['loginCS', sysmanage.SysManageServicePrx, 'SysManageService']
+      var service = ['loginCS', sysmanage.SysManageServicePrx, 'SysManageService']
       queryIce(15151515, '15608447849', '123456', function (e) {
         console.log(e)
       })

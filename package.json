@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "array-includes": "^3.0.3",
+    "ice": "^3.7.1",
     "ice-js": "0.0.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

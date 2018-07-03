@@ -28,6 +28,7 @@ module.exports = {
     }
   },
   module: {
+    unknownContextCritical : false, // 静态引用配置
     rules: [
       {
         test: /\.vue$/,
