@@ -6,8 +6,8 @@
 </template>
 <script>
 
-import sysmanage from '../../iceMethod/sysManage'
-import { queryIce } from '@/iceMethod/iceClient.js'
+// import sysmanage from '../../iceMethod/sysManage'
+// import { queryIce } from '@/iceMethod/iceClient.js'
 
 export default {
 
@@ -16,11 +16,21 @@ export default {
   },
   methods: {
     icetest: function () {
-      console.log('点击')
-      var service = ['loginCS', sysmanage.SysManageServicePrx, 'SysManageService']
-      queryIce(15151515, '15608447849', '123456', function (e) {
-        console.log(e)
-      })
+      var service = [, , ]
+
+      // queryIce(sysmanage.SysManageServicePrx, 'SysManageService','loginCS',
+      //   '15888888888', '123456',function (result) {
+      //     console.log(result)
+      //   });
+      queryIce(sysmanage.SysManageServicePrx, 'SysManageService','loginCS',
+        '15888888888', '123456',
+        function (result) {
+
+      },
+        function (error) {
+          console.log(error)
+        }
+        );
     }
   }
 }
