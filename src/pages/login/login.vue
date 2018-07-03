@@ -6,11 +6,9 @@
 </template>
 <script>
 
-// import sysmanage from '../../iceMethod/sysManage'
-// import { queryIce } from '@/iceMethod/iceClient.js'
+
 
 export default {
-
   data () {
     return {}
   },
@@ -18,19 +16,15 @@ export default {
     icetest: function () {
       var service = [, , ]
 
-      // queryIce(sysmanage.SysManageServicePrx, 'SysManageService','loginCS',
-      //   '15888888888', '123456',function (result) {
-      //     console.log(result)
-      //   });
-      queryIce(sysmanage.SysManageServicePrx, 'SysManageService','loginCS',
-        '15888888888', '123456',
-        function (result) {
 
-      },
-        function (error) {
-          console.log(error)
-        }
-        );
+      queryIce(sysmanage.SysManageServicePrx,
+        'SysManageService',
+        'loginCS',
+        '15888888888',
+        '123456',
+        function (object) {
+          console.log(object)
+      });
     }
   }
 }
