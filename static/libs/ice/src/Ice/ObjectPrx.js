@@ -478,9 +478,9 @@ var ObjectPrx = Ice.Class({
         //
         // We only retry local exception, system exceptions aren't retried.
         //
-        // A CloseConnectionException indicates graceful server shutdown, and is therefore
+        // A CloseConnectionException indicates graceful communication shutdown, and is therefore
         // always repeatable without violating "at-most-once". That's because by sending a
-        // close connection message, the server guarantees that all outstanding requests
+        // close connection message, the communication guarantees that all outstanding requests
         // can safely be repeated.
         //
         // An ObjectNotExistException can always be retried as well without violating

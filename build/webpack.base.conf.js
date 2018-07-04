@@ -41,7 +41,7 @@ module.exports = {
         options: {
           presets: ['es2015']
         },
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-communication/client')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

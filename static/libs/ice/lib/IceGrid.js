@@ -25,12 +25,12 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineDictionary(IceGrid, "StringStringDict", "StringStringDictHelper", "Ice.StringHelper", "Ice.StringHelper", false, undefined, undefined);
-        
+
             /**
              * Property descriptor.
-             * 
+             *
              **/
             IceGrid.PropertyDescriptor = Slice.defineStruct(
                 function(name, value)
@@ -49,13 +49,13 @@
                     this.name = __is.readString();
                     this.value = __is.readString();
                 },
-                2, 
+                2,
                 false);
             Slice.defineSequence(IceGrid, "PropertyDescriptorSeqHelper", "IceGrid.PropertyDescriptor", false);
-        
+
             /**
              * A property set descriptor.
-             * 
+             *
              **/
             IceGrid.PropertySetDescriptor = Slice.defineStruct(
                 function(references, properties)
@@ -74,13 +74,13 @@
                     this.references = Ice.StringSeqHelper.read(__is);
                     this.properties = IceGrid.PropertyDescriptorSeqHelper.read(__is);
                 },
-                2, 
+                2,
                 false);
             Slice.defineDictionary(IceGrid, "PropertySetDescriptorDict", "PropertySetDescriptorDictHelper", "Ice.StringHelper", "IceGrid.PropertySetDescriptor", false, undefined, undefined, Ice.HashMap.compareEquals);
-        
+
             /**
              * An Ice object descriptor.
-             * 
+             *
              **/
             IceGrid.ObjectDescriptor = Slice.defineStruct(
                 function(id, type, proxyOptions)
@@ -102,13 +102,13 @@
                     this.type = __is.readString();
                     this.proxyOptions = __is.readString();
                 },
-                4, 
+                4,
                 false);
             Slice.defineSequence(IceGrid, "ObjectDescriptorSeqHelper", "IceGrid.ObjectDescriptor", false);
-        
+
             /**
              * An Ice object adapter descriptor.
-             * 
+             *
              **/
             IceGrid.AdapterDescriptor = Slice.defineStruct(
                 function(name, description, id, replicaGroupId, priority, registerProcess, serverLifetime, objects, allocatables)
@@ -148,13 +148,13 @@
                     this.objects = IceGrid.ObjectDescriptorSeqHelper.read(__is);
                     this.allocatables = IceGrid.ObjectDescriptorSeqHelper.read(__is);
                 },
-                9, 
+                9,
                 false);
             Slice.defineSequence(IceGrid, "AdapterDescriptorSeqHelper", "IceGrid.AdapterDescriptor", false);
-        
+
             /**
              * A Freeze database environment descriptor.
-             * 
+             *
              **/
             IceGrid.DbEnvDescriptor = Slice.defineStruct(
                 function(name, description, dbHome, properties)
@@ -179,13 +179,13 @@
                     this.dbHome = __is.readString();
                     this.properties = IceGrid.PropertyDescriptorSeqHelper.read(__is);
                 },
-                4, 
+                4,
                 false);
             Slice.defineSequence(IceGrid, "DbEnvDescriptorSeqHelper", "IceGrid.DbEnvDescriptor", false);
-        
+
             /**
              * A communicator descriptor.
-             * 
+             *
              **/
             IceGrid.CommunicatorDescriptor = Slice.defineObject(
                 function(adapters, propertySet, dbEnvs, logs, description)
@@ -220,15 +220,15 @@
                     this.description = __is.readString();
                 },
                 false);
-        
+
             IceGrid.CommunicatorDescriptorPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.CommunicatorDescriptor.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.CommunicatorDescriptor, IceGrid.CommunicatorDescriptorPrx);
-        
+
             /**
-             * A distribution descriptor defines an IcePatch2 server and the
-             * directories to retrieve from the patch server.
-             * 
+             * A distribution descriptor defines an IcePatch2 communication and the
+             * directories to retrieve from the patch communication.
+             *
              **/
             IceGrid.DistributionDescriptor = Slice.defineStruct(
                 function(icepatch, directories)
@@ -247,12 +247,12 @@
                     this.icepatch = __is.readString();
                     this.directories = Ice.StringSeqHelper.read(__is);
                 },
-                2, 
+                2,
                 false);
-        
+
             /**
-             * An Ice server descriptor.
-             * 
+             * An Ice communication descriptor.
+             *
              **/
             IceGrid.ServerDescriptor = Slice.defineObject(
                 function(adapters, propertySet, dbEnvs, logs, description, id, exe, iceVersion, pwd, options, envs, activation, activationTimeout, deactivationTimeout, applicationDistrib, distrib, allocatable, user)
@@ -312,15 +312,15 @@
                     this.user = __is.readString();
                 },
                 false);
-        
+
             IceGrid.ServerDescriptorPrx = Slice.defineProxy(IceGrid.CommunicatorDescriptorPrx, IceGrid.ServerDescriptor.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.ServerDescriptor, IceGrid.ServerDescriptorPrx);
             Slice.defineSequence(IceGrid, "ServerDescriptorSeqHelper", "Ice.ObjectHelper", false, "IceGrid.ServerDescriptor");
-        
+
             /**
              * An IceBox service descriptor.
-             * 
+             *
              **/
             IceGrid.ServiceDescriptor = Slice.defineObject(
                 function(adapters, propertySet, dbEnvs, logs, description, name, entry)
@@ -347,15 +347,15 @@
                     this.entry = __is.readString();
                 },
                 false);
-        
+
             IceGrid.ServiceDescriptorPrx = Slice.defineProxy(IceGrid.CommunicatorDescriptorPrx, IceGrid.ServiceDescriptor.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.ServiceDescriptor, IceGrid.ServiceDescriptorPrx);
             Slice.defineSequence(IceGrid, "ServiceDescriptorSeqHelper", "Ice.ObjectHelper", false, "IceGrid.ServiceDescriptor");
-        
+
             /**
-             * A server template instance descriptor.
-             * 
+             * A communication template instance descriptor.
+             *
              **/
             IceGrid.ServerInstanceDescriptor = Slice.defineStruct(
                 function(template, parameterValues, propertySet, servicePropertySets)
@@ -380,13 +380,13 @@
                     this.propertySet = IceGrid.PropertySetDescriptor.read(__is, this.propertySet);
                     this.servicePropertySets = IceGrid.PropertySetDescriptorDictHelper.read(__is);
                 },
-                5, 
+                5,
                 false);
             Slice.defineSequence(IceGrid, "ServerInstanceDescriptorSeqHelper", "IceGrid.ServerInstanceDescriptor", false);
-        
+
             /**
-             * A template descriptor for server or service templates.
-             * 
+             * A template descriptor for communication or service templates.
+             *
              **/
             IceGrid.TemplateDescriptor = Slice.defineStruct(
                 function(descriptor, parameters, parameterDefaults)
@@ -409,13 +409,13 @@
                     this.parameters = Ice.StringSeqHelper.read(__is);
                     this.parameterDefaults = IceGrid.StringStringDictHelper.read(__is);
                 },
-                3, 
+                3,
                 false);
             Slice.defineDictionary(IceGrid, "TemplateDescriptorDict", "TemplateDescriptorDictHelper", "Ice.StringHelper", "IceGrid.TemplateDescriptor", false, undefined, undefined, Ice.HashMap.compareEquals);
-        
+
             /**
              * A service template instance descriptor.
-             * 
+             *
              **/
             IceGrid.ServiceInstanceDescriptor = Slice.defineStruct(
                 function(template, parameterValues, descriptor, propertySet)
@@ -441,13 +441,13 @@
                     __is.readObject(function(__o){ self.descriptor = __o; }, IceGrid.ServiceDescriptor);
                     this.propertySet = IceGrid.PropertySetDescriptor.read(__is, this.propertySet);
                 },
-                5, 
+                5,
                 false);
             Slice.defineSequence(IceGrid, "ServiceInstanceDescriptorSeqHelper", "IceGrid.ServiceInstanceDescriptor", false);
-        
+
             /**
-             * An IceBox server descriptor.
-             * 
+             * An IceBox communication descriptor.
+             *
              **/
             IceGrid.IceBoxDescriptor = Slice.defineObject(
                 function(adapters, propertySet, dbEnvs, logs, description, id, exe, iceVersion, pwd, options, envs, activation, activationTimeout, deactivationTimeout, applicationDistrib, distrib, allocatable, user, services)
@@ -472,14 +472,14 @@
                     this.services = IceGrid.ServiceInstanceDescriptorSeqHelper.read(__is);
                 },
                 false);
-        
+
             IceGrid.IceBoxDescriptorPrx = Slice.defineProxy(IceGrid.ServerDescriptorPrx, IceGrid.IceBoxDescriptor.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.IceBoxDescriptor, IceGrid.IceBoxDescriptorPrx);
-        
+
             /**
              * A node descriptor.
-             * 
+             *
              **/
             IceGrid.NodeDescriptor = Slice.defineStruct(
                 function(variables, serverInstances, servers, loadFactor, description, propertySets)
@@ -510,13 +510,13 @@
                     this.description = __is.readString();
                     this.propertySets = IceGrid.PropertySetDescriptorDictHelper.read(__is);
                 },
-                6, 
+                6,
                 false);
             Slice.defineDictionary(IceGrid, "NodeDescriptorDict", "NodeDescriptorDictHelper", "Ice.StringHelper", "IceGrid.NodeDescriptor", false, undefined, undefined, Ice.HashMap.compareEquals);
-        
+
             /**
              * A base class for load balancing policies.
-             * 
+             *
              **/
             IceGrid.LoadBalancingPolicy = Slice.defineObject(
                 function(nReplicas)
@@ -539,14 +539,14 @@
                     this.nReplicas = __is.readString();
                 },
                 false);
-        
+
             IceGrid.LoadBalancingPolicyPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.LoadBalancingPolicy.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.LoadBalancingPolicy, IceGrid.LoadBalancingPolicyPrx);
-        
+
             /**
              * Random load balancing policy.
-             * 
+             *
              **/
             IceGrid.RandomLoadBalancingPolicy = Slice.defineObject(
                 function(nReplicas)
@@ -560,14 +560,14 @@
                     "::IceGrid::RandomLoadBalancingPolicy"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.RandomLoadBalancingPolicyPrx = Slice.defineProxy(IceGrid.LoadBalancingPolicyPrx, IceGrid.RandomLoadBalancingPolicy.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.RandomLoadBalancingPolicy, IceGrid.RandomLoadBalancingPolicyPrx);
-        
+
             /**
              * Ordered load balancing policy.
-             * 
+             *
              **/
             IceGrid.OrderedLoadBalancingPolicy = Slice.defineObject(
                 function(nReplicas)
@@ -581,14 +581,14 @@
                     "::IceGrid::OrderedLoadBalancingPolicy"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.OrderedLoadBalancingPolicyPrx = Slice.defineProxy(IceGrid.LoadBalancingPolicyPrx, IceGrid.OrderedLoadBalancingPolicy.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.OrderedLoadBalancingPolicy, IceGrid.OrderedLoadBalancingPolicyPrx);
-        
+
             /**
              * Round robin load balancing policy.
-             * 
+             *
              **/
             IceGrid.RoundRobinLoadBalancingPolicy = Slice.defineObject(
                 function(nReplicas)
@@ -602,14 +602,14 @@
                     "::IceGrid::RoundRobinLoadBalancingPolicy"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.RoundRobinLoadBalancingPolicyPrx = Slice.defineProxy(IceGrid.LoadBalancingPolicyPrx, IceGrid.RoundRobinLoadBalancingPolicy.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.RoundRobinLoadBalancingPolicy, IceGrid.RoundRobinLoadBalancingPolicyPrx);
-        
+
             /**
              * Adaptive load balancing policy.
-             * 
+             *
              **/
             IceGrid.AdaptiveLoadBalancingPolicy = Slice.defineObject(
                 function(nReplicas, loadSample)
@@ -633,14 +633,14 @@
                     this.loadSample = __is.readString();
                 },
                 false);
-        
+
             IceGrid.AdaptiveLoadBalancingPolicyPrx = Slice.defineProxy(IceGrid.LoadBalancingPolicyPrx, IceGrid.AdaptiveLoadBalancingPolicy.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.AdaptiveLoadBalancingPolicy, IceGrid.AdaptiveLoadBalancingPolicyPrx);
-        
+
             /**
              * A replica group descriptor.
-             * 
+             *
              **/
             IceGrid.ReplicaGroupDescriptor = Slice.defineStruct(
                 function(id, loadBalancing, proxyOptions, objects, description, filter)
@@ -672,13 +672,13 @@
                     this.description = __is.readString();
                     this.filter = __is.readString();
                 },
-                6, 
+                6,
                 false);
             Slice.defineSequence(IceGrid, "ReplicaGroupDescriptorSeqHelper", "IceGrid.ReplicaGroupDescriptor", false);
-        
+
             /**
              * An application descriptor.
-             * 
+             *
              **/
             IceGrid.ApplicationDescriptor = Slice.defineStruct(
                 function(name, variables, replicaGroups, serverTemplates, serviceTemplates, nodes, distrib, description, propertySets)
@@ -718,13 +718,13 @@
                     this.description = __is.readString();
                     this.propertySets = IceGrid.PropertySetDescriptorDictHelper.read(__is);
                 },
-                10, 
+                10,
                 false);
             Slice.defineSequence(IceGrid, "ApplicationDescriptorSeqHelper", "IceGrid.ApplicationDescriptor", false);
-        
+
             /**
              * A "boxed" string.
-             * 
+             *
              **/
             IceGrid.BoxedString = Slice.defineObject(
                 function(value)
@@ -747,15 +747,15 @@
                     this.value = __is.readString();
                 },
                 false);
-        
+
             IceGrid.BoxedStringPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.BoxedString.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.BoxedString, IceGrid.BoxedStringPrx);
-        
+
             /**
              * A node update descriptor to describe the updates to apply to a
              * node of a deployed application.
-             * 
+             *
              **/
             IceGrid.NodeUpdateDescriptor = Slice.defineStruct(
                 function(name, description, variables, removeVariables, propertySets, removePropertySets, serverInstances, servers, removeServers, loadFactor)
@@ -799,13 +799,13 @@
                     this.removeServers = Ice.StringSeqHelper.read(__is);
                     __is.readObject(function(__o){ self.loadFactor = __o; }, IceGrid.BoxedString);
                 },
-                10, 
+                10,
                 false);
             Slice.defineSequence(IceGrid, "NodeUpdateDescriptorSeqHelper", "IceGrid.NodeUpdateDescriptor", false);
-        
+
             /**
              * A "boxed" distribution descriptor.
-             * 
+             *
              **/
             IceGrid.BoxedDistributionDescriptor = Slice.defineObject(
                 function(value)
@@ -828,15 +828,15 @@
                     this.value = IceGrid.DistributionDescriptor.read(__is, this.value);
                 },
                 false);
-        
+
             IceGrid.BoxedDistributionDescriptorPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.BoxedDistributionDescriptor.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.BoxedDistributionDescriptor, IceGrid.BoxedDistributionDescriptorPrx);
-        
+
             /**
              * An application update descriptor to describe the updates to apply
              * to a deployed application.
-             * 
+             *
              **/
             IceGrid.ApplicationUpdateDescriptor = Slice.defineStruct(
                 function(name, description, distrib, variables, removeVariables, propertySets, removePropertySets, replicaGroups, removeReplicaGroups, serverTemplates, removeServerTemplates, serviceTemplates, removeServiceTemplates, nodes, removeNodes)
@@ -895,9 +895,9 @@
                     this.nodes = IceGrid.NodeUpdateDescriptorSeqHelper.read(__is);
                     this.removeNodes = Ice.StringSeqHelper.read(__is);
                 },
-                15, 
+                15,
                 false);
-        
+
     }());
 
     (function()
@@ -921,11 +921,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * This exception is raised if an application does not exist.
-             * 
+             *
              **/
             IceGrid.ApplicationNotExistException = Slice.defineUserException(
                 function(name, _cause)
@@ -945,10 +945,10 @@
                 },
                 false,
                 false);
-        
+
             /**
-             * This exception is raised if a server does not exist.
-             * 
+             * This exception is raised if a communication does not exist.
+             *
              **/
             IceGrid.ServerNotExistException = Slice.defineUserException(
                 function(id, _cause)
@@ -968,10 +968,10 @@
                 },
                 false,
                 false);
-        
+
             /**
-             * This exception is raised if a server failed to start.
-             * 
+             * This exception is raised if a communication failed to start.
+             *
              **/
             IceGrid.ServerStartException = Slice.defineUserException(
                 function(id, reason, _cause)
@@ -994,10 +994,10 @@
                 },
                 false,
                 false);
-        
+
             /**
-             * This exception is raised if a server failed to stop.
-             * 
+             * This exception is raised if a communication failed to stop.
+             *
              **/
             IceGrid.ServerStopException = Slice.defineUserException(
                 function(id, reason, _cause)
@@ -1020,10 +1020,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if an adapter does not exist.
-             * 
+             *
              **/
             IceGrid.AdapterNotExistException = Slice.defineUserException(
                 function(id, _cause)
@@ -1043,10 +1043,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if an object already exists.
-             * 
+             *
              **/
             IceGrid.ObjectExistsException = Slice.defineUserException(
                 function(id, _cause)
@@ -1066,10 +1066,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if an object is not registered.
-             * 
+             *
              **/
             IceGrid.ObjectNotRegisteredException = Slice.defineUserException(
                 function(id, _cause)
@@ -1089,10 +1089,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a node does not exist.
-             * 
+             *
              **/
             IceGrid.NodeNotExistException = Slice.defineUserException(
                 function(name, _cause)
@@ -1112,10 +1112,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a registry does not exist.
-             * 
+             *
              **/
             IceGrid.RegistryNotExistException = Slice.defineUserException(
                 function(name, _cause)
@@ -1135,10 +1135,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * An exception for deployment errors.
-             * 
+             *
              **/
             IceGrid.DeploymentException = Slice.defineUserException(
                 function(reason, _cause)
@@ -1158,10 +1158,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a node could not be reached.
-             * 
+             *
              **/
             IceGrid.NodeUnreachableException = Slice.defineUserException(
                 function(name, reason, _cause)
@@ -1184,10 +1184,10 @@
                 },
                 false,
                 false);
-        
+
             /**
-             * This exception is raised if a server could not be reached.
-             * 
+             * This exception is raised if a communication could not be reached.
+             *
              **/
             IceGrid.ServerUnreachableException = Slice.defineUserException(
                 function(name, reason, _cause)
@@ -1210,10 +1210,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a registry could not be reached.
-             * 
+             *
              **/
             IceGrid.RegistryUnreachableException = Slice.defineUserException(
                 function(name, reason, _cause)
@@ -1236,11 +1236,11 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if an unknown signal was sent to
-             * to a server.
-             * 
+             * to a communication.
+             *
              **/
             IceGrid.BadSignalException = Slice.defineUserException(
                 function(reason, _cause)
@@ -1260,10 +1260,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a patch failed.
-             * 
+             *
              **/
             IceGrid.PatchException = Slice.defineUserException(
                 function(reasons, _cause)
@@ -1283,11 +1283,11 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a registry lock wasn't
              * acquired or is already held by a session.
-             * 
+             *
              **/
             IceGrid.AccessDeniedException = Slice.defineUserException(
                 function(lockUserId, _cause)
@@ -1307,10 +1307,10 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if the allocation of an object failed.
-             * 
+             *
              **/
             IceGrid.AllocationException = Slice.defineUserException(
                 function(reason, _cause)
@@ -1330,11 +1330,11 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if the request to allocate an object times
              * out.
-             * 
+             *
              **/
             IceGrid.AllocationTimeoutException = Slice.defineUserException(
                 function(reason, _cause)
@@ -1346,11 +1346,11 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a client is denied the ability to create
              * a session with IceGrid.
-             * 
+             *
              **/
             IceGrid.PermissionDeniedException = Slice.defineUserException(
                 function(reason, _cause)
@@ -1370,14 +1370,14 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if an observer is already registered with
              * the registry.
-             * 
+             *
              * @see AdminSession#setObservers
              * @see AdminSession#setObserversByIdentity
-             * 
+             *
              **/
             IceGrid.ObserverAlreadyRegisteredException = Slice.defineUserException(
                 function(id, _cause)
@@ -1397,17 +1397,17 @@
                 },
                 false,
                 false);
-        
+
             /**
              * This exception is raised if a file is not available.
-             * 
+             *
              * @see AdminSession#openServerStdOut
              * @see AdminSession#openServerStdErr
              * @see AdminSession#openNodeStdOut
              * @see AdminSession#openNodeStdErr
              * @see AdminSession#openRegistryStdOut
              * @see AdminSession#openRegistryStdErr
-             * 
+             *
              **/
             IceGrid.FileNotAvailableException = Slice.defineUserException(
                 function(reason, _cause)
@@ -1427,7 +1427,7 @@
                 },
                 false,
                 false);
-        
+
     }());
 
     (function()
@@ -1451,20 +1451,20 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
-             * An enumeration representing the state of the server.
-             * 
+             * An enumeration representing the state of the communication.
+             *
              **/
             IceGrid.ServerState = Slice.defineEnum([
                 ['Inactive', 0], ['Activating', 1], ['ActivationTimedOut', 2], ['Active', 3], ['Deactivating', 4],
                 ['Destroying', 5], ['Destroyed', 6]]);
             Slice.defineDictionary(IceGrid, "StringObjectProxyDict", "StringObjectProxyDictHelper", "Ice.StringHelper", "Ice.ObjectPrx", false, undefined, undefined);
-        
+
             /**
              * Information about an Ice object.
-             * 
+             *
              **/
             IceGrid.ObjectInfo = Slice.defineStruct(
                 function(proxy, type)
@@ -1483,13 +1483,13 @@
                     this.proxy = __is.readProxy();
                     this.type = __is.readString();
                 },
-                3, 
+                3,
                 false);
             Slice.defineSequence(IceGrid, "ObjectInfoSeqHelper", "IceGrid.ObjectInfo", false);
-        
+
             /**
              * Information about an adapter registered with the IceGrid registry.
-             * 
+             *
              **/
             IceGrid.AdapterInfo = Slice.defineStruct(
                 function(id, proxy, replicaGroupId)
@@ -1511,13 +1511,13 @@
                     this.proxy = __is.readProxy();
                     this.replicaGroupId = __is.readString();
                 },
-                4, 
+                4,
                 false);
             Slice.defineSequence(IceGrid, "AdapterInfoSeqHelper", "IceGrid.AdapterInfo", false);
-        
+
             /**
-             * Information about a server managed by an IceGrid node.
-             * 
+             * Information about a communication managed by an IceGrid node.
+             *
              **/
             IceGrid.ServerInfo = Slice.defineStruct(
                 function(application, uuid, revision, node, descriptor, sessionId)
@@ -1549,12 +1549,12 @@
                     __is.readObject(function(__o){ self.descriptor = __o; }, IceGrid.ServerDescriptor);
                     this.sessionId = __is.readString();
                 },
-                9, 
+                9,
                 false);
-        
+
             /**
              * Information about an IceGrid node.
-             * 
+             *
              **/
             IceGrid.NodeInfo = Slice.defineStruct(
                 function(name, os, hostname, release, version, machine, nProcessors, dataDir)
@@ -1591,12 +1591,12 @@
                     this.nProcessors = __is.readInt();
                     this.dataDir = __is.readString();
                 },
-                11, 
+                11,
                 false);
-        
+
             /**
              * Information about an IceGrid registry replica.
-             * 
+             *
              **/
             IceGrid.RegistryInfo = Slice.defineStruct(
                 function(name, hostname)
@@ -1615,13 +1615,13 @@
                     this.name = __is.readString();
                     this.hostname = __is.readString();
                 },
-                2, 
+                2,
                 false);
             Slice.defineSequence(IceGrid, "RegistryInfoSeqHelper", "IceGrid.RegistryInfo", false);
-        
+
             /**
              * Information about the load of a node.
-             * 
+             *
              **/
             IceGrid.LoadInfo = Slice.defineStruct(
                 function(avg1, avg5, avg15)
@@ -1643,12 +1643,12 @@
                     this.avg5 = __is.readFloat();
                     this.avg15 = __is.readFloat();
                 },
-                12, 
+                12,
                 true);
-        
+
             /**
              * Information about an IceGrid application.
-             * 
+             *
              **/
             IceGrid.ApplicationInfo = Slice.defineStruct(
                 function(uuid, createTime, createUser, updateTime, updateUser, revision, descriptor)
@@ -1682,13 +1682,13 @@
                     this.revision = __is.readInt();
                     this.descriptor = IceGrid.ApplicationDescriptor.read(__is, this.descriptor);
                 },
-                33, 
+                33,
                 false);
             Slice.defineSequence(IceGrid, "ApplicationInfoSeqHelper", "IceGrid.ApplicationInfo", false);
-        
+
             /**
              * Information about updates to an IceGrid application.
-             * 
+             *
              **/
             IceGrid.ApplicationUpdateInfo = Slice.defineStruct(
                 function(updateTime, updateUser, revision, descriptor)
@@ -1713,15 +1713,15 @@
                     this.revision = __is.readInt();
                     this.descriptor = IceGrid.ApplicationUpdateDescriptor.read(__is, this.descriptor);
                 },
-                28, 
+                28,
                 false);
-        
+
             /**
              * The IceGrid administrative interface. </p>
              * <p class="Warning">Allowing access to this interface
              * is a security risk! Please see the IceGrid documentation
              * for further information.
-             * 
+             *
              **/
             IceGrid.Admin = Slice.defineObject(
                 undefined,
@@ -1731,123 +1731,123 @@
                     "::IceGrid::Admin"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.AdminPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.Admin.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.Admin, IceGrid.AdminPrx,
             {
-                "addApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], , 
+                "addApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], ,
                 [
                     IceGrid.AccessDeniedException,
                     IceGrid.DeploymentException
                 ], true, ],
-                "syncApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], , 
-                [
-                    IceGrid.AccessDeniedException,
-                    IceGrid.ApplicationNotExistException,
-                    IceGrid.DeploymentException
-                ], true, ],
-                "updateApplication": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], , 
+                "syncApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], ,
                 [
                     IceGrid.AccessDeniedException,
                     IceGrid.ApplicationNotExistException,
                     IceGrid.DeploymentException
                 ], true, ],
-                "syncApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationDescriptor]], , 
+                "updateApplication": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], ,
                 [
                     IceGrid.AccessDeniedException,
                     IceGrid.ApplicationNotExistException,
                     IceGrid.DeploymentException
                 ], true, ],
-                "updateApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], , 
+                "syncApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationDescriptor]], ,
                 [
                     IceGrid.AccessDeniedException,
                     IceGrid.ApplicationNotExistException,
                     IceGrid.DeploymentException
                 ], true, ],
-                "removeApplication": [, , , , , , [[7]], , 
+                "updateApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], ,
+                [
+                    IceGrid.AccessDeniedException,
+                    IceGrid.ApplicationNotExistException,
+                    IceGrid.DeploymentException
+                ], true, ],
+                "removeApplication": [, , , , , , [[7]], ,
                 [
                     IceGrid.AccessDeniedException,
                     IceGrid.ApplicationNotExistException,
                     IceGrid.DeploymentException
                 ], , ],
-                "instantiateServer": [, , , , , , [[7], [7], [IceGrid.ServerInstanceDescriptor]], , 
+                "instantiateServer": [, , , , , , [[7], [7], [IceGrid.ServerInstanceDescriptor]], ,
                 [
                     IceGrid.AccessDeniedException,
                     IceGrid.ApplicationNotExistException,
                     IceGrid.DeploymentException
                 ], , ],
-                "patchApplication": [, , , 1, , , [[7], [1]], , 
+                "patchApplication": [, , , 1, , , [[7], [1]], ,
                 [
                     IceGrid.ApplicationNotExistException,
                     IceGrid.PatchException
                 ], , ],
-                "getApplicationInfo": [, 2, 1, , , [IceGrid.ApplicationInfo], [[7]], , 
+                "getApplicationInfo": [, 2, 1, , , [IceGrid.ApplicationInfo], [[7]], ,
                 [
                     IceGrid.ApplicationNotExistException
                 ], , true],
-                "getDefaultApplicationDescriptor": [, 2, 1, , , [IceGrid.ApplicationDescriptor], , , 
+                "getDefaultApplicationDescriptor": [, 2, 1, , , [IceGrid.ApplicationDescriptor], , ,
                 [
                     IceGrid.DeploymentException
                 ], , true],
                 "getAllApplicationNames": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-                "getServerInfo": [, 2, 1, , , [IceGrid.ServerInfo], [[7]], , 
+                "getServerInfo": [, 2, 1, , , [IceGrid.ServerInfo], [[7]], ,
                 [
                     IceGrid.ServerNotExistException
                 ], , true],
-                "getServerState": [, 2, 1, , , [IceGrid.ServerState.__helper], [[7]], , 
+                "getServerState": [, 2, 1, , , [IceGrid.ServerState.__helper], [[7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "getServerPid": [, 2, 1, , , [3], [[7]], , 
+                "getServerPid": [, 2, 1, , , [3], [[7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
                 "getServerAdminCategory": [, 2, 2, , , [7], , , , , ],
-                "getServerAdmin": [, 2, 2, , , [9], [[7]], , 
+                "getServerAdmin": [, 2, 2, , , [9], [[7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "enableServer": [, 2, 2, , , , [[7], [1]], , 
+                "enableServer": [, 2, 2, , , , [[7], [1]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "isServerEnabled": [, 2, 1, , , [1], [[7]], , 
+                "isServerEnabled": [, 2, 1, , , [1], [[7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "startServer": [, , , 1, , , [[7]], , 
+                "startServer": [, , , 1, , , [[7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException,
                     IceGrid.ServerStartException
                 ], , ],
-                "stopServer": [, , , 1, , , [[7]], , 
+                "stopServer": [, , , 1, , , [[7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException,
                     IceGrid.ServerStopException
                 ], , ],
-                "patchServer": [, , , 1, , , [[7], [1]], , 
+                "patchServer": [, , , 1, , , [[7], [1]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.PatchException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "sendSignal": [, , , , , , [[7], [7]], , 
+                "sendSignal": [, , , , , , [[7], [7]], ,
                 [
                     IceGrid.BadSignalException,
                     IceGrid.DeploymentException,
@@ -1855,91 +1855,91 @@
                     IceGrid.ServerNotExistException
                 ], , ],
                 "getAllServerIds": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-                "getAdapterInfo": [, 2, 1, , , ["IceGrid.AdapterInfoSeqHelper"], [[7]], , 
+                "getAdapterInfo": [, 2, 1, , , ["IceGrid.AdapterInfoSeqHelper"], [[7]], ,
                 [
                     IceGrid.AdapterNotExistException
                 ], , ],
-                "removeAdapter": [, , , , , , [[7]], , 
+                "removeAdapter": [, , , , , , [[7]], ,
                 [
                     IceGrid.AdapterNotExistException,
                     IceGrid.DeploymentException
                 ], , ],
                 "getAllAdapterIds": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-                "addObject": [, , , , , , [[9]], , 
+                "addObject": [, , , , , , [[9]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.ObjectExistsException
                 ], , ],
-                "updateObject": [, , , , , , [[9]], , 
+                "updateObject": [, , , , , , [[9]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.ObjectNotRegisteredException
                 ], , ],
-                "addObjectWithType": [, , , , , , [[9], [7]], , 
+                "addObjectWithType": [, , , , , , [[9], [7]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.ObjectExistsException
                 ], , ],
-                "removeObject": [, , , , , , [[Ice.Identity]], , 
+                "removeObject": [, , , , , , [[Ice.Identity]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.ObjectNotRegisteredException
                 ], , ],
-                "getObjectInfo": [, 2, 1, , , [IceGrid.ObjectInfo], [[Ice.Identity]], , 
+                "getObjectInfo": [, 2, 1, , , [IceGrid.ObjectInfo], [[Ice.Identity]], ,
                 [
                     IceGrid.ObjectNotRegisteredException
                 ], , ],
                 "getObjectInfosByType": [, 2, 1, , , ["IceGrid.ObjectInfoSeqHelper"], [[7]], , , , ],
                 "getAllObjectInfos": [, 2, 1, , , ["IceGrid.ObjectInfoSeqHelper"], [[7]], , , , ],
-                "pingNode": [, 2, 1, , , [1], [[7]], , 
+                "pingNode": [, 2, 1, , , [1], [[7]], ,
                 [
                     IceGrid.NodeNotExistException
                 ], , ],
-                "getNodeLoad": [, 2, 1, , , [IceGrid.LoadInfo], [[7]], , 
+                "getNodeLoad": [, 2, 1, , , [IceGrid.LoadInfo], [[7]], ,
                 [
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "getNodeInfo": [, 2, 1, , , [IceGrid.NodeInfo], [[7]], , 
+                "getNodeInfo": [, 2, 1, , , [IceGrid.NodeInfo], [[7]], ,
                 [
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "getNodeAdmin": [, 2, 2, , , [9], [[7]], , 
+                "getNodeAdmin": [, 2, 2, , , [9], [[7]], ,
                 [
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "getNodeProcessorSocketCount": [, 2, 1, , , [3], [[7]], , 
+                "getNodeProcessorSocketCount": [, 2, 1, , , [3], [[7]], ,
                 [
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "shutdownNode": [, , , , , , [[7]], , 
+                "shutdownNode": [, , , , , , [[7]], ,
                 [
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "getNodeHostname": [, 2, 1, , , [7], [[7]], , 
+                "getNodeHostname": [, 2, 1, , , [7], [[7]], ,
                 [
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
                 "getAllNodeNames": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-                "pingRegistry": [, 2, 2, , , [1], [[7]], , 
+                "pingRegistry": [, 2, 2, , , [1], [[7]], ,
                 [
                     IceGrid.RegistryNotExistException
                 ], , ],
-                "getRegistryInfo": [, 2, 2, , , [IceGrid.RegistryInfo], [[7]], , 
+                "getRegistryInfo": [, 2, 2, , , [IceGrid.RegistryInfo], [[7]], ,
                 [
                     IceGrid.RegistryNotExistException,
                     IceGrid.RegistryUnreachableException
                 ], , ],
-                "getRegistryAdmin": [, 2, 2, , , [9], [[7]], , 
+                "getRegistryAdmin": [, 2, 2, , , [9], [[7]], ,
                 [
                     IceGrid.RegistryNotExistException
                 ], , ],
-                "shutdownRegistry": [, 2, 2, , , , [[7]], , 
+                "shutdownRegistry": [, 2, 2, , , , [[7]], ,
                 [
                     IceGrid.RegistryNotExistException,
                     IceGrid.RegistryUnreachableException
@@ -1948,10 +1948,10 @@
                 "shutdown": [, , , , , , , , , , ],
                 "getSliceChecksums": [, 2, 1, , , ["Ice.SliceChecksumDictHelper"], , , , , ]
             });
-        
+
             /**
              * This interface provides access to IceGrid log file contents.
-             * 
+             *
              **/
             IceGrid.FileIterator = Slice.defineObject(
                 undefined,
@@ -1961,27 +1961,27 @@
                     "::IceGrid::FileIterator"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.FileIteratorPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.FileIterator.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.FileIterator, IceGrid.FileIteratorPrx,
             {
-                "read": [, , , , , [1], [[3]], [["Ice.StringSeqHelper"]], 
+                "read": [, , , , , [1], [[3]], [["Ice.StringSeqHelper"]],
                 [
                     IceGrid.FileNotAvailableException
                 ], , ],
                 "destroy": [, , , , , , , , , , ]
             });
-        
+
             /**
              * Used by administrative clients to view,
              * update, and receive observer updates from the IceGrid
              * registry. Admin sessions are created either with the {@link Registry}
              * object or the registry admin {@link Glacier2.SessionManager} object.
-             * 
+             *
              * @see Registry
              * @see Glacier2.SessionManager
-             * 
+             *
              **/
             IceGrid.AdminSession = Slice.defineObject(
                 undefined,
@@ -1995,79 +1995,79 @@
                     "::IceGrid::AdminSession"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.AdminSessionPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.AdminSession.ice_staticId, [
                 Glacier2.SessionPrx]);
-        
+
             Slice.defineOperations(IceGrid.AdminSession, IceGrid.AdminSessionPrx,
             {
                 "keepAlive": [, 2, 2, , , , , , , , ],
                 "getAdmin": [, 2, 1, , , ["IceGrid.AdminPrx"], , , , , ],
                 "getAdminCallbackTemplate": [, 2, 2, , , [9], , , , , ],
-                "setObservers": [, 2, 2, , , , [["IceGrid.RegistryObserverPrx"], ["IceGrid.NodeObserverPrx"], ["IceGrid.ApplicationObserverPrx"], ["IceGrid.AdapterObserverPrx"], ["IceGrid.ObjectObserverPrx"]], , 
+                "setObservers": [, 2, 2, , , , [["IceGrid.RegistryObserverPrx"], ["IceGrid.NodeObserverPrx"], ["IceGrid.ApplicationObserverPrx"], ["IceGrid.AdapterObserverPrx"], ["IceGrid.ObjectObserverPrx"]], ,
                 [
                     IceGrid.ObserverAlreadyRegisteredException
                 ], , ],
-                "setObserversByIdentity": [, 2, 2, , , , [[Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity]], , 
+                "setObserversByIdentity": [, 2, 2, , , , [[Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity]], ,
                 [
                     IceGrid.ObserverAlreadyRegisteredException
                 ], , ],
-                "startUpdate": [, , , , , [3], , , 
+                "startUpdate": [, , , , , [3], , ,
                 [
                     IceGrid.AccessDeniedException
                 ], , ],
-                "finishUpdate": [, , , , , , , , 
+                "finishUpdate": [, , , , , , , ,
                 [
                     IceGrid.AccessDeniedException
                 ], , ],
                 "getReplicaName": [, 2, 2, , , [7], , , , , ],
-                "openServerLog": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [7], [3]], , 
+                "openServerLog": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [7], [3]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.FileNotAvailableException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "openServerStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+                "openServerStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.FileNotAvailableException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "openServerStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+                "openServerStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
                 [
                     IceGrid.DeploymentException,
                     IceGrid.FileNotAvailableException,
                     IceGrid.NodeUnreachableException,
                     IceGrid.ServerNotExistException
                 ], , ],
-                "openNodeStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+                "openNodeStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
                 [
                     IceGrid.FileNotAvailableException,
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "openNodeStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+                "openNodeStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
                 [
                     IceGrid.FileNotAvailableException,
                     IceGrid.NodeNotExistException,
                     IceGrid.NodeUnreachableException
                 ], , ],
-                "openRegistryStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+                "openRegistryStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
                 [
                     IceGrid.FileNotAvailableException,
                     IceGrid.RegistryNotExistException,
                     IceGrid.RegistryUnreachableException
                 ], , ],
-                "openRegistryStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+                "openRegistryStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
                 [
                     IceGrid.FileNotAvailableException,
                     IceGrid.RegistryNotExistException,
                     IceGrid.RegistryUnreachableException
                 ], , ]
             });
-        
+
     }());
 
     (function()
@@ -2091,11 +2091,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * This exception is raised if an error occurs during parsing.
-             * 
+             *
              **/
             IceGrid.ParseException = Slice.defineUserException(
                 function(reason, _cause)
@@ -2115,12 +2115,12 @@
                 },
                 false,
                 false);
-        
+
             /**
              * <tt>icegridadmin</tt> provides a {@link FileParser}
              * object to transform XML files into {@link ApplicationDescriptor}
              * objects.
-             * 
+             *
              **/
             IceGrid.FileParser = Slice.defineObject(
                 undefined,
@@ -2130,17 +2130,17 @@
                     "::IceGrid::FileParser"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.FileParserPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.FileParser.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.FileParser, IceGrid.FileParserPrx,
             {
-                "parse": [, 2, 2, , , [IceGrid.ApplicationDescriptor], [[7], ["IceGrid.AdminPrx"]], , 
+                "parse": [, 2, 2, , , [IceGrid.ApplicationDescriptor], [[7], ["IceGrid.AdminPrx"]], ,
                 [
                     IceGrid.ParseException
                 ], , true]
             });
-        
+
     }());
 
     (function()
@@ -2164,15 +2164,15 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * The IceGrid locator interface provides access to the {@link Query}
              * and {@link Registry} object of the IceGrid registry.
-             * 
+             *
              * @see Query
              * @see Registry
-             * 
+             *
              **/
             IceGrid.Locator = Slice.defineObject(
                 undefined,
@@ -2186,16 +2186,16 @@
                     "::IceGrid::Locator"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.LocatorPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.Locator.ice_staticId, [
                 Ice.LocatorPrx]);
-        
+
             Slice.defineOperations(IceGrid.Locator, IceGrid.LocatorPrx,
             {
                 "getLocalRegistry": [, 2, 2, , , ["IceGrid.RegistryPrx"], , , , , ],
                 "getLocalQuery": [, 2, 2, , , ["IceGrid.QueryPrx"], , , , , ]
             });
-        
+
     }());
 
     (function()
@@ -2219,11 +2219,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
-             * Dynamic information about the state of a server.
-             * 
+             * Dynamic information about the state of a communication.
+             *
              **/
             IceGrid.ServerDynamicInfo = Slice.defineStruct(
                 function(id, state, pid, enabled)
@@ -2248,13 +2248,13 @@
                     this.pid = __is.readInt();
                     this.enabled = __is.readBool();
                 },
-                7, 
+                7,
                 false);
             Slice.defineSequence(IceGrid, "ServerDynamicInfoSeqHelper", "IceGrid.ServerDynamicInfo", false);
-        
+
             /**
              * Dynamic information about the state of an adapter.
-             * 
+             *
              **/
             IceGrid.AdapterDynamicInfo = Slice.defineStruct(
                 function(id, proxy)
@@ -2273,13 +2273,13 @@
                     this.id = __is.readString();
                     this.proxy = __is.readProxy();
                 },
-                3, 
+                3,
                 false);
             Slice.defineSequence(IceGrid, "AdapterDynamicInfoSeqHelper", "IceGrid.AdapterDynamicInfo", false);
-        
+
             /**
              * Dynamic information about the state of a node.
-             * 
+             *
              **/
             IceGrid.NodeDynamicInfo = Slice.defineStruct(
                 function(info, servers, adapters)
@@ -2301,15 +2301,15 @@
                     this.servers = IceGrid.ServerDynamicInfoSeqHelper.read(__is);
                     this.adapters = IceGrid.AdapterDynamicInfoSeqHelper.read(__is);
                 },
-                13, 
+                13,
                 false);
             Slice.defineSequence(IceGrid, "NodeDynamicInfoSeqHelper", "IceGrid.NodeDynamicInfo", false);
-        
+
             /**
              * The node observer interface. Observers should implement this
              * interface to receive information about the state of the IceGrid
              * nodes.
-             * 
+             *
              **/
             IceGrid.NodeObserver = Slice.defineObject(
                 undefined,
@@ -2319,9 +2319,9 @@
                     "::IceGrid::NodeObserver"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.NodeObserverPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.NodeObserver.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.NodeObserver, IceGrid.NodeObserverPrx,
             {
                 "nodeInit": [, , , , , , [["IceGrid.NodeDynamicInfoSeqHelper"]], , , , ],
@@ -2330,12 +2330,12 @@
                 "updateServer": [, , , , , , [[7], [IceGrid.ServerDynamicInfo]], , , , ],
                 "updateAdapter": [, , , , , , [[7], [IceGrid.AdapterDynamicInfo]], , , , ]
             });
-        
+
             /**
              * The database observer interface. Observers should implement this
              * interface to receive information about the state of the IceGrid
              * registry database.
-             * 
+             *
              **/
             IceGrid.ApplicationObserver = Slice.defineObject(
                 undefined,
@@ -2345,9 +2345,9 @@
                     "::IceGrid::ApplicationObserver"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.ApplicationObserverPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.ApplicationObserver.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.ApplicationObserver, IceGrid.ApplicationObserverPrx,
             {
                 "applicationInit": [, , , , , , [[3], ["IceGrid.ApplicationInfoSeqHelper"]], , , true, ],
@@ -2355,11 +2355,11 @@
                 "applicationRemoved": [, , , , , , [[3], [7]], , , , ],
                 "applicationUpdated": [, , , , , , [[3], [IceGrid.ApplicationUpdateInfo]], , , true, ]
             });
-        
+
             /**
              * This interface allows applications to monitor the state of object
              * adapters that are registered with IceGrid.
-             * 
+             *
              **/
             IceGrid.AdapterObserver = Slice.defineObject(
                 undefined,
@@ -2369,9 +2369,9 @@
                     "::IceGrid::AdapterObserver"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.AdapterObserverPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.AdapterObserver.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.AdapterObserver, IceGrid.AdapterObserverPrx,
             {
                 "adapterInit": [, , , , , , [["IceGrid.AdapterInfoSeqHelper"]], , , , ],
@@ -2379,10 +2379,10 @@
                 "adapterUpdated": [, , , , , , [[IceGrid.AdapterInfo]], , , , ],
                 "adapterRemoved": [, , , , , , [[7]], , , , ]
             });
-        
+
             /**
              * This interface allows applications to monitor IceGrid well-known objects.
-             * 
+             *
              **/
             IceGrid.ObjectObserver = Slice.defineObject(
                 undefined,
@@ -2392,9 +2392,9 @@
                     "::IceGrid::ObjectObserver"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.ObjectObserverPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.ObjectObserver.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.ObjectObserver, IceGrid.ObjectObserverPrx,
             {
                 "objectInit": [, , , , , , [["IceGrid.ObjectInfoSeqHelper"]], , , , ],
@@ -2402,11 +2402,11 @@
                 "objectUpdated": [, , , , , , [[IceGrid.ObjectInfo]], , , , ],
                 "objectRemoved": [, , , , , , [[Ice.Identity]], , , , ]
             });
-        
+
             /**
              * This interface allows applications to monitor changes the state
              * of the registry.
-             * 
+             *
              **/
             IceGrid.RegistryObserver = Slice.defineObject(
                 undefined,
@@ -2416,16 +2416,16 @@
                     "::IceGrid::RegistryObserver"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.RegistryObserverPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.RegistryObserver.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.RegistryObserver, IceGrid.RegistryObserverPrx,
             {
                 "registryInit": [, , , , , , [["IceGrid.RegistryInfoSeqHelper"]], , , , ],
                 "registryUp": [, , , , , , [[IceGrid.RegistryInfo]], , , , ],
                 "registryDown": [, , , , , , [[7]], , , , ]
             });
-        
+
     }());
 
     (function()
@@ -2449,19 +2449,19 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * Determines which load sampling interval to use.
-             * 
+             *
              **/
             IceGrid.LoadSample = Slice.defineEnum([
                 ['LoadSample1', 0], ['LoadSample5', 1], ['LoadSample15', 2]]);
-        
+
             /**
              * The IceGrid query interface. This interface is accessible to
              * Ice clients who wish to look up well-known objects.
-             * 
+             *
              **/
             IceGrid.Query = Slice.defineObject(
                 undefined,
@@ -2471,9 +2471,9 @@
                     "::IceGrid::Query"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.QueryPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.Query.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.Query, IceGrid.QueryPrx,
             {
                 "findObjectById": [, 2, 1, , , [9], [[Ice.Identity]], , , , ],
@@ -2482,7 +2482,7 @@
                 "findAllObjectsByType": [, 2, 1, , , ["Ice.ObjectProxySeqHelper"], [[7]], , , , ],
                 "findAllReplicas": [, 2, 2, , , ["Ice.ObjectProxySeqHelper"], [[9]], , , , ]
             });
-        
+
     }());
 
     (function()
@@ -2506,17 +2506,17 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * A session object is used by IceGrid clients to allocate and
              * release objects. Client sessions are either created with the
              * {@link Registry} object or the registry client {@link Glacier2.SessionManager}
              * object.
-             * 
+             *
              * @see Registry
              * @see Glacier2.SessionManager
-             * 
+             *
              **/
             IceGrid.Session = Slice.defineObject(
                 undefined,
@@ -2530,30 +2530,30 @@
                     "::IceGrid::Session"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.SessionPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.Session.ice_staticId, [
                 Glacier2.SessionPrx]);
-        
+
             Slice.defineOperations(IceGrid.Session, IceGrid.SessionPrx,
             {
                 "keepAlive": [, 2, 2, , , , , , , , ],
-                "allocateObjectById": [, , , 1, , [9], [[Ice.Identity]], , 
+                "allocateObjectById": [, , , 1, , [9], [[Ice.Identity]], ,
                 [
                     IceGrid.AllocationException,
                     IceGrid.ObjectNotRegisteredException
                 ], , ],
-                "allocateObjectByType": [, , , 1, , [9], [[7]], , 
+                "allocateObjectByType": [, , , 1, , [9], [[7]], ,
                 [
                     IceGrid.AllocationException
                 ], , ],
-                "releaseObject": [, , , , , , [[Ice.Identity]], , 
+                "releaseObject": [, , , , , , [[Ice.Identity]], ,
                 [
                     IceGrid.AllocationException,
                     IceGrid.ObjectNotRegisteredException
                 ], , ],
                 "setAllocationTimeout": [, 2, 2, , , , [[3]], , , , ]
             });
-        
+
     }());
 
     (function()
@@ -2577,15 +2577,15 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * The IceGrid registry allows clients create sessions
              * directly with the registry.
-             * 
+             *
              * @see Session
              * @see AdminSession
-             * 
+             *
              **/
             IceGrid.Registry = Slice.defineObject(
                 undefined,
@@ -2595,31 +2595,31 @@
                     "::IceGrid::Registry"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.RegistryPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.Registry.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.Registry, IceGrid.RegistryPrx,
             {
-                "createSession": [, , , , , ["IceGrid.SessionPrx"], [[7], [7]], , 
+                "createSession": [, , , , , ["IceGrid.SessionPrx"], [[7], [7]], ,
                 [
                     IceGrid.PermissionDeniedException
                 ], , ],
-                "createAdminSession": [, , , , , ["IceGrid.AdminSessionPrx"], [[7], [7]], , 
+                "createAdminSession": [, , , , , ["IceGrid.AdminSessionPrx"], [[7], [7]], ,
                 [
                     IceGrid.PermissionDeniedException
                 ], , ],
-                "createSessionFromSecureConnection": [, , , , , ["IceGrid.SessionPrx"], , , 
+                "createSessionFromSecureConnection": [, , , , , ["IceGrid.SessionPrx"], , ,
                 [
                     IceGrid.PermissionDeniedException
                 ], , ],
-                "createAdminSessionFromSecureConnection": [, , , , , ["IceGrid.AdminSessionPrx"], , , 
+                "createAdminSessionFromSecureConnection": [, , , , , ["IceGrid.AdminSessionPrx"], , ,
                 [
                     IceGrid.PermissionDeniedException
                 ], , ],
                 "getSessionTimeout": [, 2, 1, , , [3], , , , , ],
                 "getACMTimeout": [, 2, 1, , , [3], , , , , ]
             });
-        
+
     }());
 
     (function()
@@ -2643,12 +2643,12 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * This exception is raised if a user account for a given session
              * identifier can't be found.
-             * 
+             *
              **/
             IceGrid.UserAccountNotFoundException = Slice.defineUserException(
                 function(_cause)
@@ -2660,11 +2660,11 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * A user account mapper object is used by IceGrid nodes to map
              * session identifiers to user accounts.
-             * 
+             *
              **/
             IceGrid.UserAccountMapper = Slice.defineObject(
                 undefined,
@@ -2674,17 +2674,17 @@
                     "::IceGrid::UserAccountMapper"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceGrid.UserAccountMapperPrx = Slice.defineProxy(Ice.ObjectPrx, IceGrid.UserAccountMapper.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceGrid.UserAccountMapper, IceGrid.UserAccountMapperPrx,
             {
-                "getUserAccount": [, , , , , [7], [[7]], , 
+                "getUserAccount": [, , , , , [7], [[7]], ,
                 [
                     IceGrid.UserAccountNotFoundException
                 ], , ]
             });
-        
+
     }());
 
     __root.IceGrid = IceGrid;

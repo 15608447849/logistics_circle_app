@@ -189,7 +189,7 @@ var RouterInfo = Ice.Class({
             throw new Ice.NoEndpointException();
         }
 
-        serverProxy = serverProxy.ice_router(null); // The server proxy cannot be routed.
+        serverProxy = serverProxy.ice_router(null); // The communication proxy cannot be routed.
         this._serverEndpoints = serverProxy.__reference().getEndpoints();
         return this._serverEndpoints;
     },

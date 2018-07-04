@@ -24,7 +24,7 @@
 /* slice2js browser-bundle-skip-end */
 /* slice2js browser-bundle-skip */
     var __M = require("../Ice/ModuleRegistry").Ice.__M;
-    var Ice = __M.require(module, 
+    var Ice = __M.require(module,
     [
         "../Ice/Object",
         "../Ice/ObjectPrx",
@@ -37,7 +37,7 @@
         "../Ice/Identity",
         "../Ice/BuiltinSequences"
     ]).Ice;
-    
+
     var Slice = Ice.Slice;
 /* slice2js browser-bundle-skip-end */
 /* slice2js browser-bundle-skip */
@@ -48,7 +48,7 @@
 
     /**
      * Property descriptor.
-     * 
+     *
      **/
     IceGrid.PropertyDescriptor = Slice.defineStruct(
         function(name, value)
@@ -67,13 +67,13 @@
             this.name = __is.readString();
             this.value = __is.readString();
         },
-        2, 
+        2,
         false);
     Slice.defineSequence(IceGrid, "PropertyDescriptorSeqHelper", "IceGrid.PropertyDescriptor", false);
 
     /**
      * A property set descriptor.
-     * 
+     *
      **/
     IceGrid.PropertySetDescriptor = Slice.defineStruct(
         function(references, properties)
@@ -92,13 +92,13 @@
             this.references = Ice.StringSeqHelper.read(__is);
             this.properties = IceGrid.PropertyDescriptorSeqHelper.read(__is);
         },
-        2, 
+        2,
         false);
     Slice.defineDictionary(IceGrid, "PropertySetDescriptorDict", "PropertySetDescriptorDictHelper", "Ice.StringHelper", "IceGrid.PropertySetDescriptor", false, undefined, undefined, Ice.HashMap.compareEquals);
 
     /**
      * An Ice object descriptor.
-     * 
+     *
      **/
     IceGrid.ObjectDescriptor = Slice.defineStruct(
         function(id, type, proxyOptions)
@@ -120,13 +120,13 @@
             this.type = __is.readString();
             this.proxyOptions = __is.readString();
         },
-        4, 
+        4,
         false);
     Slice.defineSequence(IceGrid, "ObjectDescriptorSeqHelper", "IceGrid.ObjectDescriptor", false);
 
     /**
      * An Ice object adapter descriptor.
-     * 
+     *
      **/
     IceGrid.AdapterDescriptor = Slice.defineStruct(
         function(name, description, id, replicaGroupId, priority, registerProcess, serverLifetime, objects, allocatables)
@@ -166,13 +166,13 @@
             this.objects = IceGrid.ObjectDescriptorSeqHelper.read(__is);
             this.allocatables = IceGrid.ObjectDescriptorSeqHelper.read(__is);
         },
-        9, 
+        9,
         false);
     Slice.defineSequence(IceGrid, "AdapterDescriptorSeqHelper", "IceGrid.AdapterDescriptor", false);
 
     /**
      * A Freeze database environment descriptor.
-     * 
+     *
      **/
     IceGrid.DbEnvDescriptor = Slice.defineStruct(
         function(name, description, dbHome, properties)
@@ -197,13 +197,13 @@
             this.dbHome = __is.readString();
             this.properties = IceGrid.PropertyDescriptorSeqHelper.read(__is);
         },
-        4, 
+        4,
         false);
     Slice.defineSequence(IceGrid, "DbEnvDescriptorSeqHelper", "IceGrid.DbEnvDescriptor", false);
 
     /**
      * A communicator descriptor.
-     * 
+     *
      **/
     IceGrid.CommunicatorDescriptor = Slice.defineObject(
         function(adapters, propertySet, dbEnvs, logs, description)
@@ -244,9 +244,9 @@
     Slice.defineOperations(IceGrid.CommunicatorDescriptor, IceGrid.CommunicatorDescriptorPrx);
 
     /**
-     * A distribution descriptor defines an IcePatch2 server and the
-     * directories to retrieve from the patch server.
-     * 
+     * A distribution descriptor defines an IcePatch2 communication and the
+     * directories to retrieve from the patch communication.
+     *
      **/
     IceGrid.DistributionDescriptor = Slice.defineStruct(
         function(icepatch, directories)
@@ -265,12 +265,12 @@
             this.icepatch = __is.readString();
             this.directories = Ice.StringSeqHelper.read(__is);
         },
-        2, 
+        2,
         false);
 
     /**
-     * An Ice server descriptor.
-     * 
+     * An Ice communication descriptor.
+     *
      **/
     IceGrid.ServerDescriptor = Slice.defineObject(
         function(adapters, propertySet, dbEnvs, logs, description, id, exe, iceVersion, pwd, options, envs, activation, activationTimeout, deactivationTimeout, applicationDistrib, distrib, allocatable, user)
@@ -338,7 +338,7 @@
 
     /**
      * An IceBox service descriptor.
-     * 
+     *
      **/
     IceGrid.ServiceDescriptor = Slice.defineObject(
         function(adapters, propertySet, dbEnvs, logs, description, name, entry)
@@ -372,8 +372,8 @@
     Slice.defineSequence(IceGrid, "ServiceDescriptorSeqHelper", "Ice.ObjectHelper", false, "IceGrid.ServiceDescriptor");
 
     /**
-     * A server template instance descriptor.
-     * 
+     * A communication template instance descriptor.
+     *
      **/
     IceGrid.ServerInstanceDescriptor = Slice.defineStruct(
         function(template, parameterValues, propertySet, servicePropertySets)
@@ -398,13 +398,13 @@
             this.propertySet = IceGrid.PropertySetDescriptor.read(__is, this.propertySet);
             this.servicePropertySets = IceGrid.PropertySetDescriptorDictHelper.read(__is);
         },
-        5, 
+        5,
         false);
     Slice.defineSequence(IceGrid, "ServerInstanceDescriptorSeqHelper", "IceGrid.ServerInstanceDescriptor", false);
 
     /**
-     * A template descriptor for server or service templates.
-     * 
+     * A template descriptor for communication or service templates.
+     *
      **/
     IceGrid.TemplateDescriptor = Slice.defineStruct(
         function(descriptor, parameters, parameterDefaults)
@@ -427,13 +427,13 @@
             this.parameters = Ice.StringSeqHelper.read(__is);
             this.parameterDefaults = IceGrid.StringStringDictHelper.read(__is);
         },
-        3, 
+        3,
         false);
     Slice.defineDictionary(IceGrid, "TemplateDescriptorDict", "TemplateDescriptorDictHelper", "Ice.StringHelper", "IceGrid.TemplateDescriptor", false, undefined, undefined, Ice.HashMap.compareEquals);
 
     /**
      * A service template instance descriptor.
-     * 
+     *
      **/
     IceGrid.ServiceInstanceDescriptor = Slice.defineStruct(
         function(template, parameterValues, descriptor, propertySet)
@@ -459,13 +459,13 @@
             __is.readObject(function(__o){ self.descriptor = __o; }, IceGrid.ServiceDescriptor);
             this.propertySet = IceGrid.PropertySetDescriptor.read(__is, this.propertySet);
         },
-        5, 
+        5,
         false);
     Slice.defineSequence(IceGrid, "ServiceInstanceDescriptorSeqHelper", "IceGrid.ServiceInstanceDescriptor", false);
 
     /**
-     * An IceBox server descriptor.
-     * 
+     * An IceBox communication descriptor.
+     *
      **/
     IceGrid.IceBoxDescriptor = Slice.defineObject(
         function(adapters, propertySet, dbEnvs, logs, description, id, exe, iceVersion, pwd, options, envs, activation, activationTimeout, deactivationTimeout, applicationDistrib, distrib, allocatable, user, services)
@@ -497,7 +497,7 @@
 
     /**
      * A node descriptor.
-     * 
+     *
      **/
     IceGrid.NodeDescriptor = Slice.defineStruct(
         function(variables, serverInstances, servers, loadFactor, description, propertySets)
@@ -528,13 +528,13 @@
             this.description = __is.readString();
             this.propertySets = IceGrid.PropertySetDescriptorDictHelper.read(__is);
         },
-        6, 
+        6,
         false);
     Slice.defineDictionary(IceGrid, "NodeDescriptorDict", "NodeDescriptorDictHelper", "Ice.StringHelper", "IceGrid.NodeDescriptor", false, undefined, undefined, Ice.HashMap.compareEquals);
 
     /**
      * A base class for load balancing policies.
-     * 
+     *
      **/
     IceGrid.LoadBalancingPolicy = Slice.defineObject(
         function(nReplicas)
@@ -564,7 +564,7 @@
 
     /**
      * Random load balancing policy.
-     * 
+     *
      **/
     IceGrid.RandomLoadBalancingPolicy = Slice.defineObject(
         function(nReplicas)
@@ -585,7 +585,7 @@
 
     /**
      * Ordered load balancing policy.
-     * 
+     *
      **/
     IceGrid.OrderedLoadBalancingPolicy = Slice.defineObject(
         function(nReplicas)
@@ -606,7 +606,7 @@
 
     /**
      * Round robin load balancing policy.
-     * 
+     *
      **/
     IceGrid.RoundRobinLoadBalancingPolicy = Slice.defineObject(
         function(nReplicas)
@@ -627,7 +627,7 @@
 
     /**
      * Adaptive load balancing policy.
-     * 
+     *
      **/
     IceGrid.AdaptiveLoadBalancingPolicy = Slice.defineObject(
         function(nReplicas, loadSample)
@@ -658,7 +658,7 @@
 
     /**
      * A replica group descriptor.
-     * 
+     *
      **/
     IceGrid.ReplicaGroupDescriptor = Slice.defineStruct(
         function(id, loadBalancing, proxyOptions, objects, description, filter)
@@ -690,13 +690,13 @@
             this.description = __is.readString();
             this.filter = __is.readString();
         },
-        6, 
+        6,
         false);
     Slice.defineSequence(IceGrid, "ReplicaGroupDescriptorSeqHelper", "IceGrid.ReplicaGroupDescriptor", false);
 
     /**
      * An application descriptor.
-     * 
+     *
      **/
     IceGrid.ApplicationDescriptor = Slice.defineStruct(
         function(name, variables, replicaGroups, serverTemplates, serviceTemplates, nodes, distrib, description, propertySets)
@@ -736,13 +736,13 @@
             this.description = __is.readString();
             this.propertySets = IceGrid.PropertySetDescriptorDictHelper.read(__is);
         },
-        10, 
+        10,
         false);
     Slice.defineSequence(IceGrid, "ApplicationDescriptorSeqHelper", "IceGrid.ApplicationDescriptor", false);
 
     /**
      * A "boxed" string.
-     * 
+     *
      **/
     IceGrid.BoxedString = Slice.defineObject(
         function(value)
@@ -773,7 +773,7 @@
     /**
      * A node update descriptor to describe the updates to apply to a
      * node of a deployed application.
-     * 
+     *
      **/
     IceGrid.NodeUpdateDescriptor = Slice.defineStruct(
         function(name, description, variables, removeVariables, propertySets, removePropertySets, serverInstances, servers, removeServers, loadFactor)
@@ -817,13 +817,13 @@
             this.removeServers = Ice.StringSeqHelper.read(__is);
             __is.readObject(function(__o){ self.loadFactor = __o; }, IceGrid.BoxedString);
         },
-        10, 
+        10,
         false);
     Slice.defineSequence(IceGrid, "NodeUpdateDescriptorSeqHelper", "IceGrid.NodeUpdateDescriptor", false);
 
     /**
      * A "boxed" distribution descriptor.
-     * 
+     *
      **/
     IceGrid.BoxedDistributionDescriptor = Slice.defineObject(
         function(value)
@@ -854,7 +854,7 @@
     /**
      * An application update descriptor to describe the updates to apply
      * to a deployed application.
-     * 
+     *
      **/
     IceGrid.ApplicationUpdateDescriptor = Slice.defineStruct(
         function(name, description, distrib, variables, removeVariables, propertySets, removePropertySets, replicaGroups, removeReplicaGroups, serverTemplates, removeServerTemplates, serviceTemplates, removeServiceTemplates, nodes, removeNodes)
@@ -913,7 +913,7 @@
             this.nodes = IceGrid.NodeUpdateDescriptorSeqHelper.read(__is);
             this.removeNodes = Ice.StringSeqHelper.read(__is);
         },
-        15, 
+        15,
         false);
 /* slice2js browser-bundle-skip */
     exports.IceGrid = IceGrid;

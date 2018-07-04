@@ -25,7 +25,7 @@
 /* slice2js browser-bundle-skip */
     var __M = require("../Ice/ModuleRegistry").Ice.__M;
     var Glacier2 = require("../Glacier2/Session").Glacier2;
-    var Ice = __M.require(module, 
+    var Ice = __M.require(module,
     [
         "../Ice/Object",
         "../Ice/ObjectPrx",
@@ -37,20 +37,20 @@
         "../Ice/ArrayUtil",
         "../Ice/StreamHelpers"
     ]).Ice;
-    
-    var IceGrid = __M.require(module, 
+
+    var IceGrid = __M.require(module,
     [
         "../IceGrid/Exception",
         "../IceGrid/Descriptor",
         "../IceGrid/Admin"
     ]).IceGrid;
-    
+
     var Slice = Ice.Slice;
 /* slice2js browser-bundle-skip-end */
 
     /**
-     * Dynamic information about the state of a server.
-     * 
+     * Dynamic information about the state of a communication.
+     *
      **/
     IceGrid.ServerDynamicInfo = Slice.defineStruct(
         function(id, state, pid, enabled)
@@ -75,13 +75,13 @@
             this.pid = __is.readInt();
             this.enabled = __is.readBool();
         },
-        7, 
+        7,
         false);
     Slice.defineSequence(IceGrid, "ServerDynamicInfoSeqHelper", "IceGrid.ServerDynamicInfo", false);
 
     /**
      * Dynamic information about the state of an adapter.
-     * 
+     *
      **/
     IceGrid.AdapterDynamicInfo = Slice.defineStruct(
         function(id, proxy)
@@ -100,13 +100,13 @@
             this.id = __is.readString();
             this.proxy = __is.readProxy();
         },
-        3, 
+        3,
         false);
     Slice.defineSequence(IceGrid, "AdapterDynamicInfoSeqHelper", "IceGrid.AdapterDynamicInfo", false);
 
     /**
      * Dynamic information about the state of a node.
-     * 
+     *
      **/
     IceGrid.NodeDynamicInfo = Slice.defineStruct(
         function(info, servers, adapters)
@@ -128,7 +128,7 @@
             this.servers = IceGrid.ServerDynamicInfoSeqHelper.read(__is);
             this.adapters = IceGrid.AdapterDynamicInfoSeqHelper.read(__is);
         },
-        13, 
+        13,
         false);
     Slice.defineSequence(IceGrid, "NodeDynamicInfoSeqHelper", "IceGrid.NodeDynamicInfo", false);
 
@@ -136,7 +136,7 @@
      * The node observer interface. Observers should implement this
      * interface to receive information about the state of the IceGrid
      * nodes.
-     * 
+     *
      **/
     IceGrid.NodeObserver = Slice.defineObject(
         undefined,
@@ -162,7 +162,7 @@
      * The database observer interface. Observers should implement this
      * interface to receive information about the state of the IceGrid
      * registry database.
-     * 
+     *
      **/
     IceGrid.ApplicationObserver = Slice.defineObject(
         undefined,
@@ -186,7 +186,7 @@
     /**
      * This interface allows applications to monitor the state of object
      * adapters that are registered with IceGrid.
-     * 
+     *
      **/
     IceGrid.AdapterObserver = Slice.defineObject(
         undefined,
@@ -209,7 +209,7 @@
 
     /**
      * This interface allows applications to monitor IceGrid well-known objects.
-     * 
+     *
      **/
     IceGrid.ObjectObserver = Slice.defineObject(
         undefined,
@@ -233,7 +233,7 @@
     /**
      * This interface allows applications to monitor changes the state
      * of the registry.
-     * 
+     *
      **/
     IceGrid.RegistryObserver = Slice.defineObject(
         undefined,

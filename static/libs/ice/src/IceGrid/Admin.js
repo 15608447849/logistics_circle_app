@@ -25,7 +25,7 @@
 /* slice2js browser-bundle-skip */
     var __M = require("../Ice/ModuleRegistry").Ice.__M;
     var Glacier2 = require("../Glacier2/Session").Glacier2;
-    var Ice = __M.require(module, 
+    var Ice = __M.require(module,
     [
         "../Ice/Object",
         "../Ice/ObjectPrx",
@@ -42,19 +42,19 @@
         "../Ice/Properties",
         "../Ice/SliceChecksumDict"
     ]).Ice;
-    
-    var IceGrid = __M.require(module, 
+
+    var IceGrid = __M.require(module,
     [
         "../IceGrid/Exception",
         "../IceGrid/Descriptor"
     ]).IceGrid;
-    
+
     var Slice = Ice.Slice;
 /* slice2js browser-bundle-skip-end */
 
     /**
-     * An enumeration representing the state of the server.
-     * 
+     * An enumeration representing the state of the communication.
+     *
      **/
     IceGrid.ServerState = Slice.defineEnum([
         ['Inactive', 0], ['Activating', 1], ['ActivationTimedOut', 2], ['Active', 3], ['Deactivating', 4],
@@ -63,7 +63,7 @@
 
     /**
      * Information about an Ice object.
-     * 
+     *
      **/
     IceGrid.ObjectInfo = Slice.defineStruct(
         function(proxy, type)
@@ -82,13 +82,13 @@
             this.proxy = __is.readProxy();
             this.type = __is.readString();
         },
-        3, 
+        3,
         false);
     Slice.defineSequence(IceGrid, "ObjectInfoSeqHelper", "IceGrid.ObjectInfo", false);
 
     /**
      * Information about an adapter registered with the IceGrid registry.
-     * 
+     *
      **/
     IceGrid.AdapterInfo = Slice.defineStruct(
         function(id, proxy, replicaGroupId)
@@ -110,13 +110,13 @@
             this.proxy = __is.readProxy();
             this.replicaGroupId = __is.readString();
         },
-        4, 
+        4,
         false);
     Slice.defineSequence(IceGrid, "AdapterInfoSeqHelper", "IceGrid.AdapterInfo", false);
 
     /**
-     * Information about a server managed by an IceGrid node.
-     * 
+     * Information about a communication managed by an IceGrid node.
+     *
      **/
     IceGrid.ServerInfo = Slice.defineStruct(
         function(application, uuid, revision, node, descriptor, sessionId)
@@ -148,12 +148,12 @@
             __is.readObject(function(__o){ self.descriptor = __o; }, IceGrid.ServerDescriptor);
             this.sessionId = __is.readString();
         },
-        9, 
+        9,
         false);
 
     /**
      * Information about an IceGrid node.
-     * 
+     *
      **/
     IceGrid.NodeInfo = Slice.defineStruct(
         function(name, os, hostname, release, version, machine, nProcessors, dataDir)
@@ -190,12 +190,12 @@
             this.nProcessors = __is.readInt();
             this.dataDir = __is.readString();
         },
-        11, 
+        11,
         false);
 
     /**
      * Information about an IceGrid registry replica.
-     * 
+     *
      **/
     IceGrid.RegistryInfo = Slice.defineStruct(
         function(name, hostname)
@@ -214,13 +214,13 @@
             this.name = __is.readString();
             this.hostname = __is.readString();
         },
-        2, 
+        2,
         false);
     Slice.defineSequence(IceGrid, "RegistryInfoSeqHelper", "IceGrid.RegistryInfo", false);
 
     /**
      * Information about the load of a node.
-     * 
+     *
      **/
     IceGrid.LoadInfo = Slice.defineStruct(
         function(avg1, avg5, avg15)
@@ -242,12 +242,12 @@
             this.avg5 = __is.readFloat();
             this.avg15 = __is.readFloat();
         },
-        12, 
+        12,
         true);
 
     /**
      * Information about an IceGrid application.
-     * 
+     *
      **/
     IceGrid.ApplicationInfo = Slice.defineStruct(
         function(uuid, createTime, createUser, updateTime, updateUser, revision, descriptor)
@@ -281,13 +281,13 @@
             this.revision = __is.readInt();
             this.descriptor = IceGrid.ApplicationDescriptor.read(__is, this.descriptor);
         },
-        33, 
+        33,
         false);
     Slice.defineSequence(IceGrid, "ApplicationInfoSeqHelper", "IceGrid.ApplicationInfo", false);
 
     /**
      * Information about updates to an IceGrid application.
-     * 
+     *
      **/
     IceGrid.ApplicationUpdateInfo = Slice.defineStruct(
         function(updateTime, updateUser, revision, descriptor)
@@ -312,7 +312,7 @@
             this.revision = __is.readInt();
             this.descriptor = IceGrid.ApplicationUpdateDescriptor.read(__is, this.descriptor);
         },
-        28, 
+        28,
         false);
 
     /**
@@ -320,7 +320,7 @@
      * <p class="Warning">Allowing access to this interface
      * is a security risk! Please see the IceGrid documentation
      * for further information.
-     * 
+     *
      **/
     IceGrid.Admin = Slice.defineObject(
         undefined,
@@ -335,118 +335,118 @@
 
     Slice.defineOperations(IceGrid.Admin, IceGrid.AdminPrx,
     {
-        "addApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], , 
+        "addApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], ,
         [
             IceGrid.AccessDeniedException,
             IceGrid.DeploymentException
         ], true, ],
-        "syncApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], , 
-        [
-            IceGrid.AccessDeniedException,
-            IceGrid.ApplicationNotExistException,
-            IceGrid.DeploymentException
-        ], true, ],
-        "updateApplication": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], , 
+        "syncApplication": [, , , , , , [[IceGrid.ApplicationDescriptor]], ,
         [
             IceGrid.AccessDeniedException,
             IceGrid.ApplicationNotExistException,
             IceGrid.DeploymentException
         ], true, ],
-        "syncApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationDescriptor]], , 
+        "updateApplication": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], ,
         [
             IceGrid.AccessDeniedException,
             IceGrid.ApplicationNotExistException,
             IceGrid.DeploymentException
         ], true, ],
-        "updateApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], , 
+        "syncApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationDescriptor]], ,
         [
             IceGrid.AccessDeniedException,
             IceGrid.ApplicationNotExistException,
             IceGrid.DeploymentException
         ], true, ],
-        "removeApplication": [, , , , , , [[7]], , 
+        "updateApplicationWithoutRestart": [, , , , , , [[IceGrid.ApplicationUpdateDescriptor]], ,
+        [
+            IceGrid.AccessDeniedException,
+            IceGrid.ApplicationNotExistException,
+            IceGrid.DeploymentException
+        ], true, ],
+        "removeApplication": [, , , , , , [[7]], ,
         [
             IceGrid.AccessDeniedException,
             IceGrid.ApplicationNotExistException,
             IceGrid.DeploymentException
         ], , ],
-        "instantiateServer": [, , , , , , [[7], [7], [IceGrid.ServerInstanceDescriptor]], , 
+        "instantiateServer": [, , , , , , [[7], [7], [IceGrid.ServerInstanceDescriptor]], ,
         [
             IceGrid.AccessDeniedException,
             IceGrid.ApplicationNotExistException,
             IceGrid.DeploymentException
         ], , ],
-        "patchApplication": [, , , 1, , , [[7], [1]], , 
+        "patchApplication": [, , , 1, , , [[7], [1]], ,
         [
             IceGrid.ApplicationNotExistException,
             IceGrid.PatchException
         ], , ],
-        "getApplicationInfo": [, 2, 1, , , [IceGrid.ApplicationInfo], [[7]], , 
+        "getApplicationInfo": [, 2, 1, , , [IceGrid.ApplicationInfo], [[7]], ,
         [
             IceGrid.ApplicationNotExistException
         ], , true],
-        "getDefaultApplicationDescriptor": [, 2, 1, , , [IceGrid.ApplicationDescriptor], , , 
+        "getDefaultApplicationDescriptor": [, 2, 1, , , [IceGrid.ApplicationDescriptor], , ,
         [
             IceGrid.DeploymentException
         ], , true],
         "getAllApplicationNames": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-        "getServerInfo": [, 2, 1, , , [IceGrid.ServerInfo], [[7]], , 
+        "getServerInfo": [, 2, 1, , , [IceGrid.ServerInfo], [[7]], ,
         [
             IceGrid.ServerNotExistException
         ], , true],
-        "getServerState": [, 2, 1, , , [IceGrid.ServerState.__helper], [[7]], , 
+        "getServerState": [, 2, 1, , , [IceGrid.ServerState.__helper], [[7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "getServerPid": [, 2, 1, , , [3], [[7]], , 
+        "getServerPid": [, 2, 1, , , [3], [[7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
         "getServerAdminCategory": [, 2, 2, , , [7], , , , , ],
-        "getServerAdmin": [, 2, 2, , , [9], [[7]], , 
+        "getServerAdmin": [, 2, 2, , , [9], [[7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "enableServer": [, 2, 2, , , , [[7], [1]], , 
+        "enableServer": [, 2, 2, , , , [[7], [1]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "isServerEnabled": [, 2, 1, , , [1], [[7]], , 
+        "isServerEnabled": [, 2, 1, , , [1], [[7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "startServer": [, , , 1, , , [[7]], , 
+        "startServer": [, , , 1, , , [[7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException,
             IceGrid.ServerStartException
         ], , ],
-        "stopServer": [, , , 1, , , [[7]], , 
+        "stopServer": [, , , 1, , , [[7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException,
             IceGrid.ServerStopException
         ], , ],
-        "patchServer": [, , , 1, , , [[7], [1]], , 
+        "patchServer": [, , , 1, , , [[7], [1]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.NodeUnreachableException,
             IceGrid.PatchException,
             IceGrid.ServerNotExistException
         ], , ],
-        "sendSignal": [, , , , , , [[7], [7]], , 
+        "sendSignal": [, , , , , , [[7], [7]], ,
         [
             IceGrid.BadSignalException,
             IceGrid.DeploymentException,
@@ -454,91 +454,91 @@
             IceGrid.ServerNotExistException
         ], , ],
         "getAllServerIds": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-        "getAdapterInfo": [, 2, 1, , , ["IceGrid.AdapterInfoSeqHelper"], [[7]], , 
+        "getAdapterInfo": [, 2, 1, , , ["IceGrid.AdapterInfoSeqHelper"], [[7]], ,
         [
             IceGrid.AdapterNotExistException
         ], , ],
-        "removeAdapter": [, , , , , , [[7]], , 
+        "removeAdapter": [, , , , , , [[7]], ,
         [
             IceGrid.AdapterNotExistException,
             IceGrid.DeploymentException
         ], , ],
         "getAllAdapterIds": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-        "addObject": [, , , , , , [[9]], , 
+        "addObject": [, , , , , , [[9]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.ObjectExistsException
         ], , ],
-        "updateObject": [, , , , , , [[9]], , 
+        "updateObject": [, , , , , , [[9]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.ObjectNotRegisteredException
         ], , ],
-        "addObjectWithType": [, , , , , , [[9], [7]], , 
+        "addObjectWithType": [, , , , , , [[9], [7]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.ObjectExistsException
         ], , ],
-        "removeObject": [, , , , , , [[Ice.Identity]], , 
+        "removeObject": [, , , , , , [[Ice.Identity]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.ObjectNotRegisteredException
         ], , ],
-        "getObjectInfo": [, 2, 1, , , [IceGrid.ObjectInfo], [[Ice.Identity]], , 
+        "getObjectInfo": [, 2, 1, , , [IceGrid.ObjectInfo], [[Ice.Identity]], ,
         [
             IceGrid.ObjectNotRegisteredException
         ], , ],
         "getObjectInfosByType": [, 2, 1, , , ["IceGrid.ObjectInfoSeqHelper"], [[7]], , , , ],
         "getAllObjectInfos": [, 2, 1, , , ["IceGrid.ObjectInfoSeqHelper"], [[7]], , , , ],
-        "pingNode": [, 2, 1, , , [1], [[7]], , 
+        "pingNode": [, 2, 1, , , [1], [[7]], ,
         [
             IceGrid.NodeNotExistException
         ], , ],
-        "getNodeLoad": [, 2, 1, , , [IceGrid.LoadInfo], [[7]], , 
+        "getNodeLoad": [, 2, 1, , , [IceGrid.LoadInfo], [[7]], ,
         [
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "getNodeInfo": [, 2, 1, , , [IceGrid.NodeInfo], [[7]], , 
+        "getNodeInfo": [, 2, 1, , , [IceGrid.NodeInfo], [[7]], ,
         [
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "getNodeAdmin": [, 2, 2, , , [9], [[7]], , 
+        "getNodeAdmin": [, 2, 2, , , [9], [[7]], ,
         [
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "getNodeProcessorSocketCount": [, 2, 1, , , [3], [[7]], , 
+        "getNodeProcessorSocketCount": [, 2, 1, , , [3], [[7]], ,
         [
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "shutdownNode": [, , , , , , [[7]], , 
+        "shutdownNode": [, , , , , , [[7]], ,
         [
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "getNodeHostname": [, 2, 1, , , [7], [[7]], , 
+        "getNodeHostname": [, 2, 1, , , [7], [[7]], ,
         [
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
         "getAllNodeNames": [, 2, 1, , , ["Ice.StringSeqHelper"], , , , , ],
-        "pingRegistry": [, 2, 2, , , [1], [[7]], , 
+        "pingRegistry": [, 2, 2, , , [1], [[7]], ,
         [
             IceGrid.RegistryNotExistException
         ], , ],
-        "getRegistryInfo": [, 2, 2, , , [IceGrid.RegistryInfo], [[7]], , 
+        "getRegistryInfo": [, 2, 2, , , [IceGrid.RegistryInfo], [[7]], ,
         [
             IceGrid.RegistryNotExistException,
             IceGrid.RegistryUnreachableException
         ], , ],
-        "getRegistryAdmin": [, 2, 2, , , [9], [[7]], , 
+        "getRegistryAdmin": [, 2, 2, , , [9], [[7]], ,
         [
             IceGrid.RegistryNotExistException
         ], , ],
-        "shutdownRegistry": [, 2, 2, , , , [[7]], , 
+        "shutdownRegistry": [, 2, 2, , , , [[7]], ,
         [
             IceGrid.RegistryNotExistException,
             IceGrid.RegistryUnreachableException
@@ -550,7 +550,7 @@
 
     /**
      * This interface provides access to IceGrid log file contents.
-     * 
+     *
      **/
     IceGrid.FileIterator = Slice.defineObject(
         undefined,
@@ -565,7 +565,7 @@
 
     Slice.defineOperations(IceGrid.FileIterator, IceGrid.FileIteratorPrx,
     {
-        "read": [, , , , , [1], [[3]], [["Ice.StringSeqHelper"]], 
+        "read": [, , , , , [1], [[3]], [["Ice.StringSeqHelper"]],
         [
             IceGrid.FileNotAvailableException
         ], , ],
@@ -577,10 +577,10 @@
      * update, and receive observer updates from the IceGrid
      * registry. Admin sessions are created either with the {@link Registry}
      * object or the registry admin {@link Glacier2.SessionManager} object.
-     * 
+     *
      * @see Registry
      * @see Glacier2.SessionManager
-     * 
+     *
      **/
     IceGrid.AdminSession = Slice.defineObject(
         undefined,
@@ -603,63 +603,63 @@
         "keepAlive": [, 2, 2, , , , , , , , ],
         "getAdmin": [, 2, 1, , , ["IceGrid.AdminPrx"], , , , , ],
         "getAdminCallbackTemplate": [, 2, 2, , , [9], , , , , ],
-        "setObservers": [, 2, 2, , , , [["IceGrid.RegistryObserverPrx"], ["IceGrid.NodeObserverPrx"], ["IceGrid.ApplicationObserverPrx"], ["IceGrid.AdapterObserverPrx"], ["IceGrid.ObjectObserverPrx"]], , 
+        "setObservers": [, 2, 2, , , , [["IceGrid.RegistryObserverPrx"], ["IceGrid.NodeObserverPrx"], ["IceGrid.ApplicationObserverPrx"], ["IceGrid.AdapterObserverPrx"], ["IceGrid.ObjectObserverPrx"]], ,
         [
             IceGrid.ObserverAlreadyRegisteredException
         ], , ],
-        "setObserversByIdentity": [, 2, 2, , , , [[Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity]], , 
+        "setObserversByIdentity": [, 2, 2, , , , [[Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity], [Ice.Identity]], ,
         [
             IceGrid.ObserverAlreadyRegisteredException
         ], , ],
-        "startUpdate": [, , , , , [3], , , 
+        "startUpdate": [, , , , , [3], , ,
         [
             IceGrid.AccessDeniedException
         ], , ],
-        "finishUpdate": [, , , , , , , , 
+        "finishUpdate": [, , , , , , , ,
         [
             IceGrid.AccessDeniedException
         ], , ],
         "getReplicaName": [, 2, 2, , , [7], , , , , ],
-        "openServerLog": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [7], [3]], , 
+        "openServerLog": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [7], [3]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.FileNotAvailableException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "openServerStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+        "openServerStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.FileNotAvailableException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "openServerStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+        "openServerStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
         [
             IceGrid.DeploymentException,
             IceGrid.FileNotAvailableException,
             IceGrid.NodeUnreachableException,
             IceGrid.ServerNotExistException
         ], , ],
-        "openNodeStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+        "openNodeStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
         [
             IceGrid.FileNotAvailableException,
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "openNodeStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+        "openNodeStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
         [
             IceGrid.FileNotAvailableException,
             IceGrid.NodeNotExistException,
             IceGrid.NodeUnreachableException
         ], , ],
-        "openRegistryStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+        "openRegistryStdErr": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
         [
             IceGrid.FileNotAvailableException,
             IceGrid.RegistryNotExistException,
             IceGrid.RegistryUnreachableException
         ], , ],
-        "openRegistryStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], , 
+        "openRegistryStdOut": [, , , , , ["IceGrid.FileIteratorPrx"], [[7], [3]], ,
         [
             IceGrid.FileNotAvailableException,
             IceGrid.RegistryNotExistException,

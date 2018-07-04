@@ -53,7 +53,7 @@
 
     /**
      * Information about the current method invocation for servers. Each
-     * operation on the server has a <tt>Current</tt> as its implicit final
+     * operation on the communication has a <tt>Current</tt> as its implicit final
      * parameter. <tt>Current</tt> is mostly used for Ice services. Most
      * applications ignore this parameter.
      *

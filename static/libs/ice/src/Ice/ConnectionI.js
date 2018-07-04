@@ -249,7 +249,7 @@ var ConnectionI = Class({
             // outstanding requests have been completed. Otherwise,
             // the CloseConnectionException will cause all outstanding
             // requests to be retried, regardless of whether the
-            // server has processed them or not.
+            // communication has processed them or not.
             //
             this._closePromises.push(__r);
             this.checkClose();
@@ -1210,7 +1210,7 @@ var ConnectionI = Class({
 
         //
         // We don't want to send close connection messages if the endpoint
-        // only supports oneway transmission from client to server.
+        // only supports oneway transmission from client to communication.
         //
         if(this._endpoint.datagram() && state === StateClosing)
         {
@@ -1477,7 +1477,7 @@ var ConnectionI = Class({
     {
         if(!this._endpoint.datagram()) // Datagram connections are always implicitly validated.
         {
-            if(this._adapter !== null) // The server side has the active role for connection validation.
+            if(this._adapter !== null) // The communication side has the active role for connection validation.
             {
                 if(this._writeStream.size === 0)
                 {
@@ -1783,7 +1783,7 @@ var ConnectionI = Class({
                     if(this._state === StateClosing)
                     {
                         TraceUtil.trace("received request during closing\n" +
-                                        "(ignored by server, client will retry)",
+                                        "(ignored by communication, client will retry)",
                                         info.stream, this._logger, this._traceLevels);
                     }
                     else
@@ -1803,7 +1803,7 @@ var ConnectionI = Class({
                     if(this._state === StateClosing)
                     {
                         TraceUtil.trace("received batch request during closing\n" +
-                                        "(ignored by server, client will retry)",
+                                        "(ignored by communication, client will retry)",
                                         info.stream, this._logger, this._traceLevels);
                     }
                     else

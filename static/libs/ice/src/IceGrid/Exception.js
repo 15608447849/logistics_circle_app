@@ -24,7 +24,7 @@
 /* slice2js browser-bundle-skip-end */
 /* slice2js browser-bundle-skip */
     var __M = require("../Ice/ModuleRegistry").Ice.__M;
-    var Ice = __M.require(module, 
+    var Ice = __M.require(module,
     [
         "../Ice/Exception",
         "../Ice/Long",
@@ -35,7 +35,7 @@
         "../Ice/Identity",
         "../Ice/BuiltinSequences"
     ]).Ice;
-    
+
     var Slice = Ice.Slice;
 /* slice2js browser-bundle-skip-end */
 /* slice2js browser-bundle-skip */
@@ -45,7 +45,7 @@
 
     /**
      * This exception is raised if an application does not exist.
-     * 
+     *
      **/
     IceGrid.ApplicationNotExistException = Slice.defineUserException(
         function(name, _cause)
@@ -67,8 +67,8 @@
         false);
 
     /**
-     * This exception is raised if a server does not exist.
-     * 
+     * This exception is raised if a communication does not exist.
+     *
      **/
     IceGrid.ServerNotExistException = Slice.defineUserException(
         function(id, _cause)
@@ -90,8 +90,8 @@
         false);
 
     /**
-     * This exception is raised if a server failed to start.
-     * 
+     * This exception is raised if a communication failed to start.
+     *
      **/
     IceGrid.ServerStartException = Slice.defineUserException(
         function(id, reason, _cause)
@@ -116,8 +116,8 @@
         false);
 
     /**
-     * This exception is raised if a server failed to stop.
-     * 
+     * This exception is raised if a communication failed to stop.
+     *
      **/
     IceGrid.ServerStopException = Slice.defineUserException(
         function(id, reason, _cause)
@@ -143,7 +143,7 @@
 
     /**
      * This exception is raised if an adapter does not exist.
-     * 
+     *
      **/
     IceGrid.AdapterNotExistException = Slice.defineUserException(
         function(id, _cause)
@@ -166,7 +166,7 @@
 
     /**
      * This exception is raised if an object already exists.
-     * 
+     *
      **/
     IceGrid.ObjectExistsException = Slice.defineUserException(
         function(id, _cause)
@@ -189,7 +189,7 @@
 
     /**
      * This exception is raised if an object is not registered.
-     * 
+     *
      **/
     IceGrid.ObjectNotRegisteredException = Slice.defineUserException(
         function(id, _cause)
@@ -212,7 +212,7 @@
 
     /**
      * This exception is raised if a node does not exist.
-     * 
+     *
      **/
     IceGrid.NodeNotExistException = Slice.defineUserException(
         function(name, _cause)
@@ -235,7 +235,7 @@
 
     /**
      * This exception is raised if a registry does not exist.
-     * 
+     *
      **/
     IceGrid.RegistryNotExistException = Slice.defineUserException(
         function(name, _cause)
@@ -258,7 +258,7 @@
 
     /**
      * An exception for deployment errors.
-     * 
+     *
      **/
     IceGrid.DeploymentException = Slice.defineUserException(
         function(reason, _cause)
@@ -281,7 +281,7 @@
 
     /**
      * This exception is raised if a node could not be reached.
-     * 
+     *
      **/
     IceGrid.NodeUnreachableException = Slice.defineUserException(
         function(name, reason, _cause)
@@ -306,8 +306,8 @@
         false);
 
     /**
-     * This exception is raised if a server could not be reached.
-     * 
+     * This exception is raised if a communication could not be reached.
+     *
      **/
     IceGrid.ServerUnreachableException = Slice.defineUserException(
         function(name, reason, _cause)
@@ -333,7 +333,7 @@
 
     /**
      * This exception is raised if a registry could not be reached.
-     * 
+     *
      **/
     IceGrid.RegistryUnreachableException = Slice.defineUserException(
         function(name, reason, _cause)
@@ -359,8 +359,8 @@
 
     /**
      * This exception is raised if an unknown signal was sent to
-     * to a server.
-     * 
+     * to a communication.
+     *
      **/
     IceGrid.BadSignalException = Slice.defineUserException(
         function(reason, _cause)
@@ -383,7 +383,7 @@
 
     /**
      * This exception is raised if a patch failed.
-     * 
+     *
      **/
     IceGrid.PatchException = Slice.defineUserException(
         function(reasons, _cause)
@@ -407,7 +407,7 @@
     /**
      * This exception is raised if a registry lock wasn't
      * acquired or is already held by a session.
-     * 
+     *
      **/
     IceGrid.AccessDeniedException = Slice.defineUserException(
         function(lockUserId, _cause)
@@ -430,7 +430,7 @@
 
     /**
      * This exception is raised if the allocation of an object failed.
-     * 
+     *
      **/
     IceGrid.AllocationException = Slice.defineUserException(
         function(reason, _cause)
@@ -454,7 +454,7 @@
     /**
      * This exception is raised if the request to allocate an object times
      * out.
-     * 
+     *
      **/
     IceGrid.AllocationTimeoutException = Slice.defineUserException(
         function(reason, _cause)
@@ -470,7 +470,7 @@
     /**
      * This exception is raised if a client is denied the ability to create
      * a session with IceGrid.
-     * 
+     *
      **/
     IceGrid.PermissionDeniedException = Slice.defineUserException(
         function(reason, _cause)
@@ -494,10 +494,10 @@
     /**
      * This exception is raised if an observer is already registered with
      * the registry.
-     * 
+     *
      * @see AdminSession#setObservers
      * @see AdminSession#setObserversByIdentity
-     * 
+     *
      **/
     IceGrid.ObserverAlreadyRegisteredException = Slice.defineUserException(
         function(id, _cause)
@@ -520,14 +520,14 @@
 
     /**
      * This exception is raised if a file is not available.
-     * 
+     *
      * @see AdminSession#openServerStdOut
      * @see AdminSession#openServerStdErr
      * @see AdminSession#openNodeStdOut
      * @see AdminSession#openNodeStdErr
      * @see AdminSession#openRegistryStdOut
      * @see AdminSession#openRegistryStdErr
-     * 
+     *
      **/
     IceGrid.FileNotAvailableException = Slice.defineUserException(
         function(reason, _cause)

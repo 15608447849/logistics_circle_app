@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 // 模块名大写
 // 登陆模块
+import REGISTER from '@/pages/register/register'
 import LOGIN from '@/pages/login/login'
 import GEOLOCATION from '@/pages/geoLocationTest'
 
@@ -14,6 +15,10 @@ export default new Router({
     {
       path: '/',
       component: LOGIN
+    },
+    {
+      path: '/register',
+      component: REGISTER
     },
     {
       path: '/login',

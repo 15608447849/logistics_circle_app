@@ -59,7 +59,7 @@
 
     /**
      * This exception is raised if the replica group provided by the
-     * server is invalid.
+     * communication is invalid.
      *
      **/
     Ice.InvalidReplicaGroupIdException = Slice.defineUserException(
@@ -74,7 +74,7 @@
         false);
 
     /**
-     * This exception is raised if a server tries to set endpoints for
+     * This exception is raised if a communication tries to set endpoints for
      * an adapter that is already active.
      *
      **/
@@ -105,7 +105,7 @@
         false);
 
     /**
-     * This exception is raised if a server cannot be found.
+     * This exception is raised if a communication cannot be found.
      *
      **/
     Ice.ServerNotFoundException = Slice.defineUserException(

@@ -161,9 +161,9 @@
         "Ice::CloneNotImplementedException");
 
     /**
-     * This exception is raised if an operation call on a server raises an
+     * This exception is raised if an operation call on a communication raises an
      * unknown exception. For example, for C++, this exception is raised
-     * if the server throws a C++ exception that is not directly or
+     * if the communication throws a C++ exception that is not directly or
      * indirectly derived from <tt>Ice::LocalException</tt> or
      * <tt>Ice::UserException</tt>.
      *
@@ -178,10 +178,10 @@
         "Ice::UnknownException");
 
     /**
-     * This exception is raised if an operation call on a server raises a
+     * This exception is raised if an operation call on a communication raises a
      * local exception. Because local exceptions are not transmitted by
      * the Ice protocol, the client receives all local exceptions raised
-     * by the server as {@link UnknownLocalException}. The only exception to this
+     * by the communication as {@link UnknownLocalException}. The only exception to this
      * rule are all exceptions derived from {@link RequestFailedException},
      * which are transmitted by the Ice protocol even though they are
      * declared <tt>local</tt>.
@@ -201,7 +201,7 @@
      * This exception is raised if an operation raises a
      * user exception that is not declared in the exception's
      * <tt>throws</tt> clause. Such undeclared exceptions are
-     * not transmitted from the server to the client by the Ice
+     * not transmitted from the communication to the client by the Ice
      * protocol, but instead the client just gets an
      * {@link UnknownUserException}. This is necessary in order to not violate
      * the contract established by an operation's signature: Only local
@@ -406,7 +406,7 @@
         "Ice::RequestFailedException");
 
     /**
-     * This exception is raised if an object does not exist on the server,
+     * This exception is raised if an object does not exist on the communication,
      * that is, if no facets with the given identity exist.
      *
      **/
@@ -433,8 +433,8 @@
 
     /**
      * This exception is raised if an operation for a given object does
-     * not exist on the server. Typically this is caused by either the
-     * client or the server using an outdated Slice specification.
+     * not exist on the communication. Typically this is caused by either the
+     * client or the communication using an outdated Slice specification.
      *
      **/
     Ice.OperationNotExistException = Slice.defineLocalException(
@@ -446,7 +446,7 @@
         "Ice::OperationNotExistException");
 
     /**
-     * This exception is raised if a system error occurred in the server
+     * This exception is raised if a system error occurred in the communication
      * or client process. There are many possible causes for such a system
      * exception. For details on the cause, {@link SyscallException#error}
      * should be inspected.
@@ -500,7 +500,7 @@
 
     /**
      * This exception indicates a connection failure for which
-     * the server host actively refuses a connection.
+     * the communication host actively refuses a connection.
      *
      **/
     Ice.ConnectionRefusedException = Slice.defineLocalException(
@@ -734,11 +734,11 @@
 
     /**
      * This exception indicates that the connection has been gracefully shut down by the
-     * server. The operation call that caused this exception has not been
-     * executed by the server. In most cases you will not get this
+     * communication. The operation call that caused this exception has not been
+     * executed by the communication. In most cases you will not get this
      * exception, because the client will automatically retry the
-     * operation call in case the server shut down the connection. However,
-     * if upon retry the server shuts down the connection again, and the
+     * operation call in case the communication shut down the connection. However,
+     * if upon retry the communication shuts down the connection again, and the
      * retry limit has been reached, then this exception is propagated to
      * the application code.
      *
@@ -863,7 +863,7 @@
     /**
      * This exception is raised if the type of an unmarshaled Slice class instance does
      * not match its expected type.
-     * This can happen if client and server are compiled with mismatched Slice
+     * This can happen if client and communication are compiled with mismatched Slice
      * definitions or if a class of the wrong type is passed as a parameter
      * or return value using dynamic invocation. This exception can also be
      * raised if IceStorm is used to send Slice class instances and

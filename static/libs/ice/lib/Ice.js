@@ -17,11 +17,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         /* globals self */
         var __root = typeof(window) !== "undefined" ? window : self;
         /* globals -self */
-        
+
         var __M =
         {
             module: function(name)
@@ -46,7 +46,7 @@
                 }
                 var components = scoped.split(".");
                 var T = __root;
-        
+
                 for(var i = 0, length = components.length; i < length; ++i)
                 {
                     T = T[components[i]];
@@ -58,16 +58,16 @@
                 return T;
             }
         };
-        
-        
+
+
         Ice.__require = function()
         {
             return __root;
         };
-        
+
         Ice.Slice = Ice.Slice || {};
         Ice.__M = __M;
-        
+
     }());
 
     (function()
@@ -80,10 +80,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-            
+
         var __M = Ice.__M;
         var Slice = Ice.Slice;
-        
+
         var eq = function(e1, e2)
         {
             if(e1 === e2)
@@ -108,7 +108,7 @@
             }
             return false;
         };
-        
+
         var ArrayUtil =
         {
             clone: function(arr)
@@ -127,12 +127,12 @@
                 }
             },
             equals: function(v1, v2, valuesEqual)
-            {        
+            {
                 if(v1.length != v2.length)
                 {
                     return false;
                 }
-        
+
                 var i, length, equalFn = valuesEqual || eq;
                 for(i = 0, length = v1.length; i < length; ++i)
                 {
@@ -141,7 +141,7 @@
                         return false;
                     }
                 }
-        
+
                 return true;
             },
             shuffle: function(arr)
@@ -170,7 +170,7 @@
                 {
                     return arr.indexOf(elem);
                 }
-        
+
                 return -1;
             },
             filter: function(arr, includeFn, obj)
@@ -187,13 +187,13 @@
                 return result;
             }
         };
-        
+
         ArrayUtil.eq = eq;
-        
+
         Slice.defineSequence = function(module, name, valueHelper, fixed, elementType)
         {
             var helper = null;
-            Object.defineProperty(module, name, 
+            Object.defineProperty(module, name,
             {
                 get: function()
                     {
@@ -207,9 +207,9 @@
                     }
             });
         };
-        
+
         Ice.ArrayUtil = ArrayUtil;
-        
+
     }());
 
     (function()
@@ -222,14 +222,14 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         Ice.Class = function()
         {
             var base;
             var desc;
             var constructor;
-            
+
             if(arguments.length == 1)
             {
                 desc = arguments[0];
@@ -239,7 +239,7 @@
                 base = arguments[0];
                 desc = arguments[1];
             }
-        
+
             if(desc !== undefined)
             {
                 constructor = desc.__init__;
@@ -248,15 +248,15 @@
                     delete desc.__init__;
                 }
             }
-            
+
             var o = constructor || function(){};
-        
+
             if(base !== undefined)
             {
                 o.prototype = new base();
                 o.prototype.constructor = o;
             }
-        
+
             if(desc !== undefined)
             {
                 for(var key in desc)
@@ -266,8 +266,8 @@
             }
             return o;
         };
-        
-        
+
+
     }());
 
     (function()
@@ -280,9 +280,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var Class = Ice.Class;
-        
+
         var toString = function(key, object, objectTable, ident)
         {
             ident += "  ";
@@ -306,7 +306,7 @@
             {
                 return "\n" + ident + key + ": (recursive)";
             }
-        
+
             objectTable.push(object);
             var s = "\n" + ident + key + ":";
             for(var k in object)
@@ -315,7 +315,7 @@
                 {
                     continue;
                 }
-        
+
                 if(typeof object[k] == "function")
                 {
                     continue;
@@ -324,7 +324,7 @@
             }
             return s;
         };
-        
+
         //
         // Ice.Exception
         //
@@ -351,7 +351,7 @@
                 {
                     return "";
                 }
-        
+
                 this._inToStringAlready = true;
                 var s = this.ice_name();
                 for(var key in this)
@@ -361,7 +361,7 @@
                         s += toString(key, this[key], [], "");
                     }
                 }
-        
+
                 if(Ice.__printStackTraces === true && this.stack)
                 {
                     s += "\n" + this.stack;
@@ -370,7 +370,7 @@
                 return s;
             }
         });
-        
+
         Exception.captureStackTrace = function(object)
         {
             var stack = new Error().stack;
@@ -387,9 +387,9 @@
                 });
             }
         };
-        
+
         Ice.Exception = Exception;
-        
+
         //
         // Ice.LocalException
         //
@@ -404,9 +404,9 @@
                 return "Ice::LocalException";
             }
         });
-        
+
         Ice.LocalException = LocalException;
-        
+
         var Slice = Ice.Slice;
         Slice.defineLocalException = function(constructor, base, name)
         {
@@ -419,7 +419,7 @@
             };
             return ex;
         };
-        
+
         //
         // Ice.UserException
         //
@@ -451,11 +451,11 @@
             }
         });
         Ice.UserException = UserException;
-        
+
         //
         // Private methods
         //
-        
+
         var __writeImpl = function(obj, os, type)
         {
             //
@@ -463,12 +463,12 @@
             // class hierarchy to marshal each slice of the class using the
             // generated __writeMemberImpl method.
             //
-        
+
             if(type === undefined || type === UserException)
             {
                 return; // Don't marshal anything for Ice.UserException
             }
-        
+
             os.startWriteSlice(type.__id, -1, type.__parent === UserException);
             if(type.prototype.__writeMemberImpl)
             {
@@ -477,7 +477,7 @@
             os.endWriteSlice();
             __writeImpl(obj, os, type.__parent);
         };
-        
+
         var __readImpl = function(obj, is, type)
         {
             //
@@ -485,12 +485,12 @@
             // class hierarchy to marshal each slice of the class using the
             // generated __readMemberImpl method.
             //
-        
+
             if(type === undefined || type === UserException)
             {
                 return; // Don't marshal anything for UserException
             }
-        
+
             is.startReadSlice();
             if(type.prototype.__readMemberImpl)
             {
@@ -499,7 +499,7 @@
             is.endReadSlice();
             __readImpl(obj, is, type.__parent);
         };
-        
+
         var __writePreserved = function(os)
         {
             //
@@ -510,7 +510,7 @@
             __writeImpl(this, os, this.__mostDerivedType());
             os.endWriteException();
         };
-        
+
         var __readPreserved = function(is)
         {
             //
@@ -521,7 +521,7 @@
             __readImpl(this, is, this.__mostDerivedType());
             this.__slicedData = is.endReadException(true);
         };
-        
+
         Slice.defineUserException = function(constructor, base, name, writeImpl, readImpl, preserved, usesClasses)
         {
             var ex = constructor;
@@ -532,7 +532,7 @@
             {
                 return name;
             };
-        
+
             ex.prototype.constructor = ex;
             ex.prototype.__mostDerivedType = function() { return ex; };
             if(preserved)
@@ -542,7 +542,7 @@
             }
             ex.prototype.__writeMemberImpl = writeImpl;
             ex.prototype.__readMemberImpl = readImpl;
-        
+
             if(usesClasses)
             {
                 ex.prototype.__usesClasses = function()
@@ -550,10 +550,10 @@
                     return true;
                 };
             }
-        
+
             return ex;
         };
-        
+
     }());
 
     (function()
@@ -566,9 +566,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         Ice.AsyncStatus = {Queued: 0, Sent: 1};
-        
+
     }());
 
     (function()
@@ -581,13 +581,13 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // The Long type represents a signed 64-bit integer as two 32-bit values
         // corresponding to the high and low words.
         //
-        
+
         var Long = Ice.Class({
             __init__: function(high, low)
             {
@@ -599,7 +599,7 @@
                 {
                     throw new RangeError("High word must be between 0 and 0xFFFFFFFF");
                 }
-                
+
                 this.high = high;
                 this.low = low;
             },
@@ -625,21 +625,21 @@
             },
             toNumber: function()
             {
-        
+
                 if((this.high & Long.SIGN_MASK) !== 0)
                 {
                     if(this.high === Long.MAX_UINT32 && this.low !== 0)
                     {
                         return -(~this.low + 1);
                     }
-         
+
                     var high = ~this.high + 1;
-        
+
                     if(high > Long.HIGH_MAX)
                     {
                         return Number.NEGATIVE_INFINITY;
                     }
-        
+
                     return -1 * (high * Long.HIGH_MASK) + this.low;
                 }
                 else
@@ -652,18 +652,18 @@
                 }
             }
         });
-        
+
         //
         // 2^32
-        // 
+        //
         Long.MAX_UINT32 = 0xFFFFFFFF;
-        
+
         //
         // (high & SIGN_MASK) != 0 denotes a negative number;
         // that is, the most significant bit is set.
         //
         Long.SIGN_MASK = 0x80000000;
-        
+
         //
         // When converting to a JavaScript Number we left shift the
         // high word by 32 bits. As that isn't possible using JavaScript's
@@ -671,16 +671,16 @@
         // produce the same result.
         //
         Long.HIGH_MASK = 0x100000000;
-        
+
         //
         // The maximum value for the high word when coverting to
         // a JavaScript Number is 2^21 - 1, in which case all
         // 53 bits are used.
         //
         Long.HIGH_MAX = 0x1FFFFF;
-        
+
         Ice.Long = Long;
-        
+
     }());
 
     (function()
@@ -693,9 +693,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
-        Ice.AssertionFailedException = Ice.Class(Error, 
+
+
+        Ice.AssertionFailedException = Ice.Class(Error,
             {
                 __init__: function(message)
                 {
@@ -704,7 +704,7 @@
                     this.message = message;
                 }
             });
-        
+
         Ice.Debug =
         {
             assert: function(b, msg)
@@ -717,7 +717,7 @@
                 }
             }
         };
-        
+
     }());
 
     (function()
@@ -730,9 +730,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         Ice.DispatchStatus = {DispatchOK: 0, DispatchUserException: 1, DispatchAsync: 2};
-        
+
     }());
 
     (function()
@@ -745,8 +745,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // Ice.EnumBase
         //
@@ -762,13 +762,13 @@
                 {
                     return true;
                 }
-        
+
                 var proto = Object.getPrototypeOf(this);
                 if(!(rhs instanceof proto.constructor))
                 {
                     return false;
                 }
-        
+
                 return this._value == rhs._value;
             },
             hashCode: function()
@@ -781,19 +781,19 @@
             }
         });
         Ice.EnumBase = EnumBase;
-        
+
         var prototype = EnumBase.prototype;
-        
+
         Object.defineProperty(prototype, 'name', {
             enumerable: true,
             get: function() { return this._name; }
         });
-        
+
         Object.defineProperty(prototype, 'value', {
             enumerable: true,
             get: function() { return this._value; }
         });
-        
+
         var EnumHelper = Ice.Class({
             __init__: function(enumType)
             {
@@ -816,9 +816,9 @@
                 return this._enumType.__readOpt(is, tag);
             }
         });
-        
+
         Ice.EnumHelper = EnumHelper;
-        
+
         var Slice = Ice.Slice;
         Slice.defineEnum = function(enumerators)
         {
@@ -826,10 +826,10 @@
             {
                 EnumBase.call(this, n, v);
             };
-        
+
             type.prototype = new EnumBase();
             type.prototype.constructor = type;
-        
+
             var enums = [];
             var maxValue = 0;
             var firstEnum = null;
@@ -851,11 +851,11 @@
                     maxValue = value;
                 }
             }
-        
+
             Object.defineProperty(type, "minWireSize", {
                 get: function(){ return 1; }
             });
-        
+
             type.__write = function(os, v)
             {
                 if(v)
@@ -885,9 +885,9 @@
             {
                 return is.readOptEnum(tag, type);
             };
-        
+
             type.__helper = new EnumHelper(type);
-        
+
             Object.defineProperty(type, 'valueOf', {
                 value: function(v) {
                     if(v === undefined)
@@ -897,18 +897,18 @@
                     return enums[v];
                 }
             });
-        
+
             Object.defineProperty(type, 'maxValue', {
                 value: maxValue
             });
-        
+
             Object.defineProperty(type.prototype, 'maxValue', {
                 value: maxValue
             });
-        
+
             return type;
         };
-        
+
     }());
 
     (function()
@@ -921,7 +921,7 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         function generateUUID()
         {
             var d = new Date().getTime();
@@ -932,9 +932,9 @@
             });
             return uuid;
         }
-        
+
         Ice.generateUUID = generateUUID;
-        
+
     }());
 
     (function()
@@ -947,9 +947,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         Ice.FormatType  = Ice.Slice.defineEnum([['DefaultFormat', 0], ['CompactFormat',1], ['SlicedFormat',2]]);
-        
+
     }());
 
     (function()
@@ -962,9 +962,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var Debug = Ice.Debug;
-        
+
         Ice.StringUtil =
         {
             //
@@ -975,7 +975,7 @@
             findFirstOf: function(str, match, start)
             {
                 start = start === undefined ? 0 : start;
-        
+
                 var len = str.length;
                 for(var i = start; i < len; i++)
                 {
@@ -985,7 +985,7 @@
                         return i;
                     }
                 }
-        
+
                 return -1;
             },
             //
@@ -996,7 +996,7 @@
             findFirstNotOf: function(str, match, start)
             {
                 start = start === undefined ? 0 : start;
-        
+
                 var len = str.length;
                 for(var i = start; i < len; i++)
                 {
@@ -1006,7 +1006,7 @@
                         return i;
                     }
                 }
-        
+
                 return -1;
             },
             //
@@ -1017,7 +1017,7 @@
             escapeString: function(s, special)
             {
                 special = special === undefined ? null : special;
-        
+
                 var i, length;
                 if(special !== null)
                 {
@@ -1029,7 +1029,7 @@
                         }
                     }
                 }
-        
+
                 var result = [], c;
                 for(i = 0, length = s.length; i < length; ++i)
                 {
@@ -1050,7 +1050,7 @@
                         encodeChar((c & 63) | 128, result, special);
                     }
                 }
-        
+
                 return result.join("");
             },
             //
@@ -1061,12 +1061,12 @@
             {
                 start = start === undefined ? 0 : start;
                 end = end === undefined ? s.length : end;
-        
+
                 Debug.assert(start >= 0 && start <= end && end <= s.length);
-        
+
                 var arr = [];
                 decodeString(s, start, end, arr);
-        
+
                 return arr.join("");
             },
             //
@@ -1077,7 +1077,7 @@
                 var v = [];
                 var s = "";
                 var pos = 0;
-        
+
                 var quoteChar = null;
                 while(pos < str.length)
                 {
@@ -1115,13 +1115,13 @@
                             continue;
                         }
                     }
-        
+
                     if(pos < str.length)
                     {
                         s += str.charAt(pos++);
                     }
                 }
-        
+
                 if(s.length > 0)
                 {
                     v.push(s);
@@ -1130,7 +1130,7 @@
                 {
                     return null; // Unmatched quote.
                 }
-        
+
                 return v;
             },
             //
@@ -1142,7 +1142,7 @@
             checkQuote: function(s, start)
             {
                 start = start === undefined ? 0 : start;
-        
+
                 var quoteChar = s.charAt(start);
                 if(quoteChar == '"' || quoteChar == '\'')
                 {
@@ -1165,12 +1165,12 @@
             {
                 var hash = 0;
                 var n = s.length;
-        
+
                 for(var i = 0; i < n; i++)
                 {
                     hash = 31 * hash + s.charCodeAt(i);
                 }
-        
+
                 return hash;
             },
             toInt: function(s)
@@ -1183,7 +1183,7 @@
                 return n;
             }
         };
-        
+
         //
         // Write the byte b as an escape sequence if it isn't a printable ASCII
         // character and append the escape sequence to sb. Additional characters
@@ -1289,7 +1289,7 @@
             }
             return n;
         }
-        
+
         //
         // Decode the character or escape sequence starting at start and return it.
         // nextStart is set to the index of the first character following the decoded
@@ -1299,14 +1299,14 @@
         {
             Debug.assert(start >= 0);
             Debug.assert(end <= s.length);
-        
+
             if(start >= end)
             {
                 throw new Error("EOF while decoding string");
             }
-        
+
             var c;
-        
+
             if(s.charAt(start) != '\\')
             {
                 c = checkChar(s, start++);
@@ -1395,7 +1395,7 @@
             nextStart.value = start;
             return c;
         }
-        
+
         //
         // Remove escape sequences from s and append the result to sb.
         // Return true if successful, false otherwise.
@@ -1407,7 +1407,7 @@
             {
                 c = decodeChar(s, start, end, nextStart);
                 start = nextStart.value;
-        
+
                 if(c < 128)
                 {
                     arr.push(String.fromCharCode(c));
@@ -1428,7 +1428,7 @@
                 }
             }
         }
-        
+
     }());
 
     (function()
@@ -1441,10 +1441,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var __M = Ice.__M;
         var StringUtil = Ice.StringUtil;
-        
+
         function setInternal(map, key, value, hash, index)
         {
             //
@@ -1461,14 +1461,14 @@
                     return undefined;
                 }
             }
-        
+
             //
             // No match found, add a new entry.
             //
             map.add(key, value, hash, index);
             return undefined;
         }
-        
+
         function compareEquals(v1, v2)
         {
             if(v1 === v2)
@@ -1481,23 +1481,23 @@
             }
             return v1.equals(v2);
         }
-        
+
         function compareIdentity(v1, v2)
         {
             return v1 === v2;
         }
-        
+
         var HashMap = Ice.Class({
             __init__: function(arg1, arg2)
             {
                 //
                 // The first argument can be a HashMap or the keyComparator, the second
                 // argument if present is always the value comparator.
-                // 
+                //
                 var args = arguments;
-        
+
                 var h, keyComparator, valueComparator;
-        
+
                 if(typeof arg1 == "function")
                 {
                     keyComparator = arg1;
@@ -1509,16 +1509,16 @@
                     keyComparator = h.keyComparator;
                     valueComparator = h.valueComparator;
                 }
-        
+
                 this._size = 0;
                 this._head = null;
                 this._initialCapacity = 32;
                 this._loadFactor = 0.75;
                 this._table = [];
-        
+
                 this._keyComparator = (typeof keyComparator == "function") ? keyComparator : compareIdentity;
                 this._valueComparator = (typeof valueComparator == "function") ? valueComparator : compareIdentity;
-        
+
                 var i, length;
                 if(h instanceof HashMap && h._size > 0)
                 {
@@ -1543,9 +1543,9 @@
             set: function(key, value)
             {
                 var r = this.computeHash(key); // Returns an object with key,hash members.
-        
+
                 var index = this.hashIndex(r.hash, this._table.length);
-        
+
                 return setInternal(this, r.key, value, r.hash, index);
             },
             get: function(key)
@@ -1562,9 +1562,9 @@
             delete: function(key)
             {
                 var r = this.computeHash(key); // Returns an object with key,hash members.
-        
+
                 var index = this.hashIndex(r.hash, this._table.length);
-        
+
                 //
                 // Search for an entry with the same key.
                 //
@@ -1577,7 +1577,7 @@
                         // Found a match.
                         //
                         this._size--;
-        
+
                         //
                         // Remove from bucket.
                         //
@@ -1589,7 +1589,7 @@
                         {
                             this._table[index] = e._nextInBucket;
                         }
-        
+
                         //
                         // Unlink the entry.
                         //
@@ -1601,18 +1601,18 @@
                         {
                             e._next._prev = e._prev;
                         }
-        
+
                         if(this._head === e)
                         {
                             this._head = e._next;
                         }
-        
+
                         return e._value;
                     }
-        
+
                     prev = e;
                 }
-        
+
                 return undefined;
             },
             clear: function()
@@ -1658,13 +1658,13 @@
                 {
                     return false;
                 }
-        
+
                 var self = this;
                 var eq = valuesEqual || function(v1, v2)
                     {
                         return self._valueComparator.call(self._valueComparator, v1, v2);
                     };
-                
+
                 for(var e = this._head; e !== null; e = e._next)
                 {
                     var oe = other.findEntry(e._key, e._hash);
@@ -1673,7 +1673,7 @@
                         return false;
                     }
                 }
-        
+
                 return true;
             },
             clone: function()
@@ -1738,14 +1738,14 @@
                 });
                 e._nextInBucket = this._table[index];
                 this._table[index] = e;
-        
+
                 e._next = this._head;
                 if(this._head !== null)
                 {
                     this._head._prev = e;
                 }
                 this._head = e;
-        
+
                 this._size++;
                 if(this._size >= this._threshold)
                 {
@@ -1755,13 +1755,13 @@
             resize: function(capacity)
             {
                 var oldTable = this._table;
-        
+
                 var newTable = [];
                 for(var i = 0; i < capacity; i++)
                 {
                     newTable[i] = null;
                 }
-        
+
                 //
                 // Re-assign all entries to buckets.
                 //
@@ -1771,7 +1771,7 @@
                     e._nextInBucket = newTable[index];
                     newTable[index] = e;
                 }
-        
+
                 this._table = newTable;
                 this._threshold = (capacity * this._loadFactor);
             },
@@ -1788,7 +1788,7 @@
                         return e;
                     }
                 }
-        
+
                 return undefined;
             },
             hashIndex: function(hash, len)
@@ -1802,7 +1802,7 @@
                 {
                     return {key:0, hash:0};
                 }
-        
+
                 if(v === null)
                 {
                     if(HashMap._null === null)
@@ -1812,17 +1812,17 @@
                     }
                     return HashMap._null;
                 }
-        
+
                 if(v === undefined)
                 {
                     throw new Error("cannot compute hash for undefined value");
                 }
-        
+
                 if(typeof(v.hashCode) === "function")
                 {
                     return {key:v, hash:v.hashCode()};
                 }
-        
+
                 var type = typeof(v);
                 if(type === "string" || v instanceof String)
                 {
@@ -1845,7 +1845,7 @@
                 {
                     return {key:v, hash:v ? 1 : 0};
                 }
-        
+
                 throw new Error("cannot compute hash for value of type " + type);
             },
             keysEqual: function(k1, k2)
@@ -1854,22 +1854,22 @@
             }
         });
         Ice.HashMap = HashMap;
-        
+
         HashMap.compareEquals = compareEquals;
         HashMap.compareIdentity = compareIdentity;
         HashMap._null = null;
         HashMap._nan = null;
-        
+
         var prototype = HashMap.prototype;
-        
+
         Object.defineProperty(prototype, "size", {
             get: function() { return this._size; }
         });
-        
+
         Object.defineProperty(prototype, "entries", {
             get: function() { return this._head; }
         });
-        
+
         var Slice = Ice.Slice;
         Slice.defineDictionary = function(module, name, helperName, keyHelper, valueHelper, fixed, keysEqual, valueType, valuesEqual)
         {
@@ -1889,7 +1889,7 @@
             {
                 module[name] = HashMap;
             }
-        
+
             var helper = null;
             Object.defineProperty(module, helperName,
             {
@@ -1898,7 +1898,7 @@
                         if(helper === null)
                         {
                             /*jshint -W061 */
-                            helper = Ice.StreamHelpers.generateDictHelper(__M.type(keyHelper), __M.type(valueHelper), fixed, 
+                            helper = Ice.StreamHelpers.generateDictHelper(__M.type(keyHelper), __M.type(valueHelper), fixed,
                                                                           __M.type(valueType), module[name]);
                             /*jshint +W061 */
                         }
@@ -1906,7 +1906,7 @@
                     }
             });
         };
-        
+
     }());
 
     (function()
@@ -1919,9 +1919,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         Ice.OptionalFormat = Ice.Slice.defineEnum([['F1', 0], ['F2', 1], ['F4', 2], ['F8', 3], ['Size', 4], ['VSize', 5], ['FSize', 6], ['Class', 7]]);
-        
+
     }());
 
     (function()
@@ -1934,15 +1934,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Class = Ice.Class;
         var defineProperty = Object.defineProperty;
         var HashMap = Ice.HashMap;
         var OptionalFormat = Ice.OptionalFormat;
-        
+
         var StreamHelpers = {};
-        
+
         StreamHelpers.FSizeOptHelper = function()
         {
             this.writeOpt = function(os, tag, v)
@@ -1954,7 +1954,7 @@
                     os.endSize(pos);
                 }
             };
-        
+
             this.readOpt = function(is, tag)
             {
                 var v;
@@ -1966,7 +1966,7 @@
                 return v;
             };
         };
-        
+
         StreamHelpers.VSizeOptHelper = function()
         {
             this.writeOpt = function(os, tag, v)
@@ -1977,7 +1977,7 @@
                     this.write(os, v);
                 }
             };
-        
+
             this.readOpt = function(is, tag)
             {
                 var v;
@@ -1989,7 +1989,7 @@
                 return v;
             };
         };
-        
+
         StreamHelpers.VSizeContainerOptHelper = function(elementSize)
         {
             this.writeOpt = function(os, tag, v)
@@ -2001,7 +2001,7 @@
                     this.write(os, v);
                 }
             };
-        
+
             this.readOpt = function(is, tag)
             {
                 var v;
@@ -2013,7 +2013,7 @@
                 return v;
             };
         };
-        
+
         StreamHelpers.VSizeContainer1OptHelper = function()
         {
             this.writeOpt = function(os, tag, v)
@@ -2023,7 +2023,7 @@
                     this.write(os, v);
                 }
             };
-        
+
             this.readOpt = function(is, tag)
             {
                 var v;
@@ -2034,7 +2034,7 @@
                 return v;
             };
         };
-        
+
         //
         // Sequence helper to write sequences
         //
@@ -2072,11 +2072,11 @@
                 return (v === null || v === undefined) ? 0 : v.length;
             }
         });
-        
+
         defineProperty(SequenceHelper.prototype, "minWireSize", {
             get: function(){ return 1; }
         });
-        
+
         // Speacialization optimized for ByteSeq
         var byteSeqHelper = new SequenceHelper();
         byteSeqHelper.write = function(os, v) { return os.writeByteSeq(v); };
@@ -2085,7 +2085,7 @@
             get: function(){ return Ice.ByteHelper; }
         });
         StreamHelpers.VSizeContainer1OptHelper.call(byteSeqHelper);
-        
+
         // Read method for object sequences
         var objectSequenceHelperRead = function(is)
         {
@@ -2097,21 +2097,21 @@
             {
                 is.readObject(function(obj) { v[idx] = obj; }, elementType);
             };
-        
+
             for(var i = 0; i < sz; ++i)
             {
                 readObjectAtIndex(i);
             }
             return v;
         };
-        
+
         StreamHelpers.generateSeqHelper = function(elementHelper, fixed, elementType)
         {
             if(elementHelper === Ice.ByteHelper)
             {
                 return byteSeqHelper;
             }
-        
+
             var helper = new SequenceHelper();
             if(fixed)
             {
@@ -2128,11 +2128,11 @@
             {
                 StreamHelpers.FSizeOptHelper.call(helper);
             }
-        
+
             defineProperty(helper, "elementHelper", {
                 get: function(){ return elementHelper; }
             });
-        
+
             if(elementHelper == Ice.ObjectHelper)
             {
                 defineProperty(helper, "elementType", {
@@ -2140,10 +2140,10 @@
                 });
                 helper.read = objectSequenceHelperRead;
             }
-        
+
             return helper;
         };
-        
+
         //
         // Dictionary helper to write dictionaries
         //
@@ -2184,11 +2184,11 @@
                 return (v === null || v === undefined) ? 0 : v.size;
             }
         });
-        
+
         Object.defineProperty(DictionaryHelper.prototype, "minWireSize", {
             get: function(){ return 1; }
         });
-        
+
         // Read method for dictionaries of objects
         var objectDictionaryHelperRead = function(is)
         {
@@ -2196,12 +2196,12 @@
             var mapType = this.mapType;
             var v = new mapType();
             var valueType = this.valueType;
-        
+
             var readObjectForKey = function(key)
             {
                 is.readObject(function(obj) { v.set(key, obj); }, valueType);
             };
-        
+
             var keyHelper = this.keyHelper;
             for(var i = 0; i < sz; ++i)
             {
@@ -2209,7 +2209,7 @@
             }
             return v;
         };
-        
+
         StreamHelpers.generateDictHelper = function(keyHelper, valueHelper, fixed, valueType, mapType)
         {
             var helper = new DictionaryHelper();
@@ -2230,7 +2230,7 @@
             defineProperty(helper, "valueHelper", {
                 get: function(){ return valueHelper; }
             });
-        
+
             if(valueHelper == Ice.ObjectHelper)
             {
                 defineProperty(helper, "valueType", {
@@ -2238,12 +2238,12 @@
                 });
                 helper.read = objectDictionaryHelperRead;
             }
-        
+
             return helper;
         };
-        
+
         Ice.StreamHelpers = StreamHelpers;
-        
+
     }());
 
     (function()
@@ -2256,15 +2256,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         //
         // jshint browser: true
         //
-        
+
         /* global WorkerGlobalScope */
-        
-        
-        
+
+
+
         //
         // Create a timer object that uses the default browser methods. Note that we also
         // have to use apply with null as the first argument to workaround an issue where
@@ -2283,26 +2283,26 @@
                 function () { setTimeout.apply(null, arguments); };
             return Timer;
         }
-        
-        
-        
+
+
+
         var HashMap = Ice.HashMap;
-        
+
         var MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER  || 9007199254740991;
-        
+
         var _timers = new HashMap();
-        
+
         var _SetTimeoutType = 0,
             _SetIntervalType = 1,
             _SetImmediateType = 2,
             _ClearTimeoutType = 3,
             _ClearIntervalType = 4;
-        
+
         var Timer = {};
         var worker;
-        
+
         var _nextId = 0;
-        
+
         var nextId = function()
         {
             if(_nextId == MAX_SAFE_INTEGER)
@@ -2311,7 +2311,7 @@
             }
             return _nextId++;
         };
-        
+
         Timer.setTimeout = function(cb, ms)
         {
             var id = nextId();
@@ -2319,13 +2319,13 @@
             worker.postMessage({type: _SetTimeoutType, id: id, ms: ms});
             return id;
         };
-        
+
         Timer.clearTimeout = function(id)
         {
             _timers.delete(id);
             worker.postMessage({type: _ClearTimeoutType, id: id});
         };
-        
+
         Timer.setInterval = function(cb, ms)
         {
             var id = nextId();
@@ -2333,13 +2333,13 @@
             worker.postMessage({type: _SetIntervalType, id: id, ms: ms});
             return id;
         };
-        
+
         Timer.clearInterval = function(id)
         {
             _timers.delete(id);
             worker.postMessage({type: _ClearIntervalType, id: id});
         };
-        
+
         Timer.setImmediate = function(cb)
         {
             var id = nextId();
@@ -2347,7 +2347,7 @@
             worker.postMessage({type: _SetImmediateType, id: id});
             return id;
         };
-        
+
         Timer.onmessage = function(e)
         {
             var cb;
@@ -2359,13 +2359,13 @@
             {
                 cb = _timers.delete(e.data.id);
             }
-        
+
             if(cb !== undefined)
             {
                 cb.call();
             }
         };
-        
+
         var workerCode = function()
         {
             return "(" +
@@ -2379,9 +2379,9 @@
                     _wSetImmediateType = 2,
                     _wClearTimeoutType = 3,
                     _wClearIntervalType = 4;
-        
+
                 var timers = {};
-        
+
                 self.onmessage = function(e)
                 {
                     if(e.data.type == _wSetTimeoutType)
@@ -2415,13 +2415,13 @@
                         delete timers[e.data.id];
                     }
                 };
-        
+
                 //
                 // jshint worker: false
                 //
             }.toString() + "());";
         };
-        
+
         if(worker === undefined)
         {
             var url;
@@ -2435,7 +2435,7 @@
             catch(ex)
             {
                 URL.revokeObjectURL(url);
-        
+
                 //
                 // Fallback on setInterval/setTimeout if the worker creating failed. Some IE10 and IE11 don't
                 // support creating workers from blob URLs for instance.
@@ -2443,7 +2443,7 @@
                 Ice.Timer = createTimerObject();
             }
         }
-        
+
     }());
 
     (function()
@@ -2456,17 +2456,17 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         //
         // Ice.Object
         //
         // Using IceObject in this file to avoid collisions with the native Object.
         //
-        
+
         var Class = Ice.Class;
-        
+
         var nextAddress = 0;
-        
+
         var IceObject = Class({
             __init__: function()
             {
@@ -2543,13 +2543,13 @@
             },
             //
             // The default implementation of equals compare references.
-            // 
+            //
             equals: function(other)
             {
                 return this === other;
             }
         });
-        
+
         //
         // These methods are used for object parameters.
         //
@@ -2557,38 +2557,38 @@
         {
             os.writeObject(v);
         };
-        
+
         IceObject.writeOpt = function(os, tag, v)
         {
             os.writeOptObject(tag, v);
         };
-        
+
         IceObject.read = function(is)
         {
             var v = { value: null };
             is.readObject(function(o) { v.value = o; }, IceObject);
             return v;
         };
-        
+
         IceObject.readOpt = function(is, tag)
         {
             var v = { value: undefined };
             is.readOptObject(tag, function(o) { v.value = o; }, IceObject);
             return v;
         };
-        
+
         IceObject.ice_staticId = function()
         {
             return IceObject.__id;
         };
-        
+
         IceObject.__instanceof = function(T)
         {
             if(T === this)
             {
                 return true;
             }
-        
+
             for(var i in this.__implements)
             {
                 if(this.__implements[i].__instanceof(T))
@@ -2596,23 +2596,23 @@
                     return true;
                 }
             }
-        
+
             if(this.__parent)
             {
                 return this.__parent.__instanceof(T);
             }
             return false;
         };
-        
+
         IceObject.__ids = ["::Ice::Object"];
         IceObject.__id = IceObject.__ids[0];
         IceObject.__compactId = -1;
         IceObject.__preserved = false;
-        
+
         //
         // Private methods
         //
-        
+
         var __writeImpl = function(obj, os, type)
         {
             //
@@ -2620,12 +2620,12 @@
             // class hierarchy to marshal each slice of the class using the
             // generated __writeMemberImpl method.
             //
-        
+
             if(type === undefined || type === IceObject)
             {
                 return; // Don't marshal anything for IceObject
             }
-        
+
             os.startWriteSlice(type.__id, type.__compactId, type.__parent === IceObject);
             if(type.prototype.__writeMemberImpl)
             {
@@ -2634,7 +2634,7 @@
             os.endWriteSlice();
             __writeImpl(obj, os, type.__parent);
         };
-        
+
         var __readImpl = function(obj, is, type)
         {
             //
@@ -2642,12 +2642,12 @@
             // class hierarchy to marshal each slice of the class using the
             // generated __readMemberImpl method.
             //
-        
+
             if(type === undefined || type === IceObject)
             {
                 return; // Don't marshal anything for IceObject
             }
-        
+
             is.startReadSlice();
             if(type.prototype.__readMemberImpl)
             {
@@ -2656,7 +2656,7 @@
             is.endReadSlice();
             __readImpl(obj, is, type.__parent);
         };
-        
+
         var __writePreserved = function(os)
         {
             //
@@ -2667,7 +2667,7 @@
             __writeImpl(this, os, this.__mostDerivedType());
             os.endWriteObject();
         };
-        
+
         var __readPreserved = function(is)
         {
             //
@@ -2678,28 +2678,28 @@
             __readImpl(this, is, this.__mostDerivedType());
             this.__slicedData = is.endReadObject(true);
         };
-        
+
         Ice.Object = IceObject;
-        
+
         var Slice = Ice.Slice;
         Slice.defineLocalObject = function(constructor, base)
         {
             var obj = constructor || function(){};
-        
+
             if(base !== undefined)
             {
                 obj.prototype = new base();
                 obj.__parent = base;
                 obj.prototype.constructor = constructor;
             }
-        
+
             return obj;
         };
-        
+
         Slice.defineObject = function(constructor, base, intfs, scope, ids, compactId, writeImpl, readImpl, preserved)
         {
             var obj = constructor || function(){};
-        
+
             obj.prototype = new base();
             obj.__parent = base;
             obj.__ids = ids;
@@ -2707,7 +2707,7 @@
             obj.__compactId = compactId;
             obj.__instanceof = IceObject.__instanceof;
             obj.__implements = intfs;
-        
+
             //
             // These methods are used for object parameters.
             //
@@ -2731,12 +2731,12 @@
                 is.readOptObject(tag, function(o) { v.value = o; }, obj);
                 return v;
             };
-        
+
             obj.ice_staticId = function()
             {
                 return ids[scope];
             };
-        
+
             obj.prototype.constructor = obj;
             obj.prototype.__mostDerivedType = function() { return obj; };
             if(preserved)
@@ -2746,10 +2746,10 @@
             }
             obj.prototype.__writeMemberImpl = writeImpl;
             obj.prototype.__readMemberImpl = readImpl;
-        
+
             return obj;
         };
-        
+
     }());
 
     (function()
@@ -2762,9 +2762,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var StringUtil = Ice.StringUtil;
-        
+
         Ice.HashUtil =
         {
             addBoolean: function(h, b)
@@ -2803,7 +2803,7 @@
                 return h;
             }
         };
-        
+
     }());
 
     (function()
@@ -2816,32 +2816,32 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var ArrayUtil = Ice.ArrayUtil;
-        
+
         //
         // Use generic equality test from ArrayUtil.
         //
         var eq = ArrayUtil.eq;
-        
+
         var equals = function(other)
         {
             if(this === other)
             {
                 return true;
             }
-        
+
             if(other === null || other === undefined)
             {
                 return false;
             }
-        
+
             if(this.prototype !== other.prototype)
             {
                 return false;
             }
-        
+
             var e1, e2;
             for(var key in this)
             {
@@ -2858,7 +2858,7 @@
             }
             return true;
         };
-        
+
         var clone = function()
         {
             var other = new this.constructor();
@@ -2889,7 +2889,7 @@
             }
             return other;
         };
-        
+
         var memberHashCode = function(h, e)
         {
             if(typeof e.hashCode == "function")
@@ -2917,7 +2917,7 @@
                 }
             }
         };
-        
+
         var hashCode = function()
         {
             var __h = 5381;
@@ -2933,15 +2933,15 @@
             }
             return __h;
         };
-        
+
         Ice.Slice.defineStruct = function(constructor, legalKeyType, writeImpl, readImpl, minWireSize, fixed)
         {
             var obj = constructor;
-        
+
             obj.prototype.clone = clone;
-        
+
             obj.prototype.equals = equals;
-        
+
             //
             // Only generate hashCode if this structure type is a legal dictionary key type.
             //
@@ -2949,7 +2949,7 @@
             {
                 obj.prototype.hashCode = hashCode;
             }
-        
+
             if(readImpl && writeImpl)
             {
                 obj.prototype.__write = writeImpl;
@@ -2989,7 +2989,7 @@
             }
             return obj;
         };
-        
+
     }());
 
     (function()
@@ -3002,9 +3002,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         Ice.CompactIdRegistry = new Ice.HashMap();
-        
+
     }());
 
     (function()
@@ -3028,7 +3028,7 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineSequence(Ice, "BoolSeqHelper", "Ice.BoolHelper", true);
             Slice.defineSequence(Ice, "ByteSeqHelper", "Ice.ByteHelper", true);
             Slice.defineSequence(Ice, "ShortSeqHelper", "Ice.ShortHelper", true);
@@ -3039,7 +3039,7 @@
             Slice.defineSequence(Ice, "StringSeqHelper", "Ice.StringHelper", false);
             Slice.defineSequence(Ice, "ObjectSeqHelper", "Ice.ObjectHelper", false, "Ice.Object");
             Slice.defineSequence(Ice, "ObjectProxySeqHelper", "Ice.ObjectPrx", false);
-        
+
     }());
 
     (function()
@@ -3052,22 +3052,22 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // Using a separate module for these constants so that ObjectPrx does
         // not need to include Reference.
         //
-        Ice.ReferenceMode = 
+        Ice.ReferenceMode =
         {
-            ModeTwoway: 0, 
-            ModeOneway: 1, 
-            ModeBatchOneway: 2, 
-            ModeDatagram: 3, 
+            ModeTwoway: 0,
+            ModeOneway: 1,
+            ModeBatchOneway: 2,
+            ModeDatagram: 3,
             ModeBatchDatagram: 4,
             ModeLast: 4
         };
-        
+
     }());
 
     (function()
@@ -3080,15 +3080,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
-        
+
+
+
         var Long = Ice.Long;
-        
+
         //
         // IE 10 doesn't implement ArrayBuffer.slice
         //
-        
+
         if(!ArrayBuffer.prototype.slice)
         {
             ArrayBuffer.prototype.slice = function (start, end)
@@ -3103,11 +3103,11 @@
                 return result.buffer;
             };
         }
-        
+
         var __BufferOverflowException__ = "BufferOverflowException";
         var __BufferUnderflowException__ = "BufferUnderflowException";
         var __IndexOutOfBoundsException__ = "IndexOutOfBoundsException";
-        
+
         //
         // Buffer implementation to be used by web browsers, it uses ArrayBuffer as
         // the store.
@@ -3312,7 +3312,7 @@
                 // Encode the string as utf8
                 //
                 var encoded = unescape(encodeURIComponent(v));
-        
+
                 stream.writeSize(encoded.length);
                 stream.expand(encoded.length);
                 this.putString(encoded, encoded.length);
@@ -3425,10 +3425,10 @@
                 {
                     throw new Error(__BufferUnderflowException__);
                 }
-        
+
                 var data = new DataView(this.b, this._position, length);
                 var s = "";
-        
+
                 for(var i = 0; i < length; ++i)
                 {
                     s += String.fromCharCode(data.getUint8(i));
@@ -3438,9 +3438,9 @@
                 return s;
             }
         });
-        
+
         var prototype = Buffer.prototype;
-        
+
         Object.defineProperty(prototype, "position", {
             get: function() { return this._position; },
             set: function(position){
@@ -3450,7 +3450,7 @@
                 }
             }
         });
-        
+
         Object.defineProperty(prototype, "limit", {
             get: function() { return this._limit; },
             set: function(limit){
@@ -3464,15 +3464,15 @@
                 }
             }
         });
-        
+
         Object.defineProperty(prototype, "capacity", {
             get: function() { return this.b === null ? 0 : this.b.byteLength; }
         });
-        
+
         Object.defineProperty(prototype, "remaining", {
             get: function() { return this._limit - this._position; }
         });
-        
+
         //
         // Create a native buffer from an array of bytes.
         //
@@ -3487,9 +3487,9 @@
                 return new Uint8Array(data);
             }
         };
-        
+
         Ice.Buffer = Buffer;
-        
+
     }());
 
     (function()
@@ -3502,29 +3502,29 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Buffer = Ice.Buffer;
-        
+
         var Base64 = {};
-        
+
         var _codeA = "A".charCodeAt(0);
         var _codea = "a".charCodeAt(0);
         var _code0 = "0".charCodeAt(0);
-        
+
         Base64.encode = function(buf) // Expects native Buffer
         {
             if(buf === null || buf.length === 0)
             {
                 return "";
             }
-        
+
             var base64Bytes = (((buf.length * 4) / 3) + 1);
             var newlineBytes = (((base64Bytes * 2) / 76) + 1);
             var totalBytes = base64Bytes + newlineBytes;
-        
+
             var v = [];
-        
+
             var by1;
             var by2;
             var by3;
@@ -3532,31 +3532,31 @@
             var by5;
             var by6;
             var by7;
-        
+
             for(var i = 0; i < buf.length; i += 3)
             {
                 by1 = buf[i] & 0xff;
                 by2 = 0;
                 by3 = 0;
-        
+
                 if((i + 1) < buf.length)
                 {
                     by2 = buf[i + 1] & 0xff;
                 }
-        
+
                 if((i + 2) < buf.length)
                 {
                     by3 = buf[i + 2] & 0xff;
                 }
-        
+
                 by4 = (by1 >> 2) & 0xff;
                 by5 = (((by1 & 0x3) << 4) | (by2 >> 4)) & 0xff;
                 by6 = (((by2 & 0xf) << 2) | (by3 >> 6)) & 0xff;
                 by7 = by3 & 0x3f;
-        
+
                 v.push(encodeChar(by4));
                 v.push(encodeChar(by5));
-        
+
                 if((i + 1) < buf.length)
                 {
                     v.push(encodeChar(by6));
@@ -3565,7 +3565,7 @@
                 {
                     v.push("=");
                 }
-        
+
                 if((i + 2) < buf.length)
                 {
                     v.push(encodeChar(by7));
@@ -3575,27 +3575,27 @@
                     v.push("=");
                 }
             }
-        
+
             var retval = v.join("");
             var outString = [];
             var iter = 0;
-        
+
             while((retval.length - iter) > 76)
             {
                 outString.push(retval.substring(iter, iter + 76));
                 outString.push("\r\n");
                 iter += 76;
             }
-        
+
             outString.push(retval.substring(iter));
-        
+
             return outString.join("");
         };
-        
+
         Base64.decode = function(str) // Returns native Buffer
         {
             var newStr = [];
-        
+
             for(var j = 0; j < str.length; j++)
             {
                 var c = str.charAt(j);
@@ -3604,167 +3604,167 @@
                     newStr.push(c);
                 }
             }
-        
+
             if(newStr.length === 0)
             {
                 return null;
             }
-        
+
             // Note: This is how we were previously computing the size of the return
             //       sequence.  The method below is more efficient (and correct).
             // size_t lines = str.size() / 78;
             // size_t totalBytes = (lines * 76) + (((str.size() - (lines * 78)) * 3) / 4);
-        
+
             // Figure out how long the final sequence is going to be.
             var totalBytes = (newStr.length * 3 / 4) + 1;
-        
+
             var retval = new Buffer();
             retval.resize(totalBytes);
-        
+
             var by1;
             var by2;
             var by3;
             var by4;
-        
+
             var c1;
             var c2;
             var c3;
             var c4;
-        
+
             var off = 0;
-        
+
             for(var i = 0; i < newStr.length; i += 4)
             {
                 c1 = "A";
                 c2 = "A";
                 c3 = "A";
                 c4 = "A";
-        
+
                 c1 = newStr[i];
-        
+
                 if((i + 1) < newStr.length)
                 {
                     c2 = newStr[i + 1];
                 }
-        
+
                 if((i + 2) < newStr.length)
                 {
                     c3 = newStr[i + 2];
                 }
-        
+
                 if((i + 3) < newStr.length)
                 {
                     c4 = newStr[i + 3];
                 }
-        
+
                 by1 = decodeChar(c1) & 0xff;
                 by2 = decodeChar(c2) & 0xff;
                 by3 = decodeChar(c3) & 0xff;
                 by4 = decodeChar(c4) & 0xff;
-        
+
                 retval.put((by1 << 2) | (by2 >> 4));
-        
+
                 if(c3 != "=")
                 {
                     retval.put(((by2 & 0xf) << 4) | (by3 >> 2));
                 }
-        
+
                 if(c4 != "=")
                 {
                     retval.put(((by3 & 0x3) << 6) | by4);
                 }
             }
-        
+
             return retval.remaining > 0 ? retval.getArrayAt(0, retval.position) : retval.getArrayAt(0);
         };
-        
+
         Base64.isBase64 = function(c)
         {
             if(c >= 'A' && c <= 'Z')
             {
                 return true;
             }
-        
+
             if(c >= 'a' && c <= 'z')
             {
                 return true;
             }
-        
+
             if(c >= '0' && c <= '9')
             {
                 return true;
             }
-        
+
             if(c == '+')
             {
                 return true;
             }
-        
+
             if(c == '/')
             {
                 return true;
             }
-        
+
             if(c == '=')
             {
                 return true;
             }
-        
+
             return false;
         };
-        
+
         function encodeChar(uc)
         {
             if(uc < 26)
             {
                 return String.fromCharCode(_codeA + uc);
             }
-        
+
             if(uc < 52)
             {
                 return String.fromCharCode(_codea + (uc - 26));
             }
-        
+
             if(uc < 62)
             {
                 return String.fromCharCode(_code0 + (uc - 52));
             }
-        
+
             if(uc == 62)
             {
                 return "+";
             }
-        
+
             return "/";
         }
-        
+
         function decodeChar(c)
         {
             if(c >= 'A' && c <= 'Z')
             {
                 return c.charCodeAt(0) - _codeA;
             }
-        
+
             if(c >= 'a' && c <= 'z')
             {
                 return c.charCodeAt(0) - _codea + 26;
             }
-        
+
             if(c >= '0' && c <= '9')
             {
                 return c.charCodeAt(0) - _code0 + 52;
             }
-        
+
             if(c == '+')
             {
                 return 62;
             }
-        
+
             return 63;
         }
-        
+
         Ice.Base64 = Base64;
-        
+
     }());
 
     (function()
@@ -3788,16 +3788,16 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * The identity of an Ice object. In a proxy, an empty {@link Identity#name} denotes a nil
              * proxy. An identity with an empty {@link Identity#name} and a non-empty {@link Identity#category}
              * is illegal. You cannot add a servant with an empty name to the Active Servant Map.
-             * 
+             *
              * @see ServantLocator
              * @see ObjectAdapter#addServantLocator
-             * 
+             *
              **/
             Ice.Identity = Slice.defineStruct(
                 function(name, category)
@@ -3816,11 +3816,11 @@
                     this.name = __is.readString();
                     this.category = __is.readString();
                 },
-                2, 
+                2,
                 false);
             Slice.defineDictionary(Ice, "ObjectDict", "ObjectDictHelper", "Ice.Identity", "Ice.ObjectHelper", false, Ice.HashMap.compareEquals, "Ice.Object");
             Slice.defineSequence(Ice, "IdentitySeqHelper", "Ice.Identity", false);
-        
+
     }());
 
     (function()
@@ -3844,8 +3844,8 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
     }());
 
     (function()
@@ -3869,11 +3869,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * A version structure for the protocol version.
-             * 
+             *
              **/
             Ice.ProtocolVersion = Slice.defineStruct(
                 function(major, minor)
@@ -3892,12 +3892,12 @@
                     this.major = __is.readByte();
                     this.minor = __is.readByte();
                 },
-                2, 
+                2,
                 true);
-        
+
             /**
              * A version structure for the encoding version.
-             * 
+             *
              **/
             Ice.EncodingVersion = Slice.defineStruct(
                 function(major, minor)
@@ -3916,9 +3916,9 @@
                     this.major = __is.readByte();
                     this.minor = __is.readByte();
                 },
-                2, 
+                2,
                 true);
-        
+
     }());
 
     (function()
@@ -3931,48 +3931,48 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-            
+
+
         var SliceInfo = function()
         {
             /**
             * The Slice type ID for this slice.
             **/
             this.typeId = "";
-        
+
             /**
             * The Slice compact type ID for this slice.
             **/
             this.compactId = -1;
-        
+
             /**
             * The encoded bytes for this slice, including the leading size integer.
             **/
             this.bytes = [];
-        
+
             /**
             * The Ice objects referenced by this slice.
             **/
             this.objects = [];
-        
+
             /**
             * Whether or not the slice contains optional members.
             **/
             this.hasOptionalMembers = false;
-        
+
             /**
             * Whether or not this is the last slice.
             **/
             this.isLastSlice = false;
         };
         Ice.SliceInfo = SliceInfo;
-        
+
         var SlicedData = function(slices)
         {
             this.slices = slices;
         };
         Ice.SlicedData = SlicedData;
-        
+
         var UnknownSlicedObject = Ice.Class(Ice.Object,
             {
                 __init__: function(unknownTypeId)
@@ -3995,8 +3995,8 @@
                 }
             });
         Ice.UnknownSlicedObject = UnknownSlicedObject;
-        
-        
+
+
     }());
 
     (function()
@@ -4020,8 +4020,8 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
     }());
 
     (function()
@@ -4034,11 +4034,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var HashMap = Ice.HashMap;
         var Debug = Ice.Debug;
-        
+
         var LocatorTable = Ice.Class({
             __init__: function()
             {
@@ -4057,7 +4057,7 @@
                     cached.value = false;
                     return null;
                 }
-        
+
                 var entry = this._adapterEndpointsTable.get(adapter);
                 if(entry !== undefined)
                 {
@@ -4084,7 +4084,7 @@
                     cached.value = false;
                     return null;
                 }
-        
+
                 var entry = this._objectTable.get(id);
                 if(entry !== undefined)
                 {
@@ -4117,21 +4117,21 @@
                 }
             }
         });
-        
+
         Ice.LocatorTable = LocatorTable;
-        
+
         var EndpointTableEntry = function(time, endpoints)
         {
             this.time = time;
             this.endpoints = endpoints;
         };
-        
+
         var ReferenceTableEntry = function(time, reference)
         {
             this.time = time;
             this.reference = reference;
         };
-        
+
     }());
 
     (function()
@@ -4144,15 +4144,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Timer = Ice.Timer;
-        
+
         //
         // Promise State
         //
         var State = {Pending: 0, Success: 1, Failed: 2};
-        
+
         var resolveImp = function(self, listener)
         {
             var callback = self.__state === State.Success ? listener.onResponse : listener.onException;
@@ -4165,7 +4165,7 @@
                 else
                 {
                     var result = callback.apply(null, self._args);
-        
+
                     //
                     // Callback can return a new promise.
                     //
@@ -4194,7 +4194,7 @@
                 listener.promise.fail.call(listener.promise, e);
             }
         };
-        
+
         var Promise = Ice.Class({
             __init__: function()
             {
@@ -4229,7 +4229,7 @@
             {
                 var p = new Promise();
                 var self = this;
-                
+
                 var finallyHandler = function(method)
                 {
                     return function()
@@ -4254,7 +4254,7 @@
                         }
                     };
                 };
-                
+
                 Timer.setImmediate(
                     function(){
                         self.then(finallyHandler(p.succeed), finallyHandler(p.fail));
@@ -4264,9 +4264,9 @@
             delay: function(ms)
             {
                 var p = new Promise();
-                
+
                 var self = this;
-                
+
                 var delayHandler = function(promise, method)
                 {
                     return function()
@@ -4280,7 +4280,7 @@
                             ms);
                     };
                 };
-                
+
                 Timer.setImmediate(function()
                            {
                                self.then(delayHandler(p, p.succeed), delayHandler(p, p.fail));
@@ -4293,7 +4293,7 @@
                 {
                     return;
                 }
-        
+
                 var obj;
                 while((obj = this.__listeners.pop()))
                 {
@@ -4342,7 +4342,7 @@
                 return this.__state !== State.Pending;
             }
         });
-        
+
         //
         // Create a new promise object that is fulfilled when all the promise arguments
         // are fulfilled or is rejected when one of the promises is rejected.
@@ -4354,11 +4354,11 @@
             {
                 return Promise.all.apply(this, arguments[0]);
             }
-        
+
             var promise = new Promise();
             var promises = Array.prototype.slice.call(arguments);
             var results = new Array(arguments.length);
-        
+
             var pending = promises.length;
             if(pending === 0)
             {
@@ -4369,7 +4369,7 @@
                 //
                 // Create an anonymous function to capture the loop index
                 //
-                
+
                 /*jshint -W083 */
                 (function(j)
                 {
@@ -4404,12 +4404,12 @@
             }
             return promise;
         };
-        
+
         Promise.try = function(onResponse)
         {
             return new Promise().succeed().then(onResponse);
         };
-        
+
         Promise.delay = function(ms)
         {
             if(arguments.length > 1)
@@ -4424,9 +4424,9 @@
                 return new Promise().succeed().delay(ms);
             }
         };
-        
+
         Ice.Promise = Promise;
-        
+
     }());
 
     (function()
@@ -4439,8 +4439,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-            
-            
+
+
         var Logger = Ice.Class({
             __init__: function(prefix)
             {
@@ -4452,7 +4452,7 @@
                 {
                     this._prefix = "";
                 }
-                this._dateformat = 
+                this._dateformat =
                 {
                     year: 'numeric',
                     month: 'numeric',
@@ -4514,7 +4514,7 @@
                 {
                     message = message.replace(/\n/g, "\n   ");
                 }
-        
+
                 console.log(message);
             },
             timestamp: function()
@@ -4524,7 +4524,7 @@
             }
         });
         Ice.Logger = Logger;
-        
+
     }());
 
     (function()
@@ -4548,11 +4548,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * This exception is raised when a failure occurs during initialization.
-             * 
+             *
              **/
             Ice.InitializationException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -4562,11 +4562,11 @@
                 },
                 Ice.LocalException,
                 "Ice::InitializationException");
-        
+
             /**
              * This exception indicates that a failure occurred while initializing
              * a plug-in.
-             * 
+             *
              **/
             Ice.PluginInitializationException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -4576,11 +4576,11 @@
                 },
                 Ice.LocalException,
                 "Ice::PluginInitializationException");
-        
+
             /**
              * This exception is raised if a feature is requested that is not
              * supported with collocation optimization.
-             * 
+             *
              * @deprecated this exception isn't used anymore by the Ice runtime
              **/
             Ice.CollocationOptimizationException = Slice.defineLocalException(
@@ -4590,16 +4590,16 @@
                 },
                 Ice.LocalException,
                 "Ice::CollocationOptimizationException");
-        
+
             /**
              * An attempt was made to register something more than once with
              * the Ice run time.
-             * 
+             *
              * This exception is raised if an attempt is made to register a
              * servant, servant locator, facet, object factory, plug-in, object
              * adapter, object, or user exception factory more than once for the
              * same ID.
-             * 
+             *
              **/
             Ice.AlreadyRegisteredException = Slice.defineLocalException(
                 function(kindOfObject, id, _cause)
@@ -4610,19 +4610,19 @@
                 },
                 Ice.LocalException,
                 "Ice::AlreadyRegisteredException");
-        
+
             /**
              * An attempt was made to find or deregister something that is not
              * registered with the Ice run time or Ice locator.
-             * 
+             *
              * This exception is raised if an attempt is made to remove a servant,
              * servant locator, facet, object factory, plug-in, object adapter,
              * object, or user exception factory that is not currently registered.
-             * 
+             *
              * It's also raised if the Ice locator can't find an object or object
              * adapter when resolving an indirect proxy or when an object adapter
              * is activated.
-             * 
+             *
              **/
             Ice.NotRegisteredException = Slice.defineLocalException(
                 function(kindOfObject, id, _cause)
@@ -4633,15 +4633,15 @@
                 },
                 Ice.LocalException,
                 "Ice::NotRegisteredException");
-        
+
             /**
              * The operation can only be invoked with a twoway request.
-             * 
+             *
              * This exception is raised if an attempt is made to invoke an
              * operation with <tt>ice_oneway</tt>, <tt>ice_batchOneway</tt>, <tt>ice_datagram</tt>,
              * or <tt>ice_batchDatagram</tt> and the operation has a return value,
              * out-parameters, or an exception specification.
-             * 
+             *
              **/
             Ice.TwowayOnlyException = Slice.defineLocalException(
                 function(operation, _cause)
@@ -4651,16 +4651,16 @@
                 },
                 Ice.LocalException,
                 "Ice::TwowayOnlyException");
-        
+
             /**
              * An attempt was made to clone a class that does not support
              * cloning.
-             * 
+             *
              * This exception is raised if <tt>ice_clone</tt> is called on
              * a class that is derived from an abstract Slice class (that is,
              * a class containing operations), and the derived class does not
              * provide an implementation of the <tt>ice_clone</tt> operation (C++ only).
-             * 
+             *
              **/
             Ice.CloneNotImplementedException = Slice.defineLocalException(
                 function(_cause)
@@ -4669,14 +4669,14 @@
                 },
                 Ice.LocalException,
                 "Ice::CloneNotImplementedException");
-        
+
             /**
-             * This exception is raised if an operation call on a server raises an
+             * This exception is raised if an operation call on a communication raises an
              * unknown exception. For example, for C++, this exception is raised
-             * if the server throws a C++ exception that is not directly or
+             * if the communication throws a C++ exception that is not directly or
              * indirectly derived from <tt>Ice::LocalException</tt> or
              * <tt>Ice::UserException</tt>.
-             * 
+             *
              **/
             Ice.UnknownException = Slice.defineLocalException(
                 function(unknown, _cause)
@@ -4686,16 +4686,16 @@
                 },
                 Ice.LocalException,
                 "Ice::UnknownException");
-        
+
             /**
-             * This exception is raised if an operation call on a server raises a
+             * This exception is raised if an operation call on a communication raises a
              * local exception. Because local exceptions are not transmitted by
              * the Ice protocol, the client receives all local exceptions raised
-             * by the server as {@link UnknownLocalException}. The only exception to this
+             * by the communication as {@link UnknownLocalException}. The only exception to this
              * rule are all exceptions derived from {@link RequestFailedException},
              * which are transmitted by the Ice protocol even though they are
              * declared <tt>local</tt>.
-             * 
+             *
              **/
             Ice.UnknownLocalException = Slice.defineLocalException(
                 function(unknown, _cause)
@@ -4704,20 +4704,20 @@
                 },
                 Ice.UnknownException,
                 "Ice::UnknownLocalException");
-        
+
             /**
              * An operation raised an incorrect user exception.
-             * 
+             *
              * This exception is raised if an operation raises a
              * user exception that is not declared in the exception's
              * <tt>throws</tt> clause. Such undeclared exceptions are
-             * not transmitted from the server to the client by the Ice
+             * not transmitted from the communication to the client by the Ice
              * protocol, but instead the client just gets an
              * {@link UnknownUserException}. This is necessary in order to not violate
              * the contract established by an operation's signature: Only local
              * exceptions and user exceptions declared in the
              * <tt>throws</tt> clause can be raised.
-             * 
+             *
              **/
             Ice.UnknownUserException = Slice.defineLocalException(
                 function(unknown, _cause)
@@ -4726,11 +4726,11 @@
                 },
                 Ice.UnknownException,
                 "Ice::UnknownUserException");
-        
+
             /**
              * This exception is raised if the Ice library version does not match
              * the version in the Ice header files.
-             * 
+             *
              **/
             Ice.VersionMismatchException = Slice.defineLocalException(
                 function(_cause)
@@ -4739,12 +4739,12 @@
                 },
                 Ice.LocalException,
                 "Ice::VersionMismatchException");
-        
+
             /**
              * This exception is raised if the {@link Communicator} has been destroyed.
-             * 
+             *
              * @see Communicator#destroy
-             * 
+             *
              **/
             Ice.CommunicatorDestroyedException = Slice.defineLocalException(
                 function(_cause)
@@ -4753,14 +4753,14 @@
                 },
                 Ice.LocalException,
                 "Ice::CommunicatorDestroyedException");
-        
+
             /**
              * This exception is raised if an attempt is made to use a deactivated
              * {@link ObjectAdapter}.
-             * 
+             *
              * @see ObjectAdapter#deactivate
              * @see Communicator#shutdown
-             * 
+             *
              **/
             Ice.ObjectAdapterDeactivatedException = Slice.defineLocalException(
                 function(name, _cause)
@@ -4770,13 +4770,13 @@
                 },
                 Ice.LocalException,
                 "Ice::ObjectAdapterDeactivatedException");
-        
+
             /**
              * This exception is raised if an {@link ObjectAdapter} cannot be activated.
-             * 
+             *
              * This happens if the {@link Locator} detects another active {@link ObjectAdapter} with
              * the same adapter id.
-             * 
+             *
              **/
             Ice.ObjectAdapterIdInUseException = Slice.defineLocalException(
                 function(id, _cause)
@@ -4786,10 +4786,10 @@
                 },
                 Ice.LocalException,
                 "Ice::ObjectAdapterIdInUseException");
-        
+
             /**
              * This exception is raised if no suitable endpoint is available.
-             * 
+             *
              **/
             Ice.NoEndpointException = Slice.defineLocalException(
                 function(proxy, _cause)
@@ -4799,11 +4799,11 @@
                 },
                 Ice.LocalException,
                 "Ice::NoEndpointException");
-        
+
             /**
              * This exception is raised if there was an error while parsing an
              * endpoint.
-             * 
+             *
              **/
             Ice.EndpointParseException = Slice.defineLocalException(
                 function(str, _cause)
@@ -4813,11 +4813,11 @@
                 },
                 Ice.LocalException,
                 "Ice::EndpointParseException");
-        
+
             /**
              * This exception is raised if there was an error while parsing an
              * endpoint selection type.
-             * 
+             *
              **/
             Ice.EndpointSelectionTypeParseException = Slice.defineLocalException(
                 function(str, _cause)
@@ -4827,11 +4827,11 @@
                 },
                 Ice.LocalException,
                 "Ice::EndpointSelectionTypeParseException");
-        
+
             /**
              * This exception is raised if there was an error while parsing a
              * version.
-             * 
+             *
              **/
             Ice.VersionParseException = Slice.defineLocalException(
                 function(str, _cause)
@@ -4841,11 +4841,11 @@
                 },
                 Ice.LocalException,
                 "Ice::VersionParseException");
-        
+
             /**
              * This exception is raised if there was an error while parsing a
              * stringified identity.
-             * 
+             *
              **/
             Ice.IdentityParseException = Slice.defineLocalException(
                 function(str, _cause)
@@ -4855,11 +4855,11 @@
                 },
                 Ice.LocalException,
                 "Ice::IdentityParseException");
-        
+
             /**
              * This exception is raised if there was an error while parsing a
              * stringified proxy.
-             * 
+             *
              **/
             Ice.ProxyParseException = Slice.defineLocalException(
                 function(str, _cause)
@@ -4869,10 +4869,10 @@
                 },
                 Ice.LocalException,
                 "Ice::ProxyParseException");
-        
+
             /**
              * This exception is raised if an illegal identity is encountered.
-             * 
+             *
              **/
             Ice.IllegalIdentityException = Slice.defineLocalException(
                 function(id, _cause)
@@ -4882,11 +4882,11 @@
                 },
                 Ice.LocalException,
                 "Ice::IllegalIdentityException");
-        
+
             /**
              * This exception is raised to reject an illegal servant (typically
              * a null servant)
-             * 
+             *
              **/
             Ice.IllegalServantException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -4896,13 +4896,13 @@
                 },
                 Ice.LocalException,
                 "Ice::IllegalServantException");
-        
+
             /**
              * This exception is raised if a request failed. This exception, and
              * all exceptions derived from {@link RequestFailedException}, are
              * transmitted by the Ice protocol, even though they are declared
              * <tt>local</tt>.
-             * 
+             *
              **/
             Ice.RequestFailedException = Slice.defineLocalException(
                 function(id, facet, operation, _cause)
@@ -4914,11 +4914,11 @@
                 },
                 Ice.LocalException,
                 "Ice::RequestFailedException");
-        
+
             /**
-             * This exception is raised if an object does not exist on the server,
+             * This exception is raised if an object does not exist on the communication,
              * that is, if no facets with the given identity exist.
-             * 
+             *
              **/
             Ice.ObjectNotExistException = Slice.defineLocalException(
                 function(id, facet, operation, _cause)
@@ -4927,11 +4927,11 @@
                 },
                 Ice.RequestFailedException,
                 "Ice::ObjectNotExistException");
-        
+
             /**
              * This exception is raised if no facet with the given name exists,
              * but at least one facet with the given identity exists.
-             * 
+             *
              **/
             Ice.FacetNotExistException = Slice.defineLocalException(
                 function(id, facet, operation, _cause)
@@ -4940,12 +4940,12 @@
                 },
                 Ice.RequestFailedException,
                 "Ice::FacetNotExistException");
-        
+
             /**
              * This exception is raised if an operation for a given object does
-             * not exist on the server. Typically this is caused by either the
-             * client or the server using an outdated Slice specification.
-             * 
+             * not exist on the communication. Typically this is caused by either the
+             * client or the communication using an outdated Slice specification.
+             *
              **/
             Ice.OperationNotExistException = Slice.defineLocalException(
                 function(id, facet, operation, _cause)
@@ -4954,13 +4954,13 @@
                 },
                 Ice.RequestFailedException,
                 "Ice::OperationNotExistException");
-        
+
             /**
-             * This exception is raised if a system error occurred in the server
+             * This exception is raised if a system error occurred in the communication
              * or client process. There are many possible causes for such a system
              * exception. For details on the cause, {@link SyscallException#error}
              * should be inspected.
-             * 
+             *
              **/
             Ice.SyscallException = Slice.defineLocalException(
                 function(error, _cause)
@@ -4970,10 +4970,10 @@
                 },
                 Ice.LocalException,
                 "Ice::SyscallException");
-        
+
             /**
              * This exception indicates socket errors.
-             * 
+             *
              **/
             Ice.SocketException = Slice.defineLocalException(
                 function(error, _cause)
@@ -4982,10 +4982,10 @@
                 },
                 Ice.SyscallException,
                 "Ice::SocketException");
-        
+
             /**
              * This exception indicates file errors.
-             * 
+             *
              **/
             Ice.FileException = Slice.defineLocalException(
                 function(error, path, _cause)
@@ -4995,10 +4995,10 @@
                 },
                 Ice.SyscallException,
                 "Ice::FileException");
-        
+
             /**
              * This exception indicates connection failures.
-             * 
+             *
              **/
             Ice.ConnectFailedException = Slice.defineLocalException(
                 function(error, _cause)
@@ -5007,11 +5007,11 @@
                 },
                 Ice.SocketException,
                 "Ice::ConnectFailedException");
-        
+
             /**
              * This exception indicates a connection failure for which
-             * the server host actively refuses a connection.
-             * 
+             * the communication host actively refuses a connection.
+             *
              **/
             Ice.ConnectionRefusedException = Slice.defineLocalException(
                 function(error, _cause)
@@ -5020,10 +5020,10 @@
                 },
                 Ice.ConnectFailedException,
                 "Ice::ConnectionRefusedException");
-        
+
             /**
              * This exception indicates a lost connection.
-             * 
+             *
              **/
             Ice.ConnectionLostException = Slice.defineLocalException(
                 function(error, _cause)
@@ -5032,11 +5032,11 @@
                 },
                 Ice.SocketException,
                 "Ice::ConnectionLostException");
-        
+
             /**
              * This exception indicates a DNS problem. For details on the cause,
              * {@link DNSException#error} should be inspected.
-             * 
+             *
              **/
             Ice.DNSException = Slice.defineLocalException(
                 function(error, host, _cause)
@@ -5047,10 +5047,10 @@
                 },
                 Ice.LocalException,
                 "Ice::DNSException");
-        
+
             /**
              * This exception indicates a request was interrupted.
-             * 
+             *
              **/
             Ice.OperationInterruptedException = Slice.defineLocalException(
                 function(_cause)
@@ -5059,10 +5059,10 @@
                 },
                 Ice.LocalException,
                 "Ice::OperationInterruptedException");
-        
+
             /**
              * This exception indicates a timeout condition.
-             * 
+             *
              **/
             Ice.TimeoutException = Slice.defineLocalException(
                 function(_cause)
@@ -5071,10 +5071,10 @@
                 },
                 Ice.LocalException,
                 "Ice::TimeoutException");
-        
+
             /**
              * This exception indicates a connection establishment timeout condition.
-             * 
+             *
              **/
             Ice.ConnectTimeoutException = Slice.defineLocalException(
                 function(_cause)
@@ -5083,10 +5083,10 @@
                 },
                 Ice.TimeoutException,
                 "Ice::ConnectTimeoutException");
-        
+
             /**
              * This exception indicates a connection closure timeout condition.
-             * 
+             *
              **/
             Ice.CloseTimeoutException = Slice.defineLocalException(
                 function(_cause)
@@ -5095,11 +5095,11 @@
                 },
                 Ice.TimeoutException,
                 "Ice::CloseTimeoutException");
-        
+
             /**
              * This exception indicates that a connection has been shut down because it has been
              * idle for some time.
-             * 
+             *
              **/
             Ice.ConnectionTimeoutException = Slice.defineLocalException(
                 function(_cause)
@@ -5108,11 +5108,11 @@
                 },
                 Ice.TimeoutException,
                 "Ice::ConnectionTimeoutException");
-        
+
             /**
              * This exception indicates that an invocation failed because it timed
              * out.
-             * 
+             *
              **/
             Ice.InvocationTimeoutException = Slice.defineLocalException(
                 function(_cause)
@@ -5121,12 +5121,12 @@
                 },
                 Ice.TimeoutException,
                 "Ice::InvocationTimeoutException");
-        
+
             /**
              * This exception indicates that an asynchronous invocation failed
              * because it was canceled explicitly by the user using the
              * <tt>Ice::AsyncResult::cancel</tt> method.
-             * 
+             *
              **/
             Ice.InvocationCanceledException = Slice.defineLocalException(
                 function(_cause)
@@ -5135,11 +5135,11 @@
                 },
                 Ice.LocalException,
                 "Ice::InvocationCanceledException");
-        
+
             /**
              * A generic exception base for all kinds of protocol error
              * conditions.
-             * 
+             *
              **/
             Ice.ProtocolException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5149,11 +5149,11 @@
                 },
                 Ice.LocalException,
                 "Ice::ProtocolException");
-        
+
             /**
              * This exception indicates that a message did not start with the expected
              * magic number ('I', 'c', 'e', 'P').
-             * 
+             *
              **/
             Ice.BadMagicException = Slice.defineLocalException(
                 function(reason, badMagic, _cause)
@@ -5163,10 +5163,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::BadMagicException");
-        
+
             /**
              * This exception indicates an unsupported protocol version.
-             * 
+             *
              **/
             Ice.UnsupportedProtocolException = Slice.defineLocalException(
                 function(reason, bad, supported, _cause)
@@ -5177,10 +5177,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::UnsupportedProtocolException");
-        
+
             /**
              * This exception indicates an unsupported data encoding version.
-             * 
+             *
              **/
             Ice.UnsupportedEncodingException = Slice.defineLocalException(
                 function(reason, bad, supported, _cause)
@@ -5191,10 +5191,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::UnsupportedEncodingException");
-        
+
             /**
              * This exception indicates that an unknown protocol message has been received.
-             * 
+             *
              **/
             Ice.UnknownMessageException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5203,11 +5203,11 @@
                 },
                 Ice.ProtocolException,
                 "Ice::UnknownMessageException");
-        
+
             /**
              * This exception is raised if a message is received over a connection
              * that is not yet validated.
-             * 
+             *
              **/
             Ice.ConnectionNotValidatedException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5216,11 +5216,11 @@
                 },
                 Ice.ProtocolException,
                 "Ice::ConnectionNotValidatedException");
-        
+
             /**
              * This exception indicates that a response for an unknown request ID has been
              * received.
-             * 
+             *
              **/
             Ice.UnknownRequestIdException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5229,10 +5229,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::UnknownRequestIdException");
-        
+
             /**
              * This exception indicates that an unknown reply status has been received.
-             * 
+             *
              **/
             Ice.UnknownReplyStatusException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5241,17 +5241,17 @@
                 },
                 Ice.ProtocolException,
                 "Ice::UnknownReplyStatusException");
-        
+
             /**
              * This exception indicates that the connection has been gracefully shut down by the
-             * server. The operation call that caused this exception has not been
-             * executed by the server. In most cases you will not get this
+             * communication. The operation call that caused this exception has not been
+             * executed by the communication. In most cases you will not get this
              * exception, because the client will automatically retry the
-             * operation call in case the server shut down the connection. However,
-             * if upon retry the server shuts down the connection again, and the
+             * operation call in case the communication shut down the connection. However,
+             * if upon retry the communication shuts down the connection again, and the
              * retry limit has been reached, then this exception is propagated to
              * the application code.
-             * 
+             *
              **/
             Ice.CloseConnectionException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5260,13 +5260,13 @@
                 },
                 Ice.ProtocolException,
                 "Ice::CloseConnectionException");
-        
+
             /**
              * This exception is raised by an operation call if the application
              * forcefully closes the connection {@link Connection#close}.
-             * 
+             *
              * @see Connection#close
-             * 
+             *
              **/
             Ice.ForcedCloseConnectionException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5275,11 +5275,11 @@
                 },
                 Ice.ProtocolException,
                 "Ice::ForcedCloseConnectionException");
-        
+
             /**
              * This exception indicates that a message size is less
              * than the minimum required size.
-             * 
+             *
              **/
             Ice.IllegalMessageSizeException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5288,10 +5288,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::IllegalMessageSizeException");
-        
+
             /**
              * This exception indicates a problem with compressing or uncompressing data.
-             * 
+             *
              **/
             Ice.CompressionException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5300,13 +5300,13 @@
                 },
                 Ice.ProtocolException,
                 "Ice::CompressionException");
-        
+
             /**
              * A datagram exceeds the configured size.
-             * 
+             *
              * This exception is raised if a datagram exceeds the configured send or receive buffer
              * size, or exceeds the maximum payload size of a UDP packet (65507 bytes).
-             * 
+             *
              **/
             Ice.DatagramLimitException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5315,10 +5315,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::DatagramLimitException");
-        
+
             /**
              * This exception is raised for errors during marshaling or unmarshaling data.
-             * 
+             *
              **/
             Ice.MarshalException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5327,10 +5327,10 @@
                 },
                 Ice.ProtocolException,
                 "Ice::MarshalException");
-        
+
             /**
              * This exception is raised if inconsistent data is received while unmarshaling a proxy.
-             * 
+             *
              **/
             Ice.ProxyUnmarshalException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5339,10 +5339,10 @@
                 },
                 Ice.MarshalException,
                 "Ice::ProxyUnmarshalException");
-        
+
             /**
              * This exception is raised if an out-of-bounds condition occurs during unmarshaling.
-             * 
+             *
              **/
             Ice.UnmarshalOutOfBoundsException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5351,15 +5351,15 @@
                 },
                 Ice.MarshalException,
                 "Ice::UnmarshalOutOfBoundsException");
-        
+
             /**
              * This exception is raised if no suitable object factory was found during
              * unmarshaling of a Slice class instance.
-             * 
+             *
              * @see ObjectFactory
              * @see Communicator#addObjectFactory
              * @see Communicator#findObjectFactory
-             * 
+             *
              **/
             Ice.NoObjectFactoryException = Slice.defineLocalException(
                 function(reason, type, _cause)
@@ -5369,16 +5369,16 @@
                 },
                 Ice.MarshalException,
                 "Ice::NoObjectFactoryException");
-        
+
             /**
              * This exception is raised if the type of an unmarshaled Slice class instance does
              * not match its expected type.
-             * This can happen if client and server are compiled with mismatched Slice
+             * This can happen if client and communication are compiled with mismatched Slice
              * definitions or if a class of the wrong type is passed as a parameter
              * or return value using dynamic invocation. This exception can also be
              * raised if IceStorm is used to send Slice class instances and
              * an operation is subscribed to the wrong topic.
-             * 
+             *
              **/
             Ice.UnexpectedObjectException = Slice.defineLocalException(
                 function(reason, type, expectedType, _cause)
@@ -5389,12 +5389,12 @@
                 },
                 Ice.MarshalException,
                 "Ice::UnexpectedObjectException");
-        
+
             /**
              * This exception is raised when Ice receives a request or reply
              * message whose size exceeds the limit specified by the
              * <tt>Ice.MessageSizeMax</tt> property.
-             * 
+             *
              **/
             Ice.MemoryLimitException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5403,11 +5403,11 @@
                 },
                 Ice.MarshalException,
                 "Ice::MemoryLimitException");
-        
+
             /**
              * This exception is raised when a string conversion to or from UTF-8
              * fails during marshaling or unmarshaling.
-             * 
+             *
              **/
             Ice.StringConversionException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5416,10 +5416,10 @@
                 },
                 Ice.MarshalException,
                 "Ice::StringConversionException");
-        
+
             /**
              * This exception indicates a malformed data encapsulation.
-             * 
+             *
              **/
             Ice.EncapsulationException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5428,12 +5428,12 @@
                 },
                 Ice.MarshalException,
                 "Ice::EncapsulationException");
-        
+
             /**
              * This exception is raised if an unsupported feature is used. The
              * unsupported feature string contains the name of the unsupported
              * feature
-             * 
+             *
              **/
             Ice.FeatureNotSupportedException = Slice.defineLocalException(
                 function(unsupportedFeature, _cause)
@@ -5443,11 +5443,11 @@
                 },
                 Ice.LocalException,
                 "Ice::FeatureNotSupportedException");
-        
+
             /**
              * This exception indicates a failure in a security subsystem,
              * such as the IceSSL plug-in.
-             * 
+             *
              **/
             Ice.SecurityException = Slice.defineLocalException(
                 function(reason, _cause)
@@ -5457,11 +5457,11 @@
                 },
                 Ice.LocalException,
                 "Ice::SecurityException");
-        
+
             /**
              * This exception indicates that an attempt has been made to
              * change the connection properties of a fixed proxy.
-             * 
+             *
              **/
             Ice.FixedProxyException = Slice.defineLocalException(
                 function(_cause)
@@ -5470,11 +5470,11 @@
                 },
                 Ice.LocalException,
                 "Ice::FixedProxyException");
-        
+
             /**
              * Indicates that the response to a request has already been sent;
              * re-dispatching such a request is not possible.
-             * 
+             *
              **/
             Ice.ResponseSentException = Slice.defineLocalException(
                 function(_cause)
@@ -5483,7 +5483,7 @@
                 },
                 Ice.LocalException,
                 "Ice::ResponseSentException");
-        
+
     }());
 
     (function()
@@ -5496,17 +5496,17 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var StringUtil = Ice.StringUtil;
-        
+
         var Protocol = {};
-        
+
         Ice.Encoding_1_0 = new Ice.EncodingVersion(1, 0);
         Ice.Encoding_1_1 = new Ice.EncodingVersion(1, 1);
-        
+
         Ice.Protocol_1_0 = new Ice.ProtocolVersion(1, 0);
-        
+
         //
         // Size of the Ice protocol header
         //
@@ -5520,13 +5520,13 @@
         // Message size (Int)
         //
         Protocol.headerSize = 14;
-        
+
         //
         // The magic number at the front of each message
         //
         //Protocol.magic = [ 0x49, 0x63, 0x65, 0x50 ];      // 'I', 'c', 'e', 'P'
         Protocol.magic = Ice.Buffer.createNative([ 0x49, 0x63, 0x65, 0x50 ]);      // 'I', 'c', 'e', 'P'
-        
+
         //
         // The current Ice protocol and encoding version
         //
@@ -5534,10 +5534,10 @@
         Protocol.protocolMinor = 0;
         Protocol.protocolEncodingMajor = 1;
         Protocol.protocolEncodingMinor = 0;
-        
+
         Protocol.encodingMajor = 1;
         Protocol.encodingMinor = 1;
-        
+
         //
         // The Ice protocol message types
         //
@@ -5546,7 +5546,7 @@
         Protocol.replyMsg = 2;
         Protocol.validateConnectionMsg = 3;
         Protocol.closeConnectionMsg = 4;
-        
+
         //
         // Reply status
         //
@@ -5558,7 +5558,7 @@
         Protocol.replyUnknownLocalException = 5;
         Protocol.replyUnknownUserException = 6;
         Protocol.replyUnknownException = 7;
-        
+
         Protocol.requestHdr = Ice.Buffer.createNative([
             Protocol.magic[0],
             Protocol.magic[1],
@@ -5573,7 +5573,7 @@
             0, 0, 0, 0, // Message size (placeholder).
             0, 0, 0, 0  // Request ID (placeholder).
         ]);
-        
+
         Protocol.requestBatchHdr = Ice.Buffer.createNative([
             Protocol.magic[0],
             Protocol.magic[1],
@@ -5588,7 +5588,7 @@
             0, 0, 0, 0, // Message size (placeholder).
             0, 0, 0, 0  // Number of requests in batch (placeholder).
         ]);
-        
+
         Protocol.replyHdr = Ice.Buffer.createNative([
             Protocol.magic[0],
             Protocol.magic[1],
@@ -5602,13 +5602,13 @@
             0, // Compression status.
             0, 0, 0, 0 // Message size (placeholder).
         ]);
-        
+
         Protocol.currentProtocol = new Ice.ProtocolVersion(Protocol.protocolMajor, Protocol.protocolMinor);
-        Protocol.currentProtocolEncoding = new Ice.EncodingVersion(Protocol.protocolEncodingMajor, 
+        Protocol.currentProtocolEncoding = new Ice.EncodingVersion(Protocol.protocolEncodingMajor,
                                                                     Protocol.protocolEncodingMinor);
-        
+
         Protocol.currentEncoding = new Ice.EncodingVersion(Protocol.encodingMajor, Protocol.encodingMinor);
-        
+
         Protocol.checkSupportedProtocol = function(v)
         {
             if(v.major !== Protocol.currentProtocol.major || v.minor > Protocol.currentProtocol.minor)
@@ -5616,7 +5616,7 @@
                 throw new Ice.UnsupportedProtocolException("", v, Protocol.currentProtocol);
             }
         };
-        
+
         Protocol.checkSupportedProtocolEncoding = function(v)
         {
             if(v.major !== Protocol.currentProtocolEncoding.major ||
@@ -5625,7 +5625,7 @@
                 throw new Ice.UnsupportedEncodingException("", v, Protocol.currentProtocolEncoding);
             }
         };
-        
+
         Protocol.checkSupportedEncoding = function(v)
         {
             if(v.major !== Protocol.currentEncoding.major || v.minor > Protocol.currentEncoding.minor)
@@ -5633,7 +5633,7 @@
                 throw new Ice.UnsupportedEncodingException("", v, Protocol.currentEncoding);
             }
         };
-        
+
         //
         // Either return the given protocol if not compatible, or the greatest
         // supported protocol otherwise.
@@ -5654,10 +5654,10 @@
                 // Unsupported but compatible, use the currently supported
                 // protocol, that's the best we can do.
                 //
-                return Protocol.currentProtocol; 
+                return Protocol.currentProtocol;
             }
         };
-        
+
         //
         // Either return the given encoding if not compatible, or the greatest
         // supported encoding otherwise.
@@ -5678,15 +5678,15 @@
                 // Unsupported but compatible, use the currently supported
                 // encoding, that's the best we can do.
                 //
-                return Protocol.currentEncoding; 
+                return Protocol.currentEncoding;
             }
         };
-        
+
         Protocol.isSupported = function(version, supported)
         {
             return version.major === supported.major && version.minor <= supported.minor;
         };
-        
+
         /**
         * Converts a string to a protocol version.
         *
@@ -5698,7 +5698,7 @@
         {
             return new Ice.ProtocolVersion(stringToMajor(version), stringToMinor(version));
         };
-        
+
         /**
         * Converts a string to an encoding version.
         *
@@ -5710,7 +5710,7 @@
         {
             return new Ice.EncodingVersion(stringToMajor(version), stringToMinor(version));
         };
-        
+
         /**
         * Converts a protocol version to a string.
         *
@@ -5722,7 +5722,7 @@
         {
             return majorMinorToString(v.major, v.minor);
         };
-        
+
         /**
         * Converts an encoding version to a string.
         *
@@ -5734,9 +5734,9 @@
         {
             return majorMinorToString(v.major, v.minor);
         };
-        
+
         Ice.Protocol = Protocol;
-        
+
         function stringToMajor(str)
         {
             var pos = str.indexOf('.');
@@ -5744,7 +5744,7 @@
             {
                 throw new Ice.VersionParseException("malformed version value `" + str + "'");
             }
-                
+
             var majStr = str.substring(0, pos);
             var majVersion;
             try
@@ -5755,15 +5755,15 @@
             {
                 throw new Ice.VersionParseException("invalid version value `" + str + "'");
             }
-            
+
             if(majVersion < 1 || majVersion > 255)
             {
                 throw new Ice.VersionParseException("range error in version `" + str + "'");
             }
-        
+
             return majVersion;
         }
-        
+
         function stringToMinor(str)
         {
             var pos = str.indexOf('.');
@@ -5771,7 +5771,7 @@
             {
                 throw new Ice.VersionParseException("malformed version value `" + str + "'");
             }
-                
+
             var minStr = str.substring(pos + 1);
             var minVersion;
             try
@@ -5782,20 +5782,20 @@
             {
                 throw new Ice.VersionParseException("invalid version value `" + str + "'");
             }
-            
+
             if(minVersion < 0 || minVersion > 255)
             {
                 throw new Ice.VersionParseException("range error in version `" + str + "'");
             }
-        
+
             return minVersion;
         }
-        
+
         function majorMinorToString(major, minor)
         {
             return major + "." + minor;
         }
-        
+
     }());
 
     (function()
@@ -5808,28 +5808,28 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var Property = function Property(pattern, deprecated, deprecatedBy)
         {
             this._pattern = pattern;
             this._deprecated = deprecated;
             this._deprecatedBy = deprecatedBy;
         };
-        
+
         Object.defineProperty(Property.prototype, "pattern",{
             get: function() { return this._pattern; }
         });
-        
+
         Object.defineProperty(Property.prototype, "deprecated",{
             get: function() { return this._deprecated; }
         });
-        
+
         Object.defineProperty(Property.prototype, "deprecatedBy",{
             get: function() { return this._deprecatedBy; }
         });
-        
+
         Ice.Property = Property;
-        
+
     }());
 
     (function()
@@ -5843,13 +5843,13 @@
         //
         // **********************************************************************
         // Generated by makeprops.py from file ../config/PropertyNames.xml, Tue Sep 20 10:36:23 2016
-        
+
         // IMPORTANT: Do not edit this file -- any edits made here will be lost!
-        
+
         var PropertyNames = {};
         var Property = Ice.Property;
         /* jshint -W044*/
-        
+
         PropertyNames.IceProps =
         [
             new Property("/^Ice\.ACM\.Client/", true, null),
@@ -6027,21 +6027,21 @@
             new Property("/^Ice\.ThreadInterruptSafe/", false, null),
             new Property("/^Ice\.Voip/", false, null),
         ];
-        
+
         /* jshint +W044*/
-        
+
         PropertyNames.validProps =
         [
             PropertyNames.IceProps,
         ];
-        
+
         PropertyNames.clPropNames =
         [
             "Ice",
         ];
-        
+
         Ice.PropertyNames = PropertyNames;
-        
+
     }());
 
     (function()
@@ -6054,12 +6054,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-            
+
+
         var HashMap = Ice.HashMap;
         var AlreadyRegisteredException = Ice.AlreadyRegisteredException;
         var NotRegisteredException = Ice.NotRegisteredException;
-        
+
         //
         // Only for use by Instance
         //
@@ -6104,7 +6104,7 @@
                 var oldMap = this._factoryMap,
                     e = oldMap.entries;
                 this._factoryMap = new HashMap(); // Map<String, ObjectFactory>
-        
+
                 while(e !== null)
                 {
                     e.value.destroy();
@@ -6112,9 +6112,9 @@
                 }
             }
         });
-        
+
         Ice.ObjectFactoryManager = ObjectFactoryManager;
-        
+
     }());
 
     (function()
@@ -6127,10 +6127,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Promise = Ice.Promise;
-        
+
         var AsyncResultBase = Ice.Class(Promise, {
             __init__: function(communicator, op, connection, proxy, adapter)
             {
@@ -6150,33 +6150,33 @@
                 }
             }
         });
-        
+
         var prototype = AsyncResultBase.prototype;
         var defineProperty = Object.defineProperty;
-        
+
         defineProperty(prototype, "communicator", {
             get: function() { return this._communicator; }
         });
-        
+
         defineProperty(prototype, "connection", {
             get: function() { return this._connection; }
         });
-        
+
         defineProperty(prototype, "proxy", {
             get: function() { return this._proxy; }
         });
-        
+
         defineProperty(prototype, "adapter", {
             get: function() { return this._adapter; }
         });
-        
+
         defineProperty(prototype, "operation", {
             get: function() { return this._operation; }
         });
-        
+
         Ice.AsyncResultBase = AsyncResultBase;
-        
-        
+
+
     }());
 
     (function()
@@ -6200,23 +6200,23 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineDictionary(Ice, "Context", "ContextHelper", "Ice.StringHelper", "Ice.StringHelper", false, undefined, undefined);
-        
+
             /**
              * The {@link OperationMode} determines the retry behavior an
              * invocation in case of a (potentially) recoverable error.
-             * 
+             *
              **/
             Ice.OperationMode = Slice.defineEnum([
                 ['Normal', 0], ['Nonmutating', 1], ['Idempotent', 2]]);
-        
+
             /**
              * Information about the current method invocation for servers. Each
-             * operation on the server has a <tt>Current</tt> as its implicit final
+             * operation on the communication has a <tt>Current</tt> as its implicit final
              * parameter. <tt>Current</tt> is mostly used for Ice services. Most
              * applications ignore this parameter.
-             * 
+             *
              **/
             Ice.Current = Slice.defineStruct(
                 function(adapter, con, id, facet, operation, mode, ctx, requestId, encoding)
@@ -6232,7 +6232,7 @@
                     this.encoding = encoding !== undefined ? encoding : new Ice.EncodingVersion();
                 },
                 false);
-        
+
     }());
 
     (function()
@@ -6245,7 +6245,7 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         Ice.ObjectFactory = Ice.Class({
             create: function(type)
             {
@@ -6256,7 +6256,7 @@
                 throw new Error("not implemented");
             }
         });
-        
+
     }());
 
     (function()
@@ -6269,8 +6269,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var RetryException = Ice.Class(Error, {
             __init__: function(ex)
             {
@@ -6285,15 +6285,15 @@
                 }
             }
         });
-        
+
         var prototype = RetryException.prototype;
-        
+
         Object.defineProperty(prototype, "inner", {
             get: function() { return this._ex; }
         });
-        
+
         Ice.RetryException = RetryException;
-        
+
     }());
 
     (function()
@@ -6317,16 +6317,16 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * Determines the order in which the Ice run time uses the endpoints
              * in a proxy when establishing a connection.
-             * 
+             *
              **/
             Ice.EndpointSelectionType = Slice.defineEnum([
                 ['Random', 0], ['Ordered', 1]]);
-        
+
     }());
 
     (function()
@@ -6339,11 +6339,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Promise = Ice.Promise;
         var ReferenceMode = Ice.ReferenceMode;
-        
+
         var ConnectionRequestHandler = Ice.Class({
             __init__: function(ref, connection, compress)
             {
@@ -6393,9 +6393,9 @@
                 return this._connection;
             },
         });
-        
+
         Ice.ConnectionRequestHandler = ConnectionRequestHandler;
-        
+
     }());
 
     (function()
@@ -6408,8 +6408,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // Local aliases.
         //
@@ -6419,59 +6419,59 @@
         var StringUtil = Ice.StringUtil;
         var OperationMode = Ice.OperationMode;
         var Identity = Ice.Identity;
-        
+
         var TraceUtil = {};
-        
+
         TraceUtil.traceSend = function(stream, logger, traceLevels)
         {
             if(traceLevels.protocol >= 1)
             {
                 var p = stream.pos;
                 stream.pos = 0;
-        
+
                 var s = [];
                 var type = printMessage(s, stream);
-        
+
                 logger.trace(traceLevels.protocolCat, "sending " + getMessageTypeAsString(type) + " " + s.join(""));
-        
+
                 stream.pos = p;
             }
         };
-        
+
         TraceUtil.traceRecv = function(stream, logger, traceLevels)
         {
             if(traceLevels.protocol >= 1)
             {
                 var p = stream.pos;
                 stream.pos = 0;
-        
+
                 var s = [];
                 var type = printMessage(s, stream);
-        
+
                 logger.trace(traceLevels.protocolCat, "received " + getMessageTypeAsString(type) + " " + s.join(""));
-        
+
                 stream.pos = p;
             }
         };
-        
+
         TraceUtil.trace = function(heading, stream, logger, traceLevels)
         {
             if(traceLevels.protocol >= 1)
             {
                 var p = stream.pos;
                 stream.pos = 0;
-        
+
                 var s = [];
                 s.push(heading);
                 printMessage(s, stream);
-        
+
                 logger.trace(traceLevels.protocolCat, s.join(""));
                 stream.pos = p;
             }
         };
-        
+
         var slicingIds = new HashMap();
-        
+
         function traceSlicing(kind, typeId, slicingCat, logger)
         {
             if(!slicingIds.has(typeId))
@@ -6481,23 +6481,23 @@
                 slicingIds.set(typeId, 1);
             }
         }
-        
+
         TraceUtil.dumpStream = function(stream)
         {
             var pos = stream.pos;
             stream.pos = 0;
-        
+
             var data = stream.readBlob(stream.size());
             TraceUtil.dumpOctets(data);
-        
+
             stream.pos = pos;
         };
-        
+
         TraceUtil.dumpOctets = function(data)
         {
             var inc = 8;
             var buf = [];
-        
+
             for(var i = 0; i < data.length; i += inc)
             {
                 var j;
@@ -6530,9 +6530,9 @@
                         buf.push("    ");
                     }
                 }
-        
+
                 buf.push('"');
-        
+
                 for(j = i; j < data.length && j - i < inc; j++)
                 {
                     if(data[j] >= 32 && data[j] < 127)
@@ -6544,32 +6544,32 @@
                         buf.push('.');
                     }
                 }
-        
+
                 buf.push("\"\n");
             }
-        
+
             console.log(buf.join(""));
         };
-        
+
         Ice.TraceUtil = TraceUtil;
-        
+
         function printIdentityFacetOperation(s, stream)
         {
             var identity = new Identity();
             identity.__read(stream);
             s.push("\nidentity = " + stream.instance.identityToString(identity));
-        
+
             var facet = Ice.StringSeqHelper.read(stream);
             s.push("\nfacet = ");
             if(facet.length > 0)
             {
                 s.push(StringUtil.escapeString(facet[0], ""));
             }
-        
+
             var operation = stream.readString();
             s.push("\noperation = " + operation);
         }
-        
+
         function printRequest(s, stream)
         {
             var requestId = stream.readInt();
@@ -6578,30 +6578,30 @@
             {
                 s.push(" (oneway)");
             }
-        
+
             printRequestHeader(s, stream);
         }
-        
+
         function printBatchRequest(s, stream)
         {
             var batchRequestNum = stream.readInt();
             s.push("\nnumber of requests = " + batchRequestNum);
-        
+
             for(var i = 0; i < batchRequestNum; ++i)
             {
                 s.push("\nrequest #" + i + ':');
                 printRequestHeader(s, stream);
             }
         }
-        
+
         function printReply(s, stream)
         {
             var requestId = stream.readInt();
             s.push("\nrequest id = " + requestId);
-        
+
             var replyStatus = stream.readByte();
             s.push("\nreply status = " + replyStatus + ' ');
-        
+
             switch(replyStatus)
             {
             case Protocol.replyOK:
@@ -6609,13 +6609,13 @@
                 s.push("(ok)");
                 break;
             }
-        
+
             case Protocol.replyUserException:
             {
                 s.push("(user exception)");
                 break;
             }
-        
+
             case Protocol.replyObjectNotExist:
             case Protocol.replyFacetNotExist:
             case Protocol.replyOperationNotExist:
@@ -6627,30 +6627,30 @@
                     s.push("(object not exist)");
                     break;
                 }
-        
+
                 case Protocol.replyFacetNotExist:
                 {
                     s.push("(facet not exist)");
                     break;
                 }
-        
+
                 case Protocol.replyOperationNotExist:
                 {
                     s.push("(operation not exist)");
                     break;
                 }
-        
+
                 default:
                 {
                     Debug.assert(false);
                     break;
                 }
                 }
-        
+
                 printIdentityFacetOperation(s, stream);
                 break;
             }
-        
+
             case Protocol.replyUnknownException:
             case Protocol.replyUnknownLocalException:
             case Protocol.replyUnknownUserException:
@@ -6662,38 +6662,38 @@
                     s.push("(unknown exception)");
                     break;
                 }
-        
+
                 case Protocol.replyUnknownLocalException:
                 {
                     s.push("(unknown local exception)");
                     break;
                 }
-        
+
                 case Protocol.replyUnknownUserException:
                 {
                     s.push("(unknown user exception)");
                     break;
                 }
-        
+
                 default:
                 {
                     Debug.assert(false);
                     break;
                 }
                 }
-        
+
                 var unknown = stream.readString();
                 s.push("\nunknown = " + unknown);
                 break;
             }
-        
+
             default:
             {
                 s.push("(unknown)");
                 break;
             }
             }
-        
+
             if(replyStatus === Protocol.replyOK || replyStatus === Protocol.replyUserException)
             {
                 var ver = stream.skipEncaps();
@@ -6704,11 +6704,11 @@
                 }
             }
         }
-        
+
         function printRequestHeader(s, stream)
         {
             printIdentityFacetOperation(s, stream);
-        
+
             var mode = stream.readByte();
             s.push("\nmode = " + mode + ' ');
             switch(OperationMode.valueOf(mode))
@@ -6718,26 +6718,26 @@
                     s.push("(normal)");
                     break;
                 }
-        
+
                 case OperationMode.Nonmutating:
                 {
                     s.push("(nonmutating)");
                     break;
                 }
-        
+
                 case OperationMode.Idempotent:
                 {
                     s.push("(idempotent)");
                     break;
                 }
-        
+
                 default:
                 {
                     s.push("(unknown)");
                     break;
                 }
             }
-        
+
             var sz = stream.readSize();
             s.push("\ncontext = ");
             while(sz-- > 0)
@@ -6750,7 +6750,7 @@
                     s.push(", ");
                 }
             }
-        
+
             var ver = stream.skipEncaps();
             if(!ver.equals(Ice.Encoding_1_0))
             {
@@ -6758,28 +6758,28 @@
                 s.push(Ice.encodingVersionToString(ver));
             }
         }
-        
+
         function printHeader(s, stream)
         {
             stream.readByte();  // Don't bother printing the magic number
             stream.readByte();
             stream.readByte();
             stream.readByte();
-        
+
         //        var pMajor = stream.readByte();
         //        var pMinor = stream.readByte();
         //        s.push("\nprotocol version = " + pMajor + "." + pMinor);
             stream.readByte(); // major
             stream.readByte(); // minor
-        
+
         //        var eMajor = stream.readByte();
         //        var eMinor = stream.readByte();
         //        s.push("\nencoding version = " + eMajor + "." + eMinor);
             stream.readByte(); // major
             stream.readByte(); // minor
-        
+
             var type = stream.readByte();
-        
+
             s.push("\nmessage type = " + type + " (" + getMessageTypeAsString(type) + ')');
             var compress = stream.readByte();
             s.push("\ncompression status = " + compress + ' ');
@@ -6790,35 +6790,35 @@
                     s.push("(not compressed; do not compress response, if any)");
                     break;
                 }
-        
+
                 case 1:
                 {
                     s.push("(not compressed; compress response, if any)");
                     break;
                 }
-        
+
                 case 2:
                 {
                     s.push("(compressed; compress response, if any)");
                     break;
                 }
-        
+
                 default:
                 {
                     s.push("(unknown)");
                     break;
                 }
             }
-        
+
             var size = stream.readInt();
             s.push("\nmessage size = " + size);
             return type;
         }
-        
+
         function printMessage(s, stream)
         {
             var type = printHeader(s, stream);
-        
+
             switch(type)
             {
             case Protocol.closeConnectionMsg:
@@ -6827,34 +6827,34 @@
                 // We're done.
                 break;
             }
-        
+
             case Protocol.requestMsg:
             {
                 printRequest(s, stream);
                 break;
             }
-        
+
             case Protocol.requestBatchMsg:
             {
                 printBatchRequest(s, stream);
                 break;
             }
-        
+
             case Protocol.replyMsg:
             {
                 printReply(s, stream);
                 break;
             }
-        
+
             default:
             {
                 break;
             }
             }
-        
+
             return type;
         }
-        
+
         function getMessageTypeAsString(type)
         {
             switch(type)
@@ -6873,12 +6873,12 @@
                 return "unknown";
             }
         }
-        
+
     }());
 
     (function()
     {
-        
+
         // **********************************************************************
         //
         // Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
@@ -6887,11 +6887,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var Logger = Ice.Logger;
-        
+
         var processLogger = null;
-        
+
         Ice.getProcessLogger = function()
         {
             if(processLogger === null)
@@ -6901,16 +6901,16 @@
                 //
                 processLogger = new Logger("", "");
             }
-        
+
             return processLogger;
         };
-        
+
         Ice.setProcessLogger = function(logger)
         {
             processLogger = logger;
         };
-        
-        
+
+
     }());
 
     (function()
@@ -6923,18 +6923,18 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // Local aliases.
         //
         var UnexpectedObjectException = Ice.UnexpectedObjectException;
         var MemoryLimitException = Ice.MemoryLimitException;
-        
+
         //
         // Exception utilities
         //
-        
+
         Ice.ExUtil =
         {
             throwUOE: function(expectedType, v)
@@ -6949,7 +6949,7 @@
                                                " bytes (see Ice.MessageSizeMax)");
             }
         };
-        
+
     }());
 
     (function()
@@ -6962,9 +6962,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
-        
+
+
+
         var StringUtil = Ice.StringUtil;
         var HashMap = Ice.HashMap;
         var Promise = Ice.Promise;
@@ -6973,7 +6973,7 @@
         var ProcessLogger = Ice.ProcessLogger;
         var getProcessLogger = Ice.getProcessLogger;
         var InitializationException = Ice.InitializationException;
-        
+
         var ParseStateKey = 0;
         var ParseStateValue = 1;
         //
@@ -6983,7 +6983,7 @@
             __init__: function(args, defaults)
             {
                 this._properties = new HashMap();
-        
+
                 if(defaults !== undefined && defaults !== null)
                 {
                     //
@@ -6996,7 +6996,7 @@
                         this._properties.set(e.key, { 'value': e.value.value, 'used': false });
                     }
                 }
-        
+
                 if(args !== undefined && args !== null)
                 {
                     var v = this.parseIceCommandLineOptions(args);
@@ -7051,12 +7051,12 @@
                 {
                     value = [];
                 }
-        
+
                 var pv = this._properties.get(key);
                 if(pv !== undefined)
                 {
                     pv.used = true;
-        
+
                     var result = StringUtil.splitString(pv.value, ", \t\r\n");
                     if(result === null)
                     {
@@ -7096,7 +7096,7 @@
                 {
                     key = key.trim();
                 }
-        
+
                 //
                 // Check if the property is legal.
                 //
@@ -7105,7 +7105,7 @@
                 {
                     throw new InitializationException("Attempt to set property with empty key");
                 }
-        
+
                 var dotPos = key.indexOf(".");
                 if(dotPos !== -1)
                 {
@@ -7124,7 +7124,7 @@
                         {
                             continue;
                         }
-                        
+
                         var found = false;
                         var mismatchCase = false;
                         var otherKey;
@@ -7133,7 +7133,7 @@
                             pattern = PropertyNames.validProps[i][j].pattern();
                             var pComp = new RegExp(pattern);
                             found = pComp.test(key);
-        
+
                             if(found && PropertyNames.validProps[i][j].deprecated)
                             {
                                 logger.warning("deprecated property: " + key);
@@ -7142,7 +7142,7 @@
                                     key = PropertyNames.validProps[i][j].deprecatedBy;
                                 }
                             }
-                            
+
                             if(found)
                             {
                                 break;
@@ -7161,7 +7161,7 @@
                                 }
                             }
                         }
-                        
+
                         if(!found)
                         {
                             logger.warning("unknown property: " + key);
@@ -7172,7 +7172,7 @@
                         }
                     }
                 }
-        
+
                 //
                 // Set or clear the property.
                 //
@@ -7209,9 +7209,9 @@
                     pfx += ".";
                 }
                 pfx = "--" + pfx;
-        
+
                 var result = [];
-                
+
                 var self = this;
                 options.forEach(
                     function(opt)
@@ -7222,7 +7222,7 @@
                             {
                                 opt += "=1";
                             }
-        
+
                             self.parseLine(opt.substring(2));
                         }
                         else
@@ -7244,9 +7244,9 @@
             parse: function(data)
             {
                 var lines = data.match(/[^\r\n]+/g);
-                
+
                 var line;
-                
+
                 while((line = lines.shift()))
                 {
                     this.parseLine(line);
@@ -7256,13 +7256,13 @@
             {
                 var key = "";
                 var value = "";
-        
+
                 var state = ParseStateKey;
-        
+
                 var whitespace = "";
                 var escapedspace = "";
                 var finished = false;
-                
+
                 for(var i = 0; i < line.length; ++i)
                 {
                     var c = line.charAt(i);
@@ -7285,14 +7285,14 @@
                                                 whitespace = "";
                                                 key += c;
                                                 break;
-        
+
                                             case ' ':
                                                 if(key.length !== 0)
                                                 {
                                                     whitespace += c;
                                                 }
                                                 break;
-        
+
                                             default:
                                                 key += whitespace;
                                                 whitespace = "";
@@ -7307,7 +7307,7 @@
                                         key += c;
                                     }
                                     break;
-        
+
                                 case ' ':
                                 case '\t':
                                 case '\r':
@@ -7317,16 +7317,16 @@
                                         whitespace += c;
                                     }
                                     break;
-        
+
                                 case '=':
                                     whitespace = "";
                                     state = ParseStateValue;
                                     break;
-        
+
                                 case '#':
                                     finished = true;
                                     break;
-        
+
                                 default:
                                     key += whitespace;
                                     whitespace = "";
@@ -7335,7 +7335,7 @@
                             }
                             break;
                         }
-        
+
                         case ParseStateValue:
                         {
                             switch(c)
@@ -7354,12 +7354,12 @@
                                                 escapedspace = "";
                                                 value += c;
                                                 break;
-        
+
                                             case ' ':
                                                 whitespace += c;
                                                 escapedspace += c;
                                                 break;
-        
+
                                             default:
                                                 value += value.length === 0 ? escapedspace : whitespace;
                                                 whitespace = "";
@@ -7375,7 +7375,7 @@
                                         value += c;
                                     }
                                     break;
-        
+
                                 case ' ':
                                 case '\t':
                                 case '\r':
@@ -7385,11 +7385,11 @@
                                         whitespace += c;
                                     }
                                     break;
-        
+
                                 case '#':
                                     finished = true;
                                     break;
-        
+
                                 default:
                                     value += value.length === 0 ? escapedspace : whitespace;
                                     whitespace = "";
@@ -7406,7 +7406,7 @@
                     }
                 }
                 value += escapedspace;
-        
+
                 if((state === ParseStateKey && key.length !== 0) ||
                 (state == ParseStateValue && key.length === 0))
                 {
@@ -7417,7 +7417,7 @@
                 {
                     return;
                 }
-                
+
                 this.setProperty(key, value);
             },
             clone: function()
@@ -7437,14 +7437,14 @@
                 return unused;
             }
         });
-        
+
         Properties.createProperties = function(args, defaults)
         {
             return new Properties(args, defaults);
         };
-        
+
         Ice.Properties = Properties;
-        
+
     }());
 
     (function()
@@ -7457,12 +7457,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Debug = Ice.Debug;
         var HashMap = Ice.HashMap;
         var StringUtil = Ice.StringUtil;
-        
+
         //
         // Only for use by Ice.ObjectAdatperI.
         //
@@ -7478,12 +7478,12 @@
             addServant: function(servant, ident, facet)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 if(facet === null)
                 {
                     facet = "";
                 }
-        
+
                 var m = this._servantMapMap.get(ident);
                 if(m === undefined)
                 {
@@ -7504,13 +7504,13 @@
                         throw ex;
                     }
                 }
-        
+
                 m.set(facet, servant);
             },
             addDefaultServant: function(servant, category)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction
-        
+
                 var obj = this._defaultServantMap.get(category);
                 if(obj !== undefined)
                 {
@@ -7519,18 +7519,18 @@
                     ex.id = category;
                     throw ex;
                 }
-        
+
                 this._defaultServantMap.set(category, servant);
             },
             removeServant: function(ident, facet)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 if(facet === null)
                 {
                     facet = "";
                 }
-        
+
                 var m = this._servantMapMap.get(ident);
                 if(m === undefined || !m.has(facet))
                 {
@@ -7543,21 +7543,21 @@
                     }
                     throw ex;
                 }
-        
+
                 var obj = m.get(facet);
                 m.delete(facet);
-        
+
                 if(m.size === 0)
                 {
                     this._servantMapMap.delete(ident);
                 }
-        
+
                 return obj;
             },
             removeDefaultServant: function(category)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var obj = this._defaultServantMap.get(category);
                 if(obj === undefined)
                 {
@@ -7566,14 +7566,14 @@
                     ex.id = category;
                     throw ex;
                 }
-        
+
                 this._defaultServantMap.delete(category);
                 return obj;
             },
             removeAllFacets: function(ident)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var m = this._servantMapMap.get(ident);
                 if(m === undefined)
                 {
@@ -7582,9 +7582,9 @@
                     ex.kindOfObject = "servant";
                     throw ex;
                 }
-        
+
                 this._servantMapMap.delete(ident);
-        
+
                 return m;
             },
             findServant: function(ident, facet)
@@ -7596,12 +7596,12 @@
                 // adapter was deactivated.
                 //
                 //Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 if(facet === null)
                 {
                     facet = "";
                 }
-        
+
                 var m = this._servantMapMap.get(ident);
                 var obj = null;
                 if(m === undefined)
@@ -7616,26 +7616,26 @@
                 {
                     obj = m.get(facet);
                 }
-        
+
                 return obj === undefined ? null : obj;
             },
             findDefaultServant: function(category)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var ds = this._defaultServantMap.get(category);
                 return ds === undefined ? null : ds;
             },
             findAllFacets: function(ident)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var m = this._servantMapMap.get(ident);
                 if(m !== undefined)
                 {
                     return m.clone();
                 }
-        
+
                 return new HashMap();
             },
             hasServant: function(ident)
@@ -7647,7 +7647,7 @@
                 // adapter was deactivated.
                 //
                 //Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var m = this._servantMapMap.get(ident);
                 if(m === undefined)
                 {
@@ -7662,7 +7662,7 @@
             addServantLocator: function(locator, category)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var l = this._locatorMap.get(category);
                 if(l !== undefined)
                 {
@@ -7671,13 +7671,13 @@
                     ex.kindOfObject = "servant locator";
                     throw ex;
                 }
-        
+
                 this._locatorMap.set(category, locator);
             },
             removeServantLocator: function(category)
             {
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var l = this._locatorMap.get(category);
                 if(l === undefined)
                 {
@@ -7698,7 +7698,7 @@
                 // adapter was deactivated.
                 //
                 //Debug.assert(this._instance !== null); // Must not be called after destruction.
-        
+
                 var l = this._locatorMap.get(category);
                 return l === undefined ? null : l;
             },
@@ -7710,13 +7710,13 @@
                 Debug.assert(this._instance !== null); // Must not be called after destruction.
                 var logger = this._instance.initializationData().logger;
                 this._servantMapMap.clear();
-        
+
                 this._defaultServantMap.clear();
-        
+
                 var locatorMap = this._locatorMap.clone();
                 this._locatorMap.clear();
                 this._instance = null;
-        
+
                 for(var e = locatorMap.entries; e !== null; e = e.next)
                 {
                     var locator = e.value;
@@ -7733,9 +7733,9 @@
                 }
             }
         });
-        
+
         Ice.ServantManager = ServantManager;
-        
+
     }());
 
     (function()
@@ -7748,9 +7748,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var __M = Ice.__M;
-        
+
         var Debug = Ice.Debug;
         var ExUtil = Ice.ExUtil;
         var FormatType = Ice.FormatType;
@@ -7761,12 +7761,12 @@
         var TraceUtil = Ice.TraceUtil;
         var ArrayUtil = Ice.ArrayUtil;
         var SlicedData = Ice.SlicedData;
-        
+
         var SliceType = {};
         SliceType.NoSlice = 0;
         SliceType.ObjectSlice = 1;
         SliceType.ExceptionSlice = 2;
-        
+
         var OPTIONAL_END_MARKER           = 0xFF;
         var FLAG_HAS_TYPE_ID_STRING       = (1<<0);
         var FLAG_HAS_TYPE_ID_INDEX        = (1<<1);
@@ -7775,7 +7775,7 @@
         var FLAG_HAS_INDIRECTION_TABLE    = (1<<3);
         var FLAG_HAS_SLICE_SIZE           = (1<<4);
         var FLAG_IS_LAST_SLICE            = (1<<5);
-        
+
         //
         // Number.isNaN polyfill for compatibility with IE
         //
@@ -7785,15 +7785,15 @@
         {
             return typeof value === "number" && isNaN(value);
         };
-        
+
         var IndirectPatchEntry = function(index, patcher)
         {
             this.index = index;
             this.patcher = patcher;
         };
-        
+
         var Class = Ice.Class;
-        
+
         var EncapsDecoder = Class({
             __init__: function(stream, encaps, sliceObjects, f)
             {
@@ -7821,7 +7821,7 @@
                 {
                     this._typeIdMap = new HashMap(); // Map<int, String>();
                 }
-        
+
                 if(isIndex)
                 {
                     index = this._stream.readSize();
@@ -7845,12 +7845,12 @@
                 //
                 var userFactory = this._servantFactoryManager.find(typeId);
                 var v = null;
-        
+
                 if(userFactory !== undefined)
                 {
                     v = userFactory.create(typeId);
                 }
-        
+
                 //
                 // If that fails, invoke the default factory if one has been
                 // registered.
@@ -7863,7 +7863,7 @@
                         v = userFactory.create(typeId);
                     }
                 }
-        
+
                 //
                 // Last chance: try to instantiate the class dynamically.
                 //
@@ -7871,7 +7871,7 @@
                 {
                     v = this._stream.createObject(typeId);
                 }
-        
+
                 return v;
             },
             addPatchEntry: function(index, patcher)
@@ -7887,12 +7887,12 @@
                     patcher.call(null, obj);
                     return;
                 }
-        
+
                 if(this._patchMap === null) // Lazy initialization
                 {
                     this._patchMap = new HashMap(); // HashMap<Integer, Patcher[] >();
                 }
-        
+
                 //
                 // Add patch entry if the object isn't un-marshalled yet,
                 // the smart pointer will be patched when the instance is
@@ -7908,7 +7908,7 @@
                     l = []; // Patcher[];
                     this._patchMap.set(index, l);
                 }
-        
+
                 //
                 // Append a patch entry for this instance.
                 //
@@ -7922,7 +7922,7 @@
                 // be done before reading the objects (for circular references).
                 //
                 this._unmarshaledMap.set(index, v);
-        
+
                 //
                 // Read the object.
                 //
@@ -7950,7 +7950,7 @@
                         this._patchMap.delete(index);
                     }
                 }
-        
+
                 if((this._patchMap === null || this._patchMap.size === 0) && this._objectList === null)
                 {
                     try
@@ -7970,7 +7970,7 @@
                         this._objectList = []; // Ice.Object[]
                     }
                     this._objectList.push(v);
-        
+
                     if(this._patchMap === null || this._patchMap.size === 0)
                     {
                         //
@@ -7996,7 +7996,7 @@
                 }
             }
         });
-        
+
         var EncapsDecoder10 = Class(EncapsDecoder, {
             __init__: function(stream, encaps, sliceObjects, f)
             {
@@ -8006,7 +8006,7 @@
             readObject: function(patcher)
             {
                 Debug.assert(patcher !== null);
-        
+
                 //
                 // Object references are encoded as a negative integer in 1.0.
                 //
@@ -8016,7 +8016,7 @@
                     throw new Ice.MarshalException("invalid object id");
                 }
                 index = -index;
-        
+
                 if(index === 0)
                 {
                     patcher.call(null, null);
@@ -8029,7 +8029,7 @@
             throwException: function()
             {
                 Debug.assert(this._sliceType === SliceType.NoSlice);
-        
+
                 //
                 // User exception with the 1.0 encoding start with a boolean flag
                 // that indicates whether or not the exception has classes.
@@ -8040,7 +8040,7 @@
                 var usesClasses = this._stream.readBool();
                 this._sliceType = SliceType.ExceptionSlice;
                 this._skipFirstSlice = false;
-        
+
                 //
                 // Read the first slice header.
                 //
@@ -8049,7 +8049,7 @@
                 while(true)
                 {
                     var userEx = this._stream.createUserException(this._typeId);
-        
+
                     //
                     // We found the exception.
                     //
@@ -8061,10 +8061,10 @@
                             this.readPendingObjects();
                         }
                         throw userEx;
-        
+
                         // Never reached.
                     }
-        
+
                     //
                     // Slice off what we don't understand.
                     //
@@ -8112,7 +8112,7 @@
                     }
                     this.endSlice();
                 }
-        
+
                 this._sliceType = SliceType.NoSlice;
                 return null;
             },
@@ -8128,7 +8128,7 @@
                     this._skipFirstSlice = false;
                     return this._typeId;
                 }
-        
+
                 //
                 // For objects, first read the type ID boolean which indicates
                 // whether or not the type ID is encoded as a string or as an
@@ -8144,13 +8144,13 @@
                 {
                     this._typeId = this._stream.readString();
                 }
-        
+
                 this._sliceSize = this._stream.readInt();
                 if(this._sliceSize < 4)
                 {
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
-        
+
                 return this._typeId;
             },
             endSlice: function()
@@ -8185,7 +8185,7 @@
                     }
                 }
                 while(num > 0);
-        
+
                 if(this._patchMap !== null && this._patchMap.size !== 0)
                 {
                     //
@@ -8200,15 +8200,15 @@
                 var index = this._stream.readInt(),
                     mostDerivedId,
                     v = null;
-        
+
                 if(index <= 0)
                 {
                     throw new Ice.MarshalException("invalid object id");
                 }
-        
+
                 this._sliceType = SliceType.ObjectSlice;
                 this._skipFirstSlice = false;
-        
+
                 //
                 // Read the first slice header.
                 //
@@ -8224,9 +8224,9 @@
                     {
                         throw new Ice.NoObjectFactoryException("", mostDerivedId);
                     }
-        
+
                     v = this.newInstance(this._typeId);
-        
+
                     //
                     // We found a factory, we get out of this loop.
                     //
@@ -8234,7 +8234,7 @@
                     {
                         break;
                     }
-        
+
                     //
                     // If object slicing is disabled, stop un-marshalling.
                     //
@@ -8243,21 +8243,21 @@
                         throw new Ice.NoObjectFactoryException("no object factory found and object slicing is disabled",
                                                                this._typeId);
                     }
-        
+
                     //
                     // Slice off what we don't understand.
                     //
                     this.skipSlice();
                     this.startSlice(); // Read next Slice header for next iteration.
                 }
-        
+
                 //
                 // Un-marshal the object and add-it to the map of un-marshaled objects.
                 //
                 this.unmarshal(index, v);
             }
         });
-        
+
         var EncapsDecoder11 = Class(EncapsDecoder, {
             __init__: function(stream, encaps, sliceObjects, f)
             {
@@ -8269,12 +8269,12 @@
             {
                 Debug.assert(patcher !== undefined);
                 var index = this._stream.readSize();
-        
+
                 if(index < 0)
                 {
                     throw new Ice.MarshalException("invalid object id");
                 }
-        
+
                 if(index === 0)
                 {
                     if(patcher !== null)
@@ -8316,7 +8316,7 @@
             {
                 Debug.assert(this._current === null);
                 this.push(SliceType.ExceptionSlice);
-        
+
                 //
                 // Read the first slice header.
                 //
@@ -8324,9 +8324,9 @@
                 var mostDerivedId = this._current.typeId;
                 while(true)
                 {
-        
+
                     var userEx = this._stream.createUserException(this._current.typeId);
-        
+
                     //
                     // We found the exception.
                     //
@@ -8334,15 +8334,15 @@
                     {
                         userEx.__read(this._stream);
                         throw userEx;
-        
+
                         // Never reached.
                     }
-        
+
                     //
                     // Slice off what we don't understand.
                     //
                     this.skipSlice();
-        
+
                     if((this._current.sliceFlags & FLAG_IS_LAST_SLICE) !== 0)
                     {
                         if(mostDerivedId.indexOf("::") === 0)
@@ -8351,7 +8351,7 @@
                         }
                         throw new Ice.UnknownUserException(mostDerivedId);
                     }
-        
+
                     this.startSlice();
                 }
             },
@@ -8387,9 +8387,9 @@
                     this._current.skipFirstSlice = false;
                     return this._current.typeId;
                 }
-        
+
                 this._current.sliceFlags = this._stream.readByte();
-        
+
                 //
                 // Read the type ID, for object slices the type ID is encoded as a
                 // string or as an index, for exceptions it's always encoded as a
@@ -8419,7 +8419,7 @@
                     this._current.typeId = this._stream.readString();
                     this._current.compactId = -1;
                 }
-        
+
                 //
                 // Read the slice size if necessary.
                 //
@@ -8443,12 +8443,12 @@
                     i,
                     indirectionTable = [],
                     length;
-        
+
                 if((this._current.sliceFlags & FLAG_HAS_OPTIONAL_MEMBERS) !== 0)
                 {
                     this._stream.skipOpts();
                 }
-        
+
                 //
                 // Read the indirection table if one is present and transform the
                 // indirect patch list into patch entries with direct references.
@@ -8463,7 +8463,7 @@
                     {
                         indirectionTable[i] = this.readInstance(this._stream.readSize(), null);
                     }
-        
+
                     //
                     // Sanity checks. If there are optional members, it's possible
                     // that not all object references were read if they are from
@@ -8478,7 +8478,7 @@
                     {
                         throw new Ice.MarshalException("no references to indirection table");
                     }
-        
+
                     //
                     // Convert indirect references into direct references.
                     //
@@ -8513,9 +8513,9 @@
                         TraceUtil.traceSlicing("object", this._current.typeId, slicingCat, logger);
                     }
                 }
-        
+
                 var start = this._stream.pos;
-        
+
                 if((this._current.sliceFlags & FLAG_HAS_SLICE_SIZE) !== 0)
                 {
                     Debug.assert(this._current.sliceSize >= 4);
@@ -8529,15 +8529,15 @@
                                                                "(the sender should use the sliced format instead)",
                                                                this._current.typeId);
                     }
-        
+
                     if(this._current.typeId.indexOf("::") === 0)
                     {
                         throw new Ice.UnknownUserException(this._current.typeId.substring(2));
                     }
-        
+
                     throw new Ice.UnknownUserException(this._current.typeId);
                 }
-        
+
                 //
                 // Preserve this slice.
                 //
@@ -8546,7 +8546,7 @@
                 info.compactId = this._current.compactId;
                 info.hasOptionalMembers = (this._current.sliceFlags & FLAG_HAS_OPTIONAL_MEMBERS) !== 0;
                 info.isLastSlice = (this._current.sliceFlags & FLAG_IS_LAST_SLICE) !== 0;
-        
+
                 var b = this._stream._buf;
                 var end = b.position;
                 var dataEnd = end;
@@ -8558,17 +8558,17 @@
                     //
                     --dataEnd;
                 }
-        
+
                 b.position = start;
                 info.bytes = b.getArray(dataEnd - start);
                 b.position = end;
-        
+
                 if(this._current.slices === null) // Lazy initialization
                 {
                     this._current.slices = []; // Ice.SliceInfo[]
                     this._current.indirectionTables = []; // int[]
                 }
-        
+
                 //
                 // Read the indirect object table. We read the instances or their
                 // IDs if the instance is a reference to an already un-marhsaled
@@ -8577,7 +8577,7 @@
                 // The SliceInfo object sequence is initialized only if
                 // readSlicedData is called.
                 //
-        
+
                 if((this._current.sliceFlags & FLAG_HAS_INDIRECTION_TABLE) !== 0)
                 {
                     var length = this._stream.readAndCheckSeqSize(1);
@@ -8600,7 +8600,7 @@
                 {
                     return this._stream.readOptImpl(readTag, expectedFormat);
                 }
-        
+
                 if((this._current.sliceFlags & FLAG_HAS_OPTIONAL_MEMBERS) !== 0)
                 {
                     return this._stream.readOptImpl(readTag, expectedFormat);
@@ -8610,10 +8610,10 @@
             readInstance: function(index, patcher)
             {
                 Debug.assert(index > 0);
-        
+
                 var mostDerivedId,
                     v = null;
-        
+
                 if(index > 1)
                 {
                     if(patcher !== null)
@@ -8622,16 +8622,16 @@
                     }
                     return index;
                 }
-        
+
                 this.push(SliceType.ObjectSlice);
-        
+
                 //
                 // Get the object ID before we start reading slices. If some
                 // slices are skiped, the indirect object table are still read and
                 // might read other objects.
                 //
                 index = ++this._objectIdIndex;
-        
+
                 //
                 // Read the first slice header.
                 //
@@ -8650,7 +8650,7 @@
                             this._current.typeId = this._stream.getTypeId(this._current.compactId);
                         }
                     }
-        
+
                     if(this._current.typeId.length > 0)
                     {
                         v = this.newInstance(this._current.typeId);
@@ -8662,7 +8662,7 @@
                             break;
                         }
                     }
-        
+
                     //
                     // If object slicing is disabled, stop un-marshalling.
                     //
@@ -8671,7 +8671,7 @@
                         throw new Ice.NoObjectFactoryException("no object factory found and object slicing is disabled",
                                                                this._current.typeId);
                     }
-        
+
                     //
                     // Slice off what we don't understand.
                     //
@@ -8685,10 +8685,10 @@
                         v = new Ice.UnknownSlicedObject(mostDerivedId);
                         break;
                     }
-        
+
                     this.startSlice(); // Read next Slice header for next iteration.
                 }
-        
+
                 //
                 // Un-marshal the object
                 //
@@ -8701,7 +8701,7 @@
                     //
                     throw new Ice.MarshalException("index for class received, but no instance");
                 }
-        
+
                 if(patcher !== null)
                 {
                     patcher.call(null, v);
@@ -8711,7 +8711,7 @@
             readSlicedData: function()
             {
                 var i, ii, table, info, j, jj;
-        
+
                 if(this._current.slices === null) // No preserved slices.
                 {
                     return null;
@@ -8754,7 +8754,7 @@
                 this._current.skipFirstSlice = false;
             }
         });
-        
+
         EncapsDecoder11.InstanceData = function(previous)
         {
             if(previous !== null)
@@ -8763,13 +8763,13 @@
             }
             this.previous = previous;
             this.next = null;
-        
+
             // Instance attributes
             this.sliceType = null;
             this.skipFirstSlice = false;
             this.slices = null;     // Preserved slices. Ice.SliceInfo[]
             this.indirectionTables = null; // int[]
-        
+
             // Slice attributes
             this.sliceFlags = 0;
             this.sliceSize = 0;
@@ -8777,7 +8777,7 @@
             this.compactId = 0;
             this.indirectPatchList = null; // Lazy initialized, IndirectPatchEntry[]
         };
-        
+
         var sequencePatcher = function(seq, index, T){
             return function(v)
                 {
@@ -8788,7 +8788,7 @@
                     seq[index] = v;
                 };
         };
-        
+
         var EncapsEncoder = Class({
             __init__: function(stream, encaps)
             {
@@ -8812,7 +8812,7 @@
                 {
                     this._typeIdMap = new HashMap(); // HashMap<String, int>
                 }
-        
+
                 var p = this._typeIdMap.get(typeId);
                 if(p !== undefined)
                 {
@@ -8822,7 +8822,7 @@
                 return -1;
             }
         });
-        
+
         var EncapsEncoder10 = Class(EncapsEncoder, {
             __init__: function(stream, encaps)
             {
@@ -8910,9 +8910,9 @@
                 {
                     this._stream.writeString(typeId);
                 }
-        
+
                 this._stream.writeInt(0); // Placeholder for the slice length.
-        
+
                 this._writeSlice = this._stream.pos;
             },
             endSlice: function()
@@ -8934,7 +8934,7 @@
                                     // are added to toBeMarshaledMap.
                                     //
                                     self._stream.writeInt(value);
-        
+
                                     try
                                     {
                                         key.ice_preMarshal();
@@ -8944,11 +8944,11 @@
                                         self._stream.instance.initializationData().logger.warning(
                                             "exception raised by ice_preMarshal:\n" + ex.toString());
                                     }
-        
+
                                     key.__write(self._stream);
                                 },
                     savedMap;
-        
+
                 while(this._toBeMarshaledMap.size > 0)
                 {
                     //
@@ -8958,7 +8958,7 @@
                     // objects.
                     //
                     this._marshaledMap.merge(this._toBeMarshaledMap);
-        
+
                     savedMap = this._toBeMarshaledMap;
                     this._toBeMarshaledMap = new HashMap(); // HashMap<Ice.Object, int>();
                     this._stream.writeSize(savedMap.size);
@@ -8969,7 +8969,7 @@
             registerObject: function(v)
             {
                 Debug.assert(v !== null);
-        
+
                 //
                 // Look for this instance in the to-be-marshaled map.
                 //
@@ -8978,7 +8978,7 @@
                 {
                     return p;
                 }
-        
+
                 //
                 // Didn't find it, try the marshaled map next.
                 //
@@ -8987,7 +8987,7 @@
                 {
                     return p;
                 }
-        
+
                 //
                 // We haven't seen this instance previously, create a new
                 // index, and insert it into the to-be-marshaled map.
@@ -8996,7 +8996,7 @@
                 return this._objectIdIndex;
             }
         });
-        
+
         var EncapsEncoder11 = Class(EncapsEncoder, {
             __init__: function(stream, encaps)
             {
@@ -9019,7 +9019,7 @@
                         this._current.indirectionTable = []; // Ice.Object[]
                         this._current.indirectionMap = new HashMap(); // HashMap<Ice.Object, int>
                     }
-        
+
                     //
                     // If writting an object within a slice and using the sliced
                     // format, write an index from the object indirection
@@ -9066,7 +9066,7 @@
                 }
                 this._current.sliceType = sliceType;
                 this._current.firstSlice = true;
-        
+
                 if(data !== null && data !== undefined)
                 {
                     this.writeSlicedData(data);
@@ -9080,9 +9080,9 @@
             {
                 Debug.assert((this._current.indirectionTable === null || this._current.indirectionTable.length === 0) &&
                                 (this._current.indirectionMap === null || this._current.indirectionMap.size === 0));
-        
+
                 this._current.sliceFlagsPos = this._stream.pos;
-        
+
                 this._current.sliceFlags = 0;
                 if(this._encaps.format === FormatType.SlicedFormat)
                 {
@@ -9092,9 +9092,9 @@
                 {
                     this._current.sliceFlags |= FLAG_IS_LAST_SLICE; // This is the last slice.
                 }
-        
+
                 this._stream.writeByte(0); // Placeholder for the slice flags
-        
+
                 //
                 // For object slices, encode the flag and the type ID either as a
                 // string or index. For exception slices, always encode the type
@@ -9133,19 +9133,19 @@
                 {
                     this._stream.writeString(typeId);
                 }
-        
+
                 if((this._current.sliceFlags & FLAG_HAS_SLICE_SIZE) !== 0)
                 {
                     this._stream.writeInt(0); // Placeholder for the slice length.
                 }
-        
+
                 this._current.writeSlice = this._stream.pos;
                 this._current.firstSlice = false;
             },
             endSlice: function()
             {
                 var sz, i, length;
-        
+
                 //
                 // Write the optional member end marker if some optional members
                 // were encoded. Note that the optional members are encoded before
@@ -9155,7 +9155,7 @@
                 {
                     this._stream.writeByte(OPTIONAL_END_MARKER);
                 }
-        
+
                 //
                 // Write the slice length if necessary.
                 //
@@ -9164,7 +9164,7 @@
                     sz = this._stream.pos - this._current.writeSlice + 4;
                     this._stream.rewriteInt(sz, this._current.writeSlice - 4);
                 }
-        
+
                 //
                 // Only write the indirection table if it contains entries.
                 //
@@ -9172,7 +9172,7 @@
                 {
                     Debug.assert(this._encaps.format === FormatType.SlicedFormat);
                     this._current.sliceFlags |= FLAG_HAS_INDIRECTION_TABLE;
-        
+
                     //
                     // Write the indirection object table.
                     //
@@ -9184,7 +9184,7 @@
                     this._current.indirectionTable.length = 0; // Faster way to clean array in JavaScript
                     this._current.indirectionMap.clear();
                 }
-        
+
                 //
                 // Finally, update the slice flags.
                 //
@@ -9196,19 +9196,19 @@
                 {
                     return this._stream.writeOptImpl(tag, format);
                 }
-        
+
                 if(this._stream.writeOptImpl(tag, format))
                 {
                     this._current.sliceFlags |= FLAG_HAS_OPTIONAL_MEMBERS;
                     return true;
                 }
-        
+
                 return false;
             },
             writeSlicedData: function(slicedData)
             {
                 Debug.assert(slicedData !== null && slicedData !== undefined);
-        
+
                 //
                 // We only remarshal preserved slices if we are using the sliced
                 // format. Otherwise, we ignore the preserved slices, which
@@ -9219,25 +9219,25 @@
                 {
                     return;
                 }
-        
+
                 var i, ii, info,
                     j, jj;
-        
+
                 for(i = 0, ii = slicedData.slices.length; i < ii; ++i)
                 {
                     info = slicedData.slices[i];
                     this.startSlice(info.typeId, info.compactId, info.isLastSlice);
-        
+
                     //
                     // Write the bytes associated with this slice.
                     //
                     this._stream.writeBlob(info.bytes);
-        
+
                     if(info.hasOptionalMembers)
                     {
                         this._current.sliceFlags |= FLAG_HAS_OPTIONAL_MEMBERS;
                     }
-        
+
                     //
                     // Make sure to also re-write the object indirection table.
                     //
@@ -9248,20 +9248,20 @@
                             this._current.indirectionTable = []; // Ice.Object[]
                             this._current.indirectionMap = new HashMap(); // HashMap<Ice.Object, int>
                         }
-        
+
                         for(j = 0, jj = info.objects.length; j < jj; ++j)
                         {
                             this._current.indirectionTable.push(info.objects[j]);
                         }
                     }
-        
+
                     this.endSlice();
                 }
             },
             writeInstance: function(v)
             {
                 Debug.assert(v !== null && v !== undefined);
-        
+
                 //
                 // If the instance was already marshaled, just write it's ID.
                 //
@@ -9271,13 +9271,13 @@
                     this._stream.writeSize(p);
                     return;
                 }
-        
+
                 //
                 // We haven't seen this instance previously, create a new ID,
                 // insert it into the marshaled map, and write the instance.
                 //
                 this._marshaledMap.set(v, ++this._objectIdIndex);
-        
+
                 try
                 {
                     v.ice_preMarshal();
@@ -9287,12 +9287,12 @@
                     this._stream.instance.initializationData().logger.warning("exception raised by ice_preMarshal:\n" +
                                                                               ex.toString());
                 }
-        
+
                 this._stream.writeSize(1); // Object instance marker.
                 v.__write(this._stream);
             }
         });
-        
+
         EncapsEncoder11.InstanceData = function(previous)
         {
             Debug.assert(previous !== undefined);
@@ -9302,11 +9302,11 @@
             }
             this.previous = previous;
             this.next = null;
-        
+
             // Instance attributes
             this.sliceType = null;
             this.firstSlice = false;
-        
+
             // Slice attributes
             this.sliceFlags = 0;
             this.writeSlice = 0;    // Position of the slice data members
@@ -9314,7 +9314,7 @@
             this.indirectionTable = null; // Ice.Object[]
             this.indirectionMap = null; // HashMap<Ice.Object, int>
         };
-        
+
         var ReadEncaps = Class({
             __init__: function()
             {
@@ -9335,7 +9335,7 @@
                 this.encoding_1_0 = encoding.equals(Ice.Encoding_1_0);
             }
         });
-        
+
         var WriteEncaps = Class({
             __init__: function()
             {
@@ -9356,24 +9356,24 @@
                 this.encoding_1_0 = encoding.equals(Ice.Encoding_1_0);
             }
         });
-        
+
         var BasicStream = Class({
             __init__: function(instance, encoding, data)
             {
                 this._instance = instance;
                 this._closure = null;
                 this._encoding = encoding;
-        
+
                 this._readEncapsStack = null;
                 this._writeEncapsStack = null;
                 this._readEncapsCache = null;
                 this._writeEncapsCache = null;
-        
+
                 this._sliceObjects = true;
-        
+
                 this._startSeq = -1;
                 this._sizePos = -1;
-        
+
                 if(data !== undefined)
                 {
                     this._buf = new Ice.Buffer(data);
@@ -9402,7 +9402,7 @@
                     this._readEncapsCache.reset();
                     this._readEncapsStack = null;
                 }
-        
+
                 if(this._writeEncapsStack !== null)
                 {
                     Debug.assert(this._writeEncapsStack.next);
@@ -9417,17 +9417,17 @@
             swap: function(other)
             {
                 Debug.assert(this._instance === other._instance);
-        
+
                 var tmpBuf, tmpClosure, tmpStartSeq, tmpMinSeqSize, tmpSizePos;
-        
+
                 tmpBuf = other._buf;
                 other._buf = this._buf;
                 this._buf = tmpBuf;
-        
+
                 tmpClosure = other._closure;
                 other._closure = this._closure;
                 this._closure = tmpClosure;
-        
+
                 //
                 // Swap is never called for BasicStreams that have encapsulations being read/write. However,
                 // encapsulations might still be set in case marshalling or un-marshalling failed. We just
@@ -9435,15 +9435,15 @@
                 //
                 this.resetEncaps();
                 other.resetEncaps();
-        
+
                 tmpStartSeq = other._startSeq;
                 other._startSeq = this._startSeq;
                 this._startSeq = tmpStartSeq;
-        
+
                 tmpMinSeqSize = other._minSeqSize;
                 other._minSeqSize = this._minSeqSize;
                 this._minSeqSize = tmpMinSeqSize;
-        
+
                 tmpSizePos = other._sizePos;
                 other._sizePos = this._sizePos;
                 this._sizePos = tmpSizePos;
@@ -9510,7 +9510,7 @@
                 // encapsulation encoding version if there's a current write
                 // encapsulation, otherwise, use the stream encoding version.
                 //
-        
+
                 if(encoding === undefined)
                 {
                     if(this._writeEncapsStack !== null)
@@ -9524,9 +9524,9 @@
                         format = FormatType.DefaultFormat;
                     }
                 }
-        
+
                 Protocol.checkSupportedEncoding(encoding);
-        
+
                 var curr = this._writeEncapsCache;
                 if(curr !== null)
                 {
@@ -9539,24 +9539,24 @@
                 }
                 curr.next = this._writeEncapsStack;
                 this._writeEncapsStack = curr;
-        
+
                 this._writeEncapsStack.format = format;
                 this._writeEncapsStack.setEncoding(encoding);
                 this._writeEncapsStack.start = this._buf.limit;
-        
+
                 this.writeInt(0); // Placeholder for the encapsulation length.
                 this._writeEncapsStack.encoding.__write(this);
             },
             endWriteEncaps: function()
             {
                 Debug.assert(this._writeEncapsStack);
-        
+
                 // Size includes size and version.
                 var start = this._writeEncapsStack.start;
-        
+
                 var sz = this._buf.limit - start;
                 this._buf.putIntAt(start, sz);
-        
+
                 var curr = this._writeEncapsStack;
                 this._writeEncapsStack = curr.next;
                 curr.next = this._writeEncapsCache;
@@ -9604,9 +9604,9 @@
                 }
                 curr.next = this._readEncapsStack;
                 this._readEncapsStack = curr;
-        
+
                 this._readEncapsStack.start = this._buf.position;
-        
+
                 //
                 // I don't use readSize() and writeSize() for encapsulations,
                 // because when creating an encapsulation, I must know in advance
@@ -9624,18 +9624,18 @@
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
                 this._readEncapsStack.sz = sz;
-        
+
                 var encoding = new Ice.EncodingVersion();
                 encoding.__read(this);
                 Protocol.checkSupportedEncoding(encoding); // Make sure the encoding is supported.
                 this._readEncapsStack.setEncoding(encoding);
-        
+
                 return encoding;
             },
             endReadEncaps: function()
             {
                 Debug.assert(this._readEncapsStack !== null);
-        
+
                 if(!this._readEncapsStack.encoding_1_0)
                 {
                     this.skipOpts();
@@ -9650,14 +9650,14 @@
                     {
                         throw new Ice.EncapsulationException();
                     }
-        
+
                     //
                     // Ice version < 3.3 had a bug where user exceptions with
                     // class members could be encoded with a trailing byte
                     // when dispatched with AMD. So we tolerate an extra byte
                     // in the encapsulation.
                     //
-        
+
                     try
                     {
                         this._buf.get();
@@ -9667,7 +9667,7 @@
                         throw new Ice.UnmarshalOutOfBoundsException();
                     }
                 }
-        
+
                 var curr = this._readEncapsStack;
                 this._readEncapsStack = curr.next;
                 curr.next = this._readEncapsCache;
@@ -9685,7 +9685,7 @@
                 {
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
-        
+
                 var encoding = new Ice.EncodingVersion();
                 encoding.__read(this);
                 if(encoding.equals(Ice.Encoding_1_0))
@@ -9719,12 +9719,12 @@
                 {
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
-        
+
                 if(sz - 4 > this._buf.remaining)
                 {
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
-        
+
                 if(encoding !== null)
                 {
                     encoding.__read(this);
@@ -9734,7 +9734,7 @@
                 {
                     this._buf.position = this._buf.position - 4;
                 }
-        
+
                 try
                 {
                     return this._buf.getArray(sz);
@@ -9877,12 +9877,12 @@
             readAndCheckSeqSize: function(minSize)
             {
                 var sz = this.readSize();
-        
+
                 if(sz === 0)
                 {
                     return sz;
                 }
-        
+
                 //
                 // The _startSeq variable points to the start of the sequence for which
                 // we expect to read at least _minSeqSize bytes from the stream.
@@ -9909,7 +9909,7 @@
                 {
                     this._minSeqSize += sz * minSize;
                 }
-        
+
                 //
                 // If there isn't enough data to read on the stream for the sequence (and
                 // possibly enclosed sequences), something is wrong with the marshalled
@@ -9919,7 +9919,7 @@
                 {
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
-        
+
                 return sz;
             },
             startSize: function()
@@ -10163,7 +10163,7 @@
                 {
                     throw new Ice.UnmarshalOutOfBoundsException();
                 }
-        
+
                 try
                 {
                     return this._buf.getString(len);
@@ -10249,7 +10249,7 @@
                 {
                     v = this.readSize();
                 }
-        
+
                 var e = T.valueOf(v);
                 if(e === undefined)
                 {
@@ -10330,41 +10330,41 @@
             readOptImpl: function(readTag, expectedFormat)
             {
                 var b, v, format, tag, offset;
-        
+
                 if(this.isReadEncoding_1_0())
                 {
                     return false; // Optional members aren't supported with the 1.0 encoding.
                 }
-        
+
                 while(true)
                 {
                     if(this._buf.position >= this._readEncapsStack.start + this._readEncapsStack.sz)
                     {
                         return false; // End of encapsulation also indicates end of optionals.
                     }
-        
+
                     v = this.readByte();
-        
+
                     if(v === OPTIONAL_END_MARKER)
                     {
                         this._buf.position -= 1; // Rewind.
                         return false;
                     }
-        
+
                     format = OptionalFormat.valueOf(v & 0x07); // First 3 bits.
                     tag = v >> 3;
                     if(tag === 30)
                     {
                         tag = this.readSize();
                     }
-        
+
                     if(tag > readTag)
                     {
                         offset = tag < 30 ? 1 : (tag < 255 ? 2 : 6); // Rewind
                         this._buf.position -= offset;
                         return false; // No optional data members with the requested tag.
                     }
-        
+
                     if(tag < readTag)
                     {
                         this.skipOpt(format); // Skip optional data members
@@ -10385,7 +10385,7 @@
                 {
                     return false; // Optional members aren't supported with the 1.0 encoding.
                 }
-        
+
                 var v = format.value;
                 if(tag < 30)
                 {
@@ -10442,14 +10442,14 @@
                     {
                         return; // End of encapsulation also indicates end of optionals.
                     }
-        
+
                     b = this.readByte();
                     v = b < 0 ? b + 256 : b;
                     if(v === OPTIONAL_END_MARKER)
                     {
                         return;
                     }
-        
+
                     format = OptionalFormat.valueOf(v & 0x07); // Read first 3 bits.
                     if((v >> 3) === 30)
                     {
@@ -10500,7 +10500,7 @@
                 {
                     throw new Ice.NoObjectFactoryException("no object factory", id, ex);
                 }
-        
+
                 return obj;
             },
             getTypeId: function(compactId)
@@ -10532,7 +10532,7 @@
                     this._readEncapsStack.setEncoding(this._encoding);
                     this._readEncapsStack.sz = this._buf.limit;
                 }
-        
+
                 if(this._readEncapsStack.decoder === null) // Lazy initialization.
                 {
                     var factoryManager = this._instance.servantFactoryManager();
@@ -10561,12 +10561,12 @@
                     }
                     this._writeEncapsStack.setEncoding(this._encoding);
                 }
-        
+
                 if(this._writeEncapsStack.format === FormatType.DefaultFormat)
                 {
                     this._writeEncapsStack.format = this._instance.defaultsAndOverrides().defaultFormat;
                 }
-        
+
                 if(!this._writeEncapsStack.encoder) // Lazy initialization.
                 {
                     if(this._writeEncapsStack.encoding_1_0)
@@ -10582,7 +10582,7 @@
             createUserException: function(id)
             {
                 var userEx = null, Class;
-        
+
                 try
                 {
                     var typeId = id.length > 2 ? id.substr(2).replace(/::/g, ".") : "";
@@ -10598,35 +10598,35 @@
                 {
                     throw new Ice.MarshalException(ex);
                 }
-        
+
                 return userEx;
             }
         });
-        
+
         var defineProperty = Object.defineProperty;
-        
+
         defineProperty(BasicStream.prototype, "pos", {
             get: function() { return this._buf.position; },
             set: function(n) { this._buf.position = n; }
         });
-        
+
         defineProperty(BasicStream.prototype, "size", {
             get: function() { return this._buf.limit; }
         });
-        
+
         defineProperty(BasicStream.prototype, "instance", {
             get: function() { return this._instance; }
         });
-        
+
         defineProperty(BasicStream.prototype, "closure", {
             get: function() { return this._type; },
             set: function(type) { this._type = type; }
         });
-        
+
         defineProperty(BasicStream.prototype, "buffer", {
             get: function() { return this._buf; }
         });
-        
+
         var defineBuiltinHelper = function(write, read, sz, format, min, max)
         {
             var helper = {
@@ -10635,7 +10635,7 @@
                 writeOpt: function(os, tag, v) { os.writeOptValue(tag, format, write, v); },
                 readOpt: function(is, tag) { return is.readOptValue(tag, format, read); },
             };
-        
+
             if(min !== undefined && max !== undefined)
             {
                 helper.validate = function(v) {
@@ -10647,37 +10647,37 @@
             });
             return helper;
         };
-        
+
         var stream = BasicStream.prototype;
-        
-        
+
+
         //
         // Constants to use in number type range checks.
         //
         var MIN_UINT8_VALUE = 0x0;
         var MAX_UINT8_VALUE = 0xFF;
-        
+
         var MIN_INT16_VALUE = -0x8000;
         var MAX_INT16_VALUE = 0x7FFF;
-        
+
         var MIN_UINT32_VALUE = 0x0;
         var MAX_UINT32_VALUE = 0xFFFFFFFF;
-        
+
         var MIN_INT32_VALUE = -0x80000000;
         var MAX_INT32_VALUE = 0x7FFFFFFF;
-        
+
         var MIN_FLOAT32_VALUE = -3.4028234664e+38;
         var MAX_FLOAT32_VALUE = 3.4028234664e+38;
-        
+
         Ice.ByteHelper = defineBuiltinHelper(stream.writeByte, stream.readByte, 1, Ice.OptionalFormat.F1,
                                              MIN_UINT8_VALUE, MAX_UINT8_VALUE);
-        
+
         Ice.ShortHelper = defineBuiltinHelper(stream.writeShort, stream.readShort, 2, Ice.OptionalFormat.F2,
                                               MIN_INT16_VALUE, MAX_INT16_VALUE);
-        
+
         Ice.IntHelper = defineBuiltinHelper(stream.writeInt, stream.readInt, 4, Ice.OptionalFormat.F4,
                                             MIN_INT32_VALUE, MAX_INT32_VALUE);
-        
+
         Ice.FloatHelper = defineBuiltinHelper(stream.writeFloat, stream.readFloat, 4, Ice.OptionalFormat.F4,
                                               MIN_FLOAT32_VALUE, MAX_FLOAT32_VALUE);
         Ice.FloatHelper.validate = function(v)
@@ -10685,7 +10685,7 @@
             return Number.isNaN(v) || v == Number.POSITIVE_INFINITY || v == Number.NEGATIVE_INFINITY ||
                 (v >= MIN_FLOAT32_VALUE && v <= MAX_FLOAT32_VALUE);
         };
-        
+
         Ice.DoubleHelper = defineBuiltinHelper(stream.writeDouble, stream.readDouble, 8, Ice.OptionalFormat.F8,
                                                -Number.MAX_VALUE, Number.MAX_VALUE);
         Ice.DoubleHelper.validate = function(v)
@@ -10693,7 +10693,7 @@
             return Number.isNaN(v) || v == Number.POSITIVE_INFINITY || v == Number.NEGATIVE_INFINITY ||
                 (v >= -Number.MAX_VALUE && v <= Number.MAX_VALUE);
         };
-        
+
         Ice.BoolHelper = defineBuiltinHelper(stream.writeBool, stream.readBool, 1, Ice.OptionalFormat.F1);
         Ice.LongHelper = defineBuiltinHelper(stream.writeLong, stream.readLong, 8, Ice.OptionalFormat.F8);
         Ice.LongHelper.validate = function(v)
@@ -10704,9 +10704,9 @@
             return v.low >= MIN_UINT32_VALUE && v.low <= MAX_UINT32_VALUE &&
                    v.high >= MIN_UINT32_VALUE && v.high <= MAX_UINT32_VALUE;
         };
-        
+
         Ice.StringHelper = defineBuiltinHelper(stream.writeString, stream.readString, 1, Ice.OptionalFormat.VSize);
-        
+
         Ice.ObjectHelper = {
             write: function(os, v)
             {
@@ -10729,13 +10729,13 @@
                 return o;
             },
         };
-        
+
         defineProperty(Ice.ObjectHelper, "minWireSize", {
             get: function() { return 1; }
         });
-        
+
         Ice.BasicStream = BasicStream;
-        
+
     }());
 
     (function()
@@ -10748,15 +10748,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        Ice.SocketOperation = 
+
+        Ice.SocketOperation =
         {
             None: 0,
             Read: 1,
             Write: 2,
             Connect: 2 // Same as Write
         };
-        
+
     }());
 
     (function()
@@ -10769,8 +10769,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // NOTE: the protocol instance class is a bit different from other
         // language mappinps since it also provides the secure property for
@@ -10845,11 +10845,11 @@
                 return this._instance.messageSizeMax();
             }
         });
-        
+
         Ice.ProtocolInstance = ProtocolInstance;
-        
-        
-        
+
+
+
     }());
 
     (function()
@@ -10873,9 +10873,9 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineSequence(Ice, "EndpointSeqHelper", "Ice.ObjectHelper", false, "Ice.Endpoint");
-        
+
     }());
 
     (function()
@@ -10888,15 +10888,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var AsyncResultBase = Ice.AsyncResultBase;
         var Debug = Ice.Debug;
         var Promise = Ice.Promise;
         var Protocol = Ice.Protocol;
         var UserException = Ice.UserException;
         var BasicStream = Ice.BasicStream;
-        
+
         var AsyncResult = Ice.Class(AsyncResultBase, {
             __init__: function(com, op, connection, proxy, adapter, completedFn)
             {
@@ -10909,7 +10909,7 @@
                 {
                     return;
                 }
-        
+
                 this._completed = completedFn;
                 this._is = null;
                 this._os = com !== null ? new BasicStream(this._instance, Protocol.currentProtocolEncoding) : null;
@@ -11046,13 +11046,13 @@
                 }
             },
         });
-        
+
         AsyncResult.OK = 0x1;
         AsyncResult.Done = 0x2;
         AsyncResult.Sent = 0x4;
-        
+
         Ice.AsyncResult = AsyncResult;
-        
+
     }());
 
     (function()
@@ -11065,14 +11065,14 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-            
-        
+
+
         Ice.Address = function(host, port)
         {
             this.host = host;
             this.port = port;
         };
-        
+
     }());
 
     (function()
@@ -11085,16 +11085,16 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var BasicStream = Ice.BasicStream;
         var Debug = Ice.Debug;
         var ExUtil = Ice.ExUtil;
         var Class = Ice.Class;
         var Protocol = Ice.Protocol;
-        
+
         var udpOverhead = 20 + 8;
-        
+
         var BatchRequestQueue = Class({
             __init__: function(instance, datagram)
             {
@@ -11104,7 +11104,7 @@
                 this._batchStream.writeBlob(Protocol.requestBatchHdr);
                 this._batchMarker = this._batchStream.size;
                 this._exception = null;
-        
+
                 this._maxSize = instance.batchAutoFlushSize();
                 if(this._maxSize > 0 && datagram)
                 {
@@ -11131,14 +11131,14 @@
                 // to modify the queue since we set this._batchStreamInUse to true.
                 //
                 this._batchStream.swap(os);
-        
+
                 try
                 {
                     if(this._maxSize > 0 && this._batchStream.size >= this._maxSize)
                     {
                         proxy.ice_flushBatchRequests(); // Auto flush
                     }
-        
+
                     Debug.assert(this._batchMarker < this._batchStream.size);
                     this._batchMarker = this._batchStream.size;
                     ++this._batchRequestNum;
@@ -11159,7 +11159,7 @@
                 {
                     return 0;
                 }
-        
+
                 var lastRequest = null;
                 if(this._batchMarker < this._batchStream.size)
                 {
@@ -11168,10 +11168,10 @@
                     lastRequest = this._batchStream.buffer.getArray(length);
                     this._batchStream.resize(this._batchMarker);
                 }
-        
+
                 var requestNum = this._batchRequestNum;
                 this._batchStream.swap(os);
-        
+
                 //
                 // Reset the batch.
                 //
@@ -11193,9 +11193,9 @@
                 return this._batchStream.size === Protocol.requestBatchHdr.length;
             }
         });
-        
+
         Ice.BatchRequestQueue = BatchRequestQueue;
-        
+
     }());
 
     (function()
@@ -11208,11 +11208,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var HashMap = Ice.HashMap;
         var CommunicatorDestroyedException = Ice.CommunicatorDestroyedException;
-        
+
         var Timer = Ice.Class({
             __init__: function(logger)
             {
@@ -11236,12 +11236,12 @@
                 {
                     throw new CommunicatorDestroyedException();
                 }
-        
+
                 var token = this._tokenId++;
                 var self = this;
                 var id = Timer.setTimeout(function() { self.handleTimeout(token); }, delay);
                 this._tokens.set(token, { callback: callback, id: id, isInterval: false });
-        
+
                 return token;
             },
             scheduleRepeated: function(callback, period)
@@ -11250,13 +11250,13 @@
                 {
                     throw new CommunicatorDestroyedException();
                 }
-        
+
                 var token = this._tokenId++;
                 var self = this;
-        
+
                 var id = Timer.setInterval(function() { self.handleInterval(token); }, period);
                 this._tokens.set(token, { callback: callback, id: id, isInterval: true });
-        
+
                 return token;
             },
             cancel: function(id)
@@ -11265,13 +11265,13 @@
                 {
                     return false;
                 }
-        
+
                 var token = this._tokens.get(id);
                 if(token === undefined)
                 {
                     return false;
                 }
-        
+
                 this._tokens.delete(id);
                 if(token.isInterval)
                 {
@@ -11281,7 +11281,7 @@
                 {
                     Timer.clearTimeout(token.id);
                 }
-        
+
                 return true;
             },
             handleTimeout: function(id)
@@ -11290,7 +11290,7 @@
                 {
                     return;
                 }
-        
+
                 var token = this._tokens.get(id);
                 if(token !== undefined)
                 {
@@ -11311,7 +11311,7 @@
                 {
                     return;
                 }
-        
+
                 var token = this._tokens.get(id);
                 if(token !== undefined)
                 {
@@ -11326,15 +11326,15 @@
                 }
             }
         });
-        
+
         Timer.setTimeout = Ice.Timer.setTimeout;
         Timer.clearTimeout = Ice.Timer.clearTimeout;
         Timer.setInterval = Ice.Timer.setInterval;
         Timer.clearInterval = Ice.Timer.clearInterval;
         Timer.setImmediate = Ice.Timer.setImmediate;
-        
+
         Ice.Timer = Timer;
-        
+
     }());
 
     (function()
@@ -11347,10 +11347,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Class = Ice.Class;
-        
+
         var RetryQueue = Class({
             __init__: function(instance)
             {
@@ -11401,7 +11401,7 @@
             }
         });
         Ice.RetryQueue = RetryQueue;
-        
+
         var RetryTask = Class({
             __init__: function(instance, queue, outAsync, interval)
             {
@@ -11438,7 +11438,7 @@
                 }
             }
         });
-        
+
     }());
 
     (function()
@@ -11451,20 +11451,20 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var ArrayUtil = Ice.ArrayUtil;
         var Debug = Ice.Debug;
         var HashMap = Ice.HashMap;
         var Promise = Ice.Promise;
-        
+
         var RouterInfo = Ice.Class({
             __init__: function(router)
             {
                 this._router = router;
-        
+
                 Debug.assert(this._router !== null);
-        
+
                 this._clientEndpoints = null;
                 this._serverEndpoints = null;
                 this._adapter = null;
@@ -11484,12 +11484,12 @@
                 {
                     return true;
                 }
-        
+
                 if(rhs instanceof RouterInfo)
                 {
                     return this._router.equals(rhs._router);
                 }
-        
+
                 return false;
             },
             hashCode: function()
@@ -11506,7 +11506,7 @@
             getClientEndpoints: function()
             {
                 var promise = new Promise();
-        
+
                 if(this._clientEndpoints !== null)
                 {
                     promise.succeed(this._clientEndpoints);
@@ -11524,7 +11524,7 @@
                                 promise.fail(ex);
                             });
                 }
-        
+
                 return promise;
             },
             getServerEndpoints: function()
@@ -11546,7 +11546,7 @@
             addProxy: function(proxy)
             {
                 Debug.assert(proxy !== null);
-        
+
                 if(this._identities.has(proxy.ice_getIdentity()))
                 {
                     //
@@ -11591,7 +11591,7 @@
                     else
                     {
                         clientProxy = clientProxy.ice_router(null); // The client proxy cannot be routed.
-        
+
                         //
                         // In order to avoid creating a new connection to the
                         // router, we must use the same timeout as the already
@@ -11622,8 +11622,8 @@
                 {
                     throw new Ice.NoEndpointException();
                 }
-        
-                serverProxy = serverProxy.ice_router(null); // The server proxy cannot be routed.
+
+                serverProxy = serverProxy.ice_router(null); // The communication proxy cannot be routed.
                 this._serverEndpoints = serverProxy.__reference().getEndpoints();
                 return this._serverEndpoints;
             },
@@ -11648,7 +11648,7 @@
                     //
                     this._identities.set(proxy.ice_getIdentity(), 1);
                 }
-        
+
                 //
                 // We also must remove whatever proxies the router evicted.
                 //
@@ -11658,9 +11658,9 @@
                 }
             }
         });
-        
+
         Ice.RouterInfo = RouterInfo;
-        
+
     }());
 
     (function()
@@ -11673,8 +11673,8 @@
         // ICE_FOR_ACTIONSCRIPT_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var AsyncStatus = Ice.AsyncStatus;
         var AsyncResult = Ice.AsyncResult;
         var BasicStream = Ice.BasicStream;
@@ -11684,7 +11684,7 @@
         var OperationMode = Ice.OperationMode;
         var Protocol = Ice.Protocol;
         var Identity = Ice.Identity;
-        
+
         var OutgoingAsyncBase = Ice.Class(AsyncResult, {
             __init__ : function(communicator, operation, connection, proxy, adapter)
             {
@@ -11711,8 +11711,8 @@
                 this.__markFinishedEx(ex);
             }
         });
-        
-        
+
+
         var ProxyOutgoingAsyncBase = Ice.Class(OutgoingAsyncBase, {
             __init__ : function(prx, operation)
             {
@@ -11778,7 +11778,7 @@
                                 invocationTimeout);
                         }
                     }
-        
+
                     while(true)
                     {
                         try
@@ -11846,7 +11846,7 @@
                 return interval.value;
             }
         });
-        
+
         var OutgoingAsync = Ice.Class(ProxyOutgoingAsyncBase, {
             __init__: function(prx, operation, completed)
             {
@@ -11868,13 +11868,13 @@
             __prepare: function(op, mode, ctx)
             {
                 Protocol.checkSupportedProtocol(Protocol.getCompatibleProtocol(this._proxy.__reference().getProtocol()));
-        
+
                 this._mode = mode;
                 if(ctx === null)
                 {
                     ctx = OutgoingAsync._emptyContext;
                 }
-        
+
                 if(this._proxy.ice_isBatchOneway() || this._proxy.ice_isBatchDatagram())
                 {
                     this._proxy.__getBatchRequestQueue().prepareBatchRequest(this._os);
@@ -11883,11 +11883,11 @@
                 {
                     this._os.writeBlob(Protocol.requestHdr);
                 }
-        
+
                 var ref = this._proxy.__reference();
-        
+
                 ref.getIdentity().__write(this._os);
-        
+
                 //
                 // For compatibility with the old FacetPath.
                 //
@@ -11900,18 +11900,18 @@
                 {
                     Ice.StringSeqHelper.write(this._os, [ facet ]);
                 }
-        
+
                 this._os.writeString(this._operation);
-        
+
                 this._os.writeByte(mode.value);
-        
+
                 if(ctx !== undefined)
                 {
                     if(ctx !== null && !(ctx instanceof HashMap))
                     {
                         throw new Error("illegal context value, expecting null or HashMap");
                     }
-        
+
                     //
                     // Explicit context
                     //
@@ -11924,7 +11924,7 @@
                     //
                     var implicitContext = ref.getInstance().getImplicitContext();
                     var prxContext = ref.getContext();
-        
+
                     if(implicitContext === null)
                     {
                         Ice.ContextHelper.write(this._os, prxContext);
@@ -11960,7 +11960,7 @@
                     this.__markFinished(true);
                     return;
                 }
-        
+
                 //
                 // NOTE: invokeImpl doesn't throw so this can be called from the
                 // try block with the catch block calling abort() in case of an
@@ -11971,7 +11971,7 @@
             __completed: function(istr)
             {
                 Debug.assert(this._proxy.ice_isTwoway()); // Can only be called for twoways.
-        
+
                 var replyStatus;
                 try
                 {
@@ -11981,7 +11981,7 @@
                     }
                     this._is.swap(istr);
                     replyStatus = this._is.readByte();
-        
+
                     switch(replyStatus)
                     {
                         case Protocol.replyOK:
@@ -11989,14 +11989,14 @@
                         {
                             break;
                         }
-        
+
                         case Protocol.replyObjectNotExist:
                         case Protocol.replyFacetNotExist:
                         case Protocol.replyOperationNotExist:
                         {
                             var id = new Identity();
                             id.__read(this._is);
-        
+
                             //
                             // For compatibility with the old FacetPath.
                             //
@@ -12014,9 +12014,9 @@
                             {
                                 facet = "";
                             }
-        
+
                             var operation = this._is.readString();
-        
+
                             var rfe = null;
                             switch(replyStatus)
                             {
@@ -12025,38 +12025,38 @@
                                 rfe = new Ice.ObjectNotExistException();
                                 break;
                             }
-        
+
                             case Protocol.replyFacetNotExist:
                             {
                                 rfe = new Ice.FacetNotExistException();
                                 break;
                             }
-        
+
                             case Protocol.replyOperationNotExist:
                             {
                                 rfe = new Ice.OperationNotExistException();
                                 break;
                             }
-        
+
                             default:
                             {
                                 Debug.assert(false);
                                 break;
                             }
                             }
-        
+
                             rfe.id = id;
                             rfe.facet = facet;
                             rfe.operation = operation;
                             throw rfe;
                         }
-        
+
                         case Protocol.replyUnknownException:
                         case Protocol.replyUnknownLocalException:
                         case Protocol.replyUnknownUserException:
                         {
                             var unknown = this._is.readString();
-        
+
                             var ue = null;
                             switch(replyStatus)
                             {
@@ -12065,36 +12065,36 @@
                                 ue = new Ice.UnknownException();
                                 break;
                             }
-        
+
                             case Protocol.replyUnknownLocalException:
                             {
                                 ue = new Ice.UnknownLocalException();
                                 break;
                             }
-        
+
                             case Protocol.replyUnknownUserException:
                             {
                                 ue = new Ice.UnknownUserException();
                                 break;
                             }
-        
+
                             default:
                             {
                                 Debug.assert(false);
                                 break;
                             }
                             }
-        
+
                             ue.unknown = unknown;
                             throw ue;
                         }
-        
+
                         default:
                         {
                             throw new Ice.UnknownReplyStatusException();
                         }
                     }
-        
+
                     this.__markFinished(replyStatus == Protocol.replyOK, this._completed);
                 }
                 catch(ex)
@@ -12169,7 +12169,7 @@
             },
         });
         OutgoingAsync._emptyContext = new HashMap();
-        
+
         var ProxyFlushBatch = Ice.Class(ProxyOutgoingAsyncBase, {
             __init__ : function(prx, operation)
             {
@@ -12191,7 +12191,7 @@
                 this.__invokeImpl(true); // userThread = true
             },
         });
-        
+
         var ProxyGetConnection = Ice.Class(ProxyOutgoingAsyncBase, {
             __init__ : function(prx, operation)
             {
@@ -12211,7 +12211,7 @@
                 this.__invokeImpl(true); // userThread = true
             }
         });
-        
+
         var ConnectionFlushBatch = Ice.Class(OutgoingAsyncBase, {
             __init__: function(con, communicator, operation)
             {
@@ -12232,7 +12232,7 @@
                     {
                         status = this._connection.sendAsyncRequest(this, false, false, batchRequestNum);
                     }
-        
+
                     if((status & AsyncStatus.Sent) > 0)
                     {
                         this._sentSynchronously = true;
@@ -12244,13 +12244,13 @@
                 }
             }
         });
-        
+
         Ice.OutgoingAsync = OutgoingAsync;
         Ice.ProxyFlushBatch = ProxyFlushBatch;
         Ice.ProxyGetConnection = ProxyGetConnection;
         Ice.ConnectionFlushBatch = ConnectionFlushBatch;
-        
-        
+
+
     }());
 
     (function()
@@ -12263,8 +12263,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var ArrayUtil = Ice.ArrayUtil;
         var AsyncResultBase = Ice.AsyncResultBase;
         var AsyncResult = Ice.AsyncResult;
@@ -12276,7 +12276,7 @@
         var ProxyGetConnection = Ice.ProxyGetConnection;
         var RefMode = Ice.ReferenceMode;
         var OperationMode = Ice.OperationMode;
-        
+
         //
         // Ice.ObjectPrx
         //
@@ -12337,7 +12337,7 @@
                 {
                     newFacet = "";
                 }
-        
+
                 if(newFacet === this._reference.getFacet())
                 {
                     return this;
@@ -12359,7 +12359,7 @@
                 {
                     newAdapterId = "";
                 }
-        
+
                 if(newAdapterId === this._reference.getAdapterId())
                 {
                     return this;
@@ -12379,7 +12379,7 @@
                 {
                     newEndpoints = [];
                 }
-        
+
                 if(ArrayUtil.equals(newEndpoints, this._reference.getEndpoints()))
                 {
                     return this;
@@ -12691,12 +12691,12 @@
                 {
                     return true;
                 }
-        
+
                 if(r instanceof ObjectPrx)
                 {
                     return this._reference.equals(r._reference);
                 }
-        
+
                 return false;
             },
             __reference: function()
@@ -12707,20 +12707,20 @@
             {
                 Debug.assert(this._reference === null);
                 Debug.assert(this._requestHandler === null);
-        
+
                 this._reference = from._reference;
                 this._requestHandler = from._requestHandler;
             },
             __handleException: function(ex, handler, mode, sent, sleep, cnt)
             {
                 this.__updateRequestHandler(handler, null); // Clear the request handler
-        
+
                 //
                 // We only retry local exception, system exceptions aren't retried.
                 //
-                // A CloseConnectionException indicates graceful server shutdown, and is therefore
+                // A CloseConnectionException indicates graceful communication shutdown, and is therefore
                 // always repeatable without violating "at-most-once". That's because by sending a
-                // close connection message, the server guarantees that all outstanding requests
+                // close connection message, the communication guarantees that all outstanding requests
                 // can safely be repeated.
                 //
                 // An ObjectNotExistException can always be retried as well without violating
@@ -12816,7 +12816,7 @@
             __setup: function(ref)
             {
                 Debug.assert(this._reference === null);
-        
+
                 this._reference = ref;
             },
             __newInstance: function(ref)
@@ -12838,7 +12838,7 @@
                 return false;
             }
         });
-        
+
         //
         // Generic invocation for operations that have input parameters.
         //
@@ -12848,13 +12848,13 @@
             {
                 p.__checkAsyncTwowayOnly(name);
             }
-        
+
             var __r = new OutgoingAsync(p, name,
                 function(__res)
                 {
                     ObjectPrx.__completed(__res, unmarshalFn, userEx);
                 });
-        
+
             try
             {
                 __r.__prepare(name, mode, ctx);
@@ -12876,7 +12876,7 @@
             }
             return __r;
         };
-        
+
         //
         // Handles the completion of an invocation.
         //
@@ -12886,7 +12886,7 @@
             {
                 return;
             }
-        
+
             try
             {
                 if(unmarshalFn === null)
@@ -12906,7 +12906,7 @@
                 return;
             }
         };
-        
+
         //
         // Unmarshal callback for operations that return a bool as the only result.
         //
@@ -12914,7 +12914,7 @@
         {
             __results.push(__is.readBool());
         };
-        
+
         //
         // Unmarshal callback for operations that return a byte as the only result.
         //
@@ -12922,7 +12922,7 @@
         {
             __results.push(__is.readByte());
         };
-        
+
         //
         // Unmarshal callback for operations that return a short as the only result.
         //
@@ -12930,7 +12930,7 @@
         {
             __results.push(__is.readShort());
         };
-        
+
         //
         // Unmarshal callback for operations that return an int as the only result.
         //
@@ -12938,7 +12938,7 @@
         {
             __results.push(__is.readInt());
         };
-        
+
         //
         // Unmarshal callback for operations that return a long as the only result.
         //
@@ -12946,7 +12946,7 @@
         {
             __results.push(__is.readLong());
         };
-        
+
         //
         // Unmarshal callback for operations that return a float as the only result.
         //
@@ -12954,7 +12954,7 @@
         {
             __results.push(__is.readFloat());
         };
-        
+
         //
         // Unmarshal callback for operations that return a double as the only result.
         //
@@ -12962,7 +12962,7 @@
         {
             __results.push(__is.readDouble());
         };
-        
+
         //
         // Unmarshal callback for operations that return a string as the only result.
         //
@@ -12970,7 +12970,7 @@
         {
             __results.push(__is.readString());
         };
-        
+
         //
         // Unmarshal callback for operations that return a proxy as the only result.
         //
@@ -12978,7 +12978,7 @@
         {
             __results.push(__is.readProxy());
         };
-        
+
         //
         // Unmarshal callback for operations that return an object as the only result.
         //
@@ -12987,7 +12987,7 @@
             __is.readObject(function(obj){ __results.push(obj); }, Ice.Object);
             __is.readPendingObjects();
         };
-        
+
         //
         // Handles user exceptions.
         //
@@ -13024,21 +13024,21 @@
                     return false;
                 }
             }
-        
+
             return true;
         };
-        
+
         ObjectPrx.__dispatchLocalException = function(__r, __ex)
         {
             __r.fail(__ex, __r);
         };
-        
+
         ObjectPrx.ice_staticId = Ice.Object.ice_staticId;
-        
+
         ObjectPrx.checkedCast = function(prx, facet, ctx)
         {
             var __r = null;
-        
+
             if(prx === undefined || prx === null)
             {
                 __r = new AsyncResultBase(null, "checkedCast", null, null, null);
@@ -13050,7 +13050,7 @@
                 {
                     prx = prx.ice_facet(facet);
                 }
-        
+
                 var self = this;
                 __r = new AsyncResultBase(prx.ice_getCommunicator(), "checkedCast", null, prx, null);
                 prx.ice_isA(this.ice_staticId(), ctx).then(
@@ -13079,10 +13079,10 @@
                             }
                         });
             }
-        
+
             return __r;
         };
-        
+
         ObjectPrx.uncheckedCast = function(prx, facet)
         {
             var r = null;
@@ -13097,38 +13097,38 @@
             }
             return r;
         };
-        
+
         Object.defineProperty(ObjectPrx, "minWireSize", {
             get: function(){ return 2; }
         });
-        
+
         ObjectPrx.write = function(os, v)
         {
             os.writeProxy(v);
         };
-        
+
         ObjectPrx.read = function(is)
         {
             return is.readProxy(this);
         };
-        
+
         ObjectPrx.writeOpt = function(os, tag, v)
         {
             os.writeOptProxy(tag, v);
         };
-        
+
         ObjectPrx.readOpt = function(is, tag)
         {
             return is.readOptProxy(tag, this);
         };
-        
+
         ObjectPrx.__instanceof = function(T)
         {
             if(T === this)
             {
                 return true;
             }
-        
+
             for(var i in this.__implements)
             {
                 if(this.__implements[i].__instanceof(T))
@@ -13136,14 +13136,14 @@
                     return true;
                 }
             }
-        
+
             if(this.__parent)
             {
                 return this.__parent.__instanceof(T);
             }
             return false;
         };
-        
+
         var Slice = Ice.Slice;
         Slice.defineProxy = function(base, staticId, prxInterfaces)
         {
@@ -13153,14 +13153,14 @@
             };
             prx.__parent = base;
             prx.__implements = prxInterfaces;
-        
+
             // All generated proxies inherit from ObjectPrx
             prx.prototype = new base();
             prx.prototype.constructor = prx;
-        
+
             // Static methods
             prx.ice_staticId = staticId;
-        
+
             // Copy static methods inherited from ObjectPrx
             prx.checkedCast = ObjectPrx.checkedCast;
             prx.uncheckedCast = ObjectPrx.uncheckedCast;
@@ -13168,19 +13168,19 @@
             prx.writeOpt = ObjectPrx.writeOpt;
             prx.read = ObjectPrx.read;
             prx.readOpt = ObjectPrx.readOpt;
-        
+
             prx.__instanceof = ObjectPrx.__instanceof;
-        
+
             // Static properties
             Object.defineProperty(prx, "minWireSize", {
                 get: function(){ return 2; }
             });
-        
+
             return prx;
         };
-        
+
         Ice.ObjectPrx = ObjectPrx;
-        
+
     }());
 
     (function()
@@ -13204,31 +13204,31 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             Object.defineProperty(Ice, 'TCPEndpointType', {
                 value: 1
             });
-        
+
             Object.defineProperty(Ice, 'SSLEndpointType', {
                 value: 2
             });
-        
+
             Object.defineProperty(Ice, 'UDPEndpointType', {
                 value: 3
             });
-        
+
             Object.defineProperty(Ice, 'WSEndpointType', {
                 value: 4
             });
-        
+
             Object.defineProperty(Ice, 'WSSEndpointType', {
                 value: 5
             });
-        
+
             /**
              * Base class providing access to the endpoint details.
-             * 
+             *
              **/
             Ice.EndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress)
@@ -13236,18 +13236,18 @@
                     this.timeout = timeout !== undefined ? timeout : 0;
                     this.compress = compress !== undefined ? compress : false;
                 });
-        
+
             /**
              * The user-level interface to an endpoint.
-             * 
+             *
              **/
             Ice.Endpoint = Slice.defineLocalObject();
-        
+
             /**
              * Provides access to the address details of a IP endpoint.
-             * 
+             *
              * @see Endpoint
-             * 
+             *
              **/
             Ice.IPEndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, host, port, sourceAddress)
@@ -13258,12 +13258,12 @@
                     this.sourceAddress = sourceAddress !== undefined ? sourceAddress : "";
                 },
                 Ice.EndpointInfo);
-        
+
             /**
              * Provides access to a TCP endpoint information.
-             * 
+             *
              * @see Endpoint
-             * 
+             *
              **/
             Ice.TCPEndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, host, port, sourceAddress)
@@ -13271,12 +13271,12 @@
                     Ice.IPEndpointInfo.call(this, timeout, compress, host, port, sourceAddress);
                 },
                 Ice.IPEndpointInfo);
-        
+
             /**
              * Provides access to an UDP endpoint information.
-             * 
+             *
              * @see Endpoint
-             * 
+             *
              **/
             Ice.UDPEndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, host, port, sourceAddress, mcastInterface, mcastTtl)
@@ -13286,10 +13286,10 @@
                     this.mcastTtl = mcastTtl !== undefined ? mcastTtl : 0;
                 },
                 Ice.IPEndpointInfo);
-        
+
             /**
              * Provides access to a WebSocket endpoint information.
-             * 
+             *
              **/
             Ice.WSEndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, host, port, sourceAddress, resource)
@@ -13298,12 +13298,12 @@
                     this.resource = resource !== undefined ? resource : "";
                 },
                 Ice.TCPEndpointInfo);
-        
+
             /**
              * Provides access to the details of an opaque endpoint.
-             * 
+             *
              * @see Endpoint
-             * 
+             *
              **/
             Ice.OpaqueEndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, rawEncoding, rawBytes)
@@ -13313,7 +13313,7 @@
                     this.rawBytes = rawBytes !== undefined ? rawBytes : null;
                 },
                 Ice.EndpointInfo);
-        
+
     }());
 
     (function()
@@ -13326,10 +13326,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Class = Ice.Class;
-        
+
         var EndpointI = Class(Ice.Endpoint, {
             toString: function()
             {
@@ -13345,7 +13345,7 @@
             initWithOptions: function(args)
             {
                 var unknown = [];
-        
+
                 var i;
                 var str = "`" + this.protocol();
                 for(i = 0; i < args.length; ++i)
@@ -13360,7 +13360,7 @@
                     }
                 }
                 str += "'";
-        
+
                 i = 0;
                 while(i < args.length)
                 {
@@ -13370,13 +13370,13 @@
                         unknown.push(option);
                         continue;
                     }
-        
+
                     var argument = null;
                     if(i < args.length && args[i].charAt(0) != '-')
                     {
                         argument = args[i++];
                     }
-        
+
                     if(!this.checkOption(option, argument, str))
                     {
                         unknown.push(option);
@@ -13386,7 +13386,7 @@
                         }
                     }
                 }
-        
+
                 args.length = 0;
                 for(i = 0; i < unknown.length; i++)
                 {
@@ -13409,9 +13409,9 @@
                 return false;
             }
         });
-        
+
         Ice.EndpointI = EndpointI;
-        
+
     }());
 
     (function()
@@ -13435,8 +13435,8 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
     }());
 
     (function()
@@ -13449,12 +13449,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var __M = Ice.__M;
-        
+
         var Class = Ice.Class;
-        
+
         var builtinHelpers =
         [
             Ice.ByteHelper,
@@ -13468,7 +13468,7 @@
             Ice.Object,
             Ice.ObjectPrx
         ];
-        
+
         function parseParam(p)
         {
             var type = p[0];
@@ -13483,14 +13483,14 @@
                 type = __M.type(type);
                 /*jshint +W061 */
             }
-        
+
             return {
                 "type": type,
                 "isObject": (p[1] === true),
                 "tag": p[2] // Optional tag, which may not be present - an undefined tag means "not optional".
             };
         }
-        
+
         //
         // Each operation descriptor is a property. The key is the "on-the-wire"
         // name, and the value is an array consisting of the following elements:
@@ -13513,13 +13513,13 @@
             var r = {};
             var i;
             var p;
-        
+
             r.name = name;
             r.mode = arr[1] ? Ice.OperationMode.valueOf(arr[1]) : Ice.OperationMode.Normal;
             r.sendMode = arr[2] ? Ice.OperationMode.valueOf(arr[2]) : Ice.OperationMode.Normal;
             r.amd = arr[3] ? true : false;
             r.format = arr[4] ? Ice.FormatType.valueOf(arr[4]) : Ice.FormatType.DefaultFormat;
-        
+
             if(r.amd)
             {
                 r.servantMethod = name + "_async";
@@ -13528,7 +13528,7 @@
             {
                 r.servantMethod = arr[0] ? arr[0] : name;
             }
-        
+
             var ret;
             if(arr[5])
             {
@@ -13536,7 +13536,7 @@
                 ret.pos = 0;
             }
             r.returns = ret;
-        
+
             var inParams = [];
             var inParamsOpt = [];
             if(arr[6])
@@ -13555,7 +13555,7 @@
             inParamsOpt.sort(function(p1, p2) { return p1.tag - p2.tag; }); // Sort by tag.
             r.inParams = inParams;
             r.inParamsOpt = inParamsOpt;
-        
+
             var outParams = [];
             var outParamsOpt = [];
             if(arr[7])
@@ -13579,7 +13579,7 @@
             outParamsOpt.sort(function(p1, p2) { return p1.tag - p2.tag; }); // Sort by tag.
             r.outParams = outParams;
             r.outParamsOpt = outParamsOpt;
-        
+
             var exceptions = [];
             if(arr[8])
             {
@@ -13589,13 +13589,13 @@
                 }
             }
             r.exceptions = exceptions;
-        
+
             r.sendsClasses = arr[9] === true;
             r.returnsClasses = arr[10] === true;
-        
+
             return r;
         }
-        
+
         var OpTable = Class({
             __init__: function(ops)
             {
@@ -13619,7 +13619,7 @@
                 return op;
             }
         });
-        
+
         function unmarshalParams(is, retvalInfo, allParamInfo, optParamInfo, usesClasses, params, offset)
         {
             var i, p, v;
@@ -13635,7 +13635,7 @@
                     params[p.pos + offset] = v;
                 }
             }
-        
+
             //
             // Then read a required return value (if any).
             //
@@ -13644,7 +13644,7 @@
                 v = retvalInfo.type.read(is);
                 params[retvalInfo.pos + offset] = v;
             }
-        
+
             //
             // Then read all optional params.
             //
@@ -13654,17 +13654,17 @@
                 v = p.type.readOpt(is, p.tag);
                 params[p.pos + offset] = v;
             }
-        
+
             if(usesClasses)
             {
                 is.readPendingObjects();
             }
         }
-        
+
         function marshalParams(os, params, retvalInfo, paramInfo, optParamInfo, usesClasses)
         {
             var i, p;
-        
+
             //
             // Write the required params.
             //
@@ -13676,7 +13676,7 @@
                     p.type.write(os, params[p.pos]);
                 }
             }
-        
+
             //
             // retvalInfo should only be provided if there is a non-void required return value.
             //
@@ -13684,7 +13684,7 @@
             {
                 retvalInfo.type.write(os, params[retvalInfo.pos]);
             }
-        
+
             //
             // Write the optional params.
             //
@@ -13693,13 +13693,13 @@
                 p = optParamInfo[i];
                 p.type.writeOpt(os, p.tag, params[p.pos]);
             }
-        
+
             if(usesClasses)
             {
                 os.writePendingObjects();
             }
         }
-        
+
         var Upcall = Class({
             __init__: function(incomingAsync, op)
             {
@@ -13709,7 +13709,7 @@
             ice_response: function()
             {
                 var args = arguments;
-        
+
                 if(this.incomingAsync.__validateResponse(true))
                 {
                     try
@@ -13783,7 +13783,7 @@
                         return true;
                     }
                 }
-        
+
                 return false;
             },
             __sendException: function(ex)
@@ -13794,7 +13794,7 @@
                 this.incomingAsync.__writeUserException(ex, this.op.format);
             }
         });
-        
+
         var __dispatchImpl = function(servant, op, incomingAsync, current)
         {
             //
@@ -13808,9 +13808,9 @@
                     " does not define operation `" + op.servantMethod + "'";
                 throw new Ice.UnknownException(msg);
             }
-        
+
             var up = new Upcall(incomingAsync, op);
-        
+
             try
             {
                 //
@@ -13827,7 +13827,7 @@
                     var offset = op.amd ? 1 : 0;
                     unmarshalParams(__is, undefined, op.inParams, op.inParamsOpt, op.sendsClasses, params, offset);
                     incomingAsync.endReadParams();
-        
+
                     //
                     // When unmarshaling objects, the ObjectHelper returns a wrapper object
                     // and eventually stores the unmarshaled object into its "value" member.
@@ -13849,9 +13849,9 @@
                         }
                     }
                 }
-        
+
                 params.push(current);
-        
+
                 if(op.amd)
                 {
                     params[0] = up; // The AMD callback object.
@@ -13875,9 +13875,9 @@
                     {
                         ++numExpectedResults;
                     }
-        
+
                     var results = method.apply(servant, params);
-        
+
                     //
                     // Complain if we expect more than out parameter and the servant doesn't return an array.
                     //
@@ -13893,7 +13893,7 @@
                         //
                         results = [results];
                     }
-        
+
                     up.__sendResponse(results);
                     return Ice.DispatchStatus.DispatchOK;
                 }
@@ -13911,7 +13911,7 @@
                 }
             }
         };
-        
+
         function getServantMethodFromInterfaces(interfaces, methodName, all)
         {
             var method;
@@ -13933,27 +13933,27 @@
             }
             return method;
         }
-        
+
         var dispatchPrefix = "__op_";
-        
+
         function getServantMethod(servantType, name)
         {
             //
             // The dispatch method is named __op_<Slice name> and is stored in the type (not the prototype).
             //
             var methodName = dispatchPrefix + name;
-        
+
             //
             // First check the servant type.
             //
             var method = servantType[methodName];
-        
+
             var allInterfaces;
-        
+
             if(method === undefined)
             {
                 allInterfaces = [];
-        
+
                 //
                 // Now check the prototypes of the implemented interfaces.
                 //
@@ -13966,7 +13966,7 @@
                     }
                     curr = curr.__parent;
                 }
-        
+
                 if(method !== undefined)
                 {
                     //
@@ -13975,7 +13975,7 @@
                     servantType[methodName] = method;
                 }
             }
-        
+
             if(method === undefined)
             {
                 //
@@ -13986,7 +13986,7 @@
                 {
                     op = servantType.__ops.find(name);
                 }
-        
+
                 var source;
                 if(op === undefined)
                 {
@@ -14005,7 +14005,7 @@
                         }
                         parent = parent.__parent;
                     }
-        
+
                     //
                     // Now check the op tables of all base interfaces.
                     //
@@ -14021,19 +14021,19 @@
                         }
                     }
                 }
-        
+
                 if(op !== undefined)
                 {
                     method = function(servant, incomingAsync, current)
                     {
                         return __dispatchImpl(servant, op, incomingAsync, current);
                     };
-        
+
                     //
                     // Add the method to the servant type.
                     //
                     servantType[methodName] = method;
-        
+
                     //
                     // Also add the method to the type in which the operation was found.
                     //
@@ -14043,20 +14043,20 @@
                     }
                 }
             }
-        
+
             return method;
         }
-        
+
         function addProxyOperation(proxyType, name, data)
         {
             var method = data[0] ? data[0] : name;
-        
+
             var op = null;
-        
+
             proxyType.prototype[method] = function()
             {
                 var args = arguments;
-        
+
                 //
                 // Parse the operation data on the first invocation of a proxy method.
                 //
@@ -14064,16 +14064,16 @@
                 {
                     op = parseOperation(name, data);
                 }
-        
+
                 var ctx = args[op.inParams.length]; // The request context is the last argument (if present).
-        
+
                 var marshalFn = null;
                 if(op.inParams.length > 0)
                 {
                     marshalFn = function(os, params)
                     {
                         var i, p, v;
-        
+
                         //
                         // Validate the parameters.
                         //
@@ -14093,11 +14093,11 @@
                                 }
                             }
                         }
-        
+
                         marshalParams(os, params, undefined, op.inParams, op.inParamsOpt, op.sendsClasses);
                     };
                 }
-        
+
                 var unmarshalFn = null;
                 if(op.returns || op.outParams.length > 0)
                 {
@@ -14109,18 +14109,18 @@
                         // [retval, out1, out2, ..., asyncResult]
                         //
                         var results = [];
-        
+
                         var is = asyncResult.__startReadParams();
-        
+
                         var retvalInfo;
                         if(op.returns && !op.returns.tag)
                         {
                             retvalInfo = op.returns;
                         }
                         unmarshalParams(is, retvalInfo, op.outParams, op.outParamsOpt, op.returnsClasses, results, 0);
-        
+
                         asyncResult.__endReadParams();
-        
+
                         //
                         // When unmarshaling objects, the ObjectHelper returns a wrapper object
                         // and eventually stores the unmarshaled object into its "value" member.
@@ -14150,12 +14150,12 @@
                         return results;
                     };
                 }
-        
+
                 return Ice.ObjectPrx.__invoke(this, op.name, op.sendMode, op.format, ctx, marshalFn, unmarshalFn,
                                                 op.exceptions, Array.prototype.slice.call(args));
             };
         }
-        
+
         var Slice = Ice.Slice;
         Slice.defineOperations = function(classType, proxyType, ops)
         {
@@ -14163,22 +14163,22 @@
             {
                 classType.__ops = new OpTable(ops);
             }
-        
+
             classType.prototype.__dispatch = function(incomingAsync, current)
             {
                 //
                 // Retrieve the dispatch method for this operation.
                 //
                 var method = getServantMethod(classType, current.operation);
-        
+
                 if(method === undefined || typeof(method) !== 'function')
                 {
                     throw new Ice.OperationNotExistException(current.id, current.facet, current.operation);
                 }
-        
+
                 return method.call(method, this, incomingAsync, current);
             };
-        
+
             if(ops)
             {
                 for(var name in ops)
@@ -14186,7 +14186,7 @@
                     addProxyOperation(proxyType, name, ops[name]);
                 }
             }
-        
+
             //
             // Copy proxy methods from super-interfaces.
             //
@@ -14205,7 +14205,7 @@
                 }
             }
         };
-        
+
         //
         // Define the "built-in" operations for all Ice objects.
         //
@@ -14216,8 +14216,8 @@
             "ice_id": [, 1, 1, , , [7], , , ],
             "ice_ids": [, 1, 1, , , ["Ice.StringSeqHelper"], , , ]
         });
-        
-        
+
+
     }());
 
     (function()
@@ -14230,14 +14230,14 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Address = Ice.Address;
         var HashUtil = Ice.HashUtil;
         var StringUtil = Ice.StringUtil;
         var Class = Ice.Class;
         var EndpointParseException = Ice.EndpointParseException;
-        
+
         var IPEndpointI = Class(Ice.EndpointI, {
             __init__: function(instance, ho, po, sa, conId)
             {
@@ -14322,7 +14322,7 @@
                 // format of proxyToString() before changing this and related code.
                 //
                 var s = "";
-        
+
                 if(this._host !== null && this._host.length > 0)
                 {
                     s += " -h ";
@@ -14337,9 +14337,9 @@
                         s += "\"";
                     }
                 }
-        
+
                 s += " -p " + this._port;
-        
+
                 if(this._sourceAddr !== null && this._sourceAddr.length > 0)
                 {
                     s += " --sourceAddr " + this._sourceAddr;
@@ -14352,17 +14352,17 @@
                 {
                     return 0;
                 }
-        
+
                 if(p === null)
                 {
                     return 1;
                 }
-        
+
                 if(!(p instanceof IPEndpointI))
                 {
                     return this.type() < p.type() ? -1 : 1;
                 }
-        
+
                 if(this._port < p._port)
                 {
                     return -1;
@@ -14371,22 +14371,22 @@
                 {
                     return 1;
                 }
-        
+
                 if(this._host != p._host)
                 {
                     return this._host < p._host ? -1 : 1;
                 }
-        
+
                 if(this._sourceAddr != p._sourceAddr)
                 {
                     return this._sourceAddr < p._sourceAddr ? -1 : 1;
                 }
-        
+
                 if(this._connectionId != p._connectionId)
                 {
                     return this._connectionId < p._connectionId ? -1 : 1;
                 }
-        
+
                 return 0;
             },
             getAddress: function()
@@ -14427,7 +14427,7 @@
             initWithOptions: function(args, oaEndpoint)
             {
                 Ice.EndpointI.prototype.initWithOptions.call(this, args);
-        
+
                 if(this._host === null || this._host.length === 0)
                 {
                     this._host = this._instance.defaultHost();
@@ -14443,12 +14443,12 @@
                         throw new EndpointParseException("`-h *' not valid for proxy endpoint `" + this + "'");
                     }
                 }
-        
+
                 if(this._host === null)
                 {
                     this._host = "";
                 }
-        
+
                 if(this._sourceAddr === null)
                 {
                     if(!oaEndpoint)
@@ -14474,7 +14474,7 @@
                     {
                         throw new EndpointParseException("no argument provided for -h option in endpoint " + str);
                     }
-        
+
                     this._host = argument;
                 }
                 else if(option === "-p")
@@ -14483,7 +14483,7 @@
                     {
                         throw new EndpointParseException("no argument provided for -p option in endpoint " + str);
                     }
-        
+
                     try
                     {
                         this._port = StringUtil.toInt(argument);
@@ -14492,7 +14492,7 @@
                     {
                         throw new EndpointParseException("invalid port value `" + argument + "' in endpoint " + str);
                     }
-        
+
                     if(this._port < 0 || this._port > 65535)
                     {
                         throw new EndpointParseException("port value `" + argument + "' out of range in endpoint " + str);
@@ -14504,7 +14504,7 @@
                     {
                         throw new EndpointParseException("no argument provided for --sourceAddress option in endpoint " + str);
                     }
-        
+
                     this._sourceAddr = argument;
                 }
                 else
@@ -14514,10 +14514,10 @@
                 return true;
             }
         });
-        
+
         Ice.IPEndpointI = IPEndpointI;
-        
-        
+
+
     }());
 
     (function()
@@ -14541,15 +14541,15 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             Object.defineProperty(IceSSL, 'EndpointType', {
                 value: Ice.SSLEndpointType
             });
-        
+
             /**
              * Provides access to an SSL endpoint information.
-             * 
+             *
              **/
             IceSSL.EndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, host, port, sourceAddress)
@@ -14557,10 +14557,10 @@
                     Ice.IPEndpointInfo.call(this, timeout, compress, host, port, sourceAddress);
                 },
                 Ice.IPEndpointInfo);
-        
+
             /**
              * Provides access to a secure WebSocket endpoint information.
-             * 
+             *
              **/
             IceSSL.WSSEndpointInfo = Slice.defineLocalObject(
                 function(timeout, compress, host, port, sourceAddress, resource)
@@ -14569,7 +14569,7 @@
                     this.resource = resource !== undefined ? resource : "";
                 },
                 IceSSL.EndpointInfo);
-        
+
     }());
 
     (function()
@@ -14593,8 +14593,8 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * Base class providing access to the connection details. *
              **/
@@ -14607,22 +14607,22 @@
                     this.rcvSize = rcvSize !== undefined ? rcvSize : 0;
                     this.sndSize = sndSize !== undefined ? sndSize : 0;
                 });
-        
+
             /**
              * An application can implement this interface to receive notifications when
              * a connection closes or receives a heartbeat message.
-             * 
+             *
              * @see Connection#setCallback
-             * 
+             *
              **/
             Ice.ConnectionCallback = Slice.defineLocalObject();
-        
+
             Ice.ACMClose = Slice.defineEnum([
                 ['CloseOff', 0], ['CloseOnIdle', 1], ['CloseOnInvocation', 2], ['CloseOnInvocationAndIdle', 3], ['CloseOnIdleForceful', 4]]);
-        
+
             Ice.ACMHeartbeat = Slice.defineEnum([
                 ['HeartbeatOff', 0], ['HeartbeatOnInvocation', 1], ['HeartbeatOnIdle', 2], ['HeartbeatAlways', 3]]);
-        
+
             Ice.ACM = Slice.defineStruct(
                 function(timeout, close, heartbeat)
                 {
@@ -14631,16 +14631,16 @@
                     this.heartbeat = heartbeat !== undefined ? heartbeat : Ice.ACMHeartbeat.HeartbeatOff;
                 },
                 true);
-        
+
             /**
              * The user-level interface to a connection.
-             * 
+             *
              **/
             Ice.Connection = Slice.defineLocalObject();
-        
+
             /**
              * Provides access to the connection details of an IP connection
-             * 
+             *
              **/
             Ice.IPConnectionInfo = Slice.defineLocalObject(
                 function(incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort)
@@ -14652,10 +14652,10 @@
                     this.remotePort = remotePort !== undefined ? remotePort : -1;
                 },
                 Ice.ConnectionInfo);
-        
+
             /**
              * Provides access to the connection details of a TCP connection
-             * 
+             *
              **/
             Ice.TCPConnectionInfo = Slice.defineLocalObject(
                 function(incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort)
@@ -14663,10 +14663,10 @@
                     Ice.IPConnectionInfo.call(this, incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort);
                 },
                 Ice.IPConnectionInfo);
-        
+
             /**
              * Provides access to the connection details of a UDP connection
-             * 
+             *
              **/
             Ice.UDPConnectionInfo = Slice.defineLocalObject(
                 function(incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort, mcastAddress, mcastPort)
@@ -14677,10 +14677,10 @@
                 },
                 Ice.IPConnectionInfo);
             Slice.defineDictionary(Ice, "HeaderDict", "HeaderDictHelper", "Ice.StringHelper", "Ice.StringHelper", false, undefined, undefined);
-        
+
             /**
              * Provides access to the connection details of a WebSocket connection
-             * 
+             *
              **/
             Ice.WSConnectionInfo = Slice.defineLocalObject(
                 function(incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort, headers)
@@ -14689,7 +14689,7 @@
                     this.headers = headers !== undefined ? headers : null;
                 },
                 Ice.TCPConnectionInfo);
-        
+
     }());
 
     (function()
@@ -14702,8 +14702,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         Ice.TraceLevels = function(properties)
         {
             var networkCat = "Network";
@@ -14711,16 +14711,16 @@
             var retryCat = "Retry";
             var locationCat = "Locator";
             var slicingCat = "Slicing";
-        
+
             var keyBase = "Ice.Trace.";
-        
+
             var network = properties.getPropertyAsInt(keyBase + networkCat);
             var protocol = properties.getPropertyAsInt(keyBase + protocolCat);
             var retry = properties.getPropertyAsInt(keyBase + retryCat);
             var location = properties.getPropertyAsInt(keyBase + locationCat);
             var slicing = properties.getPropertyAsInt(keyBase + slicingCat);
             properties.getPropertyAsInt(keyBase + "ThreadPool"); // Avoid an "unused property" warning.
-        
+
             return Object.create(null, {
                 'network': {
                     get: function() { return network; }
@@ -14754,7 +14754,7 @@
                 }
             });
         };
-        
+
     }());
 
     (function()
@@ -14767,17 +14767,17 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Base64 = Ice.Base64;
         var Debug = Ice.Debug;
         var HashUtil = Ice.HashUtil;
         var Protocol = Ice.Protocol;
         var StringUtil = Ice.StringUtil;
         var EndpointParseException = Ice.EndpointParseException;
-        
+
         var Class = Ice.Class;
-        
+
         var OpaqueEndpointI = Class(Ice.EndpointI, {
             __init__: function(type)
             {
@@ -14875,7 +14875,7 @@
                 return this._rawBytes; // Returns a Uint8Array
             },
             //
-            // Return a server side transceiver for this endpoint, or null if a
+            // Return a communication side transceiver for this endpoint, or null if a
             // transceiver can only be created by an acceptor. In case a
             // transceiver is created, this operation also returns a new
             // "effective" endpoint, which might differ from this endpoint,
@@ -14931,22 +14931,22 @@
                 {
                     return false;
                 }
-        
+
                 if(this === p)
                 {
                     return true;
                 }
-        
+
                 if(this._type !== p._type)
                 {
                     return false;
                 }
-        
+
                 if(!this._rawEncoding.equals(p._rawEncoding))
                 {
                     return false;
                 }
-        
+
                 if(this._rawBytes.length !== p._rawBytes.length)
                 {
                     return false;
@@ -14958,7 +14958,7 @@
                         return false;
                     }
                 }
-        
+
                 return true;
             },
             compareTo: function(p)
@@ -14967,17 +14967,17 @@
                 {
                     return 0;
                 }
-        
+
                 if(p === null)
                 {
                     return 1;
                 }
-        
+
                 if(!(p instanceof OpaqueEndpointI))
                 {
                     return this.type() < p.type() ? -1 : 1;
                 }
-        
+
                 if(this._type < p._type)
                 {
                     return -1;
@@ -14986,7 +14986,7 @@
                 {
                     return 1;
                 }
-        
+
                 if(this._rawEncoding.major < p._rawEncoding.major)
                 {
                     return -1;
@@ -14995,7 +14995,7 @@
                 {
                     return 1;
                 }
-        
+
                 if(this._rawEncoding.minor < p._rawEncoding.minor)
                 {
                     return -1;
@@ -15004,7 +15004,7 @@
                 {
                     return 1;
                 }
-        
+
                 if(this._rawBytes.length < p._rawBytes.length)
                 {
                     return -1;
@@ -15024,7 +15024,7 @@
                         return 1;
                     }
                 }
-        
+
                 return 0;
             },
             checkOption: function(option, argument, endpoint)
@@ -15041,9 +15041,9 @@
                         {
                             throw new EndpointParseException("no argument provided for -t option in endpoint " + endpoint);
                         }
-        
+
                         var type;
-        
+
                         try
                         {
                             type = StringUtil.toInt(argument);
@@ -15052,17 +15052,17 @@
                         {
                             throw new EndpointParseException("invalid type value `" + argument + "' in endpoint " + endpoint);
                         }
-        
+
                         if(type < 0 || type > 65535)
                         {
                             throw new EndpointParseException("type value `" + argument + "' out of range in endpoint " +
                                                              endpoint);
                         }
-        
+
                         this._type = type;
                         return true;
                     }
-        
+
                     case 'v':
                     {
                         if(this._rawBytes)
@@ -15085,7 +15085,7 @@
                         this._rawBytes = Base64.decode(argument);
                         return true;
                     }
-        
+
                     case 'e':
                     {
                         if(argument === null)
@@ -15103,7 +15103,7 @@
                         }
                         return true;
                     }
-        
+
                     default:
                     {
                         return false;
@@ -15114,7 +15114,7 @@
             {
                 Ice.EndpointI.prototype.initWithOptions.call(this, args);
                 Debug.assert(this._rawEncoding);
-        
+
                 if(this._type < 0)
                 {
                     throw new EndpointParseException("no -t option in endpoint `" + this + "'");
@@ -15131,7 +15131,7 @@
                 this._rawBytes = s.readBlob(sz);
             }
         });
-        
+
         var OpaqueEndpointInfoI = Class(Ice.OpaqueEndpointInfo, {
             __init__: function(timeout, compress, rawEncoding, rawBytes, type)
             {
@@ -15151,9 +15151,9 @@
                 return false;
             }
         });
-        
+
         Ice.OpaqueEndpointI = OpaqueEndpointI;
-        
+
     }());
 
     (function()
@@ -15166,8 +15166,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var BasicStream = Ice.BasicStream;
         var Current = Ice.Current;
         var Debug = Ice.Debug;
@@ -15176,7 +15176,7 @@
         var Identity = Ice.Identity;
         var Protocol = Ice.Protocol;
         var StringUtil = Ice.StringUtil;
-        
+
         var IncomingAsync = Ice.Class({
             __init__: function(instance, connection, adapter, response, compress, requestId)
             {
@@ -15188,32 +15188,32 @@
                     this._os = new BasicStream(instance, Protocol.currentProtocolEncoding);
                 }
                 this._connection = connection;
-        
+
                 this._current = new Current();
                 this._current.id = new Identity();
                 this._current.adapter = adapter;
                 this._current.con = this._connection;
                 this._current.requestId = requestId;
-        
+
                 this._servant = null;
                 this._locator = null;
                 this._cookie = { value: null };
-        
+
                 //
                 // Prepare the response if necessary.
                 //
                 if(response)
                 {
                     this._os.writeBlob(Protocol.replyHdr);
-        
+
                     //
                     // Add the request ID.
                     //
                     this._os.writeInt(requestId);
                 }
-        
+
                 this._is = null;
-        
+
                 this._cb = null;
                 this._active = true;
             },
@@ -15223,7 +15223,7 @@
                 {
                     throw new Ice.MarshalException("can't marshal out parameters for oneway dispatch");
                 }
-        
+
                 Debug.assert(this._os.size == Protocol.headerSize + 4); // Reply status position.
                 Debug.assert(this._current.encoding !== null); // Encoding for reply is known.
                 this._os.writeByte(0);
@@ -15277,7 +15277,7 @@
             __warning: function(ex)
             {
                 Debug.assert(this._instance !== null);
-        
+
                 var s = [];
                 s.push("dispatch exception:");
                 s.push("\nidentity: " + this._instance.identityToString(this._current.id));
@@ -15319,7 +15319,7 @@
                     if(ex instanceof Ice.UserException)
                     {
                         Debug.assert(this._connection !== null);
-        
+
                         //
                         // The operation may have already marshaled a reply; we must overwrite that reply.
                         //
@@ -15336,7 +15336,7 @@
                         {
                             this._connection.sendNoResponse();
                         }
-        
+
                         this._connection = null;
                     }
                     else
@@ -15349,7 +15349,7 @@
             __handleException: function(ex)
             {
                 Debug.assert(this._connection !== null);
-        
+
                 var props = this._instance.initializationData().properties;
                 var s;
                 if(ex instanceof Ice.RequestFailedException)
@@ -15358,22 +15358,22 @@
                     {
                         ex.id = this._current.id;
                     }
-        
+
                     if(ex.facet === null)
                     {
                         ex.facet = this._current.facet;
                     }
-        
+
                     if(ex.operation === null || ex.operation.length === 0)
                     {
                         ex.operation = this._current.operation;
                     }
-        
+
                     if(props.getPropertyAsIntWithDefault("Ice.Warn.Dispatch", 1) > 1)
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15394,7 +15394,7 @@
                             Debug.assert(false);
                         }
                         ex.id.__write(this._os);
-        
+
                         //
                         // For compatibility with the old FacetPath.
                         //
@@ -15406,9 +15406,9 @@
                         {
                             Ice.StringSeqHelper.write(this._os, [ ex.facet ]);
                         }
-        
+
                         this._os.writeString(ex.operation);
-        
+
                         this._connection.sendResponse(this._os, this._compress);
                     }
                     else
@@ -15422,7 +15422,7 @@
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15441,7 +15441,7 @@
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15460,7 +15460,7 @@
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15479,7 +15479,7 @@
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15505,7 +15505,7 @@
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15531,7 +15531,7 @@
                     {
                         this.__warning(ex);
                     }
-        
+
                     if(this._response)
                     {
                         this._os.resize(Protocol.headerSize + 4); // Reply status position.
@@ -15545,20 +15545,20 @@
                         this._connection.sendNoResponse();
                     }
                 }
-        
+
                 this._connection = null;
             },
             invoke: function(servantManager, stream)
             {
                 this._is = stream;
-        
+
                 var start = this._is.pos;
-        
+
                 //
                 // Read the current.
                 //
                 this._current.id.__read(this._is);
-        
+
                 //
                 // For compatibility with the old FacetPath.
                 //
@@ -15575,7 +15575,7 @@
                 {
                     this._current.facet = "";
                 }
-        
+
                 this._current.operation = this._is.readString();
                 this._current.mode = Ice.OperationMode.valueOf(this._is.readByte());
                 this._current.ctx = new Context();
@@ -15586,13 +15586,13 @@
                     var second = this._is.readString();
                     this._current.ctx.set(first, second);
                 }
-        
+
                 //
                 // Don't put the code above into the try block below. Exceptions
                 // in the code above are considered fatal, and must propagate to
                 // the caller of this operation.
                 //
-        
+
                 if(servantManager !== null)
                 {
                     this._servant = servantManager.findServant(this._current.id, this._current.facet);
@@ -15603,7 +15603,7 @@
                         {
                             this._locator = servantManager.findServantLocator("");
                         }
-        
+
                         if(this._locator !== null)
                         {
                             try
@@ -15615,7 +15615,7 @@
                                 if(ex instanceof Ice.UserException)
                                 {
                                     var encoding = this._is.skipEncaps(); // Required for batch requests.
-        
+
                                     if(this._response)
                                     {
                                         this._os.writeByte(Protocol.replyUserException);
@@ -15628,7 +15628,7 @@
                                     {
                                         this._connection.sendNoResponse();
                                     }
-        
+
                                     this._connection = null;
                                     return;
                                 }
@@ -15642,7 +15642,7 @@
                         }
                     }
                 }
-        
+
                 try
                 {
                     if(this._servant !== null)
@@ -15658,7 +15658,7 @@
                             //
                             return;
                         }
-        
+
                         if(this._locator !== null && !this.__servantLocatorFinished())
                         {
                             return;
@@ -15671,7 +15671,7 @@
                         // the next batch request if dispatching batch requests.
                         //
                         this._is.skipEncaps();
-        
+
                         if(servantManager !== null && servantManager.hasServant(this._current.id))
                         {
                             throw new Ice.FacetNotExistException(this._current.id, this._current.facet,
@@ -15693,15 +15693,15 @@
                     this.__handleException(ex);
                     return;
                 }
-        
+
                 //
                 // Don't put the code below into the try block above. Exceptions
                 // in the code below are considered fatal, and must propagate to
                 // the caller of this operation.
                 //
-        
+
                 Debug.assert(this._connection !== null);
-        
+
                 if(this._response)
                 {
                     this._connection.sendResponse(this._os, this._compress);
@@ -15710,7 +15710,7 @@
                 {
                     this._connection.sendNoResponse();
                 }
-        
+
                 this._connection = null;
             },
             startReadParams: function()
@@ -15743,9 +15743,9 @@
                     {
                         return;
                     }
-        
+
                     Debug.assert(this._connection !== null);
-        
+
                     if(this._response)
                     {
                         this._connection.sendResponse(this._os, this._compress);
@@ -15754,7 +15754,7 @@
                     {
                         this._connection.sendNoResponse();
                     }
-        
+
                     this._connection = null;
                 }
                 catch(ex)
@@ -15770,7 +15770,7 @@
                     {
                         return;
                     }
-        
+
                     this.__handleException(exc);
                 }
                 catch(ex)
@@ -15794,7 +15794,7 @@
                     return;
                 }
                 this._active = false;
-        
+
                 if(this._connection !== null)
                 {
                     this.__exception(ex);
@@ -15811,9 +15811,9 @@
                 }
             }
         });
-        
+
         Ice.IncomingAsync = IncomingAsync;
-        
+
     }());
 
     (function()
@@ -15826,8 +15826,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var AsyncResult = Ice.AsyncResult;
         var AsyncStatus = Ice.AsyncStatus;
         var BasicStream = Ice.BasicStream;
@@ -15840,7 +15840,7 @@
         var ReferenceMode = Ice.ReferenceMode;
         var LocalException = Ice.LocalException;
         var Promise = Ice.Promise;
-        
+
         var ConnectRequestHandler = Ice.Class({
             __init__: function(ref, proxy)
             {
@@ -15849,7 +15849,7 @@
                 this._proxy = proxy;
                 this._proxies = [];
                 this._initialized = false;
-        
+
                 this._connection = null;
                 this._compress = false;
                 this._exception = null;
@@ -15873,7 +15873,7 @@
                 {
                     out.__cancelable(this); // This will throw if the request is canceled
                 }
-        
+
                 if(!this.initialized())
                 {
                     this._requests.push(out);
@@ -15887,7 +15887,7 @@
                 {
                     return; // The request has been notified of a failure already.
                 }
-        
+
                 if(!this.initialized())
                 {
                     for(var i = 0; i < this._requests.length; i++)
@@ -15924,10 +15924,10 @@
             setConnection: function(connection, compress)
             {
                 Debug.assert(this._exception === null && this._connection === null);
-        
+
                 this._connection = connection;
                 this._compress = compress;
-        
+
                 //
                 // If this proxy is for a non-local object, and we are using a router, then
                 // add this proxy to the router info object.
@@ -15950,7 +15950,7 @@
                                                   });
                     return; // The request handler will be initialized once addProxy completes.
                 }
-        
+
                 //
                 // We can now send the queued requests.
                 //
@@ -15959,11 +15959,11 @@
             setException: function(ex)
             {
                 Debug.assert(!this._initialized && this._exception === null);
-        
+
                 this._exception = ex;
                 this._proxies.length = 0;
                 this._proxy = null; // Break cyclic reference count.
-        
+
                 //
                 // NOTE: remove the request handler *before* notifying the
                 // requests that the connection failed. It's important to ensure
@@ -15978,7 +15978,7 @@
                 {
                     // Ignore
                 }
-        
+
                 for(var i = 0; i < this._requests.length; ++i)
                 {
                     var request = this._requests[i];
@@ -16021,7 +16021,7 @@
             flushRequests: function()
             {
                 Debug.assert(this._connection !== null && !this._initialized);
-        
+
                 var exception = null;
                 for(var i = 0; i < this._requests.length; ++i)
                 {
@@ -16035,10 +16035,10 @@
                         if(ex instanceof RetryException)
                         {
                             exception = ex.inner;
-        
+
                             // Remove the request handler before retrying.
                             this._reference.getInstance().requestHandlerFactory().removeRequestHandler(this._reference, this);
-        
+
                             request.__retryException(ex.inner);
                         }
                         else
@@ -16050,7 +16050,7 @@
                     }
                 }
                 this._requests.length = 0;
-        
+
                 if(this._reference.getCacheConnection() && exception === null)
                 {
                     this._requestHandler = new ConnectionRequestHandler(this._reference, this._connection, this._compress);
@@ -16059,24 +16059,24 @@
                         this._proxies[k].__updateRequestHandler(this, this._requestHandler);
                     }
                 }
-        
+
                 Debug.assert(!this._initialized);
                 this._exception = exception;
                 this._initialized = this._exception === null;
-        
+
                 //
                 // Only remove once all the requests are flushed to
                 // guarantee serialization.
                 //
                 this._reference.getInstance().requestHandlerFactory().removeRequestHandler(this._reference, this);
-        
+
                 this._proxies.length = 0;
                 this._proxy = null; // Break cyclic reference count.
             }
         });
-        
+
         Ice.ConnectRequestHandler = ConnectRequestHandler;
-        
+
     }());
 
     (function()
@@ -16100,11 +16100,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * Provides access to the connection details of an SSL connection
-             * 
+             *
              **/
             IceSSL.ConnectionInfo = Slice.defineLocalObject(
                 function(incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort, cipher, certs, verified)
@@ -16115,10 +16115,10 @@
                     this.verified = verified !== undefined ? verified : false;
                 },
                 Ice.IPConnectionInfo);
-        
+
             /**
              * Provides access to the connection details of a secure WebSocket connection
-             * 
+             *
              **/
             IceSSL.WSSConnectionInfo = Slice.defineLocalObject(
                 function(incoming, adapterName, connectionId, rcvSize, sndSize, localAddress, localPort, remoteAddress, remotePort, cipher, certs, verified, headers)
@@ -16127,7 +16127,7 @@
                     this.headers = headers !== undefined ? headers : null;
                 },
                 IceSSL.ConnectionInfo);
-        
+
     }());
 
     (function()
@@ -16140,9 +16140,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
+
         var IceSSL = Ice.__M.module("IceSSL");
-        
+
         //
         // With Chrome we don't want to close the socket while connection is in progress,
         // see comments on close implementation below.
@@ -16151,7 +16151,7 @@
         //
         var IsChrome = navigator.userAgent.indexOf("Edge/") === -1 &&
                        navigator.userAgent.indexOf("Chrome/") !== -1;
-        
+
         var Debug = Ice.Debug;
         var ExUtil = Ice.ExUtil;
         var Network = Ice.Network;
@@ -16160,13 +16160,13 @@
         var LocalException = Ice.LocalException;
         var SocketException = Ice.SocketException;
         var Timer = Ice.Timer;
-        
+
         var StateNeedConnect = 0;
         var StateConnectPending = 1;
         var StateConnected = 2;
         var StateClosePending = 3;
         var StateClosed = 4;
-        
+
         var WSTransceiver = Ice.Class({
             __init__: function(instance)
             {
@@ -16199,7 +16199,7 @@
                     {
                         throw this._exception;
                     }
-        
+
                     if(this._state === StateNeedConnect)
                     {
                         this._state = StateConnectPending;
@@ -16228,7 +16228,7 @@
                     }
                     throw this._exception;
                 }
-        
+
                 Debug.assert(this._state === StateConnected);
                 return SocketOperation.None;
             },
@@ -16258,7 +16258,7 @@
                     Debug.assert(this._exception); // Websocket creation failed.
                     return;
                 }
-        
+
                 //
                 // With Chrome calling close() while the websocket isn't connected yet
                 // doesn't abort the connection attempt, and might result in the connection
@@ -16272,7 +16272,7 @@
                     this._state = StateClosePending;
                     return;
                 }
-        
+
                 Debug.assert(this._fd !== null);
                 try
                 {
@@ -16302,7 +16302,7 @@
                     return true;
                 }
                 Debug.assert(this._fd);
-        
+
                 var transceiver = this;
                 var cb = function()
                 {
@@ -16318,7 +16318,7 @@
                         }
                     }
                 };
-        
+
                 var i = byteBuffer.position;
                 while(true)
                 {
@@ -16347,28 +16347,28 @@
                 {
                     throw this._exception;
                 }
-        
+
                 moreData.value = false;
-        
+
                 if(this._readBuffers.length === 0)
                 {
                     return false; // No data available.
                 }
-        
+
                 var avail = this._readBuffers[0].byteLength - this._readPosition;
                 Debug.assert(avail > 0);
                 var remaining = byteBuffer.remaining;
-        
+
                 while(byteBuffer.remaining > 0)
                 {
                     if(avail > byteBuffer.remaining)
                     {
                         avail = byteBuffer.remaining;
                     }
-        
+
                     new Uint8Array(byteBuffer.b).set(new Uint8Array(this._readBuffers[0], this._readPosition, avail),
                                                         byteBuffer.position);
-        
+
                     byteBuffer.position += avail;
                     this._readPosition += avail;
                     if(this._readPosition === this._readBuffers[0].byteLength)
@@ -16388,9 +16388,9 @@
                         }
                     }
                 }
-        
+
                 moreData.value = this._readBuffers.byteLength > 0;
-        
+
                 return byteBuffer.remaining === 0;
             },
             type: function()
@@ -16401,7 +16401,7 @@
             {
                 Debug.assert(this._fd !== null);
                 var info = this._secure ? new IceSSL.WSSConnectionInfo() : new Ice.WSConnectionInfo();
-        
+
                 //
                 // The WebSocket API doens't provide this info
                 //
@@ -16432,7 +16432,7 @@
                     this.close();
                     return;
                 }
-        
+
                 Debug.assert(this._connectedCallback !== null);
                 this._connectedCallback();
             },
@@ -16459,7 +16459,7 @@
                     this.close();
                     return;
                 }
-        
+
                 this._exception = translateError(this._state, err);
                 if(this._state < StateConnected)
                 {
@@ -16471,12 +16471,12 @@
                 }
             },
         });
-        
+
         function fdToString(address)
         {
             return "local address = <not available>\nremote address = " + address.host + ":" + address.port;
         }
-        
+
         function translateError(state, err)
         {
             if(state < StateConnected)
@@ -16492,11 +16492,11 @@
                 return new Ice.SocketException(err.code, err);
             }
         }
-        
+
         WSTransceiver.createOutgoing = function(instance, secure, addr, resource)
         {
             var transceiver = new WSTransceiver(instance);
-        
+
             var url = secure ? "wss" : "ws";
             url += "://" + addr.host;
             if(addr.port !== 80)
@@ -16511,12 +16511,12 @@
             transceiver._state = StateNeedConnect;
             transceiver._secure = secure;
             transceiver._exception = null;
-        
+
             return transceiver;
         };
-        
+
         Ice.WSTransceiver = WSTransceiver;
-        
+
     }());
 
     (function()
@@ -16540,13 +16540,13 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * The Ice router interface. Routers can be set either globally with
              * {@link Communicator#setDefaultRouter}, or with <tt>ice_router</tt> on specific
              * proxies.
-             * 
+             *
              **/
             Ice.Router = Slice.defineObject(
                 undefined,
@@ -16556,23 +16556,23 @@
                     "::Ice::Router"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.RouterPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.Router.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.Router, Ice.RouterPrx,
             {
                 "getClientProxy": [, 2, 1, , , [9], , , , , ],
                 "getServerProxy": [, 2, 1, , , [9], , , , , ],
                 "addProxies": [, 2, 2, , , ["Ice.ObjectProxySeqHelper"], [["Ice.ObjectProxySeqHelper"]], , , , ]
             });
-        
+
             /**
              * This inferface should be implemented by services implementing the
              * Ice::Router interface. It should be advertised through an Ice
              * object with the identity `Ice/RouterFinder'. This allows clients to
              * retrieve the router proxy with just the endpoint information of the
              * service.
-             * 
+             *
              **/
             Ice.RouterFinder = Slice.defineObject(
                 undefined,
@@ -16582,14 +16582,14 @@
                     "::Ice::RouterFinder"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.RouterFinderPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.RouterFinder.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.RouterFinder, Ice.RouterFinderPrx,
             {
                 "getRouter": [, , , , , ["Ice.RouterPrx"], , , , , ]
             });
-        
+
     }());
 
     (function()
@@ -16613,11 +16613,11 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * This exception is raised if an adapter cannot be found.
-             * 
+             *
              **/
             Ice.AdapterNotFoundException = Slice.defineUserException(
                 function(_cause)
@@ -16629,11 +16629,11 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * This exception is raised if the replica group provided by the
-             * server is invalid.
-             * 
+             * communication is invalid.
+             *
              **/
             Ice.InvalidReplicaGroupIdException = Slice.defineUserException(
                 function(_cause)
@@ -16645,11 +16645,11 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
-             * This exception is raised if a server tries to set endpoints for
+             * This exception is raised if a communication tries to set endpoints for
              * an adapter that is already active.
-             * 
+             *
              **/
             Ice.AdapterAlreadyActiveException = Slice.defineUserException(
                 function(_cause)
@@ -16661,10 +16661,10 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * This exception is raised if an object cannot be found.
-             * 
+             *
              **/
             Ice.ObjectNotFoundException = Slice.defineUserException(
                 function(_cause)
@@ -16676,10 +16676,10 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
-             * This exception is raised if a server cannot be found.
-             * 
+             * This exception is raised if a communication cannot be found.
+             *
              **/
             Ice.ServerNotFoundException = Slice.defineUserException(
                 function(_cause)
@@ -16691,17 +16691,17 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * The Ice locator interface. This interface is used by clients to
              * lookup adapters and objects. It is also used by servers to get the
              * locator registry proxy.
-             * 
+             *
              * <p class="Note">The {@link Locator} interface is intended to be used by
              * Ice internals and by locator implementations. Regular user code
              * should not attempt to use any functionality of this interface
              * directly.
-             * 
+             *
              **/
             Ice.Locator = Slice.defineObject(
                 undefined,
@@ -16711,31 +16711,31 @@
                     "::Ice::Object"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.LocatorPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.Locator.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.Locator, Ice.LocatorPrx,
             {
-                "findObjectById": [, 2, 1, 1, , [9], [[Ice.Identity]], , 
+                "findObjectById": [, 2, 1, 1, , [9], [[Ice.Identity]], ,
                 [
                     Ice.ObjectNotFoundException
                 ], , ],
-                "findAdapterById": [, 2, 1, 1, , [9], [[7]], , 
+                "findAdapterById": [, 2, 1, 1, , [9], [[7]], ,
                 [
                     Ice.AdapterNotFoundException
                 ], , ],
                 "getRegistry": [, 2, 1, , , ["Ice.LocatorRegistryPrx"], , , , , ]
             });
-        
+
             /**
              * The Ice locator registry interface. This interface is used by
              * servers to register adapter endpoints with the locator.
-             * 
+             *
              * <p class="Note"> The {@link LocatorRegistry} interface is intended to be used
              * by Ice internals and by locator implementations. Regular user
              * code should not attempt to use any functionality of this interface
              * directly.
-             * 
+             *
              **/
             Ice.LocatorRegistry = Slice.defineObject(
                 undefined,
@@ -16745,35 +16745,35 @@
                     "::Ice::Object"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.LocatorRegistryPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.LocatorRegistry.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.LocatorRegistry, Ice.LocatorRegistryPrx,
             {
-                "setAdapterDirectProxy": [, 2, 2, 1, , , [[7], [9]], , 
+                "setAdapterDirectProxy": [, 2, 2, 1, , , [[7], [9]], ,
                 [
                     Ice.AdapterAlreadyActiveException,
                     Ice.AdapterNotFoundException
                 ], , ],
-                "setReplicatedAdapterDirectProxy": [, 2, 2, 1, , , [[7], [7], [9]], , 
+                "setReplicatedAdapterDirectProxy": [, 2, 2, 1, , , [[7], [7], [9]], ,
                 [
                     Ice.AdapterAlreadyActiveException,
                     Ice.AdapterNotFoundException,
                     Ice.InvalidReplicaGroupIdException
                 ], , ],
-                "setServerProcessProxy": [, 2, 2, 1, , , [[7], ["Ice.ProcessPrx"]], , 
+                "setServerProcessProxy": [, 2, 2, 1, , , [[7], ["Ice.ProcessPrx"]], ,
                 [
                     Ice.ServerNotFoundException
                 ], , ]
             });
-        
+
             /**
              * This inferface should be implemented by services implementing the
              * Ice::Locator interface. It should be advertised through an Ice
              * object with the identity `Ice/LocatorFinder'. This allows clients
              * to retrieve the locator proxy with just the endpoint information of
              * the service.
-             * 
+             *
              **/
             Ice.LocatorFinder = Slice.defineObject(
                 undefined,
@@ -16783,14 +16783,14 @@
                     "::Ice::Object"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.LocatorFinderPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.LocatorFinder.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.LocatorFinder, Ice.LocatorFinderPrx,
             {
                 "getLocator": [, , , , , ["Ice.LocatorPrx"], , , , , ]
             });
-        
+
     }());
 
     (function()
@@ -16803,15 +16803,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
-        
+
+
+
         var Debug = Ice.Debug;
         var HashUtil = Ice.HashUtil;
         var StringUtil = Ice.StringUtil;
         var TcpTransceiver = typeof(Ice.TcpTransceiver) !== "undefined" ? Ice.TcpTransceiver : null;
         var Class = Ice.Class;
-        
+
         var TcpEndpointI = Class(Ice.IPEndpointI, {
             __init__: function(instance, ho, po, sif, ti, conId, co)
             {
@@ -16934,7 +16934,7 @@
                 {
                     s += " -t " + this._timeout;
                 }
-        
+
                 if(this._compress)
                 {
                     s += " -z";
@@ -16947,17 +16947,17 @@
                 {
                     return 0;
                 }
-        
+
                 if(p === null)
                 {
                     return 1;
                 }
-        
+
                 if(!(p instanceof TcpEndpointI))
                 {
                     return this.type() < p.type() ? -1 : 1;
                 }
-        
+
                 if(this._timeout < p._timeout)
                 {
                     return -1;
@@ -16966,7 +16966,7 @@
                 {
                     return 1;
                 }
-        
+
                 if(!this._compress && p._compress)
                 {
                     return -1;
@@ -16975,7 +16975,7 @@
                 {
                     return 1;
                 }
-        
+
                 return Ice.IPEndpointI.prototype.compareTo.call(this, p);
             },
             streamWriteImpl: function(s)
@@ -17009,14 +17009,14 @@
                 {
                     return true;
                 }
-        
+
                 if(option === "-t")
                 {
                     if(argument === null)
                     {
                         throw new Ice.EndpointParseException("no argument provided for -t option in endpoint " + endpoint);
                     }
-        
+
                     if(argument == "infinite")
                     {
                         this._timeout = -1;
@@ -17046,7 +17046,7 @@
                         throw new Ice.EndpointParseException("unexpected argument `" + argument +
                                                              "' provided for -z option in " + endpoint);
                     }
-        
+
                     this._compress = true;
                 }
                 else
@@ -17060,9 +17060,9 @@
                 return new TcpEndpointI(this._instance, host, port, this._sourceAddr, this._timeout, conId, this._compress);
             }
         });
-        
+
         Ice.TcpEndpointI = TcpEndpointI;
-        
+
     }());
 
     (function()
@@ -17075,8 +17075,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var AsyncStatus = Ice.AsyncStatus;
         var AsyncResultBase = Ice.AsyncResultBase;
         var BasicStream = Ice.BasicStream;
@@ -17097,7 +17097,7 @@
         var ACM = Ice.ACM;
         var ACMClose = Ice.ACMClose;
         var ACMHeartbeat = Ice.ACMHeartbeat;
-        
+
         var StateNotInitialized = 0;
         var StateNotValidated = 1;
         var StateActive = 2;
@@ -17105,11 +17105,11 @@
         var StateClosing = 4;
         var StateClosed = 5;
         var StateFinished = 6;
-        
+
         var MessageInfo = function(instance)
         {
             this.stream = new BasicStream(instance, Protocol.currentProtocolEncoding);
-        
+
             this.invokeNum = 0;
             this.requestId = 0;
             this.compress = false;
@@ -17118,9 +17118,9 @@
             this.outAsync = null;
             this.heartbeatCallback = null;
         };
-        
+
         var Class = Ice.Class;
-        
+
         var ConnectionI = Class({
             __init__: function(communicator, instance, monitor, transceiver, endpoint, incoming, adapter)
             {
@@ -17141,44 +17141,44 @@
                 this._writeTimeoutScheduled = false;
                 this._readTimeoutId = 0;
                 this._readTimeoutScheduled = false;
-        
+
                 this._hasMoreData = { value: false };
-        
+
                 this._warn = initData.properties.getPropertyAsInt("Ice.Warn.Connections") > 0;
                 this._warnUdp = instance.initializationData().properties.getPropertyAsInt("Ice.Warn.Datagrams") > 0;
                 this._acmLastActivity = this._monitor !== null && this._monitor.getACM().timeout > 0 ? Date.now() : -1;
                 this._nextRequestId = 1;
                 this._messageSizeMax = adapter ? adapter.messageSizeMax() : instance.messageSizeMax();
                 this._batchRequestQueue = new BatchRequestQueue(instance, endpoint.datagram());
-        
+
                 this._sendStreams = [];
-        
+
                 this._readStream = new BasicStream(instance, Protocol.currentProtocolEncoding);
                 this._readHeader = false;
                 this._writeStream = new BasicStream(instance, Protocol.currentProtocolEncoding);
-        
+
                 this._readStreamPos = -1;
                 this._writeStreamPos = -1;
-        
+
                 this._dispatchCount = 0;
-        
+
                 this._state = StateNotInitialized;
                 this._shutdownInitiated = false;
                 this._initialized = false;
                 this._validated = false;
-        
+
                 this._readProtocol = new ProtocolVersion();
                 this._readProtocolEncoding = new EncodingVersion();
-        
+
                 this._asyncRequests = new HashMap(); // Map<int, OutgoingAsync>
-        
+
                 this._exception = null;
-        
+
                 this._startPromise = null;
                 this._closePromises = [];
                 this._holdPromises = [];
                 this._finishedPromises = [];
-        
+
                 if(this._adapter !== null)
                 {
                     this._servantManager = this._adapter.getServantManager();
@@ -17192,7 +17192,7 @@
             start: function()
             {
                 Debug.assert(this._startPromise === null);
-        
+
                 try
                 {
                     // The connection might already be closed if the communicator was destroyed.
@@ -17201,7 +17201,7 @@
                         Debug.assert(this._exception !== null);
                         return new Promise().fail(this._exception);
                     }
-        
+
                     this._startPromise = new Promise();
                     var self = this;
                     this._transceiver.setCallbacks(
@@ -17238,7 +17238,7 @@
                     }
                     return new Promise().fail(ex);
                 }
-        
+
                 return this._startPromise;
             },
             activate: function()
@@ -17247,7 +17247,7 @@
                 {
                     return;
                 }
-        
+
                 if(this._acmLastActivity > 0)
                 {
                     this._acmLastActivity = Date.now();
@@ -17260,7 +17260,7 @@
                 {
                     return;
                 }
-        
+
                 this.setState(StateHolding);
             },
             destroy: function(reason)
@@ -17272,7 +17272,7 @@
                         this.setState(StateClosing, new Ice.ObjectAdapterDeactivatedException());
                         break;
                     }
-        
+
                     case ConnectionI.CommunicatorDestroyed:
                     {
                         this.setState(StateClosing, new Ice.CommunicatorDestroyedException());
@@ -17283,7 +17283,7 @@
             close: function(force)
             {
                 var __r = new AsyncResultBase(this._communicator, "close", this, null, null);
-        
+
                 if(force)
                 {
                     this.setState(StateClosed, new Ice.ForcedCloseConnectionException());
@@ -17296,12 +17296,12 @@
                     // outstanding requests have been completed. Otherwise,
                     // the CloseConnectionException will cause all outstanding
                     // requests to be retried, regardless of whether the
-                    // server has processed them or not.
+                    // communication has processed them or not.
                     //
                     this._closePromises.push(__r);
                     this.checkClose();
                 }
-        
+
                 return __r;
             },
             checkClose: function()
@@ -17331,7 +17331,7 @@
                 {
                     return false;
                 }
-        
+
                 Debug.assert(this._state === StateFinished);
                 return true;
             },
@@ -17363,7 +17363,7 @@
                 {
                     return;
                 }
-        
+
                 //
                 // We send a heartbeat if there was no activity in the last
                 // (timeout / 4) period. Sending a heartbeat sooner than
@@ -17386,7 +17386,7 @@
                         this.heartbeat(); // Send heartbeat if idle in the last timeout / 2 period.
                     }
                 }
-        
+
                 if(this._readStream.size > Protocol.headerSize || !this._writeStream.isEmpty())
                 {
                     //
@@ -17397,7 +17397,7 @@
                     //
                     return;
                 }
-        
+
                 if(acm.close != Ice.ACMClose.CloseOff && now >= (this._acmLastActivity + acm.timeout))
                 {
                     if(acm.close == Ice.ACMClose.CloseOnIdleForceful ||
@@ -17423,7 +17423,7 @@
             {
                 var requestId = 0;
                 var os = out.__os();
-        
+
                 if(this._exception !== null)
                 {
                     //
@@ -17433,22 +17433,22 @@
                     //
                     throw new RetryException(this._exception);
                 }
-        
+
                 Debug.assert(this._state > StateNotValidated);
                 Debug.assert(this._state < StateClosing);
-        
+
                 //
                 // Ensure the message isn't bigger than what we can send with the
                 // transport.
                 //
                 this._transceiver.checkSendSize(os);
-        
+
                 //
                 // Notify the request that it's cancelable with this connection.
                 // This will throw if the request is canceled.
                 //
                 out.__cancelable(this); // Notify the request that it's cancelable
-        
+
                 if(response)
                 {
                     //
@@ -17460,7 +17460,7 @@
                         this._nextRequestId = 1;
                         requestId = this._nextRequestId++;
                     }
-        
+
                     //
                     // Fill in the request ID.
                     //
@@ -17472,7 +17472,7 @@
                     os.pos = Protocol.headerSize;
                     os.writeInt(batchRequestNum);
                 }
-        
+
                 var status;
                 try
                 {
@@ -17491,7 +17491,7 @@
                         throw ex;
                     }
                 }
-        
+
                 if(response)
                 {
                     //
@@ -17499,7 +17499,7 @@
                     //
                     this._asyncRequests.set(requestId, out);
                 }
-        
+
                 return status;
             },
             getBatchRequestQueue: function()
@@ -17542,7 +17542,7 @@
                 {
                     return;
                 }
-        
+
                 if(this._state == StateActive)
                 {
                     this._monitor.remove(this);
@@ -17577,7 +17577,7 @@
                         {
                             this._asyncRequests.delete(o.requestId);
                         }
-        
+
                         //
                         // If the request is being sent, don't remove it from the send streams,
                         // it will be removed once the sending is finished.
@@ -17591,7 +17591,7 @@
                         return; // We're done.
                     }
                 }
-        
+
                 if(outAsync instanceof Ice.OutgoingAsync)
                 {
                     for(var e = this._asyncRequests.entries; e !== null; e = e.next)
@@ -17608,7 +17608,7 @@
             sendResponse: function(os, compressFlag)
             {
                 Debug.assert(this._state > StateNotValidated);
-        
+
                 try
                 {
                     if(--this._dispatchCount === 0)
@@ -17619,15 +17619,15 @@
                         }
                         this.checkState();
                     }
-        
+
                     if(this._state >= StateClosed)
                     {
                         Debug.assert(this._exception !== null);
                         throw this._exception;
                     }
-        
+
                     this.sendMessage(OutgoingMessage.createForStream(os, compressFlag !== 0, true));
-        
+
                     if(this._state === StateClosing && this._dispatchCount === 0)
                     {
                         this.initiateShutdown();
@@ -17658,13 +17658,13 @@
                         }
                         this.checkState();
                     }
-        
+
                     if(this._state >= StateClosed)
                     {
                         Debug.assert(this._exception !== null);
                         throw this._exception;
                     }
-        
+
                     if(this._state === StateClosing && this._dispatchCount === 0)
                     {
                         this.initiateShutdown();
@@ -17693,9 +17693,9 @@
                     return;
                 }
                 Debug.assert(this._state < StateClosing);
-        
+
                 this._adapter = adapter;
-        
+
                 if(this._adapter !== null)
                 {
                     this._servantManager = this._adapter.getServantManager();
@@ -17732,14 +17732,14 @@
                 {
                     return;
                 }
-        
+
                 this.unscheduleTimeout(operation);
-        
+
                 //
                 // Keep reading until no more data is available.
                 //
                 this._hasMoreData.value = (operation & SocketOperation.Read) !== 0;
-        
+
                 var info = null;
                 try
                 {
@@ -17764,10 +17764,10 @@
                                 //
                                 return;
                             }
-        
+
                             Debug.assert(this._readStream.buffer.remaining === 0);
                             this._readHeader = false;
-        
+
                             var pos = this._readStream.pos;
                             if(pos < Protocol.headerSize)
                             {
@@ -17776,7 +17776,7 @@
                                 //
                                 throw new Ice.IllegalMessageSizeException();
                             }
-        
+
                             this._readStream.pos = 0;
                             var magic0 = this._readStream.readByte();
                             var magic1 = this._readStream.readByte();
@@ -17789,13 +17789,13 @@
                                 bme.badMagic = Ice.Buffer.createNative([magic0, magic1, magic2, magic3]);
                                 throw bme;
                             }
-        
+
                             this._readProtocol.__read(this._readStream);
                             Protocol.checkSupportedProtocol(this._readProtocol);
-        
+
                             this._readProtocolEncoding.__read(this._readStream);
                             Protocol.checkSupportedProtocolEncoding(this._readProtocolEncoding);
-        
+
                             this._readStream.readByte(); // messageType
                             this._readStream.readByte(); // compress
                             var size = this._readStream.readInt();
@@ -17813,7 +17813,7 @@
                             }
                             this._readStream.pos = pos;
                         }
-        
+
                         if(this._readStream.pos != this._readStream.size)
                         {
                             if(this._endpoint.datagram())
@@ -17832,21 +17832,21 @@
                             }
                         }
                     }
-        
+
                     if(this._state <= StateNotValidated)
                     {
                         if(this._state === StateNotInitialized && !this.initialize())
                         {
                             return;
                         }
-        
+
                         if(this._state <= StateNotValidated && !this.validate())
                         {
                             return;
                         }
-        
+
                         this._transceiver.unregister();
-        
+
                         //
                         // We start out in holding state.
                         //
@@ -17859,7 +17859,7 @@
                     else
                     {
                         Debug.assert(this._state <= StateClosing);
-        
+
                         //
                         // We parse messages first, if we receive a close
                         // connection message we won't send more messages.
@@ -17868,7 +17868,7 @@
                         {
                             info = this.parseMessage();
                         }
-        
+
                         if((operation & SocketOperation.Write) !== 0)
                         {
                             this.sendNextMessage();
@@ -17916,14 +17916,14 @@
                         throw ex;
                     }
                 }
-        
+
                 if(this._acmLastActivity > 0)
                 {
                     this._acmLastActivity = Date.now();
                 }
-        
+
                 this.dispatch(info);
-        
+
                 if(this._hasMoreData.value)
                 {
                     var self = this;
@@ -17943,7 +17943,7 @@
                     this._startPromise = null;
                     ++count;
                 }
-        
+
                 if(info !== null)
                 {
                     if(info.outAsync !== null)
@@ -17951,18 +17951,18 @@
                         info.outAsync.__completed(info.stream);
                         ++count;
                     }
-        
+
                     if(info.invokeNum > 0)
                     {
                         this.invokeAll(info.stream, info.invokeNum, info.requestId, info.compress, info.servantManager,
                                     info.adapter);
-        
+
                         //
                         // Don't increase count, the dispatch count is
                         // decreased when the incoming reply is sent.
                         //
                     }
-        
+
                     if(info.heartbeatCallback)
                     {
                         try
@@ -17977,7 +17977,7 @@
                         ++count;
                     }
                 }
-        
+
                 //
                 // Decrease dispatch count.
                 //
@@ -18016,7 +18016,7 @@
             {
                 Debug.assert(this._state === StateClosed);
                 this.unscheduleTimeout(SocketOperation.Read | SocketOperation.Write | SocketOperation.Connect);
-        
+
                 var s;
                 var traceLevels = this._instance.traceLevels();
                 if(!this._initialized)
@@ -18042,7 +18042,7 @@
                         s.push(this._endpoint.protocol());
                         s.push(" connection\n");
                         s.push(this.toString());
-        
+
                         //
                         // Trace the cause of unexpected connection closures
                         //
@@ -18055,17 +18055,17 @@
                             s.push("\n");
                             s.push(this._exception.toString());
                         }
-        
+
                         this._instance.initializationData().logger.trace(traceLevels.networkCat, s.join(""));
                     }
                 }
-        
+
                 if(this._startPromise !== null)
                 {
                     this._startPromise.fail(this._exception);
                     this._startPromise = null;
                 }
-        
+
                 if(this._sendStreams.length > 0)
                 {
                     if(!this._writeStream.isEmpty())
@@ -18077,7 +18077,7 @@
                         var message = this._sendStreams[0];
                         this._writeStream.swap(message.stream);
                     }
-        
+
                     //
                     // NOTE: for twoway requests which are not sent, finished can be called twice: the
                     // first time because the outgoing is in the _sendStreams set and the second time
@@ -18095,13 +18095,13 @@
                     }
                     this._sendStreams = [];
                 }
-        
+
                 for(var e = this._asyncRequests.entries; e !== null; e = e.next)
                 {
                     e.value.__completedEx(this._exception);
                 }
                 this._asyncRequests.clear();
-        
+
                 //
                 // Don't wait to be reaped to reclaim memory allocated by read/write streams.
                 //
@@ -18109,7 +18109,7 @@
                 this._readStream.buffer.clear();
                 this._writeStream.clear();
                 this._writeStream.buffer.clear();
-        
+
                 if(this._callback !== null)
                 {
                     try
@@ -18122,7 +18122,7 @@
                     }
                     this._callback = null;
                 }
-        
+
                 //
                 // This must be done last as this will cause waitUntilFinished() to return (and communicator
                 // objects such as the timer might be destroyed too).
@@ -18189,9 +18189,9 @@
                 // Fatal exception while invoking a request. Since sendResponse/sendNoResponse isn't
                 // called in case of a fatal exception we decrement this._dispatchCount here.
                 //
-        
+
                 this.setState(StateClosed, ex);
-        
+
                 if(invokeNum > 0)
                 {
                     Debug.assert(this._dispatchCount > 0);
@@ -18212,22 +18212,22 @@
                 if(ex !== undefined)
                 {
                     Debug.assert(ex instanceof Ice.LocalException);
-        
+
                     //
                     // If setState() is called with an exception, then only closed
                     // and closing states are permissible.
                     //
                     Debug.assert(state >= StateClosing);
-        
+
                     if(this._state === state) // Don't switch twice.
                     {
                         return;
                     }
-        
+
                     if(this._exception === null)
                     {
                         this._exception = ex;
-        
+
                         //
                         // We don't warn if we are not validated.
                         //
@@ -18247,23 +18247,23 @@
                             }
                         }
                     }
-        
+
                     //
                     // We must set the new state before we notify requests of any
                     // exceptions. Otherwise new requests may retry on a
                     // connection that is not yet marked as closed or closing.
                     //
                 }
-        
+
                 //
                 // We don't want to send close connection messages if the endpoint
-                // only supports oneway transmission from client to server.
+                // only supports oneway transmission from client to communication.
                 //
                 if(this._endpoint.datagram() && state === StateClosing)
                 {
                     state = StateClosed;
                 }
-        
+
                 //
                 // Skip graceful shutdown if we are destroyed before validation.
                 //
@@ -18271,12 +18271,12 @@
                 {
                     state = StateClosed;
                 }
-        
+
                 if(this._state === state) // Don't switch twice.
                 {
                     return;
                 }
-        
+
                 try
                 {
                     switch(state)
@@ -18286,7 +18286,7 @@
                         Debug.assert(false);
                         break;
                     }
-        
+
                     case StateNotValidated:
                     {
                         if(this._state !== StateNotInitialized)
@@ -18308,7 +18308,7 @@
                         }
                         break;
                     }
-        
+
                     case StateActive:
                     {
                         //
@@ -18322,7 +18322,7 @@
                         this._transceiver.register();
                         break;
                     }
-        
+
                     case StateHolding:
                     {
                         //
@@ -18339,7 +18339,7 @@
                         }
                         break;
                     }
-        
+
                     case StateClosing:
                     {
                         //
@@ -18356,7 +18356,7 @@
                         }
                         break;
                     }
-        
+
                     case StateClosed:
                     {
                         if(this._state === StateFinished)
@@ -18367,7 +18367,7 @@
                         this._transceiver.unregister();
                         break;
                     }
-        
+
                     case StateFinished:
                     {
                         Debug.assert(this._state === StateClosed);
@@ -18389,7 +18389,7 @@
                         throw ex;
                     }
                 }
-        
+
                 //
                 // We only register with the connection monitor if our new state
                 // is StateActive. Otherwise we unregister with the connection
@@ -18411,9 +18411,9 @@
                         this._monitor.remove(this);
                     }
                 }
-        
+
                 this._state = state;
-        
+
                 if(this._state === StateClosing && this._dispatchCount === 0)
                 {
                     try
@@ -18436,7 +18436,7 @@
                 {
                     this.finish();
                 }
-        
+
                 this.checkState();
             },
             initiateShutdown: function()
@@ -18444,7 +18444,7 @@
                 Debug.assert(this._state === StateClosing);
                 Debug.assert(this._dispatchCount === 0);
                 Debug.assert(!this._shutdownInitiated);
-        
+
                 if(!this._endpoint.datagram())
                 {
                     //
@@ -18458,7 +18458,7 @@
                     os.writeByte(Protocol.closeConnectionMsg);
                     os.writeByte(0); // compression status: always report 0 for CloseConnection.
                     os.writeInt(Protocol.headerSize); // Message size.
-        
+
                     var status = this.sendMessage(OutgoingMessage.createForStream(os, false, false));
                     if((status & AsyncStatus.Sent) > 0)
                     {
@@ -18467,7 +18467,7 @@
                         //
                         this.scheduleTimeout(SocketOperation.Write, this.closeTimeout());
                     }
-        
+
                     //
                     // The CloseConnection message should be sufficient. Closing the write
                     // end of the socket is probably an artifact of how things were done
@@ -18482,7 +18482,7 @@
             heartbeat: function()
             {
                 Debug.assert(this._state === StateActive);
-        
+
                 if(!this._endpoint.datagram())
                 {
                     var os = new BasicStream(this._instance, Protocol.currentProtocolEncoding);
@@ -18511,7 +18511,7 @@
                     this.scheduleTimeout(s, this.connectTimeout());
                     return false;
                 }
-        
+
                 //
                 // Update the connection description once the transceiver is initialized.
                 //
@@ -18524,7 +18524,7 @@
             {
                 if(!this._endpoint.datagram()) // Datagram connections are always implicitly validated.
                 {
-                    if(this._adapter !== null) // The server side has the active role for connection validation.
+                    if(this._adapter !== null) // The communication side has the active role for connection validation.
                     {
                         if(this._writeStream.size === 0)
                         {
@@ -18537,7 +18537,7 @@
                             TraceUtil.traceSend(this._writeStream, this._logger, this._traceLevels);
                             this._writeStream.prepareWrite();
                         }
-        
+
                         if(this._writeStream.pos != this._writeStream.size && !this.write(this._writeStream.buffer))
                         {
                             this.scheduleTimeout(SocketOperation.Write, this.connectTimeout());
@@ -18551,14 +18551,14 @@
                             this._readStream.resize(Protocol.headerSize);
                             this._readStream.pos = 0;
                         }
-        
+
                         if(this._readStream.pos !== this._readStream.size &&
                             !this.read(this._readStream.buffer))
                         {
                             this.scheduleTimeout(SocketOperation.Read, this.connectTimeout());
                             return false;
                         }
-        
+
                         Debug.assert(this._readStream.pos === Protocol.headerSize);
                         this._readStream.pos = 0;
                         var m = this._readStream.readBlob(4);
@@ -18569,13 +18569,13 @@
                             bme.badMagic = m;
                             throw bme;
                         }
-        
+
                         this._readProtocol.__read(this._readStream);
                         Protocol.checkSupportedProtocol(this._readProtocol);
-        
+
                         this._readProtocolEncoding.__read(this._readStream);
                         Protocol.checkSupportedProtocolEncoding(this._readProtocolEncoding);
-        
+
                         var messageType = this._readStream.readByte();
                         if(messageType !== Protocol.validateConnectionMsg)
                         {
@@ -18591,14 +18591,14 @@
                         this._validated = true;
                     }
                 }
-        
+
                 this._writeStream.resize(0);
                 this._writeStream.pos = 0;
-        
+
                 this._readStream.resize(Protocol.headerSize);
                 this._readHeader = true;
                 this._readStream.pos = 0;
-        
+
                 var traceLevels = this._instance.traceLevels();
                 if(traceLevels.network >= 1)
                 {
@@ -18620,7 +18620,7 @@
                     }
                     this._instance.initializationData().logger.trace(traceLevels.networkCat, s.join(""));
                 }
-        
+
                 return true;
             },
             sendNextMessage: function()
@@ -18629,7 +18629,7 @@
                 {
                     return;
                 }
-        
+
                 Debug.assert(!this._writeStream.isEmpty() && this._writeStream.pos === this._writeStream.size);
                 try
                 {
@@ -18641,7 +18641,7 @@
                         var message = this._sendStreams.shift();
                         this._writeStream.swap(message.stream);
                         message.sent();
-        
+
                         //
                         // If there's nothing left to send, we're done.
                         //
@@ -18649,7 +18649,7 @@
                         {
                             break;
                         }
-        
+
                         //
                         // If we are in the closed state, don't continue sending.
                         //
@@ -18661,19 +18661,19 @@
                         {
                             return;
                         }
-        
+
                         //
                         // Otherwise, prepare the next message stream for writing.
                         //
                         message = this._sendStreams[0];
                         Debug.assert(!message.prepared);
                         var stream = message.stream;
-        
+
                         stream.pos = 10;
                         stream.writeInt(stream.size);
                         stream.prepareWrite();
                         message.prepared = true;
-        
+
                         if(message.outAsync !== null)
                         {
                             TraceUtil.trace("sending asynchronous request", stream, this._logger, this._traceLevels);
@@ -18683,7 +18683,7 @@
                             TraceUtil.traceSend(stream, this._logger, this._traceLevels);
                         }
                         this._writeStream.swap(message.stream);
-        
+
                         //
                         // Send the message.
                         //
@@ -18707,9 +18707,9 @@
                         throw ex;
                     }
                 }
-        
+
                 Debug.assert(this._writeStream.isEmpty());
-        
+
                 //
                 // If all the messages were sent and we are in the closing state, we schedule
                 // the close timeout to wait for the peer to close the connection.
@@ -18728,15 +18728,15 @@
                     return AsyncStatus.Queued;
                 }
                 Debug.assert(this._state < StateClosed);
-        
+
                 Debug.assert(!message.prepared);
-        
+
                 var stream = message.stream;
                 stream.pos = 10;
                 stream.writeInt(stream.size);
                 stream.prepareWrite();
                 message.prepared = true;
-        
+
                 if(message.outAsync)
                 {
                     TraceUtil.trace("sending asynchronous request", message.stream, this._logger, this._traceLevels);
@@ -18745,14 +18745,14 @@
                 {
                     TraceUtil.traceSend(message.stream, this._logger, this._traceLevels);
                 }
-        
+
                 if(this.write(message.stream.buffer))
                 {
                     //
                     // Entire buffer was written immediately.
                     //
                     message.sent();
-        
+
                     if(this._acmLastActivity > 0)
                     {
                         this._acmLastActivity = Date.now();
@@ -18760,24 +18760,24 @@
                     return AsyncStatus.Sent;
                 }
                 message.doAdopt();
-        
+
                 this._writeStream.swap(message.stream);
                 this._sendStreams.push(message);
                 this.scheduleTimeout(SocketOperation.Write, this._endpoint.timeout());
-        
+
                 return AsyncStatus.Queued;
             },
             parseMessage: function()
             {
                 Debug.assert(this._state > StateNotValidated && this._state < StateClosed);
-        
+
                 var info = new MessageInfo(this._instance);
-        
+
                 this._readStream.swap(info.stream);
                 this._readStream.resize(Protocol.headerSize);
                 this._readStream.pos = 0;
                 this._readHeader = true;
-        
+
                 //
                 // Connection is validated on first message. This is only used by
                 // setState() to check wether or not we can print a connection
@@ -18785,9 +18785,9 @@
                 // connection isn't validated).
                 //
                 this._validated = true;
-        
+
                 Debug.assert(info.stream.pos === info.stream.size);
-        
+
                 try
                 {
                     //
@@ -18804,7 +18804,7 @@
                         throw ex;
                     }
                     info.stream.pos = Protocol.headerSize;
-        
+
                     switch(messageType)
                     {
                         case Protocol.closeConnectionMsg:
@@ -18824,13 +18824,13 @@
                             }
                             break;
                         }
-        
+
                         case Protocol.requestMsg:
                         {
                             if(this._state === StateClosing)
                             {
                                 TraceUtil.trace("received request during closing\n" +
-                                                "(ignored by server, client will retry)",
+                                                "(ignored by communication, client will retry)",
                                                 info.stream, this._logger, this._traceLevels);
                             }
                             else
@@ -18844,13 +18844,13 @@
                             }
                             break;
                         }
-        
+
                         case Protocol.requestBatchMsg:
                         {
                             if(this._state === StateClosing)
                             {
                                 TraceUtil.trace("received batch request during closing\n" +
-                                                "(ignored by server, client will retry)",
+                                                "(ignored by communication, client will retry)",
                                                 info.stream, this._logger, this._traceLevels);
                             }
                             else
@@ -18868,7 +18868,7 @@
                             }
                             break;
                         }
-        
+
                         case Protocol.replyMsg:
                         {
                             TraceUtil.traceRecv(info.stream, this._logger, this._traceLevels);
@@ -18886,7 +18886,7 @@
                             this.checkClose();
                             break;
                         }
-        
+
                         case Protocol.validateConnectionMsg:
                         {
                             TraceUtil.traceRecv(info.stream, this._logger, this._traceLevels);
@@ -18897,7 +18897,7 @@
                             }
                             break;
                         }
-        
+
                         default:
                         {
                             TraceUtil.trace("received unknown message\n(invalid, closing connection)",
@@ -18927,7 +18927,7 @@
                         throw ex;
                     }
                 }
-        
+
                 return info;
             },
             invokeAll: function(stream, invokeNum, requestId, compress, servantManager, adapter)
@@ -18942,16 +18942,16 @@
                         //
                         var response = !this._endpoint.datagram() && requestId !== 0;
                         inc = new IncomingAsync(this._instance, this, adapter, response, compress, requestId);
-        
+
                         //
                         // Dispatch the invocation.
                         //
                         inc.invoke(servantManager, stream);
-        
+
                         --invokeNum;
                         inc = null;
                     }
-        
+
                     stream.clear();
                 }
                 catch(ex)
@@ -18972,7 +18972,7 @@
                 {
                     return;
                 }
-        
+
                 var self = this;
                 if((op & SocketOperation.Read) !== 0)
                 {
@@ -19032,7 +19032,7 @@
                 {
                     return;
                 }
-        
+
                 var i;
                 if(this._holdPromises.length > 0)
                 {
@@ -19042,7 +19042,7 @@
                     }
                     this._holdPromises = [];
                 }
-        
+
                 //
                 // We aren't finished until the state is finished and all
                 // outstanding requests are completed. Otherwise we couldn't
@@ -19055,7 +19055,7 @@
                     // Clear the OA. See bug 1673 for the details of why this is necessary.
                     //
                     this._adapter = null;
-        
+
                     for(i = 0; i < this._finishedPromises.length; ++i)
                     {
                         this._finishedPromises[i].succeed();
@@ -19119,13 +19119,13 @@
                 return ret;
             }
         });
-        
+
         // DestructionReason.
         ConnectionI.ObjectAdapterDeactivated = 0;
         ConnectionI.CommunicatorDestroyed = 1;
-        
+
         Ice.ConnectionI = ConnectionI;
-        
+
         var OutgoingMessage = Class({
             __init__: function()
             {
@@ -19165,7 +19165,7 @@
                 }
             }
         });
-        
+
         OutgoingMessage.createForStream = function(stream, compress, adopt)
         {
             var m = new OutgoingMessage();
@@ -19177,7 +19177,7 @@
             m.outAsync = null;
             return m;
         };
-        
+
         OutgoingMessage.create = function(out, stream, compress, requestId)
         {
             var m = new OutgoingMessage();
@@ -19189,8 +19189,8 @@
             m.adopt = false;
             return m;
         };
-        
-        
+
+
     }());
 
     (function()
@@ -19203,15 +19203,15 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var IceSSL = Ice.__M.module("IceSSL");
-        
+
         var HashUtil = Ice.HashUtil;
         var StringUtil = Ice.StringUtil;
         var EndpointI = Ice.EndpointI;
         var Class = Ice.Class;
-        
+
         var WSEndpoint = Class(EndpointI, {
             __init__: function(instance, del, re)
             {
@@ -19312,28 +19312,28 @@
                 {
                     return 0;
                 }
-        
+
                 if(p === null)
                 {
                     return 1;
                 }
-        
+
                 if(!(p instanceof WSEndpoint))
                 {
                     return this.type() < p.type() ? -1 : 1;
                 }
-        
+
                 var r = this._delegate.compareTo(p._delegate);
                 if(r !== 0)
                 {
                     return r;
                 }
-        
+
                 if(this._resource !== p._resource)
                 {
                     return this._resource < p._resource ? -1 : 1;
                 }
-        
+
                 return 0;
             },
             options: function()
@@ -19346,13 +19346,13 @@
                 // format of proxyToString() before changing this and related code.
                 //
                 var s = this._delegate.options();
-        
+
                 if(this._resource !== null && this._resource.length > 0)
                 {
                     s += " -r ";
                     s += (this._resource.indexOf(':') !== -1) ? ("\"" + this._resource + "\"") : this._resource;
                 }
-        
+
                 return s;
             },
             toConnectorString: function()
@@ -19380,7 +19380,7 @@
                 return true;
             },
         });
-        
+
         if(typeof(Ice.WSTransceiver) !== "undefined")
         {
             WSEndpoint.prototype.connectable = function()
@@ -19395,9 +19395,9 @@
                 return false;
             };
         }
-        
+
         Ice.WSEndpoint = WSEndpoint;
-        
+
     }());
 
     (function()
@@ -19410,12 +19410,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var HashMap = Ice.HashMap;
         var RouterInfo = Ice.RouterInfo;
         var RouterPrx = Ice.RouterPrx;
-        
+
         var RouterManager = Ice.Class({
             __init__: function()
             {
@@ -19439,19 +19439,19 @@
                 {
                     return null;
                 }
-        
+
                 //
                 // The router cannot be routed.
                 //
                 var router = RouterPrx.uncheckedCast(rtr.ice_router(null));
-        
+
                 var info = this._table.get(router);
                 if(info === undefined)
                 {
                     info = new RouterInfo(router);
                     this._table.set(router, info);
                 }
-        
+
                 return info;
             },
             erase: function(rtr)
@@ -19461,7 +19461,7 @@
                 {
                     // The router cannot be routed.
                     var router = RouterPrx.uncheckedCast(rtr.ice_router(null));
-        
+
                     info = this._table.get(router);
                     this._table.delete(router);
                 }
@@ -19469,7 +19469,7 @@
             }
         });
         Ice.RouterManager = RouterManager;
-        
+
     }());
 
     (function()
@@ -19482,11 +19482,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Class = Ice.Class;
         var Debug = Ice.Debug;
-        
+
         var ACMConfig = Class({
             __init__: function(p, l, prefix, dflt)
             {
@@ -19497,7 +19497,7 @@
                     this.close = Ice.ACMClose.CloseOnInvocationAndIdle;
                     return;
                 }
-        
+
                 var timeoutProperty;
                 if((prefix == "Ice.ACM.Client" || prefix == "Ice.ACM.Server") &&
                     p.getProperty(prefix + ".Timeout").length === 0)
@@ -19508,9 +19508,9 @@
                 {
                     timeoutProperty = prefix + ".Timeout";
                 }
-        
+
                 this.timeout = p.getPropertyAsIntWithDefault(timeoutProperty, dflt.timeout / 1000) * 1000; // To ms
-        
+
                 var hb = p.getPropertyAsIntWithDefault(prefix + ".Heartbeat", dflt.heartbeat.value);
                 if(hb >= 0 && hb <= Ice.ACMHeartbeat.maxValue)
                 {
@@ -19522,7 +19522,7 @@
                                 "', default value will be used instead");
                     this.heartbeat = dflt.heartbeat;
                 }
-        
+
                 var cl = p.getPropertyAsIntWithDefault(prefix + ".Close", dflt.close.value);
                 if(cl >= 0 && cl <= Ice.ACMClose.maxValue)
                 {
@@ -19536,7 +19536,7 @@
                 }
             }
         });
-        
+
         var ACMMonitor = Class({
             add: function(con)
             {
@@ -19561,7 +19561,7 @@
                 return 0;
             }
         });
-        
+
         var FactoryACMMonitor = Class(ACMMonitor, {
             __init__: function(instance, config)
             {
@@ -19585,7 +19585,7 @@
                 {
                     return;
                 }
-        
+
                 this._connections.push(connection);
                 if(this._connections.length == 1)
                 {
@@ -19604,7 +19604,7 @@
                 {
                     return;
                 }
-        
+
                 var i = this._connections.indexOf(connection);
                 Debug.assert(i >= 0);
                 this._connections.splice(i, 1);
@@ -19621,7 +19621,7 @@
             acm: function(timeout, close, heartbeat)
             {
                 Debug.assert(this._instance !== null);
-        
+
                 var config = new ACMConfig();
                 config.timeout = this._config.timeout;
                 config.close = this._config.close;
@@ -19660,7 +19660,7 @@
                 {
                     return;
                 }
-        
+
                 //
                 // Monitor connections outside the thread synchronization, so
                 // that connections can be added or removed during monitoring.
@@ -19687,7 +19687,7 @@
                 this._instance.initializationData().logger.error("exception in connection monitor:\n" + ex);
             }
         });
-        
+
         var ConnectionACMMonitor = Class(ACMMonitor, {
             __init__: function(parent, timer, config)
             {
@@ -19740,10 +19740,10 @@
                 }
             }
         });
-        
+
         Ice.FactoryACMMonitor = FactoryACMMonitor;
         Ice.ACMConfig = ACMConfig;
-        
+
     }());
 
     (function()
@@ -19756,11 +19756,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Context = Ice.Context;
         var InitializationException = Ice.InitializationException;
-        
+
         //
         // The base class for all ImplicitContext implementations
         //
@@ -19790,7 +19790,7 @@
                 {
                     key = "";
                 }
-        
+
                 return this._context.has(key);
             },
             get: function(key)
@@ -19799,13 +19799,13 @@
                 {
                     key = "";
                 }
-        
+
                 var val = this._context.get(key);
                 if(val === null)
                 {
                     val = "";
                 }
-        
+
                 return val;
             },
             put: function(key, value)
@@ -19818,15 +19818,15 @@
                 {
                     value = "";
                 }
-        
+
                 var oldVal = this._context.get(key);
                 if(oldVal === null)
                 {
                     oldVal = "";
                 }
-        
+
                 this._context.set(key, value);
-        
+
                 return oldVal;
             },
             remove: function(key)
@@ -19835,10 +19835,10 @@
                 {
                     key = "";
                 }
-        
+
                 var val = this._context.get(key);
                 this._context.delete(key);
-        
+
                 if(val === null)
                 {
                     val = "";
@@ -19867,7 +19867,7 @@
                 }
             }
         });
-        
+
         ImplicitContextI.create = function(kind)
         {
             if(kind.length === 0 || kind === "None")
@@ -19884,7 +19884,7 @@
             }
         };
         Ice.ImplicitContextI = ImplicitContextI;
-        
+
     }());
 
     (function()
@@ -19897,8 +19897,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var ArrayUtil = Ice.ArrayUtil;
         var Debug = Ice.Debug;
         var BatchRequestQueue = Ice.BatchRequestQueue;
@@ -19916,9 +19916,9 @@
         var LocatorPrx = Ice.LocatorPrx;
         var PropertyNames = Ice.PropertyNames;
         var ConnectionRequestHandler = Ice.ConnectionRequestHandler;
-        
+
         var Class = Ice.Class;
-        
+
         var suffixes =
         [
             "EndpointSelection",
@@ -19931,7 +19931,7 @@
             "Router",
             "CollocationOptimized"
         ];
-        
+
         //
         // Only for use by Instance
         //
@@ -19949,7 +19949,7 @@
                 {
                     return null;
                 }
-        
+
                 return this.createImpl(ident, facet, tmpl.getMode(), tmpl.getSecure(), tmpl.getProtocol(), tmpl.getEncoding(),
                                     endpoints, null, null);
             },
@@ -19959,7 +19959,7 @@
                 {
                     return null;
                 }
-        
+
                 return this.createImpl(ident, facet, tmpl.getMode(), tmpl.getSecure(), tmpl.getProtocol(), tmpl.getEncoding(),
                                     null, adapterId, null);
             },
@@ -19969,7 +19969,7 @@
                 {
                     return null;
                 }
-        
+
                 //
                 // Create new reference
                 //
@@ -19999,18 +19999,18 @@
                 {
                     return null;
                 }
-        
+
                 var delim = " \t\n\r";
-        
+
                 var beg;
                 var end = 0;
-        
+
                 beg = StringUtil.findFirstNotOf(s, delim, end);
                 if(beg == -1)
                 {
                     throw new Ice.ProxyParseException("no non-whitespace characters found in `" + s + "'");
                 }
-        
+
                 //
                 // Extract the identity, which may be enclosed in single
                 // or double quotation marks.
@@ -20036,17 +20036,17 @@
                     idstr = s.substring(beg, end);
                     end++; // Skip trailing quote
                 }
-        
+
                 if(beg === end)
                 {
                     throw new Ice.ProxyParseException("no identity in `" + s + "'");
                 }
-        
+
                 //
                 // Parsing the identity may raise IdentityParseException.
                 //
                 var ident = this._instance.stringToIdentity(idstr);
-        
+
                 if(ident.name.length === 0)
                 {
                     //
@@ -20072,14 +20072,14 @@
                         return null;
                     }
                 }
-        
+
                 var facet = "";
                 var mode = RefMode.ModeTwoway;
                 var secure = false;
                 var encoding = this._instance.defaultsAndOverrides().defaultEncoding;
                 var protocol = Ice.Protocol_1_0;
                 var adapter = "";
-        
+
                 while(true)
                 {
                     beg = StringUtil.findFirstNotOf(s, delim, end);
@@ -20087,29 +20087,29 @@
                     {
                         break;
                     }
-        
+
                     if(s.charAt(beg) == ':' || s.charAt(beg) == '@')
                     {
                         break;
                     }
-        
+
                     end = StringUtil.findFirstOf(s, delim + ":@", beg);
                     if(end == -1)
                     {
                         end = s.length;
                     }
-        
+
                     if(beg == end)
                     {
                         break;
                     }
-        
+
                     var option = s.substring(beg, end);
                     if(option.length != 2 || option.charAt(0) != '-')
                     {
                         throw new Ice.ProxyParseException("expected a proxy option but found `" + option + "' in `" + s + "'");
                     }
-        
+
                     //
                     // Check for the presence of an option argument. The
                     // argument may be enclosed in single or double
@@ -20146,7 +20146,7 @@
                             }
                         }
                     }
-        
+
                     //
                     // If any new options are added here,
                     // IceInternal::Reference::toString() and its derived classes must be updated as well.
@@ -20159,7 +20159,7 @@
                             {
                                 throw new Ice.ProxyParseException("no argument provided for -f option in `" + s + "'");
                             }
-        
+
                             try
                             {
                                 facet = StringUtil.unescapeString(argument, 0, argument.length);
@@ -20168,10 +20168,10 @@
                             {
                                 throw new Ice.ProxyParseException("invalid facet in `" + s + "': " + ex.message);
                             }
-        
+
                             break;
                         }
-        
+
                         case 't':
                         {
                             if(argument !== null)
@@ -20182,7 +20182,7 @@
                             mode = RefMode.ModeTwoway;
                             break;
                         }
-        
+
                         case 'o':
                         {
                             if(argument !== null)
@@ -20193,7 +20193,7 @@
                             mode = RefMode.ModeOneway;
                             break;
                         }
-        
+
                         case 'O':
                         {
                             if(argument !== null)
@@ -20204,7 +20204,7 @@
                             mode = RefMode.ModeBatchOneway;
                             break;
                         }
-        
+
                         case 'd':
                         {
                             if(argument !== null)
@@ -20215,7 +20215,7 @@
                             mode = RefMode.ModeDatagram;
                             break;
                         }
-        
+
                         case 'D':
                         {
                             if(argument !== null)
@@ -20226,7 +20226,7 @@
                             mode = RefMode.ModeBatchDatagram;
                             break;
                         }
-        
+
                         case 's':
                         {
                             if(argument !== null)
@@ -20237,14 +20237,14 @@
                             secure = true;
                             break;
                         }
-        
+
                         case 'e':
                         {
                             if(argument === null)
                             {
                                 throw new Ice.ProxyParseException("no argument provided for -e option in `" + s + "'");
                             }
-        
+
                             try
                             {
                                 encoding = Ice.stringToEncodingVersion(argument);
@@ -20256,14 +20256,14 @@
                             }
                             break;
                         }
-        
+
                         case 'p':
                         {
                             if(argument === null)
                             {
                                 throw new Ice.ProxyParseException("no argument provided for -p option in `" + s + "'");
                             }
-        
+
                             try
                             {
                                 protocol = Ice.stringToProtocolVersion(argument);
@@ -20275,30 +20275,30 @@
                             }
                             break;
                         }
-        
+
                         default:
                         {
                             throw new Ice.ProxyParseException("unknown option `" + option + "' in `" + s + "'");
                         }
                     }
                 }
-        
+
                 if(beg === -1)
                 {
                     return this.createImpl(ident, facet, mode, secure, protocol, encoding, null, null, propertyPrefix);
                 }
-        
+
                 var endpoints = [];
-        
+
                 if(s.charAt(beg) == ':')
                 {
                     var unknownEndpoints = [];
                     end = beg;
-        
+
                     while(end < s.length && s.charAt(end) == ':')
                     {
                         beg = end + 1;
-        
+
                         end = beg;
                         while(true)
                         {
@@ -20341,7 +20341,7 @@
                                 ++end;
                             }
                         }
-        
+
                         var es = s.substring(beg, end);
                         var endp = this._instance.endpointFactoryManager().create(es, false);
                         if(endp !== null)
@@ -20371,7 +20371,7 @@
                         }
                         this._instance.initializationData().logger.warning(msg.join(""));
                     }
-        
+
                     return this.createImpl(ident, facet, mode, secure, protocol, encoding, endpoints, null, propertyPrefix);
                 }
                 else if(s.charAt(beg) == '@')
@@ -20381,7 +20381,7 @@
                     {
                         throw new Ice.ProxyParseException("missing adapter id in `" + s + "'");
                     }
-        
+
                     var adapterstr = null;
                     end = StringUtil.checkQuote(s, beg);
                     if(end === -1)
@@ -20403,13 +20403,13 @@
                         adapterstr = s.substring(beg, end);
                         end++; // Skip trailing quote
                     }
-        
+
                     if(end !== s.length && StringUtil.findFirstNotOf(s, delim, end) !== -1)
                     {
                         throw new Ice.ProxyParseException("invalid trailing characters after `" + s.substring(0, end + 1) +
                                                             "' in `" + s + "'");
                     }
-        
+
                     try
                     {
                         adapter = StringUtil.unescapeString(adapterstr, 0, adapterstr.length);
@@ -20424,7 +20424,7 @@
                     }
                     return this.createImpl(ident, facet, mode, secure, protocol, encoding, null, adapter, propertyPrefix);
                 }
-        
+
                 throw new Ice.ProxyParseException("malformed proxy `" + s + "'");
             },
             createFromStream: function(ident, s)
@@ -20433,12 +20433,12 @@
                 // Don't read the identity here. Operations calling this
                 // constructor read the identity, and pass it as a parameter.
                 //
-        
+
                 if(ident.name.length === 0 && ident.category.length === 0)
                 {
                     return null;
                 }
-        
+
                 //
                 // For compatibility with the old FacetPath.
                 //
@@ -20456,15 +20456,15 @@
                 {
                     facet = "";
                 }
-        
+
                 var mode = s.readByte();
                 if(mode < 0 || mode > RefMode.ModeLast)
                 {
                     throw new Ice.ProxyUnmarshalException();
                 }
-        
+
                 var secure = s.readBool();
-        
+
                 var protocol = null;
                 var encoding = null;
                 if(!s.getReadEncoding().equals(Ice.Encoding_1_0))
@@ -20479,10 +20479,10 @@
                     protocol = Ice.Protocol_1_0;
                     encoding = Ice.Encoding_1_0;
                 }
-        
+
                 var endpoints = null; // EndpointI[]
                 var adapterId = null;
-        
+
                 var sz = s.readSize();
                 if(sz > 0)
                 {
@@ -20496,7 +20496,7 @@
                 {
                     adapterId = s.readString();
                 }
-        
+
                 return this.createImpl(ident, facet, mode, secure, protocol, encoding, endpoints, adapterId, null);
             },
             setDefaultRouter: function(defaultRouter)
@@ -20505,7 +20505,7 @@
                 {
                     return this;
                 }
-        
+
                 var factory = new ReferenceFactory(this._instance, this._communicator);
                 factory._defaultLocator = this._defaultLocator;
                 factory._defaultRouter = defaultRouter;
@@ -20521,7 +20521,7 @@
                 {
                     return this;
                 }
-        
+
                 var factory = new ReferenceFactory(this._instance, this._communicator);
                 factory._defaultRouter = this._defaultRouter;
                 factory._defaultLocator = defaultLocator;
@@ -20544,7 +20544,7 @@
                         return;
                     }
                 }
-        
+
                 var props = this._instance.initializationData().properties.getPropertiesForPrefix(prefix + ".");
                 for(var e = props.entries; e !== null; e = e.next)
                 {
@@ -20557,13 +20557,13 @@
                             break;
                         }
                     }
-        
+
                     if(!valid)
                     {
                         unknownProps.push(e.key);
                     }
                 }
-        
+
                 if(unknownProps.length > 0)
                 {
                     var message = [];
@@ -20581,7 +20581,7 @@
             createImpl: function(ident, facet, mode, secure, protocol, encoding, endpoints, adapterId, propertyPrefix)
             {
                 var defaultsAndOverrides = this._instance.defaultsAndOverrides();
-        
+
                 //
                 // Default local proxy options.
                 //
@@ -20604,14 +20604,14 @@
                 var endpointSelection = defaultsAndOverrides.defaultEndpointSelection;
                 var locatorCacheTimeout = defaultsAndOverrides.defaultLocatorCacheTimeout;
                 var invocationTimeout = defaultsAndOverrides.defaultInvocationTimeout;
-        
+
                 //
                 // Override the defaults with the proxy properties if a property prefix is defined.
                 //
                 if(propertyPrefix !== null && propertyPrefix.length > 0)
                 {
                     var properties = this._instance.initializationData().properties;
-        
+
                     //
                     // Warn about unknown properties.
                     //
@@ -20619,9 +20619,9 @@
                     {
                         this.checkForUnknownProperties(propertyPrefix);
                     }
-        
+
                     var property;
-        
+
                     property = propertyPrefix + ".Locator";
                     var locator = LocatorPrx.uncheckedCast(this._communicator.propertyToProxy(property));
                     if(locator !== null)
@@ -20635,7 +20635,7 @@
                             locatorInfo = this._instance.locatorManager().find(locator);
                         }
                     }
-        
+
                     property = propertyPrefix + ".Router";
                     var router = RouterPrx.uncheckedCast(this._communicator.propertyToProxy(property));
                     if(router !== null)
@@ -20652,13 +20652,13 @@
                             routerInfo = this._instance.routerManager().find(router);
                         }
                     }
-        
+
                     property = propertyPrefix + ".ConnectionCached";
                     cacheConnection = properties.getPropertyAsIntWithDefault(property, cacheConnection ? 1 : 0) > 0;
-        
+
                     property = propertyPrefix + ".PreferSecure";
                     preferSecure = properties.getPropertyAsIntWithDefault(property, preferSecure ? 1 : 0) > 0;
-        
+
                     property = propertyPrefix + ".EndpointSelection";
                     if(properties.getProperty(property).length > 0)
                     {
@@ -20677,7 +20677,7 @@
                                                                                 "'; expected `Random' or `Ordered'");
                         }
                     }
-        
+
                     property = propertyPrefix + ".LocatorCacheTimeout";
                     var value = properties.getProperty(property);
                     if(value.length !== 0)
@@ -20691,7 +20691,7 @@
                                 "': defaulting to -1");
                         }
                     }
-        
+
                     property = propertyPrefix + ".InvocationTimeout";
                     value = properties.getProperty(property);
                     if(value.length !== 0)
@@ -20706,7 +20706,7 @@
                         }
                     }
                 }
-        
+
                 //
                 // Create new reference
                 //
@@ -20729,9 +20729,9 @@
                                              invocationTimeout);
             }
         });
-        
+
         Ice.ReferenceFactory = ReferenceFactory;
-        
+
         var Reference = Class({
             __init__: function(instance, communicator, identity, facet, mode, secure, protocol, encoding, invocationTimeout)
             {
@@ -20741,7 +20741,7 @@
                 Debug.assert(identity === undefined || identity.name !== null);
                 Debug.assert(identity === undefined || identity.category !== null);
                 Debug.assert(facet === undefined || facet !== null);
-        
+
                 this._instance = instance;
                 this._communicator = communicator;
                 this._mode = mode;
@@ -21009,7 +21009,7 @@
                 {
                     return this._hashValue;
                 }
-        
+
                 var h = 5381;
                 h = HashUtil.addNumber(h, this._mode);
                 h = HashUtil.addBoolean(h, this._secure);
@@ -21031,10 +21031,10 @@
                 h = HashUtil.addHashable(h, this._protocol);
                 h = HashUtil.addHashable(h, this._encoding);
                 h = HashUtil.addNumber(h, this._invocationTimeout);
-        
+
                 this._hashValue = h;
                 this._hashInitialized = true;
-        
+
                 return this._hashValue;
             },
             //
@@ -21061,7 +21061,7 @@
                 // Don't write the identity here. Operations calling streamWrite
                 // write the identity.
                 //
-        
+
                 //
                 // For compatibility with the old FacetPath.
                 //
@@ -21074,17 +21074,17 @@
                     s.writeSize(1); // String sequence with one element
                     s.writeString(this._facet);
                 }
-        
+
                 s.writeByte(this._mode);
-        
+
                 s.writeBool(this._secure);
-        
+
                 if(!s.getWriteEncoding().equals(Ice.Encoding_1_0))
                 {
                     this._protocol.__write(s);
                     this._encoding.__write(s);
                 }
-        
+
                 // Derived class writes the remainder of the reference.
             },
             //
@@ -21100,7 +21100,7 @@
                 // format of proxyToString() before changing this and related code.
                 //
                 var s = [];
-        
+
                 //
                 // If the encoded identity string contains characters which
                 // the reference parser uses as separators, then we enclose
@@ -21117,7 +21117,7 @@
                 {
                     s.push(id);
                 }
-        
+
                 if(this._facet.length > 0)
                 {
                     //
@@ -21138,7 +21138,7 @@
                         s.push(fs);
                     }
                 }
-        
+
                 switch(this._mode)
                 {
                     case RefMode.ModeTwoway:
@@ -21146,37 +21146,37 @@
                         s.push(" -t");
                         break;
                     }
-        
+
                     case RefMode.ModeOneway:
                     {
                         s.push(" -o");
                         break;
                     }
-        
+
                     case RefMode.ModeBatchOneway:
                     {
                         s.push(" -O");
                         break;
                     }
-        
+
                     case RefMode.ModeDatagram:
                     {
                         s.push(" -d");
                         break;
                     }
-        
+
                     case RefMode.ModeBatchDatagram:
                     {
                         s.push(" -D");
                         break;
                     }
                 }
-        
+
                 if(this._secure)
                 {
                     s.push(" -s");
                 }
-        
+
                 if(!this._protocol.equals(Ice.Protocol_1_0))
                 {
                     //
@@ -21188,7 +21188,7 @@
                     s.push(" -p ");
                     s.push(Ice.protocolVersionToString(this._protocol));
                 }
-        
+
                 //
                 // Always print the encoding version to ensure a stringified proxy
                 // will convert back to a proxy with the same encoding with
@@ -21196,9 +21196,9 @@
                 //
                 s.push(" -e ");
                 s.push(Ice.encodingVersionToString(this._encoding));
-        
+
                 return s.join("");
-        
+
                 // Derived class writes the remainder of the string.
             },
             //
@@ -21225,32 +21225,32 @@
                 //
                 // Note: if(this === r) and type test are performed by each non-abstract derived class.
                 //
-        
+
                 if(this._mode !== r._mode)
                 {
                     return false;
                 }
-        
+
                 if(this._secure !== r._secure)
                 {
                     return false;
                 }
-        
+
                 if(!this._identity.equals(r._identity))
                 {
                     return false;
                 }
-        
+
                 if(!this._context.equals(r._context))
                 {
                     return false;
                 }
-        
+
                 if(this._facet !== r._facet)
                 {
                     return false;
                 }
-        
+
                 if(this._overrideCompress !== r._overrideCompress)
                 {
                 return false;
@@ -21259,22 +21259,22 @@
                 {
                     return false;
                 }
-        
+
                 if(!this._protocol.equals(r._protocol))
                 {
                     return false;
                 }
-        
+
                 if(!this._encoding.equals(r._encoding))
                 {
                     return false;
                 }
-        
+
                 if(this._invocationTimeout !== r._invocationTimeout)
                 {
                     return false;
                 }
-        
+
                 return true;
             },
             clone: function()
@@ -21293,12 +21293,12 @@
                 r._compress = this._compress;
             }
         });
-        
+
         Reference._emptyContext = new HashMap();
         Reference._emptyEndpoints = [];
-        
+
         Ice.Reference = Reference;
-        
+
         var FixedReference = Class(Reference, {
             __init__: function(instance, communicator, identity, facet, mode, secure, encoding, connection)
             {
@@ -21422,7 +21422,7 @@
                         }
                         break;
                     }
-        
+
                     case RefMode.ModeDatagram:
                     case RefMode.ModeBatchDatagram:
                     {
@@ -21433,7 +21433,7 @@
                         break;
                     }
                 }
-        
+
                 //
                 // If a secure connection is requested or secure overrides is set,
                 // check if the connection is secure.
@@ -21452,9 +21452,9 @@
                 {
                     throw new Ice.NoEndpointException("");
                 }
-        
+
                 this._fixedConnection.throwException(); // Throw in case our connection is already destroyed.
-        
+
                 var compress;
                 if(defaultsAndOverrides.overrideCompress)
                 {
@@ -21468,7 +21468,7 @@
                 {
                     compress = this._fixedConnection.endpoint().compress();
                 }
-        
+
                 return proxy.__setRequestHandler(new ConnectionRequestHandler(this, this._fixedConnection, compress));
             },
             getBatchRequestQueue: function()
@@ -21492,9 +21492,9 @@
                 return this._fixedConnection.equals(rhs._fixedConnection);
             }
         });
-        
+
         Ice.FixedReference = FixedReference;
-        
+
         var RoutableReference = Class(Reference, {
             __init__: function(instance, communicator, identity, facet, mode, secure, protocol, encoding, endpoints,
                                 adapterId, locatorInfo, routerInfo, cacheConnection, preferSecure, endpointSelection,
@@ -21512,7 +21512,7 @@
                 this._locatorCacheTimeout = locatorCacheTimeout;
                 this._overrideTimeout = false;
                 this._timeout = -1;
-        
+
                 if(this._endpoints === null)
                 {
                     this._endpoints = Reference._emptyEndpoints;
@@ -21723,7 +21723,7 @@
             streamWrite: function(s)
             {
                 Reference.prototype.streamWrite.call(this, s);
-        
+
                 s.writeSize(this._endpoints.length);
                 if(this._endpoints.length > 0)
                 {
@@ -21765,7 +21765,7 @@
                 else if(this._adapterId.length > 0)
                 {
                     s.push(" @ ");
-        
+
                     //
                     // If the encoded adapter id string contains characters which
                     // the reference parser uses as separators, then we enclose
@@ -21788,17 +21788,17 @@
             toProperty: function(prefix)
             {
                 var properties = new HashMap(), e;
-        
+
                 properties.set(prefix, this.toString());
                 properties.set(prefix + ".CollocationOptimized", "0");
                 properties.set(prefix + ".ConnectionCached", this._cacheConnection ? "1" : "0");
                 properties.set(prefix + ".PreferSecure", this._preferSecure ? "1" : "0");
                 properties.set(prefix + ".EndpointSelection",
                             this._endpointSelection === EndpointSelectionType.Random ? "Random" : "Ordered");
-        
+
                 properties.set(prefix + ".LocatorCacheTimeout", "" + this._locatorCacheTimeout);
                 properties.set(prefix + ".InvocationTimeout", "" + this.getInvocationTimeout());
-        
+
                 if(this._routerInfo !== null)
                 {
                     var h = this._routerInfo.getRouter();
@@ -21808,7 +21808,7 @@
                         properties.set(e.key, e.value);
                     }
                 }
-        
+
                 if(this._locatorInfo !== null)
                 {
                     var p = this._locatorInfo.getLocator();
@@ -21818,7 +21818,7 @@
                         properties.set(e.key, e.value);
                     }
                 }
-        
+
                 return properties;
             },
             hashCode: function()
@@ -21840,12 +21840,12 @@
                 {
                     return false;
                 }
-        
+
                 if(!Reference.prototype.equals.call(this, rhs))
                 {
                     return false;
                 }
-        
+
                 if(this._locatorInfo === null ? rhs._locatorInfo !== null : !this._locatorInfo.equals(rhs._locatorInfo))
                 {
                     return false;
@@ -21903,7 +21903,7 @@
             getConnection: function()
             {
                 var promise = new Promise(); // success callback receives (connection, compress)
-        
+
                 if(this._routerInfo !== null)
                 {
                     //
@@ -21941,7 +21941,7 @@
                 {
                     this.getConnectionNoRouterInfo(promise);
                 }
-        
+
                 return promise;
             },
             getConnectionNoRouterInfo: function(promise)
@@ -21959,7 +21959,7 @@
                             });
                     return;
                 }
-        
+
                 var self = this;
                 if(this._locatorInfo !== null)
                 {
@@ -21971,7 +21971,7 @@
                                 promise.fail(new Ice.NoEndpointException(self.toString()));
                                 return;
                             }
-        
+
                             self.applyOverrides(endpoints);
                             self.createConnection(endpoints).then(
                                 function(connection, compress)
@@ -22071,7 +22071,7 @@
             filterEndpoints: function(allEndpoints)
             {
                 var endpoints = [];
-        
+
                 //
                 // Filter out opaque endpoints or endpoints which can't connect.
                 //
@@ -22082,7 +22082,7 @@
                         endpoints.push(allEndpoints[i]);
                     }
                 }
-        
+
                 //
                 // Filter out endpoints according to the mode of the reference.
                 //
@@ -22098,7 +22098,7 @@
                         endpoints = ArrayUtil.filter(endpoints, function(e, index, arr) { return !e.datagram(); });
                         break;
                     }
-        
+
                     case RefMode.ModeDatagram:
                     case RefMode.ModeBatchDatagram:
                     {
@@ -22109,7 +22109,7 @@
                         break;
                     }
                 }
-        
+
                 //
                 // Sort the endpoints according to the endpoint selection type.
                 //
@@ -22134,7 +22134,7 @@
                         break;
                     }
                 }
-        
+
                 //
                 // If a secure connection is requested or secure overrides is
                 // set, remove all non-secure endpoints. Otherwise if preferSecure is set
@@ -22177,7 +22177,7 @@
                 {
                     return new Promise().fail(new Ice.NoEndpointException(this.toString()));
                 }
-        
+
                 //
                 // Finally, create the connection.
                 //
@@ -22222,13 +22222,13 @@
                                 cb.setException(ex);
                             });
                 }
-        
+
                 return promise;
             }
         });
-        
+
         Ice.RoutableReference = RoutableReference;
-        
+
         var CreateConnectionCallback = Class({
             __init__: function(r, endpoints, promise)
             {
@@ -22257,13 +22257,13 @@
                 {
                     this.exception = ex;
                 }
-        
+
                 if(this.endpoints === null || ++this.i === this.endpoints.length)
                 {
                     this.promise.fail(this.exception);
                     return;
                 }
-        
+
                 var more = this.i != this.endpoints.length - 1;
                 var arr = [ this.endpoints[this.i] ];
                 var self = this;
@@ -22278,7 +22278,7 @@
                         });
             }
         });
-        
+
     }());
 
     (function()
@@ -22291,8 +22291,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         //
         // Local aliases.
         //
@@ -22302,7 +22302,7 @@
         var OpaqueEndpointI = Ice.OpaqueEndpointI;
         var Protocol = Ice.Protocol;
         var StringUtil = Ice.StringUtil;
-        
+
         var EndpointFactoryManager = Ice.Class({
             __init__: function(instance)
             {
@@ -22315,7 +22315,7 @@
                 {
                     Debug.assert(this._factories[i].type() != factory.type());
                 }
-        
+
                 this._factories.push(factory);
             },
             get: function(type)
@@ -22336,21 +22336,21 @@
                 {
                     throw new EndpointParseException("value has no non-whitespace characters");
                 }
-        
+
                 var arr = StringUtil.splitString(s, " \t\n\r");
                 if(arr.length === 0)
                 {
                     throw new EndpointParseException("value has no non-whitespace characters");
                 }
-        
+
                 var protocol = arr[0];
                 arr.splice(0, 1);
-        
+
                 if(protocol === "default")
                 {
                     protocol = this._instance.defaultsAndOverrides().defaultProtocol;
                 }
-        
+
                 for(var i = 0, length = this._factories.length; i < length; ++i)
                 {
                     if(this._factories[i].protocol() === protocol)
@@ -22364,7 +22364,7 @@
                         return e;
                     }
                 }
-        
+
                 //
                 // If the stringified endpoint is opaque, create an unknown endpoint,
                 // then see whether the type matches one of the known endpoints.
@@ -22377,7 +22377,7 @@
                     {
                         throw new EndpointParseException("unrecognized argument `" + arr[0] + "' in endpoint `" + str + "'");
                     }
-        
+
                     for(i = 0, length =  this._factories.length; i < length; ++i)
                     {
                         if(this._factories[i].type() == ue.type())
@@ -22400,7 +22400,7 @@
                     }
                     return ue; // Endpoint is opaque, but we don't have a factory for its type.
                 }
-        
+
                 return null;
             },
             read: function(s)
@@ -22432,9 +22432,9 @@
                 this._factories = [];
             }
         });
-        
+
         Ice.EndpointFactoryManager = EndpointFactoryManager;
-        
+
     }());
 
     (function()
@@ -22447,14 +22447,14 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Debug = Ice.Debug;
         var HashMap = Ice.HashMap;
         var ObjectPrx = Ice.ObjectPrx;
         var StringUtil = Ice.StringUtil;
         var Identity = Ice.Identity;
-        
+
         //
         // Only for use by Instance.
         //
@@ -22462,17 +22462,17 @@
             __init__: function(instance)
             {
                 this._instance = instance;
-        
+
                 var arr = this._instance.initializationData().properties.getPropertyAsList("Ice.RetryIntervals");
-        
+
                 if(arr.length > 0)
                 {
                     this._retryIntervals = [];
-        
+
                     for(var i = 0; i < arr.length; i++)
                     {
                         var v;
-        
+
                         try
                         {
                             v = StringUtil.toInt(arr[i]);
@@ -22481,7 +22481,7 @@
                         {
                             v = 0;
                         }
-        
+
                         //
                         // If -1 is the first value, no retry and wait intervals.
                         //
@@ -22489,7 +22489,7 @@
                         {
                             break;
                         }
-        
+
                         this._retryIntervals[i] = v > 0 ? v : 0;
                     }
                 }
@@ -22535,7 +22535,7 @@
             {
                 var ident = new Identity();
                 ident.__read(s);
-        
+
                 var ref = this._instance.referenceFactory().createFromStream(ident, s);
                 return this.referenceToProxy(ref, type);
             },
@@ -22570,7 +22570,7 @@
             {
                 var traceLevels = this._instance.traceLevels();
                 var logger = this._instance.initializationData().logger;
-        
+
                 //
                 // We don't retry batch requests because the exception might have caused
                 // the all the requests batched with the connection to be aborted and we
@@ -22580,11 +22580,11 @@
                 {
                     throw ex;
                 }
-        
+
                 if(ex instanceof Ice.ObjectNotExistException)
                 {
                     var one = ex;
-        
+
                     if(ref.getRouterInfo() !== null && one.operation === "ice_add_proxy")
                     {
                         //
@@ -22595,15 +22595,15 @@
                         // must *always* retry, so that the missing proxy is added
                         // to the router.
                         //
-        
+
                         ref.getRouterInfo().clearCache(ref);
-        
+
                         if(traceLevels.retry >= 1)
                         {
                             logger.trace(traceLevels.retryCat, "retrying operation call to add proxy to router\n" +
                                                             ex.toString());
                         }
-        
+
                         if(sleepInterval !== null)
                         {
                             sleepInterval.value = 0;
@@ -22616,7 +22616,7 @@
                         // We retry ObjectNotExistException if the reference is
                         // indirect.
                         //
-        
+
                         if(ref.isWellKnown())
                         {
                             var li = ref.getLocatorInfo();
@@ -22641,11 +22641,11 @@
                     //
                     throw ex;
                 }
-        
+
                 //
                 // There is no point in retrying an operation that resulted in a
                 // MarshalException. This must have been raised locally (because
-                // if it happened in a server it would result in an
+                // if it happened in a communication it would result in an
                 // UnknownLocalException instead), which means there was a problem
                 // in this process that will not change if we try again.
                 //
@@ -22668,7 +22668,7 @@
                 {
                     throw ex;
                 }
-        
+
                 //
                 // Don't retry if the communicator is destroyed or object adapter
                 // deactivated.
@@ -22677,7 +22677,7 @@
                 {
                     throw ex;
                 }
-        
+
                 //
                 // Don't retry invocation timeouts.
                 //
@@ -22685,10 +22685,10 @@
                 {
                     throw ex;
                 }
-        
+
                 ++cnt;
                 Debug.assert(cnt > 0);
-        
+
                 var interval;
                 if(cnt === (this._retryIntervals.length + 1) && ex instanceof Ice.CloseConnectionException)
                 {
@@ -22711,7 +22711,7 @@
                 {
                     interval = this._retryIntervals[cnt - 1];
                 }
-        
+
                 if(traceLevels.retry >= 1)
                 {
                     var msg = "retrying operation call";
@@ -22722,16 +22722,16 @@
                     msg += " because of exception\n" + ex.toString();
                     logger.trace(traceLevels.retryCat, msg);
                 }
-        
+
                 Debug.assert(sleepInterval !== null);
                 sleepInterval.value = interval;
-        
+
                 return cnt;
             }
         });
-        
+
         Ice.ProxyFactory = ProxyFactory;
-        
+
     }());
 
     (function()
@@ -22744,24 +22744,24 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
-        
+
+
+
         var FormatType = Ice.FormatType;
         var EndpointSelectionType = Ice.EndpointSelectionType;
         var Protocol = Ice.Protocol;
-        
+
         var DefaultsAndOverrides = function(properties, logger)
         {
             this.defaultProtocol = properties.getPropertyWithDefault("Ice.Default.Protocol",
                                                                      Ice.TcpEndpointFactory !== undefined ? "tcp" : "ws");
-        
+
             var value = properties.getProperty("Ice.Default.Host");
             this.defaultHost = value.length > 0 ? value : null;
-        
+
             value = properties.getProperty("Ice.Default.SourceAddress");
             this.defaultSourceAddress = value.length > 0 ? value : null;
-        
+
             value = properties.getProperty("Ice.Override.Timeout");
             if(value.length > 0)
             {
@@ -22779,7 +22779,7 @@
                 this.overrideTimeout = false;
                 this.overrideTimeoutValue = -1;
             }
-        
+
             value = properties.getProperty("Ice.Override.ConnectTimeout");
             if(value.length > 0)
             {
@@ -22797,7 +22797,7 @@
                 this.overrideConnectTimeout = false;
                 this.overrideConnectTimeoutValue = -1;
             }
-        
+
             value = properties.getProperty("Ice.Override.CloseTimeout");
             if(value.length > 0)
             {
@@ -22815,10 +22815,10 @@
                 this.overrideCloseTimeout = false;
                 this.overrideCloseTimeoutValue = -1;
             }
-        
+
             this.overrideCompress = false;
             this.overrideSecure = false;
-        
+
             value = properties.getPropertyWithDefault("Ice.Default.EndpointSelection", "Random");
             if(value === "Random")
             {
@@ -22834,7 +22834,7 @@
                 ex.str = "illegal value `" + value + "'; expected `Random' or `Ordered'";
                 throw ex;
             }
-        
+
             this.defaultTimeout = properties.getPropertyAsIntWithDefault("Ice.Default.Timeout", 60000);
             if(this.defaultTimeout < 1 && this.defaultTimeout !== -1)
             {
@@ -22842,7 +22842,7 @@
                 logger.warning("invalid value for Ice.Default.Timeout `" + properties.getProperty("Ice.Default.Timeout") +
                                "': defaulting to 60000");
             }
-        
+
             this.defaultLocatorCacheTimeout = properties.getPropertyAsIntWithDefault("Ice.Default.LocatorCacheTimeout", -1);
             if(this.defaultLocatorCacheTimeout < -1)
             {
@@ -22850,7 +22850,7 @@
                 logger.warning("invalid value for Ice.Default.LocatorCacheTimeout `" +
                                properties.getProperty("Ice.Default.LocatorCacheTimeout") + "': defaulting to -1");
             }
-        
+
             this.defaultInvocationTimeout = properties.getPropertyAsIntWithDefault("Ice.Default.InvocationTimeout", -1);
             if(this.defaultInvocationTimeout < 1 && this.defaultInvocationTimeout !== -1)
             {
@@ -22858,20 +22858,20 @@
                 logger.warning("invalid value for Ice.Default.InvocationTimeout `" +
                                properties.getProperty("Ice.Default.InvocationTimeout") + "': defaulting to -1");
             }
-        
+
             this.defaultPreferSecure = properties.getPropertyAsIntWithDefault("Ice.Default.PreferSecure", 0) > 0;
-        
+
             value = properties.getPropertyWithDefault("Ice.Default.EncodingVersion",
                                                       Ice.encodingVersionToString(Protocol.currentEncoding));
             this.defaultEncoding = Ice.stringToEncodingVersion(value);
             Protocol.checkSupportedEncoding(this.defaultEncoding);
-        
+
             var slicedFormat = properties.getPropertyAsIntWithDefault("Ice.Default.SlicedFormat", 0) > 0;
             this.defaultFormat = slicedFormat ? FormatType.SlicedFormat : FormatType.CompactFormat;
         };
-        
+
         Ice.DefaultsAndOverrides = DefaultsAndOverrides;
-        
+
     }());
 
     (function()
@@ -22884,12 +22884,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var StringUtil = Ice.StringUtil;
         var Identity = Ice.Identity;
         var IdentityParseException = Ice.IdentityParseException;
-        
+
         /**
         * Converts a string to an object identity.
         *
@@ -22900,7 +22900,7 @@
         Ice.stringToIdentity = function(s)
         {
             var ident = new Identity();
-        
+
             //
             // Find unescaped separator; note that the string may contain an escaped
             // backslash before the separator.
@@ -22914,7 +22914,7 @@
                 {
                     escapes++;
                 }
-                    
+
                 //
                 // We ignore escaped escapes
                 //
@@ -22936,7 +22936,7 @@
                 }
                 pos++;
             }
-        
+
             if(slash == -1)
             {
                 ident.category = "";
@@ -22981,10 +22981,10 @@
                     ident.name = "";
                 }
             }
-        
+
             return ident;
         };
-        
+
         /**
         * Converts an object identity to a string.
         *
@@ -23003,7 +23003,7 @@
                 return StringUtil.escapeString(ident.category, "/") + '/' + StringUtil.escapeString(ident.name, "/");
             }
         };
-        
+
         /**
         * Compares the object identities of two proxies.
         *
@@ -23043,7 +23043,7 @@
                 return lhsIdentity.category.localeCompare(rhsIdentity.category);
             }
         };
-        
+
         /**
         * Compares the object identities and facets of two proxies.
         *
@@ -23084,7 +23084,7 @@
                 {
                     return n;
                 }
-        
+
                 var lhsFacet = lhs.ice_getFacet();
                 var rhsFacet = rhs.ice_getFacet();
                 if(lhsFacet === null && rhsFacet === null)
@@ -23102,8 +23102,8 @@
                 return lhsFacet.localeCompare(rhsFacet);
             }
         };
-        
-        
+
+
     }());
 
     (function()
@@ -23116,8 +23116,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var ArrayUtil = Ice.ArrayUtil;
         var AsyncResultBase = Ice.AsyncResultBase;
         var ConnectionI = Ice.ConnectionI;
@@ -23128,7 +23128,7 @@
         var EndpointSelectionType = Ice.EndpointSelectionType;
         var FactoryACMMonitor = Ice.FactoryACMMonitor;
         var Class = Ice.Class;
-        
+
         //
         // Only for use by Instance.
         //
@@ -23138,13 +23138,13 @@
                 this._communicator = communicator;
                 this._instance = instance;
                 this._destroyed = false;
-        
+
                 this._monitor = new FactoryACMMonitor(this._instance, this._instance.clientACM());
-        
+
                 this._connectionsByEndpoint = new ConnectionListMap(); // map<EndpointI, Array<Ice.ConnectionI>>
                 this._pending = new HashMap(HashMap.compareEquals); // map<EndpointI, Array<ConnectCallback>>
                 this._pendingConnectCount = 0;
-        
+
                 this._waitPromise = null;
             },
             destroy: function()
@@ -23153,12 +23153,12 @@
                 {
                     return;
                 }
-        
+
                 this._connectionsByEndpoint.forEach(function(connection)
                                                     {
                                                         connection.destroy(ConnectionI.CommunicatorDestroyed);
                                                     });
-        
+
                 this._destroyed = true;
                 this._communicator = null;
                 this.checkFinished();
@@ -23175,12 +23175,12 @@
             create: function(endpts, hasMore, selType)
             {
                 Debug.assert(endpts.length > 0);
-        
+
                 //
                 // Apply the overrides.
                 //
                 var endpoints = this.applyOverrides(endpts);
-        
+
                 //
                 // Try to find a connection to one of the given endpoints.
                 //
@@ -23197,7 +23197,7 @@
                 {
                     return new Promise().fail(ex);
                 }
-        
+
                 var cb = new ConnectCallback(this, endpoints, hasMore, selType);
                 return cb.start();
             },
@@ -23227,7 +23227,7 @@
                         for(var i = 0; i < endpoints.length; ++i)
                         {
                             var endpoint = endpoints[i];
-        
+
                             //
                             // Modify endpoints with overrides.
                             //
@@ -23235,7 +23235,7 @@
                             {
                                 endpoint = endpoint.changeTimeout(defaultsAndOverrides.overrideTimeoutValue);
                             }
-        
+
                             //
                             // The Connection object does not take the compression flag of
                             // endpoints into account, but instead gets the information
@@ -23246,7 +23246,7 @@
                             // this connection factory.
                             //
                             endpoint = endpoint.changeCompress(false);
-        
+
                             self._connectionsByEndpoint.forEach(function(connection)
                                                                 {
                                                                     if(connection.endpoint().equals(endpoint))
@@ -23280,7 +23280,7 @@
                     promise.succeed();
                     return;
                 }
-        
+
                 Promise.all(
                     this._connectionsByEndpoint.map(
                         function(connection)
@@ -23320,7 +23320,7 @@
                 for(var i = 0; i < endpts.length; ++i)
                 {
                     var endpoint = endpts[i];
-        
+
                     //
                     // Modify endpoints with overrides.
                     //
@@ -23333,7 +23333,7 @@
                         endpoints.push(endpoint);
                     }
                 }
-        
+
                 return endpoints;
             },
             findConnectionByEndpoint: function(endpoints, compress)
@@ -23342,25 +23342,25 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 var defaultsAndOverrides = this._instance.defaultsAndOverrides();
                 Debug.assert(endpoints.length > 0);
-        
+
                 for(var i = 0; i < endpoints.length; ++i)
                 {
                     var endpoint = endpoints[i];
-        
+
                     if(this._pending.has(endpoint))
                     {
                         continue;
                     }
-        
+
                     var connectionList = this._connectionsByEndpoint.get(endpoint);
                     if(connectionList === undefined)
                     {
                         continue;
                     }
-        
+
                     for(var j = 0; j < connectionList.length; ++j)
                     {
                         if(connectionList[j].isActiveOrHolding()) // Don't return destroyed or un-validated connections
@@ -23377,7 +23377,7 @@
                         }
                     }
                 }
-        
+
                 return null;
             },
             incPendingConnectCount: function()
@@ -23389,7 +23389,7 @@
                 // too soon and will still be available to execute the ice_exception() callbacks for
                 // the asynchronous requests waiting on a connection to be established.
                 //
-        
+
                 if(this._destroyed)
                 {
                     throw new Ice.CommunicatorDestroyedException();
@@ -23411,7 +23411,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 //
                 // Reap closed connections
                 //
@@ -23425,7 +23425,7 @@
                         this._connectionsByEndpoint.removeConnection(c.endpoint().changeCompress(true), c);
                     }
                 }
-        
+
                 //
                 // Try to get the connection.
                 //
@@ -23435,7 +23435,7 @@
                     {
                         throw new Ice.CommunicatorDestroyedException();
                     }
-        
+
                     //
                     // Search for a matching connection. If we find one, we're done.
                     //
@@ -23444,7 +23444,7 @@
                     {
                         return connection;
                     }
-        
+
                     if(this.addToPending(cb, endpoints))
                     {
                         //
@@ -23462,7 +23462,7 @@
                         break;
                     }
                 }
-        
+
                 //
                 // At this point, we're responsible for establishing the connection to one of
                 // the given endpoints. If it's a non-blocking connect, calling nextEndpoint
@@ -23470,13 +23470,13 @@
                 // the caller to establish the connection.
                 //
                 cb.nextEndpoint();
-        
+
                 return null;
             },
             createConnection: function(transceiver, endpoint)
             {
                 Debug.assert(this._pending.has(endpoint) && transceiver !== null);
-        
+
                 //
                 // Create and add the connection to the connection map. Adding the connection to the map
                 // is necessary to support the interruption of the connection initialization and validation
@@ -23489,7 +23489,7 @@
                     {
                         throw new Ice.CommunicatorDestroyedException();
                     }
-        
+
                     connection = new ConnectionI(this._communicator, this._instance, this._monitor, transceiver,
                                                 endpoint.changeCompress(false), false, null);
                 }
@@ -23508,7 +23508,7 @@
                     }
                     throw ex;
                 }
-        
+
                 this._connectionsByEndpoint.set(connection.endpoint(), connection);
                 this._connectionsByEndpoint.set(connection.endpoint().changeCompress(true), connection);
                 return connection;
@@ -23516,13 +23516,13 @@
             finishGetConnection: function(endpoints, endpoint, connection, cb)
             {
                 // cb is-a ConnectCallback
-        
+
                 var connectionCallbacks = [];
                 if(cb !== null)
                 {
                     connectionCallbacks.push(cb);
                 }
-        
+
                 var i;
                 var cc;
                 var callbacks = [];
@@ -23553,7 +23553,7 @@
                         }
                     }
                 }
-        
+
                 for(i = 0; i < connectionCallbacks.length; ++i)
                 {
                     cc = connectionCallbacks[i];
@@ -23569,7 +23569,7 @@
                     cc = callbacks[i];
                     cc.removeFromPending();
                 }
-        
+
                 var compress;
                 var defaultsAndOverrides = this._instance.defaultsAndOverrides();
                 if(defaultsAndOverrides.overrideCompress)
@@ -23580,7 +23580,7 @@
                 {
                     compress = endpoint.compress();
                 }
-        
+
                 for(i = 0; i < callbacks.length; ++i)
                 {
                     cc = callbacks[i];
@@ -23591,13 +23591,13 @@
                     cc = connectionCallbacks[i];
                     cc.setConnection(connection, compress);
                 }
-        
+
                 this.checkFinished();
             },
             finishGetConnectionEx: function(endpoints, ex, cb)
             {
                 // cb is-a ConnectCallback
-        
+
                 var failedCallbacks = [];
                 if(cb !== null)
                 {
@@ -23633,7 +23633,7 @@
                         }
                     }
                 }
-        
+
                 for(i = 0; i < callbacks.length; ++i)
                 {
                     cc = callbacks[i];
@@ -23641,7 +23641,7 @@
                     cc.removeFromPending();
                 }
                 this.checkFinished();
-        
+
                 for(i = 0; i < callbacks.length; ++i)
                 {
                     cc = callbacks[i];
@@ -23656,7 +23656,7 @@
             addToPending: function(cb, endpoints)
             {
                 // cb is-a ConnectCallback
-        
+
                 //
                 // Add the callback to each pending list.
                 //
@@ -23679,12 +23679,12 @@
                         }
                     }
                 }
-        
+
                 if(found)
                 {
                     return true;
                 }
-        
+
                 //
                 // If there's no pending connection for the given endpoints, we're
                 // responsible for its establishment. We add empty pending lists,
@@ -23698,13 +23698,13 @@
                         this._pending.set(p, []);
                     }
                 }
-        
+
                 return false;
             },
             removeFromPending: function(cb, endpoints)
             {
                 // cb is-a ConnectCallback
-        
+
                 for(var i = 0; i < endpoints.length; ++i)
                 {
                     var p = endpoints[i];
@@ -23780,7 +23780,7 @@
                 {
                     return;
                 }
-        
+
                 var self = this;
                 Promise.all(
                     self._connectionsByEndpoint.map(
@@ -23817,7 +23817,7 @@
                         {
                             Debug.assert(self._connectionsByEndpoint.size === 0);
                         }
-        
+
                         Debug.assert(self._waitPromise !== null);
                         self._waitPromise.succeed();
                         self._monitor.destroy();
@@ -23825,9 +23825,9 @@
                 );
             }
         });
-        
+
         Ice.OutgoingConnectionFactory = OutgoingConnectionFactory;
-        
+
         //
         // Value is a Vector<Ice.ConnectionI>
         //
@@ -23877,7 +23877,7 @@
                 }
             }
         });
-        
+
         var ConnectCallback = Class({
             __init__: function(f, endpoints, more, selType)
             {
@@ -23970,7 +23970,7 @@
                     this._promise.fail(ex);
                     return;
                 }
-        
+
                 this.getConnection();
                 return this._promise;
             },
@@ -23993,7 +23993,7 @@
                         //
                         return;
                     }
-        
+
                     this._promise.succeed(connection, compress.value);
                     this._factory.decPendingConnectCount(); // Must be called last.
                 }
@@ -24012,7 +24012,7 @@
                     {
                         Debug.assert(this._index < this._endpoints.length);
                         this._current = this._endpoints[this._index++];
-        
+
                         if(traceLevels.network >= 2)
                         {
                             var s = [];
@@ -24022,7 +24022,7 @@
                             s.push(this._current.toConnectorString());
                             this._factory._instance.initializationData().logger.trace(traceLevels.networkCat, s.join(""));
                         }
-        
+
                         var connection = this._factory.createConnection(this._current.connect(), this._current);
                         var self = this;
                         connection.start().then(
@@ -24048,7 +24048,7 @@
                             s.push(ex.toString());
                             this._factory._instance.initializationData().logger.trace(traceLevels.networkCat, s.join(""));
                         }
-        
+
                         if(this.connectionStartFailedImpl(ex))
                         {
                             continue;
@@ -24082,7 +24082,7 @@
                 return false;
             }
         });
-        
+
     }());
 
     (function()
@@ -24095,16 +24095,16 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Debug = Ice.Debug;
         var HashMap = Ice.HashMap;
         var Promise = Ice.Promise;
         var Protocol = Ice.Protocol;
         var LocatorRegistryPrx = Ice.LocatorRegisterPrx;
-        
+
         var  Class = Ice.Class;
-        
+
         var LocatorInfo = Class({
             __init__: function(locator, table, background)
             {
@@ -24112,7 +24112,7 @@
                 this._locatorRegistry = null;
                 this._table = table;
                 this._background = background;
-        
+
                 this._adapterRequests = new HashMap(); // Map<String, Request>
                 this._objectRequests = new HashMap(HashMap.compareEquals); // Map<Ice.Identity, Request>
             },
@@ -24127,12 +24127,12 @@
                 {
                     return true;
                 }
-        
+
                 if(rhs instanceof LocatorInfo)
                 {
                     return this._locator.equals(rhs._locator);
                 }
-        
+
                 return false;
             },
             hashCode: function()
@@ -24149,7 +24149,7 @@
                 {
                     return new Promise().succeed(this._locatorRegistry);
                 }
-        
+
                 var self = this;
                 return this._locator.getRegistry().then(
                     function(reg)
@@ -24167,7 +24167,7 @@
             getEndpoints: function(ref, wellKnownRef, ttl, p)
             {
                 var promise = p || new Promise(); // success callback receives (endpoints, cached)
-        
+
                 Debug.assert(ref.isIndirect());
                 var endpoints = null;
                 var cached = { value: false };
@@ -24202,7 +24202,7 @@
                             return promise;
                         }
                     }
-        
+
                     if(!r.isIndirect())
                     {
                         endpoints = r.getEndpoints();
@@ -24213,24 +24213,24 @@
                         return promise;
                     }
                 }
-        
+
                 Debug.assert(endpoints !== null);
                 if(ref.getInstance().traceLevels().location >= 1)
                 {
                     this.getEndpointsTrace(ref, endpoints, true);
                 }
                 promise.succeed(endpoints, true);
-        
+
                 return promise;
             },
             clearCache: function(ref)
             {
                 Debug.assert(ref.isIndirect());
-        
+
                 if(!ref.isWellKnown())
                 {
                     var endpoints = this._table.removeAdapterEndpoints(ref.getAdapterId());
-        
+
                     if(endpoints !== null && ref.getInstance().traceLevels().location >= 2)
                     {
                         this.trace("removed endpoints from locator table\n", ref, endpoints);
@@ -24258,7 +24258,7 @@
             trace: function(msg, ref, endpoints)
             {
                 Debug.assert(ref.isIndirect());
-        
+
                 var s = [];
                 s.push(msg);
                 s.push("\n");
@@ -24274,7 +24274,7 @@
                     s.push(ref.getInstance().identityToString(ref.getIdentity()));
                     s.push("\n");
                 }
-        
+
                 s.push("endpoints = ");
                 for(var i = 0; i < endpoints.length; i++)
                 {
@@ -24284,13 +24284,13 @@
                         s.push(":");
                     }
                 }
-        
+
                 ref.getInstance().initializationData().logger.trace(ref.getInstance().traceLevels().locationCat, s.join(""));
             },
             getEndpointsException: function(ref, exc)
             {
                 Debug.assert(ref.isIndirect());
-        
+
                 var instance = ref.getInstance();
                 var s, e;
                 try
@@ -24309,7 +24309,7 @@
                             s.push(ref.getAdapterId());
                             instance.initializationData().logger.trace(instance.traceLevels().locationCat, s.join(""));
                         }
-        
+
                         e = new Ice.NotRegisteredException();
                         e.kindOfObject = "object adapter";
                         e.id = ref.getAdapterId();
@@ -24325,7 +24325,7 @@
                             s.push(instance.identityToString(ref.getIdentity()));
                             instance.initializationData().logger.trace(instance.traceLevels().locationCat, s.join(""));
                         }
-        
+
                         e = new Ice.NotRegisteredException();
                         e.kindOfObject = "object";
                         e.id = instance.identityToString(ref.getIdentity());
@@ -24410,7 +24410,7 @@
                     s.push(ref.getAdapterId());
                     instance.initializationData().logger.trace(instance.traceLevels().locationCat, s.join(""));
                 }
-        
+
                 var request = this._adapterRequests.get(ref.getAdapterId());
                 if(request !== undefined)
                 {
@@ -24431,7 +24431,7 @@
                     s.push(instance.identityToString(ref.getIdentity()));
                     instance.initializationData().logger.trace(instance.traceLevels().locationCat, s.join(""));
                 }
-        
+
                 var request = this._objectRequests.get(ref.getIdentity());
                 if(request !== undefined)
                 {
@@ -24454,7 +24454,7 @@
                         this._table.removeObjectReference(wellKnownRefs[i].getIdentity());
                     }
                 }
-        
+
                 if(!ref.isWellKnown())
                 {
                     if(proxy !== null && !proxy.__reference().isIndirect())
@@ -24466,7 +24466,7 @@
                     {
                         this._table.removeAdapterEndpoints(ref.getAdapterId());
                     }
-        
+
                     Debug.assert(this._adapterRequests.has(ref.getAdapterId()));
                     this._adapterRequests.delete(ref.getAdapterId());
                 }
@@ -24481,15 +24481,15 @@
                     {
                         this._table.removeObjectReference(ref.getIdentity());
                     }
-        
+
                     Debug.assert(this._objectRequests.has(ref.getIdentity()));
                     this._objectRequests.delete(ref.getIdentity());
                 }
             }
         });
-        
+
         Ice.LocatorInfo = LocatorInfo;
-        
+
         var RequestCallback = Class({
             __init__: function(ref, ttl, promise)
             {
@@ -24541,12 +24541,12 @@
                         return;
                     }
                 }
-        
+
                 if(this._ref.getInstance().traceLevels().location >= 1)
                 {
                     locatorInfo.getEndpointsTrace(this._ref, endpoints, false);
                 }
-        
+
                 if(this._promise !== null)
                 {
                     this._promise.succeed(endpoints === null ? [] : endpoints, false);
@@ -24567,13 +24567,13 @@
                 }
             }
         });
-        
+
         var Request = Class({
             __init__: function(locatorInfo, ref)
             {
                 this._locatorInfo = locatorInfo;
                 this._ref = ref;
-        
+
                 this._callbacks = []; // Array<RequestCallback>
                 this._wellKnownRefs = []; // Array<Reference>
                 this._sent = false;
@@ -24626,7 +24626,7 @@
                 }
             }
         });
-        
+
         var ObjectRequest = Class(Request, {
             __init__: function(locatorInfo, reference)
             {
@@ -24654,7 +24654,7 @@
                 }
             }
         });
-        
+
         var AdapterRequest = Class(Request, {
             __init__: function(locatorInfo, reference)
             {
@@ -24682,8 +24682,8 @@
                 }
             }
         });
-        
-        
+
+
     }());
 
     (function()
@@ -24696,8 +24696,8 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var AsyncResultBase = Ice.AsyncResultBase;
         var Debug = Ice.Debug;
         var Identity = Ice.Identity;
@@ -24705,7 +24705,7 @@
         var PropertyNames = Ice.PropertyNames;
         var ServantManager = Ice.ServantManager;
         var StringUtil = Ice.StringUtil;
-        
+
         var _suffixes =
         [
             "ACM",
@@ -24743,7 +24743,7 @@
             "ThreadPool.StackSize",
             "ThreadPool.Serialize"
         ];
-        
+
         var StateUninitialized = 0; // Just constructed.
         //var StateHeld = 1;
         //var StateWaitActivate = 2;
@@ -24751,7 +24751,7 @@
         //var StateDeactivating = 4;
         var StateDeactivated = 5;
         var StateDestroyed  = 6;
-        
+
         //
         // Only for use by IceInternal.ObjectAdapterFactory
         //
@@ -24767,7 +24767,7 @@
                 this._routerInfo = null;
                 this._state = StateUninitialized;
                 this._noConfig = noConfig;
-        
+
                 if(this._noConfig)
                 {
                     this._reference = this._instance.referenceFactory().createFromString("dummy -t", "");
@@ -24775,11 +24775,11 @@
                     promise.succeed(this, promise);
                     return;
                 }
-        
+
                 var properties = this._instance.initializationData().properties;
                 var unknownProps = [];
                 var noProps = this.filterProperties(unknownProps);
-        
+
                 //
                 // Warn about unknown object adapter properties.
                 //
@@ -24792,7 +24792,7 @@
                     }
                     this._instance.initializationData().logger.warning(message.join(""));
                 }
-        
+
                 //
                 // Make sure named adapter has some configuration.
                 //
@@ -24802,7 +24802,7 @@
                     ex.reason = "object adapter `" + this._name + "' requires configuration";
                     throw ex;
                 }
-        
+
                 //
                 // Setup a reference to be used to get the default proxy options
                 // when creating new proxies. By default, create twoway proxies.
@@ -24825,7 +24825,7 @@
                         throw e;
                     }
                 }
-        
+
                 {
                     var defaultMessageSizeMax = this._instance.messageSizeMax() / 1024;
                     var num = properties.getPropertyAsIntWithDefault(this._name + ".MessageSizeMax", defaultMessageSizeMax);
@@ -24838,10 +24838,10 @@
                         this._messageSizeMax = num * 1024; // Property is in kilobytes, _messageSizeMax in bytes
                     }
                 }
-        
+
                 try
                 {
-        
+
                     if(router === null)
                     {
                         router = Ice.RouterPrx.uncheckedCast(
@@ -24851,7 +24851,7 @@
                     {
                         this._routerInfo = this._instance.routerManager().find(router);
                         Debug.assert(this._routerInfo !== null);
-        
+
                         //
                         // Make sure this router is not already registered with another adapter.
                         //
@@ -24861,9 +24861,9 @@
                                 "object adapter with router",
                                 this._instance.identityToString(router.ice_getIdentity()));
                         }
-        
+
                         //
-                        // Add the router's server proxy endpoints to this object
+                        // Add the router's communication proxy endpoints to this object
                         // adapter.
                         //
                         var self = this;
@@ -24871,7 +24871,7 @@
                             function(endpoints)
                             {
                                 var i;
-        
+
                                 for(i = 0; i < endpoints.length; ++i)
                                 {
                                     self._routerEndpoints.push(endpoints[i]);
@@ -24881,7 +24881,7 @@
                                     {
                                         return e1.compareTo(e2);
                                     });
-        
+
                                 //
                                 // Remove duplicate endpoints, so we have a list of unique
                                 // endpoints.
@@ -24899,14 +24899,14 @@
                                         ++i;
                                     }
                                 }
-        
+
                                 //
                                 // Associate this object adapter with the router. This way,
                                 // new outgoing connections to the router's client proxy will
                                 // use this object adapter for callbacks.
                                 //
                                 self._routerInfo.setAdapter(self);
-        
+
                                 //
                                 // Also modify all existing outgoing connections to the
                                 // router's client proxy to use this object adapter for
@@ -25000,7 +25000,7 @@
                     }
                     return promise.succeed(promise);
                 };
-        
+
                 return this._state < StateDeactivated ? this.deactivate().then(destroyInternal) : destroyInternal();
             },
             add: function(object, ident)
@@ -25012,15 +25012,15 @@
                 this.checkForDeactivation();
                 this.checkIdentity(ident);
                 this.checkServant(object);
-        
+
                 //
                 // Create a copy of the Identity argument, in case the caller
                 // reuses it.
                 //
                 var id = ident.clone();
-        
+
                 this._servantManager.addServant(object, id, facet);
-        
+
                 return this.newProxy(id, facet);
             },
             addWithUUID: function(object)
@@ -25035,7 +25035,7 @@
             {
                 this.checkServant(servant);
                 this.checkForDeactivation();
-        
+
                 this._servantManager.addDefaultServant(servant, category);
             },
             remove: function(ident)
@@ -25046,20 +25046,20 @@
             {
                 this.checkForDeactivation();
                 this.checkIdentity(ident);
-        
+
                 return this._servantManager.removeServant(ident, facet);
             },
             removeAllFacets: function(ident)
             {
                 this.checkForDeactivation();
                 this.checkIdentity(ident);
-        
+
                 return this._servantManager.removeAllFacets(ident);
             },
             removeDefaultServant: function(category)
             {
                 this.checkForDeactivation();
-        
+
                 return this._servantManager.removeDefaultServant(category);
             },
             find: function(ident)
@@ -25070,52 +25070,52 @@
             {
                 this.checkForDeactivation();
                 this.checkIdentity(ident);
-        
+
                 return this._servantManager.findServant(ident, facet);
             },
             findAllFacets: function(ident)
             {
                 this.checkForDeactivation();
                 this.checkIdentity(ident);
-        
+
                 return this._servantManager.findAllFacets(ident);
             },
             findByProxy: function(proxy)
             {
                 this.checkForDeactivation();
-        
+
                 var ref = proxy.__reference();
                 return this.findFacet(ref.getIdentity(), ref.getFacet());
             },
             findDefaultServant: function(category)
             {
                 this.checkForDeactivation();
-        
+
                 return this._servantManager.findDefaultServant(category);
             },
             addServantLocator: function(locator, prefix)
             {
                 this.checkForDeactivation();
-        
+
                 this._servantManager.addServantLocator(locator, prefix);
             },
             removeServantLocator: function(prefix)
             {
                 this.checkForDeactivation();
-        
+
                 return this._servantManager.removeServantLocator(prefix);
             },
             findServantLocator: function(prefix)
             {
                 this.checkForDeactivation();
-        
+
                 return this._servantManager.findServantLocator(prefix);
             },
             createProxy: function(ident)
             {
                 this.checkForDeactivation();
                 this.checkIdentity(ident);
-        
+
                 return this.newProxy(ident, "");
             },
             createDirectProxy: function(ident)
@@ -25156,17 +25156,17 @@
             newProxy: function(ident, facet)
             {
                 var endpoints = [];
-        
+
                 //
-                // Now we also add the endpoints of the router's server proxy, if
+                // Now we also add the endpoints of the router's communication proxy, if
                 // any. This way, object references created by this object adapter
-                // will also point to the router's server proxy endpoints.
+                // will also point to the router's communication proxy endpoints.
                 //
                 for(var i = 0; i < this._routerEndpoints.length; ++i)
                 {
                     endpoints.push(this._routerEndpoints[i]);
                 }
-        
+
                 //
                 // Create a reference and return a proxy for this reference.
                 //
@@ -25179,7 +25179,7 @@
                 {
                     var ex = new Ice.ObjectAdapterDeactivatedException();
                     ex.name = this.getName();
-        
+
                     if(promise !== undefined)
                     {
                         promise.fail(ex, promise);
@@ -25190,7 +25190,7 @@
                         throw ex;
                     }
                 }
-        
+
                 return false;
             },
             checkIdentity: function(ident)
@@ -25199,7 +25199,7 @@
                 {
                     throw new Ice.IllegalIdentityException(ident);
                 }
-        
+
                 if(ident.category === undefined || ident.category === null)
                 {
                     ident.category = "";
@@ -25227,7 +25227,7 @@
                         break;
                     }
                 }
-        
+
                 var noProps = true;
                 var props = this._instance.initializationData().properties.getPropertiesForPrefix(prefix);
                 for(var e = props.entries; e !== null; e = e.next)
@@ -25242,19 +25242,19 @@
                             break;
                         }
                     }
-        
+
                     if(!valid && addUnknown)
                     {
                         unknownProps.push(e.key);
                     }
                 }
-        
+
                 return noProps;
             }
         });
-        
+
         Ice.ObjectAdapterI = ObjectAdapterI;
-        
+
     }());
 
     (function()
@@ -25267,18 +25267,18 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var HashMap = Ice.HashMap;
         var LocatorInfo = Ice.LocatorInfo;
         var LocatorTable = Ice.LocatorTable;
         var LocatorPrx = Ice.LocatorPrx;
-        
+
         var LocatorManager = Ice.Class({
             __init__: function(properties)
             {
                 this._background = properties.getPropertyAsInt("Ice.BackgroundLocatorCacheUpdates") > 0;
-        
+
                 this._table = new HashMap(HashMap.compareEquals); // Map<Ice.LocatorPrx, LocatorInfo>
                 this._locatorTables = new HashMap(HashMap.compareEquals); // Map<Ice.Identity, LocatorTable>
             },
@@ -25301,16 +25301,16 @@
                 {
                     return null;
                 }
-        
+
                 //
                 // The locator can't be located.
                 //
                 var locator = LocatorPrx.uncheckedCast(loc.ice_locator(null));
-        
+
                 //
                 // TODO: reap unused locator info objects?
                 //
-        
+
                 var info = this._table.get(locator);
                 if(info === undefined)
                 {
@@ -25325,17 +25325,17 @@
                         table = new LocatorTable();
                         this._locatorTables.set(locator.ice_getIdentity(), table);
                     }
-        
+
                     info = new LocatorInfo(locator, table, this._background);
                     this._table.set(locator, info);
                 }
-        
+
                 return info;
             }
         });
-        
+
         Ice.LocatorManager = LocatorManager;
-        
+
     }());
 
     (function()
@@ -25348,12 +25348,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var AsyncResultBase = Ice.AsyncResultBase;
         var ObjectAdapterI = Ice.ObjectAdapterI;
         var Promise = Ice.Promise;
-        
+
         //
         // Only for use by Instance.
         //
@@ -25376,7 +25376,7 @@
                 {
                     return this._shutdownPromise;
                 }
-        
+
                 this._instance = null;
                 this._communicator = null;
                 this._shutdownPromise = Promise.all(
@@ -25420,7 +25420,7 @@
                 {
                     throw new Ice.ObjectAdapterDeactivatedException();
                 }
-        
+
                 var adapter = null;
                 try
                 {
@@ -25451,13 +25451,13 @@
                 {
                     return;
                 }
-        
+
                 var n = this._adapters.indexOf(adapter);
                 if(n !== -1)
                 {
                     this._adapters.splice(n, 1);
                 }
-        
+
                 n = this._adapterNamesInUse.indexOf(adapter.getName());
                 if(n !== -1)
                 {
@@ -25465,9 +25465,9 @@
                 }
             }
         });
-        
+
         Ice.ObjectAdapterFactory = ObjectAdapterFactory;
-        
+
     }());
 
     (function()
@@ -25491,13 +25491,13 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineDictionary(IceMX, "StringIntDict", "StringIntDictHelper", "Ice.StringHelper", "Ice.IntHelper", false, undefined, undefined);
-        
+
             /**
              * The base class for metrics. A metrics object represents a
              * collection of measurements associated to a given a system.
-             * 
+             *
              **/
             IceMX.Metrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures)
@@ -25532,15 +25532,15 @@
                     this.failures = __is.readInt();
                 },
                 false);
-        
+
             IceMX.MetricsPrx = Slice.defineProxy(Ice.ObjectPrx, IceMX.Metrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.Metrics, IceMX.MetricsPrx);
-        
+
             /**
              * A structure to keep track of failures associated with a given
              * metrics.
-             * 
+             *
              **/
             IceMX.MetricsFailures = Slice.defineStruct(
                 function(id, failures)
@@ -25559,15 +25559,15 @@
                     this.id = __is.readString();
                     this.failures = IceMX.StringIntDictHelper.read(__is);
                 },
-                2, 
+                2,
                 false);
             Slice.defineSequence(IceMX, "MetricsFailuresSeqHelper", "IceMX.MetricsFailures", false);
             Slice.defineSequence(IceMX, "MetricsMapHelper", "Ice.ObjectHelper", false, "IceMX.Metrics");
             Slice.defineDictionary(IceMX, "MetricsView", "MetricsViewHelper", "Ice.StringHelper", "IceMX.MetricsMapHelper", false, undefined, undefined, Ice.ArrayUtil.equals);
-        
+
             /**
              * Raised if a metrics view cannot be found.
-             * 
+             *
              **/
             IceMX.UnknownMetricsView = Slice.defineUserException(
                 function(_cause)
@@ -25579,13 +25579,13 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * The metrics administrative facet interface. This interface allows
              * remote administrative clients to access metrics of an application
              * that enabled the Ice administrative facility and configured some
              * metrics views.
-             * 
+             *
              **/
             IceMX.MetricsAdmin = Slice.defineObject(
                 undefined,
@@ -25595,38 +25595,38 @@
                     "::IceMX::MetricsAdmin"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceMX.MetricsAdminPrx = Slice.defineProxy(Ice.ObjectPrx, IceMX.MetricsAdmin.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.MetricsAdmin, IceMX.MetricsAdminPrx,
             {
                 "getMetricsViewNames": [, , , , 2, ["Ice.StringSeqHelper"], , [["Ice.StringSeqHelper"]], , , ],
-                "enableMetricsView": [, , , , 2, , [[7]], , 
+                "enableMetricsView": [, , , , 2, , [[7]], ,
                 [
                     IceMX.UnknownMetricsView
                 ], , ],
-                "disableMetricsView": [, , , , 2, , [[7]], , 
+                "disableMetricsView": [, , , , 2, , [[7]], ,
                 [
                     IceMX.UnknownMetricsView
                 ], , ],
-                "getMetricsView": [, , , , 2, ["IceMX.MetricsViewHelper"], [[7]], [[4]], 
+                "getMetricsView": [, , , , 2, ["IceMX.MetricsViewHelper"], [[7]], [[4]],
                 [
                     IceMX.UnknownMetricsView
                 ], , true],
-                "getMapMetricsFailures": [, , , , 2, ["IceMX.MetricsFailuresSeqHelper"], [[7], [7]], , 
+                "getMapMetricsFailures": [, , , , 2, ["IceMX.MetricsFailuresSeqHelper"], [[7], [7]], ,
                 [
                     IceMX.UnknownMetricsView
                 ], , ],
-                "getMetricsFailures": [, , , , 2, [IceMX.MetricsFailures], [[7], [7], [7]], , 
+                "getMetricsFailures": [, , , , 2, [IceMX.MetricsFailures], [[7], [7], [7]], ,
                 [
                     IceMX.UnknownMetricsView
                 ], , ]
             });
-        
+
             /**
              * Provides information on the number of threads currently in use and
              * their activity.
-             * 
+             *
              **/
             IceMX.ThreadMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, inUseForIO, inUseForUser, inUseForOther)
@@ -25656,14 +25656,14 @@
                     this.inUseForOther = __is.readInt();
                 },
                 false);
-        
+
             IceMX.ThreadMetricsPrx = Slice.defineProxy(IceMX.MetricsPrx, IceMX.ThreadMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.ThreadMetrics, IceMX.ThreadMetricsPrx);
-        
+
             /**
              * Provides information on servant dispatch.
-             * 
+             *
              **/
             IceMX.DispatchMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, userException, size, replySize)
@@ -25693,18 +25693,18 @@
                     this.replySize = __is.readLong();
                 },
                 false);
-        
+
             IceMX.DispatchMetricsPrx = Slice.defineProxy(IceMX.MetricsPrx, IceMX.DispatchMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.DispatchMetrics, IceMX.DispatchMetricsPrx);
-        
+
             /**
              * Provides information on child invocations. A child invocation is
              * either remote (sent over an Ice connection) or collocated. An
              * invocation can have multiple child invocation if it is
              * retried. Child invocation metrics are embedded within {@link
              * InvocationMetrics}.
-             * 
+             *
              **/
             IceMX.ChildInvocationMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, size, replySize)
@@ -25731,15 +25731,15 @@
                     this.replySize = __is.readLong();
                 },
                 false);
-        
+
             IceMX.ChildInvocationMetricsPrx = Slice.defineProxy(IceMX.MetricsPrx, IceMX.ChildInvocationMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.ChildInvocationMetrics, IceMX.ChildInvocationMetricsPrx);
-        
+
             /**
              * Provides information on invocations that are collocated. Collocated
              * metrics are embedded within {@link InvocationMetrics}.
-             * 
+             *
              **/
             IceMX.CollocatedMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, size, replySize)
@@ -25754,16 +25754,16 @@
                     "::IceMX::Metrics"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceMX.CollocatedMetricsPrx = Slice.defineProxy(IceMX.ChildInvocationMetricsPrx, IceMX.CollocatedMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.CollocatedMetrics, IceMX.CollocatedMetricsPrx);
-        
+
             /**
              * Provides information on invocations that are specifically sent over
              * Ice connections. Remote metrics are embedded within {@link
              * InvocationMetrics}.
-             * 
+             *
              **/
             IceMX.RemoteMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, size, replySize)
@@ -25778,15 +25778,15 @@
                     "::IceMX::RemoteMetrics"
                 ],
                 -1, undefined, undefined, false);
-        
+
             IceMX.RemoteMetricsPrx = Slice.defineProxy(IceMX.ChildInvocationMetricsPrx, IceMX.RemoteMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.RemoteMetrics, IceMX.RemoteMetricsPrx);
-        
+
             /**
              * Provide measurements for proxy invocations. Proxy invocations can
              * either be sent over the wire or be collocated.
-             * 
+             *
              **/
             IceMX.InvocationMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, retry, userException, remotes, collocated)
@@ -25819,15 +25819,15 @@
                     this.collocated = IceMX.MetricsMapHelper.read(__is);
                 },
                 false);
-        
+
             IceMX.InvocationMetricsPrx = Slice.defineProxy(IceMX.MetricsPrx, IceMX.InvocationMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.InvocationMetrics, IceMX.InvocationMetricsPrx);
-        
+
             /**
              * Provides information on the data sent and received over Ice
              * connections.
-             * 
+             *
              **/
             IceMX.ConnectionMetrics = Slice.defineObject(
                 function(id, total, current, totalLifetime, failures, receivedBytes, sentBytes)
@@ -25854,11 +25854,11 @@
                     this.sentBytes = __is.readLong();
                 },
                 false);
-        
+
             IceMX.ConnectionMetricsPrx = Slice.defineProxy(IceMX.MetricsPrx, IceMX.ConnectionMetrics.ice_staticId, undefined);
-        
+
             Slice.defineOperations(IceMX.ConnectionMetrics, IceMX.ConnectionMetricsPrx);
-        
+
     }());
 
     (function()
@@ -25871,12 +25871,12 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Debug = Ice.Debug;
         var HashMap = Ice.HashMap;
         var ConnectRequestHandler = Ice.ConnectRequestHandler;
-        
+
         var RequestHandlerFactory = Ice.Class({
             __init__: function(instance)
             {
@@ -25902,7 +25902,7 @@
                     connect = true;
                     handler = new ConnectRequestHandler(ref, proxy);
                 }
-        
+
                 if(connect)
                 {
                     ref.getConnection().then(function(connection, compress)
@@ -25927,9 +25927,9 @@
                 }
             }
         });
-        
+
         Ice.RequestHandlerFactory = RequestHandlerFactory;
-        
+
     }());
 
     (function()
@@ -25953,18 +25953,18 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * An administrative interface for process management. Managed servers must
              * implement this interface.
-             * 
+             *
              * <p class="Note">A servant implementing this interface is a potential target
              * for denial-of-service attacks, therefore proper security precautions
              * should be taken. For example, the servant can use a UUID to make its
              * identity harder to guess, and be registered in an object adapter with
              * a secured endpoint.
-             * 
+             *
              **/
             Ice.Process = Slice.defineObject(
                 undefined,
@@ -25974,15 +25974,15 @@
                     "::Ice::Process"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.ProcessPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.Process.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.Process, Ice.ProcessPrx,
             {
                 "shutdown": [, , , , , , , , , , ],
                 "writeMessage": [, , , , , , [[7], [3]], , , , ]
             });
-        
+
     }());
 
     (function()
@@ -25995,10 +25995,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var TcpEndpointI = Ice.TcpEndpointI;
-        
+
         var TcpEndpointFactory = Ice.Class({
             __init__: function(instance)
             {
@@ -26033,9 +26033,9 @@
                 return new TcpEndpointFactory(instance);
             }
         });
-        
+
         Ice.TcpEndpointFactory = TcpEndpointFactory;
-        
+
     }());
 
     (function()
@@ -26059,13 +26059,13 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineDictionary(Ice, "PropertyDict", "PropertyDictHelper", "Ice.StringHelper", "Ice.StringHelper", false, undefined, undefined);
-        
+
             /**
              * The PropertiesAdmin interface provides remote access to the properties
              * of a communicator.
-             * 
+             *
              **/
             Ice.PropertiesAdmin = Slice.defineObject(
                 undefined,
@@ -26075,16 +26075,16 @@
                     "::Ice::PropertiesAdmin"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.PropertiesAdminPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.PropertiesAdmin.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.PropertiesAdmin, Ice.PropertiesAdminPrx,
             {
                 "getProperty": [, , , , , [7], [[7]], , , , ],
                 "getPropertiesForPrefix": [, , , , , ["Ice.PropertyDictHelper"], [[7]], , , , ],
                 "setProperties": [, , , 1, , , [["Ice.PropertyDictHelper"]], , , , ]
             });
-        
+
     }());
 
     (function()
@@ -26108,19 +26108,19 @@
         //
         // </auto-generated>
         //
-        
-        
+
+
             /**
              * An enumeration representing the different types of log messages.
-             * 
+             *
              **/
             Ice.LogMessageType = Slice.defineEnum([
                 ['PrintMessage', 0], ['TraceMessage', 1], ['WarningMessage', 2], ['ErrorMessage', 3]]);
             Slice.defineSequence(Ice, "LogMessageTypeSeqHelper", "Ice.LogMessageType.__helper", false);
-        
+
             /**
              * A complete log message.
-             * 
+             *
              **/
             Ice.LogMessage = Slice.defineStruct(
                 function(type, timestamp, traceCategory, message)
@@ -26145,15 +26145,15 @@
                     this.traceCategory = __is.readString();
                     this.message = __is.readString();
                 },
-                11, 
+                11,
                 false);
             Slice.defineSequence(Ice, "LogMessageSeqHelper", "Ice.LogMessage", false);
-        
+
             /**
              * The Ice remote logger interface. An application can implement a
              * RemoteLogger to receive the log messages sent to the local {@link Logger}
              * of another Ice application.
-             * 
+             *
              **/
             Ice.RemoteLogger = Slice.defineObject(
                 undefined,
@@ -26163,20 +26163,20 @@
                     "::Ice::RemoteLogger"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.RemoteLoggerPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.RemoteLogger.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.RemoteLogger, Ice.RemoteLoggerPrx,
             {
                 "init": [, , , , , , [[7], ["Ice.LogMessageSeqHelper"]], , , , ],
                 "log": [, , , , , , [[Ice.LogMessage]], , , , ]
             });
-        
+
             /**
              * An exception thrown by {@link LoggerAdmin#attachRemoteLogger} to report
              * that the provided {@link RemoteLogger} was previously attached to this
              * {@link LoggerAdmin}.
-             * 
+             *
              **/
             Ice.RemoteLoggerAlreadyAttachedException = Slice.defineUserException(
                 function(_cause)
@@ -26188,11 +26188,11 @@
                 undefined, undefined,
                 false,
                 false);
-        
+
             /**
              * The interface of the admin object that allows an Ice application the attach its
              * {@link RemoteLogger} to the {@link Logger} of this admin object's Ice communicator.
-             * 
+             *
              **/
             Ice.LoggerAdmin = Slice.defineObject(
                 undefined,
@@ -26202,19 +26202,19 @@
                     "::Ice::Object"
                 ],
                 -1, undefined, undefined, false);
-        
+
             Ice.LoggerAdminPrx = Slice.defineProxy(Ice.ObjectPrx, Ice.LoggerAdmin.ice_staticId, undefined);
-        
+
             Slice.defineOperations(Ice.LoggerAdmin, Ice.LoggerAdminPrx,
             {
-                "attachRemoteLogger": [, , , , , , [["Ice.RemoteLoggerPrx"], ["Ice.LogMessageTypeSeqHelper"], ["Ice.StringSeqHelper"], [3]], , 
+                "attachRemoteLogger": [, , , , , , [["Ice.RemoteLoggerPrx"], ["Ice.LogMessageTypeSeqHelper"], ["Ice.StringSeqHelper"], [3]], ,
                 [
                     Ice.RemoteLoggerAlreadyAttachedException
                 ], , ],
                 "detachRemoteLogger": [, , , , , [1], [["Ice.RemoteLoggerPrx"]], , , , ],
                 "getLog": [, , , , , ["Ice.LogMessageSeqHelper"], [["Ice.LogMessageTypeSeqHelper"], ["Ice.StringSeqHelper"], [3]], [[7]], , , ]
             });
-        
+
     }());
 
     (function()
@@ -26227,10 +26227,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var WSEndpoint = Ice.WSEndpoint;
-        
+
         var WSEndpointFactory = Ice.Class({
             __init__:function(instance, delegate)
             {
@@ -26287,9 +26287,9 @@
         //
         // </auto-generated>
         //
-        
+
             Slice.defineDictionary(Ice, "SliceChecksumDict", "SliceChecksumDictHelper", "Ice.StringHelper", "Ice.StringHelper", false, undefined, undefined);
-        
+
     }());
 
     (function()
@@ -26302,9 +26302,9 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
-        
+
+
+
         var AsyncResultBase = Ice.AsyncResultBase;
         var Debug = Ice.Debug;
         var DefaultsAndOverrides = Ice.DefaultsAndOverrides;
@@ -26326,11 +26326,11 @@
         var ReferenceFactory = Ice.ReferenceFactory;
         var RequestHandlerFactory = Ice.RequestHandlerFactory;
         var ACMConfig = Ice.ACMConfig;
-        
+
         var StateActive = 0;
         var StateDestroyInProgress = 1;
         var StateDestroyed = 2;
-        
+
         //
         // Instance - only for use by Communicator
         //
@@ -26339,7 +26339,7 @@
             {
                 this._state = StateActive;
                 this._initData = initData;
-        
+
                 this._traceLevels = null;
                 this._defaultsAndOverrides = null;
                 this._messageSizeMax = 0;
@@ -26386,7 +26386,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._routerManager !== null);
                 return this._routerManager;
             },
@@ -26396,7 +26396,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._locatorManager !== null);
                 return this._locatorManager;
             },
@@ -26406,7 +26406,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._referenceFactory !== null);
                 return this._referenceFactory;
             },
@@ -26416,7 +26416,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._requestHandlerFactory !== null);
                 return this._requestHandlerFactory;
             },
@@ -26426,7 +26426,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._proxyFactory !== null);
                 return this._proxyFactory;
             },
@@ -26436,7 +26436,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._outgoingConnectionFactory !== null);
                 return this._outgoingConnectionFactory;
             },
@@ -26446,7 +26446,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._servantFactoryManager !== null);
                 return this._servantFactoryManager;
             },
@@ -26456,7 +26456,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._objectAdapterFactory !== null);
                 return this._objectAdapterFactory;
             },
@@ -26466,7 +26466,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._retryQueue !== null);
                 return this._retryQueue;
             },
@@ -26476,7 +26476,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._timer !== null);
                 return this._timer;
             },
@@ -26486,7 +26486,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 Debug.assert(this._endpointFactoryManager !== null);
                 return this._endpointFactoryManager;
             },
@@ -26517,14 +26517,14 @@
             {
                 return Ice.identityToString(ident);
             },
-        
+
             setDefaultLocator: function(locator)
             {
                 if(this._state == StateDestroyed)
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 this._referenceFactory = this._referenceFactory.setDefaultLocator(locator);
             },
             setDefaultRouter: function(router)
@@ -26533,7 +26533,7 @@
                 {
                     throw new Ice.CommunicatorDestroyedException();
                 }
-        
+
                 this._referenceFactory = this._referenceFactory.setDefaultRouter(router);
             },
             setLogger: function(logger)
@@ -26546,31 +26546,31 @@
                 // If promise == null, it means the caller is requesting a synchronous setup.
                 // Otherwise, we resolve the promise after all initialization is complete.
                 //
-        
+
                 try
                 {
                     if(this._initData.properties === null)
                     {
                         this._initData.properties = Properties.createProperties();
                     }
-        
+
                     if(Ice.__oneOfDone === undefined)
                     {
                         Ice.__printStackTraces =
                             this._initData.properties.getPropertyAsIntWithDefault("Ice.PrintStackTraces", 0) > 0;
-        
+
                         Ice.__oneOfDone = true;
                     }
-        
+
                     if(this._initData.logger === null)
                     {
                         this._initData.logger = Ice.getProcessLogger();
                     }
-        
+
                     this._traceLevels = new TraceLevels(this._initData.properties);
-        
+
                     this._defaultsAndOverrides = new DefaultsAndOverrides(this._initData.properties, this._initData.logger);
-        
+
                     var defMessageSizeMax = 1024;
                     var num = this._initData.properties.getPropertyAsIntWithDefault("Ice.MessageSizeMax", defMessageSizeMax);
                     if(num < 1 || num > 0x7fffffff / 1024)
@@ -26581,7 +26581,7 @@
                     {
                         this._messageSizeMax = num * 1024; // Property is in kilobytes, _messageSizeMax in bytes
                     }
-        
+
                     if(this._initData.properties.getProperty("Ice.BatchAutoFlushSize").length === 0 &&
                        this._initData.properties.getProperty("Ice.BatchAutoFlush").length > 0)
                     {
@@ -26606,62 +26606,62 @@
                             this._batchAutoFlushSize = num * 1024; // Property is in kilobytes, _batchAutoFlushSize in bytes
                         }
                     }
-        
+
                     this._clientACM = new ACMConfig(this._initData.properties, this._initData.logger, "Ice.ACM.Client",
                                                     new ACMConfig(this._initData.properties, this._initData.logger,
                                                                     "Ice.ACM", new ACMConfig()));
-        
+
                     this._implicitContext =
                         ImplicitContextI.create(this._initData.properties.getProperty("Ice.ImplicitContext"));
-        
+
                     this._routerManager = new RouterManager();
-        
+
                     this._locatorManager = new LocatorManager(this._initData.properties);
-        
+
                     this._referenceFactory = new ReferenceFactory(this, communicator);
-        
+
                     this._requestHandlerFactory = new RequestHandlerFactory(this, communicator);
-        
+
                     this._proxyFactory = new ProxyFactory(this);
-        
+
                     this._endpointFactoryManager = new EndpointFactoryManager(this);
-        
+
                     var tcpInstance = new Ice.ProtocolInstance(this, Ice.TCPEndpointType, "tcp", false);
                     var tcpEndpointFactory = new Ice.TcpEndpointFactory(tcpInstance);
                     this._endpointFactoryManager.add(tcpEndpointFactory);
-        
+
                     var wsInstance = new Ice.ProtocolInstance(this, Ice.WSEndpointType, "ws", false);
                     var wsEndpointFactory = new Ice.WSEndpointFactory(wsInstance, tcpEndpointFactory.clone(wsInstance));
                     this._endpointFactoryManager.add(wsEndpointFactory);
-        
+
                     var sslInstance = new Ice.ProtocolInstance(this, IceSSL.EndpointType, "ssl", true);
                     var sslEndpointFactory = new Ice.TcpEndpointFactory(sslInstance);
                     this._endpointFactoryManager.add(sslEndpointFactory);
-        
+
                     var wssInstance = new Ice.ProtocolInstance(this, Ice.WSSEndpointType, "wss", true);
                     var wssEndpointFactory = new Ice.WSEndpointFactory(wssInstance, sslEndpointFactory.clone(wssInstance));
                     this._endpointFactoryManager.add(wssEndpointFactory);
-        
+
                     this._outgoingConnectionFactory = new OutgoingConnectionFactory(communicator, this);
                     this._servantFactoryManager = new ObjectFactoryManager();
-        
+
                     this._objectAdapterFactory = new ObjectAdapterFactory(this, communicator);
-        
+
                     this._retryQueue = new RetryQueue(this);
                     this._timer = new Timer(this._initData.logger);
-        
+
                     var router = Ice.RouterPrx.uncheckedCast(this._proxyFactory.propertyToProxy("Ice.Default.Router"));
                     if(router !== null)
                     {
                         this._referenceFactory = this._referenceFactory.setDefaultRouter(router);
                     }
-        
+
                     var loc = Ice.LocatorPrx.uncheckedCast(this._proxyFactory.propertyToProxy("Ice.Default.Locator"));
                     if(loc !== null)
                     {
                         this._referenceFactory = this._referenceFactory.setDefaultLocator(loc);
                     }
-        
+
                     if(promise !== null)
                     {
                         promise.succeed(communicator);
@@ -26699,7 +26699,7 @@
             destroy: function()
             {
                 var promise = new AsyncResultBase(null, "destroy", null, this, null);
-        
+
                 //
                 // If destroy is in progress, wait for it to be done. This is
                 // necessary in case destroy() is called concurrently by
@@ -26715,7 +26715,7 @@
                     return promise;
                 }
                 this._state = StateDestroyInProgress;
-        
+
                 //
                 // Shutdown and destroy all the incoming and outgoing Ice
                 // connections and wait for the connections to be finished.
@@ -26736,7 +26736,7 @@
                         {
                             self._outgoingConnectionFactory.destroy();
                         }
-        
+
                         if(self._objectAdapterFactory !== null)
                         {
                             return self._objectAdapterFactory.destroy();
@@ -26761,7 +26761,7 @@
                         {
                             self._timer.destroy();
                         }
-        
+
                         if(self._servantFactoryManager)
                         {
                             self._servantFactoryManager.destroy();
@@ -26778,7 +26778,7 @@
                         {
                             self._endpointFactoryManager.destroy();
                         }
-        
+
                         var i;
                         if(self._initData.properties.getPropertyAsInt("Ice.Warn.UnusedProperties") > 0)
                         {
@@ -26795,12 +26795,12 @@
                                 self._initData.logger.warning(message.join(""));
                             }
                         }
-        
+
                         self._objectAdapterFactory = null;
                         self._outgoingConnectionFactory = null;
                         self._retryQueue = null;
                         self._timer = null;
-        
+
                         self._servantFactoryManager = null;
                         self._referenceFactory = null;
                         self._requestHandlerFactory = null;
@@ -26808,9 +26808,9 @@
                         self._routerManager = null;
                         self._locatorManager = null;
                         self._endpointFactoryManager = null;
-        
+
                         self._state = StateDestroyed;
-        
+
                         if(this._destroyPromises)
                         {
                             for(i = 0; i < this._destroyPromises.length; ++i)
@@ -26836,9 +26836,9 @@
                 return promise;
             },
         });
-        
+
         Ice.Instance = Instance;
-        
+
     }());
 
     (function()
@@ -26851,11 +26851,11 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Instance = Ice.Instance;
         var Promise = Ice.Promise;
-        
+
         //
         // Ice.Communicator
         //
@@ -26924,7 +26924,7 @@
                 {
                     name = Ice.generateUUID();
                 }
-        
+
                 this.getProperties().setProperty(name + ".Endpoints", endpoints);
                 var promise = new Ice.AsyncResultBase(this, "createObjectAdapterWithEndpoints", this, null, null);
                 this._instance.objectAdapterFactory().createObjectAdapter(name, null, promise);
@@ -26936,9 +26936,9 @@
                 {
                     name = Ice.generateUUID();
                 }
-        
+
                 var promise = new Ice.AsyncResultBase(this, "createObjectAdapterWithRouter", this, null, null);
-        
+
                 //
                 // We set the proxy properties here, although we still use the proxy supplied.
                 //
@@ -26947,7 +26947,7 @@
                 {
                     this.getProperties().setProperty(e.key, e.value);
                 }
-        
+
                 this._instance.objectAdapterFactory().createObjectAdapter(name, router, promise);
                 return promise;
             },
@@ -26992,13 +26992,13 @@
                 return this._instance.outgoingConnectionFactory().flushAsyncBatchRequests();
             }
         });
-        
+
         Object.defineProperty(Communicator.prototype, "instance", {
             get: function() { return this._instance; }
         });
-        
+
         Ice.Communicator = Communicator;
-        
+
     }());
 
     (function()
@@ -27011,10 +27011,10 @@
         // ICE_LICENSE file included in this distribution.
         //
         // **********************************************************************
-        
-        
+
+
         var Protocol = Ice.Protocol;
-        
+
         //
         // Ice.InitializationData
         //
@@ -27023,7 +27023,7 @@
             this.properties = null;
             this.logger = null;
         };
-        
+
         Ice.InitializationData.prototype.clone = function()
         {
             var r = new Ice.InitializationData();
@@ -27031,7 +27031,7 @@
             r.logger = this.logger;
             return r;
         };
-        
+
         //
         // Ice.initialize()
         //
@@ -27039,7 +27039,7 @@
         {
             var args = null;
             var initData = null;
-        
+
             if(arg1 instanceof Array)
             {
                 args = arg1;
@@ -27052,7 +27052,7 @@
             {
                 throw new Ice.InitializationException("invalid argument to initialize");
             }
-        
+
             if(arg2 !== undefined && arg2 !== null)
             {
                 if(arg2 instanceof Ice.InitializationData && initData === null)
@@ -27064,7 +27064,7 @@
                     throw new Ice.InitializationException("invalid argument to initialize");
                 }
             }
-        
+
             if(initData === null)
             {
                 initData = new Ice.InitializationData();
@@ -27074,12 +27074,12 @@
                 initData = initData.clone();
             }
             initData.properties = Ice.createProperties(args, initData.properties);
-        
+
             var result = new Ice.Communicator(initData);
             result.finishSetup(null);
             return result;
         };
-        
+
         //
         // Ice.createProperties()
         //
@@ -27087,18 +27087,18 @@
         {
             return new Ice.Properties(args, defaults);
         };
-        
+
         Ice.currentProtocol = function()
         {
             return Protocol.currentProtocol.clone();
         };
-        
+
         Ice.currentEncoding = function()
         {
             return Protocol.currentEncoding.clone();
         };
-        
-        
+
+
     }());
 
     __root.Ice = Ice;

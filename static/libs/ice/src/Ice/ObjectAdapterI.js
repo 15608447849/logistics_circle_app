@@ -188,7 +188,7 @@ var ObjectAdapterI = Ice.Class({
                 }
 
                 //
-                // Add the router's server proxy endpoints to this object
+                // Add the router's communication proxy endpoints to this object
                 // adapter.
                 //
                 var self = this;
@@ -483,9 +483,9 @@ var ObjectAdapterI = Ice.Class({
         var endpoints = [];
 
         //
-        // Now we also add the endpoints of the router's server proxy, if
+        // Now we also add the endpoints of the router's communication proxy, if
         // any. This way, object references created by this object adapter
-        // will also point to the router's server proxy endpoints.
+        // will also point to the router's communication proxy endpoints.
         //
         for(var i = 0; i < this._routerEndpoints.length; ++i)
         {
