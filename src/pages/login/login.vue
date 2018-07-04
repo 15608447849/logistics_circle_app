@@ -17,8 +17,10 @@ export default {
     }
   },
   methods: {
+
     loginBtnOnclick: function () {
-      userVerify(this.account,this.password,function (result) {
+      this.regest()
+      this.userVerify(this.account,this.password,function (result) {
         console.log(result)
       })
     }
