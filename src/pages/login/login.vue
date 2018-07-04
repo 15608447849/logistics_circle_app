@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button @click="icetest"> 测试 </button>
+    用户名:<input v-model="account"/>
+    密  码:<input v-model="password"/>
+    <button @click="loginBtnOnclick"> 登陆 </button>
   </div>
-
 </template>
 <script>
 
@@ -10,21 +11,16 @@
 
 export default {
   data () {
-    return {}
+    return {
+      account:"",
+      password:""
+    }
   },
   methods: {
-    icetest: function () {
-      var service = [, , ]
-
-
-      queryIce(sysmanage.SysManageServicePrx,
-        'SysManageService',
-        'loginCS',
-        '15888888888',
-        '123456',
-        function (object) {
-          console.log(object)
-      });
+    loginBtnOnclick: function () {
+      userVerify(this.account,this.password,function (result) {
+        console.log(result)
+      })
     }
   }
 }
