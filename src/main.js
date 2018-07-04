@@ -3,8 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Vuex from 'vuex'
+import AMap from 'vue-amap';
 
-Vue.config.productionTip = false
+Vue.use(AMap);
+Vue.use(Vuex);
+Vue.config.productionTip = false;
+
+// 初始化vue-amap
+AMap.initAMapApiLoader({
+  // 申请的高德key
+  key: 'c942df1ef2ea97f1eb415f9743bf6cf2',
+  // 插件集合
+  plugin: ['AMap.PlaceSearch', 'AMap.Geolocation']
+});
 
 /* eslint-disable no-new */
 new Vue({

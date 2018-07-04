@@ -1,6 +1,7 @@
 <template>
   <div>
     <button @click="icetest"> 测试 </button>
+    <button @click="toGeoTestPage">高德地图测试</button>
   </div>
 
 </template>
@@ -25,6 +26,11 @@ export default {
         function (object) {
           console.log(object)
       });
+    },
+    toGeoTestPage() {
+      this.$router.push({
+
+      })
     }
   }
 }
