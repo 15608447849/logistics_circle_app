@@ -4,8 +4,9 @@ import Router from 'vue-router'
 // 模块名大写
 // 登陆模块
 import LOGIN from '@/pages/login/login'
+import GEOLOCATION from '@/pages/geoLocationTest'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
 
@@ -17,6 +18,10 @@ export default new Router({
     {
       path: '/login',
       component: LOGIN
+    },
+    {
+      path: '/geo',
+      component: GEOLOCATION
     }
   ]
 })
