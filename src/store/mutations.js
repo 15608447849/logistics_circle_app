@@ -17,15 +17,6 @@ export default {
     state.userToken = v
   },
 
-  // 用户UNION_ID
-  [UNION_ID] (state, v) {
-    state.unionId = v
-  },
-
-  // 用户小程序登录成功信息
-  [WX_USER_INFO] (state, v) {
-    state.wxUserInfo = v
-  },
   // 搜索内容
   [SEARCH_CONTENT] (state, v) {
     state.searchContent = v

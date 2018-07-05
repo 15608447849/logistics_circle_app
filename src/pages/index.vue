@@ -1,5 +1,4 @@
 <template>
-  <!--<yd-layout>-->
   <div class="container">
     <transition :name="transitionName">
       <keep-alive>

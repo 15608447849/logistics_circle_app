@@ -7,5 +7,11 @@ export default {
   },
   userToken: state => {
     return state.userToken
+  },
+  searchContent: state => {
+    return state.searchContent
+  },
+  searchState: state => {
+    return state.searchState
   }
 }

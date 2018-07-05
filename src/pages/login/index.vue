@@ -1,8 +1,16 @@
 <template>
   <div class="login">
-     <h5>用户名密码登录</h5>
-    <div class="input_div"><input type="text" class="input" placeholder="手机/用户名" v-model="account"></div>
-    <div class="input_div"><input type="password" class="input" placeholder="密码" v-model="password"></div>
+    <yd-navbar title="登录"></yd-navbar>
+    <yd-cell-group>
+      <yd-cell-item>
+        <span slot="left">用户名：</span>
+        <yd-input slot="right" required v-model="account" ref="account" max="20" placeholder="请输入用户名"></yd-input>
+      </yd-cell-item>
+      <yd-cell-item>
+        <span slot="left">密&nbsp&nbsp&nbsp&nbsp码：</span>
+        <yd-input slot="right" type="password" v-model="password" ref="password" min="6" placeholder="请输入密码"></yd-input>
+      </yd-cell-item>
+    </yd-cell-group>
     <div class="input_div"><input class="remember" type="checkbox"><span>下次自动登录</span></div>
     <button class="login_btn" @click="loginBtnOnclick">登录</button>
     <div class="find_register"><span>忘记密码？</span><span class="note">短信快捷登录</span></div>

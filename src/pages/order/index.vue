@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-header fixed title="我的订单"></mt-header>
+    <yd-navbar title="我的订单"></yd-navbar>
   </div>
 </template>
 <script>

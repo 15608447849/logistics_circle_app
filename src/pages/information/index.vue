@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-header fixed title="信息大厅"></mt-header>
+    <yd-navbar title="信息大厅"></yd-navbar>
   </div>
 </template>
 <script>

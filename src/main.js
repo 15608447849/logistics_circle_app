@@ -4,19 +4,31 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
+import store from '@/store'
 import business  from './components/business'
-import VueAMap from 'vue-amap'
-import MintUI from 'mint-ui'
+import VueAMap from 'vue-amap';
+import YDUI from 'vue-ydui';
+import { Tabbar, TabItem } from 'mint-ui';
 
 import 'mint-ui/lib/style.css'
+import 'vue-ydui/dist/ydui.rem.css';
+import 'lib-flexible/flexible'
+import './assets/css/index.css'
+
+
+
+// 局部引用组件
+// 底部导航栏
+Vue.component(Tabbar.name, Tabbar);
+Vue.component(TabItem.name, TabItem);
 
 Vue.use(business);
-
 Vue.use(Vuex);
 Vue.use(VueAMap);
-Vue.use(MintUI);
+Vue.use(YDUI);
 
 Vue.config.productionTip = false;
+Vue.prototype.$store = store;
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({
   // 高德的key

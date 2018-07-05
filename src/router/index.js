@@ -19,6 +19,8 @@ import CIRCLE from '@/pages/circle/index'
 import INFO from '@/pages/information/index'
 // 我的订单模块
 import ORDER from '@/pages/order/index'
+// 搜索页
+import SEARCH from '@/components/SimpleSearchInput'
 
 Vue.use(Router);
 
@@ -139,6 +141,11 @@ export default new Router({
     {
       path: '/geo',
       component: GEOLOCATION
+    },
+    {
+      path: '/search',
+      component: SEARCH
+
     }
   ]
 })
