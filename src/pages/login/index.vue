@@ -18,9 +18,6 @@
   </div>
 </template>
 <script>
-
-
-
 export default {
   data () {
     return {
@@ -30,22 +27,17 @@ export default {
   },
   methods: {
     loginBtnOnclick: function () {
-
       this.$Ice_UserService.userVerify(this.account,this.password,new IceCallback(
         function (params) {
           console.log("准备访问",params);
         },
         function (result) {
           console.log("完成",result);
-
         },
         function (error) {
           console.log("错误",error);
         },
-
       ))
-
-
     }
   }
 }

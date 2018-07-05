@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store/index'
+import store from '@/store'
+import {
+  UPDATE_LOADING_STATUS
+} from '@/store/mutation-types'
 
 // 模块名大写
 // 登陆模块
@@ -24,79 +27,61 @@ import SEARCH from '@/components/SimpleSearchInput'
 
 Vue.use(Router);
 
-// const routes = [
-//   {
-//     path: '/',
-//     component: INDEX,
-//     meta: {
-//       requireAuth: true
+// export default new Router({
+//   routes: [
+//     {
+//       path: '/',
+//       component: INDEX,
+//       meta: {
+//         requireAuth: true
+//       },
+//       children: [
+//         {
+//           path: '',
+//           component: HOME,
+//         },
+//         {
+//           name: 'circle',
+//           path: '/circle',
+//           component: CIRCLE
+//         },
+//         {
+//           name: 'information',
+//           path: '/information',
+//           component: INFO
+//         },
+//         {
+//           name: 'order',
+//           path: '/order',
+//           component: ORDER
+//         }
+//       ]
 //     },
-//     children: [
-//       {
-//         path: '',
-//         component: HOME,
-//       },
-//       {
-//         name: 'circle',
-//         path: '/circle',
-//         component: CIRCLE
-//       },
-//       {
-//         name: 'information',
-//         path: '/information',
-//         component: INFO
-//       },
-//       {
-//         name: 'order',
-//         path: '/order',
-//         component: ORDER
-//       }
-//     ]
-//   },
-//   {
-//     path: '/login',
-//     component: LOGIN
-//   },
-//   {
-//     path: '/register',
-//     component: REGISTER
-//   },
-//   {
-//     path: '/login',
-//     component: LOGIN
-//   },
-//   {
-//     path: '/geo',
-//     component: GEOLOCATION
-//   }
-// ]
+//     {
+//       path: '/login',
+//       component: LOGIN
+//     },
+//     {
+//       path: '/register',
+//       component: REGISTER
+//     },
+//     {
+//       path: '/login',
+//       component: LOGIN
+//     },
+//     {
+//       path: '/geo',
+//       component: GEOLOCATION
+//     },
+//     {
+//       path: '/search',
+//       component: SEARCH
 //
-// const router = new Router({
-//   routes
-// })
-//
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(r => r.meta.requireAuth)) {
-//     if (to.path === '/login') {
-//       next()
-//     } else {
-//       // if (store.state.users.userToken) {
-//       //   next()
-//       // } else {
-//       //   next({
-//       //     path: '/login',
-//       //     query: {redirect: to.fullPath} // 将跳转的路由path作为参数，登录成功后跳转到该路由
-//       //   })
-//       // }
 //     }
-//   } else {
-//     next()
-//   }
+//   ]
 // })
-//
-// export default router
 
-export default new Router({
+const vueRouter = new Router({
   routes: [
     {
       path: '/',
@@ -145,7 +130,20 @@ export default new Router({
     {
       path: '/search',
       component: SEARCH
-
     }
   ]
-})
+});
+
+vueRouter.beforeEach(function (to, from, next) {
+  /* 显示加载中动画 */
+  store.commit(UPDATE_LOADING_STATUS, true);
+  console.log('钩子执行了');
+  next();
+});
+
+vueRouter.afterEach(route => {
+  /* 隐藏加载中动画 */
+  store.commit(UPDATE_LOADING_STATUS, false);
+});
+
+export default vueRouter

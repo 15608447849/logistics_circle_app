@@ -5,7 +5,7 @@ import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const state = {
   userInfo: {}, // 用户信息
@@ -13,8 +13,9 @@ const state = {
   openId: '',
   wxUserInfo: {}, // 微信用户信息
   searchContent: '', // 搜索内容
-  searchState: '' // 搜索类型
-}
+  searchState: '', // 搜索类型
+  isLoading: false // 网络加载等待框
+};
 
 export default new Vuex.Store({
   state,

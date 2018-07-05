@@ -4,7 +4,7 @@ import {
   WX_USER_INFO,
   SEARCH_STATE,
   SEARCH_CONTENT,
-  UNION_ID
+  UPDATE_LOADING_STATUS
 } from './mutation-types'
 
 export default {
@@ -25,5 +25,9 @@ export default {
   // 搜索状态
   [SEARCH_STATE] (state, v) {
     state.searchState = v
+  },
+
+  [UPDATE_LOADING_STATUS](state, isLoading) {
+    state.isLoading = isLoading;
   }
 }

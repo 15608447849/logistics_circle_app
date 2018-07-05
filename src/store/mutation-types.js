@@ -8,3 +8,5 @@ export const UNION_ID = 'UNION_ID'
 export const SEARCH_STATE = 'SEARCH_STATE'
 // 搜索内容
 export const SEARCH_CONTENT = 'SEARCH_CONTENT'
+// 网络加载框
+export const UPDATE_LOADING_STATUS  = 'UPDATE_LOADING_STATUS'
