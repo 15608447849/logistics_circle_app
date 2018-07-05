@@ -4,21 +4,27 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
-import AMap from 'vue-amap';
 import business  from './components/business'
+import VueAMap from 'vue-amap';
+import MintUI from 'mint-ui'
+
+import 'mint-ui/lib/style.css'
+
 Vue.use(business);
-Vue.use(AMap);
 Vue.use(Vuex);
+Vue.use(VueAMap);
+Vue.use(MintUI);
 
 Vue.config.productionTip = false;
-// Vue.prototype.business = business
 
 // 初始化vue-amap
-AMap.initAMapApiLoader({
-  // 申请的高德key
-  key: 'c942df1ef2ea97f1eb415f9743bf6cf2',
+VueAMap.initAMapApiLoader({
+  // 高德的key
+  key: 'YOUR_KEY',
   // 插件集合
-  plugin: ['AMap.PlaceSearch', 'AMap.Geolocation']
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+  // 高德 sdk 版本，默认为 1.4.4
+  v: '1.4.4'
 });
 
 /* eslint-disable no-new */
