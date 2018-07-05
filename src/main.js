@@ -5,19 +5,18 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import business  from './components/business'
-import ping from './components/ping'
-import VueAMap from 'vue-amap';
+import VueAMap from 'vue-amap'
 import MintUI from 'mint-ui'
 
 import 'mint-ui/lib/style.css'
 
 Vue.use(business);
+
 Vue.use(Vuex);
 Vue.use(VueAMap);
 Vue.use(MintUI);
 
 Vue.config.productionTip = false;
-Vue.prototype.$login = ping;
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({
   // 高德的key
