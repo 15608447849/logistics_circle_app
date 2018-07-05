@@ -16,7 +16,6 @@ import 'lib-flexible/flexible'
 import './assets/css/index.css'
 
 
-
 // 局部引用组件
 // 底部导航栏
 Vue.component(Tabbar.name, Tabbar);

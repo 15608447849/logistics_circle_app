@@ -18,6 +18,9 @@
   </div>
 </template>
 <script>
+
+
+
 export default {
   data () {
     return {
@@ -27,7 +30,8 @@ export default {
   },
   methods: {
     loginBtnOnclick: function () {
-      this.$Ice_UserService.userVerify(this.account,this.password,new IceCallback(
+
+      this.$Ice_OrderService.queryAllByKey(this.account,new IceCallback(
         function (params) {
           console.log("准备访问",params);
         },
@@ -36,8 +40,11 @@ export default {
         },
         function (error) {
           console.log("错误",error);
-        },
+        }
+
       ))
+
+
     }
   }
 }
