@@ -1,9 +1,12 @@
 <template>
-  <div>
-    用户名:<input v-model="account"/>
-    密  码:<input v-model="password"/>
-    <button @click="loginBtnOnclick"> 登陆 </button>
-
+  <div class="login">
+     <h5>用户名密码登录</h5>
+    <input type="text" placeholder="手机/用户名">
+    <input type="text" placeholder="密码">
+    <input type="checkbox"><span>下次自动登录</span>
+    <button>登录</button>
+    <span>忘记密码？</span><span>短信快捷登录</span>
+    <>立即注册</>
   </div>
 </template>
 <script>
@@ -27,5 +30,10 @@ export default {
   }
 }
 </script>
+<style>
+   h5{
+     text-align: center;
+     margin-bottom:20px;
+   }
+</style>
 
-<style/>
