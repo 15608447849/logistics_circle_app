@@ -29,12 +29,12 @@ export default {
     regesterBtnOnclick: function () {
       this.userRegister(
         this.account,
-        num2long(Number(this.phone)),
-        md5(this.password),
+        this.phone,
+        this.password,
         this.verificationCode,
         this.invitationCode,
         function (result) {
-        console.log(result)
+        console.log("注册",result)
       })
     }
   }

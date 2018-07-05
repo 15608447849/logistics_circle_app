@@ -1,12 +1,12 @@
 <template>
   <div class="login">
      <h5>用户名密码登录</h5>
-    <div class="input_div"><input type="text" class="input" placeholder="手机/用户名"></div>
-    <div class="input_div"><input type="password" class="input" placeholder="密码"></div>
+    <div class="input_div"><input type="text" class="input" placeholder="手机/用户名" v-model="account"></div>
+    <div class="input_div"><input type="password" class="input" placeholder="密码" v-model="password"></div>
     <div class="input_div"><input class="remember" type="checkbox"><span>下次自动登录</span></div>
-    <button class="login_btn">登录</button>
+    <button class="login_btn" @click="loginBtnOnclick">登录</button>
     <div class="find_register"><span>忘记密码？</span><span class="note">短信快捷登录</span></div>
-    <div class="find_register"><span class="register">立即注册</span></div>
+    <div class="find_register" ><span class="register">立即注册</span></div>
   </div>
 </template>
 <script>
@@ -18,15 +18,26 @@ export default {
     return {
       account:"",
       password:"",
-
     }
   },
   methods: {
     loginBtnOnclick: function () {
-      this.userVerify(this.account,md5(this.password),function (result) {
+      this.$login.pit("151515");
+      this.userVerify(this.account,this.password,new IceCallback(
+        function (params) {
 
-        console.log(result)
-      })
+      },
+        function (result) {
+          console.log("完成",result);
+
+        },
+        function (error) {
+
+        },
+
+      ))
+
+
     }
   }
 }

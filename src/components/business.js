@@ -3,14 +3,14 @@ import {
   serverIp,
   serverPort
 } from '../config'
-import * as md5 from "md5"
 
-(function () {init(iceGridInstanceName,serverIp,serverPort);}()
-);
+import md5 from "md5"
 
+(function () {init(iceGridInstanceName,serverIp,serverPort);}());
 
 
 exports.install = function (Vue) {
+
   /**验证用户名是否重复*/
   Vue.prototype.checkUsernameRepetition=function(username,callback){
     queryIce(userApi.UserServicePrx,'UserService','verifyUserNamer',username,callback);
