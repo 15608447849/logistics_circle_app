@@ -6,7 +6,7 @@
     <div class="input_div"><span class="start">*</span><span class="text">确认密码</span><input type="password" class="input" placeholder="请确认登录密码"></div>
     <div class="input_div"><span class="start">*</span><span class="text">验证码</span><input type="text" class="input_verificationcode" placeholder="请输入验证码"><a class="verification">获取短信验证码</a></div>
     <div class="input_div"><span class="text_right">邀请码</span><input type="text" class="input" placeholder="请输入您收到的邀请码，没有可不填"></div>
-    <div class="input_div"><input type="checkbox"><span>阅读并接收本平台</span><span class="text_blue">《**用户协议》</span><span>及</span><span class="text_blue">《**声明》</span></div>
+    <div class="input_div"><input type="checkbox"><span>阅读并接收本平台</span><a class="text_blue">《**用户协议》</a><span>及</span><a class="text_blue">《**声明》</a></div>
     <button class="btn">注册</button>
   </div>
 </template>

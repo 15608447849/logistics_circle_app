@@ -1,12 +1,12 @@
 <template>
   <div class="login">
      <h5>用户名密码登录</h5>
-    <input type="text" placeholder="手机/用户名">
-    <input type="text" placeholder="密码">
-    <input type="checkbox"><span>下次自动登录</span>
-    <button>登录</button>
-    <span>忘记密码？</span><span>短信快捷登录</span>
-    <>立即注册</>
+    <div class="input_div"><input type="text" class="input" placeholder="手机/用户名"></div>
+    <div class="input_div"><input type="password" class="input" placeholder="密码"></div>
+    <div class="input_div"><input class="remember" type="checkbox"><span>下次自动登录</span></div>
+    <button class="login_btn">登录</button>
+    <div class="find_register"><span>忘记密码？</span><span class="note">短信快捷登录</span></div>
+    <div class="find_register"><span class="register">立即注册</span></div>
   </div>
 </template>
 <script>
@@ -36,5 +36,42 @@ export default {
      text-align: center;
      margin-bottom:20px;
    }
+   .input_div{
+     display:block;
+     margin-bottom:20px;
+   }
+  .input{
+    height:25px;
+    width:80%;
+    margin-left:10%;
+  }
+  .remember{
+    margin-left:10%;
+  }
+  .login_btn{
+    display:block;
+    width:80%;
+    height:30px;
+    margin:0 auto;
+    border:1px solid blue;
+    border-radius: 5%;
+    background:blue;
+  }
+  .find_register{
+    display:block;
+    width:80%;
+    margin:0 auto;
+    margin-top:20px;
+    color:blue;
+  }
+  .note{
+    float:right;
+  }
+  .register{
+    float:right;
+    font-size:18px;
+    font-weight:bold;
+    color:blue;
+  }
 </style>
 
