@@ -4,9 +4,9 @@ import store from '../store/index'
 
 // 模块名大写
 // 登陆模块
-import REGISTER from '@/pages/register/register'
+import REGISTER from '@/pages/register/index'
 
-import LOGIN from '@/pages/login/login'
+import LOGIN from '@/pages/login/index'
 // 高德地图测试
 import GEOLOCATION from '@/pages/geoLocationTest'
 // 初始页

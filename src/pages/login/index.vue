@@ -11,7 +11,7 @@
 </template>
 <script>
 
-import * as md5 from "md5"
+
 
 export default {
   data () {
@@ -24,6 +24,7 @@ export default {
   methods: {
     loginBtnOnclick: function () {
       this.userVerify(this.account,md5(this.password),function (result) {
+
         console.log(result)
       })
     }

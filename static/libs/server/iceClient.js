@@ -20,9 +20,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
       function () {
         var base = communication.stringToProxy(moduleName).ice_twoway().ice_secure(false);
         return moduleProxy.checkedCast(base).then(
-
           function(remoteProxy) {
-            console.log("proxy>>>>>>>>>",remoteProxy)
             if (params.length>0) {
               remoteProxy[methodName].apply(remoteProxy,params).then(callback)
             }else{
@@ -32,34 +30,31 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
         )
 
       }
-
-
-
-
     ).exception(function (e) {
       console.log("ICE 错误: "+ e);
     })
 
 }
 
-  //数字转long型
+//数字转long型
+function num2long(num) {
+  let MAX_INT = Math.pow(2, 53);
+  if(num > MAX_INT || num < -MAX_INT)
+    throw new Error("Can't convert number to long: out of bounds");
+  var low = num >>> 0;
+  var high = ((num - low) / 0x100000000) >>> 0;
+  return new Ice.Long(high, low);
+}
 
-   function num2long(num) {
-    let MAX_INT = Math.pow(2, 53);
-    if(num > MAX_INT || num < -MAX_INT)
-      throw new Error("Can't convert number to long: out of bounds");
-    var low = num >>> 0;
-    var high = ((num - low) / 0x100000000) >>> 0;
-    return new Ice.Long(high, low);
-  }
-
-  //long型转数字
-   function long2num (value, row, index) {
-    var num = new Ice.Long(value.high, value.low);
-    return num.toNumber()
-  }
-
-
+//long型转数字
+function long2num (value, row, index) {
+  var num = new Ice.Long(value.high, value.low);
+  return num.toNumber()
+}
+//文本类型转long
+function str2long(string){
+  return num2long(Number(string))
+}
 
 
 

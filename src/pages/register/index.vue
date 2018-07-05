@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     regesterBtnOnclick: function () {
-      this.userRegester(
+      this.userRegister(
         this.account,
         num2long(Number(this.phone)),
         md5(this.password),
