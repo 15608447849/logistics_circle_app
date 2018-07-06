@@ -23,7 +23,7 @@ exports.install = function (Vue) {
     },
     /** 检测手机号码是否重复
      * int verifyPhone(long phone);
-     * */
+     */
     checkPhoneRepetition: function (phone, callback) {
       queryIce(userApi.UserServicePrx, 'UserService', 'verifyPhone', str2jlong(phone), callback);
     },
@@ -31,8 +31,8 @@ exports.install = function (Vue) {
     /**请求对手机号码发送短信
      * int sendSms(long phone,string checkPhone);//checkPhone ="true",电话号码必须属于用户才能发短信,其他不校验
      * */
-    requestPhoneSms: function (phone, callback) {
-      queryIce(userApi.UserServicePrx, 'UserService', 'sendSms', str2jlong(phone),'true', callback);
+    requestPhoneSms: function (phone,flag, callback) {
+      queryIce(userApi.UserServicePrx, 'UserService', 'sendSms', str2jlong(phone),flag.toString(), callback);
     },
 
     /**
@@ -98,6 +98,10 @@ exports.install = function (Vue) {
   };
   Vue.prototype.$Ice_OrderService = {
 
+    initDictionnary:(callback)=>{
+      queryIce(order.OrderServicePrx , 'OrderService', 'initOrderPage',callback);
+    },
+
     /**
      *全文查询当前的订单
      */
@@ -128,8 +132,6 @@ exports.install = function (Vue) {
 
           // console.log("过滤",result,orderList);
           return orderList;
-
-
         }
       ));
       queryIce(order.OrderServicePrx , 'OrderService', 'queryOrderByCurdate', [key],callback);
@@ -178,7 +180,6 @@ exports.install = function (Vue) {
      string eastime;  //期望到货开始时间
      string eaedate;  //期望到货结束日期
      string eaetime;  //期望到货结束时间
-     * {"consphone":13587458521,"orderno":1807051505583840000,"num":200,"startaddr":"耒阳市第二中学","phone2":13585458521,"redictc":101,"tndictc":71,"numdictc":51,"startc":10170310,"arriaddr":"衡阳大道1号","phone1":13586458521,"insureamt":0,"arriarc":10170305,"wm":30.2,"price":60,"consignee":"章广","dmdictc":91,"vnum":2,"vldictc":1,"codamt":0,"vtdictc":11,"padictc":61,"wmdictc":41,"puberid":1,"ctdictc":31,"ptdictc":21,"pmdictc":81,"billno":"E099393990021"}
      *大于0操作成功;等于0操作失败;
      * */
     releaseOrder:(token,json,callback)=>{
