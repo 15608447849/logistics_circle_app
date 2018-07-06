@@ -7,7 +7,7 @@ import {
 
 // 模块名大写
 // 登陆模块
-import REGISTER from '@/pages/register/index'
+import REGISTER from '@/pages/login/register'
 
 import LOGIN from '@/pages/login/index'
 // 高德地图测试
@@ -72,7 +72,10 @@ const vueRouter = new Router({
         {
           name: 'order',
           path: '/order',
-          component: ORDER
+          component: ORDER,
+          meta: {
+            requireAuth: true
+          }
         }
       ]
     },
@@ -124,11 +127,24 @@ const vueRouter = new Router({
 
 // 全局前置守卫
 vueRouter.beforeEach(function (to, from, next) {
-  /* 显示加载中动画 */
-  store.commit(UPDATE_LOADING_STATUS, true);
-  /* 路由权限验证 */
-  /* 登陆验证 */
-  next();
+  // 判断该路由是否需要登录权限
+  if (to.meta.requireAuth) {
+    // 通过vuex state获取当前的token是否存在
+    if (store.state.userToken) {
+      next();
+    } else {
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  } else {
+    /* 显示加载中动画 */
+    store.commit(UPDATE_LOADING_STATUS, true);
+    /* 路由权限验证 */
+    /* 登陆验证 */
+    next();
+  }
 });
 
 // 全局后置钩子, 也就是说页面加载完毕后执行 ，该钩子中没有next() 无法改变路由本身

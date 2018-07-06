@@ -17,3 +17,6 @@ function stringIsNotNull(str) {
   }
   return true
 }
+
+
+// regex

@@ -1,26 +1,40 @@
 <template>
-  <div class="content">
-    <mt-header fixed title="信息大厅">
-    </mt-header>
-    <div class="order_header">
-      <span class="order_num">共1888条</span>
-      <a class="issue_order" @click="toissue">发布订单</a>
-    </div>
-    <div class="list_content">
+  <div>
+    <yd-navbar title="信息大厅"></yd-navbar>
+    <div class="content">
+      <!--<div class="order_header">-->
+        <!--<span class="order_num">共1888条</span>-->
+        <!--<a class="issue_order" @click="toissue">发布订单</a>-->
+      <!--</div>-->
+      <yd-infinitescroll :callback="loadList" ref="infinitescrollDemo">
+
+      </yd-infinitescroll>
+      <div class="list_content">
         <ul class="order_box">
           <li class="order_list">
             <div class="order_price"><span class="site">长沙到广州</span><span class="price">2000元</span></div>
             <div class="order_time"><span class="volume">家具,9方</span><span class="car_type">厢式货车，9.6</span><span class="time">1小时前发布</span></div>
           </li>
         </ul>
+      </div>
     </div>
+
   </div>
 </template>
 <script>
   export default{
+    data() {
+      return {
+        infoList: []
+      }
+    },
+    mounted() {
+      console.log(this.$app_store.state.userToken);
+      this.requestInfoList();
+    },
     methods: {
-      toissue() {
-        this.$router.push({path: '/information/issue'})
+      requestInfoList() {
+
       }
     }
   }

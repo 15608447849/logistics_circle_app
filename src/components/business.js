@@ -43,7 +43,7 @@ exports.install = function (Vue) {
     /**请求对手机号码发送短信
      * int sendSms(long phone,string checkPhone);//checkPhone ="true",电话号码必须属于用户才能发短信,其他不校验
      * */
-    requestPhoneSms: function (phone,flag, callback) {
+    requestPhoneSms: function (phone, flag, callback) {
       queryIce(userApi.UserServicePrx, 'UserService', 'sendSms', str2jlong(phone),flag.toString(), callback);
     },
 

@@ -78,7 +78,6 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
       throw new Error("callback is not IceCallback!")
   }
 
-
   callback.onCallback(CALLBACK_ACTION.READY,params);
 
 

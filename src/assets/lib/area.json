@@ -1,0 +1,3809 @@
+{
+	"qtc": "ZG",
+	"sub": {
+		"1000": {
+			"qtc": "BJ",
+			"sub": {
+				"100000": {
+					"qtc": "BJS",
+					"sub": {
+						"10000000": {
+							"qtc": "XWQ",
+							"cstatus": 0,
+							"areac": 10000000,
+							"arean": "宣武区",
+							"cyprnh": 2478573102
+						}
+					},
+					"cstatus": 0,
+					"areac": 100000,
+					"arean": "北京市",
+					"cyprnh": 3905893190
+				}
+			},
+			"cstatus": 0,
+			"areac": 1000,
+			"arean": "北京",
+			"cyprnh": 3429596817
+		},
+		"1022": {
+			"qtc": "SC",
+			"sub": {
+				"102220": {
+					"qtc": "LSYZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102220,
+					"arean": "凉山彝族",
+					"cyprnh": 206223194
+				},
+				"102200": {
+					"qtc": "CD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102200,
+					"arean": "成都",
+					"cyprnh": 1313123421
+				},
+				"102211": {
+					"qtc": "MS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102211,
+					"arean": "眉山",
+					"cyprnh": 3501569937
+				},
+				"102210": {
+					"qtc": "NC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102210,
+					"arean": "南充",
+					"cyprnh": 3936718662
+				},
+				"102209": {
+					"qtc": "LS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102209,
+					"arean": "乐山",
+					"cyprnh": 1913748830
+				},
+				"102202": {
+					"qtc": "PZH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102202,
+					"arean": "攀枝花",
+					"cyprnh": 3070465634
+				},
+				"102213": {
+					"qtc": "GA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102213,
+					"arean": "广安",
+					"cyprnh": 2755962771
+				},
+				"102201": {
+					"qtc": "ZG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102201,
+					"arean": "自贡",
+					"cyprnh": 3964458101
+				},
+				"102212": {
+					"qtc": "YB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102212,
+					"arean": "宜宾",
+					"cyprnh": 2092845534
+				},
+				"102204": {
+					"qtc": "DY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102204,
+					"arean": "德阳",
+					"cyprnh": 2514150095
+				},
+				"102215": {
+					"qtc": "YA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102215,
+					"arean": "雅安",
+					"cyprnh": 4145087305
+				},
+				"102203": {
+					"qtc": "LZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102203,
+					"arean": "泸州",
+					"cyprnh": 3982809594
+				},
+				"102214": {
+					"qtc": "DZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102214,
+					"arean": "达州",
+					"cyprnh": 177546215
+				},
+				"102206": {
+					"qtc": "GY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102206,
+					"arean": "广元",
+					"cyprnh": 853652452
+				},
+				"102217": {
+					"qtc": "ZY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102217,
+					"arean": "资阳",
+					"cyprnh": 3154810703
+				},
+				"102205": {
+					"qtc": "MY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102205,
+					"arean": "绵阳",
+					"cyprnh": 3137012799
+				},
+				"102216": {
+					"qtc": "BZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102216,
+					"arean": "巴中",
+					"cyprnh": 3979126210
+				},
+				"102208": {
+					"qtc": "NJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102208,
+					"arean": "内江",
+					"cyprnh": 594253207
+				},
+				"102219": {
+					"qtc": "GZZZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102219,
+					"arean": "甘孜藏族",
+					"cyprnh": 1468573326
+				},
+				"102207": {
+					"qtc": "SN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102207,
+					"arean": "遂宁",
+					"cyprnh": 1313684705
+				},
+				"102218": {
+					"qtc": "ABZZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102218,
+					"arean": "阿坝藏族",
+					"cyprnh": 983082807
+				}
+			},
+			"cstatus": 0,
+			"areac": 1022,
+			"arean": "四川",
+			"cyprnh": 2983173883
+		},
+		"1021": {
+			"qtc": "CQ",
+			"sub": {
+				"102100": {
+					"qtc": "CQS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102100,
+					"arean": "重庆市",
+					"cyprnh": 2498528123
+				}
+			},
+			"cstatus": 0,
+			"areac": 1021,
+			"arean": "重庆",
+			"cyprnh": 698653665
+		},
+		"1020": {
+			"qtc": "HN",
+			"sub": {
+				"102000": {
+					"qtc": "HK",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102000,
+					"arean": "海口",
+					"cyprnh": 1974521062
+				},
+				"102011": {
+					"qtc": "CMX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102011,
+					"arean": "澄迈县",
+					"cyprnh": 26900438
+				},
+				"102010": {
+					"qtc": "TCX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102010,
+					"arean": "屯昌县",
+					"cyprnh": 3926143466
+				},
+				"102002": {
+					"qtc": "SS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102002,
+					"arean": "三沙",
+					"cyprnh": 2126383515
+				},
+				"102013": {
+					"qtc": "BSLZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102013,
+					"arean": "白沙黎族",
+					"cyprnh": 2358732093
+				},
+				"102001": {
+					"qtc": "SY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102001,
+					"arean": "三亚",
+					"cyprnh": 753534535
+				},
+				"102012": {
+					"qtc": "LGX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102012,
+					"arean": "临高县",
+					"cyprnh": 1329940221
+				},
+				"102004": {
+					"qtc": "QHS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102004,
+					"arean": "琼海市",
+					"cyprnh": 1746384006
+				},
+				"102015": {
+					"qtc": "LDLZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102015,
+					"arean": "乐东黎族",
+					"cyprnh": 708357011
+				},
+				"102003": {
+					"qtc": "WZSS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102003,
+					"arean": "五指山市",
+					"cyprnh": 189274745
+				},
+				"102014": {
+					"qtc": "CJLZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102014,
+					"arean": "昌江黎族",
+					"cyprnh": 3167890765
+				},
+				"102006": {
+					"qtc": "WCS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102006,
+					"arean": "文昌市",
+					"cyprnh": 219991295
+				},
+				"102017": {
+					"qtc": "BTLZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102017,
+					"arean": "保亭黎族",
+					"cyprnh": 2067940347
+				},
+				"102005": {
+					"qtc": "DZS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102005,
+					"arean": "儋州市",
+					"cyprnh": 4072339831
+				},
+				"102016": {
+					"qtc": "LSLZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102016,
+					"arean": "陵水黎族",
+					"cyprnh": 2587798006
+				},
+				"102008": {
+					"qtc": "DFS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102008,
+					"arean": "东方市",
+					"cyprnh": 3523930843
+				},
+				"102007": {
+					"qtc": "WNS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102007,
+					"arean": "万宁市",
+					"cyprnh": 2508813128
+				},
+				"102018": {
+					"qtc": "QZLZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102018,
+					"arean": "琼中黎族",
+					"cyprnh": 4211246473
+				},
+				"102009": {
+					"qtc": "DAX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102009,
+					"arean": "定安县",
+					"cyprnh": 720328482
+				}
+			},
+			"cstatus": 0,
+			"areac": 1020,
+			"arean": "海南",
+			"cyprnh": 1714576081
+		},
+		"1019": {
+			"qtc": "GX",
+			"sub": {
+				"101909": {
+					"qtc": "BS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101909,
+					"arean": "百色",
+					"cyprnh": 4092036843
+				},
+				"101902": {
+					"qtc": "GL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101902,
+					"arean": "桂林",
+					"cyprnh": 1460575435
+				},
+				"101913": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101913,
+					"arean": "崇左",
+					"cyprnh": 1503274797
+				},
+				"101901": {
+					"qtc": "LZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101901,
+					"arean": "柳州",
+					"cyprnh": 1045732606
+				},
+				"101912": {
+					"qtc": "LB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101912,
+					"arean": "来宾",
+					"cyprnh": 2441629197
+				},
+				"101904": {
+					"qtc": "BH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101904,
+					"arean": "北海",
+					"cyprnh": 3255992284
+				},
+				"101903": {
+					"qtc": "WZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101903,
+					"arean": "梧州",
+					"cyprnh": 3097370625
+				},
+				"101906": {
+					"qtc": "QZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101906,
+					"arean": "钦州",
+					"cyprnh": 1347767607
+				},
+				"101905": {
+					"qtc": "FCG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101905,
+					"arean": "防城港",
+					"cyprnh": 3830456304
+				},
+				"101908": {
+					"qtc": "YL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101908,
+					"arean": "玉林",
+					"cyprnh": 146960570
+				},
+				"101907": {
+					"qtc": "GG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101907,
+					"arean": "贵港",
+					"cyprnh": 1126440683
+				},
+				"101900": {
+					"qtc": "NN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101900,
+					"arean": "南宁",
+					"cyprnh": 3070999137
+				},
+				"101911": {
+					"qtc": "HC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101911,
+					"arean": "河池",
+					"cyprnh": 2457367359
+				},
+				"101910": {
+					"qtc": "HZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101910,
+					"arean": "贺州",
+					"cyprnh": 3477580817
+				}
+			},
+			"cstatus": 0,
+			"areac": 1019,
+			"arean": "广西",
+			"cyprnh": 2161277074
+		},
+		"1018": {
+			"qtc": "GD",
+			"sub": {
+				"101802": {
+					"qtc": "SZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101802,
+					"arean": "深圳",
+					"cyprnh": 1447268780
+				},
+				"101813": {
+					"qtc": "HY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101813,
+					"arean": "河源",
+					"cyprnh": 1465227864
+				},
+				"101803": {
+					"qtc": "ZH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101803,
+					"arean": "珠海",
+					"cyprnh": 2777048095
+				},
+				"101814": {
+					"qtc": "YJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101814,
+					"arean": "阳江",
+					"cyprnh": 1580850034
+				},
+				"101804": {
+					"qtc": "ST",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101804,
+					"arean": "汕头",
+					"cyprnh": 2141746493
+				},
+				"101815": {
+					"qtc": "QY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101815,
+					"arean": "清远",
+					"cyprnh": 3069882592
+				},
+				"101805": {
+					"qtc": "FS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101805,
+					"arean": "佛山",
+					"cyprnh": 1351638175
+				},
+				"101816": {
+					"qtc": "DG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101816,
+					"arean": "东莞",
+					"cyprnh": 4268781408
+				},
+				"101806": {
+					"qtc": "JM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101806,
+					"arean": "江门",
+					"cyprnh": 4184167746
+				},
+				"101817": {
+					"qtc": "ZS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101817,
+					"arean": "中山",
+					"cyprnh": 1295021202
+				},
+				"101807": {
+					"qtc": "ZJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101807,
+					"arean": "湛江",
+					"cyprnh": 910747842
+				},
+				"101818": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101818,
+					"arean": "潮州",
+					"cyprnh": 656830424
+				},
+				"101808": {
+					"qtc": "MM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101808,
+					"arean": "茂名",
+					"cyprnh": 905084067
+				},
+				"101819": {
+					"qtc": "JY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101819,
+					"arean": "揭阳",
+					"cyprnh": 2964043436
+				},
+				"101809": {
+					"qtc": "ZQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101809,
+					"arean": "肇庆",
+					"cyprnh": 1168451408
+				},
+				"101820": {
+					"qtc": "YF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101820,
+					"arean": "云浮",
+					"cyprnh": 1714361923
+				},
+				"101810": {
+					"qtc": "HZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101810,
+					"arean": "惠州",
+					"cyprnh": 3655867916
+				},
+				"101800": {
+					"qtc": "GZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101800,
+					"arean": "广州",
+					"cyprnh": 3164048204
+				},
+				"101811": {
+					"qtc": "MZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101811,
+					"arean": "梅州",
+					"cyprnh": 2997176244
+				},
+				"101801": {
+					"qtc": "SG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101801,
+					"arean": "韶关",
+					"cyprnh": 1349768733
+				},
+				"101812": {
+					"qtc": "SW",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101812,
+					"arean": "汕尾",
+					"cyprnh": 2983414646
+				}
+			},
+			"cstatus": 0,
+			"areac": 1018,
+			"arean": "广东",
+			"cyprnh": 3569589400
+		},
+		"1017": {
+			"qtc": "HN",
+			"sub": {
+				"101703": {
+					"qtc": "HY",
+					"sub": {
+						"10170307": {
+							"qtc": "HSX",
+							"cstatus": 0,
+							"areac": 10170307,
+							"arean": "衡山县",
+							"cyprnh": 2144043884
+						},
+						"10170306": {
+							"qtc": "HNX",
+							"cstatus": 0,
+							"areac": 10170306,
+							"arean": "衡南县",
+							"cyprnh": 2655200777
+						},
+						"10170305": {
+							"qtc": "HYX",
+							"cstatus": 0,
+							"areac": 10170305,
+							"arean": "衡阳县",
+							"cyprnh": 1859241705
+						},
+						"10170304": {
+							"qtc": "NYQ",
+							"cstatus": 0,
+							"areac": 10170304,
+							"arean": "南岳区",
+							"cyprnh": 1142662940
+						},
+						"10170303": {
+							"qtc": "J Q",
+							"cstatus": 0,
+							"areac": 10170303,
+							"arean": "郊 区",
+							"cyprnh": 3686777439
+						},
+						"10170302": {
+							"qtc": "CBQ",
+							"cstatus": 0,
+							"areac": 10170302,
+							"arean": "城北区",
+							"cyprnh": 3112335065
+						},
+						"10170301": {
+							"qtc": "CNQ",
+							"cstatus": 0,
+							"areac": 10170301,
+							"arean": "城南区",
+							"cyprnh": 2229428073
+						},
+						"10170300": {
+							"qtc": "JDQ",
+							"cstatus": 0,
+							"areac": 10170300,
+							"arean": "江东区",
+							"cyprnh": 3852920800
+						},
+						"10170311": {
+							"qtc": "CNS",
+							"cstatus": 0,
+							"areac": 10170311,
+							"arean": "常宁市",
+							"cyprnh": 3705254576
+						},
+						"10170310": {
+							"qtc": "ZYS",
+							"cstatus": 0,
+							"areac": 10170310,
+							"arean": "耒阳市",
+							"cyprnh": 334677642
+						},
+						"10170309": {
+							"qtc": "QDX",
+							"cstatus": 0,
+							"areac": 10170309,
+							"arean": "祁东县",
+							"cyprnh": 2140257772
+						},
+						"10170308": {
+							"qtc": "HDX",
+							"cstatus": 0,
+							"areac": 10170308,
+							"arean": "衡东县",
+							"cyprnh": 3957278043
+						}
+					},
+					"cstatus": 0,
+					"areac": 101703,
+					"arean": "衡阳",
+					"cyprnh": 3196516609
+				},
+				"101704": {
+					"qtc": "SY",
+					"sub": {
+						"10170406": {
+							"qtc": "LHX",
+							"cstatus": 0,
+							"areac": 10170406,
+							"arean": "隆回县",
+							"cyprnh": 3375192027
+						},
+						"10170405": {
+							"qtc": "SYX",
+							"cstatus": 0,
+							"areac": 10170405,
+							"arean": "邵阳县",
+							"cyprnh": 2646740930
+						},
+						"10170404": {
+							"qtc": "XSX",
+							"cstatus": 0,
+							"areac": 10170404,
+							"arean": "新邵县",
+							"cyprnh": 3884515482
+						},
+						"10170403": {
+							"qtc": "SDX",
+							"cstatus": 0,
+							"areac": 10170403,
+							"arean": "邵东县",
+							"cyprnh": 416058480
+						},
+						"10170402": {
+							"qtc": "BTQ",
+							"cstatus": 0,
+							"areac": 10170402,
+							"arean": "北塔区",
+							"cyprnh": 2450840919
+						},
+						"10170401": {
+							"qtc": "DXQ",
+							"cstatus": 0,
+							"areac": 10170401,
+							"arean": "大祥区",
+							"cyprnh": 3762002409
+						},
+						"10170400": {
+							"qtc": "SQQ",
+							"cstatus": 0,
+							"areac": 10170400,
+							"arean": "双清区",
+							"cyprnh": 2055447847
+						},
+						"10170411": {
+							"qtc": "WGS",
+							"cstatus": 0,
+							"areac": 10170411,
+							"arean": "武冈市",
+							"cyprnh": 1784118758
+						},
+						"10170410": {
+							"qtc": "CB",
+							"cstatus": 0,
+							"areac": 10170410,
+							"arean": "城步",
+							"cyprnh": 3118556042
+						},
+						"10170409": {
+							"qtc": "XNX",
+							"cstatus": 0,
+							"areac": 10170409,
+							"arean": "新宁县",
+							"cyprnh": 3946016018
+						},
+						"10170408": {
+							"qtc": "SNX",
+							"cstatus": 0,
+							"areac": 10170408,
+							"arean": "绥宁县",
+							"cyprnh": 2883435967
+						},
+						"10170407": {
+							"qtc": "DKX",
+							"cstatus": 0,
+							"areac": 10170407,
+							"arean": "洞口县",
+							"cyprnh": 964176889
+						}
+					},
+					"cstatus": 0,
+					"areac": 101704,
+					"arean": "邵阳",
+					"cyprnh": 750829496
+				},
+				"101705": {
+					"qtc": "YY",
+					"sub": {
+						"10170505": {
+							"qtc": "XYX",
+							"cstatus": 0,
+							"areac": 10170505,
+							"arean": "湘阴县",
+							"cyprnh": 2841767901
+						},
+						"10170504": {
+							"qtc": "HRX",
+							"cstatus": 0,
+							"areac": 10170504,
+							"arean": "华容县",
+							"cyprnh": 1051489003
+						},
+						"10170503": {
+							"qtc": "YYX",
+							"cstatus": 0,
+							"areac": 10170503,
+							"arean": "岳阳县",
+							"cyprnh": 2649463441
+						},
+						"10170502": {
+							"qtc": "JSQ",
+							"cstatus": 0,
+							"areac": 10170502,
+							"arean": "君山区",
+							"cyprnh": 2309774281
+						},
+						"10170501": {
+							"qtc": "YXQ",
+							"cstatus": 0,
+							"areac": 10170501,
+							"arean": "云溪区",
+							"cyprnh": 609090939
+						},
+						"10170500": {
+							"qtc": "YYLQ",
+							"cstatus": 0,
+							"areac": 10170500,
+							"arean": "岳阳楼区",
+							"cyprnh": 2390560483
+						},
+						"10170508": {
+							"qtc": "LXS",
+							"cstatus": 0,
+							"areac": 10170508,
+							"arean": "临湘市",
+							"cyprnh": 1967648174
+						},
+						"10170507": {
+							"qtc": "ZLS",
+							"cstatus": 0,
+							"areac": 10170507,
+							"arean": "汨罗市",
+							"cyprnh": 2185186698
+						},
+						"10170506": {
+							"qtc": "PJX",
+							"cstatus": 0,
+							"areac": 10170506,
+							"arean": "平江县",
+							"cyprnh": 400714209
+						}
+					},
+					"cstatus": 0,
+					"areac": 101705,
+					"arean": "岳阳",
+					"cyprnh": 3746076825
+				},
+				"101706": {
+					"qtc": "CD",
+					"sub": {
+						"10170604": {
+							"qtc": "ZX",
+							"cstatus": 0,
+							"areac": 10170604,
+							"arean": "澧县",
+							"cyprnh": 1600374630
+						},
+						"10170603": {
+							"qtc": "HSX",
+							"cstatus": 0,
+							"areac": 10170603,
+							"arean": "汉寿县",
+							"cyprnh": 149897470
+						},
+						"10170602": {
+							"qtc": "AXX",
+							"cstatus": 0,
+							"areac": 10170602,
+							"arean": "安乡县",
+							"cyprnh": 12832407
+						},
+						"10170601": {
+							"qtc": "DCQ",
+							"cstatus": 0,
+							"areac": 10170601,
+							"arean": "鼎城区",
+							"cyprnh": 572396863
+						},
+						"10170600": {
+							"qtc": "WLQ",
+							"cstatus": 0,
+							"areac": 10170600,
+							"arean": "武陵区",
+							"cyprnh": 1850529499
+						},
+						"10170608": {
+							"qtc": "JSS",
+							"cstatus": 0,
+							"areac": 10170608,
+							"arean": "津市市",
+							"cyprnh": 1239919608
+						},
+						"10170607": {
+							"qtc": "SMX",
+							"cstatus": 0,
+							"areac": 10170607,
+							"arean": "石门县",
+							"cyprnh": 3559293663
+						},
+						"10170606": {
+							"qtc": "TYX",
+							"cstatus": 0,
+							"areac": 10170606,
+							"arean": "桃源县",
+							"cyprnh": 115473327
+						},
+						"10170605": {
+							"qtc": "LZX",
+							"cstatus": 0,
+							"areac": 10170605,
+							"arean": "临澧县",
+							"cyprnh": 3193635885
+						}
+					},
+					"cstatus": 0,
+					"areac": 101706,
+					"arean": "常德",
+					"cyprnh": 2404432224
+				},
+				"101707": {
+					"qtc": "ZJJ",
+					"sub": {
+						"10170703": {
+							"qtc": "SZX",
+							"cstatus": 0,
+							"areac": 10170703,
+							"arean": "桑植县",
+							"cyprnh": 2332283113
+						},
+						"10170702": {
+							"qtc": "CLX",
+							"cstatus": 0,
+							"areac": 10170702,
+							"arean": "慈利县",
+							"cyprnh": 2844585370
+						},
+						"10170701": {
+							"qtc": "WLYQ",
+							"cstatus": 0,
+							"areac": 10170701,
+							"arean": "武陵源区",
+							"cyprnh": 2722399171
+						},
+						"10170700": {
+							"qtc": "YDQ",
+							"cstatus": 0,
+							"areac": 10170700,
+							"arean": "永定区",
+							"cyprnh": 578883127
+						}
+					},
+					"cstatus": 0,
+					"areac": 101707,
+					"arean": "张家界",
+					"cyprnh": 2772962685
+				},
+				"101708": {
+					"qtc": "YY",
+					"sub": {
+						"10170802": {
+							"qtc": "NX",
+							"cstatus": 0,
+							"areac": 10170802,
+							"arean": "南县",
+							"cyprnh": 3479015231
+						},
+						"10170801": {
+							"qtc": "HSQ",
+							"cstatus": 0,
+							"areac": 10170801,
+							"arean": "赫山区",
+							"cyprnh": 1628861950
+						},
+						"10170800": {
+							"qtc": "ZYQ",
+							"cstatus": 0,
+							"areac": 10170800,
+							"arean": "资阳区",
+							"cyprnh": 1241086222
+						},
+						"10170805": {
+							"qtc": "ZJS",
+							"cstatus": 0,
+							"areac": 10170805,
+							"arean": "沅江市",
+							"cyprnh": 1774322814
+						},
+						"10170804": {
+							"qtc": "AHX",
+							"cstatus": 0,
+							"areac": 10170804,
+							"arean": "安化县",
+							"cyprnh": 3483560668
+						},
+						"10170803": {
+							"qtc": "TJX",
+							"cstatus": 0,
+							"areac": 10170803,
+							"arean": "桃江县",
+							"cyprnh": 693295848
+						}
+					},
+					"cstatus": 0,
+					"areac": 101708,
+					"arean": "益阳",
+					"cyprnh": 3547513804
+				},
+				"101709": {
+					"qtc": "CZ",
+					"sub": {
+						"10170901": {
+							"qtc": "SXQ",
+							"cstatus": 0,
+							"areac": 10170901,
+							"arean": "苏仙区",
+							"cyprnh": 784950763
+						},
+						"10170900": {
+							"qtc": "BHQ",
+							"cstatus": 0,
+							"areac": 10170900,
+							"arean": "北湖区",
+							"cyprnh": 3994663729
+						},
+						"10170910": {
+							"qtc": "ZXS",
+							"cstatus": 0,
+							"areac": 10170910,
+							"arean": "资兴市",
+							"cyprnh": 2830408086
+						},
+						"10170909": {
+							"qtc": "ARX",
+							"cstatus": 0,
+							"areac": 10170909,
+							"arean": "安仁县",
+							"cyprnh": 3660657353
+						},
+						"10170908": {
+							"qtc": "GDX",
+							"cstatus": 0,
+							"areac": 10170908,
+							"arean": "桂东县",
+							"cyprnh": 3712531912
+						},
+						"10170907": {
+							"qtc": "RCX",
+							"cstatus": 0,
+							"areac": 10170907,
+							"arean": "汝城县",
+							"cyprnh": 1925767009
+						},
+						"10170906": {
+							"qtc": "LWX",
+							"cstatus": 0,
+							"areac": 10170906,
+							"arean": "临武县",
+							"cyprnh": 564629018
+						},
+						"10170905": {
+							"qtc": "JHX",
+							"cstatus": 0,
+							"areac": 10170905,
+							"arean": "嘉禾县",
+							"cyprnh": 792699225
+						},
+						"10170904": {
+							"qtc": "YXX",
+							"cstatus": 0,
+							"areac": 10170904,
+							"arean": "永兴县",
+							"cyprnh": 2518769186
+						},
+						"10170903": {
+							"qtc": "YZX",
+							"cstatus": 0,
+							"areac": 10170903,
+							"arean": "宜章县",
+							"cyprnh": 288206039
+						},
+						"10170902": {
+							"qtc": "GYX",
+							"cstatus": 0,
+							"areac": 10170902,
+							"arean": "桂阳县",
+							"cyprnh": 1480998522
+						}
+					},
+					"cstatus": 0,
+					"areac": 101709,
+					"arean": "郴州",
+					"cyprnh": 4156910609
+				},
+				"101710": {
+					"qtc": "YZ",
+					"sub": {
+						"10171010": {
+							"qtc": "JHX",
+							"cstatus": 0,
+							"areac": 10171010,
+							"arean": "江华县",
+							"cyprnh": 4285991594
+						},
+						"10171000": {
+							"qtc": "ZSQ",
+							"cstatus": 0,
+							"areac": 10171000,
+							"arean": "芝山区",
+							"cyprnh": 4131955783
+						},
+						"10171001": {
+							"qtc": "LSTQ",
+							"cstatus": 0,
+							"areac": 10171001,
+							"arean": "冷水滩区",
+							"cyprnh": 2545914101
+						},
+						"10171002": {
+							"qtc": "QYX",
+							"cstatus": 0,
+							"areac": 10171002,
+							"arean": "祁阳县",
+							"cyprnh": 4204740190
+						},
+						"10171003": {
+							"qtc": "DAX",
+							"cstatus": 0,
+							"areac": 10171003,
+							"arean": "东安县",
+							"cyprnh": 3834662647
+						},
+						"10171004": {
+							"qtc": "SPX",
+							"cstatus": 0,
+							"areac": 10171004,
+							"arean": "双牌县",
+							"cyprnh": 315244083
+						},
+						"10171005": {
+							"qtc": "DX",
+							"cstatus": 0,
+							"areac": 10171005,
+							"arean": "道县",
+							"cyprnh": 4060951826
+						},
+						"10171006": {
+							"qtc": "JYX",
+							"cstatus": 0,
+							"areac": 10171006,
+							"arean": "江永县",
+							"cyprnh": 4111639374
+						},
+						"10171007": {
+							"qtc": "NYX",
+							"cstatus": 0,
+							"areac": 10171007,
+							"arean": "宁远县",
+							"cyprnh": 3387921751
+						},
+						"10171008": {
+							"qtc": "LSX",
+							"cstatus": 0,
+							"areac": 10171008,
+							"arean": "蓝山县",
+							"cyprnh": 3621787722
+						},
+						"10171009": {
+							"qtc": "XTX",
+							"cstatus": 0,
+							"areac": 10171009,
+							"arean": "新田县",
+							"cyprnh": 100529146
+						}
+					},
+					"cstatus": 0,
+					"areac": 101710,
+					"arean": "永州",
+					"cyprnh": 2865013546
+				},
+				"101700": {
+					"qtc": "CS",
+					"sub": {
+						"10170008": {
+							"qtc": "ZYS",
+							"cstatus": 0,
+							"areac": 10170008,
+							"arean": "浏阳市",
+							"cyprnh": 269794575
+						},
+						"10170007": {
+							"qtc": "NXX",
+							"cstatus": 0,
+							"areac": 10170007,
+							"arean": "宁乡县",
+							"cyprnh": 858554608
+						},
+						"10170006": {
+							"qtc": "WCX",
+							"cstatus": 0,
+							"areac": 10170006,
+							"arean": "望城县",
+							"cyprnh": 1936432604
+						},
+						"10170005": {
+							"qtc": "CSX",
+							"cstatus": 0,
+							"areac": 10170005,
+							"arean": "长沙县",
+							"cyprnh": 4200899220
+						},
+						"10170004": {
+							"qtc": "YHQ",
+							"cstatus": 0,
+							"areac": 10170004,
+							"arean": "雨花区",
+							"cyprnh": 3239481613
+						},
+						"10170003": {
+							"qtc": "KFQ",
+							"cstatus": 0,
+							"areac": 10170003,
+							"arean": "开福区",
+							"cyprnh": 3444605423
+						},
+						"10170002": {
+							"qtc": "YLQ",
+							"cstatus": 0,
+							"areac": 10170002,
+							"arean": "岳麓区",
+							"cyprnh": 3297042374
+						},
+						"10170001": {
+							"qtc": "TXQ",
+							"cstatus": 0,
+							"areac": 10170001,
+							"arean": "天心区",
+							"cyprnh": 1388657790
+						},
+						"10170000": {
+							"qtc": "ZRQ",
+							"cstatus": 0,
+							"areac": 10170000,
+							"arean": "芙蓉区",
+							"cyprnh": 805781408
+						}
+					},
+					"cstatus": 0,
+					"areac": 101700,
+					"arean": "长沙",
+					"cyprnh": 774985357
+				},
+				"101711": {
+					"qtc": "HH",
+					"sub": {
+						"10171110": {
+							"qtc": "TDX",
+							"cstatus": 0,
+							"areac": 10171110,
+							"arean": "通道县",
+							"cyprnh": 735058695
+						},
+						"10171100": {
+							"qtc": "HCQ",
+							"cstatus": 0,
+							"areac": 10171100,
+							"arean": "鹤城区",
+							"cyprnh": 20151689
+						},
+						"10171111": {
+							"qtc": "HJS",
+							"cstatus": 0,
+							"areac": 10171111,
+							"arean": "洪江市",
+							"cyprnh": 2522367116
+						},
+						"10171101": {
+							"qtc": "ZFX",
+							"cstatus": 0,
+							"areac": 10171101,
+							"arean": "中方县",
+							"cyprnh": 225089881
+						},
+						"10171102": {
+							"qtc": "ZLX",
+							"cstatus": 0,
+							"areac": 10171102,
+							"arean": "沅陵县",
+							"cyprnh": 2011054160
+						},
+						"10171103": {
+							"qtc": "CXX",
+							"cstatus": 0,
+							"areac": 10171103,
+							"arean": "辰溪县",
+							"cyprnh": 1839572144
+						},
+						"10171104": {
+							"qtc": "ZPX",
+							"cstatus": 0,
+							"areac": 10171104,
+							"arean": "溆浦县",
+							"cyprnh": 572049881
+						},
+						"10171105": {
+							"qtc": "HTX",
+							"cstatus": 0,
+							"areac": 10171105,
+							"arean": "会同县",
+							"cyprnh": 717587426
+						},
+						"10171106": {
+							"qtc": "MYMZ",
+							"cstatus": 0,
+							"areac": 10171106,
+							"arean": "麻阳苗族",
+							"cyprnh": 3966274329
+						},
+						"10171107": {
+							"qtc": "XHDZ",
+							"cstatus": 0,
+							"areac": 10171107,
+							"arean": "新晃侗族",
+							"cyprnh": 1340698399
+						},
+						"10171108": {
+							"qtc": "ZJDZ",
+							"cstatus": 0,
+							"areac": 10171108,
+							"arean": "芷江侗族",
+							"cyprnh": 1778744877
+						},
+						"10171109": {
+							"qtc": "JZX",
+							"cstatus": 0,
+							"areac": 10171109,
+							"arean": "靖州县",
+							"cyprnh": 2684813321
+						}
+					},
+					"cstatus": 0,
+					"areac": 101711,
+					"arean": "怀化",
+					"cyprnh": 202616040
+				},
+				"101701": {
+					"qtc": "ZZ",
+					"sub": {
+						"10170108": {
+							"qtc": "ZLS",
+							"cstatus": 0,
+							"areac": 10170108,
+							"arean": "醴陵市",
+							"cyprnh": 1988141444
+						},
+						"10170107": {
+							"qtc": "YLX",
+							"cstatus": 0,
+							"areac": 10170107,
+							"arean": "炎陵县",
+							"cyprnh": 3882832788
+						},
+						"10170106": {
+							"qtc": "CLX",
+							"cstatus": 0,
+							"areac": 10170106,
+							"arean": "茶陵县",
+							"cyprnh": 3067110722
+						},
+						"10170105": {
+							"qtc": "ZX",
+							"cstatus": 0,
+							"areac": 10170105,
+							"arean": "攸县",
+							"cyprnh": 3697850122
+						},
+						"10170104": {
+							"qtc": "ZZX",
+							"cstatus": 0,
+							"areac": 10170104,
+							"arean": "株洲县",
+							"cyprnh": 627400362
+						},
+						"10170103": {
+							"qtc": "TYQ",
+							"cstatus": 0,
+							"areac": 10170103,
+							"arean": "天元区",
+							"cyprnh": 3109330009
+						},
+						"10170102": {
+							"qtc": "SFQ",
+							"cstatus": 0,
+							"areac": 10170102,
+							"arean": "石峰区",
+							"cyprnh": 1079255581
+						},
+						"10170101": {
+							"qtc": "LZQ",
+							"cstatus": 0,
+							"areac": 10170101,
+							"arean": "芦淞区",
+							"cyprnh": 2913561993
+						},
+						"10170100": {
+							"qtc": "HTQ",
+							"cstatus": 0,
+							"areac": 10170100,
+							"arean": "荷塘区",
+							"cyprnh": 714783930
+						}
+					},
+					"cstatus": 0,
+					"areac": 101701,
+					"arean": "株洲",
+					"cyprnh": 730278597
+				},
+				"101712": {
+					"qtc": "LD",
+					"sub": {
+						"10171200": {
+							"qtc": "LDS",
+							"cstatus": 0,
+							"areac": 10171200,
+							"arean": "娄底市",
+							"cyprnh": 2243607863
+						},
+						"10171201": {
+							"qtc": "LSJS",
+							"cstatus": 0,
+							"areac": 10171201,
+							"arean": "冷水江市",
+							"cyprnh": 2607244352
+						},
+						"10171202": {
+							"qtc": "LYS",
+							"cstatus": 0,
+							"areac": 10171202,
+							"arean": "涟源市",
+							"cyprnh": 26601539
+						},
+						"10171203": {
+							"qtc": "SFX",
+							"cstatus": 0,
+							"areac": 10171203,
+							"arean": "双峰县",
+							"cyprnh": 242120710
+						},
+						"10171204": {
+							"qtc": "XHX",
+							"cstatus": 0,
+							"areac": 10171204,
+							"arean": "新化县",
+							"cyprnh": 2650570320
+						}
+					},
+					"cstatus": 0,
+					"areac": 101712,
+					"arean": "娄底",
+					"cyprnh": 3829525787
+				},
+				"101702": {
+					"qtc": "XT",
+					"sub": {
+						"10170204": {
+							"qtc": "SSS",
+							"cstatus": 0,
+							"areac": 10170204,
+							"arean": "韶山市",
+							"cyprnh": 2348460356
+						},
+						"10170203": {
+							"qtc": "XXS",
+							"cstatus": 0,
+							"areac": 10170203,
+							"arean": "湘乡市",
+							"cyprnh": 1609400446
+						},
+						"10170202": {
+							"qtc": "XTX",
+							"cstatus": 0,
+							"areac": 10170202,
+							"arean": "湘潭县",
+							"cyprnh": 2080892265
+						},
+						"10170201": {
+							"qtc": "YTQ",
+							"cstatus": 0,
+							"areac": 10170201,
+							"arean": "岳塘区",
+							"cyprnh": 1937194543
+						},
+						"10170200": {
+							"qtc": "YHQ",
+							"cstatus": 0,
+							"areac": 10170200,
+							"arean": "雨湖区",
+							"cyprnh": 544777644
+						}
+					},
+					"cstatus": 0,
+					"areac": 101702,
+					"arean": "湘潭",
+					"cyprnh": 1084184992
+				},
+				"101713": {
+					"qtc": "XXTJ",
+					"sub": {
+						"10171300": {
+							"qtc": "JSS",
+							"cstatus": 0,
+							"areac": 10171300,
+							"arean": "吉首市",
+							"cyprnh": 1914863913
+						},
+						"10171301": {
+							"qtc": "ZXX",
+							"cstatus": 0,
+							"areac": 10171301,
+							"arean": "泸溪县",
+							"cyprnh": 227353748
+						},
+						"10171302": {
+							"qtc": "FHX",
+							"cstatus": 0,
+							"areac": 10171302,
+							"arean": "凤凰县",
+							"cyprnh": 1970801166
+						},
+						"10171303": {
+							"qtc": "HYX",
+							"cstatus": 0,
+							"areac": 10171303,
+							"arean": "花垣县",
+							"cyprnh": 92816995
+						},
+						"10171304": {
+							"qtc": "BJX",
+							"cstatus": 0,
+							"areac": 10171304,
+							"arean": "保靖县",
+							"cyprnh": 3508210110
+						},
+						"10171305": {
+							"qtc": "GZX",
+							"cstatus": 0,
+							"areac": 10171305,
+							"arean": "古丈县",
+							"cyprnh": 2066693383
+						},
+						"10171306": {
+							"qtc": "YSX",
+							"cstatus": 0,
+							"areac": 10171306,
+							"arean": "永顺县",
+							"cyprnh": 897409198
+						},
+						"10171307": {
+							"qtc": "LSX",
+							"cstatus": 0,
+							"areac": 10171307,
+							"arean": "龙山县",
+							"cyprnh": 1453809565
+						}
+					},
+					"cstatus": 0,
+					"areac": 101713,
+					"arean": "湘西土家",
+					"cyprnh": 2504669545
+				}
+			},
+			"cstatus": 0,
+			"areac": 1017,
+			"arean": "湖南",
+			"cyprnh": 3142352779
+		},
+		"1016": {
+			"qtc": "HB",
+			"sub": {
+				"101604": {
+					"qtc": "XY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101604,
+					"arean": "襄阳",
+					"cyprnh": 3706323149
+				},
+				"101615": {
+					"qtc": "TM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101615,
+					"arean": "天门",
+					"cyprnh": 45193315
+				},
+				"101605": {
+					"qtc": "EZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101605,
+					"arean": "鄂州",
+					"cyprnh": 2426738556
+				},
+				"101616": {
+					"qtc": "SNJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101616,
+					"arean": "神龙架",
+					"cyprnh": 3680457515
+				},
+				"101606": {
+					"qtc": "JM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101606,
+					"arean": "荆门",
+					"cyprnh": 2326755744
+				},
+				"101607": {
+					"qtc": "XG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101607,
+					"arean": "孝感",
+					"cyprnh": 2732996164
+				},
+				"101608": {
+					"qtc": "JZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101608,
+					"arean": "荆州",
+					"cyprnh": 3649778175
+				},
+				"101609": {
+					"qtc": "HG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101609,
+					"arean": "黄冈",
+					"cyprnh": 2755056916
+				},
+				"101610": {
+					"qtc": "XN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101610,
+					"arean": "咸宁",
+					"cyprnh": 2170095885
+				},
+				"101600": {
+					"qtc": "WH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101600,
+					"arean": "武汉",
+					"cyprnh": 1438469293
+				},
+				"101611": {
+					"qtc": "SZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101611,
+					"arean": "随州",
+					"cyprnh": 3172984386
+				},
+				"101601": {
+					"qtc": "HS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101601,
+					"arean": "黄石",
+					"cyprnh": 2377728326
+				},
+				"101612": {
+					"qtc": "ESZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101612,
+					"arean": "恩施州",
+					"cyprnh": 2162087721
+				},
+				"101602": {
+					"qtc": "SY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101602,
+					"arean": "十堰",
+					"cyprnh": 563581889
+				},
+				"101613": {
+					"qtc": "XT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101613,
+					"arean": "仙桃",
+					"cyprnh": 4119501884
+				},
+				"101603": {
+					"qtc": "YC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101603,
+					"arean": "宜昌",
+					"cyprnh": 1060321138
+				},
+				"101614": {
+					"qtc": "QJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101614,
+					"arean": "潜江",
+					"cyprnh": 1579120315
+				}
+			},
+			"cstatus": 0,
+			"areac": 1016,
+			"arean": "湖北",
+			"cyprnh": 2723630794
+		},
+		"1015": {
+			"qtc": "HN",
+			"sub": {
+				"101505": {
+					"qtc": "HB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101505,
+					"arean": "鹤壁",
+					"cyprnh": 4025172233
+				},
+				"101516": {
+					"qtc": "ZMD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101516,
+					"arean": "驻马店",
+					"cyprnh": 1933936493
+				},
+				"101506": {
+					"qtc": "XX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101506,
+					"arean": "新乡",
+					"cyprnh": 148257765
+				},
+				"101517": {
+					"qtc": "JY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101517,
+					"arean": "济源",
+					"cyprnh": 3878970932
+				},
+				"101507": {
+					"qtc": "JZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101507,
+					"arean": "焦作",
+					"cyprnh": 2430381556
+				},
+				"101508": {
+					"qtc": "PY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101508,
+					"arean": "濮阳",
+					"cyprnh": 54501828
+				},
+				"101509": {
+					"qtc": "XC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101509,
+					"arean": "许昌",
+					"cyprnh": 2902269125
+				},
+				"101510": {
+					"qtc": "LH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101510,
+					"arean": "漯河",
+					"cyprnh": 2551461732
+				},
+				"101500": {
+					"qtc": "ZZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101500,
+					"arean": "郑州",
+					"cyprnh": 1613312797
+				},
+				"101511": {
+					"qtc": "SMX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101511,
+					"arean": "三门峡",
+					"cyprnh": 2196527764
+				},
+				"101501": {
+					"qtc": "KF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101501,
+					"arean": "开封",
+					"cyprnh": 511080441
+				},
+				"101512": {
+					"qtc": "NY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101512,
+					"arean": "南阳",
+					"cyprnh": 3546910631
+				},
+				"101502": {
+					"qtc": "LY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101502,
+					"arean": "洛阳",
+					"cyprnh": 3004864582
+				},
+				"101513": {
+					"qtc": "SQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101513,
+					"arean": "商丘",
+					"cyprnh": 1522281903
+				},
+				"101503": {
+					"qtc": "PDS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101503,
+					"arean": "平顶山",
+					"cyprnh": 3825773369
+				},
+				"101514": {
+					"qtc": "XY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101514,
+					"arean": "信阳",
+					"cyprnh": 378802329
+				},
+				"101504": {
+					"qtc": "AY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101504,
+					"arean": "安阳",
+					"cyprnh": 3855547103
+				},
+				"101515": {
+					"qtc": "ZK",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101515,
+					"arean": "周口",
+					"cyprnh": 3474944069
+				}
+			},
+			"cstatus": 0,
+			"areac": 1015,
+			"arean": "河南",
+			"cyprnh": 1534071190
+		},
+		"1014": {
+			"qtc": "SD",
+			"sub": {
+				"101406": {
+					"qtc": "WF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101406,
+					"arean": "潍坊",
+					"cyprnh": 3759175517
+				},
+				"101407": {
+					"qtc": "JN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101407,
+					"arean": "济宁",
+					"cyprnh": 2708221898
+				},
+				"101408": {
+					"qtc": "TA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101408,
+					"arean": "泰安",
+					"cyprnh": 805559754
+				},
+				"101409": {
+					"qtc": "WH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101409,
+					"arean": "威海",
+					"cyprnh": 2200043099
+				},
+				"101410": {
+					"qtc": "RZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101410,
+					"arean": "日照",
+					"cyprnh": 3399997291
+				},
+				"101400": {
+					"qtc": "JN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101400,
+					"arean": "济南",
+					"cyprnh": 3943820794
+				},
+				"101411": {
+					"qtc": "LW",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101411,
+					"arean": "莱芜",
+					"cyprnh": 2145989110
+				},
+				"101401": {
+					"qtc": "QD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101401,
+					"arean": "青岛",
+					"cyprnh": 2689709530
+				},
+				"101412": {
+					"qtc": "LY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101412,
+					"arean": "临沂",
+					"cyprnh": 4137345035
+				},
+				"101402": {
+					"qtc": "ZB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101402,
+					"arean": "淄博",
+					"cyprnh": 2161975875
+				},
+				"101413": {
+					"qtc": "DZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101413,
+					"arean": "德州",
+					"cyprnh": 3406004147
+				},
+				"101403": {
+					"qtc": "ZZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101403,
+					"arean": "枣庄",
+					"cyprnh": 467756518
+				},
+				"101414": {
+					"qtc": "LC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101414,
+					"arean": "聊城",
+					"cyprnh": 373808520
+				},
+				"101404": {
+					"qtc": "DY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101404,
+					"arean": "东营",
+					"cyprnh": 2604317083
+				},
+				"101415": {
+					"qtc": "BZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101415,
+					"arean": "滨州",
+					"cyprnh": 2366490020
+				},
+				"101405": {
+					"qtc": "YT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101405,
+					"arean": "烟台",
+					"cyprnh": 1907725418
+				},
+				"101416": {
+					"qtc": "HZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101416,
+					"arean": "菏泽",
+					"cyprnh": 437135162
+				}
+			},
+			"cstatus": 0,
+			"areac": 1014,
+			"arean": "山东",
+			"cyprnh": 74227818
+		},
+		"1013": {
+			"qtc": "JX",
+			"sub": {
+				"101307": {
+					"qtc": "JA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101307,
+					"arean": "吉安",
+					"cyprnh": 3184872859
+				},
+				"101308": {
+					"qtc": "YC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101308,
+					"arean": "宜春",
+					"cyprnh": 2105650974
+				},
+				"101309": {
+					"qtc": "FZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101309,
+					"arean": "抚州",
+					"cyprnh": 1265525944
+				},
+				"101310": {
+					"qtc": "SR",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101310,
+					"arean": "上饶",
+					"cyprnh": 3372570759
+				},
+				"101300": {
+					"qtc": "NC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101300,
+					"arean": "南昌",
+					"cyprnh": 1850992039
+				},
+				"101301": {
+					"qtc": "JDZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101301,
+					"arean": "景德镇",
+					"cyprnh": 2651531526
+				},
+				"101302": {
+					"qtc": "PX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101302,
+					"arean": "萍乡",
+					"cyprnh": 3218968393
+				},
+				"101303": {
+					"qtc": "JJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101303,
+					"arean": "九江",
+					"cyprnh": 1592464917
+				},
+				"101304": {
+					"qtc": "XY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101304,
+					"arean": "新余",
+					"cyprnh": 1152927359
+				},
+				"101305": {
+					"qtc": "YT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101305,
+					"arean": "鹰潭",
+					"cyprnh": 3561974948
+				},
+				"101306": {
+					"qtc": "GZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101306,
+					"arean": "赣州",
+					"cyprnh": 3744898484
+				}
+			},
+			"cstatus": 0,
+			"areac": 1013,
+			"arean": "江西",
+			"cyprnh": 2516905667
+		},
+		"1012": {
+			"qtc": "FJ",
+			"sub": {
+				"101208": {
+					"qtc": "ND",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101208,
+					"arean": "宁德",
+					"cyprnh": 3990056041
+				},
+				"101200": {
+					"qtc": "FZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101200,
+					"arean": "福州",
+					"cyprnh": 3821327029
+				},
+				"101201": {
+					"qtc": "XM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101201,
+					"arean": "厦门",
+					"cyprnh": 3517169552
+				},
+				"101202": {
+					"qtc": "PT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101202,
+					"arean": "莆田",
+					"cyprnh": 4291880431
+				},
+				"101203": {
+					"qtc": "SM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101203,
+					"arean": "三明",
+					"cyprnh": 2449883252
+				},
+				"101204": {
+					"qtc": "QZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101204,
+					"arean": "泉州",
+					"cyprnh": 2784183870
+				},
+				"101205": {
+					"qtc": "ZZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101205,
+					"arean": "漳州",
+					"cyprnh": 3090532650
+				},
+				"101206": {
+					"qtc": "NP",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101206,
+					"arean": "南平",
+					"cyprnh": 1458332448
+				},
+				"101207": {
+					"qtc": "LY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101207,
+					"arean": "龙岩",
+					"cyprnh": 971388559
+				}
+			},
+			"cstatus": 0,
+			"areac": 1012,
+			"arean": "福建",
+			"cyprnh": 1936882024
+		},
+		"1011": {
+			"qtc": "AH",
+			"sub": {
+				"101110": {
+					"qtc": "FY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101110,
+					"arean": "阜阳",
+					"cyprnh": 3685404719
+				},
+				"101100": {
+					"qtc": "HF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101100,
+					"arean": "合肥",
+					"cyprnh": 106479328
+				},
+				"101111": {
+					"qtc": "SZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101111,
+					"arean": "宿州",
+					"cyprnh": 1851244766
+				},
+				"101109": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101109,
+					"arean": "滁州",
+					"cyprnh": 1345791248
+				},
+				"101101": {
+					"qtc": "WH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101101,
+					"arean": "芜湖",
+					"cyprnh": 3323019761
+				},
+				"101112": {
+					"qtc": "LZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101112,
+					"arean": "六安",
+					"cyprnh": 981822720
+				},
+				"101102": {
+					"qtc": "BB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101102,
+					"arean": "蚌埠",
+					"cyprnh": 4173998344
+				},
+				"101113": {
+					"qtc": "BZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101113,
+					"arean": "亳州",
+					"cyprnh": 2059246977
+				},
+				"101103": {
+					"qtc": "HN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101103,
+					"arean": "淮南",
+					"cyprnh": 836964772
+				},
+				"101114": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101114,
+					"arean": "池州",
+					"cyprnh": 34207210
+				},
+				"101104": {
+					"qtc": "MAS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101104,
+					"arean": "马鞍山",
+					"cyprnh": 3947550166
+				},
+				"101115": {
+					"qtc": "XC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101115,
+					"arean": "宣城",
+					"cyprnh": 879924791
+				},
+				"101105": {
+					"qtc": "HB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101105,
+					"arean": "淮北",
+					"cyprnh": 687349989
+				},
+				"101106": {
+					"qtc": "TL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101106,
+					"arean": "铜陵",
+					"cyprnh": 1543664970
+				},
+				"101107": {
+					"qtc": "AQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101107,
+					"arean": "安庆",
+					"cyprnh": 500531640
+				},
+				"101108": {
+					"qtc": "HS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101108,
+					"arean": "黄山",
+					"cyprnh": 1798634792
+				}
+			},
+			"cstatus": 0,
+			"areac": 1011,
+			"arean": "安徽",
+			"cyprnh": 3367153048
+		},
+		"1033": {
+			"qtc": "AM",
+			"sub": {},
+			"cstatus": 0,
+			"areac": 1033,
+			"arean": "澳门",
+			"cyprnh": 2446447125
+		},
+		"1010": {
+			"qtc": "ZJ",
+			"sub": {
+				"101010": {
+					"qtc": "LS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101010,
+					"arean": "丽水",
+					"cyprnh": 1981700250
+				},
+				"101000": {
+					"qtc": "HZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101000,
+					"arean": "杭州",
+					"cyprnh": 4099075890
+				},
+				"101001": {
+					"qtc": "NB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101001,
+					"arean": "宁波",
+					"cyprnh": 937838742
+				},
+				"101002": {
+					"qtc": "WZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101002,
+					"arean": "温州",
+					"cyprnh": 1913772049
+				},
+				"101003": {
+					"qtc": "JX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101003,
+					"arean": "嘉兴",
+					"cyprnh": 2747119394
+				},
+				"101004": {
+					"qtc": "HZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101004,
+					"arean": "湖州",
+					"cyprnh": 3879278934
+				},
+				"101005": {
+					"qtc": "SX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101005,
+					"arean": "绍兴",
+					"cyprnh": 3883324586
+				},
+				"101006": {
+					"qtc": "JH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101006,
+					"arean": "金华",
+					"cyprnh": 2914474944
+				},
+				"101007": {
+					"qtc": "QZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101007,
+					"arean": "衢州",
+					"cyprnh": 4075473811
+				},
+				"101008": {
+					"qtc": "ZS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101008,
+					"arean": "舟山",
+					"cyprnh": 3253812293
+				},
+				"101009": {
+					"qtc": "TZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 101009,
+					"arean": "台州",
+					"cyprnh": 3398817340
+				}
+			},
+			"cstatus": 0,
+			"areac": 1010,
+			"arean": "浙江",
+			"cyprnh": 1504824648
+		},
+		"1032": {
+			"qtc": "XG",
+			"sub": {},
+			"cstatus": 0,
+			"areac": 1032,
+			"arean": "香港",
+			"cyprnh": 2025593130
+		},
+		"1031": {
+			"qtc": "TB",
+			"sub": {},
+			"cstatus": 0,
+			"areac": 1031,
+			"arean": "台北",
+			"cyprnh": 2415624608
+		},
+		"1030": {
+			"qtc": "XJ",
+			"sub": {},
+			"cstatus": 0,
+			"areac": 1030,
+			"arean": "新疆",
+			"cyprnh": 3179677882
+		},
+		"1008": {
+			"qtc": "SH",
+			"sub": {
+				"100800": {
+					"qtc": "SHS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100800,
+					"arean": "上海市",
+					"cyprnh": 2965004744
+				}
+			},
+			"cstatus": 0,
+			"areac": 1008,
+			"arean": "上海",
+			"cyprnh": 4288429437
+		},
+		"1007": {
+			"qtc": "HLJ",
+			"sub": {
+				"100702": {
+					"qtc": "JX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100702,
+					"arean": "鸡西",
+					"cyprnh": 2058793461
+				},
+				"100703": {
+					"qtc": "HG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100703,
+					"arean": "鹤岗",
+					"cyprnh": 1223087944
+				},
+				"100704": {
+					"qtc": "SYS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100704,
+					"arean": "双鸭山",
+					"cyprnh": 325648661
+				},
+				"100705": {
+					"qtc": "DQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100705,
+					"arean": "大庆",
+					"cyprnh": 394805524
+				},
+				"100706": {
+					"qtc": "YC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100706,
+					"arean": "伊春",
+					"cyprnh": 3650072602
+				},
+				"100707": {
+					"qtc": "JMS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100707,
+					"arean": "佳木斯",
+					"cyprnh": 1301573265
+				},
+				"100708": {
+					"qtc": "QTH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100708,
+					"arean": "七台河",
+					"cyprnh": 2089261250
+				},
+				"100709": {
+					"qtc": "MDJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100709,
+					"arean": "牡丹江",
+					"cyprnh": 3907983560
+				},
+				"100710": {
+					"qtc": "HH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100710,
+					"arean": "黑河",
+					"cyprnh": 3415660083
+				},
+				"100700": {
+					"qtc": "HEB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100700,
+					"arean": "哈尔滨",
+					"cyprnh": 2590098400
+				},
+				"100711": {
+					"qtc": "SH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100711,
+					"arean": "绥化",
+					"cyprnh": 2253564374
+				},
+				"100701": {
+					"qtc": "QQHE",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100701,
+					"arean": "齐齐哈尔",
+					"cyprnh": 2344576010
+				},
+				"100712": {
+					"qtc": "DXAL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100712,
+					"arean": "大兴安岭",
+					"cyprnh": 3606125839
+				}
+			},
+			"cstatus": 0,
+			"areac": 1007,
+			"arean": "黑龙江",
+			"cyprnh": 3695868744
+		},
+		"1029": {
+			"qtc": "NX",
+			"sub": {},
+			"cstatus": 0,
+			"areac": 1029,
+			"arean": "宁夏",
+			"cyprnh": 1979461164
+		},
+		"1006": {
+			"qtc": "JL",
+			"sub": {
+				"100603": {
+					"qtc": "LY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100603,
+					"arean": "辽源",
+					"cyprnh": 1215324442
+				},
+				"100604": {
+					"qtc": "TH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100604,
+					"arean": "通化",
+					"cyprnh": 3269568966
+				},
+				"100605": {
+					"qtc": "BS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100605,
+					"arean": "白山",
+					"cyprnh": 1729910551
+				},
+				"100606": {
+					"qtc": "SY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100606,
+					"arean": "松原",
+					"cyprnh": 3481119343
+				},
+				"100607": {
+					"qtc": "BC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100607,
+					"arean": "白城",
+					"cyprnh": 3665654534
+				},
+				"100608": {
+					"qtc": "YBCX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100608,
+					"arean": "延边朝鲜",
+					"cyprnh": 2976296630
+				},
+				"100600": {
+					"qtc": "CC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100600,
+					"arean": "长春",
+					"cyprnh": 1849026082
+				},
+				"100601": {
+					"qtc": "JL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100601,
+					"arean": "吉林",
+					"cyprnh": 2598041682
+				},
+				"100602": {
+					"qtc": "SP",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100602,
+					"arean": "四平",
+					"cyprnh": 4087004858
+				}
+			},
+			"cstatus": 0,
+			"areac": 1006,
+			"arean": "吉林",
+			"cyprnh": 2598041682
+		},
+		"1028": {
+			"qtc": "QH",
+			"sub": {},
+			"cstatus": 0,
+			"areac": 1028,
+			"arean": "青海",
+			"cyprnh": 3750687143
+		},
+		"1005": {
+			"qtc": "LN",
+			"sub": {
+				"100504": {
+					"qtc": "BX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100504,
+					"arean": "本溪",
+					"cyprnh": 3889337670
+				},
+				"100505": {
+					"qtc": "DD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100505,
+					"arean": "丹东",
+					"cyprnh": 127154513
+				},
+				"100506": {
+					"qtc": "JZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100506,
+					"arean": "锦州",
+					"cyprnh": 3742742679
+				},
+				"100507": {
+					"qtc": "YK",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100507,
+					"arean": "营口",
+					"cyprnh": 3163263734
+				},
+				"100508": {
+					"qtc": "FX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100508,
+					"arean": "阜新",
+					"cyprnh": 3615288102
+				},
+				"100509": {
+					"qtc": "LY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100509,
+					"arean": "辽阳",
+					"cyprnh": 1190728053
+				},
+				"100510": {
+					"qtc": "PJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100510,
+					"arean": "盘锦",
+					"cyprnh": 3893032767
+				},
+				"100500": {
+					"qtc": "SY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100500,
+					"arean": "沈阳",
+					"cyprnh": 2130089367
+				},
+				"100511": {
+					"qtc": "TL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100511,
+					"arean": "铁岭",
+					"cyprnh": 2457298515
+				},
+				"100501": {
+					"qtc": "DL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100501,
+					"arean": "大连",
+					"cyprnh": 1900789332
+				},
+				"100512": {
+					"qtc": "CY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100512,
+					"arean": "朝阳",
+					"cyprnh": 1740677983
+				},
+				"100502": {
+					"qtc": "AS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100502,
+					"arean": "鞍山",
+					"cyprnh": 521999062
+				},
+				"100513": {
+					"qtc": "HLD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100513,
+					"arean": "葫芦岛",
+					"cyprnh": 3056068382
+				},
+				"100503": {
+					"qtc": "FS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100503,
+					"arean": "抚顺",
+					"cyprnh": 1659882714
+				}
+			},
+			"cstatus": 0,
+			"areac": 1005,
+			"arean": "辽宁",
+			"cyprnh": 237512932
+		},
+		"1027": {
+			"qtc": "GS",
+			"sub": {
+				"102705": {
+					"qtc": "WW",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102705,
+					"arean": "武威",
+					"cyprnh": 3256931294
+				},
+				"102704": {
+					"qtc": "TS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102704,
+					"arean": "天水",
+					"cyprnh": 3341365620
+				},
+				"102707": {
+					"qtc": "PL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102707,
+					"arean": "平凉",
+					"cyprnh": 2866055104
+				},
+				"102706": {
+					"qtc": "ZY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102706,
+					"arean": "张掖",
+					"cyprnh": 2115303460
+				},
+				"102709": {
+					"qtc": "QY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102709,
+					"arean": "庆阳",
+					"cyprnh": 684579787
+				},
+				"102708": {
+					"qtc": "JQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102708,
+					"arean": "酒泉",
+					"cyprnh": 405116873
+				},
+				"102701": {
+					"qtc": "JYG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102701,
+					"arean": "嘉峪关",
+					"cyprnh": 4291710344
+				},
+				"102700": {
+					"qtc": "LZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102700,
+					"arean": "兰州",
+					"cyprnh": 2149961373
+				},
+				"102703": {
+					"qtc": "BY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102703,
+					"arean": "白银",
+					"cyprnh": 1473281520
+				},
+				"102702": {
+					"qtc": "JC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102702,
+					"arean": "金昌",
+					"cyprnh": 1984586401
+				}
+			},
+			"cstatus": 0,
+			"areac": 1027,
+			"arean": "甘肃",
+			"cyprnh": 1006922569
+		},
+		"1004": {
+			"qtc": "NMG",
+			"sub": {
+				"100405": {
+					"qtc": "EEDS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100405,
+					"arean": "鄂尔多斯",
+					"cyprnh": 3946818891
+				},
+				"100406": {
+					"qtc": "HLBE",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100406,
+					"arean": "呼伦贝尔",
+					"cyprnh": 163374851
+				},
+				"100407": {
+					"qtc": "BYNE",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100407,
+					"arean": "巴彦淖尔",
+					"cyprnh": 87583263
+				},
+				"100408": {
+					"qtc": "WLCB",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100408,
+					"arean": "乌兰察布",
+					"cyprnh": 99598382
+				},
+				"100409": {
+					"qtc": "XAM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100409,
+					"arean": "兴安盟",
+					"cyprnh": 506362193
+				},
+				"100410": {
+					"qtc": "XLGL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100410,
+					"arean": "锡林郭勒",
+					"cyprnh": 3383224908
+				},
+				"100400": {
+					"qtc": "HHHT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100400,
+					"arean": "呼和浩特",
+					"cyprnh": 2836055905
+				},
+				"100411": {
+					"qtc": "ALSM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100411,
+					"arean": "阿拉善盟",
+					"cyprnh": 3429864371
+				},
+				"100401": {
+					"qtc": "BT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100401,
+					"arean": "包头",
+					"cyprnh": 4036242491
+				},
+				"100402": {
+					"qtc": "WH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100402,
+					"arean": "乌海",
+					"cyprnh": 3885452049
+				},
+				"100403": {
+					"qtc": "CF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100403,
+					"arean": "赤峰",
+					"cyprnh": 4200295878
+				},
+				"100404": {
+					"qtc": "TL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100404,
+					"arean": "通辽",
+					"cyprnh": 2348128164
+				}
+			},
+			"cstatus": 0,
+			"areac": 1004,
+			"arean": "内蒙古",
+			"cyprnh": 2327980941
+		},
+		"1026": {
+			"qtc": "SX",
+			"sub": {
+				"102606": {
+					"qtc": "HZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102606,
+					"arean": "汉中",
+					"cyprnh": 3870884528
+				},
+				"102605": {
+					"qtc": "YA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102605,
+					"arean": "延安",
+					"cyprnh": 2743909241
+				},
+				"102608": {
+					"qtc": "AK",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102608,
+					"arean": "安康",
+					"cyprnh": 1275822466
+				},
+				"102607": {
+					"qtc": "YL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102607,
+					"arean": "榆林",
+					"cyprnh": 1783420812
+				},
+				"102609": {
+					"qtc": "SL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102609,
+					"arean": "商洛",
+					"cyprnh": 1820649335
+				},
+				"102600": {
+					"qtc": "XA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102600,
+					"arean": "西安",
+					"cyprnh": 3184185038
+				},
+				"102602": {
+					"qtc": "BJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102602,
+					"arean": "宝鸡",
+					"cyprnh": 1552445437
+				},
+				"102601": {
+					"qtc": "TC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102601,
+					"arean": "铜川",
+					"cyprnh": 1806315000
+				},
+				"102604": {
+					"qtc": "WN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102604,
+					"arean": "渭南",
+					"cyprnh": 2701535643
+				},
+				"102603": {
+					"qtc": "XY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102603,
+					"arean": "咸阳",
+					"cyprnh": 3381145756
+				}
+			},
+			"cstatus": 0,
+			"areac": 1026,
+			"arean": "陕西",
+			"cyprnh": 4183742647
+		},
+		"1003": {
+			"qtc": "SX",
+			"sub": {
+				"100306": {
+					"qtc": "JZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100306,
+					"arean": "晋中",
+					"cyprnh": 3171004158
+				},
+				"100307": {
+					"qtc": "YC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100307,
+					"arean": "运城",
+					"cyprnh": 938634388
+				},
+				"100308": {
+					"qtc": "XZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100308,
+					"arean": "忻州",
+					"cyprnh": 3166038459
+				},
+				"100309": {
+					"qtc": "LF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100309,
+					"arean": "临汾",
+					"cyprnh": 4074295119
+				},
+				"100310": {
+					"qtc": "LL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100310,
+					"arean": "吕梁",
+					"cyprnh": 120773851
+				},
+				"100300": {
+					"qtc": "TY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100300,
+					"arean": "太原",
+					"cyprnh": 983810814
+				},
+				"100301": {
+					"qtc": "DT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100301,
+					"arean": "大同",
+					"cyprnh": 2553701410
+				},
+				"100302": {
+					"qtc": "YQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100302,
+					"arean": "阳泉",
+					"cyprnh": 2564492449
+				},
+				"100303": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100303,
+					"arean": "长治",
+					"cyprnh": 4216395625
+				},
+				"100304": {
+					"qtc": "JC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100304,
+					"arean": "晋城",
+					"cyprnh": 3294693342
+				},
+				"100305": {
+					"qtc": "SZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100305,
+					"arean": "朔州",
+					"cyprnh": 1141993897
+				}
+			},
+			"cstatus": 0,
+			"areac": 1003,
+			"arean": "山西",
+			"cyprnh": 1350386784
+		},
+		"1025": {
+			"qtc": "XZ",
+			"sub": {
+				"102506": {
+					"qtc": "LZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102506,
+					"arean": "林芝",
+					"cyprnh": 3613198192
+				},
+				"102501": {
+					"qtc": "CD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102501,
+					"arean": "昌都",
+					"cyprnh": 879481848
+				},
+				"102500": {
+					"qtc": "LS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102500,
+					"arean": "拉萨",
+					"cyprnh": 688194006
+				},
+				"102503": {
+					"qtc": "RKZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102503,
+					"arean": "日喀则",
+					"cyprnh": 3217385660
+				},
+				"102502": {
+					"qtc": "SN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102502,
+					"arean": "山南",
+					"cyprnh": 810406243
+				},
+				"102505": {
+					"qtc": "AL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102505,
+					"arean": "阿里",
+					"cyprnh": 303166300
+				},
+				"102504": {
+					"qtc": "NQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102504,
+					"arean": "那曲",
+					"cyprnh": 247763859
+				}
+			},
+			"cstatus": 0,
+			"areac": 1025,
+			"arean": "西藏",
+			"cyprnh": 1391818002
+		},
+		"1002": {
+			"qtc": "HB",
+			"sub": {
+				"100207": {
+					"qtc": "CD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100207,
+					"arean": "承德",
+					"cyprnh": 139616833
+				},
+				"100208": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100208,
+					"arean": "沧州",
+					"cyprnh": 3632183171
+				},
+				"100209": {
+					"qtc": "LF",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100209,
+					"arean": "廊坊",
+					"cyprnh": 1947453674
+				},
+				"100210": {
+					"qtc": "HS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100210,
+					"arean": "衡水",
+					"cyprnh": 1994622261
+				},
+				"100200": {
+					"qtc": "SJZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100200,
+					"arean": "石家庄",
+					"cyprnh": 3039994412
+				},
+				"100201": {
+					"qtc": "TS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100201,
+					"arean": "唐山",
+					"cyprnh": 2149336398
+				},
+				"100202": {
+					"qtc": "QHD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100202,
+					"arean": "秦皇岛",
+					"cyprnh": 3268673273
+				},
+				"100203": {
+					"qtc": "HD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100203,
+					"arean": "邯郸",
+					"cyprnh": 763370065
+				},
+				"100204": {
+					"qtc": "XT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100204,
+					"arean": "邢台",
+					"cyprnh": 1956576470
+				},
+				"100205": {
+					"qtc": "BD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100205,
+					"arean": "保定",
+					"cyprnh": 1860020221
+				},
+				"100206": {
+					"qtc": "ZJK",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100206,
+					"arean": "张家口",
+					"cyprnh": 3174047377
+				}
+			},
+			"cstatus": 0,
+			"areac": 1002,
+			"arean": "河北",
+			"cyprnh": 1114317015
+		},
+		"1024": {
+			"qtc": "YN",
+			"sub": {
+				"102408": {
+					"qtc": "CX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102408,
+					"arean": "楚雄",
+					"cyprnh": 3317086173
+				},
+				"102407": {
+					"qtc": "LC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102407,
+					"arean": "临沧",
+					"cyprnh": 3181261900
+				},
+				"102409": {
+					"qtc": "HH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102409,
+					"arean": "红河",
+					"cyprnh": 778226108
+				},
+				"102400": {
+					"qtc": "KM",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102400,
+					"arean": "昆明",
+					"cyprnh": 1181539885
+				},
+				"102411": {
+					"qtc": "XSBN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102411,
+					"arean": "西双版纳",
+					"cyprnh": 2270143
+				},
+				"102410": {
+					"qtc": "WS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102410,
+					"arean": "文山",
+					"cyprnh": 2978352038
+				},
+				"102402": {
+					"qtc": "YX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102402,
+					"arean": "玉溪",
+					"cyprnh": 2705513741
+				},
+				"102413": {
+					"qtc": "DH",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102413,
+					"arean": "德宏",
+					"cyprnh": 984872537
+				},
+				"102401": {
+					"qtc": "QJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102401,
+					"arean": "曲靖",
+					"cyprnh": 465756197
+				},
+				"102412": {
+					"qtc": "DL",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102412,
+					"arean": "大理",
+					"cyprnh": 2070370642
+				},
+				"102404": {
+					"qtc": "ZT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102404,
+					"arean": "昭通",
+					"cyprnh": 2730687755
+				},
+				"102415": {
+					"qtc": "DQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102415,
+					"arean": "迪庆",
+					"cyprnh": 1313614980
+				},
+				"102403": {
+					"qtc": "BS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102403,
+					"arean": "保山",
+					"cyprnh": 255545379
+				},
+				"102414": {
+					"qtc": "NJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102414,
+					"arean": "怒江",
+					"cyprnh": 3882974655
+				},
+				"102406": {
+					"qtc": "PE",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102406,
+					"arean": "普洱",
+					"cyprnh": 2447193823
+				},
+				"102405": {
+					"qtc": "LJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102405,
+					"arean": "丽江",
+					"cyprnh": 3283718299
+				}
+			},
+			"cstatus": 0,
+			"areac": 1024,
+			"arean": "云南",
+			"cyprnh": 754162921
+		},
+		"1001": {
+			"qtc": "TJ",
+			"sub": {
+				"100100": {
+					"qtc": "TJS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100100,
+					"arean": "天津市",
+					"cyprnh": 3052454986
+				},
+				"100101": {
+					"qtc": "ASD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100101,
+					"arean": "阿萨德",
+					"cyprnh": 1159291840
+				}
+			},
+			"cstatus": 0,
+			"areac": 1001,
+			"arean": "天津",
+			"cyprnh": 3388331138
+		},
+		"1023": {
+			"qtc": "GZ",
+			"sub": {
+				"102308": {
+					"qtc": "QN",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102308,
+					"arean": "黔南",
+					"cyprnh": 2597541557
+				},
+				"102301": {
+					"qtc": "LPS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102301,
+					"arean": "六盘水",
+					"cyprnh": 4224346197
+				},
+				"102300": {
+					"qtc": "GY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102300,
+					"arean": "贵阳",
+					"cyprnh": 3388809531
+				},
+				"102303": {
+					"qtc": "AS",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102303,
+					"arean": "安顺",
+					"cyprnh": 2459357121
+				},
+				"102302": {
+					"qtc": "ZY",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102302,
+					"arean": "遵义",
+					"cyprnh": 690723434
+				},
+				"102305": {
+					"qtc": "TR",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102305,
+					"arean": "铜仁",
+					"cyprnh": 3537654924
+				},
+				"102304": {
+					"qtc": "BJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102304,
+					"arean": "毕节",
+					"cyprnh": 1813861176
+				},
+				"102307": {
+					"qtc": "QD",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102307,
+					"arean": "黔东",
+					"cyprnh": 2935105468
+				},
+				"102306": {
+					"qtc": "QX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 102306,
+					"arean": "黔西",
+					"cyprnh": 4209230774
+				}
+			},
+			"cstatus": 0,
+			"areac": 1023,
+			"arean": "贵州",
+			"cyprnh": 2535767111
+		},
+		"1009": {
+			"qtc": "JS",
+			"sub": {
+				"100908": {
+					"qtc": "YC",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100908,
+					"arean": "盐城",
+					"cyprnh": 4075116421
+				},
+				"100909": {
+					"qtc": "YZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100909,
+					"arean": "扬州",
+					"cyprnh": 3650009365
+				},
+				"100900": {
+					"qtc": "NJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100900,
+					"arean": "南京",
+					"cyprnh": 4044052257
+				},
+				"100911": {
+					"qtc": "TZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100911,
+					"arean": "泰州",
+					"cyprnh": 684781845
+				},
+				"100901": {
+					"qtc": "WX",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100901,
+					"arean": "无锡",
+					"cyprnh": 1297976438
+				},
+				"100912": {
+					"qtc": "SQ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100912,
+					"arean": "宿迁",
+					"cyprnh": 593417328
+				},
+				"100902": {
+					"qtc": "XZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100902,
+					"arean": "徐州",
+					"cyprnh": 4142327860
+				},
+				"100903": {
+					"qtc": "CZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100903,
+					"arean": "常州",
+					"cyprnh": 471898693
+				},
+				"100904": {
+					"qtc": "SZ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100904,
+					"arean": "苏州",
+					"cyprnh": 734235605
+				},
+				"100905": {
+					"qtc": "NT",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100905,
+					"arean": "南通",
+					"cyprnh": 331386770
+				},
+				"100906": {
+					"qtc": "LYG",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100906,
+					"arean": "连云港",
+					"cyprnh": 3263301388
+				},
+				"100907": {
+					"qtc": "HA",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100907,
+					"arean": "淮安",
+					"cyprnh": 1967479718
+				},
+				"100910": {
+					"qtc": "ZJ",
+					"sub": {},
+					"cstatus": 0,
+					"areac": 100910,
+					"arean": "镇江",
+					"cyprnh": 3655364661
+				}
+			},
+			"cstatus": 0,
+			"areac": 1009,
+			"arean": "江苏",
+			"cyprnh": 3151681347
+		}
+	},
+	"cstatus": 0,
+	"areac": 10,
+	"arean": "中国",
+	"cyprnh": 3348955802
+}

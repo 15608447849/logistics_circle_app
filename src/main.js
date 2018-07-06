@@ -8,7 +8,9 @@ import store from './store'
 import business  from './components/business'
 import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
+import VueResource from 'vue-resource'
 import { Tabbar, TabItem } from 'mint-ui';
+import verifyUtil from './utils/verifyUtil'
 
 import 'mint-ui/lib/style.css'
 import 'vue-ydui/dist/ydui.rem.css';
@@ -25,9 +27,10 @@ Vue.use(business);
 Vue.use(Vuex);
 Vue.use(VueAMap);
 Vue.use(YDUI);
+Vue.use(VueResource);
 
 Vue.config.productionTip = false;
-
+Vue.prototype.verifyUtil = verifyUtil;
 Vue.prototype.$app_store = store;
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({
@@ -46,4 +49,3 @@ new Vue({
   components: { App },
   template: '<App/>'
 });
-
