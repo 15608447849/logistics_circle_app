@@ -85,7 +85,15 @@ export default {
         ctdictc:31,
         ptdictc:21,
         pmdictc:81,
-        billno:'E099393990021'
+        billno:'E099393990021',
+        pusdate:'',
+        pustime:'',
+        puedate:'',
+        puetime:'',
+        easdate:'',
+        eastime:'',
+        eaedate:'',
+        eaetime:''
       };
 
       console.log(JSON.stringify(json));

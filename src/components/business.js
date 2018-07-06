@@ -67,27 +67,10 @@ exports.install = function (Vue) {
 
     /** 注册: 用户名,手机号码,密码(MD5),邀请码(可选项)
      *
-     *int custRegister(UserICE record);
-     *
-    struct UserICE{
-      long uno;
-      short rno; //角色编号
-      string uname; //用户名
-      long uphone; //手机
-      string upw;//用户密码
-      short upwstatus;//密码状态.0正常,1不可用
-      string uinvite;//邀请码
-      string adddate;//创建日期
-      string addtime;//创建时间
-      string updatedate;//修改日期
-      string updatetime;//修改时间
-      short cstatus;//综合状态码
-      string msg;//返回消息
-	 };
+     int custRegister(string uname,long uphone,string upw,string sms,string uinvite);
      * */
     userRegister: function (username, phone, password, invitationCode, smsCode,callback) {
-      let newUser = new userApi.UserICE(0, 0, username, str2jlong(phone), md5(password), 0, invitationCode, "", "", "", "", 0, "");
-      queryIce(userApi.UserServicePrx, 'UserService', 'custRegister', newUser, callback)
+      queryIce(userApi.UserServicePrx, 'UserService', 'custRegister', username,phone, password,smsCode,invitationCode,callback);
     },
 
     /**登陆 密码(MD5) ,返回userApi.UserICE对象
@@ -98,10 +81,10 @@ exports.install = function (Vue) {
 
     /**
      * 根据短信登陆
-     * UserICE loginBySms(string uphone);
+     UserICE loginBySms(string uphone ,string sms);
      */
-    userVerifyBySms: function (phone, callback) {
-      queryIce(userApi.UserServicePrx, 'UserService', 'loginBySms', phone, callback);
+    userVerifyBySms: function (phone,smsCode, callback) {
+      queryIce(userApi.UserServicePrx, 'UserService', 'loginBySms', phone, smsCode,callback);
     },
 
     /**
