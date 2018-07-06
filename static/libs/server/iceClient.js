@@ -26,35 +26,43 @@ function IceCallback(args){
 
 IceCallback.prototype  = {
   constructor:IceCallback,
-  setFilter:function(icecallback){
-      this.filter = icecallback;
+  setFilter:function(callback){
+      this.filter = callback;
   },
   onCallback:function (state,obj){
+
     if (this.filter){
-      this.filter.onCallback(state,obj)
+      nobj = this.filter.onCallback(state,obj);
+
+      if (nobj) {
+        console.log("ICE过滤\n",obj,"\n=========================================>\n",nobj);
+        obj = nobj;
+      }
     }
+
     if (state === CALLBACK_ACTION.READY){
       if (this.readyCallback){
-        this.readyCallback(obj);
+        return this.readyCallback(obj);
       }
     }
     else if (state === CALLBACK_ACTION.COMPLETE){
       if (this.completeCallback){
-        this.completeCallback(obj);
+        return this.completeCallback(obj);
       }
     }else if (state === CALLBACK_ACTION.ERROR){
       if (this.errorCallback){
-        this.errorCallback(obj);
+        return this.errorCallback(obj);
       }
     }
 
   },
 };
+
 /** 初始化ICE连接 */
 function init(iceGridInstanceName,host,port){
-  let args = ['--Ice.Default.Locator='+iceGridInstanceName+'/Locator:ws -h '+host+' -p '+port, 'idleTimeOutSeconds=300', '--Ice.MessageSizeMax=4096']
-  communication = Ice.initialize(args)
-  console.log("初始化ICE连接",host,port,communication)
+  args = ['--Ice.Default.Locator='+iceGridInstanceName+'/Locator:ws -h '+host+' -p '+port, 'idleTimeOutSeconds=300', '--Ice.MessageSizeMax=4096'];
+  communication = Ice.initialize(this.args);
+  console.log("初始化ICE连接: ",host,port);
 }
 
 function queryIce (moduleProxy,moduleName,methodName,args) {
@@ -68,8 +76,11 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
       throw new Error("callback is not IceCallback!")
   }
 
-  console.log("ICE : ",moduleName,methodName,params);
+
   callback.onCallback(CALLBACK_ACTION.READY,params);
+
+
+  console.log("ICE : ",moduleName,methodName,params);
   Ice.Promise.try(
       function () {
         let base = communication.stringToProxy(moduleName).ice_twoway().ice_secure(false);
@@ -84,8 +95,11 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
             temp.then(function (data) {
               callback.onCallback(CALLBACK_ACTION.COMPLETE,data);
             })
+
           }
-        )
+        ).exception(function (e) {
+          console.log("***",e);
+        })
 
       }
     ).exception(function (e) {

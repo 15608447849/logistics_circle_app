@@ -105,29 +105,47 @@
      * 订单详细信息
      **/
     order.OrderDetail = Slice.defineStruct(
-        function(id, content, time, ostatus)
+        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType)
         {
-            this.id = id !== undefined ? id : "";
-            this.content = content !== undefined ? content : "";
             this.time = time !== undefined ? time : "";
-            this.ostatus = ostatus !== undefined ? ostatus : 0;
+            this.ostatus = ostatus !== undefined ? ostatus : "";
+            this.cost = cost !== undefined ? cost : "";
+            this.wm = wm !== undefined ? wm : "";
+            this.vlen = vlen !== undefined ? vlen : "";
+            this.startAddr = startAddr !== undefined ? startAddr : "";
+            this.destAddr = destAddr !== undefined ? destAddr : "";
+            this.id = id !== undefined ? id : "";
+            this.vt = vt !== undefined ? vt : "";
+            this.goodsType = goodsType !== undefined ? goodsType : "";
         },
         true,
         function(__os)
         {
-            __os.writeString(this.id);
-            __os.writeString(this.content);
             __os.writeString(this.time);
-            __os.writeInt(this.ostatus);
+            __os.writeString(this.ostatus);
+            __os.writeString(this.cost);
+            __os.writeString(this.wm);
+            __os.writeString(this.vlen);
+            __os.writeString(this.startAddr);
+            __os.writeString(this.destAddr);
+            __os.writeString(this.id);
+            __os.writeString(this.vt);
+            __os.writeString(this.goodsType);
         },
         function(__is)
         {
-            this.id = __is.readString();
-            this.content = __is.readString();
             this.time = __is.readString();
-            this.ostatus = __is.readInt();
+            this.ostatus = __is.readString();
+            this.cost = __is.readString();
+            this.wm = __is.readString();
+            this.vlen = __is.readString();
+            this.startAddr = __is.readString();
+            this.destAddr = __is.readString();
+            this.id = __is.readString();
+            this.vt = __is.readString();
+            this.goodsType = __is.readString();
         },
-        7, 
+        10, 
         false);
     Slice.defineSequence(order, "OrderSeqHelper", "order.OrderDetail", false);
 
@@ -275,7 +293,7 @@
         "initOrderPage": [, , , , , [order.InitOrderData], , , , , ],
         "generateOrderNo": [, , , , , [7], , , , , ],
         "queryOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [["cstruct.stringSeqHelper"]], , , , ],
-        "addOrder": [, , , , , [cstruct.BoolMessage], [["cstruct.stringSeqHelper"]], , , , ],
+        "addOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "updateOrder": [, , , , , [cstruct.BoolMessage], [[order.AddOrUpdateOrder]], , , , ]
     });
     exports.order = order;
