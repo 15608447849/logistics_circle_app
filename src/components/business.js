@@ -1,4 +1,7 @@
-// const cont = require('./convert.js');
+
+
+
+const convert = require('./convert.js');
 
 import {
   iceGridInstanceName,
@@ -7,11 +10,13 @@ import {
 } from '../../static/libs/server/config'
 
 import md5 from "md5"
-// import cont from "./convert"
+
 
 (function () {
   init(iceGridInstanceName, serverIp, serverPort);
 }());
+
+
 
 
 exports.install = function (Vue) {
@@ -117,7 +122,7 @@ exports.install = function (Vue) {
      *全文查询当前的订单
      */
     queryAllByKey: (key,callback)=> {
-      callback.setFilter(cont.conv.orderByKey());
+      callback.setFilter(convert.orderByKey());
       queryIce(order.OrderServicePrx , 'OrderService', 'queryOrderByCurdate', [key],callback);
     },
     /**自动生成订单序列.
