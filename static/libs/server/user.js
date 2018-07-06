@@ -137,7 +137,7 @@
     Slice.defineOperations(userApi.UserService, userApi.UserServicePrx,
     {
         "login": [, , , , , [userApi.UserICE], [[7], [7], [3]], , , , ],
-        "loginBySms": [, , , , , [userApi.UserICE], [[7]], , , , ],
+        "loginBySms": [, , , , , [userApi.UserICE], [[7], [7]], , , , ],
         "loginByToken": [, , , , , [userApi.UserICE], [[7]], , , , ],
         "getDriverInfo": [, , , , , [userApi.UserICE], [[7], [7]], , , , ],
         "resetDriverPassword": [, , , , , [3], [[7], [7]], , , , ],
@@ -145,10 +145,10 @@
         "verifyPhone": [, , , , , [3], [[4]], , , , ],
         "sendSms": [, , , , , [3], [[4], [7]], , , , ],
         "verifySms": [, , , , , [3], [[4], [7]], , , , ],
-        "custRegister": [, , , , , [3], [[userApi.UserICE]], , , , ],
+        "custRegister": [, , , , , [3], [[7], [4], [7], [7], [7]], , , , ],
         "forgetUserPassword": [, , , , , [3], [[4], [7], [7]], , , , ],
         "updateUserPassword": [, , , , , [3], [[7], [7], [7]], , , , ],
-        "updateUserPhone": [, , , , , [3], [[7], [4], [4], [7]], , , , ]
+        "updateUserPhone": [, , , , , [3], [[7], [4], [7]], , , , ]
     });
     exports.userApi = userApi;
 }

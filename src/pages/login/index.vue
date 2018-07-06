@@ -29,10 +29,11 @@ export default {
     }
   },
 
-
   methods: {
     loginBtnOnclick: function () {
-
+      this.$Ice_SystemService.initDirc(new IceCallback(function (result) {
+        console.log(result)
+      }))
     }
   }
 }

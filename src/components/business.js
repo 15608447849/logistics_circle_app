@@ -65,7 +65,8 @@ exports.install = function (Vue) {
       queryIce(userApi.UserServicePrx, 'UserService', 'updateUserPhone', token, str2jlong(newPhone), smsCode, callback);
     },
 
-    /** 注册: 用户名,手机号码,密码(MD5),邀请码(可选项)
+    /** 注册: 用户名,手机号码,密码(MD5),邀请码(可选项),短信验证码
+     *  必须先发送一次短信
      *
      int custRegister(string uname,long uphone,string upw,string sms,string uinvite);
      * */
@@ -96,11 +97,9 @@ exports.install = function (Vue) {
     }
 
   };
+
   Vue.prototype.$Ice_OrderService = {
 
-    initDictionnary:(callback)=>{
-      queryIce(order.OrderServicePrx , 'OrderService', 'initOrderPage',callback);
-    },
 
     /**
      *全文查询当前的订单
@@ -188,6 +187,16 @@ exports.install = function (Vue) {
 
 
 
+  };
+
+  Vue.prototype.$Ice_SystemService = {
+
+    initDirc: (callback)=> {
+      queryIce(system.SystemServicePrx , 'SystemService', 'getAllDict', callback);
+    },
+    initMapDirc: (callback)=> {
+      queryIce(system.SystemServicePrx , 'SystemService', 'getChineseAllAreas', callback);
+    }
   };
 
 
