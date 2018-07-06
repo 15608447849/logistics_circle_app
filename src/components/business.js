@@ -117,7 +117,7 @@ exports.install = function (Vue) {
      *全文查询当前的订单
      */
     queryAllByKey: (key,callback)=> {
-      callback.setFilter(cont.orderByKey());
+      callback.setFilter(cont.conv.orderByKey());
       queryIce(order.OrderServicePrx , 'OrderService', 'queryOrderByCurdate', [key],callback);
     },
     /**自动生成订单序列.
