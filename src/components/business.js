@@ -70,7 +70,7 @@ exports.install = function (Vue) {
      int custRegister(string uname,long uphone,string upw,string sms,string uinvite);
      * */
     userRegister: function (username, phone, password, invitationCode, smsCode,callback) {
-      queryIce(userApi.UserServicePrx, 'UserService', 'custRegister', username,phone, password,smsCode,invitationCode,callback);
+      queryIce(userApi.UserServicePrx, 'UserService', 'custRegister', username,str2jlong(phone), password,smsCode,invitationCode,callback);
     },
 
     /**登陆 密码(MD5) ,返回userApi.UserICE对象
@@ -94,7 +94,6 @@ exports.install = function (Vue) {
     userVerifyByToken: function (token, callback) {
       queryIce(userApi.UserServicePrx, 'UserService', 'loginByToken', token, callback);
     }
-
 
   };
   Vue.prototype.$Ice_OrderService = {

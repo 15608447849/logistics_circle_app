@@ -94,6 +94,8 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
             }
             temp.then(function (data) {
               callback.onCallback(CALLBACK_ACTION.COMPLETE,data);
+            }).exception(function (e) {
+              console.log("@@@",e);
             })
 
           }
