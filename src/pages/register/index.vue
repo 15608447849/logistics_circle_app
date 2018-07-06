@@ -6,7 +6,7 @@
     <div class="input_div"><span class="start">*</span><span class="text">确认密码</span><input type="password" class="input" placeholder="请确认登录密码"></div>
     <div class="input_div"><span class="start">*</span><span class="text">验证码</span><input type="text" class="input_verificationcode" placeholder="请输入验证码"><a class="verification">获取短信验证码</a></div>
     <div class="input_div"><span class="text_right">邀请码</span><input type="text" class="input" placeholder="请输入您收到的邀请码，没有可不填"></div>
-    <div class="input_div"><input type="checkbox"><span>阅读并接收本平台</span><a class="text_blue">《**用户协议》</a><span>及</span><a class="text_blue">《**声明》</a></div>
+    <div class="input_div"><input type="checkbox" class="check"><span>阅读并接收本平台</span><a class="text_blue">《**用户协议》</a><span>及</span><a class="text_blue">《**声明》</a></div>
     <button class="btn">注册</button>
   </div>
 </template>
@@ -54,13 +54,14 @@ export default {
  }
  .start{
     color:red;
+   margin-left:5px;
     }
  .verification{
     display:inline-block;
-    width:120px;
+    width:34%;
     height:30px;
     color:blue;
-    font-size:16px;
+    font-size:14px;
     line-height:30px;
     border:1px solid gray;
     border-radius: 5px;
@@ -70,24 +71,27 @@ export default {
 }
  .text{
    display:inline-block;
-   width:64px;
+   width:60px;
    text-align: right;
  }
   .input{
     height:25px;
-    width:252px;
+    width:70%;
     margin-left:20px;
   }
   .input_verificationcode{
     height:25px;
-    width:110px;
+    width:30%;
     margin-left:20px;
   }
   .text_right{
-    margin-left:24px;
+    margin-left:33px;
   }
   .text_blue{
     color:blue;
+  }
+  .check{
+    margin-left:5px;
   }
   .btn{
     display:block;

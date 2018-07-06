@@ -24,6 +24,8 @@ import INFO from '@/pages/information/index'
 import ORDER from '@/pages/order/index'
 // 搜索页
 import SEARCH from '@/components/SimpleSearchInput'
+// 信息大厅发布订单模块
+import ISSUE from '@/pages/information/issue'
 
 Vue.use(Router);
 
@@ -87,6 +89,11 @@ const vueRouter = new Router({
     {
       path: '/search',
       component: SEARCH
+    },
+    {
+      name: 'issue',
+      path: '/information/issue',
+      component: ISSUE
     }
   ]
 });
