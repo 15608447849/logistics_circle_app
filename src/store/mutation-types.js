@@ -10,3 +10,5 @@ export const SEARCH_STATE = 'SEARCH_STATE'
 export const SEARCH_CONTENT = 'SEARCH_CONTENT'
 // 网络加载框
 export const UPDATE_LOADING_STATUS  = 'UPDATE_LOADING_STATUS'
+// 字典
+export const DICT  = 'DICT'

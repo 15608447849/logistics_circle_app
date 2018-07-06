@@ -13,5 +13,9 @@ export default {
   },
   searchState: state => {
     return state.searchState
+  },
+  // 订单字典
+  dict: state => {
+    return state.dict
   }
 }

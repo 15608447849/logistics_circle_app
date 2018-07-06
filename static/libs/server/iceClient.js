@@ -52,6 +52,8 @@ IceCallback.prototype  = {
     }else if (state === CALLBACK_ACTION.ERROR){
       if (this.errorCallback){
         return this.errorCallback(obj);
+      }else{
+        console.log(e);
       }
     }
 
@@ -95,17 +97,17 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
             temp.then(function (data) {
               callback.onCallback(CALLBACK_ACTION.COMPLETE,data);
             }).exception(function (e) {
-              console.log("@@@",e);
+              callback.onCallback(CALLBACK_ACTION.ERROR,e);
             })
 
           }
         ).exception(function (e) {
-          console.log("***",e);
+          callback.onCallback(CALLBACK_ACTION.ERROR,e);
         })
 
       }
     ).exception(function (e) {
-      // console.log(e);
+
     callback.onCallback(CALLBACK_ACTION.ERROR,e);
     })
 }

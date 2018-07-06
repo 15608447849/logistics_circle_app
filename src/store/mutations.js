@@ -4,7 +4,8 @@ import {
   WX_USER_INFO,
   SEARCH_STATE,
   SEARCH_CONTENT,
-  UPDATE_LOADING_STATUS
+  UPDATE_LOADING_STATUS,
+  DICT
 } from './mutation-types'
 
 export default {
@@ -29,5 +30,9 @@ export default {
 
   [UPDATE_LOADING_STATUS](state, isLoading) {
     state.isLoading = isLoading;
+  },
+  // 订单字典
+  [DICT](state, v) {
+    state.dict = v;
   }
 }

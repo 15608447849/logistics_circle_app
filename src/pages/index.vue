@@ -43,6 +43,7 @@
         this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
       }
     }
+
   }
 </script>
 <style>

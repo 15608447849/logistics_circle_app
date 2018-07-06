@@ -14,7 +14,7 @@
 export default {
   computed: {
     isLoading() {
-      return this.$store.state.isLoading
+      return this.$app_store.state.isLoading
     }
   },
   data() {

@@ -26,6 +26,8 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/SimpleSearchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
+//测试页面
+import TEST from '@/pages/test'
 
 Vue.use(Router);
 
@@ -42,6 +44,10 @@ Vue.use(Router);
  */
 const vueRouter = new Router({
   routes: [
+    {
+      path: '/test',
+      component: TEST
+    },
     {
       path: '/',
       component: INDEX,
@@ -74,6 +80,7 @@ const vueRouter = new Router({
       path: '/login',
       component: LOGIN
     },
+
     {
       path: '/register',
       component: REGISTER

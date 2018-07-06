@@ -19,7 +19,10 @@
 </template>
 <script>
 
-
+  import {
+    ORDER_DIRC
+  } from '../../store/mutation-types'
+  import store from '../../store'
 
 export default {
   data () {
@@ -28,12 +31,17 @@ export default {
       password:"",
     }
   },
-
   methods: {
     loginBtnOnclick: function () {
-      this.$Ice_SystemService.initDirc(new IceCallback(function (result) {
-        console.log(result)
-      }))
+      // this.$store.state.dict 取
+      // this.$store.commit(ORDER_DIRC,对象)
+
+      this.$Ice_SystemService.initDirc(
+        new IceCallback(function (result) {
+          console.log(result)
+          store.commit(ORDER_DIRC,result)
+          console.log(store.state.dict)
+        }))
     }
   }
 }

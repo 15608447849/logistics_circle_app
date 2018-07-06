@@ -11,10 +11,11 @@ const state = {
   userInfo: {}, // 用户信息
   userToken: '',
   openId: '',
-  wxUserInfo: {}, // 微信用户信息
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型
-  isLoading: false // 网络加载等待框
+  isLoading: false, // 网络加载等待框
+  dict: {} // 字典
+
 };
 
 export default new Vuex.Store({

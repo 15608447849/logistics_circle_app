@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
-import store from '@/store'
+import store from './store'
 import business  from './components/business'
 import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
@@ -27,7 +27,8 @@ Vue.use(VueAMap);
 Vue.use(YDUI);
 
 Vue.config.productionTip = false;
-Vue.prototype.$store = store;
+
+Vue.prototype.$app_store = store;
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({
   // 高德的key
@@ -45,3 +46,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 });
+
