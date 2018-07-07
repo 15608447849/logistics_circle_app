@@ -18,19 +18,24 @@
     methods: {
       test: function () {
 
-        // this.$Ice_UserService.requestPhoneSms("15608447849",false,
+        this.$Ice_UserService.requestPhoneSms("15608447849",false,
+          new IceCallback(
+            function (result) {
+              console.log("收到",result)
+            },
+            function (result) {
+            console.log("收到",result)
+          }, function (result) {
+              console.log("收到",result)
+            }
+          ));
+
+        // this.$Ice_OrderService.queryAllByKey("",
         //   new IceCallback(
         //     function (result) {
         //     console.log("收到",result)
         //   }
-        //   ));
-
-        this.$Ice_OrderService.queryAllByKey("",
-          new IceCallback(
-            function (result) {
-            console.log("收到",result)
-          }
-          ))
+        //   ))
 
         // this.$Ice_OrderService.autoGenerationOrderSequence(
         //   new IceCallback(
@@ -39,8 +44,10 @@
         //     }
         //   ))
 
+        }
+
       }
-    }
+
   }
 </script>
 <style>

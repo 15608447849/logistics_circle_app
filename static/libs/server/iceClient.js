@@ -52,8 +52,6 @@ IceCallback.prototype  = {
     }else if (state === CALLBACK_ACTION.ERROR){
       if (this.errorCallback){
         return this.errorCallback(obj);
-      }else{
-        console.log(e);
       }
     }
 
@@ -62,8 +60,10 @@ IceCallback.prototype  = {
 
 /** 初始化ICE连接 */
 function init(iceGridInstanceName,host,port){
-  args = ['--Ice.Default.Locator='+iceGridInstanceName+'/Locator:ws -h '+host+' -p '+port, 'idleTimeOutSeconds=300', '--Ice.MessageSizeMax=4096'];
-  communication = Ice.initialize(this.args);
+  let args = ['--Ice.Default.Locator='+iceGridInstanceName+'/Locator:ws -h '+host+' -p '+port,
+    'idleTimeOutSeconds=300',
+    '--Ice.MessageSizeMax=4096'];
+  communication = Ice.initialize(args);
   console.log("初始化ICE连接: ",host,port);
 }
 
@@ -78,37 +78,41 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
       throw new Error("callback is not IceCallback!")
   }
 
-  callback.onCallback(CALLBACK_ACTION.READY,params);
 
 
-  console.log("ICE : ",moduleName,methodName,params);
   Ice.Promise.try(
       function () {
-        let base = communication.stringToProxy(moduleName).ice_twoway().ice_secure(false);
-        return moduleProxy.checkedCast(base).then(
-          function(remoteProxy) {
+        callback.onCallback(CALLBACK_ACTION.READY,params);
+        let proxy = communication.stringToProxy(moduleName);
 
-            if (params.length>0) {
-              temp = remoteProxy[methodName].apply(remoteProxy,params)
-            }else{
-              temp = remoteProxy[methodName].apply(remoteProxy)
-            }
-            temp.then(function (data) {
-              callback.onCallback(CALLBACK_ACTION.COMPLETE,data);
-            }).exception(function (e) {
-              callback.onCallback(CALLBACK_ACTION.ERROR,e);
-            })
+        // proxy.ice_timeout(1000).ice_twoway().ice_secure(false);
+        proxy =  proxy.ice_timeout(1500).ice_invocationTimeout(1500).ice_twoway().ice_preferSecure(true);
 
-          }
-        ).exception(function (e) {
-          callback.onCallback(CALLBACK_ACTION.ERROR,e);
-        })
-
+        return moduleProxy.checkedCast(proxy)
       }
-    ).exception(function (e) {
+    )
+    .then(
+      function(remoteProxy) {
 
-    callback.onCallback(CALLBACK_ACTION.ERROR,e);
-    })
+        console.log("ICE : ",moduleName,methodName,params);
+        if (params.length>0) {
+          result = remoteProxy[methodName].apply(remoteProxy,params)
+        }else{
+          result = remoteProxy[methodName].apply(remoteProxy)
+        }
+        return result;
+      }
+    )
+    .then(
+        function (result) {
+          callback.onCallback(CALLBACK_ACTION.COMPLETE,result);
+        }
+      )
+    .exception(
+        function (e) {
+          callback.onCallback(CALLBACK_ACTION.ERROR,e);
+        }
+    )
 }
 
 //数字转java long型
