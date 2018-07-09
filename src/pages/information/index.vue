@@ -1,6 +1,6 @@
 <template>
   <div>
-    <yd-navbar title="信息大厅" fixed="true"></yd-navbar>
+    <yd-navbar title="信息大厅"></yd-navbar>
     <div class="content" style="margin-top: 1rem">
 
       <!--<div class="order_header">-->
@@ -27,13 +27,14 @@
     data() {
       return {
         infoList: [],
+        requestList: [],
         pullSize: '100',// 获取条数
         searchContent: '', // 搜索内容
-        maxSize: '500',// 当前列表最大存放条数
+        maxSize: 22,// 当前列表最大存放条数
+        i:0,
       }
     },
     mounted() {
-      console.log(this.$app_store.state.userToken);
       this.requestInfoList();
     },
     methods: {
@@ -43,22 +44,61 @@
         this.$Ice_OrderService.queryAllByKey(userToken,this.searchContent,this.pullSize,
           new IceCallback(
             function (result) {
-              self.infoList = result;
-              console.log(self.infoList)
-
-              // _list.length > 0 ? '为您更新了' + _list.length + '条内容' : '已是最新内容'
-              this.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
+              self.filterList(result, self.infoList);
+              setTimeout(()=> {
+                self.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
+              },1000);
             },
             function (error) {
-              self.message.toast(self,'信息大厅数据获取失败:error'+error,'error');
-              this.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
+              setTimeout(()=> {
+                self.message.toast(self,'信息大厅数据获取失败:error'+error,'error');
+                self.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
+              },1000);
             }
           ))
       },
-      // filterList
-      filterList() {
-        // 数据比对
-
+      // 数据比对
+      filterList(newVal, oldVal) {
+        if(this.verifyUtil.isNullArray(oldVal)) {
+          this.infoList = newVal;
+        } else {
+          let result = [];
+          for(let i = 0; i < newVal.length; i++){
+            let obj = newVal[i];
+            let num = obj.id;
+            let flag = false;
+            for(let j = 0; j < oldVal.length; j++){
+              let aj = oldVal[j];
+              let n = aj.id;
+              if(n === num){
+                flag = true;
+                break;
+              }
+            }
+            if(!flag){
+              result.push(obj);
+            }
+          }
+          // requestList 防止页面多次刷新
+          self.requestList = this.copyArr(oldVal);
+          self.requestList.push(result);
+          if(self.requestList.length > maxSize){
+            // 删除多余数据
+            self.requestList.splice(1,maxSize-self.requestList.length);
+            self.infoList = this.copyArr(self.requestList);
+            // 清空requestList
+            self.requestList.splice(0,self.requestList.length);
+          } else {
+            self.infoList = this.copyArr(self.requestList);
+          }
+        }
+      },
+      copyArr(arr) {
+        let res = [];
+        for (let i = 0; i < arr.length; i++) {
+          res.push(arr[i])
+        }
+        return res
       }
     }
   }

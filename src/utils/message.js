@@ -16,6 +16,14 @@ export default class message {
    * @param str
    * @param state success error
    */
+  static toast(context, str) {
+    context.$dialog.toast({
+      mes: str,
+      icon: state,
+      timeout: 1500
+    });
+  }
+
   static toast(context, str, state) {
     context.$dialog.toast({
       mes: str,

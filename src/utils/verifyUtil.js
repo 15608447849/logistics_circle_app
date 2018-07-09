@@ -9,6 +9,15 @@ export default class verifyUtil {
   }
 
   /**
+   * 判断数组是否为空
+   * @param str
+   * @returns {boolean}
+   */
+  static isNullArray(arr) {
+    return arr == null || arr.length === 0 || arr === [];
+  }
+
+  /**
    * 判断注册登陆密码信息
    * @param str
    * @returns {boolean}
