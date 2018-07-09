@@ -11,6 +11,7 @@ import YDUI from 'vue-ydui';
 import VueResource from 'vue-resource'
 import { Tabbar, TabItem } from 'mint-ui';
 import verifyUtil from './utils/verifyUtil'
+import message from './utils/message'
 
 import 'mint-ui/lib/style.css'
 import 'vue-ydui/dist/ydui.rem.css';
@@ -31,6 +32,9 @@ Vue.use(VueResource);
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
+Vue.prototype.message = message;
+
+
 Vue.prototype.$app_store = store;
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({

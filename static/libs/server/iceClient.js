@@ -1,6 +1,4 @@
 
-
-
 const CALLBACK_ACTION={
   READY:1,
   COMPLETE:2,

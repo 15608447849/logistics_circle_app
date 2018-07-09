@@ -13,8 +13,8 @@
     </yd-cell-group>
     <div class="input_div"><input class="remember" type="checkbox"><span>下次自动登录</span></div>
     <button class="login_btn" @click="loginClick">登录</button>
-    <div class="find_register"><span>忘记密码？</span><span class="note">短信快捷登录</span></div>
-    <div class="find_register"><span class="register">立即注册</span></div>
+    <div class="find_register"><span>忘记密码？</span><span class="note" @click="toPageSMSLogin">短信快捷登录</span></div>
+    <div class="find_register"><span class="register" @click="toPageRegister">立即注册</span></div>
   </div>
 </template>
 <script>
@@ -30,9 +30,12 @@
         password: "",
       }
     },
-
-
     methods: {
+      toPageSMSLogin() {
+        this.$router.push({
+          path: '/smsLogin'
+        })
+      },
       toPageRegister() {
         this.$router.push({
           path: '/register'

@@ -1,22 +1,23 @@
 <template>
   <div>
-    <yd-navbar title="信息大厅"></yd-navbar>
-    <div class="content">
+    <yd-navbar title="信息大厅" fixed="true"></yd-navbar>
+    <div class="content" style="margin-top: 1rem">
+
       <!--<div class="order_header">-->
         <!--<span class="order_num">共1888条</span>-->
         <!--<a class="issue_order" @click="toissue">发布订单</a>-->
       <!--</div>-->
-      <yd-infinitescroll :callback="loadList" ref="infinitescrollDemo">
+      <yd-pullrefresh :callback="requestInfoList" ref="pullrefreshDemo">
+        <div class="list_content">
+          <ul class="order_box">
+            <li class="order_list" v-for="(item, index) in infoList" :key="index">
+              <div class="order_price"><span class="site">{{item.lineInfo}}</span><span class="price">{{item.fee}}元</span></div>
+              <div class="order_time"><span class="volume">{{item.goodsInfo}}</span><span class="car_type">{{item.vehicleRequire}}</span><span class="time">{{item.time}}</span></div>
+            </li>
+          </ul>
+        </div>
+      </yd-pullrefresh>
 
-      </yd-infinitescroll>
-      <div class="list_content">
-        <ul class="order_box">
-          <li class="order_list">
-            <div class="order_price"><span class="site">长沙到广州</span><span class="price">2000元</span></div>
-            <div class="order_time"><span class="volume">家具,9方</span><span class="car_type">厢式货车，9.6</span><span class="time">1小时前发布</span></div>
-          </li>
-        </ul>
-      </div>
     </div>
 
   </div>
@@ -25,7 +26,10 @@
   export default{
     data() {
       return {
-        infoList: []
+        infoList: [],
+        pullSize: '100',// 获取条数
+        searchContent: '', // 搜索内容
+        maxSize: '500',// 当前列表最大存放条数
       }
     },
     mounted() {
@@ -34,6 +38,26 @@
     },
     methods: {
       requestInfoList() {
+        let self = this;
+        let userToken = this.$app_store.state.userToken|| '';
+        this.$Ice_OrderService.queryAllByKey(userToken,this.searchContent,this.pullSize,
+          new IceCallback(
+            function (result) {
+              self.infoList = result;
+              console.log(self.infoList)
+
+              // _list.length > 0 ? '为您更新了' + _list.length + '条内容' : '已是最新内容'
+              this.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
+            },
+            function (error) {
+              self.message.toast(self,'信息大厅数据获取失败:error'+error,'error');
+              this.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
+            }
+          ))
+      },
+      // filterList
+      filterList() {
+        // 数据比对
 
       }
     }
