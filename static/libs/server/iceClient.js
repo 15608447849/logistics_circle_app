@@ -83,10 +83,13 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
   Ice.Promise.try(
       function () {
         callback.onCallback(CALLBACK_ACTION.READY,params);
-        let proxy = communication.stringToProxy(moduleName);
-
+        let proxy = communication
+          .stringToProxy(moduleName)
+          .ice_timeout(1500)
+          .ice_invocationTimeout(1500)
+          .ice_twoway()
+          .ice_preferSecure(true);
         // proxy.ice_timeout(1000).ice_twoway().ice_secure(false);
-        proxy =  proxy.ice_timeout(1500).ice_invocationTimeout(1500).ice_twoway().ice_preferSecure(true);
 
         return moduleProxy.checkedCast(proxy)
       }

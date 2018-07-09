@@ -28,84 +28,10 @@
     var order = __M.module("order");
 
     /**
-     * 字典详细信息
-     **/
-    order.DictDetail = Slice.defineStruct(
-        function(dictc, text)
-        {
-            this.dictc = dictc !== undefined ? dictc : 0;
-            this.text = text !== undefined ? text : "";
-        },
-        true,
-        function(__os)
-        {
-            __os.writeInt(this.dictc);
-            __os.writeString(this.text);
-        },
-        function(__is)
-        {
-            this.dictc = __is.readInt();
-            this.text = __is.readString();
-        },
-        5, 
-        false);
-    Slice.defineSequence(order, "DictSeqHelper", "order.DictDetail", false);
-
-    /**
-     * 初始化订单字典数据
-     **/
-    order.InitOrderData = Slice.defineStruct(
-        function(wmDictList, numDictList, paDictList, ctDictList, vlDictList, vtDictList, tnDictList, pmDictList, ptDictList, dmDictList, reDictList)
-        {
-            this.wmDictList = wmDictList !== undefined ? wmDictList : null;
-            this.numDictList = numDictList !== undefined ? numDictList : null;
-            this.paDictList = paDictList !== undefined ? paDictList : null;
-            this.ctDictList = ctDictList !== undefined ? ctDictList : null;
-            this.vlDictList = vlDictList !== undefined ? vlDictList : null;
-            this.vtDictList = vtDictList !== undefined ? vtDictList : null;
-            this.tnDictList = tnDictList !== undefined ? tnDictList : null;
-            this.pmDictList = pmDictList !== undefined ? pmDictList : null;
-            this.ptDictList = ptDictList !== undefined ? ptDictList : null;
-            this.dmDictList = dmDictList !== undefined ? dmDictList : null;
-            this.reDictList = reDictList !== undefined ? reDictList : null;
-        },
-        true,
-        function(__os)
-        {
-            order.DictSeqHelper.write(__os, this.wmDictList);
-            order.DictSeqHelper.write(__os, this.numDictList);
-            order.DictSeqHelper.write(__os, this.paDictList);
-            order.DictSeqHelper.write(__os, this.ctDictList);
-            order.DictSeqHelper.write(__os, this.vlDictList);
-            order.DictSeqHelper.write(__os, this.vtDictList);
-            order.DictSeqHelper.write(__os, this.tnDictList);
-            order.DictSeqHelper.write(__os, this.pmDictList);
-            order.DictSeqHelper.write(__os, this.ptDictList);
-            order.DictSeqHelper.write(__os, this.dmDictList);
-            order.DictSeqHelper.write(__os, this.reDictList);
-        },
-        function(__is)
-        {
-            this.wmDictList = order.DictSeqHelper.read(__is);
-            this.numDictList = order.DictSeqHelper.read(__is);
-            this.paDictList = order.DictSeqHelper.read(__is);
-            this.ctDictList = order.DictSeqHelper.read(__is);
-            this.vlDictList = order.DictSeqHelper.read(__is);
-            this.vtDictList = order.DictSeqHelper.read(__is);
-            this.tnDictList = order.DictSeqHelper.read(__is);
-            this.pmDictList = order.DictSeqHelper.read(__is);
-            this.ptDictList = order.DictSeqHelper.read(__is);
-            this.dmDictList = order.DictSeqHelper.read(__is);
-            this.reDictList = order.DictSeqHelper.read(__is);
-        },
-        11, 
-        false);
-
-    /**
      * 订单详细信息
      **/
     order.OrderDetail = Slice.defineStruct(
-        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType)
+        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime)
         {
             this.time = time !== undefined ? time : "";
             this.ostatus = ostatus !== undefined ? ostatus : "";
@@ -117,6 +43,12 @@
             this.id = id !== undefined ? id : "";
             this.vt = vt !== undefined ? vt : "";
             this.goodsType = goodsType !== undefined ? goodsType : "";
+            this.pubername = pubername !== undefined ? pubername : "";
+            this.insureamt = insureamt !== undefined ? insureamt : "";
+            this.codamt = codamt !== undefined ? codamt : "";
+            this.payType = payType !== undefined ? payType : "";
+            this.pustime = pustime !== undefined ? pustime : "";
+            this.puetime = puetime !== undefined ? puetime : "";
         },
         true,
         function(__os)
@@ -131,6 +63,12 @@
             __os.writeString(this.id);
             __os.writeString(this.vt);
             __os.writeString(this.goodsType);
+            __os.writeString(this.pubername);
+            __os.writeString(this.insureamt);
+            __os.writeString(this.codamt);
+            __os.writeString(this.payType);
+            __os.writeString(this.pustime);
+            __os.writeString(this.puetime);
         },
         function(__is)
         {
@@ -144,8 +82,14 @@
             this.id = __is.readString();
             this.vt = __is.readString();
             this.goodsType = __is.readString();
+            this.pubername = __is.readString();
+            this.insureamt = __is.readString();
+            this.codamt = __is.readString();
+            this.payType = __is.readString();
+            this.pustime = __is.readString();
+            this.puetime = __is.readString();
         },
-        10, 
+        16, 
         false);
     Slice.defineSequence(order, "OrderSeqHelper", "order.OrderDetail", false);
 
@@ -426,7 +370,7 @@
     /**
      * 查询订单详情实体
      **/
-    order.getOrderDetailRes = Slice.defineStruct(
+    order.GetOrderDetailRes = Slice.defineStruct(
         function(orderno, billno, startc, startcp, startcc, startca, startaddr, arriarc, arriarcp, arriarcc, arriarca, arriaddr, puberid, pubername, consignee, consphone, phone1, phone2, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, price, pmdictc, insureamt, codamt, ptdictc, dmdictc, redictc, pubdatetime, revidatetime, arridatetime, pusdatetime, puedatetime, easdatetime, eaedatetime, retuimg, carriage, ostatus, lstatus)
         {
             this.orderno = orderno !== undefined ? orderno : "";
@@ -594,11 +538,10 @@
 
     Slice.defineOperations(order.OrderService, order.OrderServicePrx,
     {
-        "initOrderPage": [, , , , , [order.InitOrderData], , , , , ],
         "generateOrderNo": [, , , , , [7], , , , , ],
-        "queryOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [["cstruct.stringSeqHelper"]], , , , ],
+        "queryOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "addOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "getOrderDetail": [, , , , , [order.getOrderDetailRes], [["cstruct.stringSeqHelper"]], , , , ],
+        "getOrderDetail": [, , , , , [order.GetOrderDetailRes], [["cstruct.stringSeqHelper"]], , , , ],
         "robbingOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.order = order;

@@ -18,24 +18,30 @@
     methods: {
       test: function () {
 
-        this.$Ice_UserService.requestPhoneSms("15608447849",false,
-          new IceCallback(
-            function (result) {
-              console.log("收到",result)
-            },
-            function (result) {
-            console.log("收到",result)
-          }, function (result) {
-              console.log("收到",result)
-            }
-          ));
+        // let obj = new businessBeans.ReleaseOrderBean();
+        // obj.billno = "123132132132";
+        // console.log(obj);
 
-        // this.$Ice_OrderService.queryAllByKey("",
+        // this.$Ice_UserService.requestPhoneSms("15608447849",false,
         //   new IceCallback(
         //     function (result) {
+        //       console.log("收到",result)
+        //     },
+        //     function (result) {
         //     console.log("收到",result)
-        //   }
-        //   ))
+        //   }, function (result) {
+        //       console.log("收到",result)
+        //     }
+        //   ));
+        // console.log("*******************************");
+        this.$Ice_OrderService.queryAllByKey("e140aa06136e4eb6937db4d31e5fe588","","100",
+          new IceCallback(
+            function (result) {
+            console.log("收到",result)
+          },function (error) {
+              console.log(error)
+            }
+          ))
 
         // this.$Ice_OrderService.autoGenerationOrderSequence(
         //   new IceCallback(
