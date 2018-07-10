@@ -3,6 +3,7 @@
     <yd-navbar title="首页"></yd-navbar>
     <yd-button type="primary" style="margin-top: 12%;margin-bottom:2%;" @click.native="toLogin">登陆页面</yd-button>
     <yd-button type="primary" @click.native="toRegister">注册页面</yd-button>
+    <yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>
     <!--首页轮播-->
     <div class="binnar">
        <div class="binnar_img">img</div>
@@ -40,6 +41,9 @@
       },
       toRegister() {
         this.$router.push({path: '/register'})
+      },
+      toPageGeo() {
+        this.$router.push({path: '/geo'})
       }
     }
   }

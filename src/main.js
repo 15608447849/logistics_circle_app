@@ -46,6 +46,17 @@ VueAMap.initAMapApiLoader({
   v: '1.4.4'
 });
 
+document.addEventListener('deviceready', function() {
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
+  })
+  window.navigator.splashscreen.hide()
+}, false);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
