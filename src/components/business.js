@@ -199,6 +199,37 @@ exports.install = function (Vue) {
     resetDriverPassword(token,phone,callback){
       queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'resetDriverPasswordByPhone', token, phone,callback);
     }
+
+
+    /**
+     *  常用线路
+     *
+    struct RouteInfo {
+    int routeid;//主键PK 承运商路线id
+    int carryid;//承运商id
+    string routename;//线路名称
+    int origin;//起始地
+    string originname;//起始地名称
+    int destination;//目的地
+    string desname;//目的地名称
+    int cstatus;//状态码 状态 （0：启动，1:删除，2：停用）
+    string createdate; // 创建日期
+    string createtime; // 创建时间
+    RouteviapSeq routevias;//途径点集合
+  };*/
+
+    /**
+     * 保存线路
+
+    int saveRoute(string token,RouteInfo route); */
+
+
+    /**
+     * 查询路线
+     * params:查询参数数组[目的地地区码，出发地地区码，线路状态]
+
+    RouteInfoSeq queryRoutes(string token, cstruct::stringSeq params);*/
+
   }
 
 
