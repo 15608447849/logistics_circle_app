@@ -41,7 +41,20 @@
           },function (error) {
               console.log(error)
             }
-          ))
+          ));
+
+        // this.$Ice_Enterprise.newDriver(
+        //
+        //   "e140aa06136e4eb6937db4d31e5fe588",
+        //   "李兆平",
+        //   "15608447849",
+        //   new IceCallback(
+        //     function (result) {
+        //   console.log(result);
+        //   },function (err) {
+        //       console.log(err);
+        //     }
+        // ))
 
         // this.$Ice_OrderService.autoGenerationOrderSequence(
         //   new IceCallback(
@@ -50,7 +63,11 @@
         //     }
         //   ))
 
-        }
+
+
+
+        },
+
 
       }
 

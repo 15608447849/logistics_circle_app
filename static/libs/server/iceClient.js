@@ -33,11 +33,10 @@ IceCallback.prototype  = {
       nobj = this.filter.onCallback(state,obj);
 
       if (nobj) {
-        // console.log("ICE过滤\n",obj,"\n=========================================>\n",nobj);
         obj = nobj;
       }
     }
-    console.log(state,obj);
+
     if (state === CALLBACK_ACTION.READY){
       if (this.readyCallback){
         return this.readyCallback(obj);
