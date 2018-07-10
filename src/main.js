@@ -8,6 +8,7 @@ import store from './store'
 import business  from './components/business'
 import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
+import Cube from 'cube-ui'
 import VueResource from 'vue-resource'
 import { Tabbar, TabItem } from 'mint-ui';
 import verifyUtil from './utils/verifyUtil'
@@ -29,6 +30,7 @@ Vue.use(Vuex);
 Vue.use(VueAMap);
 Vue.use(YDUI);
 Vue.use(VueResource);
+Vue.use(Cube);
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;

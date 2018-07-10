@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <yd-navbar title="信息大厅"></yd-navbar>
-    <div class="content" style="margin-top: 1rem">
-      <div class="order_header">
-        <span class="order_num">共1888条</span>
-        <!--<a class="issue_order" @click="toissue">发布订单</a>-->
-      </div>
-      <yd-pullrefresh :callback="requestInfoList" ref="pullrefreshDemo">
+  <div class="content-scroll-wrapper">
+    <div class="content-scroll-list-wrap" ref="scrollWrapper">
+      <cube-scroll
+        ref="contentScroll"
+        :data="infoList"
+        :options="options"
+        @pulling-down="onPullingDown"
+        @pulling-up="onPullingUp">
         <div class="list_content">
           <ul class="order_box">
             <li class="order_list" v-for="(item, index) in infoList" :key="index">
@@ -17,24 +17,48 @@
             </li>
           </ul>
         </div>
-      </yd-pullrefresh>
-
+        <template slot="pulldown" slot-scope="props">
+          <div v-if="props.pullDownRefresh"
+               class="cube-pulldown-wrapper"
+               :style="props.pullDownStyle">
+            <div v-if="props.beforePullDown"
+                 class="before-trigger"
+                 :style="{paddingTop: props.bubbleY + 'px'}">
+              <span :class="{rotate: props.bubbleY > 0}">↓</span>
+            </div>
+            <div class="after-trigger" v-else>
+              <div v-show="props.isPullingDown" class="loading">
+                <cube-loading></cube-loading>
+              </div>
+              <transition name="success">
+                <div v-show="!props.isPullingDown" class="text-wrapper"><span
+                  class="refresh-text">今日头条推荐引擎有x条更新</span>
+                </div>
+              </transition>
+            </div>
+          </div>
+        </template>
+      </cube-scroll>
     </div>
-
   </div>
 </template>
-<script>
+
+<script type="text/ecmascript-6">
   export default {
     data() {
       return {
         infoList: [],
-        requestList: [],
-        pullSize: '100',// 获取条数
-        searchContent: '', // 搜索内容
+        options: {
+          pullDownRefresh: {
+            threshold: 60,
+            // stop: 44,
+            stopTime: 1000,
+            txt: '更新成功'
+          },
+          pullUpLoad: true
+        },
+        secondStop: 26
       }
-    },
-    mounted() {
-      this.requestInfoList();
     },
     methods: {
       requestInfoList() {
@@ -44,27 +68,82 @@
           new IceCallback(
             function (result) {
               console.log(result)
-              setTimeout(() => {
-                self.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
-              }, 1000);
               self.infoList = result;
             },
             function (error) {
               console.log(error)
               setTimeout(() => {
-                self.message.toast(self, '信息大厅数据获取失败:error' + error, 'error');
+                self.message.Toast(self,'warn', '信息大厅数据获取失败:error' + error, false);
                 self.$refs.pullrefreshDemo.$emit('ydui.pullrefresh.finishLoad');
               }, 1000);
             }
           ))
       },
-      toPageDetail() {
+      onPullingDown() {
+        setTimeout(() => {
+          this.$refs.contentScroll.scrollTo(0, this.secondStop, 300)
+        }, 1000)
+      },
+      onPullingUp() {
+        setTimeout(() => {
 
+        }, 1000)
       }
+    },
+    mounted() {
     }
   }
 </script>
-<style>
+
+<style lang="stylus" rel="stylesheet/stylus">
+
+  .content-scroll-wrapper
+    flex: 1
+    position: relative
+    .content-scroll-list-wrap
+      height: 100%
+      transform: rotate(0deg) // fix 子元素超出边框圆角部分不隐藏的问题
+      position: absolute
+      top: 0
+      bottom: 0
+      overflow: hidden
+
+  .cube-pulldown-wrapper
+    text-align: center
+
+  .before-trigger
+    height: auto
+    font-size: 30px
+    align-self: flex-end
+    span
+      display: inline-block
+      line-height: 1
+      transition: all 0.3s
+      color: #666
+      padding: 15px 0
+      &.rotate
+        transform: rotate(180deg)
+    .after-trigger
+      flex: 1
+      margin: 0
+      .text-wrapper
+        margin: 0 auto
+        margin-top: 14px
+        padding: 5px 0
+        color: #498ec2
+        background-color: #d6eaf8
+      .cube-loading-spinners
+        margin: auto
+
+  .success-enter-active, .success-leave-active
+    transition: width .5s
+
+  .success-enter, .success-leave-to
+    width: 70%
+
+  .success-enter-to, .success-leave
+    width: 100%
+
   .content .order_header {
     display: block;
     padding-left: 10px;

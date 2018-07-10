@@ -31,5 +31,23 @@ export default class message {
       timeout: 1500
     });
   }
+
+  /**
+   * 非模态信息提醒，无需用户交互。
+   * @param context 上下文对象
+   * @param String type 类型 loading/correct/error/warn
+   * @param String txt 提示信息
+   * @param Boolean mask 遮罩
+   * @constructor
+   */
+  static Toast(context,type,txt,mask) {
+    const toast = context.$createToast({
+      time: 1500,
+      txt: txt,
+      mask: mask,
+      type: type
+    });
+    toast.show()
+  }
 }
 
