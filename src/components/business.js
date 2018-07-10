@@ -21,10 +21,10 @@ exports.install = function (Vue) {
 
   Vue.prototype.$Ice_SystemService = {
 
-    initDirc: (callback)=> {
+    getBaseUnit: (callback)=> {
       queryIce(system.SystemServicePrx , 'SystemService', 'getAllDict', callback);
     },
-    initMapDirc: (callback)=> {
+    getAreaCode: (callback)=> {
       queryIce(system.SystemServicePrx , 'SystemService', 'getChineseAllAreas', callback);
     }
   };
@@ -116,18 +116,44 @@ exports.install = function (Vue) {
 
   Vue.prototype.$Ice_OrderService = {
 
-
     /**
      *全文查询当前的订单
+     *  OrderSeq queryOrderByCurdate(string token,cstruct::stringSeq params);
      */
-    queryAllByKey: (token,key,size,callback)=> {
+    queryOrderByPc: (token,key,size,callback)=> {
       callback.setFilter(convert.queryAllByKeyFilter());
-      queryIce(order.OrderServicePrx , 'OrderService', 'queryOrderByCurdate', token,[key,size],callback);
+      queryIce(order.OrderServicePrx , 'OrderService', 'queryOrderByCurdate', token,[size,key],callback);
     },
+    /**
+     * 全文检索出当天的圈子订单
+    OrderSeq queryCircleOrderByCurdate(string token,cstruct::stringSeq params); */
+    queryCircleOrderByPc: (token,key,size,callback)=> {
+      callback.setFilter(convert.queryAllByKeyFilter());
+      queryIce(order.OrderServicePrx , 'OrderService', 'queryCircleOrderByCurdate', token,[size,key],callback);
+    },
+    /**
+     * 全文检索出当天的订单(App)
+    OrderSeq queryAppOrderByCurdate(string token,cstruct::stringSeq params);
+     参数数组定义:
+     需要获取的订单条数 , (必填)
+     当前地点名(如,长沙) , (必填)
+     关键字 , (可选,可能为空)
+     状态(获取最新 0, 获取历史1) (必填)
+     --指定订单标识(时间或自增长的订单号)
+     订单发布时间
+     */
+    queryOrderByApp: (token,key,size,addr,op,timeStr,callback)=> {
+      callback.setFilter(convert.queryAllByKeyFilter());
+      queryIce(order.OrderServicePrx , 'OrderService', 'queryAppOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
+    },
+  /**
+   * 全文检索出当天的圈子订单
+  OrderSeq queryAppCircleOrderByCurdate(string token,cstruct::stringSeq params); */
     /**自动生成订单序列.
      * 返回 string */
-    autoGenerationOrderSequence:(callback)=>{
-      queryIce(order.OrderServicePrx , 'OrderService', 'generateOrderNo', callback);
+    queryCircleOrderByApp: (token,key,size,addr,op,timeStr,callback)=> {
+      callback.setFilter(convert.queryAllByKeyFilter());
+      queryIce(order.OrderServicePrx , 'OrderService', 'queryAppCircleOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
     },
 
     releaseOrder:(token,json,callback)=>{
@@ -200,35 +226,6 @@ exports.install = function (Vue) {
       queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'resetDriverPasswordByPhone', token, phone,callback);
     }
 
-
-    /**
-     *  常用线路
-     *
-    struct RouteInfo {
-    int routeid;//主键PK 承运商路线id
-    int carryid;//承运商id
-    string routename;//线路名称
-    int origin;//起始地
-    string originname;//起始地名称
-    int destination;//目的地
-    string desname;//目的地名称
-    int cstatus;//状态码 状态 （0：启动，1:删除，2：停用）
-    string createdate; // 创建日期
-    string createtime; // 创建时间
-    RouteviapSeq routevias;//途径点集合
-  };*/
-
-    /**
-     * 保存线路
-
-    int saveRoute(string token,RouteInfo route); */
-
-
-    /**
-     * 查询路线
-     * params:查询参数数组[目的地地区码，出发地地区码，线路状态]
-
-    RouteInfoSeq queryRoutes(string token, cstruct::stringSeq params);*/
 
   }
 

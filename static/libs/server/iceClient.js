@@ -76,7 +76,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
   }
 
 
-
+  let ic = Ice.initialize(params);
   Ice.Promise.try(
       function () {
         callback.onCallback(CALLBACK_ACTION.READY,params);
@@ -94,7 +94,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
     .then(
       function(remoteProxy) {
 
-        console.log("ICE : ",moduleName,methodName,params);
+        console.log("ICE : ",moduleName,methodName,params,callback);
         if (params.length>0) {
           result = remoteProxy[methodName].apply(remoteProxy,params)
         }else{
@@ -108,9 +108,11 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
           callback.onCallback(CALLBACK_ACTION.COMPLETE,result);
         }
       )
+
     .exception(
         function (e) {
           callback.onCallback(CALLBACK_ACTION.ERROR,e);
+          process.exit(1);
         }
     )
 }

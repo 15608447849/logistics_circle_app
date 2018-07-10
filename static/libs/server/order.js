@@ -540,6 +540,9 @@
     {
         "generateOrderNo": [, , , , , [7], , , , , ],
         "queryOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryAppOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryAppCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "addOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "getOrderDetail": [, , , , , [order.GetOrderDetailRes], [["cstruct.stringSeqHelper"]], , , , ],
         "robbingOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ]
