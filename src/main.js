@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import store from './store'
-import business  from './components/business'
+import business  from './interfaces/business'
 import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
 import Cube from 'cube-ui'

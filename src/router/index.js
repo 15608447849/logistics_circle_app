@@ -31,8 +31,8 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/SimpleSearchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
-//测试页面
-import TEST from '@/pages/test'
+// 测试页面
+import TEST from '@/interfaces/test'
 // picker测试
 import PICKER from '@/pages/pickerTest'
 
@@ -50,6 +50,7 @@ Vue.use(Router);
  * @type {VueRouter}
  */
 const vueRouter = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/test',
