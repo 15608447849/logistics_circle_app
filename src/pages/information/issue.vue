@@ -1,74 +1,87 @@
 <template>
-  <div class="content">
-    <!--头部-->
-    <div class="header">
-      <span class="goto"><</span>
-      <span>发布订单</span>
-      <span>发布</span>
+  <div>
+    <div class="issueHeaderNav">
+      <div class="issueHeaderNavPic"><img src="../../assets/images/small/logo_26.png" alt=""></div>
+      <div><span>发布订单</span></div>
+      <div @click="toissue"><span>发布</span></div>
     </div>
-    <!--发布订单填写区-->
-    <ul class="locationList">
-      <li class="WaybillCode">
-        <span class="start">*</span><span class="issueText">运单号：</span><input type="text" placeholder="点击输入" class="longInput">
+
+      <ul class="releaseOption">
+        <li>
+           <span>运单号</span>
+          <input type="text" class="input_33">
+        </li>
+        <li>
+          <span class="spanBox">
+          <span class="textRed">*</span>
+          <span>目的地</span>
+          </span>
+          <input type="text" class="input_33">
+        </li>
+        <li>
+          <span class="spanBox">
+          <span class="textRed">* </span>
+          <span>出发地</span>
+          </span>
+          <input type="text" class="input_80 indent30" placeholder="请输入地址，支持在地图上定位">
+        </li>
+      </ul>
+
+
+    <ul class="releaseOption">
+      <li>
+          <span class="spanBox">
+          <span class="textRed">* </span>
+          <span>货物大小</span>
+          </span>
+        <input type="text" class="input_45 indent53" placeholder="重量/体积">
+        <input type="text" class="input_30 indent53" placeholder="单位">
       </li>
-      <li class="departure">
-        <span class="start">*</span><span class="issueText">目的地：</span><input type="text" placeholder="点击输入" class="longInput">
+      <li>
+          <span class="spanBox">
+          <span class="textRed">*</span>
+          <span>货物数量</span>
+          </span>
+        <input type="text" class="input_45 indent53" placeholder="重量/体积">
+        <input type="text" class="input_30 indent53" placeholder="单位">
       </li>
-      <li class="destination">
-        <span class="start">*</span><span class="issueText">目的地：</span><input type="text" placeholder="点击输入" class="longInput">
+      <li>
+          <span class="spanBox">
+          <span class="textRed">* </span>
+          <span>货物信息</span>
+          </span>
+        <input type="text" class="input_45 indent53" placeholder="货物类别">
+        <input type="text" class="input_30 indent53" placeholder="是否包装">
       </li>
     </ul>
-    <ul class="cargoList">
+
+    <ul class="releaseOption">
       <li>
-        <span class="start">*</span><span class="issueText">货物重量：</span>
-        <input type="text"  class="shortInput" placeholder="点击输入"><span>kg</span>
-        <span class="start">*</span><span class="issueText">货物体积：</span>
-        <input type="text" class="shortInput" placeholder="点击输入"><span>m³</span>
+          <span class="spanBox">
+          <span class="textRed">* </span>
+          <span>车辆大小</span>
+          </span>
+        <input type="text" class="input_45 indent53" placeholder="数量"><span>台</span>
+        <input type="text" class="input_30 indent53" placeholder="长度"><span>米</span>
       </li>
       <li>
-        <span class="start">*</span><span class="issueText">货物件数：</span><input type="text" class="shortInput" placeholder="点击输入">
-        <span class="issueText">货物包装：</span><input type="text" class="shortInput" placeholder="点击输入">
-      </li>
-      <li>
-        <span class="issueText">货物类型：</span><input type="text" class="shortInput" placeholder="点击输入">
-      </li>
-    </ul>
-    <ul>
-      <li>
-         <span class="issueText">车型：</span><input type="text" placeholder="点击输入" class="shortInput">
-         <span class="issueText">车长：</span><input type="text" placeholder="点击输入">
-      </li>
-      <li>
-         <span class="issueText">车辆：</span> <input type="text" placeholder="点击输入" class="shortInput">
-         <span class="issueText">说明：</span> <input type="text" placeholder="点击输入" class="shortInput">
-      </li>
-    </ul>
-    <ul>
-      <li>
-      <span class="issueText">声明保价：</span><input type="text" class="shortInput"><span class="issueText">代收货款：</span> <input type="text" placeholder="点击输入" class="shortInput">
-      </li>
-      <li>
-        <span class="start">*</span><span class="issueText">付款方式：</span><input type="text" placeholder="点击输入" class="shortInput"><span class="start">*</span><span class="issueText">订单费用：</span><input
-        type="text" placeholder="点击输入" class="shortInput">
-      </li>
-    </ul>
-    <ul>
-      <li>
-      <span class="start">*</span><span class="issueText">收货人：</span><input type="text" placeholder="点击输入" class="shortInput"><span class="start">*</span><span class="issueText">联系方式：</span><input type="text" placeholder="点击输入" class="shortInput">
-      <span class="start">*</span><span class="issueText">取货方式：</span><input type="text" placeholder="点击输入" class="shortInput"><span class="start">*</span><span class="issueText">回单要求：</span><input type="text" placeholder="点击输入" class="shortInput">
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <span class="issueText">提货时间：</span> <input type="text" placeholder="点击输入" class="longInput">
+          <span class="spanBox">
+          <span class="textRed">*</span>
+          <span>车辆要求</span>
+          </span>
+        <input type="text" class="input_80 indent64" placeholder="请选择车辆型号">
 
       </li>
       <li>
-        <span class="issueText">到货时间：</span> <input type="text" placeholder="点击输入" class="longInput">
+          <span class="spanBox">
+          <span class="textRed">* </span>
+          <span>运输要求</span>
+          </span>
+        <input type="text" class="input_80 indent64" placeholder="请选择运输要求">
+
       </li>
     </ul>
-    <span>订单费用</span>  <span>3000元</span>
-    <button>发布</button>
+
   </div>
 </template>
 <script>
@@ -77,28 +90,4 @@
 </script>
 
 <style>
-  /*头部*/
-   .content .header{
-     display:flex;
-     width:100%;
-     justify-content:space-between;
-     height:25px;
-     border-bottom:2px solid gray;
-     margin-bottom:8px;
-     padding: 0px 5px 0px 5px;
-   }
-  .header .goto{
-    font-size:18px;
-  }
-  <!--发布订单填写区-->
-  ul{
-    display:block;
-    width:100%;
-    height:100px;
-    border-bottom:5px solid gray;
-    list-style:none;
-  }
-  ul li .issueText{
-    width:60px;
-  }
 </style>

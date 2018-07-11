@@ -11,6 +11,7 @@ import YDUI from 'vue-ydui';
 import Cube from 'cube-ui'
 import VueResource from 'vue-resource'
 import { Tabbar, TabItem } from 'mint-ui';
+import {PullRefresh} from 'vue-ydui/dist/lib.rem/pullrefresh';
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 
@@ -24,6 +25,7 @@ import './assets/css/index.css'
 // 底部导航栏
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
+Vue.component(PullRefresh.name, PullRefresh);
 
 Vue.use(business);
 Vue.use(Vuex);

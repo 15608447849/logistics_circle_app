@@ -1,7 +1,13 @@
 <template>
   <div class="register">
-    <yd-navbar title="用户注册"></yd-navbar>
-    <yd-cell-group v-show="firstStepBool">
+    <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="18px">
+      <router-link to="#" slot="left">
+        <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
+      </router-link>
+
+      <img slot="right" src="../../assets/images/small/logo_26.png"/>
+    </yd-navbar>
+    <yd-cell-group v-show="thirdStep">
       <yd-cell-item>
         <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
         <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
@@ -12,7 +18,7 @@
         ></yd-sendcode>
       </yd-cell-item>
     </yd-cell-group>
-    <yd-cell-group v-show="secondStepBool">
+    <yd-cell-group v-show="thirdStep">
       <yd-cell-group>
         <yd-cell-item>
           <span slot="left">验证码：</span>
@@ -20,7 +26,7 @@
         </yd-cell-item>
       </yd-cell-group>
     </yd-cell-group>
-    <yd-cell-group v-show="thirdStepBool">
+    <yd-cell-group v-show="thirdStep">
       <yd-cell-item>
         <span slot="left" class="span">用户名：</span>
         <yd-input slot="right" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
@@ -182,73 +188,5 @@
 </script>
 
 <style>
-  a {
-    text-decoration: none
-  }
 
-  input {
-    text-indent: 15px;
-  }
-
-  .input_div {
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  .start {
-    color: red;
-  }
-
-  .verification {
-    display: inline-block;
-    width: 120px;
-    height: 30px;
-    color: blue;
-    font-size: 16px;
-    line-height: 30px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    text-align: center;
-    vertical-align: top;
-    margin-left: 20px;
-  }
-
-  .text {
-    display: inline-block;
-    width: 64px;
-    text-align: right;
-  }
-
-  .input {
-    height: 25px;
-    width: 252px;
-    margin-left: 20px;
-  }
-
-  .input_verificationcode {
-    height: 25px;
-    width: 110px;
-    margin-left: 20px;
-  }
-
-  .text_right {
-    margin-left: 24px;
-  }
-
-  .text_blue {
-    color: blue;
-  }
-
-  .btn {
-    display: block;
-    width: 252px;
-    height: 30px;
-    background: blue;
-    color: white;
-    margin: 0 auto;
-  }
-
-  .span {
-    width: 1.5rem;
-  }
 </style>
