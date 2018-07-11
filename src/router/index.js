@@ -7,9 +7,10 @@ import {
 
 // 模块名大写
 // 登陆模块
-import REGISTER from '@/pages/login/register'
+import REGISTER from '@/pages/login/register' // 用户注册
+import LOGIN from '@/pages/login/index' // 用户登录
+import SMSLOGIN from '@/pages/login/smsLogin' // 短信登录
 
-import LOGIN from '@/pages/login/index'
 // 高德地图测试
 import GEOLOCATION from '@/pages/geoLocationTest'
 // 初始页
@@ -26,16 +27,10 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/SimpleSearchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
-// 修改密码输入手机号获取验证码
-import UPDATAPWD from '@/pages/login/updatapwd'
-// 修改密码输入验证码
-import VERIFICATION from '@/pages/login/Verification'
-// 修改密码确认密码
-import CONFIRMPWD from '@/pages/login/confirmpwd'
-// 信息大厅订单详情模块
-import ISSUEDETAILS from '@/pages/information/issueDetails'
 //测试页面
 import TEST from '@/pages/test'
+// picker测试
+import PICKER from '@/pages/pickerTest'
 
 Vue.use(Router);
 
@@ -65,8 +60,7 @@ const vueRouter = new Router({
       children: [
         {
           path: '',
-             component: HOME,
- //          component: UPDATAPWD
+          component: HOME,
         },
         {
           name: 'circle',
@@ -87,6 +81,10 @@ const vueRouter = new Router({
           }
         }
       ]
+    },
+    {
+      path: '/login',
+      component: LOGIN
     },
     {
       path: '/register',
@@ -113,6 +111,14 @@ const vueRouter = new Router({
       component: LOGIN
     },
     {
+      path: '/register',
+      component: REGISTER
+    },
+    {
+      path: '/smsLogin',
+      component: SMSLOGIN
+    },
+    {
       path: '/geo',
       component: GEOLOCATION
     },
@@ -125,9 +131,14 @@ const vueRouter = new Router({
       component: ISSUE
     },
     {
+      name: 'picker',
+      path: '/picker',
+      component: PICKER
+    },
+    {
       path: '/information/issueDetails',
       component: ISSUEDETAILS
-    },
+    }
   ]
 });
 

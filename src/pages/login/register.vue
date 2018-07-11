@@ -82,7 +82,7 @@
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          this.notify('密码为空或长度小于6位,请完善输入');
+          this.notify('密码为空或长度小于6位, 请完善输入');
           return false
         }
         if (this.verifyUtil.isTwoPsd(this.password, this.rPassword)) {
@@ -97,6 +97,13 @@
           timeout: 1500
         });
       },
+      notifyToast(str, state) {
+        self.$dialog.toast({
+          mes: str,
+          icon: state,
+          timeout: 1500
+        });
+      },
       sendCode() {
         if (this.verifyUtil.isPhoneNum(this.phone)) {
           this.notify('手机号格式错误, 请重新输入');
@@ -104,36 +111,22 @@
         }
         this.$dialog.loading.open('验证码发送中...');
         let self = this;
-        console.log(this.phone)
         this.$Ice_UserService.requestPhoneSms(this.phone, false, new IceCallback(
           function (result) {
-            console.log("完成" + result);
             if (result === 0) {
               self.start1 = true;
               self.$dialog.loading.close();
               self.isFirstStepDis = false;
-              self.$dialog.toast({
-                mes: '已发送',
-                icon: 'success',
-                timeout: 1500
-              });
+              self.notifyToast('已发送','success')
             } else {
               // 发送失败
               self.$dialog.loading.close();
-              self.$dialog.toast({
-                mes: '验证码发送失败, 请稍后重试',
-                icon: 'error',
-                timeout: 1500
-              });
+              self.notifyToast('验证码发送失败, 请稍后重试','error');
             }
           },
           function (error) {
             self.$dialog.loading.close();
-            self.$dialog.toast({
-              mes: '错误' + error,
-              icon: 'error',
-              timeout: 1500
-            });
+            self.notifyToast('错误' + error,'error');
           }
         ));
       },
@@ -150,19 +143,11 @@
               self.secondStepBool = false;
               self.thirdStepBool = true;
             } else {
-              self.$dialog.toast({
-                mes: '验证码输入错误',
-                icon: 'error',
-                timeout: 1500
-              });
+              self.notifyToast('验证码输入错误','error');
             }
           },
           function (error) {
-            self.$dialog.toast({
-              mes: '错误' + error,
-              icon: 'error',
-              timeout: 1500
-            });
+            self.notifyToast('错误' + error ,'error');
           }
         ));
       },
@@ -181,39 +166,21 @@
                       // store 保存登陆状态
                       // 跳转信息大厅
                     } else {
-                      self.$dialog.toast({
-                        mes: '注册失败',
-                        icon: 'error',
-                        timeout: 1500
-                      });
+                      self.notifyToast('注册失败' ,'error');
                     }
                   },
                   function (error) {
-                    self.$dialog.toast({
-                      mes: '错误' + error,
-                      icon: 'error',
-                      timeout: 1500
-                    });
+                    self.notifyToast('错误' + error ,'error');
                   }
                 ))
               } else {
-                self.$dialog.toast({
-                  mes: '注册失败, 用户名已存在',
-                  icon: 'error',
-                  timeout: 1500
-                });
+                self.notifyToast('注册失败, 用户名已存在' ,'error');
               }
             },
             function (error) {
-              self.$dialog.toast({
-                mes: '错误' + error,
-                icon: 'error',
-                timeout: 1500
-              });
+              self.notifyToast( '错误' + error ,'error');
             }
           ));
-
-
         }
       }
     }

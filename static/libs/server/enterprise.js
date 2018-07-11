@@ -103,7 +103,7 @@
      * 常用线路
      **/
     enterprise.RouteInfo = Slice.defineStruct(
-        function(routeid, carryid, routename, origin, originname, destination, desname, cstatus, createdate, createtime, routeviaps)
+        function(routeid, carryid, routename, origin, originname, destination, desname, cstatus, createdate, createtime, routevias)
         {
             this.routeid = routeid !== undefined ? routeid : 0;
             this.carryid = carryid !== undefined ? carryid : 0;
@@ -115,7 +115,7 @@
             this.cstatus = cstatus !== undefined ? cstatus : 0;
             this.createdate = createdate !== undefined ? createdate : "";
             this.createtime = createtime !== undefined ? createtime : "";
-            this.routeviaps = routeviaps !== undefined ? routeviaps : null;
+            this.routevias = routevias !== undefined ? routevias : null;
         },
         true,
         function(__os)
@@ -130,7 +130,7 @@
             __os.writeInt(this.cstatus);
             __os.writeString(this.createdate);
             __os.writeString(this.createtime);
-            enterprise.RouteviapSeqHelper.write(__os, this.routeviaps);
+            enterprise.RouteviapSeqHelper.write(__os, this.routevias);
         },
         function(__is)
         {
@@ -144,7 +144,7 @@
             this.cstatus = __is.readInt();
             this.createdate = __is.readString();
             this.createtime = __is.readString();
-            this.routeviaps = enterprise.RouteviapSeqHelper.read(__is);
+            this.routevias = enterprise.RouteviapSeqHelper.read(__is);
         },
         26, 
         false);
@@ -168,13 +168,14 @@
     {
         "queryDriver": [, , , , , ["enterprise.DriverInfoSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "saveDriver": [, , , , , [3], [[7], [enterprise.DriverInfo]], , , , ],
-        "enable": [, , , , , [3], [[7], [3]], , , , ],
-        "disable": [, , , , , [3], [[7], [3]], , , , ],
+        "enable": [, , , , , [3], [[7], ["cstruct.intSeqHelper"]], , , , ],
+        "disable": [, , , , , [3], [[7], ["cstruct.intSeqHelper"]], , , , ],
+        "resetDriverPasswordByPhone": [, , , , , [3], [[7], [7]], , , , ],
         "deleteDrivers": [, , , , , [3], [[7], ["cstruct.intSeqHelper"]], , , , ],
         "queryRoutes": [, , , , , ["enterprise.RouteInfoSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "saveRoute": [, , , , , [3], [[7], [enterprise.RouteInfo]], , , , ],
-        "enableRoute": [, , , , , [3], [[7], [3]], , , , ],
-        "disableRoute": [, , , , , [3], [[7], [3]], , , , ],
+        "enableRoute": [, , , , , [3], [[7], ["cstruct.intSeqHelper"]], , , , ],
+        "disableRoute": [, , , , , [3], [[7], ["cstruct.intSeqHelper"]], , , , ],
         "deleteRoute": [, , , , , [3], [[7], ["cstruct.intSeqHelper"]], , , , ]
     });
     exports.enterprise = enterprise;

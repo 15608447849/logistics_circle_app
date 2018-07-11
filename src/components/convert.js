@@ -5,7 +5,7 @@ exports.queryAllByKeyFilter =  ()=> {
 
   return new IceCallback(
     function (result) {
-      console.log(result);
+      // console.log('queryAllByKeyFilter','过滤前数据: ',result);
       let orderList = [];
       if (result.length > 0) {
         for (let i = 0; i < result.length; i++) {
@@ -74,4 +74,57 @@ exports.queryAllByKeyFilter =  ()=> {
  int ostatus; // 订单状态
  int lstatus; // 装卸状态
  */
+
+
+/**查询司机
+ *  struct DriverInfo {
+        int driverid; // 司机码 (PK)
+        string carryname; // 所属企业名
+        string drivername; // 司机姓名
+        string driverphone; // 司机手机
+        string createdate; // 创建日期
+        string createtime; // 创建时间
+        int cstatus; //状态 （0：启动，1:删除，2：停用）
+     };
+ * 过滤*/
+exports.queryDriverInfoFilter = function(){
+  return IceCallback(
+    function (result) {
+      let list = [];
+      for (let i = 0;i<result.length;i++){
+        let temp = result[i];
+        let obj = businessBeans.DriverBean();
+        obj.serial = i;
+        obj.pkCode = temp.driverid;
+        obj.name = temp.drivername;
+        obj.phone = temp.driverphone;
+        obj.enterprise = temp.carryname;
+        obj.state = temp.cstatus ;
+        obj.createDate = temp.createdate;
+        obj.createTime = temp.createtime;
+        list.push(obj)
+      }
+      return list;
+    }
+  )
+};
+
+exports.saveDriverInfoFilter = function () {
+  return new IceCallback(
+    function (param) {
+      let obj = new enterprise.DriverInfo(
+        param.pkCode,
+        param.enterprise,
+        param.name,
+        param.phone,
+        param.createDate,
+        param.createTime,
+        param.state
+      );
+      return obj;
+    },
+    function (result) {},
+    function (error) {}
+  )
+};
 

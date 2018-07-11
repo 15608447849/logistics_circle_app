@@ -1,6 +1,4 @@
 
-
-
 const CALLBACK_ACTION={
   READY:1,
   COMPLETE:2,
@@ -35,7 +33,6 @@ IceCallback.prototype  = {
       nobj = this.filter.onCallback(state,obj);
 
       if (nobj) {
-        console.log("ICE过滤\n",obj,"\n=========================================>\n",nobj);
         obj = nobj;
       }
     }
@@ -79,14 +76,14 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
   }
 
 
-
+  let ic = Ice.initialize(params);
   Ice.Promise.try(
       function () {
         callback.onCallback(CALLBACK_ACTION.READY,params);
         let proxy = communication
           .stringToProxy(moduleName)
-          .ice_timeout(1500)
-          .ice_invocationTimeout(1500)
+          .ice_timeout(10000)
+          .ice_invocationTimeout(10000)
           .ice_twoway()
           .ice_preferSecure(true);
         // proxy.ice_timeout(1000).ice_twoway().ice_secure(false);
@@ -97,7 +94,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
     .then(
       function(remoteProxy) {
 
-        console.log("ICE : ",moduleName,methodName,params);
+        console.log("ICE : ",moduleName,methodName,params,callback);
         if (params.length>0) {
           result = remoteProxy[methodName].apply(remoteProxy,params)
         }else{
@@ -111,9 +108,11 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
           callback.onCallback(CALLBACK_ACTION.COMPLETE,result);
         }
       )
+
     .exception(
         function (e) {
           callback.onCallback(CALLBACK_ACTION.ERROR,e);
+          process.exit(1);
         }
     )
 }

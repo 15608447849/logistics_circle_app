@@ -33,6 +33,39 @@
         transitionName: ''
       }
     },
+    mounted() { //页面初始完成
+      this.initBaseData();
+    },
+    methods: {
+       sleep(n) {
+    var start = new Date().getTime();
+    while(true)  if(new Date().getTime()-start > n) break;
+  },
+      initBaseData(){
+        let self = this;
+        self.$Ice_SystemService.getBaseUnit(
+          new IceCallback(
+            function (result) {
+              localStorage.setItem('unit', result);
+              self.initAreaData();
+            }
+          )
+        );
+
+      },
+      initAreaData(){
+        let self = this;
+        self.$Ice_SystemService.getAreaCode(
+          new IceCallback(
+            function (result) {
+              localStorage.setItem('area', result)
+            }
+          )
+        );
+
+      }
+
+    },
     watch: {
       selected: function (val, oldvar) {
         this.$router.push(val)

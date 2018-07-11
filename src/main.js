@@ -8,10 +8,12 @@ import store from './store'
 import business  from './components/business'
 import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
+import Cube from 'cube-ui'
 import VueResource from 'vue-resource'
 import { Tabbar, TabItem } from 'mint-ui';
 import {PullRefresh} from 'vue-ydui/dist/lib.rem/pullrefresh';
 import verifyUtil from './utils/verifyUtil'
+import message from './utils/message'
 
 import 'mint-ui/lib/style.css'
 import 'vue-ydui/dist/ydui.rem.css';
@@ -30,9 +32,13 @@ Vue.use(Vuex);
 Vue.use(VueAMap);
 Vue.use(YDUI);
 Vue.use(VueResource);
+Vue.use(Cube);
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
+Vue.prototype.message = message;
+
+
 Vue.prototype.$app_store = store;
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({
@@ -43,6 +49,17 @@ VueAMap.initAMapApiLoader({
   // 高德 sdk 版本，默认为 1.4.4
   v: '1.4.4'
 });
+
+document.addEventListener('deviceready', function() {
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
+  })
+  window.navigator.splashscreen.hide()
+}, false);
 
 /* eslint-disable no-new */
 new Vue({
