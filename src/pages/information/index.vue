@@ -1,24 +1,25 @@
 <template>
   <div>
-    <yd-navbar title="信息大厅"></yd-navbar>
-    <div class="content">
-      <!--<div class="order_header">-->
-        <!--<span class="order_num">共1888条</span>-->
-        <!--<a class="issue_order" @click="toissue">发布订单</a>-->
-      <!--</div>-->
-      <yd-infinitescroll :callback="loadList" ref="infinitescrollDemo">
+    <div class="issueHeaderNav">
+      <div class="issueHeaderNavPic"><img src="../../assets/images/small/logo_26.png" alt=""></div>
+      <div><span>圈子订单</span></div>
+      <div @click="toissue"><span>发单</span></div>
+    </div>
+    <!--<yd-pullrefresh :callback="loadList">-->
 
-      </yd-infinitescroll>
-      <div class="list_content">
+    <!--</yd-pullrefresh>-->
+    <div class="content">
         <ul class="order_box">
-          <li class="order_list">
-            <div class="order_price"><span class="site">长沙到广州</span><span class="price">2000元</span></div>
-            <div class="order_time"><span class="volume">家具,9方</span><span class="car_type">厢式货车，9.6</span><span class="time">1小时前发布</span></div>
+          <li class="order_list" @click="toissueDetails">
+            <div class="order_price"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
+            <div class="order_time"><span class="volume">家具,9方</span><span class="car_type">厢式货车，9.6</span><span class="price">2000元</span></div>
+          </li>
+          <li class="order_list" @click="toissueDetails">
+            <div class="order_price"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
+            <div class="order_time"><span class="volume">家具,9方</span><span class="car_type">厢式货车，9.6</span><span class="price">2000元</span></div>
           </li>
         </ul>
-      </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -35,66 +36,16 @@
     methods: {
       requestInfoList() {
 
-      }
+      },
+      toissue() {
+        this.$router.push({path: '/information/issue'})
+      },
+      toissueDetails() {
+        this.$router.push({path: '/information/issueDetails'})
+      },
     }
   }
 </script>
 <style>
-  .content .order_header{
-    display:block;
-    padding-left:10px;
-    padding-right:10px;
-    margin-top:50px;
-    margin-bottom:80px;
-  }
-  .content .order_header .order_num{
-    float:left;
-  }
-  .content .order_header .issue_order{
-    float:right;
-    width:75px;
-    height:20px;
-    text-align: center;
-    border:1px solid gray;
-    border-radius: 2px;
-  }
-  .list_content{
-    margin:0px 10px 0px 10px;
-    margin:0px 10px 0px 10px;
 
-  }
-  ul .order_box{
-    margin-top:15px;
-  }
-  ul .order_list{
-    display:block;
-    width:100%;
-    margin-top:10px;
-    height:40px;
-    border-bottom:1px solid gray;
-    border-top:1px solid gray;
-  }
-  .order_price{
-    width:100%;
-    height:20px;
-    font-weight: bold;
-    margin-right:10px;
-  }
-  .order_price .site{
-    float:left;
-  }
-  .order_price .price{
-    float:right;
-    color:red;
-  }
-  .order_time{
-    font-size:14px;
-  }
-  .order_time .volume{
-    float:left;
-    margin-right:13px;
-  }
-  .order_time .time{
-    float:right;
-  }
 </style>

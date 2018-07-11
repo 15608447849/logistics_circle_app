@@ -10,11 +10,11 @@
         <img slot="icon" src="">
         首页
       </mt-tab-item>
-      <mt-tab-item id="/circle">
+      <mt-tab-item id="/information">
         <img slot="icon" src="">
         圈子订单
       </mt-tab-item>
-      <mt-tab-item id="/information">
+      <mt-tab-item id="/circle">
         <img slot="icon" src="">
         信息大厅
       </mt-tab-item>

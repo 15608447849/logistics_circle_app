@@ -1,0 +1,563 @@
+/*登录模块样式*/
+/*h5 {*/
+/*text-align: center;*/
+/*margin-bottom: 20px;*/
+/*}*/
+
+/*.input_div {*/
+/*display: block;*/
+/*margin-bottom: 20px;*/
+/*}*/
+
+/*.input {*/
+/*height: 25px;*/
+/*width: 80%;*/
+/*margin-left: 10%;*/
+/*}*/
+
+/*.remember {*/
+/*margin-left: 10%;*/
+/*}*/
+
+/*.login_btn {*/
+/*display: block;*/
+/*width: 80%;*/
+/*height: 30px;*/
+/*margin: 0 auto;*/
+/*border: 1px solid blue;*/
+/*border-radius: 5%;*/
+/*background: blue;*/
+/*}*/
+
+/*.find_register {*/
+/*display: block;*/
+/*width: 80%;*/
+/*margin: 0 auto;*/
+/*margin-top: 20px;*/
+/*color: blue;*/
+/*}*/
+
+/*.note {*/
+/*float: right;*/
+/*}*/
+
+/*.register {*/
+/*float: right;*/
+/*font-size: 18px;*/
+/*font-weight: bold;*/
+/*color: blue;*/
+/*}*/
+.login{
+  width:100%;
+  height:100%;
+  padding-top:60px;
+  background:url("../../assets/images/small/backgrond_login.png") no-repeat;
+}
+.loginPic{
+  display:block;
+  width:102px;
+  height:102px;
+  margin:0 auto;
+  margin-bottom:100px;
+}
+.login_input{
+  display:block;
+  width:85%;
+  height:75px;
+  margin:0 auto;
+  margin-bottom:33px;
+  background:white;
+  border:1px solid white;
+  border-radius:4px;
+}
+/*.borderBottom{*/
+/*border-bottom:1px solid gray;*/
+/*}*/
+.login_input .userName{
+  display:block;
+  width:85%;
+  height:37px;
+  border:none;
+  margin:0 auto;
+}
+.userNameBorderBottom{
+  display:block;
+  width:85%;
+  height:37px;
+  border:none;
+  margin:0 auto;
+  border-bottom:1px solid #ebeff5;;
+}
+.loginBut{
+  display:block;
+  width:85%;
+  height:44px;
+  margin:0 auto;
+  color:white;
+  background:#338fff;
+  border:1px solid #338fff;
+  border-radius:5px;
+  font-size:14px;
+  font-weight:bold;
+  font-family: PingFang-SC-Regular;
+  margin-bottom:12px;
+}
+.fastLogin{
+  display:block;
+  width:85%;
+  margin:0 auto;
+  color: #2b73cc;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom:110px;
+}
+.forgetPwd{
+  display:flex;
+  justify-content:space-between;
+  padding:0px 25px 0px 25px;
+}
+.forgetPwd span{
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 12px;
+  letter-spacing: 0px;
+  color: #2b73cc;
+}
+/*用户注册模块样式*/
+a {
+  text-decoration: none
+}
+
+input {
+  text-indent: 15px;
+}
+
+.input_div {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.start {
+  color: red;
+}
+
+.verification {
+  display: inline-block;
+  width: 120px;
+  height: 30px;
+  color: blue;
+  font-size: 16px;
+  line-height: 30px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: top;
+  margin-left: 20px;
+}
+
+.text {
+  display: inline-block;
+  width: 64px;
+  text-align: right;
+}
+
+.input {
+  height: 25px;
+  width: 252px;
+  margin-left: 20px;
+}
+
+.input_verificationcode {
+  height: 25px;
+  width: 110px;
+  margin-left: 20px;
+}
+
+.text_right {
+  margin-left: 24px;
+}
+
+.text_blue {
+  color: blue;
+}
+
+.btn {
+  display: block;
+  width: 252px;
+  height: 30px;
+  background: blue;
+  color: white;
+  margin: 0 auto;
+}
+
+.span {
+  width: 1.5rem;
+}
+/*修改密码填写手机号页面*/
+.phoneNum{
+  display:block;
+  width:90%;
+  margin:0 auto;
+}
+.phoneNum .numText{
+  display:block;
+  margin:10px 0px 31px 10px;
+  font-size:14px;
+  font-family: PingFang-SC-Regular;
+  color: #666666;
+}
+.eightSix{
+  font-size:14px;
+  font-family: PingFang-SC-Regular;
+  color: #999999;
+  margin-left:10px;
+  border-bottom:1px solid #ebeff5;
+}
+.inputNumBox{
+  display:inline-block;
+  margin-left:20px;
+  border-bottom:1px solid #ebeff5;;
+}
+.inputNum{
+  display:inline-block;
+  width:80%;
+  border:none;
+}
+.nextStep{
+  display:block;
+  width:94%;
+  height:32px;
+  margin:0 auto;
+  margin-top:28px;
+  border:1px solid #3189f5;
+  border-radius:3px;
+  font-family: PingFang-SC-Regular;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  color:#ffffff;
+  background:#3189f5;
+}
+/*修改密码填写验证码页面*/
+.verificationBox{
+  display:block;
+  width:95%;
+  height:64px;
+  margin:0 auto;
+  margin-bottom:30px;
+}
+.verificationCode{
+  display:block;
+  margin-top:17px;
+  margin-bottom:28px;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #666666;
+}
+.verificationList{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:80%;
+  height:30px;
+  margin:0 auto;
+}
+.verificationList li{
+  display:inline-block;
+  width:18%;
+  height:30px;
+  border-bottom:1px solid #ebeff5;
+}
+.verificationList li input{
+  border:none;
+}
+.nextStep{
+  display:block;
+  width:94%;
+  height:32px;
+  margin:0 auto;
+  margin-top:28px;
+  border:1px solid #3189f5;
+  border-radius:3px;
+  font-family: PingFang-SC-Regular;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  color:#ffffff;
+  background:#3189f5;
+}
+/*修改密码页面*/
+.updataPwdinputBox{
+  display:block;
+  width:95%;
+  margin:0 auto;
+}
+.settingspwd{
+  display:block;
+  margin-top:17px;
+  margin-bottom:28px;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #666666;
+}
+.inputBox{
+  display:block;
+  width:95%;
+  margin:0 auto;
+}
+.inputspan{
+  margin-right:20px;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  color: #666666;
+}
+.inputPassword{
+  display:block;
+  width:95%;
+  margin:0 auto;
+  margin-bottom:25px;
+}
+.inputBox{
+  display:inline-block;
+  width:78%;
+  border-bottom:1px solid #ebeff5;
+}
+.inputBox input{
+  width:100%;
+  border:none;
+}
+/*圈子订单---首页*/
+.issueHeaderNav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  height:44px;
+  padding:0px 8px 0px 8px;
+  background:#1E90FF;
+}
+.issueHeaderNav .issueHeaderNavPic{
+  display:inline-block;
+  width:26px;
+  height:26px;
+}
+.issueHeaderNav div span{
+  font-family: PingFang-SC-Regular;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+/*订单详情页面样式*/
+.rderCost{
+  font-size:14px;
+  font-weight: bold;
+  color:gray;
+}
+.RobbingBox{
+  display:block;
+  width:100%;
+  height:330px;
+  background:#e6e6e6;
+  padding:8px 8px 0px 8px;
+}
+.logisticsNameBox{
+  display:block;
+  width:100%;
+  height:40px;
+  border-bottom:1px solid #e6e6e6;
+  padding-top:7px;
+}
+.logisticsNameBox .logisticsName{
+  font-size:18px;
+  font-weight: bold;
+  font-family:Microsoft YaHei;
+}
+.logisticsNameBox img{
+  vertical-align: middle;
+  margin-right:10px;
+}
+.margin_bottom140{
+  margin-bottom:140px;
+}
+.Robbing{
+  display:block;
+  height:30px;
+  width:100%;
+}
+.floatright{
+  float:right;
+}
+.floatleft{
+  float:left;
+}
+.order_box{
+  margin-top:15px;
+}
+ul .order_list{
+  display:block;
+  width:100%;
+  margin-top:5px;
+  height:50px;
+  border-bottom:1px solid #e6e6e6;;
+  padding:0px 10px 0px 10px;
+}
+.order_price{
+  width:100%;
+  height:20px;
+  font-weight: bold;
+  margin-right:10px;
+  margin-bottom:7px;
+}
+.order_price .site{
+  float:left;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #333333;
+  font-weight: bold;
+}
+.order_time .price{
+  float:right;
+  color:red;
+}
+.order_time{
+  font-size:14px;
+}
+.order_time .volume{
+  float:left;
+  margin-right:13px;
+  font-size:14px;
+}
+.order_price .time{
+  float:right;
+  font-size:10px;
+  font-family: PingFang-SC-Regular;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #999999;
+}
+/*订单模块页头*/
+.orderHeaderNav{
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+  height:25px;
+  border-bottom:2px solid gray;
+  margin-bottom:3px;
+  padding: 0px 5px 0px 5px;
+}
+.issueDetailsText{
+  margin-right:8px;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.issueText{
+  display:inline-block;
+  width:70px;
+  margin-right:15px;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.marginBottom10{
+  margin-bottom:10px;
+}
+.textMargin-right10{
+  margin-right:10px;
+}
+.lineHeight10{
+  display:block;
+  width:100%;
+  height:10px;
+  background:#e6e6e6;
+  margin-bottom:5px;
+}
+.divHeight40{
+  display:flex;
+  justify-content:space-between;
+  padding:0px 20px 0px 20px;
+  align-items:center;
+  height:40px;
+  background:gray;
+}
+.textRed{
+  color:red;
+}
+.textBlod{
+  font-weight: bold;
+}
+.orderPadding10{
+  padding:0px 10px 0px 10px;
+}
+/*发布订单模块*/
+ .releaseOption{
+  display:block;
+  width:100%;
+  height:100px;
+  padding:0px 5px 0px 5px;
+  border-bottom:5px solid #e6e6e6;
+}
+.releaseOption li{
+  display:flex;
+  width:100%;
+  height:33px;
+  justify-content: space-between;
+  align-items:center;
+  border-bottom:1px solid #e6e6e6;
+}
+.releaseOption .spanBox{
+  width:28%;
+  height:100%;
+  line-height:33px;
+  text-align: right;
+ }
+.input_80{
+  width:80%;
+}
+.input_33{
+   width:33%;
+ }
+.input_45{
+  width:45%;
+}
+.releaseOption li input{
+  border:none;
+  height:100%;
+}
+.releaseOption li .indent30{
+  text-indent:30%;
+}
+.releaseOption li .indent53{
+  text-indent:53%;
+}
+.releaseOption li .indent64{
+  text-indent:64%;
+}
+
+

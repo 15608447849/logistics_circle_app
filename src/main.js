@@ -10,6 +10,7 @@ import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
 import VueResource from 'vue-resource'
 import { Tabbar, TabItem } from 'mint-ui';
+import {PullRefresh} from 'vue-ydui/dist/lib.rem/pullrefresh';
 import verifyUtil from './utils/verifyUtil'
 
 import 'mint-ui/lib/style.css'
@@ -22,6 +23,7 @@ import './assets/css/index.css'
 // 底部导航栏
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
+Vue.component(PullRefresh.name, PullRefresh);
 
 Vue.use(business);
 Vue.use(Vuex);

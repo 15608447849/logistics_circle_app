@@ -26,6 +26,14 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/SimpleSearchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
+// 修改密码输入手机号获取验证码
+import UPDATAPWD from '@/pages/login/updatapwd'
+// 修改密码输入验证码
+import VERIFICATION from '@/pages/login/Verification'
+// 修改密码确认密码
+import CONFIRMPWD from '@/pages/login/confirmpwd'
+// 信息大厅订单详情模块
+import ISSUEDETAILS from '@/pages/information/issueDetails'
 //测试页面
 import TEST from '@/pages/test'
 
@@ -57,7 +65,8 @@ const vueRouter = new Router({
       children: [
         {
           path: '',
-          component: HOME,
+             component: HOME,
+ //          component: UPDATAPWD
         },
         {
           name: 'circle',
@@ -80,16 +89,27 @@ const vueRouter = new Router({
       ]
     },
     {
-      path: '/login',
-      component: LOGIN
-    },
-
-    {
       path: '/register',
       component: REGISTER
     },
     {
       path: '/login',
+      component: LOGIN
+    },
+    {
+      path: '/login/updatapwd',
+      component: UPDATAPWD
+    },
+    {
+      path: '/login/Verification',
+      component: VERIFICATION
+    },
+    {
+      path: '/login/confirmpwd',
+      component: CONFIRMPWD
+    },
+    {
+      path: '/login/index',
       component: LOGIN
     },
     {
@@ -101,10 +121,13 @@ const vueRouter = new Router({
       component: SEARCH
     },
     {
-      name: 'issue',
       path: '/information/issue',
       component: ISSUE
-    }
+    },
+    {
+      path: '/information/issueDetails',
+      component: ISSUEDETAILS
+    },
   ]
 });
 
