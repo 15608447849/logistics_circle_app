@@ -18,7 +18,7 @@ exports.queryAllByKeyFilter =  ()=> {
           orderBean.fee=temp.cost;
           orderBean.time=temp.time;
           orderBean.state=temp.ostatus;
-
+          orderBean.userId = temp.puberid;
           orderList.push(orderBean)
         }
       }

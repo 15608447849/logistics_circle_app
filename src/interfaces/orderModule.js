@@ -1,10 +1,12 @@
 const convert = require('./convert.js');
+const businessBeans = require('./businessBeans.js');
 
 module.exports = {
 
   /**
    *全文查询当前的订单
    *  OrderSeq queryOrderByCurdate(string token,cstruct::stringSeq params);
+   *  PC使用
    */
   queryOrderByPc: (token,key,size,callback)=> {
     callback.setFilter(convert.queryAllByKeyFilter());
@@ -12,7 +14,9 @@ module.exports = {
   },
   /**
    * 全文检索出当天的圈子订单
-   OrderSeq queryCircleOrderByCurdate(string token,cstruct::stringSeq params); */
+   *OrderSeq queryCircleOrderByCurdate(string token,cstruct::stringSeq params);
+   * PC使用
+   */
   queryCircleOrderByPc: (token,key,size,callback)=> {
     callback.setFilter(convert.queryAllByKeyFilter());
     queryIce(order.OrderServicePrx , 'OrderService', 'queryCircleOrderByCurdate', token,[size,key],callback);
@@ -33,19 +37,22 @@ module.exports = {
     queryIce(order.OrderServicePrx , 'OrderService', 'queryAppOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
   },
   /**
-   * 全文检索出当天的圈子订单
-   OrderSeq queryAppCircleOrderByCurdate(string token,cstruct::stringSeq params); */
-  /**自动生成订单序列.
-   * 返回 string */
+   * 全文检索出当天的圈子订单(APP)
+   OrderSeq queryAppCircleOrderByCurdate(string token,cstruct::stringSeq params);
+   */
   queryCircleOrderByApp: (token,key,size,addr,op,timeStr,callback)=> {
     callback.setFilter(convert.queryAllByKeyFilter());
     queryIce(order.OrderServicePrx , 'OrderService', 'queryAppCircleOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
   },
-
-  releaseOrder:(token,json,callback)=>{
-    queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', token,[json],callback);
+  /**生成订单运单号*/
+  generateOrderNo:(callback)=>{
+    queryIce(order.OrderServicePrx , 'OrderService', 'generateOrderNo',callback);
   },
-
+  /**发布订单*/
+  releaseOrder:(token,businessBeans_ReleaseOrderBean,callback)=>{
+    queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', token,[JSON.stringify(businessBeans_ReleaseOrderBean)],callback);
+  },
+  /**获取订单详情， 传入订单号 */
   getTargetOrder:(orderNo,callback)=>{
     callback.setFilter(convert.getTargetOrderFilter());
     queryIce(order.OrderServicePrx , 'OrderService', 'getOrderDetail', [orderNo],callback);

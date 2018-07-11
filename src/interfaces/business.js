@@ -10,10 +10,6 @@ import {
   serverPort
 } from '../../static/libs/server/config'
 
-
-
-
-
 (function () {
   init(iceGridInstanceName, serverIp, serverPort);
 

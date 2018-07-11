@@ -31,7 +31,7 @@
      * 订单详细信息
      **/
     order.OrderDetail = Slice.defineStruct(
-        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime)
+        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime, puberid)
         {
             this.time = time !== undefined ? time : "";
             this.ostatus = ostatus !== undefined ? ostatus : "";
@@ -49,6 +49,7 @@
             this.payType = payType !== undefined ? payType : "";
             this.pustime = pustime !== undefined ? pustime : "";
             this.puetime = puetime !== undefined ? puetime : "";
+            this.puberid = puberid !== undefined ? puberid : "";
         },
         true,
         function(__os)
@@ -69,6 +70,7 @@
             __os.writeString(this.payType);
             __os.writeString(this.pustime);
             __os.writeString(this.puetime);
+            __os.writeString(this.puberid);
         },
         function(__is)
         {
@@ -88,8 +90,9 @@
             this.payType = __is.readString();
             this.pustime = __is.readString();
             this.puetime = __is.readString();
+            this.puberid = __is.readString();
         },
-        16, 
+        17, 
         false);
     Slice.defineSequence(order, "OrderSeqHelper", "order.OrderDetail", false);
 
