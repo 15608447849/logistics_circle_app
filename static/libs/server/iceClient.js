@@ -4,8 +4,6 @@ const CALLBACK_ACTION={
   COMPLETE:2,
   ERROR:3
 };
-
-
 function IceCallback(args){
   let len = arguments.length;
   if (len===1){
@@ -21,7 +19,6 @@ function IceCallback(args){
     this.errorCallback = arguments[2];
   }
 }
-
 IceCallback.prototype  = {
   constructor:IceCallback,
   setFilter:function(callback){
@@ -63,8 +60,8 @@ function init(iceGridInstanceName,host,port){
   communication = Ice.initialize(args);
   console.log("初始化ICE连接: ",host,port);
 }
-
 function queryIce (moduleProxy,moduleName,methodName,args) {
+    console.log("ICE 状态: ",communication);
     let len = arguments.length;
     let params = [];
     for (let i = 3; i < len - 1; i++) {
@@ -76,7 +73,6 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
   }
 
 
-  let ic = Ice.initialize(params);
   Ice.Promise.try(
       function () {
         callback.onCallback(CALLBACK_ACTION.READY,params);
@@ -116,7 +112,6 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
         }
     )
 }
-
 //数字转java long型
 function num2jlong(num) {
   let MAX_INT = Math.pow(2, 53);
@@ -125,7 +120,6 @@ function num2jlong(num) {
   let high = ((num - low) / 0x100000000) >>> 0;
   return new Ice.Long(high, low);
 }
-
 //java long型转数字 最大支持16位
 function jlong2num (value) {
   console.log(value);

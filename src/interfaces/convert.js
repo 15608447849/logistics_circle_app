@@ -88,12 +88,12 @@ exports.queryAllByKeyFilter =  ()=> {
      };
  * 过滤*/
 exports.queryDriverInfoFilter = function(){
-  return IceCallback(
+  return new IceCallback(
     function (result) {
       let list = [];
       for (let i = 0;i<result.length;i++){
         let temp = result[i];
-        let obj = businessBeans.DriverBean();
+        let obj = new businessBeans.DriverBean();
         obj.serial = i;
         obj.pkCode = temp.driverid;
         obj.name = temp.drivername;

@@ -35,21 +35,21 @@
         //   ));
 
         // console.log("*******************************");
-        this.$Ice_OrderService.queryCircleOrderByApp(
-          "e140aa06136e4eb6937db4d31e5fe588","衡阳药品","100","衡阳",1,"2018-07-10 11:56:30",
-          new IceCallback(
-            function (result) {
-            console.log("收到",result)
-          },function (error) {
-              console.log(error)
-            }
-          ));
-
-        // this.$Ice_Enterprise.newDriver(
+        // this.$Ice_OrderService.queryCircleOrderByApp(
+        //   "e140aa06136e4eb6937db4d31e5fe588","衡阳药品","100","衡阳",1,"2018-07-10 11:56:30",
+        //   new IceCallback(
+        //     function (result) {
+        //     console.log("收到",result)
+        //   },function (error) {
+        //       console.log(error)
+        //     }
+        //   ));
         //
+        // this.$Ice_EnterpriseService.queryDriverInfo(
         //   "e140aa06136e4eb6937db4d31e5fe588",
-        //   "李兆平",
-        //   "15608447811",
+        //   "",
+        //   "",
+        //   "",
         //   new IceCallback(
         //     function (result) {
         //   console.log(result);
@@ -66,6 +66,9 @@
         //   ))
 
 
+        // this.$Ice_TEST.getBaseUnit(new IceCallback(function (res) {
+        //   console.log(res);
+        // }))
 
       }
 

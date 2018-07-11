@@ -3,7 +3,7 @@
 
 /**信息大厅 订单对象 */
 exports.OrderBean = function () {
-  this.id = '订单id',
+    this.id = '订单id',
     this.lineInfo = '出发地-目的地',
     this.goodsInfo = "货物信息,单位",
     this.vehicleRequire = "运输需求",
@@ -52,7 +52,7 @@ exports.OrderBean = function () {
  *大于0操作成功;等于0操作失败;
  */
 exports.ReleaseOrderBean = function () {
-  this.orderno = '订单号',
+   this.orderno = '订单号',
     this.billno = 'TMS运单号',
     this.startc = -1, // 出发地地区码
     this.startaddr = '出发地详细地址',
@@ -92,7 +92,7 @@ exports.ReleaseOrderBean = function () {
 
 /** 企业中心 司机管理对象*/
 exports.DriverBean = function () {
-  this.isCheck = false, //是否勾选
+    this.isCheck = false, //是否勾选
     this.serial = -1, //序号
     this.pkCode = "司机后台标识",
     this.name = '司机姓名',
@@ -104,7 +104,7 @@ exports.DriverBean = function () {
 };
 /** 企业中心 线路管理对象*/
 exports.LineBean = function () {
-  this.isCheck = false, //是否勾选
+    this.isCheck = false, //是否勾选
     this.serial = -1, //序号
     this.name = '线路名称',
     this.startPornt = '出发地',

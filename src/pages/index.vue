@@ -25,6 +25,7 @@
     </mt-tabbar>
   </div>
 </template>
+
 <script>
   export default {
     data () {
@@ -37,10 +38,6 @@
       this.initBaseData();
     },
     methods: {
-       sleep(n) {
-    var start = new Date().getTime();
-    while(true)  if(new Date().getTime()-start > n) break;
-  },
       initBaseData(){
         let self = this;
         self.$Ice_SystemService.getBaseUnit(
@@ -51,7 +48,6 @@
             }
           )
         );
-
       },
       initAreaData(){
         let self = this;
@@ -64,7 +60,6 @@
         );
 
       }
-
     },
     watch: {
       selected: function (val, oldvar) {
