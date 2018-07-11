@@ -5,9 +5,6 @@
       <div><span>圈子订单</span></div>
       <div @click="toissue"><span>发单</span></div>
     </div>
-    <!--<yd-pullrefresh :callback="loadList">-->
-
-    <!--</yd-pullrefresh>-->
     <div class="content">
         <ul class="order_box">
           <li class="order_list" @click="toissueDetails">
@@ -26,7 +23,12 @@
   export default{
     data() {
       return {
-        infoList: []
+        infoList: [],
+        pageSize: '10', // 订单数
+        address: '', // 地址
+        timeStr: '2018-07-10 11:56:30', // 订单标识
+        key: '',// 关键词
+        requestState: 0 // 获取最新 0, 获取历史1
       }
     },
     mounted() {
@@ -35,7 +37,15 @@
     },
     methods: {
       requestInfoList() {
-
+        this.$Ice_OrderService.queryOrderByApp(
+          this.$app_store.state.userToken,this.key,this.pageSize,this.address,this.requestState,this.timeStr,
+          new IceCallback(
+            function (result) {
+              console.log("收到",result)
+            },function (error) {
+              console.log(error)
+            }
+          ));
       },
       toissue() {
         this.$router.push({path: '/information/issue'})

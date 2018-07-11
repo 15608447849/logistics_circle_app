@@ -1,13 +1,13 @@
 <template>
   <div class="register">
-    <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="18px">
+    <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
       <router-link to="#" slot="left">
         <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
       </router-link>
 
       <img slot="right" src="../../assets/images/small/logo_26.png"/>
     </yd-navbar>
-    <yd-cell-group v-show="thirdStep">
+    <yd-cell-group v-show="firstStepBool">
       <yd-cell-item>
         <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
         <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
@@ -18,7 +18,7 @@
         ></yd-sendcode>
       </yd-cell-item>
     </yd-cell-group>
-    <yd-cell-group v-show="thirdStep">
+    <yd-cell-group v-show="secondStepBool">
       <yd-cell-group>
         <yd-cell-item>
           <span slot="left">验证码：</span>
@@ -26,7 +26,7 @@
         </yd-cell-item>
       </yd-cell-group>
     </yd-cell-group>
-    <yd-cell-group v-show="thirdStep">
+    <yd-cell-group v-show="thirdStepBool">
       <yd-cell-item>
         <span slot="left" class="span">用户名：</span>
         <yd-input slot="right" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
@@ -45,9 +45,11 @@
       </yd-cell-item>
     </yd-cell-group>
 
-    <yd-button size="large" type="primary" @click.native="firstStep()" v-show="firstStepBool"
-               :disabled='isFirstStepDis'>下一步
-    </yd-button>
+    <!--<yd-button size="large" type="primary" @click.native="firstStep()" v-show="firstStepBool"-->
+               <!--:disabled='isFirstStepDis'>下一步-->
+    <!--</yd-button>-->
+    <cube-button v-show="firstStepBool" :light="true"  @click="firstStep()" :disabled='isFirstStepDis'>下一步</cube-button>
+
     <yd-button size="large" type="primary" @click.native="secondStep()" v-show="secondStepBool"
                :disabled='isFirstStepDis'>下一步
     </yd-button>
