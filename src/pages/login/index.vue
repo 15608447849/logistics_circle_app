@@ -53,12 +53,10 @@
                   path: redirect
                 })
               } else {
-                // console.log(result)
                 self.message.Toast(self,'error',result.msg,false);
               }
             },
             function (error) {
-              // console.log(error)
               self.message.Toast(self,'服务器连接失败, 请稍后重试',result.msg,false);
             }
           ))
