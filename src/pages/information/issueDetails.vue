@@ -88,7 +88,7 @@
                </li>
              </ul>
            </div>
-           <button class="nextStep" @click="tologin">抢单</button>
+           <button class="nextStep" >抢单</button>
      </div>
    </div>
 

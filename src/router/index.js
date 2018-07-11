@@ -10,6 +10,10 @@ import {
 import REGISTER from '@/pages/login/register' // 用户注册
 import LOGIN from '@/pages/login/index' // 用户登录
 import SMSLOGIN from '@/pages/login/smsLogin' // 短信登录
+import UPDATAPWD from '@/pages/login/updatapwd' // 修改密码
+import VERIFICATION from '@/pages/login/verification' // 手机验证码验证
+import CONFIRMPWD from '@/pages/login/confirmpwd' // 修改密码确认密码
+import ISSUEDETAILS from '@/pages/information/issueDetails'// 信息大厅订单详情模块
 
 // 高德地图测试
 import GEOLOCATION from '@/pages/geoLocationTest'
