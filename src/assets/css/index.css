@@ -129,11 +129,6 @@
 a {
   text-decoration: none
 }
-
-input {
-  text-indent: 15px;
-}
-
 .input_div {
   display: block;
   margin-bottom: 20px;
@@ -227,7 +222,7 @@ input {
 }
 .nextStep{
   display:block;
-  width:94%;
+  width:100%;
   height:32px;
   margin:0 auto;
   margin-top:28px;
@@ -363,16 +358,19 @@ input {
 }
 /*订单详情页面样式*/
 .rderCost{
-  font-size:14px;
-  font-weight: bold;
-  color:gray;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #cccccc;
 }
 .RobbingBox{
   display:block;
   width:100%;
   height:330px;
   background:#e6e6e6;
-  padding:8px 8px 0px 8px;
+  padding:10px 10px 0px 10px;
 }
 .logisticsNameBox{
   display:block;
@@ -380,6 +378,25 @@ input {
   height:40px;
   border-bottom:1px solid #e6e6e6;
   padding-top:7px;
+  margin-bottom:8px;
+}
+.Consignee{
+  margin-right:42px;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.arrivalTime{
+  margin-right:32px;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
 }
 .logisticsNameBox .logisticsName{
   font-size:18px;
@@ -395,6 +412,12 @@ input {
 }
 .Robbing{
   display:block;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #666666;
   height:30px;
   width:100%;
 }
@@ -474,10 +497,14 @@ ul .order_list{
   letter-spacing: 0px;
   color: #999999;
 }
+.ulWidth100{
+  display:block;
+  width:100%;
+}
 .issueText{
   display:inline-block;
-  width:70px;
-  margin-right:15px;
+  width:16%;
+  margin-right:29px;
   font-family: PingFang-SC-Regular;
   font-size: 12px;
   font-weight: normal;
@@ -485,8 +512,28 @@ ul .order_list{
   letter-spacing: 0px;
   color: #999999;
 }
+.marginright3{
+  margin-right:3px;
+}
+.marginright13{
+  margin-right:13px;
+}
+.marginright19{
+  margin-right:19px;
+}
+.marginright9{
+  margin-right:9%;
+}
+.marginright6{
+  margin-right:6%;
+}
 .marginBottom10{
   margin-bottom:10px;
+}
+.marginBottom12{
+  margin-bottom:12px;
+  font-family: PingFang-SC-Regular;
+  color:#333333;
 }
 .textMargin-right10{
   margin-right:10px;
@@ -507,7 +554,14 @@ ul .order_list{
   background:gray;
 }
 .textRed{
-  color:red;
+  color:#ff3b30;
+}
+.size10{
+  font-size:10px;
+}
+.size14{
+
+  font-size:14px;
 }
 .textBlod{
   font-weight: bold;
@@ -516,48 +570,89 @@ ul .order_list{
   padding:0px 10px 0px 10px;
 }
 /*发布订单模块*/
- .releaseOption{
-  display:block;
-  width:100%;
+.liNumThree{
   height:100px;
   padding:0px 5px 0px 5px;
   border-bottom:5px solid #e6e6e6;
 }
-.releaseOption li{
-  display:flex;
+.liNumFour{
+  height:133px;
+  padding:0px 5px 0px 5px;
+  border-bottom:5px solid #e6e6e6;
+}
+.liNumTwo{
+  height:66px;
+  padding:0px 5px 0px 5px;
+}
+.totalPrice{
+  display:block;
+  width:100%;
+  padding:10px 10px 5px 13px;
+  border-bottom: 1px solid #e6e6e6
+}
+.inputNumOne{
   width:100%;
   height:33px;
-  justify-content: space-between;
-  align-items:center;
   border-bottom:1px solid #e6e6e6;
 }
-.releaseOption .spanBox{
-  width:28%;
-  height:100%;
-  line-height:33px;
-  text-align: right;
- }
-.input_80{
+.inputNumOne input{
   width:80%;
-}
-.input_33{
-   width:33%;
- }
-.input_45{
-  width:45%;
-}
-.releaseOption li input{
-  border:none;
   height:100%;
+  text-align:right;
 }
-.releaseOption li .indent30{
-  text-indent:30%;
+.noStart{
+  font-size:12px;
+  margin-left:8px;
 }
-.releaseOption li .indent53{
-  text-indent:53%;
+.inputLong{
+  display:inline-block;
+  width:65%;
+  height:33px;
+  border-bottom: 1px solid #e6e6e6
 }
-.releaseOption li .indent64{
-  text-indent:64%;
+.inputLong input{
+  width:63%;
+  height:33px;
+  text-align:right;
 }
-
+.inputShort{
+  display:inline-block;
+  width:34%;
+  height:33px;
+  border-bottom: 1px solid #e6e6e6
+}
+.inputShort input{
+  width:80%;
+  height:33px;
+  text-align:right;
+}
+.inputLong span{
+  height:100%;
+  width:30%;
+}
+.inputShorter{
+  display:inline-block;
+  width:34%;
+  height:33px;
+}
+.inputShorter input{
+  width:29%;
+  height:33px;
+}
+.releaseBtn{
+  display:block;
+  width:100%;
+  height:32px;
+  margin:0 auto;
+  margin-top:28px;
+  border:1px solid #3189f5;
+  border-radius:3px;
+  font-family: PingFang-SC-Regular;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  color:#ffffff;
+  background:#3189f5;
+}
 
