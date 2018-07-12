@@ -1,4 +1,4 @@
-const convert = require('./convert.js');
+
 /*
  struct DriverInfo {
   int driverid; // 司机码 (PK)

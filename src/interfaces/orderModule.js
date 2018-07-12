@@ -1,7 +1,4 @@
-
-/**
- * 订单详细信息(信息大厅,我的圈子)
-
+/*订单详细信息(信息大厅,我的圈子)
 struct OrderDetail{
   string time;//时间
   string ostatus;//订单状态
@@ -21,82 +18,94 @@ struct OrderDetail{
   string puetime; // 取货结束时间
   string puberid; // 发布人用户id
 };
- */
-
-/* 订单详细信息
-struct OrderDetail{
-  //发布人ID
-  string puberid;
-  //发布人承运商名
-  string puberCarrier;
-  //联系电话
-  string puberPhone1;
-  //联系电话
-  string puberPhone2;
-  //发布时间
-  string puberTime; //yy-MM-dd hh:mm:ss
-  //TMS运单号
-  string waybill;
-  //自动生成的订单号
-  string orderId;
-
-  //出发地 : 省#市#区#详情
-  string sAddr;
-  //目的地 : 省#市#区#详情
-  string dAddr;
-
-  //货物内容 (重量/体积) 数量
-  int wm;
-  //货物内容 (重量/体积) 单位 字符串
-  string wmdictc;
-  //单位数量
-  string num;
-  //单位数量 单位 字符串
-  string numdictc;
-  //包装要求 字符串
-  string padictc;
-  //货物类型 字符串
-  string ctdictc;
-
-  //车数量(台)
-  int vnum ;
-  //车长字典码 字符串
-  string vldictc;
-  //车型字典码 字符串
-  string vtdictc;
-  //运输要求字典码 字符串
-  string tndictc;
-
-  //货物运费
-  string price;
-  //代收货款金额
-  string codamt;
-  //声明保价
-  string insureamt;
-  //付款方式 字符串
-  string ptdictc;
-
-  //收货人
-  string consignee;
-  //手机号码
-  string consphone;
-  //送货方式 str
-  string dmdictc;
-  //是否返单 str
-  string redictc;
-  //取货时间开始 yyyy-MM-dd hh:mm:ss
-  string pustime
-  //取货结束时间
-  string puetime;
-  //期望到货时间起始
-  string eastime;
-  //期望到货结束时间
-  string eadtime;
-
-  //订单状态
-  int state;
-};
 */
+
+/**
+ * 订单实体
+ *  struct OrderICE{
+	 	//发布人ID
+	 	string puberid;
+	 	//发布人承运商名
+	 	string puberCarrier;
+	 	//联系电话
+	 	string phone1;
+	 	//联系电话
+	 	string phone2;
+	 	//发布时间
+	 	string pubdatetime; //yy-MM-dd HH:mm:ss
+	 	//TMS运单号
+	 	string billno;
+	 	//自动生成的订单号
+	 	string orderno;
+
+	 	//出发地 : 省#市#区
+	 	string startc;
+	 	// 出发地: 出发地详细地址
+	 	string startaddr;
+	 	//目的地 : 省#市#区
+	 	string arriarc;
+	 	// 出发地: 出发地详细地址
+	 	string arriaddr;
+
+	 	//货物内容 (重量/体积) 数量
+	 	double wm;
+	 	//货物内容 (重量/体积) 单位 字符串
+	 	string wmdictc;
+	 	//单位数量
+	 	int num;
+	 	//单位数量 单位 字符串
+	 	string numdictc;
+	 	//包装要求 字符串
+		string padictc;
+		//货物类型 字符串
+		string ctdictc;
+
+
+		//车数量(台)
+		 int vnum ;
+		//车长字典码 字符串
+		string vldictc;
+		//车型字典码 字符串
+		string vtdictc;
+		//运输要求字典码 字符串
+		string tndictc;
+
+		//货物运费
+		double price;
+		//代收货款金额
+		double codamt;
+		//声明保价
+		double insureamt;
+		//付款方式 字符串
+		string ptdictc;
+
+		//收货人
+		string consignee;
+		//手机号码
+		string consphone;
+		//送货方式 str
+		string dmdictc;
+		//是否返单 str
+		string redictc;
+		//取货时间开始 yyyy-MM-dd hh:mm:ss
+		string pusdatetime;
+		//取货结束时间 yyyy-MM-dd hh:mm:ss
+		string puedatetime;
+		//期望到货时间起始 yyyy-MM-dd hh:mm:ss
+		string easdatetime;
+		//期望到货结束时间 yyyy-MM-dd hh:mm:ss
+		string eaedatetime;
+		// 抢单时间yyyy-MM-dd hh:mm:ss
+		string revidatetime;
+		// 签收/到货时间yyyy-MM-dd hh:mm:ss
+		string arridatetime;
+
+		//订单状态
+		int ostatus;//订单状态
+
+		int priority; //优先级  0:普通; 1:高(代表优先圈子的人)
+	 };
+ */
 module.exports = {
   /**
    *  全文查询当前的订单

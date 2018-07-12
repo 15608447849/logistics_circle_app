@@ -39,7 +39,8 @@
         }]
       }
     },
-    mounted() { //页面初始完成
+    mounted() {
+      //页面初始完成
       this.initBaseData();
       this.initAreaData();
     },
@@ -71,9 +72,11 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              console.log(1,result)
+              console.log("getBaseUnit",result);
               localStorage.setItem('unit', result);
-              // self.initAreaData();
+            },
+            function (error) {
+              console.log("getBaseUnit",error);
             }
           )
         );
@@ -83,8 +86,11 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
+              console.log("getAreaCode",result);
               localStorage.setItem('area', result)
-              console.log(2,result)
+            },
+            function (error) {
+              console.log("getAreaCode",error);
             }
           )
         );
