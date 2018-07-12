@@ -38,6 +38,7 @@ export default class message {
    * @param String type 类型 loading/correct/error/warn
    * @param String txt 提示信息
    * @param Boolean mask 遮罩
+   * Toast 单例模式 对应的视图层也只存在一份
    * @constructor
    */
   static Toast(context,type,txt,mask) {
