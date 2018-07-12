@@ -12,7 +12,7 @@ import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 
 import 'vue-ydui/dist/ydui.rem.css';
-import 'lib-flexible/flexible'
+import './assets/lib/ydui.flexible'
 import './assets/css/index.css'
 
 // 局部引用组件

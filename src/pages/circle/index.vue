@@ -34,7 +34,6 @@
           // 订单标识为空, 初次加载
           if (self.startTimeStr === '') self.infoList = [];
           if (result.length === 0) {
-
             return
           }
           // 原有数组与新数组连接

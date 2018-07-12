@@ -60,6 +60,7 @@ function init(iceGridInstanceName,host,port){
   communication = Ice.initialize(args);
   console.log("初始化ICE连接: ",host,port);
 }
+
 function queryIce (moduleProxy,moduleName,methodName,args) {
     console.log("ICE 状态: ",communication);
     let len = arguments.length;
