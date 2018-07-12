@@ -40,10 +40,8 @@
       loginClick() {
         let self = this;
         if (this.validator()) {
-          console.log('开始调用')
           this.$Ice_UserService.userVerify(this.account, this.password, new IceCallback(
             function (result) {
-              console.log(result)
               // 登录成功
               if(result.cstatus === 0) {
                 self.$app_store.commit(USER_INFO, result);

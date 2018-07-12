@@ -14,8 +14,8 @@ const state = {
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型
   isLoading: false, // 网络加载等待框
-  dict: {} // 字典
-
+  dict: {}, // 字典
+  area: {}, // 地区
 };
 
 export default new Vuex.Store({

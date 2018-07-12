@@ -29,7 +29,7 @@
       }
     },
     mounted() {
-      this.searchState = this.$store.getters.searchState;
+      this.searchState = this.$app_store.getters.searchState;
       this.clearInput();
       this.getSearchHistory(this.searchState)
     },
@@ -54,7 +54,7 @@
           this.historyList.push(searchCont)
         }
         this.clearInput();
-        this.$store.commit(SEARCH_CONTENT, searchCont);
+        this.$app_store.commit(SEARCH_CONTENT, searchCont);
         // 返回页面
         this.returnToPage()
       },

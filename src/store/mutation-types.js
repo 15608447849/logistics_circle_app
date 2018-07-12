@@ -12,3 +12,5 @@ export const SEARCH_CONTENT = 'SEARCH_CONTENT'
 export const UPDATE_LOADING_STATUS  = 'UPDATE_LOADING_STATUS'
 // 字典
 export const DICT  = 'DICT'
+// 地区
+export const AREA = 'AREA'

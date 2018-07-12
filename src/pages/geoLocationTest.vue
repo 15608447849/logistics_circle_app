@@ -1,6 +1,6 @@
 <template>
   <div>
-    <yd-navbar title="我的订单"></yd-navbar>
+    <yd-navbar title="测试工具"></yd-navbar>
     <yd-button size="large" type="primary" @click.native="getLocation">primary</yd-button>
     <yd-button size="large" type="primary">primary</yd-button>
   </div>
