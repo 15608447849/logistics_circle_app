@@ -5,6 +5,7 @@
     <yd-button type="primary" @click.native="toRegister">注册页面</yd-button>
     <yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>
     <yd-button type="primary" @click.native="toPagePickerTest">picker测试</yd-button>
+    <yd-button type="primary" @click.native="toTest">测试页面</yd-button>
     <!--首页轮播-->
     <div class="binnar">
        <div class="binnar_img">img</div>
@@ -48,6 +49,9 @@
       },
       toPagePickerTest() {
         this.$router.push({path: '/picker'})
+      },
+      toTest(){
+        this.$router.push({path: '/test'})
       }
     }
   }

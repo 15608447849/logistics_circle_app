@@ -73,7 +73,6 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
   if (!callback || callback.constructor === IceCallback.constructor) {
       throw new Error("callback is not IceCallback!")
   }
-
   console.log("ICE : ",moduleName,methodName,params);
   Ice.Promise.try(
       function () {

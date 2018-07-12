@@ -67,30 +67,32 @@
       changeHandler(label) {
         // if you clicked different tab, this methods can be emitted
       },
+
       initBaseData() {
         let self = this;
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              console.log("getBaseUnit",result);
               localStorage.setItem('unit', result);
             },
             function (error) {
-              console.log("getBaseUnit",error);
+              console.log(error);
+              self.initBaseData();
             }
           )
         );
       },
+
       initAreaData() {
         let self = this;
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              console.log("getAreaCode",result);
-              localStorage.setItem('area', result)
+              localStorage.setItem('area', result);
             },
             function (error) {
-              console.log("getAreaCode",error);
+              console.log(error);
+              self.initAreaData()
             }
           )
         );
