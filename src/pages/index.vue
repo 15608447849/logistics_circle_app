@@ -94,7 +94,7 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              self.$app_store.commit(AREA, JSON.stringify(JSON.parse(result).children));
+              self.$app_store.commit(AREA, JSON.parse(result).children);
             },
             function (error) {
               self.initAreaData();

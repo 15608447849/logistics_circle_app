@@ -2,7 +2,6 @@
   <cube-button @click="showCascadePicker">地区选择</cube-button>
 </template>
 <script>
-
   export default {
     data() {
       return {
@@ -15,9 +14,8 @@
     methods: {
       // 获取地区信息
       getArea() {
-        console.log(this.$app_store.getters.area);
-        debugger
         this.cascadeData = this.$app_store.getters.area;
+        debugger
         console.log(this.cascadeData)
         // 初始化日期控件
         // this.cascadePicker = this.$createCascadePicker({

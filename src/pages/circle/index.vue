@@ -86,11 +86,14 @@
       },
       requestInfoList(requestState,timeStr,successCallback,errorCallback) {
         let self = this;
-        this.$Ice_OrderService.queryCircleOrderByApp(self.token,self.key,self.pageSize,self.address,requestState,timeStr,
+        // this.$Ice_OrderService.queryOrderByApp(self.token,self.key,self.pageSize,self.address,requestState,timeStr,
+        this.$Ice_OrderService.queryCircleOrderByApp(self.token,self.pageSize,self.address,self.key,requestState,timeStr,
           new IceCallback(
             function (result) {
+              console.log(result);
               successCallback(result);
             },function (err) {
+              console.log(err);
               errorCallback(err);
             }
           ))

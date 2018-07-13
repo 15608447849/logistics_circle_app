@@ -80,24 +80,18 @@
     methods: {
       registerValidator() {
         if (this.verifyUtil.isNull(this.account)) {
-          this.notify('账号不能为空');
+          this.message.Toast(this,'warn','账号不能为空',false);
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          this.notify('密码为空或长度小于6位, 请完善输入');
+          this.message.Toast(this,'warn','密码为空或长度小于6位, 请完善输入',false);
           return false
         }
         if (this.verifyUtil.isTwoPsd(this.password, this.rPassword)) {
-          this.notify('密码两次输入不一致');
+          this.message.Toast(this,'warn','密码两次输入不一致',false);
           return false
         }
         return true
-      },
-      notify(str) {
-        this.$dialog.notify({
-          mes: str,
-          timeout: 1500
-        });
       },
       notifyToast(str, state) {
         self.$dialog.toast({
@@ -108,7 +102,7 @@
       },
       sendCode() {
         if (this.verifyUtil.isPhoneNum(this.phone)) {
-          this.notify('手机号格式错误, 请重新输入');
+          this.message.Toast(this,'warn','手机号格式错误, 请重新输入',false);
           return false
         }
         this.$dialog.loading.open('验证码发送中...');
@@ -123,12 +117,12 @@
             } else {
               // 发送失败
               self.$dialog.loading.close();
-              self.notifyToast('验证码发送失败, 请稍后重试','error');
+              self.message.Toast(self,'error','验证码发送失败, 请稍后重试',false);
             }
           },
           function (error) {
             self.$dialog.loading.close();
-            self.notifyToast('错误' + error,'error');
+            self.message.Toast(self,'error','错误' + error,'error',false);
           }
         ));
       },
@@ -145,11 +139,11 @@
               self.secondStepBool = false;
               self.thirdStepBool = true;
             } else {
-              self.notifyToast('验证码输入错误','error');
+              self.message.Toast(self,'error','验证码输入错误',false);
             }
           },
           function (error) {
-            self.notifyToast('错误' + error ,'error');
+            self.message.Toast(self,'error','错误' + error ,false);
           }
         ));
       },
@@ -168,19 +162,19 @@
                       // store 保存登陆状态
                       // 跳转信息大厅
                     } else {
-                      self.notifyToast('注册失败' ,'error');
+                      self.message.Toast(self,'error','错误' + error ,false);
                     }
                   },
                   function (error) {
-                    self.notifyToast('错误' + error ,'error');
+                    self.message.Toast(self,'error','错误' + error ,false);
                   }
                 ))
               } else {
-                self.notifyToast('注册失败, 用户名已存在' ,'error');
+                self.message.Toast(self,'error','注册失败, 用户名已存在' + error ,false);
               }
             },
             function (error) {
-              self.notifyToast( '错误' + error ,'error');
+              self.message.Toast(self,'error','错误' + error  ,false);
             }
           ));
         }

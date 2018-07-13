@@ -4,10 +4,8 @@ import router from './router'
 import Vuex from 'vuex'
 import store from './store'
 import business  from './interfaces/business'
-import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
 import Cube from 'cube-ui'
-import {PullRefresh} from 'vue-ydui/dist/lib.rem/pullrefresh';
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 
@@ -15,12 +13,9 @@ import 'vue-ydui/dist/ydui.rem.css';
 import './assets/lib/ydui.flexible'
 import './assets/css/index.css'
 
-// 局部引用组件
-Vue.component(PullRefresh.name, PullRefresh);
 
 Vue.use(business);
 Vue.use(Vuex);
-Vue.use(VueAMap);
 Vue.use(YDUI);
 Vue.use(Cube);
 
@@ -30,15 +25,6 @@ Vue.prototype.message = message;
 
 
 Vue.prototype.$app_store = store;
-// 初始化vue-amap
-VueAMap.initAMapApiLoader({
-  // 高德的key
-  key: 'YOUR_KEY',
-  // 插件集合
-  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
-  // 高德 sdk 版本，默认为 1.4.4
-  v: '1.4.4'
-});
 
 document.addEventListener('deviceready', function() {
   new Vue({

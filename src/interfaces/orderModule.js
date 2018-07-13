@@ -107,24 +107,9 @@ struct OrderDetail{
 	 };
  */
 module.exports = {
-  /**
-   *  全文查询当前的订单
-   *  OrderSeq queryOrderByCurdate(string token,cstruct::stringSeq params);
-   *  PC使用
-   */
-  queryOrderByPc: (token,key,size,callback)=> {
-    queryIce(order.OrderServicePrx , 'OrderService', 'queryOrderByCurdate', token,[size,key],callback);
-  },
-  /**
-   * 全文检索出当天的圈子订单
-   *OrderSeq queryCircleOrderByCurdate(string token,cstruct::stringSeq params);
-   * PC使用
-   */
-  queryCircleOrderByPc: (token,key,size,callback)=> {
-    queryIce(order.OrderServicePrx , 'OrderService', 'queryCircleOrderByCurdate', token,[size,key],callback);
-  },
-  /**
-   * 全文检索出当天的订单(App)
+
+
+   /* 全文检索出当天的订单(App)
    OrderSeq queryAppOrderByCurdate(string token,cstruct::stringSeq params);
    参数数组定义:
    需要获取的订单条数 , (必填)
@@ -141,7 +126,7 @@ module.exports = {
    * 全文检索出当天的圈子订单(APP)
    OrderSeq queryAppCircleOrderByCurdate(string token,cstruct::stringSeq params);
    */
-  queryCircleOrderByApp: (token,key,size,addr,op,timeStr,callback)=> {
+  queryCircleOrderByApp: (token,size,addr,key,op,timeStr,callback)=> {
     queryIce(order.OrderServicePrx , 'OrderService', 'queryAppCircleOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
   },
   /**生成订单运单号 */
