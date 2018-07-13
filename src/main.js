@@ -17,7 +17,7 @@ import message from './utils/message'
 
 import 'mint-ui/lib/style.css'
 import 'vue-ydui/dist/ydui.rem.css';
-import 'lib-flexible/flexible'
+import './assets/lib/ydui.flexible'
 import './assets/css/index.css'
 
 

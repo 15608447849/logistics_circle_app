@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="issueOrder">
     <div class="issueHeaderNav">
-      <div class="issueHeaderNavPic"><img src="../../assets/images/small/logo_26.png" alt=""></div>
-      <div><span>发布订单</span></div>
-      <div @click="toissue"><span>发布</span></div>
+      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+     <span>发布订单</span>
+      <span @click="toissue">发布</span>
     </div>
     <ul class="liNumThree">
       <li class="inputNumOne">
-        <span class="noStart">运单号</span>
+        <span class="waybillNum">运单号</span>
         <input type="text" placeholder="请填写运单号">
       </li>
       <li class="inputNumOne">
@@ -18,7 +18,7 @@
       <li class="inputNumOne">
         <span class="textRed">*</span>
         <span>出发地</span>
-        <input type="text" placeholder="请输入地址，可支持在地图上定位">
+        <input type="text" placeholder="请输入地址，支持在地图上定位">
       </li>
     </ul>
     <ul class="liNumThree">
@@ -47,22 +47,26 @@
         <input type="text" placeholder="是否包装">
       </li>
     </ul>
-    <ul class="liNumThree">
+
+
+
+
+    <ul class="liNumThreeCompany">
       <li class="inputLong">
-         <span class="noStart">车辆大小</span>
-         <input type="text" placeholder="数量">
-         <span>台</span>
+        <span class="liNumThreeCompanySpan">车辆大小</span>
+        <input type="text" placeholder="数量">
       </li>
+      <span class="carNum">台</span>
       <li class="inputShort">
         <input type="text" placeholder="长度">
-        <span>米</span>
       </li>
-      <li class="inputNumOne">
-        <span class="noStart">车辆要求</span>
+      <span class="carNum">米</span>
+      <li class="inputNumOneC">
+        <span class="liNumThreeCompanySpan">车辆要求</span>
         <input type="text" placeholder="请选择车辆型号">
       </li>
-      <li class="inputNumOne" >
-        <span class="noStart">运输要求</span>
+      <li class="inputNumOneC">
+        <span class="liNumThreeCompanySpan">运输要求</span>
         <input type="text" placeholder="请选择运输要求">
       </li>
     </ul>
@@ -80,15 +84,17 @@
         <span class="size10">声明保价</span>
         <input type="text">
         <span>元</span>
+        <span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>
       </li>
-      <span class="textRed size10">有保价不支持线上支付，不填默认为0</span>
+
       <li class="inputShorter">
         <span class="textRed">*</span>
         <span class="size10">代收货款</span>
         <input type="text">
         <span>元</span>
+        <span class="textRed size10 def">有代收不支持线上支付，不填默认为0</span>
       </li>
-      <span class="textRed size10">有代收不支持线上支付，不填默认为0</span>
+
       <li class="inputNumOne">
         <span class="textRed">*</span>
         <span>付款方式</span>
@@ -129,15 +135,15 @@
     </ul>
     <div>
       <div class="totalPrice">
-        <span class="floatleft">订单总价</span><span class="floatright textRed size14 textBlod">￥2000元</span>
+        <span class="floatleft marginBottom60">订单总价</span><span class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
         <button class="releaseBtn">发 布</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-    export default {
-    }
+  export default {
+  }
 </script>
 
 <style>

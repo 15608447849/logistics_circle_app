@@ -7,7 +7,8 @@
 
       <img slot="right" src="../../assets/images/small/logo_26.png"/>
     </yd-navbar>
-    <yd-cell-group v-show="firstStepBool">
+    <!--<yd-cell-group v-show="firstStepBool">-->
+    <yd-cell-group v-show="true">
       <yd-cell-item>
         <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
         <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
@@ -18,7 +19,8 @@
         ></yd-sendcode>
       </yd-cell-item>
     </yd-cell-group>
-    <yd-cell-group v-show="secondStepBool">
+    <!--<yd-cell-group v-show="secondStepBool">-->
+    <yd-cell-group v-show="true">
       <yd-cell-group>
         <yd-cell-item>
           <span slot="left">验证码：</span>
@@ -26,7 +28,8 @@
         </yd-cell-item>
       </yd-cell-group>
     </yd-cell-group>
-    <yd-cell-group v-show="thirdStepBool">
+    <!--<yd-cell-group v-show="thirdStepBool">-->
+    <yd-cell-group v-show="true">
       <yd-cell-item>
         <span slot="left" class="span">用户名：</span>
         <yd-input slot="right" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
