@@ -5,7 +5,8 @@ import {
   SEARCH_STATE,
   SEARCH_CONTENT,
   UPDATE_LOADING_STATUS,
-  DICT
+  DICT,
+  AREA
 } from './mutation-types'
 
 export default {
@@ -34,5 +35,9 @@ export default {
   // 订单字典
   [DICT](state, v) {
     state.dict = v;
+  },
+  // 地区
+  [AREA](state, v) {
+    state.area = v;
   }
 }

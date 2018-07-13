@@ -60,19 +60,20 @@ function init(iceGridInstanceName,host,port){
   communication = Ice.initialize(args);
   console.log("初始化ICE连接: ",host,port);
 }
+
 function queryIce (moduleProxy,moduleName,methodName,args) {
-    console.log("ICE 状态: ",communication);
+
     let len = arguments.length;
     let params = [];
     for (let i = 3; i < len - 1; i++) {
       params.push(arguments[i])
     }
-  callback = arguments[len - 1];
+
+  let callback = arguments[len - 1];
   if (!callback || callback.constructor === IceCallback.constructor) {
       throw new Error("callback is not IceCallback!")
   }
-
-
+  console.log("ICE : ",moduleName,methodName,params);
   Ice.Promise.try(
       function () {
         callback.onCallback(CALLBACK_ACTION.READY,params);
@@ -89,8 +90,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
     )
     .then(
       function(remoteProxy) {
-
-        console.log("ICE : ",moduleName,methodName,params,callback);
+        console.log("ICE : ",moduleName,methodName,params);
         if (params.length>0) {
           result = remoteProxy[methodName].apply(remoteProxy,params)
         }else{

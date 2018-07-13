@@ -28,7 +28,7 @@
     var order = __M.module("order");
 
     /**
-     * 订单详细信息
+     * 订单详细信息(信息大厅,我的圈子)
      **/
     order.OrderDetail = Slice.defineStruct(
         function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime, puberid)
@@ -97,432 +97,131 @@
     Slice.defineSequence(order, "OrderSeqHelper", "order.OrderDetail", false);
 
     /**
-     * 添加订单实体
+     * 订单实体
      **/
-    order.AddOrUpdateOrder = Slice.defineStruct(
-        function(orderno, billno, startc, startaddr, arriarc, arriaddr, puberid, consignee, consphone, phone1, phone2, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, price, pmdictc, insureamt, codamt, ptdictc, dmdictc, redictc, pusdate, pustime, puedate, puetime, easdate, eastime, eaedate, eaetime, priority)
+    order.OrderICE = Slice.defineStruct(
+        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, price, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
         {
-            this.orderno = orderno !== undefined ? orderno : "";
-            this.billno = billno !== undefined ? billno : "";
-            this.startc = startc !== undefined ? startc : 0;
-            this.startaddr = startaddr !== undefined ? startaddr : "";
-            this.arriarc = arriarc !== undefined ? arriarc : 0;
-            this.arriaddr = arriaddr !== undefined ? arriaddr : "";
-            this.puberid = puberid !== undefined ? puberid : 0;
-            this.consignee = consignee !== undefined ? consignee : "";
-            this.consphone = consphone !== undefined ? consphone : "";
+            this.puberid = puberid !== undefined ? puberid : "";
+            this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
             this.phone1 = phone1 !== undefined ? phone1 : "";
             this.phone2 = phone2 !== undefined ? phone2 : "";
+            this.pubdatetime = pubdatetime !== undefined ? pubdatetime : "";
+            this.billno = billno !== undefined ? billno : "";
+            this.orderno = orderno !== undefined ? orderno : "";
+            this.startc = startc !== undefined ? startc : "";
+            this.startaddr = startaddr !== undefined ? startaddr : "";
+            this.arriarc = arriarc !== undefined ? arriarc : "";
+            this.arriaddr = arriaddr !== undefined ? arriaddr : "";
             this.wm = wm !== undefined ? wm : 0.0;
-            this.wmdictc = wmdictc !== undefined ? wmdictc : 0;
+            this.wmdictc = wmdictc !== undefined ? wmdictc : "";
             this.num = num !== undefined ? num : 0;
-            this.numdictc = numdictc !== undefined ? numdictc : 0;
-            this.padictc = padictc !== undefined ? padictc : 0;
-            this.ctdictc = ctdictc !== undefined ? ctdictc : 0;
+            this.numdictc = numdictc !== undefined ? numdictc : "";
+            this.padictc = padictc !== undefined ? padictc : "";
+            this.ctdictc = ctdictc !== undefined ? ctdictc : "";
             this.vnum = vnum !== undefined ? vnum : 0;
-            this.vldictc = vldictc !== undefined ? vldictc : 0;
-            this.vtdictc = vtdictc !== undefined ? vtdictc : 0;
-            this.tndictc = tndictc !== undefined ? tndictc : 0;
+            this.vldictc = vldictc !== undefined ? vldictc : "";
+            this.vtdictc = vtdictc !== undefined ? vtdictc : "";
+            this.tndictc = tndictc !== undefined ? tndictc : "";
             this.price = price !== undefined ? price : 0.0;
-            this.pmdictc = pmdictc !== undefined ? pmdictc : 0;
-            this.insureamt = insureamt !== undefined ? insureamt : 0.0;
             this.codamt = codamt !== undefined ? codamt : 0.0;
-            this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
-            this.dmdictc = dmdictc !== undefined ? dmdictc : 0;
-            this.redictc = redictc !== undefined ? redictc : 0;
-            this.pusdate = pusdate !== undefined ? pusdate : "";
-            this.pustime = pustime !== undefined ? pustime : "";
-            this.puedate = puedate !== undefined ? puedate : "";
-            this.puetime = puetime !== undefined ? puetime : "";
-            this.easdate = easdate !== undefined ? easdate : "";
-            this.eastime = eastime !== undefined ? eastime : "";
-            this.eaedate = eaedate !== undefined ? eaedate : "";
-            this.eaetime = eaetime !== undefined ? eaetime : "";
+            this.insureamt = insureamt !== undefined ? insureamt : 0.0;
+            this.ptdictc = ptdictc !== undefined ? ptdictc : "";
+            this.consignee = consignee !== undefined ? consignee : "";
+            this.consphone = consphone !== undefined ? consphone : "";
+            this.dmdictc = dmdictc !== undefined ? dmdictc : "";
+            this.redictc = redictc !== undefined ? redictc : "";
+            this.pusdatetime = pusdatetime !== undefined ? pusdatetime : "";
+            this.puedatetime = puedatetime !== undefined ? puedatetime : "";
+            this.easdatetime = easdatetime !== undefined ? easdatetime : "";
+            this.eaedatetime = eaedatetime !== undefined ? eaedatetime : "";
+            this.revidatetime = revidatetime !== undefined ? revidatetime : "";
+            this.arridatetime = arridatetime !== undefined ? arridatetime : "";
+            this.ostatus = ostatus !== undefined ? ostatus : 0;
             this.priority = priority !== undefined ? priority : 0;
         },
         false,
         function(__os)
         {
-            __os.writeString(this.orderno);
-            __os.writeString(this.billno);
-            __os.writeInt(this.startc);
-            __os.writeString(this.startaddr);
-            __os.writeInt(this.arriarc);
-            __os.writeString(this.arriaddr);
-            __os.writeInt(this.puberid);
-            __os.writeString(this.consignee);
-            __os.writeString(this.consphone);
+            __os.writeString(this.puberid);
+            __os.writeString(this.puberCarrier);
             __os.writeString(this.phone1);
             __os.writeString(this.phone2);
-            __os.writeDouble(this.wm);
-            __os.writeInt(this.wmdictc);
-            __os.writeInt(this.num);
-            __os.writeInt(this.numdictc);
-            __os.writeInt(this.padictc);
-            __os.writeInt(this.ctdictc);
-            __os.writeInt(this.vnum);
-            __os.writeInt(this.vldictc);
-            __os.writeInt(this.vtdictc);
-            __os.writeInt(this.tndictc);
-            __os.writeDouble(this.price);
-            __os.writeInt(this.pmdictc);
-            __os.writeDouble(this.insureamt);
-            __os.writeDouble(this.codamt);
-            __os.writeInt(this.ptdictc);
-            __os.writeInt(this.dmdictc);
-            __os.writeInt(this.redictc);
-            __os.writeString(this.pusdate);
-            __os.writeString(this.pustime);
-            __os.writeString(this.puedate);
-            __os.writeString(this.puetime);
-            __os.writeString(this.easdate);
-            __os.writeString(this.eastime);
-            __os.writeString(this.eaedate);
-            __os.writeString(this.eaetime);
-            __os.writeInt(this.priority);
-        },
-        function(__is)
-        {
-            this.orderno = __is.readString();
-            this.billno = __is.readString();
-            this.startc = __is.readInt();
-            this.startaddr = __is.readString();
-            this.arriarc = __is.readInt();
-            this.arriaddr = __is.readString();
-            this.puberid = __is.readInt();
-            this.consignee = __is.readString();
-            this.consphone = __is.readString();
-            this.phone1 = __is.readString();
-            this.phone2 = __is.readString();
-            this.wm = __is.readDouble();
-            this.wmdictc = __is.readInt();
-            this.num = __is.readInt();
-            this.numdictc = __is.readInt();
-            this.padictc = __is.readInt();
-            this.ctdictc = __is.readInt();
-            this.vnum = __is.readInt();
-            this.vldictc = __is.readInt();
-            this.vtdictc = __is.readInt();
-            this.tndictc = __is.readInt();
-            this.price = __is.readDouble();
-            this.pmdictc = __is.readInt();
-            this.insureamt = __is.readDouble();
-            this.codamt = __is.readDouble();
-            this.ptdictc = __is.readInt();
-            this.dmdictc = __is.readInt();
-            this.redictc = __is.readInt();
-            this.pusdate = __is.readString();
-            this.pustime = __is.readString();
-            this.puedate = __is.readString();
-            this.puetime = __is.readString();
-            this.easdate = __is.readString();
-            this.eastime = __is.readString();
-            this.eaedate = __is.readString();
-            this.eaetime = __is.readString();
-            this.priority = __is.readInt();
-        },
-        116, 
-        false);
-
-    /**
-     * 查询订单实体
-     **/
-    order.QueryOrderDetail = Slice.defineStruct(
-        function(orderno, billno, startc, startaddr, arriarc, arriaddr, puberid, pubername, consignee, consphone, phone1, phone2, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, price, pmdictc, insureamt, codamt, ptdictc, dmdictc, redictc, pusdate, pustime, puedate, puetime, easdate, eastime, eaedate, eaetime, arridate, arritime, retuimg, carriage, ostatus, lstatus)
-        {
-            this.orderno = orderno !== undefined ? orderno : "";
-            this.billno = billno !== undefined ? billno : "";
-            this.startc = startc !== undefined ? startc : 0;
-            this.startaddr = startaddr !== undefined ? startaddr : "";
-            this.arriarc = arriarc !== undefined ? arriarc : 0;
-            this.arriaddr = arriaddr !== undefined ? arriaddr : "";
-            this.puberid = puberid !== undefined ? puberid : 0;
-            this.pubername = pubername !== undefined ? pubername : "";
-            this.consignee = consignee !== undefined ? consignee : "";
-            this.consphone = consphone !== undefined ? consphone : "";
-            this.phone1 = phone1 !== undefined ? phone1 : "";
-            this.phone2 = phone2 !== undefined ? phone2 : "";
-            this.wm = wm !== undefined ? wm : 0.0;
-            this.wmdictc = wmdictc !== undefined ? wmdictc : 0;
-            this.num = num !== undefined ? num : 0;
-            this.numdictc = numdictc !== undefined ? numdictc : 0;
-            this.padictc = padictc !== undefined ? padictc : 0;
-            this.ctdictc = ctdictc !== undefined ? ctdictc : 0;
-            this.vnum = vnum !== undefined ? vnum : 0;
-            this.vldictc = vldictc !== undefined ? vldictc : 0;
-            this.vtdictc = vtdictc !== undefined ? vtdictc : 0;
-            this.tndictc = tndictc !== undefined ? tndictc : 0;
-            this.price = price !== undefined ? price : 0.0;
-            this.pmdictc = pmdictc !== undefined ? pmdictc : 0;
-            this.insureamt = insureamt !== undefined ? insureamt : 0.0;
-            this.codamt = codamt !== undefined ? codamt : 0.0;
-            this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
-            this.dmdictc = dmdictc !== undefined ? dmdictc : 0;
-            this.redictc = redictc !== undefined ? redictc : 0;
-            this.pusdate = pusdate !== undefined ? pusdate : "";
-            this.pustime = pustime !== undefined ? pustime : "";
-            this.puedate = puedate !== undefined ? puedate : "";
-            this.puetime = puetime !== undefined ? puetime : "";
-            this.easdate = easdate !== undefined ? easdate : "";
-            this.eastime = eastime !== undefined ? eastime : "";
-            this.eaedate = eaedate !== undefined ? eaedate : "";
-            this.eaetime = eaetime !== undefined ? eaetime : "";
-            this.arridate = arridate !== undefined ? arridate : "";
-            this.arritime = arritime !== undefined ? arritime : "";
-            this.retuimg = retuimg !== undefined ? retuimg : "";
-            this.carriage = carriage !== undefined ? carriage : 0.0;
-            this.ostatus = ostatus !== undefined ? ostatus : 0;
-            this.lstatus = lstatus !== undefined ? lstatus : 0;
-        },
-        false,
-        function(__os)
-        {
-            __os.writeString(this.orderno);
-            __os.writeString(this.billno);
-            __os.writeInt(this.startc);
-            __os.writeString(this.startaddr);
-            __os.writeInt(this.arriarc);
-            __os.writeString(this.arriaddr);
-            __os.writeInt(this.puberid);
-            __os.writeString(this.pubername);
-            __os.writeString(this.consignee);
-            __os.writeString(this.consphone);
-            __os.writeString(this.phone1);
-            __os.writeString(this.phone2);
-            __os.writeDouble(this.wm);
-            __os.writeInt(this.wmdictc);
-            __os.writeInt(this.num);
-            __os.writeInt(this.numdictc);
-            __os.writeInt(this.padictc);
-            __os.writeInt(this.ctdictc);
-            __os.writeInt(this.vnum);
-            __os.writeInt(this.vldictc);
-            __os.writeInt(this.vtdictc);
-            __os.writeInt(this.tndictc);
-            __os.writeDouble(this.price);
-            __os.writeInt(this.pmdictc);
-            __os.writeDouble(this.insureamt);
-            __os.writeDouble(this.codamt);
-            __os.writeInt(this.ptdictc);
-            __os.writeInt(this.dmdictc);
-            __os.writeInt(this.redictc);
-            __os.writeString(this.pusdate);
-            __os.writeString(this.pustime);
-            __os.writeString(this.puedate);
-            __os.writeString(this.puetime);
-            __os.writeString(this.easdate);
-            __os.writeString(this.eastime);
-            __os.writeString(this.eaedate);
-            __os.writeString(this.eaetime);
-            __os.writeString(this.arridate);
-            __os.writeString(this.arritime);
-            __os.writeString(this.retuimg);
-            __os.writeDouble(this.carriage);
-            __os.writeInt(this.ostatus);
-            __os.writeInt(this.lstatus);
-        },
-        function(__is)
-        {
-            this.orderno = __is.readString();
-            this.billno = __is.readString();
-            this.startc = __is.readInt();
-            this.startaddr = __is.readString();
-            this.arriarc = __is.readInt();
-            this.arriaddr = __is.readString();
-            this.puberid = __is.readInt();
-            this.pubername = __is.readString();
-            this.consignee = __is.readString();
-            this.consphone = __is.readString();
-            this.phone1 = __is.readString();
-            this.phone2 = __is.readString();
-            this.wm = __is.readDouble();
-            this.wmdictc = __is.readInt();
-            this.num = __is.readInt();
-            this.numdictc = __is.readInt();
-            this.padictc = __is.readInt();
-            this.ctdictc = __is.readInt();
-            this.vnum = __is.readInt();
-            this.vldictc = __is.readInt();
-            this.vtdictc = __is.readInt();
-            this.tndictc = __is.readInt();
-            this.price = __is.readDouble();
-            this.pmdictc = __is.readInt();
-            this.insureamt = __is.readDouble();
-            this.codamt = __is.readDouble();
-            this.ptdictc = __is.readInt();
-            this.dmdictc = __is.readInt();
-            this.redictc = __is.readInt();
-            this.pusdate = __is.readString();
-            this.pustime = __is.readString();
-            this.puedate = __is.readString();
-            this.puetime = __is.readString();
-            this.easdate = __is.readString();
-            this.eastime = __is.readString();
-            this.eaedate = __is.readString();
-            this.eaetime = __is.readString();
-            this.arridate = __is.readString();
-            this.arritime = __is.readString();
-            this.retuimg = __is.readString();
-            this.carriage = __is.readDouble();
-            this.ostatus = __is.readInt();
-            this.lstatus = __is.readInt();
-        },
-        132, 
-        false);
-
-    /**
-     * 查询订单详情实体
-     **/
-    order.GetOrderDetailRes = Slice.defineStruct(
-        function(orderno, billno, startc, startcp, startcc, startca, startaddr, arriarc, arriarcp, arriarcc, arriarca, arriaddr, puberid, pubername, consignee, consphone, phone1, phone2, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, price, pmdictc, insureamt, codamt, ptdictc, dmdictc, redictc, pubdatetime, revidatetime, arridatetime, pusdatetime, puedatetime, easdatetime, eaedatetime, retuimg, carriage, ostatus, lstatus)
-        {
-            this.orderno = orderno !== undefined ? orderno : "";
-            this.billno = billno !== undefined ? billno : "";
-            this.startc = startc !== undefined ? startc : 0;
-            this.startcp = startcp !== undefined ? startcp : 0;
-            this.startcc = startcc !== undefined ? startcc : 0;
-            this.startca = startca !== undefined ? startca : 0;
-            this.startaddr = startaddr !== undefined ? startaddr : "";
-            this.arriarc = arriarc !== undefined ? arriarc : 0;
-            this.arriarcp = arriarcp !== undefined ? arriarcp : 0;
-            this.arriarcc = arriarcc !== undefined ? arriarcc : 0;
-            this.arriarca = arriarca !== undefined ? arriarca : 0;
-            this.arriaddr = arriaddr !== undefined ? arriaddr : "";
-            this.puberid = puberid !== undefined ? puberid : 0;
-            this.pubername = pubername !== undefined ? pubername : "";
-            this.consignee = consignee !== undefined ? consignee : "";
-            this.consphone = consphone !== undefined ? consphone : "";
-            this.phone1 = phone1 !== undefined ? phone1 : "";
-            this.phone2 = phone2 !== undefined ? phone2 : "";
-            this.wm = wm !== undefined ? wm : 0.0;
-            this.wmdictc = wmdictc !== undefined ? wmdictc : 0;
-            this.num = num !== undefined ? num : 0;
-            this.numdictc = numdictc !== undefined ? numdictc : 0;
-            this.padictc = padictc !== undefined ? padictc : 0;
-            this.ctdictc = ctdictc !== undefined ? ctdictc : 0;
-            this.vnum = vnum !== undefined ? vnum : 0;
-            this.vldictc = vldictc !== undefined ? vldictc : 0;
-            this.vtdictc = vtdictc !== undefined ? vtdictc : 0;
-            this.tndictc = tndictc !== undefined ? tndictc : 0;
-            this.price = price !== undefined ? price : 0.0;
-            this.pmdictc = pmdictc !== undefined ? pmdictc : 0;
-            this.insureamt = insureamt !== undefined ? insureamt : 0.0;
-            this.codamt = codamt !== undefined ? codamt : 0.0;
-            this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
-            this.dmdictc = dmdictc !== undefined ? dmdictc : 0;
-            this.redictc = redictc !== undefined ? redictc : 0;
-            this.pubdatetime = pubdatetime !== undefined ? pubdatetime : "";
-            this.revidatetime = revidatetime !== undefined ? revidatetime : "";
-            this.arridatetime = arridatetime !== undefined ? arridatetime : "";
-            this.pusdatetime = pusdatetime !== undefined ? pusdatetime : "";
-            this.puedatetime = puedatetime !== undefined ? puedatetime : "";
-            this.easdatetime = easdatetime !== undefined ? easdatetime : "";
-            this.eaedatetime = eaedatetime !== undefined ? eaedatetime : "";
-            this.retuimg = retuimg !== undefined ? retuimg : "";
-            this.carriage = carriage !== undefined ? carriage : 0.0;
-            this.ostatus = ostatus !== undefined ? ostatus : 0;
-            this.lstatus = lstatus !== undefined ? lstatus : 0;
-        },
-        false,
-        function(__os)
-        {
-            __os.writeString(this.orderno);
-            __os.writeString(this.billno);
-            __os.writeInt(this.startc);
-            __os.writeInt(this.startcp);
-            __os.writeInt(this.startcc);
-            __os.writeInt(this.startca);
-            __os.writeString(this.startaddr);
-            __os.writeInt(this.arriarc);
-            __os.writeInt(this.arriarcp);
-            __os.writeInt(this.arriarcc);
-            __os.writeInt(this.arriarca);
-            __os.writeString(this.arriaddr);
-            __os.writeInt(this.puberid);
-            __os.writeString(this.pubername);
-            __os.writeString(this.consignee);
-            __os.writeString(this.consphone);
-            __os.writeString(this.phone1);
-            __os.writeString(this.phone2);
-            __os.writeDouble(this.wm);
-            __os.writeInt(this.wmdictc);
-            __os.writeInt(this.num);
-            __os.writeInt(this.numdictc);
-            __os.writeInt(this.padictc);
-            __os.writeInt(this.ctdictc);
-            __os.writeInt(this.vnum);
-            __os.writeInt(this.vldictc);
-            __os.writeInt(this.vtdictc);
-            __os.writeInt(this.tndictc);
-            __os.writeDouble(this.price);
-            __os.writeInt(this.pmdictc);
-            __os.writeDouble(this.insureamt);
-            __os.writeDouble(this.codamt);
-            __os.writeInt(this.ptdictc);
-            __os.writeInt(this.dmdictc);
-            __os.writeInt(this.redictc);
             __os.writeString(this.pubdatetime);
-            __os.writeString(this.revidatetime);
-            __os.writeString(this.arridatetime);
+            __os.writeString(this.billno);
+            __os.writeString(this.orderno);
+            __os.writeString(this.startc);
+            __os.writeString(this.startaddr);
+            __os.writeString(this.arriarc);
+            __os.writeString(this.arriaddr);
+            __os.writeDouble(this.wm);
+            __os.writeString(this.wmdictc);
+            __os.writeInt(this.num);
+            __os.writeString(this.numdictc);
+            __os.writeString(this.padictc);
+            __os.writeString(this.ctdictc);
+            __os.writeInt(this.vnum);
+            __os.writeString(this.vldictc);
+            __os.writeString(this.vtdictc);
+            __os.writeString(this.tndictc);
+            __os.writeDouble(this.price);
+            __os.writeDouble(this.codamt);
+            __os.writeDouble(this.insureamt);
+            __os.writeString(this.ptdictc);
+            __os.writeString(this.consignee);
+            __os.writeString(this.consphone);
+            __os.writeString(this.dmdictc);
+            __os.writeString(this.redictc);
             __os.writeString(this.pusdatetime);
             __os.writeString(this.puedatetime);
             __os.writeString(this.easdatetime);
             __os.writeString(this.eaedatetime);
-            __os.writeString(this.retuimg);
-            __os.writeDouble(this.carriage);
+            __os.writeString(this.revidatetime);
+            __os.writeString(this.arridatetime);
             __os.writeInt(this.ostatus);
-            __os.writeInt(this.lstatus);
+            __os.writeInt(this.priority);
         },
         function(__is)
         {
-            this.orderno = __is.readString();
-            this.billno = __is.readString();
-            this.startc = __is.readInt();
-            this.startcp = __is.readInt();
-            this.startcc = __is.readInt();
-            this.startca = __is.readInt();
-            this.startaddr = __is.readString();
-            this.arriarc = __is.readInt();
-            this.arriarcp = __is.readInt();
-            this.arriarcc = __is.readInt();
-            this.arriarca = __is.readInt();
-            this.arriaddr = __is.readString();
-            this.puberid = __is.readInt();
-            this.pubername = __is.readString();
-            this.consignee = __is.readString();
-            this.consphone = __is.readString();
+            this.puberid = __is.readString();
+            this.puberCarrier = __is.readString();
             this.phone1 = __is.readString();
             this.phone2 = __is.readString();
-            this.wm = __is.readDouble();
-            this.wmdictc = __is.readInt();
-            this.num = __is.readInt();
-            this.numdictc = __is.readInt();
-            this.padictc = __is.readInt();
-            this.ctdictc = __is.readInt();
-            this.vnum = __is.readInt();
-            this.vldictc = __is.readInt();
-            this.vtdictc = __is.readInt();
-            this.tndictc = __is.readInt();
-            this.price = __is.readDouble();
-            this.pmdictc = __is.readInt();
-            this.insureamt = __is.readDouble();
-            this.codamt = __is.readDouble();
-            this.ptdictc = __is.readInt();
-            this.dmdictc = __is.readInt();
-            this.redictc = __is.readInt();
             this.pubdatetime = __is.readString();
-            this.revidatetime = __is.readString();
-            this.arridatetime = __is.readString();
+            this.billno = __is.readString();
+            this.orderno = __is.readString();
+            this.startc = __is.readString();
+            this.startaddr = __is.readString();
+            this.arriarc = __is.readString();
+            this.arriaddr = __is.readString();
+            this.wm = __is.readDouble();
+            this.wmdictc = __is.readString();
+            this.num = __is.readInt();
+            this.numdictc = __is.readString();
+            this.padictc = __is.readString();
+            this.ctdictc = __is.readString();
+            this.vnum = __is.readInt();
+            this.vldictc = __is.readString();
+            this.vtdictc = __is.readString();
+            this.tndictc = __is.readString();
+            this.price = __is.readDouble();
+            this.codamt = __is.readDouble();
+            this.insureamt = __is.readDouble();
+            this.ptdictc = __is.readString();
+            this.consignee = __is.readString();
+            this.consphone = __is.readString();
+            this.dmdictc = __is.readString();
+            this.redictc = __is.readString();
             this.pusdatetime = __is.readString();
             this.puedatetime = __is.readString();
             this.easdatetime = __is.readString();
             this.eaedatetime = __is.readString();
-            this.retuimg = __is.readString();
-            this.carriage = __is.readDouble();
+            this.revidatetime = __is.readString();
+            this.arridatetime = __is.readString();
             this.ostatus = __is.readInt();
-            this.lstatus = __is.readInt();
+            this.priority = __is.readInt();
         },
-        153, 
+        77, 
         false);
 
     /**
@@ -546,8 +245,8 @@
         "queryCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "queryAppOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "queryAppCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "addOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "getOrderDetail": [, , , , , [order.GetOrderDetailRes], [["cstruct.stringSeqHelper"]], , , , ],
+        "addOrder": [, , , , , [3], [[7], [order.OrderICE]], , , , ],
+        "getOrderDetail": [, , , , , [order.OrderICE], [["cstruct.stringSeqHelper"]], , , , ],
         "robbingOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.order = order;

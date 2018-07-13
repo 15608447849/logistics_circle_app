@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -9,29 +7,21 @@ import business  from './interfaces/business'
 import VueAMap from 'vue-amap';
 import YDUI from 'vue-ydui';
 import Cube from 'cube-ui'
-import VueResource from 'vue-resource'
-import { Tabbar, TabItem } from 'mint-ui';
 import {PullRefresh} from 'vue-ydui/dist/lib.rem/pullrefresh';
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 
-import 'mint-ui/lib/style.css'
 import 'vue-ydui/dist/ydui.rem.css';
 import './assets/lib/ydui.flexible'
 import './assets/css/index.css'
 
-
 // 局部引用组件
-// 底部导航栏
-Vue.component(Tabbar.name, Tabbar);
-Vue.component(TabItem.name, TabItem);
 Vue.component(PullRefresh.name, PullRefresh);
 
 Vue.use(business);
 Vue.use(Vuex);
 Vue.use(VueAMap);
 Vue.use(YDUI);
-Vue.use(VueResource);
 Vue.use(Cube);
 
 Vue.config.productionTip = false;

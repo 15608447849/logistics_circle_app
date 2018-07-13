@@ -17,5 +17,9 @@ export default {
   // 订单字典
   dict: state => {
     return state.dict
+  },
+  // 地区
+  area: state => {
+    return state.area
   }
 }

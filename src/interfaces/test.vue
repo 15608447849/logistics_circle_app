@@ -65,10 +65,19 @@
         //     }
         //   ))
 
+        this.$Ice_OrderService.queryCircleOrderByPc('e140aa06136e4eb6937db4d31e5fe588','','100',
+          new IceCallback(
+            function (result) {
+              console.log("收到",result)
+            },function (err) {
+              console.log(err);
+            }
+          ))
 
         // this.$Ice_TEST.getBaseUnit(new IceCallback(function (res) {
         //   console.log(res);
         // }))
+
 
       }
 
