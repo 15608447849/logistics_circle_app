@@ -31,10 +31,15 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/SimpleSearchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
+
+
+
 // 测试页面
 import TEST from '@/interfaces/test'
 // picker测试
 import PICKER from '@/pages/pickerTest'
+// 信息大厅测试
+import infoTest from '@/pages/infoTest'
 
 Vue.use(Router);
 
@@ -143,6 +148,10 @@ const vueRouter = new Router({
     {
       path: '/information/issueDetails',
       component: ISSUEDETAILS
+    },
+    {
+      path: '/infoTest',
+      component: infoTest
     }
   ]
 });

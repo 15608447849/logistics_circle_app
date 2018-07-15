@@ -44,8 +44,8 @@
       }
     },
     mounted() {
-      this.initBaseData();
-      this.initAreaData();
+      // this.initBaseData();
+      // this.initAreaData();
     },
     methods: {
       handleActive(position) {
@@ -84,7 +84,9 @@
               self.$app_store.commit(DICT, result);
             },
             function (error) {
-              self.initBaseData();
+              setTimeout(() => {
+                self.initBaseData();
+              },15000);
             }
           )
         );
@@ -97,7 +99,9 @@
               self.$app_store.commit(AREA, JSON.parse(result).children);
             },
             function (error) {
-              self.initAreaData();
+              setTimeout(() => {
+                self.initAreaData();
+              },15000);
             }
           )
         );

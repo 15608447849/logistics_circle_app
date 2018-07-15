@@ -145,8 +145,8 @@ module.exports = {
    *抢单
   int robbingOrder(string token,cstruct::stringSeq params);
    */
-  robbingOrder:(token,orderNo)=>{
-    queryIce(order.OrderServicePrx , 'OrderService', 'robbingOrder', [orderNo],callback);
+  robbingOrder:(token,orderNo,callback)=>{
+    queryIce(order.OrderServicePrx , 'OrderService', 'robbingOrder', token,[orderNo],callback);
   }
 
 

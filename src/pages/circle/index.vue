@@ -133,27 +133,4 @@
 </script>
 
 <style>
-  .mescroll{
-    position: fixed;
-    top: .8rem;
-    bottom: 1rem;
-    height: auto;
-  }
-
-  /*下拉刷新回调的提示*/
-  .download-tip{
-    z-index: 9900;
-    position: fixed;
-    top: .8rem;
-    left: 0;
-    width: 100%;
-    height: .5rem;
-    line-height: .5rem;
-    font-size: .24rem;
-    text-align: center;
-    background-color: rgba(80,175,85,.7);
-    color: white;
-    -webkit-transition: top 300ms;
-    transition: top 300ms;
-  }
 </style>

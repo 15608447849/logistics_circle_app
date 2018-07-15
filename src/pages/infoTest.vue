@@ -1,9 +1,9 @@
 <template>
   <div class="issueOrder">
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
-     <span>发布订单</span>
-      <span @click="toissue">发布</span>
+      <img src="../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+      <span>发布订单</span>
+      <span></span>
     </div>
     <ul class="liNumThree">
       <li class="inputNumOne">
@@ -28,7 +28,7 @@
         <input type="text" placeholder="重量/体积">
       </li>
       <li class="inputShort">
-        <input type="text" placeholder="单位">
+        <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text">
       </li>
       <li class="inputLong">
         <span class="textRed">*</span>
@@ -36,7 +36,7 @@
         <input type="text" placeholder="单位数量">
       </li>
       <li class="inputShort">
-        <input type="text" placeholder="单位">
+        <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位">
       </li>
       <li class="inputLong">
         <span class="textRed">*</span>
@@ -47,8 +47,6 @@
         <input type="text" placeholder="是否包装">
       </li>
     </ul>
-
-
 
 
     <ul class="liNumThreeCompany">
@@ -135,55 +133,76 @@
     </ul>
     <div>
       <div class="totalPrice">
-        <span class="floatleft marginBottom60">订单总价</span><span class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
+        <span class="floatleft marginBottom60">订单总价</span><span
+        class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
         <button class="releaseBtn">发 布</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import { stringIsNotNull } from '@/utils/stringUtil'
   export default {
     data() {
       return {
         OrderDetail: new order.OrderICE(),
-        ctdictcList: [], // 货物类型
-        padictcList: [],// 包装要求
-        redictcList: [],// 回单要求
-        ptdictcList: [],// 支付方式
-        vldictcList: [],// 车长
-        wmdictcList: [],// 货物重量/体积单位
-        // 件数单位
-        // 提货方式
-        // 运输要求
-        // 价格度量
-        vtdictcList: []// 车型
-
-      }
-    },
-    methods: {
-      init(){
-        // console.log(this.OrderDetail)
-        console.log(localStorage.getItem('unit'));
-      },
-      // 获取字典信息
-
-      getOrderDetailInfo() {
-        const orderId = this.$route.query.id||'';
-        this.$Ice_OrderService.releaseOrder(orderId,
-          new IceCallback(
-            function (result) {
-              console.log(result)
-            },
-            function (error) {
-              console.log(error)
-            }
-          )
-        );
+        dicData: {},// 选择器字典数据, store中获取
+        displayDic: { // 用于展示用户
+          disWmLabel: '',// 货物大小
+          disCtLabel: '',// 货物类型
+          disNumLabel: '',// 件数单位
+        }
       }
     },
     mounted() {
-      this.init();
+      this.initData();
+    },
+    methods: {
+      // 初始化页面数据
+      initData() {
+        // 数据从本地获取 方便测试
+        this.dicData = JSON.parse(localStorage.getItem('unit'));
+        console.log(this.dicData);
+        // 设置默认类型字典选择, 默认取第一个
+        this.OrderDetail.wmdictc = this.dicData.wm[0].value;
+        this.displayDic.disWmLabel = this.dicData.wm[0].label;
+
+        this.OrderDetail.ctdictc = this.dicData.ct[0].value;
+        this.displayDic.disCtLabel = this.dicData.ct[0].label;
+
+        this.OrderDetail.numdictc = this.dicData.num[0].value;
+        this.displayDic.disNumLabel = this.dicData.num[0].label;
+
+
+      },
+      showPicker(category) {
+        this.setPicker(this.dicData[category]);
+        this.picker.show();
+      },
+      setPicker(pickerList) {
+        this.picker = this.$createPicker({
+          title: pickerList.remark,
+          data: [pickerList],
+          onSelect: (selectedVal, selectedIndex, selectedText) => {
+            switch (pickerList[0].remark) {
+              case '货物重量/体积单位':
+                this.OrderDetail.wmdictc = selectedVal;
+                this.displayDic.disWmLabel = selectedText;
+                break;
+              case '货物类型':
+                this.OrderDetail.ctdictc = selectedVal;
+                this.displayDic.disCtLabel = selectedText;
+                break;
+              case '件数单位':
+                this.OrderDetail.numdictc = selectedVal;
+                this.displayDic.disNumLabel = selectedText;
+                break;
+            }
+          },
+          onCancel: () => {
+
+          }
+        })
+      },
     }
   }
 </script>
