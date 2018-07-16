@@ -8,22 +8,30 @@ import YDUI from 'vue-ydui';
 import Cube from 'cube-ui'
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
+import VueAMap from 'vue-amap';
 
 import 'vue-ydui/dist/ydui.rem.css';
 import './assets/lib/ydui.flexible';
 import './assets/css/index.css';
-import 'vue-ydui/dist/ydui.base.css';
 
 Vue.use(business);
 Vue.use(Vuex);
 Vue.use(YDUI);
 Vue.use(Cube);
+Vue.use(VueAMap);
+
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
 Vue.prototype.message = message;
 
 
 Vue.prototype.$app_store = store;
+
+VueAMap.initAMapApiLoader({
+  key: 'fd1c441c553b00833ccb5ccb9cdd8281',
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+  v: '1.4.4'
+});
 
 document.addEventListener('deviceready', function() {
   new Vue({

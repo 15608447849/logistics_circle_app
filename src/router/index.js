@@ -28,7 +28,7 @@ import INFO from '@/pages/information/index'
 // 我的订单模块
 import ORDER from '@/pages/order/index'
 // 搜索页
-import SEARCH from '@/components/SimpleSearchInput'
+import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
 
@@ -40,6 +40,8 @@ import TEST from '@/interfaces/test'
 import PICKER from '@/pages/pickerTest'
 // 信息大厅测试
 import infoTest from '@/pages/infoTest'
+// 城市选择
+import CITY from '@/components/citySelector'
 
 Vue.use(Router);
 
@@ -152,6 +154,10 @@ const vueRouter = new Router({
     {
       path: '/infoTest',
       component: infoTest
+    },
+    {
+      path: '/city',
+      component: CITY
     }
   ]
 });

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <yd-button size="large" type="danger" @click.native="show4 = true">右侧弹出</yd-button>
+    <yd-popup v-model="show4" position="right">
+      <yd-button type="danger" style="margin: 30px;" @click.native="show4 = false">Close Right Popup</yd-button>
+    </yd-popup>
     <!--页头-->
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-jibenxinxi1"  size="" type="" @click.native="show3 = true"></i>
@@ -99,7 +103,7 @@
   export default{
     data(){
       return {
-        show3: false,
+        show4: false,
         isMember:true,
         direction: '',
         tipStyle: ''
