@@ -11,7 +11,7 @@ export function subString (str, len) {
 }
 
 //字符串验证不为空
-function stringIsNotNull(str) {
+export function stringIsNotNull(str) {
   if (str === null || str === undefined || str === "" ) {
     return false;
   }

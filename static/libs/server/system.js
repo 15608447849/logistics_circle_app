@@ -43,7 +43,8 @@
     Slice.defineOperations(system.SystemService, system.SystemServicePrx,
     {
         "getAllDict": [, , , , , [7], , , , , ],
-        "getChineseAllAreas": [, , , , , [7], , , , , ]
+        "getChineseAllAreas": [, , , , , [7], , , , , ],
+        "getChineseAllAreasByPc": [, , , , , [7], , , , , ]
     });
     exports.system = system;
 }

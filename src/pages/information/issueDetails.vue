@@ -1,8 +1,8 @@
 <template>
    <div>
      <yd-navbar title="货源信息" bgcolor="#1E90FF" color="#FFFFFF" fontsize="18px">
-       <router-link to="#" slot="left">
-         <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
+       <router-link to="" slot="left">
+         <yd-navbar-back-icon  color="#FFFFFF" @click.native="routerBack"></yd-navbar-back-icon>
        </router-link>
      </yd-navbar>
 
@@ -12,32 +12,32 @@
      <div class="orderPadding10">
        <div class="logisticsNameBox">
          <img src="../../assets/images/small/logo_26.png" alt="">
-         <span class="logisticsName">黄旺物流</span>
+         <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
        </div>
        <ul>
          <li class="issueDetailsLiText">
-           <span class="issueText">运单号</span><span>1121515524</span>
+           <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">出发地</span><span>湖南省，长沙市，长沙县，长沙大道10号</span>
+           <span class="issueText">出发地</span><span>{{detailInfo.startc}}</span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">目的地</span><span>广东省，广州市，荔湾区，荔湾大道8号</span>
+           <span class="issueText">目的地</span><span>{{detailInfo.arriarc}}</span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">货物信息</span><span class="textMargin-right10">1吨</span><span class="textMargin-right10">100件</span><span class="textMargin-right10">木托</span><span class="textMargin-right10">家具</span>
+           <span class="issueText">货物信息</span><span class="textMargin-right10">{{detailInfo.wm}}{{detailInfo.wmdictc}}</span><span class="textMargin-right10">{{detailInfo.num}}{{detailInfo.numdictc}}</span><span class="textMargin-right10">{{detailInfo.ctdictc}}</span><span class="textMargin-right10"></span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">车辆信息</span><span class="textMargin-right10">1台</span><span class="textMargin-right10">9.6米</span><span class="textMargin-right10">厢式货车</span><span class="textMargin-right10">勿压</span>
+           <span class="issueText">车辆信息</span><span class="textMargin-right10">{{detailInfo.vnum}}台</span><span class="textMargin-right10">{{detailInfo.vldictc}}</span><span class="textMargin-right10">{{detailInfo.vtdictc}}</span><span class="textMargin-right10">{{detailInfo.tndictc}}</span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">费用信息</span><span class="textMargin-right10">无代收</span><span class="textMargin-right10">无保价</span><span class="textMargin-right10">线下支付3000元整单</span><span></span>
+           <span class="issueText">费用信息</span><span class="textMargin-right10">{{detailInfo.redictc}}</span><span class="textMargin-right10"></span><span class="textMargin-right10">{{detailInfo.ptdictc}}</span><span></span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">时间信息</span><span class="textMargin-right10">2018-6-27</span>  <span>13:00-18:00</span><span>取货</span>
+           <span class="issueText">时间信息</span><span class="textMargin-right10">{{detailInfo.puedatetime}}</span><span>取货</span>
          </li>
          <li class="issueDetailsLiText">
-           <span class="issueText">联系方式</span><span class="textMargin-right10">18373270790</span><span>18373270790</span>
+           <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
          </li>
        </ul>
      </div>
@@ -46,61 +46,106 @@
        <ul>
          <li class="issueDetailsLiText">
            <span class="Consignee">收货人</span>
-           <span class="marginright3">老王</span>
-           <span class="marginright3">18373270790</span>
-           <span class="marginright3">送货-不上楼</span>
-           <span class="marginright3">原件返回</span>
+           <span class="marginright3">{{detailInfo.consignee}}</span>
+           <span class="marginright3">{{detailInfo.consphone}}</span>
+           <span class="marginright3">{{detailInfo.dmdictc}}</span>
+           <span class="marginright3"></span>
          </li>
          <li class="issueDetailsLiText ">
            <span class="arrivalTime">到货时间</span>
-           <span>2018-05-03</span>
+           <span>{{detailInfo.easdatetime}}</span>
            <span>至</span>
-           <span>2018-06-01</span>
+           <span>{{detailInfo.eaedatetime}}</span>
          </li>
        </ul>
      </div>
      <div class="RobbingBox">
            <div class="Robbing floatleft" >
              <span class="floatleft rderCost">订单费用</span>
-             <span class="textRed textBlod floatright rderCost">3000.00元</span>
+             <span class="textRed textBlod floatright rderCost">{{detailInfo.price}}元</span>
            </div>
            <div class="floatleft margin_bottom140 ulWidth100">
              <ul class="ulWidth100">
                <li class="orderinfo">
                  <span class="marginright95">订单号</span>
-                 <span>f12113213265656132</span>
+                 <span>{{detailInfo.orderno}}</span>
                </li>
                <li class="orderinfo">
                  <span class="marginright7">发单时间</span>
-                 <span>2018-02-02</span>
-                 <span>09:02</span>
+                 <span>{{detailInfo.pubdatetime}}</span>
                </li>
-               <li class="orderinfo">
+               <li class="orderinfo"  v-if="detailInfo.revidatetime !== ''">
                  <span class="marginright7">抢单时间</span>
-                 <span>2018-02-02</span>
-                 <span>09:02</span>
+                 <span>{{detailInfo.revidatetime}}</span>
                </li>
-               <li class="orderinfo">
+               <li class="orderinfo"  v-if="detailInfo.pusdatetime !== ''">
                  <span class="marginright7">取货时间</span>
-                 <span>2018-02-02</span>
-                 <span>09:02</span>
+                 <span>{{detailInfo.pusdatetime}}</span>
                </li>
-               <li class="orderinfo">
+               <li class="orderinfo"  v-if="detailInfo.arridatetime !== ''">
                  <span class="marginright7">签收时间</span>
-                 <span>2018-02-02</span>
-                 <span>09:02</span>
+                 <span>{{detailInfo.arridatetime}}</span>
                </li>
              </ul>
            </div>
-           <button class="nextStep" >抢单</button>
+           <button class="nextStep" v-if="detailInfo.ostatus === 0" @click="setRobbingOrder">抢单</button>
      </div>
    </div>
 
 </template>
 
 <script>
-    export default {
+  import { stringIsNotNull } from '@/utils/stringUtil'
+  export default {
+    data() {
+      return {
+        detailInfo: {},
+        token: ''
+      }
+    },
+    methods: {
+      routerBack() {
+        this.$router.go(-1)
+      },
+      setRobbingOrder() {
+        let self = this;
+        this.message.Toast(this,'loading','正在努力抢单中...',true);
+        this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userToken,this.$route.query.id,
+          new IceCallback(
+            function (result) {
+              self.message.Toast(self,'correct','抢单成功',false);
+              // 刷新订单数据
+              self.getOrderDetailInfo()
+            },
+            function (error) {
+              self.message.Toast(this,'loading',error,true);
+              // 刷新订单数据
+              self.getOrderDetailInfo()
+            }
+          )
+        );
+      },
+      getOrderDetailInfo() {
+        let self = this;
+        const orderId = this.$route.query.id || '';
+
+        this.$Ice_OrderService.getOrderDetail(orderId,
+          new IceCallback(
+            function (result) {
+              console.log(result);
+              self.detailInfo = result;
+            },
+            function (error) {
+              this.message.Toast(self,'error',error,false)
+            }
+          )
+        );
+      }
+    },
+    mounted() {
+      this.getOrderDetailInfo();
     }
+  }
 </script>
 
 <style>
