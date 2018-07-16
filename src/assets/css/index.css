@@ -60,6 +60,44 @@ a {
   height:.88rem;
   background-color: #ffffff;
 }
+.dropdowngengduo{
+  position:relative;
+  top:0rem;
+  left:0rem;
+}
+.dropdown{
+  /*display:none;*/
+  position:absolute;
+  top:.8rem;
+  left:-1.79rem;
+  width:2.18rem;
+  height:2.2rem;
+  padding:.3rem 0rem .3rem 0rem;
+  background:#ffffff;
+  box-shadow: 0px 6px 7px 0px
+  rgba(37, 102, 182, 0.2);
+  z-index: 100;
+}
+.dropdown li{
+  margin-bottom:.1rem;
+}
+.dropdown li i{
+  width:.32rem;
+  height:.32rem;
+  color:#666666;
+  margin-left:.2rem;
+  margin-right:-.2rem;
+}
+.dropdown li span{
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 0px;
+  color: #666666;
+}
+
 .searchBox .selectRegion{
   position:relative;
   top:0rem;
@@ -138,7 +176,7 @@ a {
   height:.21rem;
   text-align: center;
   margin-top:.1rem;
-  margin-bottom:1rem;
+  margin-bottom:1.1rem;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
   font-weight: normal;
@@ -813,6 +851,26 @@ a {
   border-bottom:5px solid #f5f5f5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
+}
+.liNumThreeArea{
+  display:block;
+  width:7.5rem;
+  height:2.3rem;
+  padding:0px .08rem 0px .08rem;
+  border-bottom:5px solid #f5f5f5;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+}
+.tworow{
+  display:block;
+  width:7.5rem;
+  height:.69rem;
+}
+.textarea{
+  width:5.55rem;
+  height:.69rem;
+  vertical-align: top;
+  border:none;
 }
 .haveBorderBottom{
   border-bottom:1px solid #dce0e6;

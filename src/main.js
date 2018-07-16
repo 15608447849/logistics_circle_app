@@ -10,15 +10,14 @@ import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 
 import 'vue-ydui/dist/ydui.rem.css';
-import './assets/lib/ydui.flexible'
-import './assets/css/index.css'
-
+import './assets/lib/ydui.flexible';
+import './assets/css/index.css';
+import 'vue-ydui/dist/ydui.base.css';
 
 Vue.use(business);
 Vue.use(Vuex);
 Vue.use(YDUI);
 Vue.use(Cube);
-
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
 Vue.prototype.message = message;

@@ -5,7 +5,7 @@
      <span>发布订单</span>
       <span @click="toissue">发布</span>
     </div>
-    <ul class="liNumThree">
+    <ul class="liNumThreeArea">
       <li class="inputNumOne">
         <span class="waybillNum">运单号</span>
         <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号">
@@ -15,10 +15,11 @@
         <span>目的地</span>
         <input type="text" v-model="OrderDetail.arriarc" placeholder="请填写目的地">
       </li>
-      <li class="inputNumOne">
+      <li class="tworow">
         <span class="textRed">*</span>
         <span>出发地</span>
-        <input type="text" placeholder="请输入地址，支持在地图上定位">
+        <textarea rows="2" placeholder="请输入详细地址，精确到街道，社会区及门牌号，支持地图定位" class="textarea"></textarea>
+        <i class="icon iconfont icon-dituzadian"></i>
       </li>
     </ul>
     <ul class="liNumThree">
