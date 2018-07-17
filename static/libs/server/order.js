@@ -100,7 +100,7 @@
      * 订单实体
      **/
     order.OrderICE = Slice.defineStruct(
-        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, price, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
+        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
         {
             this.puberid = puberid !== undefined ? puberid : "";
             this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
@@ -123,7 +123,9 @@
             this.vldictc = vldictc !== undefined ? vldictc : "";
             this.vtdictc = vtdictc !== undefined ? vtdictc : "";
             this.tndictc = tndictc !== undefined ? tndictc : "";
+            this.tndictarr = tndictarr !== undefined ? tndictarr : null;
             this.price = price !== undefined ? price : 0.0;
+            this.pmdictc = pmdictc !== undefined ? pmdictc : "";
             this.codamt = codamt !== undefined ? codamt : 0.0;
             this.insureamt = insureamt !== undefined ? insureamt : 0.0;
             this.ptdictc = ptdictc !== undefined ? ptdictc : "";
@@ -164,7 +166,9 @@
             __os.writeString(this.vldictc);
             __os.writeString(this.vtdictc);
             __os.writeString(this.tndictc);
+            cstruct.intSeqHelper.write(__os, this.tndictarr);
             __os.writeDouble(this.price);
+            __os.writeString(this.pmdictc);
             __os.writeDouble(this.codamt);
             __os.writeDouble(this.insureamt);
             __os.writeString(this.ptdictc);
@@ -204,7 +208,9 @@
             this.vldictc = __is.readString();
             this.vtdictc = __is.readString();
             this.tndictc = __is.readString();
+            this.tndictarr = cstruct.intSeqHelper.read(__is);
             this.price = __is.readDouble();
+            this.pmdictc = __is.readString();
             this.codamt = __is.readDouble();
             this.insureamt = __is.readDouble();
             this.ptdictc = __is.readString();
@@ -221,7 +227,7 @@
             this.ostatus = __is.readInt();
             this.priority = __is.readInt();
         },
-        77, 
+        79, 
         false);
 
     /**
@@ -245,9 +251,9 @@
         "queryCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "queryAppOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "queryAppCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "addOrder": [, , , , , [3], [[7], [order.OrderICE]], , , , ],
+        "addOrder": [, , , , , [7], [[7], [order.OrderICE]], , , , ],
         "getOrderDetail": [, , , , , [order.OrderICE], [["cstruct.stringSeqHelper"]], , , , ],
-        "robbingOrder": [, , , , , [3], [[7], ["cstruct.stringSeqHelper"]], , , , ]
+        "robbingOrder": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.order = order;
 }

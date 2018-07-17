@@ -21,5 +21,9 @@ export default {
   // 地区
   area: state => {
     return state.area
+  },
+  // 当前城市
+  currentCity: state => {
+    return state.currentCity
   }
 }

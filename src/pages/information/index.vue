@@ -49,9 +49,9 @@
       return {
         infoList: [],
         pageSize: '20', // 订单数
-        address: '', // 地址
+        address: '郴州', // 地址
         startTimeStr: '', // 起始订单标识
-        endTimeStr: '', // 结束订单标识
+        endTimeStr: '2015-10-10 00:00:00', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
         token: 'e140aa06136e4eb6937db4d31e5fe588',
@@ -124,7 +124,18 @@
       },
       requestInfoList(requestState, timeStr, successCallback, errorCallback) {
         let self = this;
-        this.$Ice_OrderService.queryOrderByApp(self.token, self.key, self.pageSize, self.address, requestState, timeStr,
+        // this.$Ice_OrderService.queryOrderByApp(self.token, self.key, self.pageSize, self.address, requestState, timeStr,
+        //   new IceCallback(
+        //     function (result) {
+        //       console.log(result);
+        //       successCallback(result);
+        //     }, function (err) {
+        //       console.log(err);
+        //       errorCallback(err);
+        //     }
+        //   ))
+
+        this.$Ice_OrderService.queryCircleOrderByApp(self.token, self.pageSize,self.address, self.key, requestState, timeStr,
           new IceCallback(
             function (result) {
               console.log(result);

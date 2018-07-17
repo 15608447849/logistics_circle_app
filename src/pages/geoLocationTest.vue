@@ -1,60 +1,68 @@
 <template>
-  <div class="amap-page-container">
-    <button @click="selectCity"></button>
-    <el-amap-search-box class="search-box" :search-option="searchOption" :on-search-result="onSearchResult"></el-amap-search-box>
-    <!--<el-amap vid="amapDemo" :center="mapCenter" :zoom="12" class="amap-demo">-->
-      <!--<el-amap-marker v-for="(marker,index) in markers" :key="index" :position="marker" ></el-amap-marker>-->
-    <!--</el-amap>-->
-    <el-amap ref="map" vid="amapDemo" :amap-manager="amapManager" :center="center" :zoom="zoom" :plugin="plugin" :events="events" class="amap-demo">
-    </el-amap>
+  <div>
+    <yd-navbar title="地址选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
+      <router-link to="#" slot="left">
+        <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
+      </router-link>
+      <!--<img slot="right" src="../../assets/images/small/logo_26.png"/>-->
+    </yd-navbar>
+    <div class="amap-container">
+      <button @click="selectCity">{{searchOption.city}}</button>
+      <el-amap-search-box class="search" :search-option="searchOption" :on-search-result="onSearchResult"></el-amap-search-box>
+      <el-amap vid="amapDemo" :center="mapCenter" :zoom="18" class="amap-demo">
+        <el-amap-marker  :position="markers" ></el-amap-marker>
+      </el-amap>
+    </div>
   </div>
 </template>
 <script>
-  import { amapManager } from 'vue-amap';
   export default {
-    components: {
-      amapManager
-    },
     data() {
       return {
-        markers: [
-          [121.59996, 31.197646],
-          [121.40018, 31.197622],
-          [121.69991, 31.207649]
-        ],
         searchOption: {
-          city: '上海',
+          city: '',
           citylimit: true
         },
-        mapCenter: [121.59996, 31.197646]
+        markers: [], // 搜索标记
+        mapCenter: [] // 地图中心点
       }
     },
+    mounted() {
+      this.initData();
+    },
     methods: {
+      // 初始化数据
+      initData() {
+        // 设置地址搜索框城市
+        this.searchOption.city = this.$app_store.getters.currentCity || '北京'
+        console.log(this.searchOption.city)
+        // 初始化地图中心点
+        this.markers = [112.99454,28.194858];
+        this.mapCenter = [113.0068368,28.212332300000003];
+      },
       selectCity() {
         this.$router.push({
           path: '/city'
         })
-      },
-      addMarker: function() {
-        let lng = 121.5 + Math.round(Math.random() * 1000) / 10000;
-        let lat = 31.197646 + Math.round(Math.random() * 500) / 10000;
-        this.markers.push([lng, lat]);
       },
       onSearchResult(pois) {
         let latSum = 0;
         let lngSum = 0;
         if (pois.length > 0) {
           pois.forEach(poi => {
+            debugger
             let {lng, lat} = poi;
             lngSum += lng;
             latSum += lat;
-            this.markers.push([poi.lng, poi.lat]);
+            this.markers = [poi.lng, poi.lat];
+            console.log(this.markers)
           });
           let center = {
             lng: lngSum / pois.length,
             lat: latSum / pois.length
           };
           this.mapCenter = [center.lng, center.lat];
+          console.log(this.mapCenter)
         }
       }
     }
@@ -62,14 +70,18 @@
 </script>
 
 <style>
+  .search {
+    font-size: .3rem;
+  }
+  .amap-container {
+    height: 10rem;
+  }
+
   .amap-demo {
-    height: 1.5rem;
+    height: 300px;
   }
-  .search-box {
-    position: absolute;
-    top: 25px;
-    left: 20px;
-  }
+
+
   .amap-page-container {
     position: relative;
   }

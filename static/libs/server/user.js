@@ -24,12 +24,12 @@
     var __M = Ice.__M;
     var Slice = Ice.Slice;
 
-    var userApi = __M.module("userApi");
+    var user = __M.module("user");
 
     /**
      * 用户基本信息数据模型
      **/
-    userApi.UserICE = Slice.defineStruct(
+    user.UserICE = Slice.defineStruct(
         function(uno, rno, uname, uphone, upw, upwstatus, uinvite, adddate, addtime, updatedate, updatetime, cstatus, msg)
         {
             this.uno = uno !== undefined ? uno : 0;
@@ -85,7 +85,7 @@
     /**
      * 角色基本信息数据模型
      **/
-    userApi.SMSICE = Slice.defineStruct(
+    user.SMSICE = Slice.defineStruct(
         function(sno, uno, sphone, sms, adddate, addtime, cstatus, msg)
         {
             this.sno = sno !== undefined ? sno : 0;
@@ -122,35 +122,44 @@
         },
         30, 
         false);
+    Slice.defineSequence(user, "stringListHelper", "Ice.StringHelper", false);
+    Slice.defineSequence(user, "userListHelper", "user.UserICE", false);
 
-    userApi.UserService = Slice.defineObject(
+    user.UserService = Slice.defineObject(
         undefined,
         Ice.Object, undefined, 1,
         [
             "::Ice::Object",
-            "::userApi::UserService"
+            "::user::UserService"
         ],
         -1, undefined, undefined, false);
 
-    userApi.UserServicePrx = Slice.defineProxy(Ice.ObjectPrx, userApi.UserService.ice_staticId, undefined);
+    user.UserServicePrx = Slice.defineProxy(Ice.ObjectPrx, user.UserService.ice_staticId, undefined);
 
-    Slice.defineOperations(userApi.UserService, userApi.UserServicePrx,
+    Slice.defineOperations(user.UserService, user.UserServicePrx,
     {
-        "login": [, , , , , [userApi.UserICE], [[7], [7], [3]], , , , ],
-        "loginBySms": [, , , , , [userApi.UserICE], [[7], [7]], , , , ],
-        "loginByToken": [, , , , , [userApi.UserICE], [[7]], , , , ],
-        "getDriverInfo": [, , , , , [userApi.UserICE], [[7], [7]], , , , ],
-        "resetDriverPassword": [, , , , , [3], [[7], [7]], , , , ],
-        "verifyUserName": [, , , , , [3], [[7]], , , , ],
-        "verifyPhone": [, , , , , [3], [[4]], , , , ],
-        "sendSms": [, , , , , [3], [[4], [7]], , , , ],
-        "verifySms": [, , , , , [3], [[4], [7]], , , , ],
-        "custRegister": [, , , , , [3], [[7], [4], [7], [7], [7]], , , , ],
-        "forgetUserPassword": [, , , , , [3], [[4], [7], [7]], , , , ],
-        "updateUserPassword": [, , , , , [3], [[7], [7], [7]], , , , ],
-        "updateUserPhone": [, , , , , [3], [[7], [4], [7]], , , , ]
+        "login": [, , , , , [user.UserICE], [[7], [7], [3]], , , , ],
+        "loginBySms": [, , , , , [user.UserICE], [[7], [7]], , , , ],
+        "loginByToken": [, , , , , [user.UserICE], [[7]], , , , ],
+        "getUserInfo": [, , , , , ["user.userListHelper"], [[7], ["user.stringListHelper"], [3]], , , , ],
+        "resetDriverPassword": [, , , , , [7], [[7], [4]], , , , ],
+        "addDriver": [, , , , , [user.UserICE], [[7], [4]], , , , ],
+        "verifyUserName": [, , , , , [7], [[7]], , , , ],
+        "verifyPhone": [, , , , , [7], [[4]], , , , ],
+        "sendSms": [, , , , , [7], [[4], [7]], , , , ],
+        "verifySms": [, , , , , [7], [[4], [7]], , , , ],
+        "custRegister": [, , , , , [user.UserICE], [[7], [4], [7], [7], [7]], , , , ],
+        "forgetUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],
+        "updateUserPassword": [, , , , , [7], [[7], [7], [7]], , , , ],
+        "updateUserPhone": [, , , , , [7], [[7], [4], [7]], , , , ],
+        "getUserInfoByToken": [, , , , , [user.UserICE], [[7]], , , , ],
+        "getPermissionByToken": [, , , , , [7], [[7]], , , , ],
+        "getRoleNameByToken": [, , , , , [7], [[7]], , , , ],
+        "smsTest": [, , , , , [7], [[7], [7]], , , , ],
+        "driverLogin": [, , , , , [7], [[4], [7]], , , , ],
+        "updateDriverPassword": [, , , , , [7], [[4], [7], [7]], , , , ]
     });
-    exports.userApi = userApi;
+    exports.user = user;
 }
 (typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? module : undefined,
  typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? require : this.Ice.__require,

@@ -1,14 +1,22 @@
 <template>
   <div>
-    <yd-button size="large" type="danger" @click.native="show4 = true">右侧弹出</yd-button>
-    <yd-popup v-model="show4" position="right">
-      <yd-button type="danger" style="margin: 30px;" @click.native="show4 = false">Close Right Popup</yd-button>
-    </yd-popup>
+    <!--<yd-button size="large" type="danger" @click.native="show4 = true">右侧弹出</yd-button>-->
+    <!--<yd-popup v-model="show4" position="right">-->
+      <!--<yd-button type="danger" style="margin: 30px;" @click.native="show4 = false">Close Right Popup</yd-button>-->
+    <!--</yd-popup>-->
     <!--页头-->
+    <yd-button type="primary" style="margin-top: 12%;margin-bottom:2%;" @click.native="toLogin">登陆页面</yd-button>
+    <yd-button type="primary" @click.native="toRegister">注册页面</yd-button>
+    <yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>
+    <yd-button type="primary" @click.native="toPagePickerTest">picker测试</yd-button>
+    <yd-button type="primary" @click.native="toPageInfoTest">发布订单测试</yd-button>
+    <yd-button type="primary" @click.native="toTest">测试页面</yd-button>
+    <yd-button type="primary" @click.native="toCityTest">城市选择</yd-button>
+    <yd-button type="primary" @click.native="toRePwdTest">找回密码</yd-button>
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-jibenxinxi1"  size="" type="" @click.native="show3 = true"></i>
       <!--<img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">-->
-      <yd-popup v-model="show3" position="left" width="80%">
+      <yd-popup  position="left" width="80%">
         <div style="background-color:#fff;">
           <p>
             我为什么喜欢在京东买东西，因为今天买明天就可以送到。我为什么每个商品的评价都一样，因为在京东买的东西太多太多了，
@@ -44,12 +52,7 @@
       </span>
 
     </div>
-    <!--<yd-button type="primary" style="margin-top: 12%;margin-bottom:2%;" @click.native="toLogin">登陆页面</yd-button>-->
-    <!--<yd-button type="primary" @click.native="toRegister">注册页面</yd-button>-->
-    <!--<yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>-->
-    <!--<yd-button type="primary" @click.native="toPagePickerTest">picker测试</yd-button>-->
-    <!--<yd-button type="primary" @click.native="toPageInfoTest">发布订单测试</yd-button>-->
-    <!--<yd-button type="primary" @click.native="toTest">测试页面</yd-button>-->
+
     <div class="searchBox">
       <div class="selectRegion">
         <div class="searchBtn">
@@ -96,6 +99,8 @@
       </li>
     </ul>
     <div class="seeMore">查看更多</div>
+
+
   </div>
 
 </template>
@@ -110,27 +115,30 @@
       }
     },
     methods: {
-      // toLogin() {
-      //   this.$router.push({path: '/login'})
-      // },
-      // toRegister() {
-      //   this.$router.push({path: '/register'})
-      // },
-      // toPageGeo() {
-      //   this.$router.push({path: '/geo'})
-      // },
-      // toPagePickerTest() {
-      //   this.$router.push({path: '/picker'})
-      // },
-      // toTest(){
-      //   this.$router.push({path: '/test'})
-      // },
-      // toPageInfoTest() {
-      //   this.$router.push({path: '/infoTest'})
-      // },
-      // personalCenter(){
-      //
-      // }
+      toLogin() {
+        this.$router.push({path: '/login'})
+      },
+      toRegister() {
+        this.$router.push({path: '/register'})
+      },
+      toPageGeo() {
+        this.$router.push({path: '/geo'})
+      },
+      toPagePickerTest() {
+        this.$router.push({path: '/picker'})
+      },
+      toTest(){
+        this.$router.push({path: '/test'})
+      },
+      toPageInfoTest() {
+        this.$router.push({path: '/infoTest'})
+      },
+      toCityTest() {
+        this.$router.push({path: '/city'})
+      },
+      toRePwdTest() {
+        this.$router.push({path: '/login/retrievePwd'})
+      }
     }
   }
 </script>

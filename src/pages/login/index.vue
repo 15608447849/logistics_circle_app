@@ -35,7 +35,7 @@
         })
       },
       toupdatapwd(){
-          this.$router.push({path: '/login/updatapwd'})
+          this.$router.push({path: '/retrievePwd'})
       },
       loginClick() {
         let self = this;

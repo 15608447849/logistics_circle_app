@@ -16,6 +16,7 @@ const state = {
   isLoading: false, // 网络加载等待框
   dict: {}, // 字典
   area: {}, // 地区
+  currentCity: '长沙' // 当前地区
 };
 
 export default new Vuex.Store({

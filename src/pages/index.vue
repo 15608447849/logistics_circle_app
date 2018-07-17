@@ -18,7 +18,8 @@
 <script>
   import {
     DICT,
-    AREA
+    AREA,
+    CURRENT_CITY
   } from '../store/mutation-types'
   export default {
     data() {
@@ -44,6 +45,9 @@
       }
     },
     mounted() {
+      // 获取当前定位城市
+      // 设置当前定位城市
+      this.$app_store.commit(CURRENT_CITY, '长沙');
       // this.initBaseData();
       // this.initAreaData();
     },
