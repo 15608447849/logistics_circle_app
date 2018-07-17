@@ -74,7 +74,9 @@
     font-size: .3rem;
   }
   .amap-container {
-    height: 10rem;
+    display:block;
+    width:7.5rem;
+    height: 100%;
   }
 
   .amap-demo {
