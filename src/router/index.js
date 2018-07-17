@@ -50,7 +50,6 @@ Vue.use(Router);
  * @type {VueRouter}
  */
 const vueRouter = new Router({
-  mode: 'history',
   routes: [
     {
       path: '/test',
