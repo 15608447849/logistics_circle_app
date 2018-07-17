@@ -1,68 +1,184 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <div class="issueHeaderNavPic"><img src="../../assets/images/small/logo_26.png" alt=""></div>
-      <div><span>信息大厅</span></div>
-      <div @click="toissue"><span>发单</span></div>
+      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+      <span>信息大厅</span>
+      <span @click="toPageIssue">发单</span>
     </div>
+    <!--下拉刷新回调的提示-->
+    <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
+    <!--<div id="mescroll" class="mescroll">-->
+    <!--<div class="orderIndexContent">-->
+    <!--<ul class="order_box">-->
+    <!--<li class="order_list" @click="toissueDetails">-->
+    <!--<div class="order_time"><span class="site">长沙</span><span class="site">—</span><span-->
+    <!--class="site">广州</span><span class="time">1小时前</span></div>-->
+    <!--<div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span-->
+    <!--class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;<li class="order_list" v-for="(item,index) in infoList" :key="index" @click="toPageIssue(item)">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="order_price"><span class="site">{{item.destAddr + '-' + item.startAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="order_time"><span class="volume">{{item.goodsType}}</span><span class="car_type">{{item.wm}}</span><span&ndash;&gt;-->
+    <!--&lt;!&ndash;class="price">{{item.cost}}</span></div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="orderIndexContent" id="mescroll">
+      <ul class="order_box">
+        <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
+          <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
+            class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
+          <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span class="carWeight"></span><span
+            class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span></div>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 <script>
+  import '../../assets/css/mescroll.min.css'
+  import '../../assets/lib/mescroll.m'
+  import Conversion from '@/utils/conversion'
+
   export default {
     data() {
       return {
         infoList: [],
-        pageSize: '10', // 订单数
-        address: '', // 地址
-        timeStr: '', // 订单标识
+        pageSize: '20', // 订单数
+        address: '郴州', // 地址
+        startTimeStr: '', // 起始订单标识
+        endTimeStr: '2015-10-10 00:00:00', // 结束订单标识
         key: '',// 关键词
-        requestState: 0 // 获取最新 0, 获取历史1
+        requestState: 0, // 获取最新 0, 获取历史1
+        token: 'e140aa06136e4eb6937db4d31e5fe588',
+        mescroll: null,
+        pullingMessage: '',
+        isShowMessage: false
+      }
+    },
+    methods: {
+      toPageIssue() {
+        this.$router.push({
+          path: '/information/issue'
+        })
+      },
+      toPageIssueDetail(item) {
+        this.$router.push({
+          path: '/information/issueDetails',
+          query: {
+            id: item.id
+          }
+        })
+      },
+      showTip() {
+        let self = this;
+        this.isShowMessage = true;
+        setTimeout(() => {
+          self.isShowMessage = false;
+        }, 1500);
+      },
+      // 下拉刷新
+      onPullingDown() {
+        let self = this;
+        this.requestInfoList(0, this.startTimeStr, function (result) {
+          self.mescroll.endSuccess();
+          if (result.length === 0) {
+            self.pullingMessage = '列表数据已是最新';
+            self.showTip();
+            return
+          }
+          self.startTimeStr = result[0].time;
+          self.pullingMessage = result.length + '条新发布订单';
+          self.showTip();
+          // 原有数组与新数组连接
+          self.infoList = result.concat(self.infoList);
+        }, function (error) {
+          self.mescroll.endErr();
+        });
+      },
+      // 上推加载
+      onPullingUp() {
+        let self = this;
+        this.requestInfoList(1, this.endTimeStr, function (result) {
+          // 隐藏上推加载状态;
+          self.mescroll.endErr();
+          // 初次加载
+          if (self.endTimeStr === '') self.infoList = [];
+          // 无数据, 关闭上推加载 提示用户
+          if (result.length === 0) {
+            return
+          }
+          // 初始化下拉刷新订单标识
+          if (self.startTimeStr === '') self.startTimeStr = result[0].time;
+          // 上推加载订单标识
+          self.endTimeStr = result[result.length - 1].time;
+          // 原有数组与新数组连接
+          self.infoList = self.infoList.concat(result);
+        }, function (error) {
+          self.mescroll.endErr();
+        });
+      },
+      requestInfoList(requestState, timeStr, successCallback, errorCallback) {
+        let self = this;
+        // this.$Ice_OrderService.queryOrderByApp(self.token, self.key, self.pageSize, self.address, requestState, timeStr,
+        //   new IceCallback(
+        //     function (result) {
+        //       console.log(result);
+        //       successCallback(result);
+        //     }, function (err) {
+        //       console.log(err);
+        //       errorCallback(err);
+        //     }
+        //   ))
+
+        this.$Ice_OrderService.queryCircleOrderByApp(self.token, self.pageSize,self.address, self.key, requestState, timeStr,
+          new IceCallback(
+            function (result) {
+              console.log(result);
+              successCallback(result);
+            }, function (err) {
+              console.log(err);
+              errorCallback(err);
+            }
+          ))
+      },
+      itemClick(item) {
+        // 跳转详情页面
+
+      },
+      dateConversion(time) {
+        return Conversion.formatMsgTime(time)
       }
     },
     mounted() {
-      // console.log(this.$app_store.state.userToken);
-      this.requestInfoList();
-    },
-    methods: {
-      requestInfoList() {
-        this.$Ice_OrderService.queryOrderByApp(
-          this.$app_store.state.userToken, this.key, this.pageSize, this.address, this.requestState, this.timeStr,
-          new IceCallback(
-            function (result) {
-
-            }, function (error) {
-              self.mescroll.endErr();
-            }
-          ));
-      },
-      toissue() {
-        this.$router.push({path: '/information/issue'})
-      },
-      toissueDetails() {
-        this.$router.push({path: '/information/issueDetails'})
-      },
+      var self = this;
+      self.mescroll = new MeScroll("mescroll", {
+        down: {
+          auto: false,
+          callback: self.onPullingDown, // 下拉回调
+        },
+        up: {
+          callback: self.onPullingUp, // 上拉回调
+          //以下参数可删除,不配置
+          isBounce: false, // 此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+          toTop: { //配置回到顶部按钮
+            src: "../../assets/images/small/totop.png", // 默认滚动到1000px显示,可配置offset修改
+            duration: 500// 回到顶部的动画时长, 默认300ms
+          },
+          empty: { // 配置列表无任何数据的提示
+            // warpId: "dataList",
+            // icon: "../res/img/mescroll-empty.png",
+            // tip : "亲,暂无相关数据哦~" ,
+          },
+        }
+      });
     }
   }
 </script>
 <style>
-  .top-load-wrapper {
-    line-height: 50px;
-    text-align: center;
-  }
-  .icon-arrow {
-    transition: .2s;
-    transform: rotate(180deg);
-  }
-  .icon-loading {
-    transform: rotate(0deg);
-    animation-name: loading;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-  }
-  @keyframes loading
-  {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-  }
+
 </style>

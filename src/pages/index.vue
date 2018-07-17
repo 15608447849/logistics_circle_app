@@ -6,110 +6,111 @@
       </keep-alive>
     </transition>
     <div class="nav-bar">
-      <cube-tab-bar
-        v-model="selectedLabelDefault"
-        :useTransition = true
-        :data="tabs"
-        @click="clickHandler"
-        @change="changeHandler">
-      </cube-tab-bar>
+      <yd-tabbar active-color="#1E90FF">
+        <yd-tabbar-item :title= item.title link="#" v-for="(item,index) in activeList" :key="index" @click.native="navBarClick(index)" :active=item.isActive>
+          <yd-icon :name= item.name slot="icon" size="0.54rem"></yd-icon>
+        </yd-tabbar-item>
+      </yd-tabbar>
     </div>
   </div>
 </template>
 
 <script>
+  import {
+    DICT,
+    AREA,
+    CURRENT_CITY
+  } from '../store/mutation-types'
   export default {
     data() {
       return {
-        selected: '/',
         transitionName: '',
-        selectedLabelDefault: '信息大厅',
-        tabs: [{
-          label: '首页',
-          icon: 'cubeic-home'
-        }, {
-          label: '圈子',
-          icon: 'cubeic-like'
-        }, {
-          label: '信息大厅',
-          icon: 'cubeic-vip'
-        }, {
-          label: '我的订单',
-          icon: 'cubeic-person'
+        activeList: [{
+          title: '首页',
+          isActive: false,
+          name: 'home'
+        },{
+          title: '圈子',
+          isActive: false,
+          name: 'discover'
+        },{
+          title: '信息大厅',
+          isActive: true,
+          name: 'feedback'
+        },{
+          title: '我的订单',
+          isActive: false,
+          name: 'ucenter-outline'
         }]
       }
     },
     mounted() {
-      //页面初始完成
-      this.initBaseData();
-      this.initAreaData();
+      // 获取当前定位城市
+      // 设置当前定位城市
+      this.$app_store.commit(CURRENT_CITY, '长沙');
+      // this.initBaseData();
+      // this.initAreaData();
     },
     methods: {
-      clickHandler(label) {
-        // if you clicked home tab, then print 'Home'
-        let pageUrl = '/';
-        switch (label) {
-          case '首页':
-            pageUrl = '/';
-            break
-          case '圈子':
-            pageUrl = '/circle';
-            break
-          case '信息大厅':
-            pageUrl = '/information';
-            break
-          case '我的订单':
-            pageUrl = '/order';
-            break
+      handleActive(position) {
+        this.activeList.forEach((val,index,array) =>{
+          if(position === index) {
+            val.isActive = true
+          } else {
+            val.isActive = false
+          }
+        });
+      },
+      navBarClick(index) {
+        let path = '/';
+        switch (index) {
+          case 0:
+            path = '/';
+            break;
+          case 1:
+            path = '/circle';
+            break;
+          case 2:
+            path = '/information';
+            break;
+          case 3:
+            path = '/order';
+            break;
         }
-        this.$router.push(pageUrl)
+        this.handleActive(index);
+        this.$router.push(path)
       },
-      changeHandler(label) {
-        // if you clicked different tab, this methods can be emitted
-      },
-
       initBaseData() {
         let self = this;
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              localStorage.setItem('unit', result);
+              self.$app_store.commit(DICT, result);
             },
             function (error) {
-              console.log(error);
-              self.initBaseData();
+              setTimeout(() => {
+                self.initBaseData();
+              },15000);
             }
           )
         );
       },
-
       initAreaData() {
         let self = this;
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              localStorage.setItem('area', result);
+              self.$app_store.commit(AREA, JSON.parse(result).children);
             },
             function (error) {
-              console.log(error);
-              self.initAreaData()
+              setTimeout(() => {
+                self.initAreaData();
+              },15000);
             }
           )
         );
       }
-    },
-    watch: {
-      selected: function (val, oldvar) {
-        this.$router.push(val)
-      }
-      ,
-      $route(to, from) {
-        const toDepth = to.path.split('/').length
-        const fromDepth = from.path.split('/').length
-        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-      }
     }
-
   }
 </script>
 <style>
@@ -131,9 +132,9 @@
     -webkit-overflow-scrolling: touch;
   }
   .nav-bar {
-    background: white;
+    /*background: white;*/
     width: 100%;
-    height: 1.5rem;
+    /*height: 2.2rem;*/
     position: fixed;
     bottom: 0;
   }

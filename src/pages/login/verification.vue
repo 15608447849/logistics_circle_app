@@ -24,6 +24,12 @@
 
 <script>
     export default {
+      data(){
+        return {
+          direction: '',
+          tipStyle: ''
+        }
+      },
       methods:{
         toconfirmpwd(){
           this.$router.push({path: '/login/confirmpwd'})

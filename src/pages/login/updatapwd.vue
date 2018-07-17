@@ -2,7 +2,7 @@
     <div>
       <div>
         <yd-navbar title="修改密码" bgcolor="#1E90FF" color="#FFFFFF" fontsize="18px">
-          <router-link to="#" slot="left">
+          <router-link to="/login" slot="left">
             <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
           </router-link>
 

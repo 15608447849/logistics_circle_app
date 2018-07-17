@@ -10,6 +10,7 @@ import {
 import REGISTER from '@/pages/login/register' // 用户注册
 import LOGIN from '@/pages/login/index' // 用户登录
 import SMSLOGIN from '@/pages/login/smsLogin' // 短信登录
+import REPWD from '@/pages/login/retrievePwd'// 找回密码
 import UPDATAPWD from '@/pages/login/updatapwd' // 修改密码
 import VERIFICATION from '@/pages/login/verification' // 手机验证码验证
 import CONFIRMPWD from '@/pages/login/confirmpwd' // 修改密码确认密码
@@ -28,13 +29,20 @@ import INFO from '@/pages/information/index'
 // 我的订单模块
 import ORDER from '@/pages/order/index'
 // 搜索页
-import SEARCH from '@/components/SimpleSearchInput'
+import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
+
+
+
 // 测试页面
 import TEST from '@/interfaces/test'
 // picker测试
 import PICKER from '@/pages/pickerTest'
+// 信息大厅测试
+import infoTest from '@/pages/infoTest'
+// 城市选择
+import CITY from '@/components/citySelector'
 
 Vue.use(Router);
 
@@ -99,8 +107,8 @@ const vueRouter = new Router({
       component: LOGIN
     },
     {
-      path: '/login/updatapwd',
-      component: UPDATAPWD
+      path: '/retrievePwd',
+      component: REPWD
     },
     {
       path: '/login/Verification',
@@ -142,6 +150,14 @@ const vueRouter = new Router({
     {
       path: '/information/issueDetails',
       component: ISSUEDETAILS
+    },
+    {
+      path: '/infoTest',
+      component: infoTest
+    },
+    {
+      path: '/city',
+      component: CITY
     }
   ]
 });
