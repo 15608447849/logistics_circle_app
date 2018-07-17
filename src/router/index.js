@@ -22,6 +22,12 @@ import GEOLOCATION from '@/pages/geoLocationTest'
 import INDEX from '@/pages/index'
 // 首页模块
 import HOME from '@/pages/home/index'
+// 首页模块个人信息中的基本信息模块
+import BASICINFORMATION from '@/pages/home/basiInformation'
+// 首页模块个人信息中的基本信息模块下的发票信息
+import INVOICE from '@/pages/home/invoice'
+// 首页模块个人信息中的基本信息模块下的企业信息
+import ENTERPRISE from '@/pages/home/enterprise'
 // 圈子订单模块
 import CIRCLE from '@/pages/circle/index'
 // 信息大厅模块
@@ -74,6 +80,22 @@ const vueRouter = new Router({
           path: '',
           component: HOME,
         },
+        {
+          name: 'basiInformation',
+          path: '/home/basiInformation',
+          component: BASICINFORMATION
+        },
+        {
+          name: 'basiInformation',
+          path: '/home/invoice',
+          component: INVOICE
+        },
+        {
+          name: 'basiInformation',
+          path: '/home/enterprise',
+          component: ENTERPRISE
+        },
+
         {
           name: 'circle',
           path: '/circle',
