@@ -6,7 +6,9 @@
         <div class="yd-loading-txt" v-html="title"></div>
       </div>
     </div>
-    <router-view v-show="!isLoading"/>
+    <keep-alive>
+      <router-view v-show="!isLoading"/>
+    </keep-alive>
   </div>
 </template>
 

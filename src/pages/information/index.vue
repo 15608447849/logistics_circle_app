@@ -32,7 +32,8 @@
           <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
             class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
           <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span class="carWeight"></span><span
-            class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span></div>
+            class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
+          </div>
         </li>
       </ul>
     </div>
@@ -135,7 +136,7 @@
         //     }
         //   ))
 
-        this.$Ice_OrderService.queryCircleOrderByApp(self.token, self.pageSize,self.address, self.key, requestState, timeStr,
+        this.$Ice_OrderService.queryCircleOrderByApp(self.token, self.pageSize, self.address, self.key, requestState, timeStr,
           new IceCallback(
             function (result) {
               console.log(result);

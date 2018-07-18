@@ -100,7 +100,7 @@
      * 订单实体
      **/
     order.OrderICE = Slice.defineStruct(
-        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
+        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
         {
             this.puberid = puberid !== undefined ? puberid : "";
             this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
@@ -113,6 +113,8 @@
             this.startaddr = startaddr !== undefined ? startaddr : "";
             this.arriarc = arriarc !== undefined ? arriarc : "";
             this.arriaddr = arriaddr !== undefined ? arriaddr : "";
+            this.startcext = startcext !== undefined ? startcext : "";
+            this.arriarcext = arriarcext !== undefined ? arriarcext : "";
             this.wm = wm !== undefined ? wm : 0.0;
             this.wmdictc = wmdictc !== undefined ? wmdictc : "";
             this.num = num !== undefined ? num : 0;
@@ -156,6 +158,8 @@
             __os.writeString(this.startaddr);
             __os.writeString(this.arriarc);
             __os.writeString(this.arriaddr);
+            __os.writeString(this.startcext);
+            __os.writeString(this.arriarcext);
             __os.writeDouble(this.wm);
             __os.writeString(this.wmdictc);
             __os.writeInt(this.num);
@@ -198,6 +202,8 @@
             this.startaddr = __is.readString();
             this.arriarc = __is.readString();
             this.arriaddr = __is.readString();
+            this.startcext = __is.readString();
+            this.arriarcext = __is.readString();
             this.wm = __is.readDouble();
             this.wmdictc = __is.readString();
             this.num = __is.readInt();
@@ -227,7 +233,7 @@
             this.ostatus = __is.readInt();
             this.priority = __is.readInt();
         },
-        79, 
+        81, 
         false);
 
     /**

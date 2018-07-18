@@ -16,8 +16,7 @@ import VERIFICATION from '@/pages/login/verification' // 手机验证码验证
 import CONFIRMPWD from '@/pages/login/confirmpwd' // 修改密码确认密码
 import ISSUEDETAILS from '@/pages/information/issueDetails'// 信息大厅订单详情模块
 
-// 高德地图测试
-import GEOLOCATION from '@/pages/geoLocationTest'
+
 // 初始页
 import INDEX from '@/pages/index'
 // 首页模块
@@ -49,6 +48,8 @@ import PICKER from '@/pages/pickerTest'
 import infoTest from '@/pages/infoTest'
 // 城市选择
 import CITY from '@/components/citySelector'
+// 高德地图
+import GEOLOCATION from '@/components/geoLocation'
 
 Vue.use(Router);
 
@@ -228,5 +229,7 @@ vueRouter.afterEach(route => {
   /* 隐藏加载中动画 */
   store.commit(UPDATE_LOADING_STATUS, false);
 });
+
+vueRouter.beforeRouteLeave
 
 export default vueRouter

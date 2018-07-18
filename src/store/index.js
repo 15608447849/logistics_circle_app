@@ -15,8 +15,10 @@ const state = {
   searchState: '', // 搜索类型
   isLoading: false, // 网络加载等待框
   dict: {}, // 字典
-  area: {}, // 地区
-  currentCity: '长沙' // 当前地区
+  area: {}, // 城市地区json数据
+  currentCity: {}, // 当前地区
+  geoState: 0, // 0: 出发地 1: 目的地
+  addressCom: {}, // 地理编码信息列表
 };
 
 export default new Vuex.Store({

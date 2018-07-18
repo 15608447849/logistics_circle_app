@@ -1,14 +1,13 @@
 <template>
   <div class="container">
     <transition :name="transitionName">
-      <keep-alive>
-        <router-view class="child-view"></router-view>
-      </keep-alive>
+      <router-view class="child-view"></router-view>
     </transition>
     <div class="nav-bar">
       <yd-tabbar active-color="#1E90FF">
-        <yd-tabbar-item :title= item.title link="#" v-for="(item,index) in activeList" :key="index" @click.native="navBarClick(index)" :active=item.isActive>
-          <yd-icon :name= item.name slot="icon" size="0.54rem"></yd-icon>
+        <yd-tabbar-item :title=item.title link="#" v-for="(item,index) in activeList" :key="index"
+                        @click.native="navBarClick(index)" :active=item.isActive>
+          <yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>
         </yd-tabbar-item>
       </yd-tabbar>
     </div>
@@ -21,6 +20,7 @@
     AREA,
     CURRENT_CITY
   } from '../store/mutation-types'
+
   export default {
     data() {
       return {
@@ -29,15 +29,15 @@
           title: '首页',
           isActive: false,
           name: 'home'
-        },{
+        }, {
           title: '圈子',
           isActive: false,
           name: 'discover'
-        },{
+        }, {
           title: '信息大厅',
           isActive: true,
           name: 'feedback'
-        },{
+        }, {
           title: '我的订单',
           isActive: false,
           name: 'ucenter-outline'
@@ -47,14 +47,14 @@
     mounted() {
       // 获取当前定位城市
       // 设置当前定位城市
-      // this.$app_store.commit(CURRENT_CITY, '长沙');
+      this.$app_store.commit(CURRENT_CITY, '长沙');
       this.initBaseData();
       this.initAreaData();
     },
     methods: {
       handleActive(position) {
-        this.activeList.forEach((val,index,array) =>{
-          if(position === index) {
+        this.activeList.forEach((val, index, array) => {
+          if (position === index) {
             val.isActive = true
           } else {
             val.isActive = false
@@ -85,14 +85,13 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              console.log(result)
-              self.$app_store.commit(DICT, result);
+              self.$app_store.commit(DICT, JSON.parse(result));
+
             },
             function (error) {
-              console.log(error)
               setTimeout(() => {
                 self.initBaseData();
-              },15000);
+              }, 15000);
             }
           )
         );
@@ -102,14 +101,13 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              console.log(result)
               self.$app_store.commit(AREA, JSON.parse(result).children);
             },
             function (error) {
               console.log(error)
               setTimeout(() => {
                 self.initAreaData();
-              },15000);
+              }, 15000);
             }
           )
         );
@@ -135,6 +133,7 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
+
   .nav-bar {
     /*background: white;*/
     width: 100%;

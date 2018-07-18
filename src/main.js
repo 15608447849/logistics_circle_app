@@ -26,10 +26,10 @@ Vue.prototype.message = message;
 
 
 Vue.prototype.$app_store = store;
-
+//
 VueAMap.initAMapApiLoader({
   key: 'fd1c441c553b00833ccb5ccb9cdd8281',
-  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+  plugin: ['AMap.Geocoder'],
   v: '1.4.4',
   uiVersion: '1.0.11'
 });

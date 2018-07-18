@@ -25,5 +25,14 @@ export default {
   // 当前城市
   currentCity: state => {
     return state.currentCity
+  },
+  // 高德地图状态
+  geoState: state => {
+    return state.geoState
+  },
+  // 地理编码信息列表
+  addressCom: state => {
+    return state.addressCom
   }
+
 }

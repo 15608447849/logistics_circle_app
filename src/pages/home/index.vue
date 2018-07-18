@@ -5,14 +5,14 @@
     <!--<yd-button type="danger" style="margin: 30px;" @click.native="show4 = false">Close Right Popup</yd-button>-->
     <!--</yd-popup>-->
     <!--页头-->
-    <yd-button type="primary" style="margin-top: 12%;margin-bottom:2%;" @click.native="toLogin">登陆页面</yd-button>
-    <yd-button type="primary" @click.native="toRegister">注册页面</yd-button>
-    <yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>
-    <yd-button type="primary" @click.native="toPagePickerTest">picker测试</yd-button>
-    <yd-button type="primary" @click.native="toPageInfoTest">发布订单测试</yd-button>
-    <yd-button type="primary" @click.native="toTest">测试页面</yd-button>
-    <yd-button type="primary" @click.native="toCityTest">城市选择</yd-button>
-    <yd-button type="primary" @click.native="toRePwdTest">找回密码</yd-button>
+    <!--<yd-button type="primary" style="margin-top: 12%;margin-bottom:2%;" @click.native="toLogin">登陆页面</yd-button>-->
+    <!--<yd-button type="primary" @click.native="toRegister">注册页面</yd-button>-->
+    <!--&lt;!&ndash;<yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>&ndash;&gt;-->
+    <!--<yd-button type="primary" @click.native="toPagePickerTest">picker测试</yd-button>-->
+    <!--<yd-button type="primary" @click.native="toPageInfoTest">发布订单测试</yd-button>-->
+    <!--<yd-button type="primary" @click.native="toTest">测试页面</yd-button>-->
+    <!--<yd-button type="primary" @click.native="toCityTest">城市选择</yd-button>-->
+    <!--<yd-button type="primary" @click.native="toRePwdTest">找回密码</yd-button>-->
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-jibenxinxi1"  size="" type="" @click.native="show3 = true"></i>
       <!--<img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">-->
@@ -121,9 +121,9 @@
       toRegister() {
         this.$router.push({path: '/register'})
       },
-      toPageGeo() {
-        this.$router.push({path: '/geo'})
-      },
+      // toPageGeo() {
+      //   this.$router.push({path: '/geo'})
+      // },
       toPagePickerTest() {
         this.$router.push({path: '/picker'})
       },

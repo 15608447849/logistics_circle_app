@@ -129,7 +129,7 @@ module.exports = {
   queryCircleOrderByApp: (token,size,addr,key,op,timeStr,callback)=> {
     queryIce(order.OrderServicePrx , 'OrderService', 'queryAppCircleOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
   },
-  /**生成订单运单号 */
+  /**生成订单订单号 */
   generateOrderNo:(callback)=>{
     queryIce(order.OrderServicePrx , 'OrderService', 'generateOrderNo',callback);
   },

@@ -16,3 +16,7 @@ export const DICT  = 'DICT'
 export const AREA = 'AREA'
 // 所在地区
 export const CURRENT_CITY = 'CURRENT_CITY'
+// 高德地图状态
+export const GEOSTATE = 'GEOSTATE'
+// 地理编码信息列表
+export const ADDRESSCOM = 'ADDRESSCOM'

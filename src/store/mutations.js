@@ -7,7 +7,9 @@ import {
   UPDATE_LOADING_STATUS,
   DICT,
   AREA,
-  CURRENT_CITY
+  CURRENT_CITY,
+  GEOSTATE,
+  ADDRESSCOM
 } from './mutation-types'
 
 export default {
@@ -44,5 +46,14 @@ export default {
   // 当前城市
   [CURRENT_CITY](state, v) {
     state.currentCity = v;
+  },
+  // 高德地图状态
+  [GEOSTATE](state, v) {
+    state.geoState = v;
+  },
+  // 地理编码信息列表
+  [ADDRESSCOM](state, v) {
+    state.addressCom = v;
   }
+
 }
