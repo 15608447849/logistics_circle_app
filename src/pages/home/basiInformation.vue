@@ -17,8 +17,8 @@
      <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
      <li><img src="../../assets/images/small/star36_off@2x.png" alt=""></li>
    </ul>
-   <ul class="enterpriseInformation">
-     <li class="enterpriseSmallPic" @click="toenterprise">
+   <ul class="enterpriseInformation" @click="toenterprise">
+     <li class="enterpriseSmallPic">
        <i class="icon iconfont icon-qiyexinxi"></i>
        <span>企业信息</span>
      </li>
@@ -27,8 +27,8 @@
        <span>18373270790</span>
      </li>
    </ul>
-   <ul class="enterpriseInformation">
-     <li class="enterpriseSmallPic" @click="toInvoice">
+   <ul class="enterpriseInformation" @click="toInvoice">
+     <li class="enterpriseSmallPic">
        <i class="icon iconfont icon-fapiao1"></i>
        <span>发票信息</span>
      </li>
@@ -37,7 +37,7 @@
      </li>
    </ul>
    <ul class="Certificates">
-     <li class="firstCertificates">
+     <li class="firstCertificates"  @click="toCertificates">
        <i class="icon iconfont icon-zhengjianzhao"></i>
        <span>证件信息</span>
      </li>
@@ -88,6 +88,11 @@
         toenterprise(){
           this.$router.push({
             path: '/home/enterprise'
+          })
+        },
+        toCertificates(){
+          this.$router.push({
+            path: '/home/certificates'
           })
         }
       }

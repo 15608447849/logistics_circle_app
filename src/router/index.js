@@ -27,6 +27,8 @@ import BASICINFORMATION from '@/pages/home/basiInformation'
 import INVOICE from '@/pages/home/invoice'
 // 首页模块个人信息中的基本信息模块下的企业信息
 import ENTERPRISE from '@/pages/home/enterprise'
+// 首页模块个人信息中的基本信息模块下的证件信息
+import CERTIFICATES from '@/pages/home/certificates'
 // 圈子订单模块
 import CIRCLE from '@/pages/circle/index'
 // 信息大厅模块
@@ -96,7 +98,11 @@ const vueRouter = new Router({
           path: '/home/enterprise',
           component: ENTERPRISE
         },
-
+        {
+          name: 'basiInformation',
+          path: '/home/certificates',
+          component: CERTIFICATES
+        },
         {
           name: 'circle',
           path: '/circle',

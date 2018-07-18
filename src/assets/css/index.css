@@ -275,12 +275,20 @@ a {
 }
 .personalList i{
   margin-right:.25rem;
+  color:#55606e;
 }
 .circle{
   margin-left:-6%;
 }
 .settingCircleBox{
-  margin-left:.5rem;
+  display:block;
+  width:.6rem;
+  height:.1rem;
+  margin-left:.4rem;
+}
+.settingCircleBox i{
+  margin-left:.07rem;
+  color:#55606e;
 }
 .settingCircle{
   margin-top:.16rem;
@@ -476,7 +484,7 @@ a {
 }
 /*首面个人中心基本信息的企业信息*****************************************************************************/
 .enterpriseBox{
-  background:#f5f5f5;
+  background:#ffffff;
 }
 .enterpriseList{
   width:7.5rem;
@@ -573,9 +581,90 @@ a {
   letter-spacing: 0px;
   color: #333333;
 }
+.natureBox div{
+  margin-left:.35rem;
+  margin-bottom:.37rem;
+}
+input[type="radio"] + label::before {
+  content: "\a0";
+  display: inline-block;
+  vertical-align: middle;
+  font-size: .24rem;
+  width: .24rem;
+  height: .24rem;
+  margin-right: .04rem;
+  border-radius: 50%;
+  border: 1px solid #3189f5;
+  text-indent: .15rem;
+  line-height: 1;
+}
+input[type="radio"]:checked + label::before {
+  background-color: #3189f5;
+  background-clip: content-box;
+  padding: .2em;
+}
+input[type="radio"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+/*证件信息**********************************************************************************************/
+.identity{
+  display:flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  width:7.5rem;
+  height:11.55rem;
+  margin:0rem 5rem .64rem 0rem;
+  padding:.4rem .21rem 0rem .21rem;
+  background:#ffffff;
+}
+.identity div{
+  width:3.46rem;
+  height:2.6rem;
+  margin-bottom:.64rem;
+  background:#ffffff;
+}
+.identity div p{
+  margin-bottom:.31rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height:.24rem;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.identity div .cerPic{
+  display:block;
+  width:3.4rem;
+  height:2.39rem;
+  margin:0 auto;
+  box-shadow: 0px 2px 7px 0px
+  rgba(37, 117, 188, 0.2);
+}
+.updataCertificates{
+  width: 3.46rem;
+  height: 3.14rem;
+  background-color: #ffffff;
+}
+.updataCertificatesBox{
+  width:3.46rem;
+  height:2.6rem;
+  background-color: #ffffff;
+  border: solid 1px #ebeff5;
+}
+.upcerPic{
+  display:block;
+  width:.8rem;
+  height:.8rem;
+  margin:.9rem auto;
 
+}
 /*登录*/
 .login{
+  position:relative;
+  top:0rem;
+  left:0rem;
   width:7.5rem;
   height:100%;
   padding-top:1.2rem;
@@ -594,7 +683,7 @@ a {
   height:1.5rem;
   margin:0 auto;
   margin-bottom:.66rem;
-  background:white;
+  background:#ffffff;
   border:1px solid white;
   border-radius:4px;
   font-family: PingFang-SC-Regular;
@@ -602,6 +691,27 @@ a {
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
+}
+.Flogin_input{
+  display:block;
+  width:6.42rem;
+  height:1.5rem;
+  position:absolute;
+  top:5.25rem;
+  left:.545rem;
+  margin:0 auto;
+  margin-bottom:.66rem;
+  background:#ffffff;
+  border:1px solid white;
+  border-radius:4px;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+}
+.Flogin_input div{
+  padding-right:.4rem;
 }
 .login_phone{
   display:none;
@@ -620,7 +730,7 @@ a {
 }
 .verificationLogin{
   float:left;
-  width:4rem;
+  width:auto;
   height:1.5rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
@@ -631,15 +741,19 @@ a {
 }
 .getVerificationCode{
   float:right;
-  width:2.42rem;
-  height:1.5rem;
+  width:1.5rem;
+  height:.74rem;
+  text-align: right;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .24rem;
+  line-height: .74rem;
   letter-spacing: 0px;
   color: #3189f5;
+}
+.displayNone{
+  display:none;
 }
 .userPwdLogin{
   display:none;
@@ -657,12 +771,19 @@ a {
 /*.borderBottom{*/
 /*border-bottom:1px solid gray;*/
 /*}*/
-.login_input .userName{
+.login_input .userPwd{
   display:block;
   width:5.8rem;
   height:.74rem;
   border:none;
   margin:0 auto;
+}
+.FuserPwd{
+  display:inline-block;
+  width:4.1rem;
+  height:.74rem;
+  border:none;
+  margin-left:.3rem;
 }
 .userNameBorderBottom{
   display:block;
@@ -688,22 +809,22 @@ a {
   margin-bottom:.24rem;
 }
 .fastLogin{
-  display:block;
-  width:6.42rem;
-  margin:0 auto;
-  font-family: PingFang-SC-Regular;
-  font-size: .24rem;
-  font-weight: normal;
-  font-stretch: normal;
-  line-height: .24rem;
-  letter-spacing: 0px;
-  color: #2b73cc;
-  margin-bottom:4.02rem;
-}
+   display:block;
+   width:6.42rem;
+   margin:0 auto;
+   font-family: PingFang-SC-Regular;
+   font-size: .24rem;
+   font-weight: normal;
+   font-stretch: normal;
+   line-height: .24rem;
+   letter-spacing: 0px;
+   color: #2b73cc;
+   margin-bottom:3.5rem;
+ }
 .forgetPwd{
   display:flex;
   justify-content:space-between;
-  padding:0rem .25rem 0rem .25rem;
+  padding:0rem .54rem 0rem .54rem;
 }
 .forgetPwd span{
   font-family: PingFang-SC-Regular;
@@ -831,7 +952,7 @@ a {
   height:.64rem;
   margin:0 auto;
   margin-top:.56rem;
-  border:1px solid #3189f5;
+  border:1px solid #ffffff;
   border-radius:3px;
   font-family: PingFang-SC-Regular;
   font-size:.32rem;
@@ -840,7 +961,10 @@ a {
   line-height: .24rem;
   letter-spacing: 0px;
   color: #ffffff;
-  background:#3189f5;
+  background: -webkit-linear-gradient(45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
 /*修改密码填写验证码页面**********************************************************************/
 .verificationBox{
@@ -937,7 +1061,10 @@ a {
   width:7.5rem;
   height:.8rem;
   padding:0px .08rem 0px .08rem;
-  background:#1E90FF;
+  background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
 .issueHeaderNav .issueHeaderNavPic img{
   display:inline-block;

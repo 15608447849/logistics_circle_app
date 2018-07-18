@@ -7,7 +7,6 @@
 
       <img slot="right" src="../../assets/images/small/logo_26.png"/>
     </yd-navbar>
-    <!--<yd-cell-group v-show="firstStepBool">-->
     <yd-cell-group v-show="firstStepBool">
       <yd-cell-item>
         <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
@@ -19,7 +18,6 @@
         ></yd-sendcode>
       </yd-cell-item>
     </yd-cell-group>
-    <!--<yd-cell-group v-show="secondStepBool">-->
     <yd-cell-group v-show="secondStepBool">
       <yd-cell-group>
         <yd-cell-item>

@@ -14,8 +14,8 @@
       <div class="inputNumBox">
         <input v-model="userPhone" type="text" placeholder="请输入您的手机号" class="inputNum">
       </div>
+      <button class="nextStep" @click="firstStep()">下一步</button>
     </div>
-    <button class="nextStep" @click="firstStep()">下一步</button>
   </div>
 </template>
 

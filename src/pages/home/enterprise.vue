@@ -10,9 +10,9 @@
         <span class="touxiang">头像</span>
         <img src="../../assets/images/small/bussiness-man.png" alt="" class="enterprisetouxiang">
       </li>
-      <li class="enterpriseLi needBorder">
+      <li class="enterpriseLi needBorder" @click="show1 = true">
         <span class="invoiceTitle">企业名称</span>
-        <span class="invoiceContent" @click="show1 = true">
+        <span class="invoiceContent">
           长沙大唐物流有限公司
         </span>
       </li>
@@ -20,9 +20,9 @@
         <span class="invoiceTitle">企业简称</span>
         <span class="invoiceContent">大唐物流</span>
       </li>
-      <li class="enterpriseLi needBorder">
+      <li class="enterpriseLi needBorder" @click="show2 = true">
         <span class="invoiceTitle">企业性质</span>
-        <span class="invoiceContent" @click="show2 = true">民营企业</span>
+        <span class="invoiceContent">民营企业</span>
       </li>
       <li class="enterpriseLi needBorder">
         <span class="invoiceTitle">企业规模</span>
@@ -53,19 +53,27 @@
         </div>
       </div>
     </yd-popup>
-    <yd-popup v-model="show2" position="bottom" height="30%">
+    <yd-popup v-model="show2" position="bottom" height="30%" close-on-masker="true">
       <div style="background-color:#fff;">
         <div class="updataEnterpriseNature">
           <p>修改企业性质</p>
           <div class="natureBox">
-            <input type="radio" value="" name="Nature"> <span>国有企业</span>
-            <input type="radio" value="" name="Nature"> <span>集体企业</span>
-            <input type="radio" value="" name="Nature"> <span>民营企业</span>
-            <input type="radio" value="" name="Nature"> <span>股份合作制企业</span>
-          </div>
-          <div>
-            <span class="cancel" @click="show1 = false">取消</span>
-            <span class="sure" @click="show1 = false">确定</span>
+            <div @click="show2 = false">
+              <input type="radio" value="" name="Nature" id="Nature1">
+              <label for="Nature1"> &nbsp&nbsp国有企业</label>
+            </div>
+            <div @click="show2 = false">
+              <input type="radio" value="" name="Nature" id="Nature2">
+              <label for="Nature2"> &nbsp&nbsp集体企业</label>
+            </div>
+            <div @click="show2 = false">
+              <input type="radio" value="" name="Nature" id="Nature3">
+              <label for="Nature3"> &nbsp&nbsp民营企业</label>
+            </div>
+            <div @click="show2 = false">
+              <input type="radio" value="" name="Nature" id="Nature4">
+              <label for="Nature4"> &nbsp&nbsp股份合作制企业</label>
+            </div>
           </div>
         </div>
       </div>
@@ -80,8 +88,7 @@
           show1: false,
           show2: false
         }
-      }
-
+      },
     }
 </script>
 

@@ -3,11 +3,21 @@
     <img src="../../assets/images/small/login_logo.png" alt="" class="loginPic">
     <div class="login_input">
         <input type="text" v-model="account" placeholder="用户名/手机号码" class="userNameBorderBottom">
-        <input type="password" v-model="password" placeholder="密码" class="userName">
+        <input type="password" v-model="password" placeholder="密码" class="userPwd">
+    </div>
+    <div class="Flogin_input displayNone">
+      <input type="text" v-model="account" placeholder="注册的手机号" class="FuserNameBorderBottom">
+      <div>
+        <input type="password" v-model="password" placeholder="验证码" class="FuserPwd">
+        <a class="getVerificationCode">获取验证码</a>
+      </div>
     </div>
     <button class="loginBut" @click="loginClick">登 录</button>
-    <div class="fastLogin">
+    <div class="fastLogin displayNone">
       快捷登录
+    </div>
+    <div class="FfastLogin displayNone">
+      账号密码登录
     </div>
     <div class="forgetPwd">
       <span @click="toPageRegister">新用户注册</span>

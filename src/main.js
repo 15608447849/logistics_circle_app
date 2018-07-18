@@ -10,15 +10,19 @@ import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 import VueAMap from 'vue-amap';
 
+
+
 import 'vue-ydui/dist/ydui.rem.css';
 import './assets/lib/ydui.flexible';
 import './assets/css/index.css';
+
 
 Vue.use(business);
 Vue.use(Vuex);
 Vue.use(YDUI);
 Vue.use(Cube);
 Vue.use(VueAMap);
+
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
