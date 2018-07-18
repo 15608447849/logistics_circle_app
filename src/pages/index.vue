@@ -47,9 +47,9 @@
     mounted() {
       // 获取当前定位城市
       // 设置当前定位城市
-      this.$app_store.commit(CURRENT_CITY, '长沙');
-      // this.initBaseData();
-      // this.initAreaData();
+      // this.$app_store.commit(CURRENT_CITY, '长沙');
+      this.initBaseData();
+      this.initAreaData();
     },
     methods: {
       handleActive(position) {
@@ -85,9 +85,11 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
+              console.log(result)
               self.$app_store.commit(DICT, result);
             },
             function (error) {
+              console.log(error)
               setTimeout(() => {
                 self.initBaseData();
               },15000);
@@ -100,9 +102,11 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
+              console.log(result)
               self.$app_store.commit(AREA, JSON.parse(result).children);
             },
             function (error) {
+              console.log(error)
               setTimeout(() => {
                 self.initAreaData();
               },15000);
