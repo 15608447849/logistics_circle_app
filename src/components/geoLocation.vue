@@ -1,15 +1,22 @@
 <template>
   <div>
-    <yd-navbar title="地址选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
-      <router-link @click.native="" to="#" slot="left">
-        <yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>
-      </router-link>
-    </yd-navbar>
+    <!--<yd-navbar title="地址选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">-->
+      <!--<router-link @click.native="goBack" to="#" slot="left">-->
+        <!--<yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>-->
+      <!--</router-link>-->
+    <!--</yd-navbar>-->
+
+    <div class="issueHeaderNav">
+      <i  class="icon iconfont icon-btngoback back" @click="goBack"></i>
+      <span>地址选择</span>
+      <div></div>
+    </div>
+
     <div class="amap-container">
       <button @click="selectCity">{{searchOption.city}}</button>
       <el-amap-search-box class="search" :search-option="searchOption"
                           :on-search-result="onSearchResult"></el-amap-search-box>
-      <el-amap vid="amapDemo" :center="mapCenter" :zoom="12" class="amap-demo">
+      <el-amap vid="amapDemo" :events="events"  :center="mapCenter" :zoom="cZoom" class="amap-demo">
         <el-amap-marker v-for="marker in markers" :icon="marker.icon" :position="marker" :key="marker"></el-amap-marker>
       </el-amap>
     </div>
@@ -25,28 +32,42 @@
   import {
     ADDRESSCOM
   } from '../store/mutation-types'
+  import { AMapManager } from "vue-amap";
   export default {
     data() {
       return {
+        // 缩放比例
+        cZoom: 12,
         pList: [],// 搜索点坐标
+        map: null,
         searchOption: {
           city: '',
           citylimit: true
         },
         markers: [], // 搜索标记
         mapCenter: [], // 地图中心点
-        geocoder: null
+        geocoder: null,
+        events: {
+          init :(map) => {
+            this.map = map
+            this.map.setCity(this.$app_store.getters.currentCity);
+          }
+        }
       }
     },
     mounted() {
       this.initData();
     },
+    activated: function () {
+      if(this.map !== null) {
+        this.searchOption.city = this.$app_store.getters.currentCity;
+        this.map.setCity(this.searchOption.city);
+      }
+    },
     methods: {
-      // 初始化数据
       initData() {
         // 设置地址搜索框城市
         this.searchOption.city = this.$app_store.getters.currentCity || '北京';
-        // 初始化地图中心点
         this.mapCenter = [113.0068368, 28.212332300000003];
       },
       selectCity() {
@@ -55,6 +76,7 @@
         })
       },
       onSearchResult(pois) {
+        this.cZoom = 14;
         let latSum = 0;
         let lngSum = 0;
         this.pList = pois;

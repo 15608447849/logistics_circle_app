@@ -5,10 +5,9 @@
     <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
     <div id="mescroll" class="mescroll">
       <ul class="order_box">
-        <li class="order_list" v-for="(item,index) in infoList" :key="index" @click="item">
-          <div class="order_price"><span class="site">{{item.destAddr + '-' + item.startAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
-          <div class="order_time"><span class="volume">{{item.goodsType}}</span><span class="car_type">{{item.wm}}</span><span
-            class="price">{{item.cost}}</span></div>
+        <li class="order_list"  v-for="(item,index) in infoList" :key="index" @click="item">
+          <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
+          <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span class="carWeight">{{item.wm}}</span><span class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.vlen}}</span><span class="total_price">￥{{item.cost}}元</span></div>
         </li>
       </ul>
     </div>

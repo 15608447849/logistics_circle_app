@@ -1,11 +1,16 @@
 <template>
   <div style="height: 100%;">
-    <yd-navbar title="城市选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
-      <router-link to="#" slot="left">
-        <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
-      </router-link>
-      <!--<img slot="right" src="../../assets/images/small/logo_26.png"/>-->
-    </yd-navbar>
+    <!--<yd-navbar title="城市选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">-->
+      <!--<router-link to="#" slot="left">-->
+        <!--<yd-navbar-back-icon " color="#FFFFFF"></yd-navbar-back-icon>-->
+      <!--</router-link>-->
+      <!--&lt;!&ndash;<img slot="right" src="../../assets/images/small/logo_26.png"/>&ndash;&gt;-->
+    <!--</yd-navbar>-->
+    <div class="issueHeaderNav">
+      <i  class="icon iconfont icon-btngoback back" @click="fallback"></i>
+      <span>城市选择</span>
+      <div></div>
+    </div>
     <cube-index-list
       :data="cityData"
       :title="title"
@@ -1413,25 +1418,24 @@
   export default {
     data() {
       return {
-        title: '当前城市选中: 长沙',
+        title: '',
         cityData: cityData,
         currentCity: ''
       }
     },
-    mounted() {
-      this.initData();
+    activated: function () {
+      this.currentCity = this.$app_store.getters.currentCity || '北京';
+      this.title = '当前城市选中:' + this.currentCity;
     },
     methods: {
-      initData() {
-        this.currentCity = this.$app_store.getters.currentCity || '北京';
-        this.title = '当前城市选中:' + this.currentCity;
-      },
       selectItem(item) {
-        debugger
         this.$app_store.commit(CURRENT_CITY,item.name);
         this.$router.go(-1);
       },
       clickTitle(title) {
+        this.$router.go(-1);
+      },
+      fallback() {
         this.$router.go(-1);
       }
     }

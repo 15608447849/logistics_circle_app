@@ -40,7 +40,11 @@ import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
 
-
+// 个人中心
+import USER_INFO from '@/pages/center/userInfo'
+import ENT_INFO from '@/pages/center/entInfo'
+import VAT_INFO from '@/pages/center/vatInfo'
+import CART_INFO from '@/pages/center/cardInfo'
 
 // 测试页面
 import TEST from '@/interfaces/test'
@@ -187,6 +191,22 @@ const vueRouter = new Router({
     {
       path: '/city',
       component: CITY
+    },
+    {
+      path: '/userInfo',
+      component: USER_INFO
+    },
+    {
+      path: '/entInfo',
+      component: ENT_INFO
+    },
+    {
+      path: '/vatInfo',
+      component: VAT_INFO
+    },
+    {
+      path: '/cartInfo',
+      component: CART_INFO
     }
   ]
 });

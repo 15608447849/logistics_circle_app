@@ -23,14 +23,15 @@
             </div>
           </div>
           <ul class="personalList">
-            <li @click="tobasicInformation"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span> </li>
-            <li><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span> </li>
-            <li><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span> </li>
-            <li><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span> </li>
-            <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span> </li>
-            <li><i class="icon iconfont icon-quanzi"></i><span class="personalText circle">我的圈子</span> </li>
-            <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span> </li>
-            <li><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span> </li>
+            <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
+            </li>
+            <li><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span></li>
+            <li><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span></li>
+            <li><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
+            <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
+            <li><i class="icon iconfont icon-quanzi"></i><span class="personalText circle">我的圈子</span></li>
+            <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
+            <li><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
           </ul>
           <div class="settingCircleBox">
             <i class="icon iconfont icon-shezhi1"></i>
@@ -56,14 +57,7 @@
             </li>
         </ul>
       </span>
-
     </div>
-    <yd-button type="primary" style="margin-top: 12%;margin-bottom:2%;" @click.native="toLogin">登陆页面</yd-button>
-    <yd-button type="primary" @click.native="toRegister">注册页面</yd-button>
-    <yd-button type="primary" @click.native="toPageGeo">地图测试</yd-button>
-    <yd-button type="primary" @click.native="toPagePickerTest">picker测试</yd-button>
-    <yd-button type="primary" @click.native="toPageInfoTest">发布订单测试</yd-button>
-    <yd-button type="primary" @click.native="toTest">测试页面</yd-button>
     <div class="searchBox">
       <div class="selectRegion">
         <div class="searchBtn">
@@ -89,24 +83,10 @@
     </div>
     <ul class="order_box">
       <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
       </li>
     </ul>
     <div class="seeMore">查看更多</div>
@@ -114,11 +94,11 @@
 
 </template>
 <script>
-  export default{
-    data(){
+  export default {
+    data() {
       return {
         show4: false,
-        isMember:true,
+        isMember: true,
         direction: '',
         tipStyle: ''
       }
@@ -136,15 +116,15 @@
       toPagePickerTest() {
         this.$router.push({path: '/picker'})
       },
-      toTest(){
+      toTest() {
         this.$router.push({path: '/test'})
       },
       toPageInfoTest() {
         this.$router.push({path: '/infoTest'})
       },
-      tobasicInformation(){
+      jUserInfo() {
         this.$router.push({
-          path: '/home/basiInformation'
+          path: '/userInfo'
         })
       }
     }

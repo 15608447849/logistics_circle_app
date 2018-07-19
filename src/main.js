@@ -30,7 +30,7 @@ Vue.prototype.message = message;
 
 
 Vue.prototype.$app_store = store;
-//
+
 VueAMap.initAMapApiLoader({
   key: 'fd1c441c553b00833ccb5ccb9cdd8281',
   plugin: ['AMap.Geocoder'],

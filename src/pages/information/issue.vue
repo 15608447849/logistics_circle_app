@@ -156,7 +156,7 @@
       <div class="totalPrice">
         <span class="floatleft marginBottom60">订单总价</span><span
         class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
-        <button class="releaseBtn" @click="releaseOrder">发 布</button>
+        <button class="releaseBtn" @click="releaseOrder" >发 布</button>
       </div>
     </div>
   </div>
@@ -169,6 +169,7 @@
   export default {
     data() {
       return {
+        isSubmit: false,
         OrderDetail: new order.OrderICE(),
         dicData: {},// 选择器字典数据, store中获取
         selectDataPicker: '',
@@ -212,13 +213,12 @@
     methods: {
       // 初始化页面数据
       initData() {
+        // startc arriarc  这两个字段Web端使用 APP传0
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
-        // 数据从本地获取 方便测试
+
         this.dicData = this.$app_store.getters.dict || null;
         this.pmList = this.dicData.pm;
-        console.log(this.dicData)
-        // console.log(this.dicData);
         // 设置默认类型字典选择, 默认取第一个
         this.OrderDetail.wmdictc = this.dicData.wm[0].value;
         this.displayDic.disWmLabel = this.dicData.wm[0].label;
@@ -252,8 +252,6 @@
 
         this.OrderDetail.pmdictc = this.dicData.pm[0].value;
         this.displayDic.disPmLabel = this.dicData.pm[0].label;
-
-
 
         // 声明保价
         this.OrderDetail.insureamt = 0.0;
@@ -359,9 +357,11 @@
           },
           function (error) {
             self.message.Toast(self, 'error', '订单号生成失败，请稍后重试', false);
-            setTimeout(() => {
-              self.$router.go(-1);
-            }, 1500)
+            // 发布按钮设置不可选
+            // self.isSubmit = true
+            // setTimeout(() => {
+            //   self.$router.go(-1);
+            // }, 1500)
           }
         ));
       },
