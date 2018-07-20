@@ -73,6 +73,23 @@
        <span class="CertificatesName">机构代码证</span>
        <span class="uploadState">上传</span>
      </li>
+     <li class="notUpload">
+       <span class="CertificatesName">机构代码证</span>
+       <span class="uploadState">上传</span>
+     </li>
+     <li class="notUpload">
+       <span class="CertificatesName">机构代码证</span>
+       <span class="uploadState">上传</span>
+     </li>
+     <li class="notUpload">
+       <span class="CertificatesName">机构代码证</span>
+       <span class="uploadState">上传</span>
+     </li>
+     <li class="notUpload">
+     <span class="CertificatesName">机构代码证</span>
+     <span class="uploadState">上传</span>
+   </li>
+
    </ul>
  </div>
 </template>

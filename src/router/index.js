@@ -8,7 +8,8 @@ import {
 // 模块名大写
 // 登陆模块
 import REGISTER from '@/pages/login/register' // 用户注册
-import LOGIN from '@/pages/login/index' // 用户登录
+import LOGIN from '@/pages/login/index' // 用户账号密码登录
+import FIRSTLONG from '@/pages/login/firstLong' // 用户快速登录
 import SMSLOGIN from '@/pages/login/smsLogin' // 短信登录
 import REPWD from '@/pages/login/retrievePwd'// 找回密码
 import UPDATAPWD from '@/pages/login/updatapwd' // 修改密码
@@ -130,6 +131,10 @@ const vueRouter = new Router({
     {
       path: '/login',
       component: LOGIN
+    },
+    {
+      path: '/login/firstLong',
+      component: FIRSTLONG
     },
     {
       path: '/register',

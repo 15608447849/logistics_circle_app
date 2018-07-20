@@ -1,12 +1,12 @@
 <template>
   <div class="issueOrder">
-    <div class="issueHeaderNav">
-      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+    <div class="issueHeaderNavFixed">
+      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPicFixed">
       <span>发布订单</span>
-      <span></span>
+      <span>发布</span>
     </div>
-    <ul class="liNumThree">
-      <li class="inputNumOne">
+    <ul class="liNumThree margintop80">
+      <li class="inputNumOne needBorder">
         <span class="waybillNum">运单号</span>
         <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号">
       </li>
@@ -15,76 +15,74 @@
       <!--<span>目的地</span>-->
       <!--<input type="text" v-model="OrderDetail.arriarc" placeholder="请填写目的地">-->
       <!--</li>-->
-      <li class="tworow" @click="toPageGeo(2)">
+      <li class="tworow needBorder" @click="toPageGeo(2)">
         <span class="textRed">*</span>
         <span>目的地</span>
         <textarea v-model="arriarc" rows="2" placeholder="请输入详细地址，精确到街道，社会区及门牌号，支持地图定位" class="textarea"></textarea>
-        <i class="icon iconfont icon-dituzadian"></i>
+        <i class="icon iconfont icon-dituzadian iblue"></i>
       </li>
       <li class="tworow" @click="toPageGeo(1)">
         <span class="textRed">*</span>
         <span>出发地</span>
         <textarea v-model="startc" rows="2" placeholder="请输入详细地址，精确到街道，社会区及门牌号，支持地图定位" class="textarea"></textarea>
-        <i class="icon iconfont icon-dituzadian"></i>
+        <i class="icon iconfont icon-dituzadian iblue"></i>
       </li>
     </ul>
     <ul class="liNumThree">
-      <li class="inputLong">
+      <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物大小</span>
         <input type="text" placeholder="重量/体积">
       </li>
-      <li class="inputShort">
-        <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text">
+      <li class="inputShort needBorder">
+        <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text" readonly="readonly">
       </li>
-      <li class="inputLong">
+      <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物数量</span>
         <input type="text" placeholder="单位数量">
       </li>
-      <li class="inputShort">
-        <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位">
+      <li class="inputShort needBorder">
+        <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"  readonly="readonly">
       </li>
       <li class="inputLong">
         <span class="textRed">*</span>
         <span>货物信息</span>
-        <input type="text" v-model="displayDic.disCtLabel" @click="showPicker('ct')" placeholder="货物类别">
+        <input type="text" v-model="displayDic.disCtLabel" @click="showPicker('ct')" placeholder="货物类别" readonly="readonly">
       </li>
       <li class="inputShort">
-        <input type="text" v-model="displayDic.disPaLabel" @click="showPicker('pa')" placeholder="是否包装">
+        <input type="text" v-model="displayDic.disPaLabel" @click="showPicker('pa')" placeholder="是否包装" readonly="readonly">
       </li>
     </ul>
-
-
     <ul class="liNumThreeCompany">
-      <li class="inputLong">
+      <li class="inputLong needBorder">
         <span class="liNumThreeCompanySpan">车辆大小</span>
         <input v-model="OrderDetail.vnum" type="text" placeholder="数量">
       </li>
       <span class="carNum">台</span>
-      <li class="inputShort">
-        <input v-model="displayDic.disVlLabel" @click="showPicker('vl')" type="text" placeholder="长度">
+      <li class="inputShort needBorder">
+        <input v-model="displayDic.disVlLabel" @click="showPicker('vl')" type="text" placeholder="长度"  readonly="readonly">
       </li>
       <span class="carNum">米</span>
-      <li class="inputNumOneC">
+      <li class="inputNumOneC needBorder">
         <span class="liNumThreeCompanySpan">车辆要求</span>
-        <input v-model="displayDic.disVtLabel" @click="showPicker('vt')" type="text" placeholder="请选择车辆型号">
+        <input v-model="displayDic.disVtLabel" @click="showPicker('vt')" type="text" placeholder="请选择车辆型号" readonly="readonly">
       </li>
       <li class="inputNumOneC">
         <span class="liNumThreeCompanySpan">运输要求</span>
-        <input v-model="displayDic.disTnLabel" @click="showPicker('tn')" type="text" placeholder="请选择运输要求">
+        <input v-model="displayDic.disTnLabel" @click="showPicker('tn')" type="text" placeholder="请选择运输要求" readonly="readonly">
       </li>
     </ul>
     <ul class="liNumFour">
-      <li class="inputLong">
+      <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物运费</span>
         <input v-model="OrderDetail.price" type="text" placeholder="费用">
       </li>
-      <li class="inputShort">
-        <input v-model="displayDic.disPmLabel" @click="showPicker('pm')" type="text" placeholder="单">
+      <li class="inputShort needBorder">
+        <input v-model="displayDic.disPmLabel" @click="showPicker('pm')" type="text" placeholder="单"  readonly="readonly">
       </li>
-      <li class="inputShorter">
+      <li class="inputShorter needBorder">
         <span class="textRed">*</span>
         <span class="size10">声明保价</span>
         <input type="text" v-model="OrderDetail.insureamt">
@@ -92,7 +90,7 @@
         <span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>
       </li>
 
-      <li class="inputShorter">
+      <li class="inputShorter needBorder">
         <span class="textRed">*</span>
         <span class="size10">代收货款</span>
         <input v-model="OrderDetail.codamt" type="text">
@@ -103,62 +101,60 @@
       <li class="inputNumOne">
         <span class="textRed">*</span>
         <span>付款方式</span>
-        <input v-model="displayDic.disPtLabel" @click="showPicker('pt')" type="text" placeholder="请选择">
+        <input v-model="displayDic.disPtLabel" @click="showPicker('pt')" type="text" placeholder="请选择" readonly="readonly">
       </li>
     </ul>
     <ul class="liNumFour">
-      <li class="inputNumOne">
+      <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span class="marginright13">收货人</span>
         <input type="text" v-model="OrderDetail.consignee" placeholder="请输入联系人">
       </li>
-      <li class="inputNumOne">
+      <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span>联系方式</span>
         <input v-model="OrderDetail.consphone" type="text" placeholder="请输入联系方式">
       </li>
-      <li class="inputNumOne">
+      <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span>取货方式</span>
-        <input v-model="displayDic.disDmLabel" @click="showPicker('dm')" type="text" placeholder="请选择取货方式">
+        <input v-model="displayDic.disDmLabel" @click="showPicker('dm')" type="text" placeholder="请选择取货方式" readonly="readonly">
       </li>
       <li class="inputNumOne">
         <span class="textRed">*</span>
         <span>回单要求</span>
-        <input v-model="displayDic.disReLabel" @click="showPicker('re')" type="text" placeholder="请请选择回单要求">
+        <input v-model="displayDic.disReLabel" @click="showPicker('re')" type="text" placeholder="请请选择回单要求" readonly="readonly">
       </li>
     </ul>
     <ul class="liNumTwo">
-      <li class="inputNumOne">
+      <li class="inputNumOne needBorder">
         <span class="noStart">提货时间</span>
         <input v-model="OrderDetail.pusdatetime" @click="showDatePicker('pusdatetime')" type="text"
-               placeholder="预计提货时间起">
+               placeholder="预计提货时间起" readonly="readonly">
       </li>
-      <li class="inputNumOne">
+      <li class="inputNumOneLong">
         <span class="noStart">提货结束时间</span>
         <input v-model="OrderDetail.puedatetime" @click="showDatePicker('puedatetime')" type="text"
-               placeholder="预计提货时间止">
+               placeholder="预计提货时间止" readonly="readonly" class="goodsTime">
       </li>
     </ul>
     <ul class="liNumTwo">
-      <li class="inputNumOne">
+      <li class="inputNumOne needBorder">
         <span class="noStart">到货时间</span>
         <input v-model="OrderDetail.easdatetime" @click="showDatePicker('easdatetime')" type="text"
-               placeholder="预计到达时间起">
+               placeholder="预计到达时间起" readonly="readonly">
       </li>
-      <li class="inputNumOne">
+      <li class="inputNumOneLong">
         <span class="noStart">预计到达时间</span>
         <input v-model="OrderDetail.eaedatetime" @click="showDatePicker('eaedatetime')" type="text"
-               placeholder="预计到达时间止">
+               placeholder="预计到达时间止" readonly="readonly"  class="goodsTime">
       </li>
     </ul>
-    <div>
-      <div class="totalPrice">
-        <span class="floatleft marginBottom60">订单总价</span><span
-        class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
-        <button class="releaseBtn" @click="releaseOrder" >发 布</button>
-      </div>
+    <div class="totalPrice marginBottom65">
+      <span class="floatleft marginBottom60">订单总价</span><span
+      class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
     </div>
+    <button class="releaseBtn" @click="releaseOrder">发 布</button>
   </div>
 </template>
 <script>
@@ -169,7 +165,6 @@
   export default {
     data() {
       return {
-        isSubmit: false,
         OrderDetail: new order.OrderICE(),
         dicData: {},// 选择器字典数据, store中获取
         selectDataPicker: '',
@@ -213,12 +208,13 @@
     methods: {
       // 初始化页面数据
       initData() {
-        // startc arriarc  这两个字段Web端使用 APP传0
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
-
+        // 数据从本地获取 方便测试
         this.dicData = this.$app_store.getters.dict || null;
         this.pmList = this.dicData.pm;
+        console.log(this.dicData)
+        // console.log(this.dicData);
         // 设置默认类型字典选择, 默认取第一个
         this.OrderDetail.wmdictc = this.dicData.wm[0].value;
         this.displayDic.disWmLabel = this.dicData.wm[0].label;
@@ -252,6 +248,8 @@
 
         this.OrderDetail.pmdictc = this.dicData.pm[0].value;
         this.displayDic.disPmLabel = this.dicData.pm[0].label;
+
+
 
         // 声明保价
         this.OrderDetail.insureamt = 0.0;
@@ -357,11 +355,9 @@
           },
           function (error) {
             self.message.Toast(self, 'error', '订单号生成失败，请稍后重试', false);
-            // 发布按钮设置不可选
-            // self.isSubmit = true
-            // setTimeout(() => {
-            //   self.$router.go(-1);
-            // }, 1500)
+            setTimeout(() => {
+              self.$router.go(-1);
+            }, 1500)
           }
         ));
       },

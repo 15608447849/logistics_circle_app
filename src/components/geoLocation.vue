@@ -1,29 +1,22 @@
 <template>
   <div>
-    <!--<yd-navbar title="地址选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">-->
-      <!--<router-link @click.native="goBack" to="#" slot="left">-->
-        <!--<yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>-->
-      <!--</router-link>-->
-    <!--</yd-navbar>-->
-
-    <div class="issueHeaderNav">
-      <i  class="icon iconfont icon-btngoback back" @click="goBack"></i>
-      <span>地址选择</span>
-      <div></div>
+    <div class="issueHeaderNavMap">
+      <i class="icon iconfont icon-btngoback back"></i>
+      <span>选择地址</span>
+      <button @click="selectCity" class="selectCityBtn">当前城市：{{searchOption.city}}<i class="icon iconfont icon-xiala xiala"></i></button>
     </div>
-
     <div class="amap-container">
-      <button @click="selectCity">{{searchOption.city}}</button>
       <el-amap-search-box class="search" :search-option="searchOption"
-                          :on-search-result="onSearchResult"></el-amap-search-box>
-      <el-amap vid="amapDemo" :events="events"  :center="mapCenter" :zoom="cZoom" class="amap-demo">
+                          :on-search-result="onSearchResult">
+      </el-amap-search-box>
+      <el-amap vid="amapDemo" :center="mapCenter" :zoom="cZoom" class="amap-demo" :events="events">
         <el-amap-marker v-for="marker in markers" :icon="marker.icon" :position="marker" :key="marker"></el-amap-marker>
       </el-amap>
     </div>
-    <ul class="order_box" style="height: 5rem">
-      <li class="order_list" v-for="(item,index) in pList" :key="index" @click="selectionPio(item)">
-        <div class="order_time"><span class="site">{{item.name}}</span></div>
-        <div class="order_price"><span class="carWeight">{{item.address}}</span></div>
+    <ul class="order_boxMap">
+      <li class="order_listMap" v-for="(item,index) in pList" :key="index" @click="selectionPio(item)">
+        <div class="order_timeMap"><span class="siteMap">{{item.name}}</span></div>
+        <div class="order_priceMap"><span class="carWeightMap">{{item.address}}</span></div>
       </li>
     </ul>
   </div>
@@ -49,6 +42,7 @@
         geocoder: null,
         events: {
           init :(map) => {
+            console.log(123)
             this.map = map
             this.map.setCity(this.$app_store.getters.currentCity);
           }
@@ -76,6 +70,7 @@
         })
       },
       onSearchResult(pois) {
+
         this.cZoom = 14;
         let latSum = 0;
         let lngSum = 0;

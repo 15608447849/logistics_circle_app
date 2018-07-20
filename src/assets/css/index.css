@@ -692,6 +692,9 @@ input[type="radio"] {
   font-stretch: normal;
   letter-spacing: 0px;
 }
+.login_input div{
+  padding-right:.28rem;
+}
 .Flogin_input{
   display:block;
   width:6.42rem;
@@ -784,6 +787,20 @@ input[type="radio"] {
   height:.74rem;
   border:none;
   margin-left:.3rem;
+}
+.FfastLogin{
+  display:block;
+  width:5rem;
+  height:auto;
+  padding-left:.58rem;
+  margin-bottom:3.5rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 0px;
+  color: #2b73cc;
 }
 .userNameBorderBottom{
   display:block;
@@ -1081,6 +1098,38 @@ input[type="radio"] {
   letter-spacing: 1px;
   color: #ffffff;
 }
+.issueHeaderNavFixed{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:fixed;
+  top:0rem;
+  -webkit-transform: translateY(0);
+  width:7.5rem;
+  height:.8rem;
+  padding:0px .08rem 0px .08rem;
+  background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
+  z-index:100;
+}
+.issueHeaderNavFixed .issueHeaderNavPicFixed img{
+  display:inline-block;
+  width:.52rem;
+  height:.52rem;
+  vertical-align: middle;
+}
+.issueHeaderNavFixed span{
+  font-family: PingFang-SC-Regular;
+  font-size: .36rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
 .order_box{
   width:7.5rem;
   background:#ffffff;
@@ -1286,13 +1335,13 @@ input[type="radio"] {
   color: #999999;
 }
 .marginright3{
-  margin-right:3px;
+  margin-right:.03rem;
 }
 .marginright13{
-  margin-right:13px;
+  margin-right:.13rem;
 }
 .marginright19{
-  margin-right:19px;
+  margin-right:.19rem;
 }
 .marginright7{
   margin-right:.7rem;
@@ -1335,7 +1384,7 @@ input[type="radio"] {
 .def{
   float:right;
   width:4.7rem;
-  line-height:.69rem;
+  line-height:.89rem;
   text-align: right;
 }
 .textBlod{
@@ -1347,6 +1396,8 @@ input[type="radio"] {
 /*发布订单模块*************************************************************************************/
 .issueOrder{
   width:7.5rem;
+  background:#ffffff;
+  overflow:hidden;
 }
 .spanTitle{
   width:.5rem;
@@ -1354,18 +1405,27 @@ input[type="radio"] {
 .liNumTwo{
   display:block;
   width:7.5rem;
-  height:1.5rem;
-  padding:0px .08rem 0px .08rem;
+  height:1.9rem;
+  padding:0px .15rem 0px .08rem;
   font-size: .24rem;
+  border-bottom:5px solid #f5f5f5;
+  z-index: 1;
 }
 .liNumThree{
   display:block;
   width:7.5rem;
-  height:2.155rem;
+  height:2.755rem;
   padding:0px .08rem 0px .08rem;
   border-bottom:5px solid #f5f5f5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
+  z-index: 1;
+}
+.margintop80{
+  margin-top:.8rem;
+}
+.marginBottom65{
+  margin-bottom:.65rem;
 }
 .liNumThreeArea{
   display:block;
@@ -1383,9 +1443,21 @@ input[type="radio"] {
 }
 .textarea{
   width:5.55rem;
-  height:.69rem;
-  vertical-align: top;
+  height:.87rem;
+  vertical-align: middle;
   border:none;
+}
+.textarea::-webkit-input-placeholder{
+  height: .43rem;line-height: .43rem;
+}    /* 使用webkit内核的浏览器 */
+.textarea:-moz-placeholder{
+  height: .43rem;line-height: .43rem;
+}                  /* Firefox版本4-18 */
+.textarea::-moz-placeholder{
+  height: .43rem;line-height: .43rem;
+}                  /* Firefox版本19+ */
+.textarea:-ms-input-placeholder{
+  height: .43rem;line-height:.43rem;
 }
 .haveBorderBottom{
   border-bottom:1px solid #dce0e6;
@@ -1393,7 +1465,7 @@ input[type="radio"] {
 .inputLong{
   display:inline-block;
   width:5.7rem;
-  height:.7rem;
+  height:.89rem;
 }
 .inputLong input{
   display:inline-block;
@@ -1403,10 +1475,11 @@ input[type="radio"] {
 .liNumThreeCompany{
   display:block;
   width:7.5rem;
-  height:2.155rem;
+  height:2.755rem;
   padding:0px .08rem 0px .08rem;
   border-bottom:5px solid #f5f5f5;
   font-size: .24rem;
+  z-index: 1;
 }
 .liNumThreeCompanySpan{
   margin-left:.22rem;
@@ -1414,7 +1487,7 @@ input[type="radio"] {
 .liNumThreeCompany .inputLong{
   display:inline-block;
   width:4.5rem;
-  height:.7rem;
+  height:.89rem;
 }
 .liNumThreeCompany .inputLong input{
   display:inline-block;
@@ -1424,7 +1497,7 @@ input[type="radio"] {
 .liNumThreeCompany .inputShort{
   display:inline-block;
   width:2rem;
-  height:.7rem;
+  height:.89rem;
 }
 .liNumThreeCompany .inputShort input{
   width:1.9rem;
@@ -1433,11 +1506,11 @@ input[type="radio"] {
 .liNumThreeCompany .inputNumOneC{
   display:inline-block;
   width:7.5rem;
-  height:.7rem;
+  height:.89rem;
 }
 .liNumThreeCompany .inputNumOneC input{
   display:inline-block;
-  width:5.85rem;
+  width:5.9rem;
   text-align: right;
 }
 .pingfang3{
@@ -1481,34 +1554,41 @@ input[type="radio"] {
   color: #ff3b30;
 }
 .waybillNum{
-  margin-left:.19rem;
+  margin-left:.27rem;
 }
 .liNumFour{
   display:block;
   width:7.5rem;
-  height:2.8rem;
+  height:3.6rem;
   padding:0px .08rem 0px .08rem;
   border-bottom:5px solid #f5f5f5;
   font-size: .24rem;
+  z-index: 1;
 }
-.inputNumOne{
+.inputNumOne,.inputNumOneLong{
   display:block;
   width:7.5rem;
-  height:.69rem;
+  height:.89rem;
 }
+
 .inputNumOne input{
   display:inline-block;
-  width:5.9rem;
+  width:6rem;
+  text-align: right;
+}
+.inputNumOneLong input{
+  display:inline-block;
+  width:5.5rem;
   text-align: right;
 }
 .inputShort{
   display:inline-block;
   width:1.4rem;
-  height:.7rem;
+  height:.89rem;
   padding-right:.05rem;
 }
 .inputShort input{
-  width:1.4rem;
+  width:1.5rem;
   text-align: right;
 }
 .inputShorter{
@@ -1523,7 +1603,13 @@ input[type="radio"] {
   height:.69rem;
 }
 .issueOrder ul li input{
-  height:.66rem;
+  height:.89rem;
+}
+.issueOrder ul li{
+  height:.89rem;
+}
+.iblue{
+  color:#3189f5;
 }
 /*.inputNumOne input{*/
 /*display:inline-block;*/
@@ -1609,8 +1695,11 @@ input[type="radio"] {
   display:block;
   width:7.15rem;
   height:.65rem;
+  position:fixed;
+  bottom:0rem;
+  left:.18rem;
+  -webkit-transform: translateZ(0);
   margin:0 auto;
-  margin-top:.28rem;
   border:1px solid #319ef5;
   border-radius:3px;
   font-family: PingFang-SC-Regular;
@@ -1620,7 +1709,7 @@ input[type="radio"] {
   line-height: .24rem;
   color:#ffffff;
   background:#3189f5;
-  margin-bottom:.3rem;
+  z-index: 100;
 }
 .marginBottom60{
   margin-bottom:.6rem;
@@ -1628,17 +1717,16 @@ input[type="radio"] {
 .totalPrice{
   display:block;
   width:7.5rem;
+  height:.7rem;
   padding:.1rem .1rem .05rem .25rem;
+  background:#f5f5f5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
   color: #333333;
-  background:#f5f5f5;
-}
-.issueOrder{
-  background:#ffffff;
+  z-index: 1;
 }
 /*input框提示语字体颜色设置*/
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -1653,4 +1741,127 @@ input::-moz-placeholder, textarea::-moz-placeholder {
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #d9d9d9;
 }
-
+/*地图*************************************************************************************************************/
+.amap-container {
+  position:relative;
+  top:0rem;
+  left:0rem;
+  height: 8rem;
+}
+ .citySearchBtn{
+  position:fixed;
+  top:2rem;
+  left:1rem;
+  width:2rem;
+  height:.45rem;
+  background:black;
+}
+.amap-container .el-vue-search-box-container{
+  position:fixed;
+  top:1.2rem;
+  left:.28rem;
+  background: rgba(0,0,0,0.3);
+  color:rgba(0, 0, 0, 0.5);
+  width:7rem;
+  height:.8rem;
+}
+.mapSearchBox{
+  position:relative;
+  top:0rem;
+  left:0rem;
+}
+.amap-maps{
+  position:relative;
+  top:0rem;
+  left:0rem;
+}
+.el-vue-search-box-container .search-box-wrapper input{
+  flex:none;
+  width:4rem;
+  height:.45rem;
+}
+.selectCityBtn{
+  width:2.4rem;
+  height:.8rem;
+  border:none;
+  color:#ffffff;
+  text-align: right;
+}
+.el-vue-search-box-container .search-box-wrapper{
+  position: absolute;
+  display: none;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.issueHeaderNavMap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:7.5rem;
+  height:.8rem;
+  padding:0px .08rem 0px .08rem;
+  background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
+}
+.issueHeaderNavMap span{
+  width:2rem;
+  height:.8rem;
+  text-align: right;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height:.8rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+.order_boxMap{
+  width:7.5rem;
+  height:4.45rem;
+  overflow: auto;
+  background:#ffffff;
+  z-index:100;
+}
+.order_listMap{
+  display:block;
+  width:7.5rem;
+  height:1.2rem;
+  border-bottom:1px solid #e6e6e6;
+  background:#ffffff;
+}
+.order_timeMap , .order_priceMap{
+  display:block;
+  width:7.5rem;
+  height:.65rem;
+  padding:0px .1rem 0px .1rem;
+}
+.order_timeMap span, .order_priceMap span{
+  line-height:.5rem;
+}
+.order_timeMap .site{
+  float:left;
+  font-family: PingFang-SC-Regular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.carWeightMap{
+  float:left;
+  margin-right:5px;
+  font-family: PingFang-SC-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #999999;
+}

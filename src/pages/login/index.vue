@@ -13,11 +13,8 @@
       </div>
     </div>
     <button class="loginBut" @click="loginClick">登 录</button>
-    <div class="fastLogin displayNone">
+    <div class="fastLogin displayNone" @click="tofirstLong()">
       快捷登录
-    </div>
-    <div class="FfastLogin displayNone">
-      账号密码登录
     </div>
     <div class="forgetPwd">
       <span @click="toPageRegister">新用户注册</span>
@@ -42,6 +39,11 @@
       toPageRegister() {
         this.$router.push({
           path: '/register'
+        })
+      },
+      tofirstLong() {
+        this.$router.push({
+          path: '/login/firstLong'
         })
       },
       toupdatapwd(){
