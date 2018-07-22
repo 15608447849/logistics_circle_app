@@ -6,9 +6,6 @@
        </router-link>
      </yd-navbar>
 
-
-
-
      <div class="orderPadding10">
        <div class="logisticsNameBox">
          <img src="../../assets/images/small/logo_26.png" alt="">
@@ -41,7 +38,7 @@
          </li>
        </ul>
      </div>
-     <div class="lineHeight10">     </div>
+     <div class="lineHeight10"></div>
      <div class="orderPadding10">
        <ul>
          <li class="issueDetailsLiText">

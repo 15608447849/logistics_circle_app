@@ -16,11 +16,16 @@ module.exports =  {
     queryIce(user.UserServicePrx, 'UserService', 'verifyPhone', str2jlong(phone), callback);
   },
 
-  /**请求对手机号码发送短信
-   * int sendSms(long phone,string checkPhone);//checkPhone ="true",电话号码必须属于用户才能发短信,其他不校验
+  /** 发送手机验证码
+   * list<String>
+   * 第一个参数:register(注册),login(登录),forgotpw(忘记密码),changephone(更换手机)...后续添加
+   * 第二个参数手机号码
+   * 第三个参数订单号码,如果没有就传"0"
    * */
-  requestPhoneSms: function (phone, flag, callback) {
-    queryIce(user.UserServicePrx, 'UserService', 'sendSms', str2jlong(phone),flag.toString(), callback);
+  requestPhoneSms: function (paramList, callback) {
+
+    // queryIce(user.UserServicePrx, 'UserService', 'sendSms', str2jlong(phone), callback);
+    queryIce(user.UserServicePrx, 'UserService', 'sendSms', paramList, callback);
   },
 
   /**
@@ -28,7 +33,7 @@ module.exports =  {
    * int verifySms(long phone,string sms );
    */
   verifySms:function(phone,sms,callback){
-    queryIce(user.UserServicePrx, 'UserService', 'verifySms', str2jlong(phone),sms, callback);
+    queryIce(user.UserServicePrx, 'UserService', 'verifyCode', str2jlong(phone),sms, callback);
   },
 
   /**通过手机号码,短信 修改密码
@@ -64,7 +69,7 @@ module.exports =  {
 
   /**登陆 密码(MD5) ,返回userApi.UserICE对象
    * UserICE login(string nameOrPhone , string password , int type);//0 管理后台 ;1 信息大厅 ;2司机APP*/
-  userVerify: function (account, password, callback) {
+  login: function (account, password, callback) {
     queryIce(user.UserServicePrx, 'UserService', 'login', account, md5(password), 1, callback);
   },
 
@@ -73,7 +78,7 @@ module.exports =  {
    UserICE loginBySms(string uphone ,string sms);
    */
   userVerifyBySms: function (phone,smsCode, callback) {
-    queryIce(user.UserServicePrx, 'UserService', 'loginBySms', phone, smsCode,callback);
+    queryIce(user.UserServicePrx, 'UserService', 'loginBySms', str2jlong(phone), smsCode,callback);
   },
 
   /**

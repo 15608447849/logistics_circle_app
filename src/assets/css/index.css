@@ -918,7 +918,7 @@ input[type="radio"] {
 .phoneNum{
   display:block;
   width:7.5rem;
-  height:7.75rem;
+  height:3rem;
   margin:0 auto;
 }
 .phoneNum .numText{
@@ -987,7 +987,7 @@ input[type="radio"] {
 .verificationBox{
   display:block;
   width:7.5rem;
-  height:7.75rem;
+  height:3rem;
   margin:0 auto;
 }
 .verificationCode{

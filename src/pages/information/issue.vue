@@ -10,11 +10,6 @@
         <span class="waybillNum">运单号</span>
         <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号">
       </li>
-      <!--<li class="inputNumOne" @click="toPageGeo(2)">-->
-      <!--<span class="textRed">*</span>-->
-      <!--<span>目的地</span>-->
-      <!--<input type="text" v-model="OrderDetail.arriarc" placeholder="请填写目的地">-->
-      <!--</li>-->
       <li class="tworow needBorder" @click="toPageGeo(2)">
         <span class="textRed">*</span>
         <span>目的地</span>
@@ -190,7 +185,6 @@
       let addressCom = this.$app_store.getters.addressCom || null;
       if (addressCom !== null) {
         if (this.$app_store.getters.geoState === 1) {
-          // this.OrderDetail.startc = addressCom.
           this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
           this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
           this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
@@ -213,8 +207,6 @@
         // 数据从本地获取 方便测试
         this.dicData = this.$app_store.getters.dict || null;
         this.pmList = this.dicData.pm;
-        console.log(this.dicData)
-        // console.log(this.dicData);
         // 设置默认类型字典选择, 默认取第一个
         this.OrderDetail.wmdictc = this.dicData.wm[0].value;
         this.displayDic.disWmLabel = this.dicData.wm[0].label;
@@ -249,8 +241,6 @@
         this.OrderDetail.pmdictc = this.dicData.pm[0].value;
         this.displayDic.disPmLabel = this.dicData.pm[0].label;
 
-
-
         // 声明保价
         this.OrderDetail.insureamt = 0.0;
         // 代收货款
@@ -260,10 +250,6 @@
       },
       showPicker(category) {
         this.setPicker(this.dicData[category]);
-        this.picker.show();
-      },
-      showPickerTwo() {
-        this.setPicker();
         this.picker.show();
       },
       showDatePicker(category) {
@@ -350,7 +336,7 @@
         let self = this;
         this.$Ice_OrderService.generateOrderNo(new IceCallback(
           function (result) {
-            console.log(result)
+            console.log(result);
             self.OrderDetail.orderno = result
           },
           function (error) {
@@ -363,9 +349,7 @@
       },
       releaseOrder() {
         let self = this;
-        debugger
         if (this.validator()) {
-          console.log(self.OrderDetail)
           self.$Ice_OrderService.releaseOrder('e140aa06136e4eb6937db4d31e5fe588', self.OrderDetail, new IceCallback(
             function (result) {
               console.log(result)
@@ -390,11 +374,13 @@
           this.message.Toast(this, 'warn', '请填写货物重量', false);
           return false
         }
+
         // 货物运费
         if (this.verifyUtil.isNull(this.OrderDetail.price)) {
           this.message.Toast(this, 'warn', '请填写货物运费', false);
           return false
         }
+
         // 收货人
         if (this.verifyUtil.isNull(this.OrderDetail.consignee)) {
           this.message.Toast(this, 'warn', '请填写收货人信息', false);

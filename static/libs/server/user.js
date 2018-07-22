@@ -30,97 +30,44 @@
      * 用户基本信息数据模型
      **/
     user.UserICE = Slice.defineStruct(
-        function(uno, rno, uname, uphone, upw, upwstatus, uinvite, adddate, addtime, updatedate, updatetime, cstatus, msg)
+        function(oid, uphone, uname, upw, roleid, ioid, adddate, addtime, cstatus)
         {
-            this.uno = uno !== undefined ? uno : 0;
-            this.rno = rno !== undefined ? rno : 0;
-            this.uname = uname !== undefined ? uname : "";
+            this.oid = oid !== undefined ? oid : 0;
             this.uphone = uphone !== undefined ? uphone : 0;
+            this.uname = uname !== undefined ? uname : "";
             this.upw = upw !== undefined ? upw : "";
-            this.upwstatus = upwstatus !== undefined ? upwstatus : 0;
-            this.uinvite = uinvite !== undefined ? uinvite : "";
+            this.roleid = roleid !== undefined ? roleid : 0;
+            this.ioid = ioid !== undefined ? ioid : "";
             this.adddate = adddate !== undefined ? adddate : "";
             this.addtime = addtime !== undefined ? addtime : "";
-            this.updatedate = updatedate !== undefined ? updatedate : "";
-            this.updatetime = updatetime !== undefined ? updatetime : "";
             this.cstatus = cstatus !== undefined ? cstatus : 0;
-            this.msg = msg !== undefined ? msg : "";
         },
         true,
         function(__os)
         {
-            __os.writeLong(this.uno);
-            __os.writeShort(this.rno);
-            __os.writeString(this.uname);
+            __os.writeInt(this.oid);
             __os.writeLong(this.uphone);
+            __os.writeString(this.uname);
             __os.writeString(this.upw);
-            __os.writeShort(this.upwstatus);
-            __os.writeString(this.uinvite);
+            __os.writeInt(this.roleid);
+            __os.writeString(this.ioid);
             __os.writeString(this.adddate);
             __os.writeString(this.addtime);
-            __os.writeString(this.updatedate);
-            __os.writeString(this.updatetime);
             __os.writeShort(this.cstatus);
-            __os.writeString(this.msg);
         },
         function(__is)
         {
-            this.uno = __is.readLong();
-            this.rno = __is.readShort();
-            this.uname = __is.readString();
+            this.oid = __is.readInt();
             this.uphone = __is.readLong();
+            this.uname = __is.readString();
             this.upw = __is.readString();
-            this.upwstatus = __is.readShort();
-            this.uinvite = __is.readString();
-            this.adddate = __is.readString();
-            this.addtime = __is.readString();
-            this.updatedate = __is.readString();
-            this.updatetime = __is.readString();
-            this.cstatus = __is.readShort();
-            this.msg = __is.readString();
-        },
-        30, 
-        false);
-
-    /**
-     * 角色基本信息数据模型
-     **/
-    user.SMSICE = Slice.defineStruct(
-        function(sno, uno, sphone, sms, adddate, addtime, cstatus, msg)
-        {
-            this.sno = sno !== undefined ? sno : 0;
-            this.uno = uno !== undefined ? uno : 0;
-            this.sphone = sphone !== undefined ? sphone : 0;
-            this.sms = sms !== undefined ? sms : "";
-            this.adddate = adddate !== undefined ? adddate : "";
-            this.addtime = addtime !== undefined ? addtime : "";
-            this.cstatus = cstatus !== undefined ? cstatus : 0;
-            this.msg = msg !== undefined ? msg : "";
-        },
-        true,
-        function(__os)
-        {
-            __os.writeLong(this.sno);
-            __os.writeLong(this.uno);
-            __os.writeLong(this.sphone);
-            __os.writeString(this.sms);
-            __os.writeString(this.adddate);
-            __os.writeString(this.addtime);
-            __os.writeShort(this.cstatus);
-            __os.writeString(this.msg);
-        },
-        function(__is)
-        {
-            this.sno = __is.readLong();
-            this.uno = __is.readLong();
-            this.sphone = __is.readLong();
-            this.sms = __is.readString();
+            this.roleid = __is.readInt();
+            this.ioid = __is.readString();
             this.adddate = __is.readString();
             this.addtime = __is.readString();
             this.cstatus = __is.readShort();
-            this.msg = __is.readString();
         },
-        30, 
+        23, 
         false);
     Slice.defineSequence(user, "stringListHelper", "Ice.StringHelper", false);
     Slice.defineSequence(user, "userListHelper", "user.UserICE", false);
@@ -138,24 +85,21 @@
 
     Slice.defineOperations(user.UserService, user.UserServicePrx,
     {
-        "login": [, , , , , [user.UserICE], [[7], [7], [3]], , , , ],
-        "loginBySms": [, , , , , [user.UserICE], [[7], [7]], , , , ],
-        "loginByToken": [, , , , , [user.UserICE], [[7]], , , , ],
-        "getUserInfo": [, , , , , ["user.userListHelper"], [[7], ["user.stringListHelper"], [3]], , , , ],
-        "resetDriverPassword": [, , , , , [7], [[7], [4]], , , , ],
-        "addDriver": [, , , , , [user.UserICE], [[7], [4]], , , , ],
+        "login": [, , , , , [7], [[7], [7], [3]], , , , ],
+        "loginBySms": [, , , , , [7], [[4], [7]], , , , ],
+        "loginByToken": [, , , , , [7], [[7]], , , , ],
+        "getUserInfo": [, , , , , [7], [["user.stringListHelper"], [3]], , , , ],
+        "resetDriverPassword": [, , , , , [7], [[4]], , , , ],
+        "addDriver": [, , , , , [7], [[4], [7]], , , , ],
         "verifyUserName": [, , , , , [7], [[7]], , , , ],
         "verifyPhone": [, , , , , [7], [[4]], , , , ],
-        "sendSms": [, , , , , [7], [[4], [7]], , , , ],
-        "verifySms": [, , , , , [7], [[4], [7]], , , , ],
-        "custRegister": [, , , , , [user.UserICE], [[7], [4], [7], [7], [7]], , , , ],
+        "sendSms": [, , , , , [7], [["user.stringListHelper"]], , , , ],
+        "verifyCode": [, , , , , [7], [[4], [7]], , , , ],
+        "custRegister": [, , , , , [7], [[7], [4], [7], [7], [7]], , , , ],
         "forgetUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],
-        "updateUserPassword": [, , , , , [7], [[7], [7], [7]], , , , ],
-        "updateUserPhone": [, , , , , [7], [[7], [4], [7]], , , , ],
-        "getUserInfoByToken": [, , , , , [user.UserICE], [[7]], , , , ],
-        "getPermissionByToken": [, , , , , [7], [[7]], , , , ],
-        "getRoleNameByToken": [, , , , , [7], [[7]], , , , ],
-        "smsTest": [, , , , , [7], [[7], [7]], , , , ],
+        "updateUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],
+        "updateUserPhone": [, , , , , [7], [[4], [4], [7]], , , , ],
+        "smsTest": [, , , , , [7], [[4], [7]], , , , ],
         "driverLogin": [, , , , , [7], [[4], [7]], , , , ],
         "updateDriverPassword": [, , , , , [7], [[4], [7], [7]], , , , ]
     });
