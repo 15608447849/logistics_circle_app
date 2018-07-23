@@ -3,43 +3,6 @@
     <!--页头-->
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>
-      <yd-popup v-model="show4" position="left" width="73%">
-        <div style="background-color:#fff;">
-          <div class="centerPic">
-            <div class="portrait">
-              <img src="../../assets/images/small/aaaaaaa.png" alt="">
-              <span class="logisticsMing">长沙大唐物流</span>
-            </div>
-            <ul class="startBox">
-              <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-              <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-              <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-              <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-              <li><img src="../../assets/images/small/star36_off@2x.png" alt=""></li>
-            </ul>
-            <div class="money">
-              <img src="../../assets/images/small/jewelry.png" alt="">
-              <span class="yang">￥</span><span class="priceNum">2588.00</span>
-            </div>
-          </div>
-          <ul class="personalList">
-            <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
-            </li>
-            <li><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span></li>
-            <li><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span></li>
-            <li><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
-            <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
-            <li><i class="icon iconfont icon-quanzi"></i><span class="personalText circle">我的圈子</span></li>
-            <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
-            <li><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
-          </ul>
-          <div class="settingCircleBox">
-            <i class="icon iconfont icon-shezhi1"></i>
-            <div class="settingCircle">设置</div>
-          </div>
-        </div>
-      </yd-popup>
-
       <span>首页</span>
       <span class="icon iconfont icon-gengduo1 dropdowngengduo">
         <ul class="dropdown" v-show="!isMember">
@@ -90,6 +53,42 @@
       </li>
     </ul>
     <div class="seeMore">查看更多</div>
+    <yd-popup v-model="show4" position="left" width="73%">
+      <div style="background-color:#fff;">
+        <div class="centerPic">
+          <div class="portrait">
+            <img src="../../assets/images/small/aaaaaaa.png" alt="">
+            <span class="logisticsMing">长沙大唐物流</span>
+          </div>
+          <ul class="startBox">
+            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../../assets/images/small/star36_off@2x.png" alt=""></li>
+          </ul>
+          <div class="money">
+            <img src="../../assets/images/small/jewelry.png" alt="">
+            <span class="yang">￥</span><span class="priceNum">2588.00</span>
+          </div>
+        </div>
+        <ul class="personalList">
+          <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
+          </li>
+          <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span></li>
+          <li><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span></li>
+          <li><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
+          <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
+          <li><i class="icon iconfont icon-quanzi marginright3"></i><span class="personalText circle">我的圈子</span></li>
+          <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
+          <li><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
+        </ul>
+        <div class="settingCircleBox">
+          <i class="icon iconfont icon-shezhi1"></i>
+          <div class="settingCircle">设置</div>
+        </div>
+      </div>
+    </yd-popup>
   </div>
 
 </template>
@@ -125,6 +124,16 @@
       jUserInfo() {
         this.$router.push({
           path: '/userInfo'
+        })
+      },
+      toDriverAmd(){
+        this.$router.push({
+          path: '/center/driverAdm/index'
+        })
+      },
+      toMycircle(){
+        this.$router.push({
+          path: '/center/driverAdm/index'
         })
       }
     }

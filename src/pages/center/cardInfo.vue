@@ -65,6 +65,7 @@
         <p>国税登记证</p>
         <cube-upload
           ref="upload"
+          v-model="files"
           :action="action"
           :simultaneous-uploads="1"
           @files-added="filesAdded"
@@ -84,15 +85,11 @@
     data() {
       return {
         action: {
-          target: 'http://192.168.1.240:8090/fileUpload',
-          prop: 'base64Value',
-          headers: {
-            'Access-Control-Allow-Origin':'*',
-            "Access-Control-Allow-Headers": "X-Requested-With,Content-Type",
-            "Access-Control-Allow-Methods":"PUT,POST,GET,DELETE,OPTIONS"
-          }
+          target: '//jsonplaceholder.typicode.com/photos/',
+          prop: 'base64Value'
         },
         imgUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1685044995,1968324938&fm=27&gp=0.jpg',
+         files: [{ name, size, imgUrl, status: 'success', progress: 1 }]
       }
     },
     methods: {
@@ -113,7 +110,6 @@
         }).show()
       },
       fileSubmitted(file) {
-        debugger
         file.base64Value = file.file.base64
       },
       fileSuccess(file) {
