@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNavMap">
-      <i class="icon iconfont icon-btngoback back"></i>
+      <i class="icon iconfont icon-btngoback back" @click="goBack"></i>
       <span>选择地址</span>
       <button @click="selectCity" class="selectCityBtn">当前城市：{{searchOption.city}}<i class="icon iconfont icon-xiala xiala"></i></button>
     </div>
@@ -70,7 +70,6 @@
         })
       },
       onSearchResult(pois) {
-
         this.cZoom = 14;
         let latSum = 0;
         let lngSum = 0;
@@ -88,7 +87,6 @@
             lat: latSum / pois.length
           };
           this.mapCenter = [center.lng, center.lat];
-          console.log(this.mapCenter)
         }
       },
       selectionPio(item) {

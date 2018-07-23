@@ -11,9 +11,9 @@ import message from './utils/message'
 import VueAMap from 'vue-amap';
 
 
-
-import 'vue-ydui/dist/ydui.rem.css';
+// import 'lib-flexible'
 import './assets/lib/ydui.flexible';
+import 'vue-ydui/dist/ydui.rem.css';
 import './assets/css/index.css';
 
 

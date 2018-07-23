@@ -127,8 +127,10 @@
         }
         this.$dialog.loading.open('验证码发送中...');
         let self = this;
-        this.$Ice_UserService.requestPhoneSms(this.phone, false, new IceCallback(
+        let param = ['register',this.phone,'0'];
+        this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
           function (result) {
+            console.log(result)
             result = JSON.parse(result);
             if (result.code === 0) {
               self.start1 = true;
@@ -175,18 +177,21 @@
           // 验证用户名是否存在
           this.$Ice_UserService.checkUsernameRepetition(this.account, new IceCallback(
             function (result) {
+              console.log(result)
               result = JSON.parse(result);
               if (result.code === 0) {
                 // 用户名不存在, 注册用户
                 self.$Ice_UserService.userRegister(self.account, self.phone, self.password, self.invitationCode, self.verificationCode, new IceCallback(
                   function (result) {
-                    if (result.cstatus === 0) {
+                    result = JSON.parse(result);
+                    if (result.code === 0) {
                       // store 保存登陆token
-                      self.$app_store.commit(USER_TOKEN, result.upw);
-                      console.log( self.$app_store.getters.userToken);
+                      self.$app_store.commit(USER_INFO, result.obj);
+                      console.log(self.$app_store.getters.user)
+                      let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
                       // 跳转信息大厅
                       self.$router.push({
-                        path: '/information'
+                        path: redirect
                       });
                     } else {
                       self.message.Toast(self,'error',result.msg ,false);
