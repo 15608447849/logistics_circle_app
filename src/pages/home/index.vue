@@ -79,7 +79,7 @@
           <li><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span></li>
           <li><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
           <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
-          <li><i class="icon iconfont icon-quanzi marginright3"></i><span class="personalText circle">我的圈子</span></li>
+          <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span class="personalText circle">我的圈子</span></li>
           <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
           <li><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
         </ul>
@@ -133,7 +133,7 @@
       },
       toMycircle(){
         this.$router.push({
-          path: '/center/driverAdm/index'
+          path: '/center/myCircle/index'
         })
       }
     }

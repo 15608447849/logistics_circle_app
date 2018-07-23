@@ -46,6 +46,12 @@ import USER_INFO from '@/pages/center/userInfo'
 import ENT_INFO from '@/pages/center/entInfo'
 import VAT_INFO from '@/pages/center/vatInfo'
 import CART_INFO from '@/pages/center/cardInfo'
+import DRIVER_ADM from '@/pages/center/driverAdm/index'
+import ADDDRIVER from '@/pages/center/driverAdm/addDriver'
+import MYCIRCLE from '@/pages/center/myCircle/index'
+import ADDFRIEND from '@/pages/center/myCircle/addFriend'
+import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
+
 
 // 测试页面
 import TEST from '@/interfaces/test'
@@ -212,7 +218,28 @@ const vueRouter = new Router({
     {
       path: '/cartInfo',
       component: CART_INFO
-    }
+    },
+    {
+      path: '/center/driverAdm/index',
+      component: DRIVER_ADM
+    },
+    {
+      path: '/center/driverAdm/addDriver',
+      component: ADDDRIVER
+    },
+    {
+      path: '/center/myCircle/index',
+      component: MYCIRCLE
+    },
+    {
+      path: '/center/myCircle/addFriend',
+      component:  ADDFRIEND
+    },
+    {
+      path: '/center/myCircle/friendDetails',
+      component:  FRIENDDETAILS
+    },
+
   ]
 });
 
