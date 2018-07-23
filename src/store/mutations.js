@@ -1,6 +1,7 @@
 import {
   USER_INFO,
-  USER_TOKEN,
+  USER_ID,
+  COMP_INFO,
   WX_USER_INFO,
   SEARCH_STATE,
   SEARCH_CONTENT,
@@ -18,8 +19,12 @@ export default {
     state.userInfo = v
   },
   // 用户token
-  [USER_TOKEN] (state, v) {
-    state.userToken = v
+  [USER_ID] (state, v) {
+    state.userId = v
+  },
+  // 企业信息
+  [COMP_INFO] (state, v) {
+    state.compInfo = v
   },
 
   // 搜索内容

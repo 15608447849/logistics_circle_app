@@ -1,38 +1,38 @@
 <template>
   <div class="invoiceBox">
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back"></i>
+      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发票信息</span>
       <div></div>
     </div>
     <ul class="invoiceList">
       <li class="needBorder">
         <span class="invoiceTitle">发票抬头</span>
-        <span class="invoiceContent">长沙大唐物流有限公司</span>
+        <span class="invoiceContent">{{CompInfo.invtitle}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">发票类型</span>
-        <span class="invoiceContent">普通发票</span>
+        <span class="invoiceContent">{{CompInfo.invtype}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">发票税号</span>
-        <span class="invoiceContent">56545825252</span>
+        <span class="invoiceContent">{{CompInfo.taxno}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">电话</span>
-        <span class="invoiceContent">0731-57867076</span>
+        <span class="invoiceContent">{{CompInfo.phone}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">开户银行</span>
-        <span class="invoiceContent">中国建设银行芙蓉支行</span>
+        <span class="invoiceContent">{{CompInfo.openbank}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">开户账号</span>
-        <span class="invoiceContent">621730001230488</span>
+        <span class="invoiceContent">{{CompInfo.openaccount}}</span>
       </li>
       <li>
         <span class="invoiceTitle">发票地址</span>
-        <span class="invoiceContent">湖南省长沙市迎宾路</span>
+        <span class="invoiceContent">{{CompInfo.billaddr}}</span>
       </li>
     </ul>
   </div>
@@ -40,6 +40,19 @@
 
 <script>
   export default {
+    data() {
+      return {
+        CompInfo: {}
+      }
+    },
+    mounted() {
+      this.CompInfo = this.$app_store.getters.compInfo
+    },
+    methods: {
+      fallback() {
+        this.$router.go(-1)
+      },
+    }
   }
 </script>
 

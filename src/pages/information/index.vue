@@ -7,25 +7,6 @@
     </div>
     <!--下拉刷新回调的提示-->
     <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
-    <!--<div id="mescroll" class="mescroll">-->
-    <!--<div class="orderIndexContent">-->
-    <!--<ul class="order_box">-->
-    <!--<li class="order_list" @click="toissueDetails">-->
-    <!--<div class="order_time"><span class="site">长沙</span><span class="site">—</span><span-->
-    <!--class="site">广州</span><span class="time">1小时前</span></div>-->
-    <!--<div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span-->
-    <!--class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span>-->
-    <!--</div>-->
-    <!--</li>-->
-    <!--&lt;!&ndash;<li class="order_list" v-for="(item,index) in infoList" :key="index" @click="toPageIssue(item)">&ndash;&gt;-->
-    <!--&lt;!&ndash;<div class="order_price"><span class="site">{{item.destAddr + '-' + item.startAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<div class="order_time"><span class="volume">{{item.goodsType}}</span><span class="car_type">{{item.wm}}</span><span&ndash;&gt;-->
-    <!--&lt;!&ndash;class="price">{{item.cost}}</span></div>&ndash;&gt;-->
-    <!--&lt;!&ndash;</li>&ndash;&gt;-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-
     <div class="orderIndexContent" id="mescroll">
       <ul class="order_box">
         <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
@@ -50,12 +31,12 @@
       return {
         infoList: [],
         pageSize: '20', // 订单数
-        address: '郴州', // 地址
+        address: '', // 地址
         startTimeStr: '', // 起始订单标识
-        endTimeStr: '2015-10-10 00:00:00', // 结束订单标识
+        endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        token: 'e140aa06136e4eb6937db4d31e5fe588',
+        oid: this.$app_store.getters.userId,
         mescroll: null,
         pullingMessage: '',
         isShowMessage: false
@@ -87,6 +68,7 @@
         let self = this;
         this.requestInfoList(0, this.startTimeStr, function (result) {
           self.mescroll.endSuccess();
+
           if (result.length === 0) {
             self.pullingMessage = '列表数据已是最新';
             self.showTip();
@@ -125,22 +107,15 @@
       },
       requestInfoList(requestState, timeStr, successCallback, errorCallback) {
         let self = this;
-        // this.$Ice_OrderService.queryOrderByApp(self.token, self.key, self.pageSize, self.address, requestState, timeStr,
-        //   new IceCallback(
-        //     function (result) {
-        //       console.log(result);
-        //       successCallback(result);
-        //     }, function (err) {
-        //       console.log(err);
-        //       errorCallback(err);
-        //     }
-        //   ))
-
-        this.$Ice_OrderService.queryCircleOrderByApp(self.token, self.pageSize, self.address, self.key, requestState, timeStr,
+        this.$Ice_OrderService.queryOrderByApp(this.oid, self.pageSize, self.address, self.key, requestState, timeStr,
           new IceCallback(
             function (result) {
-              console.log(result);
-              successCallback(result);
+              result = JSON.parse(result);
+              if(result.code !== 0) {
+                self.message.Toast(self,'error',result.msg,false);
+                return
+              }
+              successCallback(result.obj);
             }, function (err) {
               console.log(err);
               errorCallback(err);

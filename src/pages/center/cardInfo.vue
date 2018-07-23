@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back"></i>
+      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>证件信息</span>
       <div></div>
     </div>
@@ -57,23 +57,22 @@
           @file-submitted="fileSubmitted"
           @file-success="fileSuccess"/>
         <!--<div class="updataCertificatesBox">-->
-          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
         <!--</div>-->
       </div>
       <div class="updataCertificates">
         <p>国税登记证</p>
         <cube-upload
           ref="upload"
-          v-model="files"
           :action="action"
           :simultaneous-uploads="1"
           @files-added="filesAdded"
           @file-submitted="fileSubmitted"
           @file-success="fileSuccess"/>
         <!--<div class="updataCertificatesBox">-->
-          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
         <!--</div>-->
       </div>
     </div>
@@ -85,11 +84,15 @@
     data() {
       return {
         action: {
-          target: '//jsonplaceholder.typicode.com/photos/',
-          prop: 'base64Value'
+          target: 'http://192.168.1.240:8090/fileUpload',
+          prop: 'base64Value',
+          headers: {
+            'Access-Control-Allow-Origin':'*',
+            "Access-Control-Allow-Headers": "X-Requested-With,Content-Type",
+
+          }
         },
         imgUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1685044995,1968324938&fm=27&gp=0.jpg',
-         files: [{ name, size, imgUrl, status: 'success', progress: 1 }]
       }
     },
     methods: {
@@ -110,10 +113,14 @@
         }).show()
       },
       fileSubmitted(file) {
+        debugger
         file.base64Value = file.file.base64
       },
       fileSuccess(file) {
         console.log('图片上传成功')
+      },
+      fallback() {
+        this.$router.go(-1)
       }
     }
   }

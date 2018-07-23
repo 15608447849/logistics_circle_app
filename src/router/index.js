@@ -265,7 +265,7 @@ vueRouter.beforeEach(function (to, from, next) {
   // 判断该路由是否需要登录权限
   if (to.meta.requireAuth) {
     // 通过vuex state获取当前的token是否存在
-    if (store.state.user) {
+    if (store.state.userId) {
       next();
     } else {
       next({

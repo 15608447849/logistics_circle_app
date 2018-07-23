@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back"></i>
+      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>添加好友</span>
       <div></div>
     </div>
@@ -48,6 +48,11 @@
 
 <script>
     export default {
+      methods: {
+        fallback() {
+          this.$router.go(-1)
+        }
+      }
     }
 </script>
 

@@ -29,7 +29,7 @@
     /**
      * 用户基本信息数据模型
      **/
-    user.UserICE = Slice.defineStruct(
+    user.UserIce = Slice.defineStruct(
         function(oid, uphone, uname, upw, roleid, ioid, adddate, addtime, cstatus)
         {
             this.oid = oid !== undefined ? oid : 0;
@@ -37,7 +37,7 @@
             this.uname = uname !== undefined ? uname : "";
             this.upw = upw !== undefined ? upw : "";
             this.roleid = roleid !== undefined ? roleid : 0;
-            this.ioid = ioid !== undefined ? ioid : "";
+            this.ioid = ioid !== undefined ? ioid : 0;
             this.adddate = adddate !== undefined ? adddate : "";
             this.addtime = addtime !== undefined ? addtime : "";
             this.cstatus = cstatus !== undefined ? cstatus : 0;
@@ -50,7 +50,7 @@
             __os.writeString(this.uname);
             __os.writeString(this.upw);
             __os.writeInt(this.roleid);
-            __os.writeString(this.ioid);
+            __os.writeInt(this.ioid);
             __os.writeString(this.adddate);
             __os.writeString(this.addtime);
             __os.writeShort(this.cstatus);
@@ -62,15 +62,15 @@
             this.uname = __is.readString();
             this.upw = __is.readString();
             this.roleid = __is.readInt();
-            this.ioid = __is.readString();
+            this.ioid = __is.readInt();
             this.adddate = __is.readString();
             this.addtime = __is.readString();
             this.cstatus = __is.readShort();
         },
-        23, 
+        26, 
         false);
     Slice.defineSequence(user, "stringListHelper", "Ice.StringHelper", false);
-    Slice.defineSequence(user, "userListHelper", "user.UserICE", false);
+    Slice.defineSequence(user, "userListHelper", "user.UserIce", false);
 
     user.UserService = Slice.defineObject(
         undefined,
@@ -88,9 +88,8 @@
         "login": [, , , , , [7], [[7], [7], [3]], , , , ],
         "loginBySms": [, , , , , [7], [[4], [7]], , , , ],
         "loginByToken": [, , , , , [7], [[7]], , , , ],
-        "getUserInfo": [, , , , , [7], [["user.stringListHelper"], [3]], , , , ],
-        "resetDriverPassword": [, , , , , [7], [[4]], , , , ],
-        "addDriver": [, , , , , [7], [[4], [7]], , , , ],
+        "getUserInfo": [, , , , , ["user.userListHelper"], [["user.stringListHelper"], [3]], , , , ],
+        "addUser": [, , , , , [user.UserIce], [[4], [7], [3]], , , , ],
         "verifyUserName": [, , , , , [7], [[7]], , , , ],
         "verifyPhone": [, , , , , [7], [[4]], , , , ],
         "sendSms": [, , , , , [7], [["user.stringListHelper"]], , , , ],
@@ -99,9 +98,7 @@
         "forgetUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],
         "updateUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],
         "updateUserPhone": [, , , , , [7], [[4], [4], [7]], , , , ],
-        "smsTest": [, , , , , [7], [[4], [7]], , , , ],
-        "driverLogin": [, , , , , [7], [[4], [7]], , , , ],
-        "updateDriverPassword": [, , , , , [7], [[4], [7], [7]], , , , ]
+        "smsTest": [, , , , , [7], [[4], [7]], , , , ]
     });
     exports.user = user;
 }

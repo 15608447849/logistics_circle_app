@@ -2254,3 +2254,20 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   letter-spacing: 0px;
   color: #999999;
 }
+/** 下拉刷新加载框 */
+/*下拉刷新回调的提示*/
+.download-tip{
+  z-index: 9900;
+  position: fixed;
+  height:.8rem;
+  left: 0;
+  width: 100%;
+  height: .5rem;
+  line-height: 30px;
+  font-size: 12px;
+  text-align: center;
+  background-color:	#00BFFF;
+  color: white;
+  -webkit-transition: top 300ms;
+  transition: top 300ms;
+}

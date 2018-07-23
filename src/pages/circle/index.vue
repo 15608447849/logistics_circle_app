@@ -1,11 +1,16 @@
 <template>
   <div>
-    <yd-navbar height=.8rem title="圈子" fontsize="0.36rem" color="#FFFFFF" bgcolor="#1E90FF"></yd-navbar>
+    <div class="issueHeaderNav">
+      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+      <span>圈子</span>
+      <span></span>
+    </div>
+    <!--<yd-navbar height=.8rem title="圈子" fontsize="0.36rem" color="#FFFFFF" bgcolor="#1E90FF"></yd-navbar>-->
     <!--下拉刷新回调的提示-->
     <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
     <div id="mescroll" class="mescroll">
       <ul class="order_box">
-        <li class="order_list"  v-for="(item,index) in infoList" :key="index" @click="item">
+        <li class="order_list"  @click="toPageIssueDetail(item)"  v-for="(item,index) in infoList" :key="index">
           <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
           <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span class="carWeight">{{item.wm}}</span><span class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.vlen}}</span><span class="total_price">￥{{item.cost}}元</span></div>
         </li>
@@ -28,7 +33,7 @@
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        token: 'e140aa06136e4eb6937db4d31e5fe588',
+        token: '0',
         mescroll:null,
         pullingMessage: '',
         isShowMessage: false
@@ -86,16 +91,28 @@
       requestInfoList(requestState,timeStr,successCallback,errorCallback) {
         let self = this;
         // this.$Ice_OrderService.queryOrderByApp(self.token,self.key,self.pageSize,self.address,requestState,timeStr,
-        this.$Ice_OrderService.queryCircleOrderByApp(self.token,self.pageSize,self.address,self.key,requestState,timeStr,
+        this.$Ice_OrderService.queryCircleOrderByApp("0",self.pageSize,self.address,self.key,requestState,timeStr,
           new IceCallback(
             function (result) {
-              console.log(result);
-              successCallback(result);
+              result = JSON.parse(result);
+              if(result.code !== 0) {
+                self.message.Toast(self,'error',result.msg,false);
+                return
+              }
+              successCallback(result.obj);
             },function (err) {
               console.log(err);
               errorCallback(err);
             }
           ))
+      },
+      toPageIssueDetail(item) {
+        this.$router.push({
+          path: '/information/issueDetails',
+          query: {
+            id: item.id
+          }
+        })
       },
       itemClick(item) {
         // 跳转详情页面

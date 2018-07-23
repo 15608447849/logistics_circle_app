@@ -1,9 +1,9 @@
 <template>
   <div class="issueOrder">
     <div class="issueHeaderNavFixed">
-      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPicFixed">
+      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发布订单</span>
-      <span>发布</span>
+      <span></span>
     </div>
     <ul class="liNumThree margintop80">
       <li class="inputNumOne needBorder">
@@ -265,6 +265,9 @@
         });
         this.dateTimePicker.show()
       },
+      fallback() {
+        this.$router.go(-1);
+      },
       selectHandle(date, selectedVal, selectedText, type) {
         this.OrderDetail[this.selectDataPicker] = selectedVal[0] + '-' + selectedVal[1] + '-' + selectedVal[2] + ' ' + selectedVal[3] + ':' + selectedVal[4] + ':' + selectedVal[5]
       },
@@ -350,11 +353,12 @@
       releaseOrder() {
         let self = this;
         if (this.validator()) {
-          self.$Ice_OrderService.releaseOrder('e140aa06136e4eb6937db4d31e5fe588', self.OrderDetail, new IceCallback(
+          self.$Ice_OrderService.releaseOrder('0', self.OrderDetail, new IceCallback(
             function (result) {
-              console.log(result)
-              if (result === 0) {
-                self.notifyToast('已发送', 'success')
+              result = JSON.parse(result);
+              if (result.code === 0) {
+                self.message.Toast(self, 'correct', '订单发布成功', true);
+                self.$router.go(-1);
               } else {
                 // 发送失败
                 self.$dialog.loading.close();
@@ -374,19 +378,16 @@
           this.message.Toast(this, 'warn', '请填写货物重量', false);
           return false
         }
-
         // 货物运费
         if (this.verifyUtil.isNull(this.OrderDetail.price)) {
           this.message.Toast(this, 'warn', '请填写货物运费', false);
           return false
         }
-
         // 收货人
         if (this.verifyUtil.isNull(this.OrderDetail.consignee)) {
           this.message.Toast(this, 'warn', '请填写收货人信息', false);
           return false
         }
-
         // 联系方式
         if (this.verifyUtil.isNull(this.OrderDetail.consphone)) {
           this.message.Toast(this, 'warn', '请填写联系方式', false);

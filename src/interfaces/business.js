@@ -5,6 +5,7 @@ const userModule = require('./userModule');
 const orderModule = require('./orderModule');
 const enterpriseModule = require('./enterpriseModule');
 const circleModule = require('./circleModule');
+const compModule = require('./compModule');
 
 import {
   iceGridInstanceName,
@@ -35,6 +36,8 @@ exports.install = function (Vue) {
   Vue.prototype.$Ice_EnterpriseService = enterpriseModule;
 
   Vue.prototype.$Ice_CircleService = circleModule;
+
+  Vue.prototype.$Ice_CompService = compModule;
 
 };
 

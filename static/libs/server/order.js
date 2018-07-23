@@ -253,12 +253,12 @@
     Slice.defineOperations(order.OrderService, order.OrderServicePrx,
     {
         "generateOrderNo": [, , , , , [7], , , , , ],
-        "queryOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "queryCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "queryAppOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "queryAppCircleOrderByCurdate": [, , , , , ["order.OrderSeqHelper"], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryCircleOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryAppOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryAppCircleOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "addOrder": [, , , , , [7], [[7], [order.OrderICE]], , , , ],
-        "getOrderDetail": [, , , , , [order.OrderICE], [["cstruct.stringSeqHelper"]], , , , ],
+        "getOrderDetail": [, , , , , [7], [["cstruct.stringSeqHelper"]], , , , ],
         "robbingOrder": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.order = order;

@@ -9,7 +9,8 @@ Vue.use(Vuex);
 
 const state = {
   userInfo: {}, // 用户信息
-  userToken: '',
+  compInfo: {}, // 企业信息
+  userId: '', // 用户ouid
   openId: '',
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型

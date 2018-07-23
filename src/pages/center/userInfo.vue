@@ -8,7 +8,7 @@
    <div class="enterprisePic">
      <img src="../../assets/images/small/bussiness-man.png" alt="">
    </div>
-   <span class="pLabel">长沙大唐物流有限公司</span>
+   <span class="pLabel">{{compInfo.fname}}</span>
    <span class="creditGrade">信用等级</span>
    <ul class="startBoxCredit">
      <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
@@ -24,7 +24,7 @@
      </li>
      <li class="contactMode">
        <span>联系方式：</span>
-       <span>18373270790</span>
+       <span>{{compInfo.phone}}</span>
      </li>
    </ul>
    <ul class="enterpriseInformation" @click="toInvoice">
@@ -75,9 +75,17 @@
 
 <script>
     export default {
+      data() {
+        return {
+          compInfo: {},
+        }
+      },
+      mounted() {
+        this.compInfo = this.$app_store.getters.compInfo
+      },
       methods:{
         fallback() {
-
+          this.$router.go(-1)
         },
         toInvoice(){
           this.$router.push({

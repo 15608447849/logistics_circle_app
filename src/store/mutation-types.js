@@ -1,7 +1,11 @@
 // 用户信息
 export const USER_INFO = 'USER_INFO'
 // token
-export const USER_TOKEN = 'USER_TOKEN'
+// export const USER_TOKEN = 'USER_TOKEN'
+// userId
+export const USER_ID = 'USER_ID'
+// 企业信息
+export const  COMP_INFO = 'COMP_INFO'
 // open_id
 export const UNION_ID = 'UNION_ID'
 // 搜索状态

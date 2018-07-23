@@ -1,10 +1,10 @@
 <template>
    <div>
-     <yd-navbar title="货源信息" bgcolor="#1E90FF" color="#FFFFFF" fontsize="18px">
-       <router-link to="" slot="left">
-         <yd-navbar-back-icon  color="#FFFFFF" @click.native="routerBack"></yd-navbar-back-icon>
-       </router-link>
-     </yd-navbar>
+     <div class="issueHeaderNav">
+       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
+       <span>货源信息</span>
+       <span></span>
+     </div>
 
      <div class="orderPadding10">
        <div class="logisticsNameBox">
@@ -107,7 +107,7 @@
       setRobbingOrder() {
         let self = this;
         this.message.Toast(this,'loading','正在努力抢单中...',true);
-        this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userToken,this.$route.query.id,
+        this.$Ice_OrderService.robbingOrder('0',this.$route.query.id,
           new IceCallback(
             function (result) {
               self.message.Toast(self,'correct','抢单成功',false);
@@ -122,18 +122,24 @@
           )
         );
       },
+      fallback() {
+        this.$router.go(-1)
+      },
       getOrderDetailInfo() {
         let self = this;
         const orderId = this.$route.query.id || '';
-
-        this.$Ice_OrderService.getOrderDetail(orderId,
+        this.$Ice_OrderService.getOrderDetail(orderId,'0',
           new IceCallback(
             function (result) {
-              console.log(result);
-              self.detailInfo = result;
+              result = JSON.parse(result);
+              if (result.code !== 0) {
+                self.message.Toast(self,'error',result.msg,false);
+              }
+              self.detailInfo = result.obj;
             },
             function (error) {
-              this.message.Toast(self,'error',error,false)
+              self.message.Toast(self,'error','订单详情获取失败, 请稍后重试',false);
+              self.$router.go(-1)
             }
           )
         );

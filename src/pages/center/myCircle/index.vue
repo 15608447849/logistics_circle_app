@@ -1,7 +1,7 @@
 <template>
  <div>
    <div class="issueHeaderNav">
-     <i class="icon iconfont icon-btngoback back"></i>
+     <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
      <span>我的圈子</span>
      <span @click="toaddFriend">添加</span>
    </div>
@@ -17,8 +17,8 @@
    </div>
    <div class="circleListBox">
      <div class="circleType">
-       <div class="SourceGoods activecircle marginLeft21">货源圈</div>
-       <div class="dispatch marginRight21 marginRight21">调度圈</div>
+       <div class="SourceGoods marginLeft21" :class="classA ? 'activecircle' : 'class-b' ">货源圈</div>
+       <div class="dispatch  marginRight21">调度圈</div>
      </div>
      <ul class="circleList">
        <li class="needBorder" @click="tofriendDetails">
@@ -54,7 +54,9 @@
 <script>
     export default {
        data(){
-
+         return {
+           selectOneTab: false
+         }
        },
       methods:{
         toaddFriend(){
@@ -71,6 +73,9 @@
           this.$router.push({
             path: '/center/myCircle/searchFriend'
           })
+        },
+        fallback() {
+          this.$router.go(-1)
         }
       }
     }

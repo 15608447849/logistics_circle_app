@@ -36,11 +36,11 @@
       <div class="fastSendRob">
         <div class="sendOrder">
           <img src="../../assets/images/small/快速发单@2x.png" alt="">
-          <span>快速发单</span>
+          <span @click="toPageIssue">快速发单</span>
         </div>
         <div class="already">
           <img src="../../assets/images/small/已抢订单@2x.png" alt="">
-          <span>快速发单</span>
+          <span>我的发布</span>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
         <div class="centerPic">
           <div class="portrait">
             <img src="../../assets/images/small/aaaaaaa.png" alt="">
-            <span class="logisticsMing">长沙大唐物流</span>
+            <span class="logisticsMing">{{compInfo.fname}}</span>
           </div>
           <ul class="startBox">
             <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
@@ -69,7 +69,7 @@
           </ul>
           <div class="money">
             <img src="../../assets/images/small/jewelry.png" alt="">
-            <span class="yang">￥</span><span class="priceNum">2588.00</span>
+            <span class="yang">￥</span><span class="priceNum">0.00</span>
           </div>
         </div>
         <ul class="personalList">
@@ -99,10 +99,25 @@
         show4: false,
         isMember: true,
         direction: '',
-        tipStyle: ''
+        tipStyle: '',
+        compInfo: {
+          fname: '当前用户未登录'
+        },
+        // 信息大厅数据
+
+      }
+    },
+    mounted() {
+      if(this.$app_store.getters.compInfo!== null) {
+        this.compInfo = this.$app_store.getters.compInfo;
       }
     },
     methods: {
+      toPageIssue() {
+        this.$router.push({
+          path: '/information/issue'
+        })
+      },
       toLogin() {
         this.$router.push({path: '/login'})
       },

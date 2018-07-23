@@ -3,7 +3,7 @@
     <div class="issueHeaderNavMap">
       <i class="icon iconfont icon-btngoback back" @click="goBack"></i>
       <span>选择地址</span>
-      <button @click="selectCity" class="selectCityBtn">当前城市：{{searchOption.city}}<i class="icon iconfont icon-xiala xiala"></i></button>
+      <button @click="selectCity" class="selectCityBtn">{{searchOption.city}}<i class="icon iconfont icon-xiala xiala"></i></button>
     </div>
     <div class="amap-container">
       <el-amap-search-box class="search" :search-option="searchOption"
@@ -96,6 +96,7 @@
           if (status === "complete" && result.info === "OK") {
             if (result && result.regeocode) {
               self.$app_store.commit(ADDRESSCOM, result.regeocode.addressComponent);
+
               self.goBack()
             }
           }
@@ -104,6 +105,10 @@
       goBack() {
         this.$router.go(-1);
       }
+    },
+    deactivated() {
+      // 地图页面不需要被缓存
+      this.$destroy();
     }
   };
 </script>

@@ -5,8 +5,12 @@ export default {
   user: state => {
     return state.userInfo
   },
-  userToken: state => {
-    return state.userToken
+  userId: state => {
+    return state.userId
+  },
+  // 企业信息
+  compInfo: state => {
+    return state.compInfo
   },
   searchContent: state => {
     return state.searchContent

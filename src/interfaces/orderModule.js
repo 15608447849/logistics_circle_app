@@ -107,8 +107,6 @@ struct OrderDetail{
 	 };
  */
 module.exports = {
-
-
    /* 全文检索出当天的订单(App)
    OrderSeq queryAppOrderByCurdate(string token,cstruct::stringSeq params);
    参数数组定义:
@@ -119,8 +117,8 @@ module.exports = {
    --指定订单标识(时间或自增长的订单号)
    订单发布时间
    */
-  queryOrderByApp: (token,key,size,addr,op,timeStr,callback)=> {
-    queryIce(order.OrderServicePrx , 'OrderService', 'queryAppOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
+  queryOrderByApp: (oid,size,addr,key,op,timeStr,callback)=> {
+    queryIce(order.OrderServicePrx , 'OrderService', 'queryAppOrderByCurdate', oid,[size,addr,key,op,timeStr],callback);
   },
   /**
    * 全文检索出当天的圈子订单(APP)
@@ -138,8 +136,8 @@ module.exports = {
     queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', token,OrderICE,callback);
   },
   /** 传入订单号 获取订单详情 OrderDetail */
-  getOrderDetail:(orderNo,callback)=>{
-    queryIce(order.OrderServicePrx , 'OrderService', 'getOrderDetail', [orderNo],callback);
+  getOrderDetail:(orderNo,userId,callback)=>{
+    queryIce(order.OrderServicePrx , 'OrderService', 'getOrderDetail', [orderNo,userId],callback);
   },
   /**
    *抢单

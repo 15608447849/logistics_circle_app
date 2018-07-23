@@ -25,7 +25,7 @@
 <script>
   import {
     USER_INFO,
-    USER_TOKEN
+    USER_ID, COMP_INFO
   } from '../../store/mutation-types'
 
   export default {
@@ -56,13 +56,11 @@
             function (result) {
               result = JSON.parse(result);
               // 登录成功
-              if(result.cstatus === 0) {
+              if(result.code === 0) {
                 self.$app_store.commit(USER_INFO, result.obj);
-                // self.$app_store.commit(USER_TOKEN, result.upw);
-                let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
-                self.$router.push({
-                  path: redirect
-                })
+                self.$app_store.commit(USER_ID, result.obj.oid);
+                // 选择企业信息
+                self.selectComp(result.obj);
               } else {
                 self.message.Toast(self,'error',result.msg,false);
               }
@@ -72,6 +70,29 @@
             }
           ))
         }
+      },
+      selectComp(userInfo) {
+        // 根据选中企业id获取企业信息
+        // 获取企业详情
+        this.getCompInfo(userInfo.oid);
+      },
+      getCompInfo(oid) {
+        let self = this;
+        this.$Ice_CompService.querygetCompByUid(oid,
+          new IceCallback(
+            function (result) {
+              result = JSON.parse(result);
+              self.$app_store.commit(COMP_INFO,result.obj);
+              let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+              self.$router.push({
+                path: redirect
+              })
+            },
+            function (error) {
+              this.message.Toast(this,'warn','企业信息获取失败, 请尝试从新登录',false);
+            }
+          )
+        );
       },
       validator() {
         if (this.verifyUtil.isNull(this.account)) {
