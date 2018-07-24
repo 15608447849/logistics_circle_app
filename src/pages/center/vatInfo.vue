@@ -46,7 +46,8 @@
       }
     },
     mounted() {
-      this.CompInfo = this.$app_store.getters.compInfo
+      debugger
+      this.compInfo = this.$route.params;
     },
     methods: {
       fallback() {

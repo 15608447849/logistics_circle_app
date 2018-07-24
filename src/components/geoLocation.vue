@@ -96,7 +96,6 @@
           if (status === "complete" && result.info === "OK") {
             if (result && result.regeocode) {
               self.$app_store.commit(ADDRESSCOM, result.regeocode.addressComponent);
-
               self.goBack()
             }
           }

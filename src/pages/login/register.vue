@@ -130,8 +130,6 @@
         let param = ['register',this.phone,'0'];
         this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
           function (result) {
-            console.log(result)
-            result = JSON.parse(result);
             if (result.code === 0) {
               self.start1 = true;
               self.$dialog.loading.close();
@@ -158,7 +156,6 @@
         // 校验验证码
         this.$Ice_UserService.verifySms(this.phone, this.verificationCode, new IceCallback(
           function (result) {
-            result = JSON.parse(result);
             if (result.code === 0) {
               self.secondStepBool = false;
               self.thirdStepBool = true;
@@ -177,13 +174,10 @@
           // 验证用户名是否存在
           this.$Ice_UserService.checkUsernameRepetition(this.account, new IceCallback(
             function (result) {
-              console.log(result)
-              result = JSON.parse(result);
               if (result.code === 0) {
                 // 用户名不存在, 注册用户
                 self.$Ice_UserService.userRegister(self.account, self.phone, self.password, self.invitationCode, self.verificationCode, new IceCallback(
                   function (result) {
-                    result = JSON.parse(result);
                     if (result.code === 0) {
                       // store 保存登陆token
                       self.$app_store.commit(USER_INFO, result.obj);

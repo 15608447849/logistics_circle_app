@@ -128,10 +128,10 @@
       getOrderDetailInfo() {
         let self = this;
         const orderId = this.$route.query.id || '';
-        this.$Ice_OrderService.getOrderDetail(orderId,'0',
+        const puberId = this.$route.query.puberid || '';
+        this.$Ice_OrderService.getOrderDetail(orderId,puberId,
           new IceCallback(
             function (result) {
-              result = JSON.parse(result);
               if (result.code !== 0) {
                 self.message.Toast(self,'error',result.msg,false);
               }
@@ -139,13 +139,13 @@
             },
             function (error) {
               self.message.Toast(self,'error','订单详情获取失败, 请稍后重试',false);
-              self.$router.go(-1)
+              // self.$router.go(-1)
             }
           )
         );
       }
     },
-    mounted() {
+    activated() {
       this.getOrderDetailInfo();
     }
   }

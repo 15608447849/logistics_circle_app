@@ -71,14 +71,61 @@
       </li>
     </ul>
     <div class="blacklist">
-      <a class="moveDetele">移除伙伴</a>
-      <a class="addBlacklist">加入黑名单</a>
+      <a class="moveDetele" @click="removePartner">移除伙伴</a>
+      <a class="addBlacklist"  @click="addBlacklist">加入黑名单</a>
     </div>
   </div>
 </template>
 
 <script>
     export default {
+      data() {
+        return {
+          compInfo: {},
+        }
+      },
+      mounted() {
+
+      },
+      methods: {
+        // 根据企业编号 获取企业详情
+        removePartner() {
+          this.message.showAlert(this,'移除伙伴','伙伴移除后订单信息将不会优先查看,您确定要移除吗?')
+            .then(() => {
+
+            })
+            .catch(() => {
+
+            })
+        },
+        addBlacklist() {
+          this.message.showAlert(this,'黑名单添加','伙伴添加至黑名单后, 双方发单信息都将无法查看?')
+            .then(() => {
+
+            })
+            .catch(() => {
+
+            })
+        },
+        fallback() {
+          this.$router.go(-1)
+        },
+        toInvoice(){
+          this.$router.push({
+            path: '/vatInfo'
+          })
+        },
+        toenterprise(){
+          this.$router.push({
+            path: '/entInfo'
+          })
+        },
+        toCertificates(){
+          this.$router.push({
+            path: '/cartInfo'
+          })
+        }
+      }
     }
 </script>
 

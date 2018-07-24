@@ -113,7 +113,6 @@
         }).show()
       },
       fileSubmitted(file) {
-        debugger
         file.base64Value = file.file.base64
       },
       fileSuccess(file) {

@@ -34,8 +34,8 @@ module.exports= {
    * params:查询参数数组[司机姓名，司机电话，司机状态] -> 没有传入空
    DriverInfoSeq queryDriver(string token, cstruct::stringSeq params);
    */
-  queryDriverInfo: function (token, name, phone, state, callback) {
-    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'queryDriver', token, [name, phone, state], callback);
+  queryDriverInfo: function (oid, name, phone, state, callback) {
+    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'queryDriver', oid, [name, phone, state], callback);
   },
 
   	/**
@@ -71,17 +71,15 @@ module.exports= {
     * 查询路线
     * params:查询参数数组[目的地地区码，出发地地区码，线路状态]
     */
-  	queryRoutes: function (phone, origin, destination, state,page, callback) {
-	  	var phone = num2jlong(phone);
-	    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'queryRoutes', phone, [origin, destination, state],page, callback);
+  	queryRoutes: function (oid, origin, destination, state,page, callback) {
+	    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'queryRoutes', oid, [origin, destination, state],page, callback);
   	},
-
    	/**
     * 保存线路
-    *  string saveRoute(RouteInfo route, long uphone);
+    *  string saveRoute(RouteInfo route, long uphone); 
     */
-  	saveRoute: function (uphone, routeInfo, callback) {
-	   queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'saveRoute', num2jlong(uphone), routeInfo, callback);
+  	saveRoute: function ( routeInfo,oid, callback) {
+	   queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'saveRoute',  routeInfo, num2jlong(oid),callback);
     },
    	/**
     * 停用线路
@@ -98,5 +96,13 @@ module.exports= {
     */
 	enableRoute: function (routeids, callback) {
 	   queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'enableRoute',[routeids], callback);
+	},
+	/**
+    * 途径点
+    * start 起点码  end 终点码
+    * getPassingPoint
+    */
+    getPassingPoint: function (start,end, callback) {
+	   queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'getPassingPoint',start,end, callback);
 	},
 };

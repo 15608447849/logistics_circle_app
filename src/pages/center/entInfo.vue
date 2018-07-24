@@ -92,7 +92,7 @@
       }
     },
     mounted() {
-      this.compInfo = this.$app_store.getters.compInfo;
+      this.compInfo = this.$route.params;
       this.getBasicInfo();
     },
     methods: {

@@ -47,20 +47,18 @@
         })
       },
       toupdatapwd(){
-          this.$router.push({path: '/retrievePwd'})
+        this.$router.push({path: '/retrievePwd'})
       },
       loginClick() {
         let self = this;
         if (this.validator()) {
+          debugger
           this.$Ice_UserService.login(this.account, this.password, new IceCallback(
             function (result) {
-              result = JSON.parse(result);
-              // 登录成功
               if(result.code === 0) {
                 self.$app_store.commit(USER_INFO, result.obj);
                 self.$app_store.commit(USER_ID, result.obj.oid);
-                // 选择企业信息
-                self.selectComp(result.obj);
+                self.getCompList(result.obj.oid);
               } else {
                 self.message.Toast(self,'error',result.msg,false);
               }
@@ -71,25 +69,74 @@
           ))
         }
       },
-      selectComp(userInfo) {
-        // 根据选中企业id获取企业信息
-        // 获取企业详情
-        this.getCompInfo(userInfo.oid);
+      getCompList(oid) {
+        let self = this;
+        let compList = [];
+        this.$Ice_CompService.selectCompUserByUid(oid,
+          new IceCallback(
+            function (result) {
+              // 登录时添加企业到缓存
+              if (result.obj.length === 1) {
+                self.setCompIdByRedis(oid,result.obj[0].compid);
+                return
+              }
+              // 弹出选择列表
+              result.obj.forEach((currentValue, index, arr)=>{
+                compList.push({
+                  content: currentValue.fname,
+                  compid: currentValue.compid
+                });
+              });
+              self.showActive(oid,compList);
+            },
+            function (error) {
+              self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
+            }
+          )
+        );
       },
+      showActive(oid,dataList) {
+        this.$createActionSheet({
+          title: '请选择要登录的企业',
+          active: 0,
+          data: dataList,
+          onSelect: (item, index) => {
+            this.setCompIdByRedis(oid,item.compid);
+          },
+          onCancel: () => {
+            this.message.Toast(this,'warn','未选择企业, 请尝试重新登录',false);
+          }
+        }).show()
+      },
+      // 登录时添加企业到缓存
+      setCompIdByRedis(oid, compid) {
+        let self = this;
+        this.$Ice_CompService.addLoginCompByRedis(oid,compid,
+          new IceCallback(
+            function (result) {
+              self.getCompInfo(oid);
+            },
+            function (error) {
+              self.message.Toast(this,'warn','企业信息添加失败, 请稍后重试',false);
+            }
+          )
+        );
+      },
+      // 获取企业信息
       getCompInfo(oid) {
         let self = this;
         this.$Ice_CompService.querygetCompByUid(oid,
           new IceCallback(
             function (result) {
-              result = JSON.parse(result);
               self.$app_store.commit(COMP_INFO,result.obj);
+              console.log(self.$app_store.getters.compInfo);
               let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
               self.$router.push({
                 path: redirect
               })
             },
             function (error) {
-              this.message.Toast(this,'warn','企业信息获取失败, 请尝试从新登录',false);
+              self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
             }
           )
         );

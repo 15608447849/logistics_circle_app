@@ -107,10 +107,9 @@
       },
       requestInfoList(requestState, timeStr, successCallback, errorCallback) {
         let self = this;
-        this.$Ice_OrderService.queryOrderByApp(this.oid, self.pageSize, self.address, self.key, requestState, timeStr,
+        this.$Ice_OrderService.queryOrderByApp('0', self.pageSize, self.address, self.key, requestState, timeStr,
           new IceCallback(
             function (result) {
-              result = JSON.parse(result);
               if(result.code !== 0) {
                 self.message.Toast(self,'error',result.msg,false);
                 return

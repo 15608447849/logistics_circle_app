@@ -54,6 +54,41 @@
         },
         4, 
         false);
+
+    comp.Staff = Slice.defineStruct(
+        function(name, uid, phone, comp, compid, status, createdate)
+        {
+            this.name = name !== undefined ? name : "";
+            this.uid = uid !== undefined ? uid : 0;
+            this.phone = phone !== undefined ? phone : "";
+            this.comp = comp !== undefined ? comp : "";
+            this.compid = compid !== undefined ? compid : 0;
+            this.status = status !== undefined ? status : 0;
+            this.createdate = createdate !== undefined ? createdate : "";
+        },
+        true,
+        function(__os)
+        {
+            __os.writeString(this.name);
+            __os.writeInt(this.uid);
+            __os.writeString(this.phone);
+            __os.writeString(this.comp);
+            __os.writeInt(this.compid);
+            __os.writeInt(this.status);
+            __os.writeString(this.createdate);
+        },
+        function(__is)
+        {
+            this.name = __is.readString();
+            this.uid = __is.readInt();
+            this.phone = __is.readString();
+            this.comp = __is.readString();
+            this.compid = __is.readInt();
+            this.status = __is.readInt();
+            this.createdate = __is.readString();
+        },
+        16, 
+        false);
     Slice.defineSequence(comp, "RouteSeqHelper", "comp.Route", false);
 
     /**
@@ -195,7 +230,10 @@
         "updateComp": [, , , , , [7], [[comp.CompInfo]], , , , ],
         "queryCompByBasicUid": [, , , , , [7], [[7]], , , , ],
         "insertCompUser": [, , , , , [7], [[3], [4]], , , , ],
-        "selectCompUserByUid": [, , , , , [7], [[3]], , , , ]
+        "selectCompUserByUid": [, , , , , [7], [[3]], , , , ],
+        "addLoginCompByRedis": [, , , , , [7], [[3], [3]], , , , ],
+        "selectStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
+        "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ]
     });
     exports.comp = comp;
 }

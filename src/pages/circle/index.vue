@@ -5,7 +5,6 @@
       <span>圈子</span>
       <span></span>
     </div>
-    <!--<yd-navbar height=.8rem title="圈子" fontsize="0.36rem" color="#FFFFFF" bgcolor="#1E90FF"></yd-navbar>-->
     <!--下拉刷新回调的提示-->
     <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
     <div id="mescroll" class="mescroll">
@@ -90,11 +89,9 @@
       },
       requestInfoList(requestState,timeStr,successCallback,errorCallback) {
         let self = this;
-        // this.$Ice_OrderService.queryOrderByApp(self.token,self.key,self.pageSize,self.address,requestState,timeStr,
         this.$Ice_OrderService.queryCircleOrderByApp("0",self.pageSize,self.address,self.key,requestState,timeStr,
           new IceCallback(
             function (result) {
-              result = JSON.parse(result);
               if(result.code !== 0) {
                 self.message.Toast(self,'error',result.msg,false);
                 return
@@ -110,7 +107,8 @@
         this.$router.push({
           path: '/information/issueDetails',
           query: {
-            id: item.id
+            id: item.id,
+            puberid: item.puberid
           }
         })
       },

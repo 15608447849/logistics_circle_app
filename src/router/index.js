@@ -212,6 +212,7 @@ const vueRouter = new Router({
       component: ENT_INFO
     },
     {
+      name: 'vatInfo',
       path: '/vatInfo',
       component: VAT_INFO
     },

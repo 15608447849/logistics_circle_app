@@ -100,7 +100,19 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
       }
     )
     .then(
-        function (result) {
+        function (args0) {
+          console.log(args0)
+          let result;
+          if(args0){
+            if(typeof (args0)==="string") args0 = JSON.parse(args0);
+            result = args0;
+          }
+          // if(args1){
+          //   if(typeof (args1)==="string") args1 = JSON.parse(args1);
+          //   result = [];
+          //   result.push(args0);
+          //   result.push(args1);
+          // }
           callback.onCallback(CALLBACK_ACTION.COMPLETE,result);
         }
       )
@@ -112,6 +124,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
         }
     )
 }
+
 //数字转java long型
 function num2jlong(num) {
   let MAX_INT = Math.pow(2, 53);

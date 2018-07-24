@@ -27,6 +27,39 @@
     var system = __M.module("system");
 
     /**
+     * 地区信息模型
+     **/
+    system.Area = Slice.defineStruct(
+        function(areac, arean, cyprnh, qtc, cstatus)
+        {
+            this.areac = areac !== undefined ? areac : 0;
+            this.arean = arean !== undefined ? arean : "";
+            this.cyprnh = cyprnh !== undefined ? cyprnh : 0;
+            this.qtc = qtc !== undefined ? qtc : "";
+            this.cstatus = cstatus !== undefined ? cstatus : 0;
+        },
+        true,
+        function(__os)
+        {
+            __os.writeInt(this.areac);
+            __os.writeString(this.arean);
+            __os.writeLong(this.cyprnh);
+            __os.writeString(this.qtc);
+            __os.writeInt(this.cstatus);
+        },
+        function(__is)
+        {
+            this.areac = __is.readInt();
+            this.arean = __is.readString();
+            this.cyprnh = __is.readLong();
+            this.qtc = __is.readString();
+            this.cstatus = __is.readInt();
+        },
+        18, 
+        false);
+    Slice.defineSequence(system, "AreaSeqHelper", "system.Area", false);
+
+    /**
      * 系统服务接口
      **/
     system.SystemService = Slice.defineObject(
@@ -44,7 +77,8 @@
     {
         "getAllDict": [, , , , , [7], , , , , ],
         "getChineseAllAreas": [, , , , , [7], , , , , ],
-        "getChineseAllAreasByPc": [, , , , , [7], , , , , ]
+        "getChineseAllAreasByPc": [, , , , , [7], , , , , ],
+        "getTransferPoint": [, , , , , [7], [[3]], , , , ]
     });
     exports.system = system;
 }
