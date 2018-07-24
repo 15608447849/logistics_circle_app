@@ -1080,7 +1080,7 @@ input[type="radio"] {
   align-items:center;
   width:7.5rem;
   height:.8rem;
-  padding:0px .08rem 0px .08rem;
+  padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
@@ -2253,6 +2253,173 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: .24rem;
   letter-spacing: 0px;
   color: #999999;
+}
+/*我的发布***********************************************************************************************************************/
+.myReleaseBox{
+  background:#f5f5f5;
+}
+.white{
+  color:#ffffff;
+}
+.releaseAccept{
+  display:block;
+  width:7.5rem;
+  height:.4rem;
+  text-align:center;
+  line-height:.4rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .2rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #666666;
+}
+
+.releaseMenu{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding:0rem .31rem 0rem .31rem;
+  width:7.5rem;
+  height:.6rem;
+  background:#ffffff;
+  border:1px solid #ebeff5;
+  color:#333333;
+}
+.releaseMenu .releaseState{
+  display:inline-block;
+  width:.9rem;
+  height:.57rem;
+  text-align: center;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .57rem;
+  letter-spacing: 0px;
+}
+.releaseCompany{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  width:7.5rem;
+  height:.85rem;
+  background:#ffffff;
+  padding:0rem .21rem 0rem .21rem;
+}
+.companyBox span{
+  margin:0rem .14rem 0rem .14rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+  color: #333333;
+}
+.releasetext{
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+  color: #3189f5;
+}
+.myReleaseList{
+  display:block;
+  width:7.5rem;
+  height:auto;
+  background:#fafafa;
+  margin-bottom:.16rem;
+}
+.address{
+  margin-top:.2rem;
+}
+.marginBottom15{
+  margin-bottom:.15rem;
+}
+.myReleaseList li{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  width:7.5rem;
+  height:auto;
+  padding:0rem .21rem 0rem .21rem;
+}
+.address .addressList span{
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+  color: #333333;
+}
+.address .addressTime span {
+  font-family: PingFang-SC-Regular;
+  font-size: .2rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.collection span,.specifications span,.pickGoods div span{
+  font-family: PingFang-SC-Regular;
+  font-size:.24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.underPay,.Totaltext{
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.yang{
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  letter-spacing: 0px;
+  color: #ff3b30;
+}
+.yangNum{
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+  color: #ff3b30;
+}
+.cancelRefres{
+  display:block;
+  width:7.5rem;
+  height:.8rem;
+  padding-right:.21rem;
+  background:#ffffff;
+  margin-top:.16rem;
+}
+.cancelRefres a{
+  display:inline-block;
+  width:1.3rem;
+  height:.48rem;
+  text-align: center;
+  line-height:.48rem;
+  border: solid 1px #b5b5b5;
+  border-radius: 5px;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #666666;
+}
+.refreshRelease{
+  margin-left:.24rem;
+}
+.cancelRefres div{
+  float:right;
+  margin-top:.16rem;
 }
 /** 下拉刷新加载框 */
 /*下拉刷新回调的提示*/

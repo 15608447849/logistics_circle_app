@@ -12,7 +12,7 @@
         </div>
         <span class="friendCanle">取消</span>
       </div>
-      <p>按指定电话、</p>
+      <p>按指定名称、电话查询</p>
     </div>
   </div>
 </template>
