@@ -77,7 +77,7 @@
           </li>
           <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span></li>
           <li><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span></li>
-          <li><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
+          <li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
           <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
           <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span class="personalText circle">我的圈子</span></li>
           <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
@@ -150,7 +150,12 @@
         this.$router.push({
           path: '/center/myCircle/index'
         })
-      }
+      },
+      toMyRelease(){
+        this.$router.push({
+          path: '/center/myRelease/index'
+        })
+      },
     }
   }
 </script>

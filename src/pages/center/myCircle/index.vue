@@ -17,6 +17,8 @@
    </div>
    <div class="circleListBox">
      <div class="circleType">
+       <div class="SourceGoods marginLeft21">货源圈</div>
+       <div class="dispatch marginRight21 marginRight21 activecircle">调度圈</div>
        <div class="SourceGoods marginLeft21" :class="classA ? 'activecircle' : 'class-b' ">货源圈</div>
        <div class="dispatch  marginRight21">调度圈</div>
      </div>

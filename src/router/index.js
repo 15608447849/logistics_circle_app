@@ -51,7 +51,9 @@ import ADDDRIVER from '@/pages/center/driverAdm/addDriver'
 import MYCIRCLE from '@/pages/center/myCircle/index'
 import ADDFRIEND from '@/pages/center/myCircle/addFriend'
 import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
-
+import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
+import MYRELEASE from '@/pages/center/myRelease/index'
+import RELEASEDETAILS from '@/pages/center/myRelease/releaseDetails'
 
 // 测试页面
 import TEST from '@/interfaces/test'
@@ -238,6 +240,18 @@ const vueRouter = new Router({
     {
       path: '/center/myCircle/friendDetails',
       component:  FRIENDDETAILS
+    },
+    {
+      path: '/center/myCircle/searchFriend',
+      component:  SEARCHFRIEND
+    },
+    {
+      path: '/center/myRelease/index',
+      component:  MYRELEASE
+    },
+    {
+      path: '/center/myRelease/releaseDetails',
+      component:  RELEASEDETAILS
     },
 
   ]
