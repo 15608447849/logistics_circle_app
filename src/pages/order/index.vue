@@ -10,7 +10,7 @@
     methods: {
       toPageTest() {
         this.$router.push({
-          path: '/test'
+          path: '/picker'
         })
       }
     }

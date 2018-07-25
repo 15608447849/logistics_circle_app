@@ -20,164 +20,167 @@
 
 (function(module, require, exports)
 {
-    var Ice = require("ice").Ice;
-    var __M = Ice.__M;
-    var cstruct = require("cstruct").cstruct;
-    var Slice = Ice.Slice;
+  var Ice = require("ice").Ice;
+  var __M = Ice.__M;
+  var cstruct = require("cstruct").cstruct;
+  var Slice = Ice.Slice;
 
-    var enterprise = __M.module("enterprise");
+  var enterprise = __M.module("enterprise");
 
-    /**
-     * 司机信息
-     **/
-    enterprise.DriverInfo = Slice.defineStruct(
-        function(driverid, carryname, drivername, driverphone, createdate, createtime, cstatus)
-        {
-            this.driverid = driverid !== undefined ? driverid : 0;
-            this.carryname = carryname !== undefined ? carryname : "";
-            this.drivername = drivername !== undefined ? drivername : "";
-            this.driverphone = driverphone !== undefined ? driverphone : "";
-            this.createdate = createdate !== undefined ? createdate : "";
-            this.createtime = createtime !== undefined ? createtime : "";
-            this.cstatus = cstatus !== undefined ? cstatus : 0;
-        },
-        true,
-        function(__os)
-        {
-            __os.writeInt(this.driverid);
-            __os.writeString(this.carryname);
-            __os.writeString(this.drivername);
-            __os.writeString(this.driverphone);
-            __os.writeString(this.createdate);
-            __os.writeString(this.createtime);
-            __os.writeInt(this.cstatus);
-        },
-        function(__is)
-        {
-            this.driverid = __is.readInt();
-            this.carryname = __is.readString();
-            this.drivername = __is.readString();
-            this.driverphone = __is.readString();
-            this.createdate = __is.readString();
-            this.createtime = __is.readString();
-            this.cstatus = __is.readInt();
-        },
-        13, 
-        false);
-    Slice.defineSequence(enterprise, "DriverInfoSeqHelper", "enterprise.DriverInfo", false);
-
-    /**
-     * 途径点中转点
-     **/
-    enterprise.Routeviap = Slice.defineStruct(
-        function(oid, routeid, compid, place, cstatus)
-        {
-            this.oid = oid !== undefined ? oid : 0;
-            this.routeid = routeid !== undefined ? routeid : 0;
-            this.compid = compid !== undefined ? compid : 0;
-            this.place = place !== undefined ? place : 0;
-            this.cstatus = cstatus !== undefined ? cstatus : 0;
-        },
-        true,
-        function(__os)
-        {
-            __os.writeInt(this.oid);
-            __os.writeInt(this.routeid);
-            __os.writeInt(this.compid);
-            __os.writeInt(this.place);
-            __os.writeInt(this.cstatus);
-        },
-        function(__is)
-        {
-            this.oid = __is.readInt();
-            this.routeid = __is.readInt();
-            this.compid = __is.readInt();
-            this.place = __is.readInt();
-            this.cstatus = __is.readInt();
-        },
-        20, 
-        true);
-    Slice.defineSequence(enterprise, "RouteviapSeqHelper", "enterprise.Routeviap", true);
-
-    /**
-     * 常用线路
-     **/
-    enterprise.RouteInfo = Slice.defineStruct(
-        function(oid, routeid, compid, routename, startpc, startpn, endpc, endpn, cstatus, routevias)
-        {
-            this.oid = oid !== undefined ? oid : 0;
-            this.routeid = routeid !== undefined ? routeid : 0;
-            this.compid = compid !== undefined ? compid : 0;
-            this.routename = routename !== undefined ? routename : "";
-            this.startpc = startpc !== undefined ? startpc : 0;
-            this.startpn = startpn !== undefined ? startpn : "";
-            this.endpc = endpc !== undefined ? endpc : 0;
-            this.endpn = endpn !== undefined ? endpn : "";
-            this.cstatus = cstatus !== undefined ? cstatus : 0;
-            this.routevias = routevias !== undefined ? routevias : null;
-        },
-        true,
-        function(__os)
-        {
-            __os.writeInt(this.oid);
-            __os.writeInt(this.routeid);
-            __os.writeInt(this.compid);
-            __os.writeString(this.routename);
-            __os.writeInt(this.startpc);
-            __os.writeString(this.startpn);
-            __os.writeInt(this.endpc);
-            __os.writeString(this.endpn);
-            __os.writeInt(this.cstatus);
-            enterprise.RouteviapSeqHelper.write(__os, this.routevias);
-        },
-        function(__is)
-        {
-            this.oid = __is.readInt();
-            this.routeid = __is.readInt();
-            this.compid = __is.readInt();
-            this.routename = __is.readString();
-            this.startpc = __is.readInt();
-            this.startpn = __is.readString();
-            this.endpc = __is.readInt();
-            this.endpn = __is.readString();
-            this.cstatus = __is.readInt();
-            this.routevias = enterprise.RouteviapSeqHelper.read(__is);
-        },
-        28, 
-        false);
-    Slice.defineSequence(enterprise, "RouteInfoSeqHelper", "enterprise.RouteInfo", false);
-
-    /**
-     * 业务中心管理服务接口
-     **/
-    enterprise.EnterpriseServer = Slice.defineObject(
-        undefined,
-        Ice.Object, undefined, 1,
-        [
-            "::Ice::Object",
-            "::enterprise::EnterpriseServer"
-        ],
-        -1, undefined, undefined, false);
-
-    enterprise.EnterpriseServerPrx = Slice.defineProxy(Ice.ObjectPrx, enterprise.EnterpriseServer.ice_staticId, undefined);
-
-    Slice.defineOperations(enterprise.EnterpriseServer, enterprise.EnterpriseServerPrx,
+  /**
+   * 司机信息
+   **/
+  enterprise.DriverInfo = Slice.defineStruct(
+    function(driverid, carryname, drivername, driverphone, createdate, createtime, cstatus)
     {
-        "queryDriver": [, , , , , ["enterprise.DriverInfoSeqHelper"], [[7], ["cstruct.stringSeqHelper"], [cstruct.Page]], [[cstruct.Page]], , , ],
-        "saveDriver": [, , , , , [7], [[7], [enterprise.DriverInfo]], , , , ],
-        "enable": [, , , , , [7], [[7], ["cstruct.intSeqHelper"]], , , , ],
-        "disable": [, , , , , [7], [[7], ["cstruct.intSeqHelper"]], , , , ],
-        "resetDriverPasswordByPhone": [, , , , , [7], [[7], [7]], , , , ],
-        "deleteDrivers": [, , , , , [7], [[7], ["cstruct.intSeqHelper"]], , , , ],
-        "queryRoutes": [, , , , , [7], [[4], ["cstruct.stringSeqHelper"], [cstruct.Page]], [[cstruct.Page]], , , ],
-        "queryRoutesCommon": [, , , , , ["enterprise.RouteInfoSeqHelper"], [[4], ["cstruct.stringSeqHelper"]], , , , ],
-        "saveRoute": [, , , , , [7], [[enterprise.RouteInfo], [4]], , , , ],
-        "enableRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
-        "disableRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
-        "deleteRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ]
+      this.driverid = driverid !== undefined ? driverid : 0;
+      this.carryname = carryname !== undefined ? carryname : "";
+      this.drivername = drivername !== undefined ? drivername : "";
+      this.driverphone = driverphone !== undefined ? driverphone : "";
+      this.createdate = createdate !== undefined ? createdate : "";
+      this.createtime = createtime !== undefined ? createtime : "";
+      this.cstatus = cstatus !== undefined ? cstatus : 0;
+    },
+    true,
+    function(__os)
+    {
+      __os.writeInt(this.driverid);
+      __os.writeString(this.carryname);
+      __os.writeString(this.drivername);
+      __os.writeString(this.driverphone);
+      __os.writeString(this.createdate);
+      __os.writeString(this.createtime);
+      __os.writeInt(this.cstatus);
+    },
+    function(__is)
+    {
+      this.driverid = __is.readInt();
+      this.carryname = __is.readString();
+      this.drivername = __is.readString();
+      this.driverphone = __is.readString();
+      this.createdate = __is.readString();
+      this.createtime = __is.readString();
+      this.cstatus = __is.readInt();
+    },
+    13,
+    false);
+  Slice.defineSequence(enterprise, "DriverInfoSeqHelper", "enterprise.DriverInfo", false);
+
+  /**
+   * 途径点中转点
+   **/
+  enterprise.Routeviap = Slice.defineStruct(
+    function(oid, routeid, compid, place, placename, cstatus)
+    {
+      this.oid = oid !== undefined ? oid : 0;
+      this.routeid = routeid !== undefined ? routeid : 0;
+      this.compid = compid !== undefined ? compid : 0;
+      this.place = place !== undefined ? place : 0;
+      this.placename = placename !== undefined ? placename : "";
+      this.cstatus = cstatus !== undefined ? cstatus : 0;
+    },
+    true,
+    function(__os)
+    {
+      __os.writeInt(this.oid);
+      __os.writeInt(this.routeid);
+      __os.writeInt(this.compid);
+      __os.writeInt(this.place);
+      __os.writeString(this.placename);
+      __os.writeInt(this.cstatus);
+    },
+    function(__is)
+    {
+      this.oid = __is.readInt();
+      this.routeid = __is.readInt();
+      this.compid = __is.readInt();
+      this.place = __is.readInt();
+      this.placename = __is.readString();
+      this.cstatus = __is.readInt();
+    },
+    21,
+    false);
+  Slice.defineSequence(enterprise, "RouteviapSeqHelper", "enterprise.Routeviap", false);
+
+  /**
+   * 常用线路
+   **/
+  enterprise.RouteInfo = Slice.defineStruct(
+    function(oid, routeid, compid, routename, startpc, startpn, endpc, endpn, cstatus, routevias)
+    {
+      this.oid = oid !== undefined ? oid : 0;
+      this.routeid = routeid !== undefined ? routeid : 0;
+      this.compid = compid !== undefined ? compid : 0;
+      this.routename = routename !== undefined ? routename : "";
+      this.startpc = startpc !== undefined ? startpc : 0;
+      this.startpn = startpn !== undefined ? startpn : "";
+      this.endpc = endpc !== undefined ? endpc : 0;
+      this.endpn = endpn !== undefined ? endpn : "";
+      this.cstatus = cstatus !== undefined ? cstatus : 0;
+      this.routevias = routevias !== undefined ? routevias : null;
+    },
+    true,
+    function(__os)
+    {
+      __os.writeInt(this.oid);
+      __os.writeInt(this.routeid);
+      __os.writeInt(this.compid);
+      __os.writeString(this.routename);
+      __os.writeInt(this.startpc);
+      __os.writeString(this.startpn);
+      __os.writeInt(this.endpc);
+      __os.writeString(this.endpn);
+      __os.writeInt(this.cstatus);
+      enterprise.RouteviapSeqHelper.write(__os, this.routevias);
+    },
+    function(__is)
+    {
+      this.oid = __is.readInt();
+      this.routeid = __is.readInt();
+      this.compid = __is.readInt();
+      this.routename = __is.readString();
+      this.startpc = __is.readInt();
+      this.startpn = __is.readString();
+      this.endpc = __is.readInt();
+      this.endpn = __is.readString();
+      this.cstatus = __is.readInt();
+      this.routevias = enterprise.RouteviapSeqHelper.read(__is);
+    },
+    28,
+    false);
+  Slice.defineSequence(enterprise, "RouteInfoSeqHelper", "enterprise.RouteInfo", false);
+
+  /**
+   * 业务中心管理服务接口
+   **/
+  enterprise.EnterpriseServer = Slice.defineObject(
+    undefined,
+    Ice.Object, undefined, 1,
+    [
+      "::Ice::Object",
+      "::enterprise::EnterpriseServer"
+    ],
+    -1, undefined, undefined, false);
+
+  enterprise.EnterpriseServerPrx = Slice.defineProxy(Ice.ObjectPrx, enterprise.EnterpriseServer.ice_staticId, undefined);
+
+  Slice.defineOperations(enterprise.EnterpriseServer, enterprise.EnterpriseServerPrx,
+    {
+      "saveDriver": [, , , , , [7], [[7], [enterprise.DriverInfo]], , , , ],
+      "enable": [, , , , , [7], [[7], ["cstruct.intSeqHelper"]], , , , ],
+      "disable": [, , , , , [7], [[7], ["cstruct.intSeqHelper"]], , , , ],
+      "resetDriverPasswordByPhone": [, , , , , [7], [[7], [7]], , , , ],
+      "deleteDrivers": [, , , , , [7], [[7], ["cstruct.intSeqHelper"]], , , , ],
+      "queryRoutes": [, , , , , [7], [[3], ["cstruct.stringSeqHelper"], [cstruct.Page]], [[cstruct.Page]], , , ],
+      "queryRoutesCommon": [, , , , , ["enterprise.RouteInfoSeqHelper"], [[3], ["cstruct.stringSeqHelper"]], , , , ],
+      "saveRoute": [, , , , , [7], [[enterprise.RouteInfo], [3]], , , , ],
+      "enableRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
+      "disableRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
+      "deleteRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
+      "getPassingPoint": [, , , , , [7], [[3], [3]], , , , ]
     });
-    exports.enterprise = enterprise;
+  exports.enterprise = enterprise;
 }
 (typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? module : undefined,
- typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? require : this.Ice.__require,
- typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? exports : this));
+  typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? require : this.Ice.__require,
+  typeof(global) !== "undefined" && typeof(global.process) !== "undefined" ? exports : this));

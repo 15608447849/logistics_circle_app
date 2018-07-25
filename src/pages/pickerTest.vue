@@ -14,17 +14,16 @@
     methods: {
       // 获取地区信息
       getArea() {
-        this.cascadeData = this.$app_store.getters.area;
+        this.cascadeData = JSON.parse(localStorage.getItem('area'));
         debugger
         console.log(this.cascadeData)
-        // 初始化日期控件
-        // this.cascadePicker = this.$createCascadePicker({
-        //   title: '地区选择',
-        //   data: this.cascadeData,
-        //   selectedIndex: [0, 1, 0],
-        //   onSelect: this.selectHandle,
-        //   onCancel: this.cancelHandle
-        // })
+        this.cascadePicker = this.$createCascadePicker({
+          title: '地区选择',
+          data: this.cascadeData,
+          selectedIndex: [0, 1, 0],
+          onSelect: this.selectHandle,
+          onCancel: this.cancelHandle
+        })
       },
       showCascadePicker() {
         this.cascadePicker.show()

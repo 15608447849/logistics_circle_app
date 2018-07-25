@@ -58,6 +58,11 @@ import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
 import PICKGOODSPIC from '@/pages/center/myRelease/pickGoodsPic'
 import PICKGOODSCODE from '@/pages/center/myRelease/pickGoodsCode'
+import EVALUATE from '@/pages/center/myRelease/evaluate'
+import COMMONLYROUTE from '@/pages/center/commonlyRoute/index'
+import ADDROUTE from '@/pages/center/commonlyRoute/addRoute'
+import ROUTEDETAILS from '@/pages/center/commonlyRoute/routeDetails'
+
 
 // 测试页面
 import TEST from '@/interfaces/test'
@@ -286,6 +291,22 @@ const vueRouter = new Router({
       path: '/center/myRelease/pickGoodsCode',
       component:  PICKGOODSCODE
     },
+    {
+      path: '/center/myRelease/evaluate',
+      component:  EVALUATE
+    },
+    {
+      path: '/center/commonlyRoute/index',
+      component:  COMMONLYROUTE
+    },
+    {
+      path: '/center/commonlyRoute/addRoute',
+      component:  ADDROUTE
+    },
+    {
+      path: '/center/commonlyRoute/routeDetails',
+      component:  ROUTEDETAILS
+    },
   ]
 });
 
@@ -311,14 +332,14 @@ vueRouter.beforeEach(function (to, from, next) {
   // 判断该路由是否需要登录权限
   if (to.meta.requireAuth) {
     // 通过vuex state获取当前的token是否存在
-    if (store.state.userId) {
+    // if (store.state.userId) {
       next();
-    } else {
-      next({
-        path: '/login',
-        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
-    }
+    // } else {
+    //   next({
+    //     path: '/login',
+    //     query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+    //   })
+    // }
   } else {
     /* 显示加载中动画 */
     store.commit(UPDATE_LOADING_STATUS, true);

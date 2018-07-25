@@ -47,8 +47,8 @@
     mounted() {
       // 获取当前定位城市
       this.$app_store.commit(CURRENT_CITY, '长沙');
-      // this.initBaseData();
-      // this.initAreaData();
+      this.initBaseData();
+      this.initAreaData();
 
     },
     methods: {
@@ -101,6 +101,8 @@
           new IceCallback(
             function (result) {
               self.$app_store.commit(AREA, result.children);
+              debugger
+              localStorage.setItem("area", JSON.stringify(result.children));
             },
             function (error) {
               setTimeout(() => {

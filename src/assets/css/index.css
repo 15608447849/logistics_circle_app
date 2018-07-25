@@ -1202,7 +1202,20 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:.3rem;
-  margin-bottom:.2rem;
+  margin-top:.15rem;
+  margin-bottom:.1rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.issueDetailsLiTextLi{
+  display:block;
+  width:7.5rem;
+  height:.3rem;
+  margin-bottom:.1rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1244,11 +1257,16 @@ input[type="radio"] {
   padding:10px 10px 0px 10px;
 }
 .logisticsNameBox{
-  display:block;
+  display: table-cell;
   width:7.5rem;
-  height:1.2rem;
+  height:.81rem;
   border-bottom:1px solid #e6e6e6;
   margin-bottom:.2rem;
+  vertical-align:middle;
+}
+.logisticsNameBox img{
+  width:.48rem;
+  height:.48rem;
 }
 .Consignee{
   margin-right:.85rem;
@@ -1270,6 +1288,8 @@ input[type="radio"] {
 }
 .logisticsNameBox .logisticsName{
   display:inline-block;
+  text-align: center;
+  vertical-align: middle;
   font-family: PingFang-SC-Regular;
   font-size: .32rem;
   font-weight: normal;
@@ -1279,6 +1299,7 @@ input[type="radio"] {
 .logisticsNameBox img{
   vertical-align: middle;
   margin-right:10px;
+  background:deeppink;
 }
 .margin_bottom140{
   margin-bottom:140px;
@@ -2400,10 +2421,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   background:#ffffff;
   margin-top:.16rem;
 }
-.cancelRefres a{
+.cancelRefres .colorsixsix{
   display:inline-block;
   width:1.3rem;
   height:.48rem;
+  margin-right:.24rem;
   text-align: center;
   line-height:.48rem;
   border: solid 1px #b5b5b5;
@@ -2415,8 +2437,20 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   letter-spacing: 0px;
   color: #666666;
 }
-.refreshRelease{
-  margin-left:.24rem;
+.cancelRefres .colorLightBlue{
+  display:inline-block;
+  width: 1.2rem;
+  height: .48rem;
+  border-radius: 5px;
+  border: solid 1px #3892ff;
+  text-align: center;
+  line-height:.48rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #3189f5;
 }
 .cancelRefres div{
   float:right;
@@ -2438,4 +2472,472 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: white;
   -webkit-transition: top 300ms;
   transition: top 300ms;
+}
+/*我的发布详情********************************************************************************************/
+.releaseStateBox{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  width:7.5rem;
+  height:1rem;
+  padding:0rem 1.2rem 0rem .61rem;
+  background: -webkit-linear-gradient(-90deg,  #a7bafa,#a7d3fb); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(-90deg, #a7bafa,#a7d3fb); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(-90deg, #a7bafa,#a7d3fb); /* Firefox 3.6 - 15 */
+  background: linear-gradient(-90deg, #a7bafa,#a7d3fb); /* 标准的语法 */
+}
+.releaseStateBox i{
+  display:inline-block;
+  font-size:.74rem;
+  color:#ffffff;
+}
+.releaseAndCollect div{
+  margin-bottom:.15rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+  color: #2174f1;
+}
+.releaseAndCollect span{
+  font-family: PingFang-SC-Regular;
+  font-size: .2rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+.orderOperationBtn{
+  position:fixed;
+  bottom:0rem;
+  width:7.5rem;
+  height:.98rem;
+  padding-right:.21rem;
+  background:#ffffff;
+}
+.orderOperationBtn .colorsixnine{
+  display:inline-block;
+  width: 1.58rem;
+  height: .64rem;
+  margin-right:.24rem;
+  border: solid 1px #b5b5b5;
+  border-radius: 4px;
+  text-align: center;
+  line-height:.64rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.orderOperationBtn .colorBlue{
+  display:inline-block;
+  width: 1.58rem;
+  height: .64rem;
+  border: solid 1px #3189f5;
+  border-radius: 4px;
+  text-align: center;
+  line-height:.64rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #3189f5;
+}
+.orderOperationBtn div{
+  float:right;
+  margin-top:.17rem;
+}
+.releaseDetailsMore{
+  display:inline-block;
+  position:relative;
+  top:.35rem;
+  left:.5rem;
+  margin-right:.5rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+  color: #999999;
+}
+.releaseDetailsMoreIndex{
+  display:inline-block;
+  position:relative;
+  top:.35rem;
+  left:.6rem;
+  margin-right:.5rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+  color: #666666;
+}
+.pickGoodsBtnIndex{
+  display:inline-block;
+  width:1.2rem;
+  height:1.2rem;
+  background:#666666;
+  border:1px solid #666666;
+  border-radius:3px;
+  position:absolute;
+  top:.3rem;
+  left:-.35rem;
+}
+.pickGoodsBtnIndex:before{
+  content: '';
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #666666;
+  position: absolute;
+  left: .5rem;
+  top: .15rem;
+  margin-top: -20px;
+
+}
+.pickGoodsBtnIndex:after{
+  content: "";
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #666666;
+  position: absolute;
+  left:.5rem;
+  top: .15rem;
+  margin-top: -18px;
+}
+.pickGoodsBtn:before{
+  content: '';
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #666666;
+  position: absolute;
+  left: .5rem;
+  top: 1.5rem;
+  margin-top: -20px;
+}
+.pickGoodsBtn:after{
+  content: "";
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #666666;
+  position: absolute;
+  left:.5rem;
+  top: 1.5rem;
+  margin-top: -18px;
+}
+.pickGoodsBtn{
+  display:inline-block;
+  width:1.2rem;
+  height:1.2rem;
+  background:#666666;
+  border:1px solid #666666;
+  border-radius:3px;
+  position:absolute;
+  top:-1.6rem;
+  left:-.25rem;
+}
+.operationA{
+  float:right;
+}
+.pickGoodsBtn:before{
+  content: '';
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #666666;
+  position: absolute;
+  left: .5rem;
+  top: 1.5rem;
+  margin-top: -20px;
+}
+.pickGoodsBtn:after{
+  content: "";
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #666666;
+  position: absolute;
+  left:.5rem;
+  top: 1.5rem;
+  margin-top: -18px;
+}
+.pickGoodsBtn a,.pickGoodsBtnIndex a{
+  display:inline-block;
+  width:1.2rem;
+  text-align: center;
+  margin-top:.22rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .2rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+/*搜索订单页面*****************************************************************************/
+.searchRelease{
+  width:7.5rem;
+  height:13.34rem;
+  background:#ffffff;
+}
+.appointDate{
+  display:block;
+  margin-top:.31rem;
+  text-align: center;
+  font-family: PingFang-SC-Regular;
+  font-size: .2rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #999999;
+}
+/*查看调度*******************************************************************************/
+.dispatchBottomBtn{
+  position:fixed;
+  bottom:0rem;
+  width:7.5rem;
+  height:1rem;
+  padding:0rem .21rem 0rem .21rem;
+  background:#ffffff;
+}
+.dispatchBottomBtn div{
+  display:flex;
+  justify-content:space-around;
+  align-items: center;
+  width:7.08rem;
+  height:.66rem;
+  margin:.17rem auto;
+  border:1px solid #b5b5b5;
+  border-radius: 4px;
+}
+.dispatchBottomBtn a{
+  display:inline-block;
+  width:2.33rem;
+  height:.6rem;
+  text-align: center;
+  line-height:.6rem;
+  background-color: #fafafa;
+}
+.borderRight{
+  border-right:1px solid #b5b5b5;
+}
+/*取货照片**************************************************************/
+.pickGoodsPicBox{
+  display:flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  width:7.5rem;
+  height:6.1rem;
+  background:#ffffff;
+  padding:.25rem .21rem;
+}
+.pickGoodsPicList{
+  display:inline-block;
+  width: 3.46rem;
+  height: 2.6rem;
+  background-color: #ffffff;
+  border:1px solid #b5b5b5;
+}
+.pickGoodsPicList img{
+  width:100%;
+  height:100%;
+}
+/*取货码***************************************************************/
+.pickGoodsCodeBox{
+  display:block;
+  height:13.34rem;
+  width:7.5rem;
+  background:#ffffff;
+}
+.pickGoodsCodeBox .pickGoodsCodePic{
+  display:block;
+  width:3.5rem;
+  height:3.42rem;
+  margin:0 auto;
+  margin-top:1.6rem;
+  margin-bottom:.26rem;
+}
+.pickGoodsCodePic img{
+  width:100%;
+  height:100%;
+  background:yellowgreen;
+}
+.Goodscode{
+  display:block;
+  text-align: center;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 1px;
+  color: #333333;
+}
+/*发表评价页面***************************************************************/
+.evaluateName{
+  display:block;
+  width:7.5rem;
+  height:.8rem;
+  padding:0rem .21rem 0rem .21rem;
+  border-bottom:1px solid #ebeff5;
+}
+.evalogisticsNameBox{
+  display: table-cell;
+  width:7.5rem;
+  height:.81rem;
+  vertical-align:middle;
+}
+.evalogisticsNameBox img{
+  width:.48rem;
+  height:.48rem;
+  margin-right:.13rem;
+  vertical-align:middle;
+}
+.evaLogisticsName{
+  display:inline-block;
+  text-align: center;
+  vertical-align: middle;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 1px;
+}
+/*常用线路*************************************************************************************************/
+.LineBox{
+  display:block;
+  width:7.5rem;
+  height:.9rem;
+  padding:.13rem .21rem 0rem .21rem;
+  background:#ffffff;
+}
+.LineBox .lineSearch{
+  display:block;
+  width:7.08rem;
+  height:.64rem;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+.lineList{
+  display:block;
+  width:7.5rem;
+  height:auto;
+  padding:0rem .21rem 0rem .21rem;
+  background:#ffffff;
+}
+.lineList li{
+  display:table;
+  width:7.08rem;
+  height:.9rem;
+}
+.needBorder img{
+  width:.48rem;
+  height:.48rem;
+  margin-right:.13rem;
+  vertical-align: middle;
+  margin-bottom:.05rem;
+}
+.route{
+  display:inline-block;
+  /*position:relative;*/
+  /*top:.06rem;*/
+  width:2.6rem;
+  /*overflow:hidden;*/
+  /*text-overflow:ellipsis;*/
+  /*-o-text-overflow:ellipsis;*/
+  white-space:nowrap;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  color: #333333;
+}
+.startAndEnd{
+  height:.9rem;
+  text-align:center;
+  margin-right:.14rem;
+  line-height:.9rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.discontinuation{
+  display:inline-block;
+  width: 1.2rem;
+  height: .48rem;
+  float:right;
+  text-align: center;
+  line-height:.45rem;
+  border-radius: 4px;
+  margin-top:.21rem;
+  border:1px solid #b5b5b5;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #666666;
+}
+.discontinuationBlue{
+  display:none;
+  width: 1.2rem;
+  height: .48rem;
+  float:right;
+  text-align: center;
+  line-height:.45rem;
+  border-radius: 4px;
+  margin-top:.21rem;
+  border:1px solid #3189f5;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #3189f5;
+}
+/*添加线路***********************************************/
+.addRouterBox{
+  display:block;
+  width:7.5rem;
+  height:13.34rem;
+  padding:0rem .21rem 0rem .21rem;
+  background:#ffffff;
+}
+.addRouteList{
+  display:block;
+  width:7.08rem;
+  height:3.6rem;
+  margin-bottom:.56rem;
+}
+.addRouteList li{
+  width:7.08rem;
+  height:.89rem;
+}
+.routeTitle{
+  height:.89rem;
+  line-height:.89rem;
+  margin-right:.92rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.addRouteList li input{
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
 }
