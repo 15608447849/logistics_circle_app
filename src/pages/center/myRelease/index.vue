@@ -155,7 +155,11 @@
 <script>
     export default {
       data(){
+        return {
+          // 发布订单条数
+          // 接受订单条数
 
+        }
       },
       methods:{
         toreleaseDetails(){

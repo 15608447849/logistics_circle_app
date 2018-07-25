@@ -27,7 +27,7 @@
       <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物大小</span>
-        <input type="text" placeholder="重量/体积">
+        <input v-model="OrderDetail.wm" type="text" placeholder="重量/体积">
       </li>
       <li class="inputShort needBorder">
         <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text" readonly="readonly">
@@ -35,7 +35,7 @@
       <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物数量</span>
-        <input type="text" placeholder="单位数量">
+        <input v-model="OrderDetail.num" type="text" placeholder="货物数量">
       </li>
       <li class="inputShort needBorder">
         <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"  readonly="readonly">
@@ -147,7 +147,7 @@
     </ul>
     <div class="totalPrice marginBottom65">
       <span class="floatleft marginBottom60">订单总价</span><span
-      class="floatright textRed size14 textBlod marginBottom60">￥{{OrderDetail.price}}元</span>
+      class="floatright textRed size14 textBlod marginBottom60">￥{{sunPrice}}元</span>
     </div>
     <button class="releaseBtn" @click="releaseOrder">发 布</button>
   </div>
@@ -178,7 +178,9 @@
         },
         startc: '', // 出发地
         arriarc: '', // 目的地
-        pmList: []
+        pmList: [],
+        disPmList: [],
+        sunPrice: 0
       }
     },
     activated() {
@@ -202,6 +204,7 @@
     methods: {
       // 初始化页面数据
       initData() {
+        this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
         // 数据从本地获取 方便测试
@@ -226,7 +229,9 @@
         this.OrderDetail.vtdictc = this.dicData.vt[0].value;
         this.displayDic.disVtLabel = this.dicData.vt[0].label;
 
-        this.OrderDetail.tndictc = this.dicData.tn[0].value;
+        let tndictarr = [];
+        tndictarr.push(this.dicData.tn[0].value);
+        this.OrderDetail.tndictarr = tndictarr;
         this.displayDic.disTnLabel = this.dicData.tn[0].label;
 
         this.OrderDetail.ptdictc = this.dicData.pt[0].value;
@@ -241,6 +246,9 @@
         this.OrderDetail.pmdictc = this.dicData.pm[0].value;
         this.displayDic.disPmLabel = this.dicData.pm[0].label;
 
+        // 初始化Pm List 数据
+        this.setPmPickerData(this.displayDic.disWmLabel);
+
         // 声明保价
         this.OrderDetail.insureamt = 0.0;
         // 代收货款
@@ -249,7 +257,12 @@
         this.OrderDetail.vnum = null;
       },
       showPicker(category) {
-        this.setPicker(this.dicData[category]);
+        if(category === 'pm') {
+          this.setPicker(this.disPmList);
+        } else {
+          this.setPicker(this.dicData[category]);
+        }
+
         this.picker.show();
       },
       showDatePicker(category) {
@@ -278,6 +291,22 @@
           time: 1000
         }).show()
       },
+      setPmPickerData(category) {
+
+        let self = this;
+        self.disPmList = [];
+        let pmList = this.dicData['pm'];
+        pmList.forEach((item,index,arr) => {
+          if(item.label === '整单') {
+            self.disPmList.push(item);
+          }
+          if(item.label === category) {
+            this.OrderDetail.pmdictc = item.value;
+            this.displayDic.disPmLabel = item.label;
+            self.disPmList.push(item);
+          }
+        });
+      },
       setPicker(pickerList) {
         this.picker = this.$createPicker({
           title: pickerList.remark,
@@ -287,6 +316,7 @@
               case '货物重量/体积单位':
                 this.OrderDetail.wmdictc = selectedVal;
                 this.displayDic.disWmLabel = selectedText;
+                this.setPmPickerData(selectedText[0]);
                 break;
               case '货物类型':
                 this.OrderDetail.ctdictc = selectedVal;
@@ -309,7 +339,8 @@
                 this.displayDic.disVtLabel = selectedText;
                 break;
               case '运输要求':
-                this.OrderDetail.tndictc = selectedVal;
+                debugger
+                this.OrderDetail.tndictarr = selectedVal;
                 this.displayDic.disTnLabel = selectedText;
                 break;
               case '支付方式':
@@ -327,6 +358,7 @@
               case '费用度量':
                 this.OrderDetail.pmdictc = selectedVal;
                 this.displayDic.disPmLabel = selectedText;
+                this.sumPrice();
                 break;
             }
           },
@@ -352,7 +384,7 @@
       releaseOrder() {
         let self = this;
         if (this.validator()) {
-          self.$Ice_OrderService.releaseOrder('0', self.OrderDetail, new IceCallback(
+          self.$Ice_OrderService.releaseOrder(self.OrderDetail.puberid, self.OrderDetail, new IceCallback(
             function (result) {
               if (result.code === 0) {
                 self.message.Toast(self, 'correct', '订单发布成功', true);
@@ -379,10 +411,11 @@
           return false
         }
         // 货物运费
-        if (this.verifyUtil.isNull(this.OrderDetail.price)) {
-          this.message.Toast(this, 'warn', '请填写货物运费', false);
+        if (this.verifyUtil.isNull(this.OrderDetail.price) || Number(this.OrderDetail.price) <= 0) {
+          this.message.Toast(this, 'warn', '请填写货物运费，并且金额不能为零', false);
           return false
         }
+
         // 收货人
         if (this.verifyUtil.isNull(this.OrderDetail.consignee)) {
           this.message.Toast(this, 'warn', '请填写收货人信息', false);
@@ -400,6 +433,34 @@
         this.$router.push({
           path: '/geo'
         })
+      },
+      sumPrice() {
+        if (this.displayDic.disPmLabel[0] === '整单') {
+          this.sunPrice = this.OrderDetail.price
+        }else {
+          this.sunPrice = Number(this.OrderDetail.price) * Number(this.OrderDetail.wm)
+        }
+      }
+    },
+
+    computed: {
+      wm() {
+        return this.OrderDetail.wm
+      },
+      price() {
+        return this.OrderDetail.price
+      }
+    },
+    watch: {
+      wm(newValue, oldValue) {
+        console.log(newValue)
+        // 计算总价
+        this.sumPrice()
+      },
+      price(newValue, oldValue) {
+        console.log(newValue)
+        // 计算总价
+        this.sumPrice()
       }
     }
   }

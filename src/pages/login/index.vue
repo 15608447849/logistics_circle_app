@@ -52,7 +52,6 @@
       loginClick() {
         let self = this;
         if (this.validator()) {
-          debugger
           this.$Ice_UserService.login(this.account, this.password, new IceCallback(
             function (result) {
               if(result.code === 0) {

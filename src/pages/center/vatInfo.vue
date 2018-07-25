@@ -46,8 +46,7 @@
       }
     },
     mounted() {
-      debugger
-      this.compInfo = this.$route.params;
+      this.CompInfo = this.$route.params;
     },
     methods: {
       fallback() {

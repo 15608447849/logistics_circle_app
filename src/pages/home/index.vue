@@ -157,7 +157,7 @@
       },
       toDriverAmd(){
         this.$router.push({
-          path: '/center/driverAdm/index'
+          path: '/center/driverMgr/index'
         })
       },
       toMycircle(){

@@ -22,6 +22,7 @@
 {
     var Ice = require("ice").Ice;
     var __M = Ice.__M;
+    var cstruct = require("cstruct").cstruct;
     var Slice = Ice.Slice;
 
     var comp = __M.module("comp");
@@ -56,7 +57,7 @@
         false);
 
     comp.Staff = Slice.defineStruct(
-        function(name, uid, phone, comp, compid, status, createdate)
+        function(name, uid, phone, comp, compid, status, type, createdate)
         {
             this.name = name !== undefined ? name : "";
             this.uid = uid !== undefined ? uid : 0;
@@ -64,6 +65,7 @@
             this.comp = comp !== undefined ? comp : "";
             this.compid = compid !== undefined ? compid : 0;
             this.status = status !== undefined ? status : 0;
+            this.type = type !== undefined ? type : 0;
             this.createdate = createdate !== undefined ? createdate : "";
         },
         true,
@@ -75,6 +77,7 @@
             __os.writeString(this.comp);
             __os.writeInt(this.compid);
             __os.writeInt(this.status);
+            __os.writeInt(this.type);
             __os.writeString(this.createdate);
         },
         function(__is)
@@ -85,10 +88,12 @@
             this.comp = __is.readString();
             this.compid = __is.readInt();
             this.status = __is.readInt();
+            this.type = __is.readInt();
             this.createdate = __is.readString();
         },
-        16, 
+        20, 
         false);
+    Slice.defineSequence(comp, "staffSeqHelper", "comp.Staff", false);
     Slice.defineSequence(comp, "RouteSeqHelper", "comp.Route", false);
 
     /**
@@ -232,8 +237,11 @@
         "insertCompUser": [, , , , , [7], [[3], [4]], , , , ],
         "selectCompUserByUid": [, , , , , [7], [[3]], , , , ],
         "addLoginCompByRedis": [, , , , , [7], [[3], [3]], , , , ],
-        "selectStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
-        "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ]
+        "selectStaffInfo": [, , , , , [7], [[7], [7], [7], [3], [3], [cstruct.Page]], [[cstruct.Page]], , , ],
+        "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
+        "updateStaffInfo": [, , , , , [7], [[7], [7], [3], [3], [3]], , , , ],
+        "updateStaffstatus": [, , , , , [7], [[3], [3], [3], [3]], , , , ],
+        "updateCompPhone": [, , , , , [7], [[4], [4]], , , , ]
     });
     exports.comp = comp;
 }

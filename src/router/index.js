@@ -46,8 +46,8 @@ import USER_INFO from '@/pages/center/userInfo'
 import ENT_INFO from '@/pages/center/entInfo'
 import VAT_INFO from '@/pages/center/vatInfo'
 import CART_INFO from '@/pages/center/cardInfo'
-import DRIVER_ADM from '@/pages/center/driverAdm/index'
-import ADDDRIVER from '@/pages/center/driverAdm/addDriver'
+import DRIVER_MGR from '@/pages/center/driverMgr/index'
+import ADDDRIVER from '@/pages/center/driverMgr/info'
 import MYCIRCLE from '@/pages/center/myCircle/index'
 import ADDFRIEND from '@/pages/center/myCircle/addFriend'
 import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
@@ -63,8 +63,6 @@ import PICKGOODSCODE from '@/pages/center/myRelease/pickGoodsCode'
 import TEST from '@/interfaces/test'
 // picker测试
 import PICKER from '@/pages/pickerTest'
-// 信息大厅测试
-import infoTest from '@/pages/infoTest'
 // 城市选择
 import CITY from '@/components/citySelector'
 // 高德地图
@@ -93,27 +91,33 @@ const vueRouter = new Router({
       path: '/',
       component: INDEX,
       meta: {
-        requireAuth: true
+        requireAuth: true,
       },
       children: [
         {
           path: '',
           component: HOME,
+          meta: {
+            keepAlive: true, //此组件不需要被缓存
+          }
         },
         {
           name: 'basiInformation',
           path: '/home/basiInformation',
-          component: BASICINFORMATION
+          component: BASICINFORMATION,
         },
         {
           name: 'basiInformation',
           path: '/home/invoice',
-          component: INVOICE
+          component: INVOICE,
+          meta: {
+            keepAlive: true, //此组件不需要被缓存
+          }
         },
         {
           name: 'basiInformation',
           path: '/home/enterprise',
-          component: ENTERPRISE
+          component: ENTERPRISE,
         },
         {
           name: 'basiInformation',
@@ -123,12 +127,18 @@ const vueRouter = new Router({
         {
           name: 'circle',
           path: '/circle',
-          component: CIRCLE
+          component: CIRCLE,
+          meta: {
+            keepAlive: true, //此组件不需要被缓存
+          }
         },
         {
           name: 'information',
           path: '/information',
-          component: INFO
+          component: INFO,
+          meta: {
+            keepAlive: true, //此组件不需要被缓存
+          }
         },
         {
           name: 'order',
@@ -190,7 +200,10 @@ const vueRouter = new Router({
     },
     {
       path: '/information/issue',
-      component: ISSUE
+      component: ISSUE,
+      meta: {
+        keepAlive: true, //此组件不需要被缓存
+      }
     },
     {
       name: 'picker',
@@ -202,10 +215,6 @@ const vueRouter = new Router({
       component: ISSUEDETAILS
     },
     {
-      path: '/infoTest',
-      component: infoTest
-    },
-    {
       path: '/city',
       component: CITY
     },
@@ -214,6 +223,7 @@ const vueRouter = new Router({
       component: USER_INFO
     },
     {
+      name: 'entInfo',
       path: '/entInfo',
       component: ENT_INFO
     },
@@ -223,15 +233,17 @@ const vueRouter = new Router({
       component: VAT_INFO
     },
     {
+      name: 'cartInfo',
       path: '/cartInfo',
       component: CART_INFO
     },
     {
-      path: '/center/driverAdm/index',
-      component: DRIVER_ADM
+      path: '/center/driverMgr/index',
+      component: DRIVER_MGR
     },
     {
-      path: '/center/driverAdm/addDriver',
+      name: 'driverInfo',
+      path: '/center/driverMgr/info',
       component: ADDDRIVER
     },
     {

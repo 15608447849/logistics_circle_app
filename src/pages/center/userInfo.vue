@@ -114,7 +114,6 @@
           this.$router.go(-1)
         },
         toInvoice(){
-          debugger
           this.$router.push({
             name: 'vatInfo',
             params: this.compInfo
@@ -122,12 +121,13 @@
         },
         toenterprise(){
           this.$router.push({
-            path: '/entInfo',
+            name: 'entInfo',
             params: this.compInfo
           })
         },
         toCertificates(){
           this.$router.push({
+            name: 'cartInfo',
             path: '/cartInfo',
             params: this.compInfo
           })

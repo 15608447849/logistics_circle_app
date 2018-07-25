@@ -79,10 +79,10 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
         callback.onCallback(CALLBACK_ACTION.READY,params);
         let proxy = communication
           .stringToProxy(moduleName)
-          .ice_timeout(10000)
-          .ice_invocationTimeout(10000)
-          .ice_twoway()
-          .ice_preferSecure(true);
+          // .ice_timeout(300000)
+          // .ice_invocationTimeout(10000)
+          // .ice_twoway()
+          // .ice_preferSecure(true);
         // proxy.ice_timeout(1000).ice_twoway().ice_secure(false);
 
         return moduleProxy.checkedCast(proxy)
@@ -101,7 +101,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
     )
     .then(
         function (args0) {
-          console.log(args0)
+          console.log(args0);
           let result;
           if(args0){
             if(typeof (args0)==="string") args0 = JSON.parse(args0);

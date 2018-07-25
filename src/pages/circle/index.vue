@@ -120,8 +120,8 @@
         return Conversion.formatMsgTime(time)
       }
     },
-    mounted() {
-      var self = this;
+    activated() {
+      let self = this;
       self.mescroll = new MeScroll("mescroll", {
         down: {
           auto: false,

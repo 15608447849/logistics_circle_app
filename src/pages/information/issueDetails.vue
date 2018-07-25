@@ -97,7 +97,9 @@
     data() {
       return {
         detailInfo: {},
-        token: ''
+        token: '',
+        orderId: '',
+        puberId: ''
       }
     },
     methods: {
@@ -107,7 +109,7 @@
       setRobbingOrder() {
         let self = this;
         this.message.Toast(this,'loading','正在努力抢单中...',true);
-        this.$Ice_OrderService.robbingOrder('0',this.$route.query.id,
+        this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,
           new IceCallback(
             function (result) {
               self.message.Toast(self,'correct','抢单成功',false);
@@ -127,9 +129,7 @@
       },
       getOrderDetailInfo() {
         let self = this;
-        const orderId = this.$route.query.id || '';
-        const puberId = this.$route.query.puberid || '';
-        this.$Ice_OrderService.getOrderDetail(orderId,puberId,
+        this.$Ice_OrderService.getOrderDetail(this.orderId,this.puberId,
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
@@ -139,13 +139,14 @@
             },
             function (error) {
               self.message.Toast(self,'error','订单详情获取失败, 请稍后重试',false);
-              // self.$router.go(-1)
             }
           )
         );
       }
     },
     activated() {
+      this.orderId = this.$route.query.id || '';
+      this.puberId = this.$route.query.puberid || '';
       this.getOrderDetailInfo();
     }
   }

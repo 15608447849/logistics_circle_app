@@ -7,8 +7,14 @@
       </div>
     </div>
     <keep-alive>
-      <router-view v-show="!isLoading"/>
+      <!--<router-view v-show="!isLoading"/>-->
+      <router-view v-if="$route.meta.keepAlive" v-show="!isLoading">
+        <!-- 这里是会被缓存的视图组件 -->
+      </router-view>
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" v-show="!isLoading">
+      <!-- 这里是不被缓存的视图组件 -->
+    </router-view>
   </div>
 </template>
 

@@ -52,7 +52,8 @@
         this.$router.push({
           path: '/information/issueDetails',
           query: {
-            id: item.id
+            id: item.id,
+            puberid: item.puberid
           }
         })
       },
@@ -130,7 +131,7 @@
       }
     },
     mounted() {
-      var self = this;
+      let self = this;
       self.mescroll = new MeScroll("mescroll", {
         down: {
           auto: false,
