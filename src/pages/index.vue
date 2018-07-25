@@ -85,7 +85,7 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              self.$app_store.commit(DICT, JSON.parse(result));
+              self.$app_store.commit(DICT, result);
             },
             function (error) {
               setTimeout(() => {
@@ -100,7 +100,7 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              self.$app_store.commit(AREA, JSON.parse(result).children);
+              self.$app_store.commit(AREA, result.children);
             },
             function (error) {
               setTimeout(() => {

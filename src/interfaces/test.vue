@@ -16,18 +16,7 @@
     },
     methods: {
       test: function () {
-        this.$Ice_CompService.queryCompByBasicUid('5',
-          new IceCallback(
-            function (result) {
-              console.log(result)
-            },
-            function (error) {
-              console.log(error)
-            }
-          )
-        );
-
-        // this.$Ice_CompService.querygetCompByUid(this.$app_store.getters.userId,
+        // this.$Ice_CompService.queryCompByBasicUid('5',
         //   new IceCallback(
         //     function (result) {
         //       console.log(result)
@@ -37,6 +26,17 @@
         //     }
         //   )
         // );
+
+        this.$Ice_CompService.querygetCompByUid('4',
+          new IceCallback(
+            function (result) {
+              console.log(result)
+            },
+            function (error) {
+              console.log(error)
+            }
+          )
+        );
       }
     }
 

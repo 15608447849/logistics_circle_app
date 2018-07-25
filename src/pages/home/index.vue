@@ -22,7 +22,7 @@
       </span>
     </div>
     <div class="searchBox">
-      <div class="selectRegion">
+      <div class="selectRegion" @click="skipSearchPage">
         <div class="searchBtn">
           <i class="icon iconfont icon-sousuo"></i>
           <span class="sousuo">搜索</span>
@@ -93,6 +93,11 @@
 
 </template>
 <script>
+  import {
+    SEARCH_STATE
+  } from '../../store/mutation-types'
+  import { searchState } from "../../utils/config";
+
   export default {
     data() {
       return {
@@ -113,6 +118,12 @@
       }
     },
     methods: {
+      skipSearchPage() {
+        this.$app_store.commit(SEARCH_STATE, searchState.INFORMATION);
+        this.$router.push({
+          path: '/search'
+        })
+      },
       toPageIssue() {
         this.$router.push({
           path: '/information/issue'
@@ -138,7 +149,10 @@
       },
       jUserInfo() {
         this.$router.push({
-          path: '/userInfo'
+          path: '/userInfo',
+          query: {
+            isYourCompInfo: true    //row.hid为变量
+          }
         })
       },
       toDriverAmd(){

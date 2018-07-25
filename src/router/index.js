@@ -54,6 +54,10 @@ import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
 import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
 import MYRELEASE from '@/pages/center/myRelease/index'
 import RELEASEDETAILS from '@/pages/center/myRelease/releaseDetails'
+import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
+import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
+import PICKGOODSPIC from '@/pages/center/myRelease/pickGoodsPic'
+import PICKGOODSCODE from '@/pages/center/myRelease/pickGoodsCode'
 
 // 测试页面
 import TEST from '@/interfaces/test'
@@ -253,7 +257,22 @@ const vueRouter = new Router({
       path: '/center/myRelease/releaseDetails',
       component:  RELEASEDETAILS
     },
-
+    {
+      path: '/center/myRelease/releaseSearch',
+      component:  RELEASESEARCH
+    },
+    {
+      path: '/center/myRelease/seeDispatch',
+      component:  SEEDISPATCH
+    },
+    {
+      path: '/center/myRelease/pickGoodsPic',
+      component:  PICKGOODSPIC
+    },
+    {
+      path: '/center/myRelease/pickGoodsCode',
+      component:  PICKGOODSCODE
+    },
   ]
 });
 

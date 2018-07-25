@@ -50,5 +50,43 @@ export default class message {
     });
     toast.show()
   }
+
+  /**
+   *
+   * @param context 上下文对象
+   * @param title 标题
+   * @param content 内容
+   * @returns {Promise<any>} resolve reject
+   */
+  static showAlert(context,title, content) {
+    return new Promise((resolve, reject) => {
+      context.$createDialog({
+        type: 'confirm',
+        title: title,
+        content: content,
+        confirmBtn: {
+          text: '确定',
+          active: true,
+          disabled: false,
+          href: 'javascript:;'
+        },
+        cancelBtn: {
+          text: '取消',
+          active: false,
+          disabled: false,
+          href: 'javascript:;'
+        },
+        onConfirm: () => {
+          // 订单移除
+          // 确认操作后 移除列表
+          resolve()
+        },
+        onCancel: () => {
+          reject()
+        }
+      }).show()
+    });
+
+  }
 }
 

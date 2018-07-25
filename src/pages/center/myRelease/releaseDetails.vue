@@ -5,14 +5,33 @@
       <span>订单详情</span>
       <div></div>
     </div>
-    <div class="orderPadding10 backFF">
-      <div>
-        <span>发布成功</span>
+    <div class="releaseStateBox">
+      <div class="releaseAndCollect ">
+        <div>发布成功</div>
+        <!--<div>交易已完成</div>-->
+        <!--<div>签收</div>-->
+        <!--<div>抢单</div>-->
+        <!--<div>取货</div>-->
         <span>等待承运商接单，请耐心等待~ </span>
-        <i class="icon iconfont icon-fabu"></i>
+        <!--<span>您的订单已经确认签收，可以留下您的评价哟~</span>-->
+        <!--<span>您的订单已签收，请与收货人确认是否签收~</span>-->
+        <!--<span>您的订单已被抢单，请尽快与承运商联系~</span>-->
+        <!--<span>司机已取货，您的货物正在运输中~</span>-->
       </div>
+      <!--发布成功-->
+      <i class="icon iconfont icon-fabu"></i>
+      <!--交易已完成-->
+      <!--<i class="icon iconfont icon-pingjia"></i>-->
+      <!--签收-->
+      <!--<i class="icon iconfont icon-liaoxiangqianshou"></i>-->
+      <!--抢单 -->
+      <!--<i class="icon iconfont icon-chenggong"></i>-->
+      <!--取货-->
+      <!--<i class="icon iconfont icon-quhuo"></i>-->
+    </div>
+    <div class="orderPadding10 backFF">
       <div class="logisticsNameBox">
-        <img src="" alt="" style="background:deeppink;">
+        <img src="" alt="">
         <span class="logisticsName">黄旺物流</span>
       </div>
       <ul class="backFF">
@@ -90,12 +109,84 @@
         </ul>
       </div>
     </div>
-  </div>
+    <!--发布成功****************-->
+    <div class="orderOperationBtn">
+      <!--<div  class="operationA">-->
+        <!--<a class="colorsixnine">取消</a>-->
+        <!--<a class="colorBlue">刷新</a>-->
+      <!--</div>-->
 
+    <!--交易已完成**********-->
+
+      <!--<div  class="operationA">-->
+        <!--<a class="colorsixnine" @click="toseeDispatch">查看调度</a>-->
+        <!--<a class="colorsixnine">行程回放</a>-->
+        <!--<a class="colorBlue" @click="toevaluate">评价</a>-->
+      <!--</div>-->
+
+    <!--抢单***************-->
+
+      <!--<div class="operationA">-->
+        <!--<a class="colorsixnine" @click="toseeDispatch">查看调度</a>-->
+        <!--<a class="colorsixnine">接受</a>-->
+        <!--<a class="colorsixnine">拒绝</a>-->
+      <!--</div>-->
+
+    <!--签收***************-->
+
+        <!--<a class="releaseDetailsMore">更多-->
+          <!--<div class="pickGoodsBtn">-->
+            <!--<a @click="topickGoodsPic">取货照片</a>-->
+            <!--<a @click="toseeDispatch">查看调度</a>-->
+
+        <!--</a>-->
+            <!--<div class="operationA">-->
+              <!--<a class="colorsixnine">签收照片</a>-->
+              <!--<a class="colorsixnine">行程回放</a>-->
+              <!--<a class="colorBlue">确认签收</a>-->
+            <!--</div>-->
+
+      <!--</div>-->
+      <!--取货******************************************************-->
+
+        <a class="releaseDetailsMore">更多
+          <div class="pickGoodsBtn">
+            <a @click="topickGoodsPic">取货照片</a>
+            <a @click="toseeDispatch">查看调度</a>
+          </div>
+        </a>
+        <div class="operationA">
+          <a class="colorsixnine" @click="topickGoodsCode">取货码</a>
+          <a class="colorBlue">付款</a>
+        </div>
+    </div>
+  </div>
 </template>
 
 <script>
     export default {
+      methods:{
+        toseeDispatch(){
+          this.$router.push({
+            path: '/center/myRelease/seeDispatch'
+          })
+        },
+        topickGoodsPic(){
+          this.$router.push({
+            path: '/center/myRelease/pickGoodsPic'
+          })
+        },
+        topickGoodsCode(){
+          this.$router.push({
+            path: '/center/myRelease/pickGoodsCode'
+          })
+        },
+        toevaluate(){
+          this.$router.push({
+            path: '/center/myRelease/evaluate'
+          })
+        },
+      }
     }
 </script>
 

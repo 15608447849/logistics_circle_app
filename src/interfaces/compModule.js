@@ -22,5 +22,19 @@ module.exports = {
    */
   queryCompByBasicUid: (uoid ,callback) => {
     queryIce(comp.CompServicePrx , 'CompService', 'queryCompByBasicUid',uoid ,callback);
+  },
+
+  /**
+   * 根据用户ID查询企业码 （公共）
+   */
+  selectCompUserByUid: (uoid, callback) => {
+    queryIce(comp.CompServicePrx , 'CompService', 'selectCompUserByUid',uoid ,callback);
+  },
+
+  /**
+   * 登录时添加企业到缓存（公共）
+   */
+  addLoginCompByRedis: (uoid, compid,callback) => {
+    queryIce(comp.CompServicePrx , 'CompService', 'addLoginCompByRedis',uoid ,compid ,callback);
   }
 };

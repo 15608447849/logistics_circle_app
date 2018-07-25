@@ -147,7 +147,7 @@
     </ul>
     <div class="totalPrice marginBottom65">
       <span class="floatleft marginBottom60">订单总价</span><span
-      class="floatright textRed size14 textBlod marginBottom60">￥2000元</span>
+      class="floatright textRed size14 textBlod marginBottom60">￥{{OrderDetail.price}}元</span>
     </div>
     <button class="releaseBtn" @click="releaseOrder">发 布</button>
   </div>
@@ -339,7 +339,6 @@
         let self = this;
         this.$Ice_OrderService.generateOrderNo(new IceCallback(
           function (result) {
-            console.log(result);
             self.OrderDetail.orderno = result
           },
           function (error) {
@@ -355,10 +354,11 @@
         if (this.validator()) {
           self.$Ice_OrderService.releaseOrder('0', self.OrderDetail, new IceCallback(
             function (result) {
-              result = JSON.parse(result);
               if (result.code === 0) {
                 self.message.Toast(self, 'correct', '订单发布成功', true);
-                self.$router.go(-1);
+                setTimeout(()=>{
+                  self.$router.go(-1);
+                },1500);
               } else {
                 // 发送失败
                 self.$dialog.loading.close();

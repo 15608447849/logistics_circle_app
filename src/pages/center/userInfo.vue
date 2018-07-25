@@ -70,6 +70,10 @@
        <span class="uploadState">上传</span>
      </li>
    </ul>
+   <div class="blacklist">
+     <a class="moveDetele" v-show="!isYourCompInfo" @click="removePartner">移除伙伴</a>
+     <a class="addBlacklist" v-show="!isYourCompInfo" @click="addBlacklist">加入黑名单</a>
+   </div>
  </div>
 </template>
 
@@ -78,30 +82,75 @@
       data() {
         return {
           compInfo: {},
+          isYourCompInfo: true
         }
       },
       mounted() {
-        this.compInfo = this.$app_store.getters.compInfo
+        this.isYourCompInfo = this.$route.query.isYourCompInfo;
+        if(this.isYourCompInfo) {
+          this.compInfo = this.$app_store.getters.compInfo
+        }else {
+          // 根据企业id获取企业信息
+          let compId = this.$route.query.id;
+          this.querygetCompByCid(compId);
+        }
       },
       methods:{
+        // 获取企业信息
+        querygetCompByCid(compId) {
+          let self = this;
+          this.$Ice_CompService.querygetCompByCid(compId,
+            new IceCallback(
+              function (result) {
+                this.compInfo = result.obj
+              },
+              function (error) {
+                self.message.Toast(this,'warn','企业信息获取失败',false);
+              }
+            )
+          );
+        },
         fallback() {
           this.$router.go(-1)
         },
         toInvoice(){
+          debugger
           this.$router.push({
-            path: '/vatInfo'
+            name: 'vatInfo',
+            params: this.compInfo
           })
         },
         toenterprise(){
           this.$router.push({
-            path: '/entInfo'
+            path: '/entInfo',
+            params: this.compInfo
           })
         },
         toCertificates(){
           this.$router.push({
-            path: '/cartInfo'
+            path: '/cartInfo',
+            params: this.compInfo
           })
-        }
+        },
+        // 根据企业编号 获取企业详情
+        removePartner() {
+          this.message.showAlert(this,'移除伙伴','伙伴移除后订单信息将不会优先查看,您确定要移除吗?')
+            .then(() => {
+
+            })
+            .catch(() => {
+
+            })
+        },
+        addBlacklist() {
+          this.message.showAlert(this,'黑名单添加','伙伴添加至黑名单后, 双方发单信息都将无法查看?')
+            .then(() => {
+
+            })
+            .catch(() => {
+
+            })
+        },
       }
     }
 </script>

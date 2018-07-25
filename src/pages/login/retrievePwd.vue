@@ -65,7 +65,6 @@
         let param = ['forgetpw',this.userPhone,'0'];
         this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
           function (result) {
-            result = JSON.parse(result);
             if (result.code === 0) {
               self.firstStepBool = false;
               self.secondStepBool = true;
@@ -84,7 +83,6 @@
         // 验证短信号码
         this.$Ice_UserService.verifySms(this.userPhone,this.smsCode, new IceCallback(
           function (result) {
-            result = JSON.parse(result);
             if (result.code === 0) {
               self.secondStepBool = false;
               self.thirdStepBool = true;
@@ -102,8 +100,6 @@
         if(this.registerValidator()) {
           this.$Ice_UserService.updatePasswordByPhone(this.userPhone,this.smsCode,this.rPassword, new IceCallback(
             function (result) {
-              debugger
-              result = JSON.parse(result);
               if (result.code === 0) {
                 self.message.Toast(self,'correct',result.msg,false);
                 setTimeout(()=> {

@@ -49,8 +49,6 @@
         let param = ['login', this.phone, '0'];
         this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
           function (result) {
-            console.log(result)
-            result = JSON.parse(result);
             if (result.code === 0) {
               self.start1 = true;
               self.$dialog.loading.close();
@@ -76,7 +74,6 @@
         }
         this.$Ice_UserService.userVerifyBySms(this.phone,this.smsCode, new IceCallback(
           function (result) {
-            result = JSON.parse(result);
             if (result.code === 0) {
               self.$app_store.commit(USER_INFO, result.obj);
               let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
