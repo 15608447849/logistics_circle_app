@@ -30,11 +30,12 @@
      * 用户基本信息数据模型
      **/
     user.UserIce = Slice.defineStruct(
-        function(oid, uphone, uname, upw, roleid, ioid, adddate, addtime, cstatus)
+        function(oid, uphone, uname, urealname, upw, roleid, ioid, adddate, addtime, cstatus)
         {
             this.oid = oid !== undefined ? oid : 0;
             this.uphone = uphone !== undefined ? uphone : 0;
             this.uname = uname !== undefined ? uname : "";
+            this.urealname = urealname !== undefined ? urealname : "";
             this.upw = upw !== undefined ? upw : "";
             this.roleid = roleid !== undefined ? roleid : 0;
             this.ioid = ioid !== undefined ? ioid : 0;
@@ -48,6 +49,7 @@
             __os.writeInt(this.oid);
             __os.writeLong(this.uphone);
             __os.writeString(this.uname);
+            __os.writeString(this.urealname);
             __os.writeString(this.upw);
             __os.writeInt(this.roleid);
             __os.writeInt(this.ioid);
@@ -60,6 +62,7 @@
             this.oid = __is.readInt();
             this.uphone = __is.readLong();
             this.uname = __is.readString();
+            this.urealname = __is.readString();
             this.upw = __is.readString();
             this.roleid = __is.readInt();
             this.ioid = __is.readInt();
@@ -67,9 +70,10 @@
             this.addtime = __is.readString();
             this.cstatus = __is.readShort();
         },
-        26, 
+        27, 
         false);
     Slice.defineSequence(user, "stringListHelper", "Ice.StringHelper", false);
+    Slice.defineSequence(user, "intListHelper", "Ice.IntHelper", true);
     Slice.defineSequence(user, "userListHelper", "user.UserIce", false);
 
     user.UserService = Slice.defineObject(
@@ -88,8 +92,9 @@
         "login": [, , , , , [7], [[7], [7], [3]], , , , ],
         "loginBySms": [, , , , , [7], [[4], [7]], , , , ],
         "loginByToken": [, , , , , [7], [[7]], , , , ],
-        "getUserInfo": [, , , , , ["user.userListHelper"], [["user.stringListHelper"], [3]], , , , ],
-        "addUser": [, , , , , [user.UserIce], [[4], [7], [3]], , , , ],
+        "getUserInfo": [, , , , , ["user.userListHelper"], [[3], ["user.intListHelper"], [3], [7], [4]], , , , ],
+        "addUser": [, , , , , [user.UserIce], [[3], [4], [7], [3]], , , , ],
+        "updateUser": [, , , , , [user.UserIce], [[3], [3], [4], [7]], , , , ],
         "verifyUserName": [, , , , , [7], [[7]], , , , ],
         "verifyPhone": [, , , , , [7], [[4]], , , , ],
         "sendSms": [, , , , , [7], [["user.stringListHelper"]], , , , ],

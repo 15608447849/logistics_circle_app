@@ -52,7 +52,6 @@
       },
       // 司机新增保存
       dSave() {
-        debugger
         let self = this;
         if(this.isEditor) {
           this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId || 4,this.uid, this.type, new IceCallback(

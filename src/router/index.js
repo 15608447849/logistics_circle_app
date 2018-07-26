@@ -200,6 +200,7 @@ const vueRouter = new Router({
       component: GEOLOCATION
     },
     {
+      name: 'simpleSearch',
       path: '/search',
       component: SEARCH
     },
@@ -304,6 +305,7 @@ const vueRouter = new Router({
       component:  ADDROUTE
     },
     {
+      name: 'routeDetails',
       path: '/center/commonlyRoute/routeDetails',
       component:  ROUTEDETAILS
     },

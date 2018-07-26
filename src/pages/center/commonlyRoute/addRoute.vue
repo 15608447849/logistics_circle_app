@@ -36,9 +36,9 @@
         return {
           area: [],
           cascadeData: '',
-          routeInfo: new enterprise.RouteInfo()
-          // oid, routeid, compid, routename, startpc, startpn, endpc, endpn, cstatus, routevias
-
+          cascadePicker: null,
+          routeInfo: new enterprise.RouteInfo(),
+          selectWayP: [],
         }
       },
       mounted() {
@@ -46,14 +46,12 @@
       },
       methods:{
         initData() {
-          debugger
           // 初始化数据
           this.cascadeData = JSON.parse(localStorage.getItem('area'));
           // 初始化地区选择器
           this.cascadePicker = this.$createCascadePicker({
             title: '地区选择',
             data: this.cascadeData,
-            selectedIndex: [0, 1, 0],
             onSelect: this.selectHandle,
             onCancel: this.cancelHandle
           })
@@ -66,10 +64,11 @@
           console.log(this.cascadePicker)
         },
         selectHandle(selectedVal, selectedIndex, selectedText) {
-          var pickValue = document.getElementsByClassName('pickValue');
-          var pickId = document.getElementsByClassName('pickValueId');
-          console.log('选中城市编码'+selectedVal);
-          console.log('选中城市名'+selectedText);
+          this.selectWayP.push({
+            selectedVal: selectedVal,
+            selectedText: selectedText
+          });
+         console.log(this.selectWayP)
           // this.$createDialog({
           //   type: 'warn',
           //   content: `Selected Item: <br/> - value: ${selectedVal.join(', ')} <br/> - index: ${selectedIndex.join(', ')} <br/> - text: ${selectedText.join(' ')}`,

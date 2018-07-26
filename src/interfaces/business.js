@@ -27,6 +27,9 @@ exports.install = function (Vue) {
     },
     getAreaCode: (callback)=> {
       queryIce(system.SystemServicePrx , 'SystemService', 'getChineseAllAreas', callback);
+    },
+    getTransferPoint: (place,callback) => {
+      queryIce(system.SystemServicePrx , 'SystemService', 'getTransferPoint',place, callback);
     }
   };
 
@@ -41,6 +44,8 @@ exports.install = function (Vue) {
   Vue.prototype.$Ice_CompService = compModule;
 
   Vue.prototype.$Ice_InfoService = informationComp;
+
+
 
 };
 
