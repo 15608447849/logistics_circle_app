@@ -1,8 +1,7 @@
 <template>
   <div>
     <yd-navbar title="我的订单"></yd-navbar>
-    <yd-button size="large" type="primary" @click.native="toPageTest">接口测试</yd-button>
-    <yd-button size="large" type="primary" @click.native="showToast">toast</yd-button>
+    <mu-button @click="showToast"  color="primary">接口测试</mu-button>
   </div>
 </template>
 <script>
@@ -14,7 +13,7 @@
         })
       },
       showToast() {
-        this.$vux.toast.text('hello', 'top')
+
       }
     }
   }

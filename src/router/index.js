@@ -226,7 +226,10 @@ const vueRouter = new Router({
     },
     {
       path: '/userInfo',
-      component: USER_INFO
+      component: USER_INFO,
+      meta: {
+        keepAlive: true,
+      }
     },
     {
       name: 'entInfo',

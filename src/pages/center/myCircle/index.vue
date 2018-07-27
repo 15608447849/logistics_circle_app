@@ -27,54 +27,26 @@
         <tab-item @on-item-click="tabClick">调度圈</tab-item>
       </tab>
       <ul class="circleList" v-show="selectOneTab">
-        <li class="needBorder" @click="tofriendDetails">
+        <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in sCircleList" :key="index">
           <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack" @click="removeClick" @click.stop="removeClick">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
+          <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
+            class="companyPhone floatright">{{item.contact}}</span></div>
+          <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+          <a class="pullBlack" @click.stop="removeClick(item, index, 128)">移 出</a>
         </li>
       </ul>
       <ul class="circleList" v-show="!selectOneTab">
-        <li class="needBorder" @click="tofriendDetails">
+        <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in SchedulingCircle" :key="index">
           <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
+          <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
+            class="companyPhone floatright">{{item.contact}}</span></div>
+          <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+          <a class="pullBlack" @click.stop="removeClick(item, index, 64)" >移 出</a>
         </li>
       </ul>
     </div>
-    <div class="friendNum" v-show="selectOneTab">共4位朋友</div>
-    <div class="friendNum" v-show="!selectOneTab">共2位朋友</div>
+    <div class="friendNum" v-show="selectOneTab">共{{sCircleNum}}位朋友</div>
+    <div class="friendNum" v-show="!selectOneTab">共{{SchedulingCircleNum}}位朋友</div>
   </div>
 </template>
 
@@ -89,34 +61,115 @@
     data() {
       return {
         selectOneTab: true, // true 货运圈 false 调度圈
-        FCircleList: [], // 货运圈列表
-        SCircleList: []// 调度圈列表
+        sCircleList: [], // 货运圈列表
+        SchedulingCircle: [],// 调度圈列表
+        page: new cstruct.Page(),
+        userId: this.$app_store.getters.userId || 3,
+        sCircleNum: 0,
+        SchedulingCircleNum: 0
       }
     },
+    mounted() {
+      // 初始化数据
+      this.initData();
+      // 获取货源圈
+      this.queryMyCircleByUser(128);
+      // 获取调度圈
+      this.queryMyCircleByUser(64);
+    },
     methods: {
+      initData() {
+        this.page.pageSize = 10; // 每页页数
+        this.page.pageIndex = 1; // 当前页
+        this.page.totalItems = 0;
+        this.page.totalPageCount = 0;
+      },
+      queryMyCircleByUser(circleT) {
+        let self = this;
+        this.$Ice_CircleService.queryMyCircleByUser(this.userId, circleT, this.page.pageIndex, this.page.pageSize, new IceCallback(
+          function (result) {
+            if (result.code === 0) {
+                if(circleT === 128) {
+                  self.sCircleList = result.obj.circleSeq;
+                  self.sCircleNum = result.obj.totalItems;
+                  self.sCircleList.forEach((item, index, arr) => {
+                    let disRoute = '';
+                    if (item.routes !== null && item.routes.length > 0) {
+                      disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
+                    }
+                    item['disRoute'] = disRoute;
+                  });
+                }else {
+                  self.SchedulingCircle = result.obj.circleSeq;
+                  self.SchedulingCircleNum = result.obj.totalItems;
+                  self.SchedulingCircle.forEach((item, index, arr) => {
+                    let disRoute = '';
+                    if (item.routes !== null && item.routes.length > 0) {
+                      disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
+                    }
+                    item['disRoute'] = disRoute;
+                  });
+                }
+            } else {
+
+            }
+          },
+          function (error) {
+
+          }
+        ))
+      },
       tabClick() {
         this.selectOneTab = !this.selectOneTab;
       },
-      removeClick() {
-        this.message.showAlert(this, '圈子移除', '您确认要将其移除好友圈子吗？')
+      removeClick(item,index,ctype) {
+        let title = '提示';
+        let content = '';
+        let self = this;
+        if (ctype === 128) {
+          content = '您确定要将好友移除货源圈嘛?';
+        } else {
+          content = '您确定要将好友移除调度圈嘛?';
+        }
+        debugger
+        this.message.showAlert(this, title, content)
           .then(() => {
-            console.log('确定')
+            self.$Ice_CircleService.removeCircle(this.userId,item.compId,ctype, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  if(ctype === 128) {
+                    // self.routeList[index].cstatus = 32;
+                    self.$vux.toast.text('货源圈好友移除成功', 'top');
+                    self.sCircleList.splice(index,1)
+                  }else {
+                    self.$vux.toast.text('调度圈好友移除成功', 'top');
+                    self.SchedulingCircle.splice(index,1)
+                  }
+                } else {
+                  self.$vux.toast.text('好友圈移除失败', 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+              }
+            ))
           })
           .catch(() => {
-            console.log('取消')
+
           })
       },
+
       toaddFriend() {
         this.$router.push({
           path: '/center/myCircle/addFriend'
         })
       },
-      tofriendDetails() {
+      toComPInfo(item) {
         this.$router.push({
           path: '/userInfo',
           query: {
             isYourCompInfo: false,
-            id: '4'
+            id: item.compId
           }
         })
       },

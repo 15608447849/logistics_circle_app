@@ -10,13 +10,14 @@ import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 import VueAMap from 'vue-amap';
 import  { ToastPlugin } from 'vux'
-
+import Vant from 'vant';
 // import 'lib-flexible'
 import './assets/lib/ydui.flexible';
 import 'vue-ydui/dist/ydui.rem.css';
 import './assets/css/index.css';
+import 'vant/lib/vant-css/index.css';
 
-
+Vue.use(Vant);
 Vue.use(business);
 Vue.use(Vuex);
 Vue.use(YDUI);
@@ -24,10 +25,10 @@ Vue.use(Cube);
 Vue.use(VueAMap);
 Vue.use(ToastPlugin);
 
+
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
 Vue.prototype.message = message;
-
 
 Vue.prototype.$app_store = store;
 
@@ -45,7 +46,7 @@ document.addEventListener('deviceready', function() {
     store,
     template: '<App/>',
     components: { App }
-  })
+  });
   window.navigator.splashscreen.hide()
 }, false);
 

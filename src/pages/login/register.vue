@@ -179,9 +179,7 @@
                 self.$Ice_UserService.userRegister(self.account, self.phone, self.password, self.invitationCode, self.verificationCode, new IceCallback(
                   function (result) {
                     if (result.code === 0) {
-                      // store 保存登陆token
                       self.$app_store.commit(USER_INFO, result.obj);
-                      console.log(self.$app_store.getters.user)
                       let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
                       // 跳转信息大厅
                       self.$router.push({

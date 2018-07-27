@@ -18,13 +18,13 @@
         <li class=" needBorder" @click="showCascadePicker(2)">
           <span class="routeTitle">途经点</span>
           <span v-for="(item, index) in wayPs" :key="index"><badge @click.native="removeBadge(64,index)"
-                                                                   @click.native.stop="removeBadge"
-                                                                   :text=item.placename /></span>
+                                                                   :text=item.placename
+                                                                   @click.native.stop="removeBadge"/></span>
         </li>
         <li class="needBorder" @click="showCascadePicker(3)">
           <span class="routeTitle">中转点</span>
           <span v-for="(item, index) in TransitP" :key="index"><badge
-            :text=item.placename @click.native="removeBadge(64,index)" @click.native.stop="removeBadge" /></span>
+            :text=item.placename @click.native="removeBadge(64,index)" @click.native.stop="removeBadge"/></span>
         </li>
       </ul>
       <button class="nextStep" @click="saveRoutes">保 存</button>
@@ -120,15 +120,12 @@
             break;
         }
       },
-      showPicker() {
-
-      },
       removeBadge(type, index) {
-        if(index === undefined) return;
+        if (index === undefined) return;
         if (type === 128) {
-          this.TransitP.splice(index,1);
+          this.TransitP.splice(index, 1);
         } else {
-          this.wayPs.splice(index,1);
+          this.wayPs.splice(index, 1);
         }
       },
       fallback() {
@@ -157,7 +154,6 @@
           function (result) {
             if (result.code === 0) {
               self.allTransferPoint = JSON.parse(JSON.stringify(result.obj).replace(/areac/g, "value").replace(/arean/g, "text"));
-              console.log(self.allTransferPoint)
             } else {
               self.$vux.toast.text('中转点数据获取失败, 请稍后重试', 'top');
             }
@@ -170,7 +166,6 @@
       selectHandle(selectedVal, selectedIndex, selectedText) {
         switch (this.pickerType) {
           case 0:
-            debugger
             this.routerInfo.endpn = selectedText[2];
             this.routerInfo.endpc = selectedVal[2];
             // 清空途径点
@@ -191,7 +186,6 @@
             this.getPassingPoint(this.routerInfo.startpc, this.routerInfo.endpc);
             break;
           case 2:
-            debugger
             this.wayPs.push({
               cstatus: 64,
               place: selectedVal[2],
@@ -237,7 +231,22 @@
           }
         ))
       },
+    },
+    watch: {
+      wayPs: {
+        handler(newValue, oldValue) {
+          var hash = {};
+          newValue = newValue.reduce(function(item, next) {
+            hash[next.place] ? '' : hash[next.place] = true && item.push(next);
+            return item
+          }, [])
+          console.log(this.wayPs)
+          console.log(newValue)
+        },
+        deep: true
+      }
     }
+
   }
 </script>
 
