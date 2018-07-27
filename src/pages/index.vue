@@ -101,8 +101,7 @@
           new IceCallback(
             function (result) {
               self.$app_store.commit(AREA, result.children);
-              debugger
-              localStorage.setItem("area", JSON.stringify(result.children));
+              // localStorage.setItem("area", JSON.stringify(result.children));
             },
             function (error) {
               setTimeout(() => {

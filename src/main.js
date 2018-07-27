@@ -9,7 +9,7 @@ import Cube from 'cube-ui'
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 import VueAMap from 'vue-amap';
-
+import  { ToastPlugin } from 'vux'
 
 // import 'lib-flexible'
 import './assets/lib/ydui.flexible';
@@ -22,7 +22,7 @@ Vue.use(Vuex);
 Vue.use(YDUI);
 Vue.use(Cube);
 Vue.use(VueAMap);
-
+Vue.use(ToastPlugin);
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;

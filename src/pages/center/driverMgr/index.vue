@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back"></i>
+      <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
       <span>司机管理</span>
       <span @click="addDriver">添加</span>
     </div>
@@ -10,7 +10,7 @@
         <div class="searchDriver">
           <div class="driverSearchBtn" @click="toPageSearch">
             <i class="icon iconfont icon-sousuo"></i>
-            <span class="sousuo">搜索</span>
+            <span class="sousuo">{{searchInputVal}}</span>
           </div>
         </div>
       </div>
@@ -23,7 +23,8 @@
             <span class="driverName">{{item.name}}</span>
             <span class="driverPhone">{{item.phone}}</span>
           </div>
-          <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable" @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
+          <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
+             @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
         </li>
       </ul>
     </div>
@@ -33,6 +34,8 @@
 <script>
   import '../../../assets/css/mescroll.min.css'
   import '../../../assets/lib/mescroll.m'
+  import {searchState} from '../../../utils/config'
+  import {SEARCH_STATE} from "../../../store/mutation-types";
 
   export default {
     data() {
@@ -45,12 +48,13 @@
         userId: this.$app_store.getters.userId || 4,
         // pageSize: '1'// 当前页数
         page: new cstruct.Page(),
+        searchInputVal: '搜索',
+        mescroll:null,
       }
     },
     mounted() {
       this.initData();
-      // this.initMescroll();
-      this.getDriverList();
+      this.initMescroll();
     },
     methods: {
       initData() {
@@ -58,11 +62,18 @@
         this.page.pageIndex = 1; // 当前页
         this.page.totalItems = 0;
         this.page.totalPageCount = 0;
+
+        if (this.$app_store.getters.searchState === searchState.DRIVER) {
+          this.searchInputVal = this.$app_store.getters.searchContent;
+          this.driverName = this.searchInputVal;
+          console.log(this.$app_store.getters.searchContent)
+        }
       },
       initMescroll() {
-        self.mescroll = new MeScroll("mescroll", {
+        this.mescroll = new MeScroll("mescroll", {
           up: {
-            callback: self.onPullingUp, // 上拉回调
+            auto: true,
+            callback: this.onPullingUp, // 上拉回调
             //以下参数可删除,不配置
             isBounce: false, // 此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
             toTop: { //配置回到顶部按钮
@@ -71,12 +82,15 @@
             },
             empty: {
               // 配置列表无任何数据的提示
-            },
+            }
           }
         });
       },
       toPageSearch() {
-
+        this.$app_store.commit(SEARCH_STATE, searchState.DRIVER);
+        this.$router.push({
+          name: 'simpleSearch'
+        })
       },
       // 司机添加
       addDriver() {
@@ -90,17 +104,18 @@
           params: item
         })
       },
-      // 获取司机列表
-      getDriverList() {
-        let self = this;
+      goBackPage() {
+        this.$router.go(-1);
+      },
+      requestDriverList(successCallback, errorCallback) {
         this.$Ice_InfoService.selectStaffInfo(this.driverName, this.driverPhone, this.driverStatus, this.driverType, this.userId, this.page, new IceCallback(
           function (result) {
             if (result.code === 0) {
-              self.drivers = result.obj
+              successCallback(result.obj)
             }
           },
           function (error) {
-            self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+            errorCallback(error);
           }
         ))
       },
@@ -114,20 +129,20 @@
           // 停用
           status = 32;
           content = '司机停用后,该司机将无法进行取货等操作 ,您确认吗?';
-        }else {
+        } else {
           // 启用
           status = 0;
           content = '司机启用后, 司机端将可以进行取货等操作 ,您确认吗?';
         }
-        this.message.showAlert(this,title,content)
+        this.message.showAlert(this, title, content)
           .then(() => {
-            self.$Ice_InfoService.updateStaffstatus(self.userId,item.uid,status,self.driverType, new IceCallback(
+            self.$Ice_InfoService.updateStaffstatus(self.userId, item.uid, status, self.driverType, new IceCallback(
               function (result) {
                 if (result.code === 0) {
-                  if(status === 0) {
+                  if (status === 0) {
                     self.message.Toast(self, 'correct', '司机启用成功', false);
-                  }else {
-                    self.message.Toast(self,'correct', '司机停用成功', false);
+                  } else {
+                    self.message.Toast(self, 'correct', '司机停用成功', false);
                   }
                   // 更新item
                   self.drivers[index].status = status;
@@ -141,7 +156,18 @@
           .catch(() => {
 
           })
-      }
+      },
+      // 上推加载
+      onPullingUp() {
+        let self = this;
+        this.requestDriverList(function (result) {
+          // 隐藏上推加载状态;
+          self.mescroll.endSuccess();
+          self.drivers = self.drivers.concat(result);
+        }, function (error) {
+          self.mescroll.endErr();
+        });
+      },
 
     }
   }

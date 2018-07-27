@@ -100,23 +100,20 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
       }
     )
     .then(
-        function (args0) {
+        function (args0,args1) {
           console.log(args0);
           let result;
           if(args0){
             if(typeof (args0)==="string") args0 = JSON.parse(args0);
             result = args0;
           }
-          // if(args1){
-          //   if(typeof (args1)==="string") args1 = JSON.parse(args1);
-          //   result = [];
-          //   result.push(args0);
-          //   result.push(args1);
-          // }
+          if(args1){
+            if(typeof (args1) === "string") args1 = JSON.parse(args1);
+            result = Object.assign(result,args1);
+          }
           callback.onCallback(CALLBACK_ACTION.COMPLETE,result);
         }
       )
-
     .exception(
         function (e) {
           callback.onCallback(CALLBACK_ACTION.ERROR,e);

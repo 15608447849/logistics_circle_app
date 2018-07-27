@@ -31,7 +31,7 @@
      * 订单详细信息(信息大厅,我的圈子)
      **/
     order.OrderDetail = Slice.defineStruct(
-        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime, puberid)
+        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime, puberid, pubercompid)
         {
             this.time = time !== undefined ? time : "";
             this.ostatus = ostatus !== undefined ? ostatus : "";
@@ -50,6 +50,7 @@
             this.pustime = pustime !== undefined ? pustime : "";
             this.puetime = puetime !== undefined ? puetime : "";
             this.puberid = puberid !== undefined ? puberid : "";
+            this.pubercompid = pubercompid !== undefined ? pubercompid : "";
         },
         true,
         function(__os)
@@ -71,6 +72,7 @@
             __os.writeString(this.pustime);
             __os.writeString(this.puetime);
             __os.writeString(this.puberid);
+            __os.writeString(this.pubercompid);
         },
         function(__is)
         {
@@ -91,8 +93,9 @@
             this.pustime = __is.readString();
             this.puetime = __is.readString();
             this.puberid = __is.readString();
+            this.pubercompid = __is.readString();
         },
-        17, 
+        18, 
         false);
     Slice.defineSequence(order, "OrderSeqHelper", "order.OrderDetail", false);
 
@@ -100,9 +103,11 @@
      * 订单实体
      **/
     order.OrderICE = Slice.defineStruct(
-        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
+        function(puberid, pubercompid, pubername, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, carriage, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
         {
             this.puberid = puberid !== undefined ? puberid : "";
+            this.pubercompid = pubercompid !== undefined ? pubercompid : "";
+            this.pubername = pubername !== undefined ? pubername : "";
             this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
             this.phone1 = phone1 !== undefined ? phone1 : "";
             this.phone2 = phone2 !== undefined ? phone2 : "";
@@ -131,6 +136,7 @@
             this.codamt = codamt !== undefined ? codamt : 0.0;
             this.insureamt = insureamt !== undefined ? insureamt : 0.0;
             this.ptdictc = ptdictc !== undefined ? ptdictc : "";
+            this.carriage = carriage !== undefined ? carriage : 0.0;
             this.consignee = consignee !== undefined ? consignee : "";
             this.consphone = consphone !== undefined ? consphone : "";
             this.dmdictc = dmdictc !== undefined ? dmdictc : "";
@@ -148,6 +154,8 @@
         function(__os)
         {
             __os.writeString(this.puberid);
+            __os.writeString(this.pubercompid);
+            __os.writeString(this.pubername);
             __os.writeString(this.puberCarrier);
             __os.writeString(this.phone1);
             __os.writeString(this.phone2);
@@ -176,6 +184,7 @@
             __os.writeDouble(this.codamt);
             __os.writeDouble(this.insureamt);
             __os.writeString(this.ptdictc);
+            __os.writeDouble(this.carriage);
             __os.writeString(this.consignee);
             __os.writeString(this.consphone);
             __os.writeString(this.dmdictc);
@@ -192,6 +201,8 @@
         function(__is)
         {
             this.puberid = __is.readString();
+            this.pubercompid = __is.readString();
+            this.pubername = __is.readString();
             this.puberCarrier = __is.readString();
             this.phone1 = __is.readString();
             this.phone2 = __is.readString();
@@ -220,6 +231,7 @@
             this.codamt = __is.readDouble();
             this.insureamt = __is.readDouble();
             this.ptdictc = __is.readString();
+            this.carriage = __is.readDouble();
             this.consignee = __is.readString();
             this.consphone = __is.readString();
             this.dmdictc = __is.readString();
@@ -233,7 +245,7 @@
             this.ostatus = __is.readInt();
             this.priority = __is.readInt();
         },
-        81, 
+        91, 
         false);
 
     /**

@@ -19,12 +19,14 @@
     "ice": "^3.7.1",
     "lib-flexible": "^0.3.2",
     "md5": "^2.2.1",
+    "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
     "vue-amap": "^0.5.8",
     "vue-pull-to": "^0.1.6",
     "vue-router": "^3.0.1",
     "vue-ydui": "^1.2.2",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vux": "^2.9.2"
   },
   "transformModules": {
     "cube-ui": {
@@ -49,6 +51,8 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "less": "^3.8.0",
+    "less-loader": "^4.1.0",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
@@ -59,19 +63,21 @@
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.1.1",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
+    "vux-loader": "^1.2.9",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^2.1.1",
     "webpack-post-compile-plugin": "^0.4.1",
-    "webpack-transform-modules-plugin": "^0.3.5"
+    "webpack-transform-modules-plugin": "^0.3.5",
+    "yaml-loader": "^0.5.0"
   },
   "engines": {
     "node": ">= 6.0.0",

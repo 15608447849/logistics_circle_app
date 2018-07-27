@@ -34,7 +34,6 @@
       }
     },
     mounted() {
-      debugger
       this.searchState = this.$app_store.getters.searchState;
       this.clearInput();
       this.getSearchHistory(this.searchState)
