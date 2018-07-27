@@ -6,11 +6,11 @@
       <span>首页</span>
       <span class="icon iconfont icon-gengduo1 dropdowngengduo">
         <ul class="dropdown" v-show="!isMember">
-            <li>
+            <li @click="todimensionalCode">
               <i class="icon iconfont icon-erweima"></i>
               <span>我的二维码</span>
             </li>
-            <li>
+            <li @click="toScan">
               <i class="icon iconfont icon-saoyisao"></i>
               <span>扫一扫</span>
             </li>
@@ -80,10 +80,10 @@
           <li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
           <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
           <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span class="personalText circle">我的圈子</span></li>
-          <li><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
-          <li><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
+          <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
+          <li @click="tomyInformation"><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
         </ul>
-        <div class="settingCircleBox">
+        <div class="settingCircleBox" @click="tosetting">
           <i class="icon iconfont icon-shezhi1"></i>
           <div class="settingCircle">设置</div>
         </div>
@@ -102,7 +102,7 @@
     data() {
       return {
         show4: false,
-        isMember: true,
+        isMember: false,
         direction: '',
         tipStyle: '',
         compInfo: {
@@ -173,6 +173,31 @@
       tocommonlyRoute(){
         this.$router.push({
           path:'/center/commonlyRoute/index'
+        })
+      },
+      toblacklist(){
+        this.$router.push({
+          path:'/center/blacklist/index'
+        })
+      },
+      tomyInformation(){
+        this.$router.push({
+          path:'/center/myInformation/index'
+        })
+      },
+      tosetting(){
+        this.$router.push({
+          path:'/center/setting/index'
+        })
+      },
+      todimensionalCode(){
+        this.$router.push({
+          path:'home/dimensionalCode'
+        })
+      },
+      toScan(){
+        this.$router.push({
+          path:'home/scan'
         })
       }
     }

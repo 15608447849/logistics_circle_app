@@ -62,13 +62,13 @@
            <!--待评价-->
            <!--<div class="operationA">-->
              <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
-             <!--<a class="colorsixsix">行程回放</a>-->
+             <!--<a class="colorsixsix" @click="totripPlayback">行程回放</a>-->
              <!--<a class="colorLightBlue">待评价</a>-->
            <!--</div>-->
            <!--签收-->
            <!--<div class="operationA">-->
              <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
-             <!--<a class="colorsixsix">行程回放</a>-->
+             <!--<a class="colorsixsix" @click="totripPlayback">行程回放</a>-->
              <!--<a class="colorLightBlue">待评价</a>-->
            <!--</div>-->
            <!--<a class="releaseDetailsMoreIndex">更多-->
@@ -92,12 +92,12 @@
            <!--全部-->
            <div class="operationA">
              <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
-             <a class="colorsixsix">行程回放</a>
+             <a class="colorsixsix" @click="totripPlayback">行程回放</a>
              <a class="colorLightBlue" @click="toevaluate">评价</a>
            </div>
          </div>
        </ul>
-       <ul class="myReleaseList">
+       <ul class="myReleaseList" @click="toreleaseDetails">
          <div class="releaseCompany">
            <div class="companyBox">
              <i class="icon iconfont icon-qiyexinxi"></i>
@@ -137,25 +137,52 @@
            <!--</div>-->
            <!--线上状态的取货-->
            <div class="operationA">
-             <a class="colorsixsix">付款</a>
+             <a class="colorsixsix" @click="show2 = true">付款</a>
              <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
            </div>
            <a class="releaseDetailsMoreIndex">更多
              <div class="pickGoodsBtnIndex">
-             <a @click="topickGoodsPic">取货照片</a>
-             <a @click="toseeDispatch">查看调度</a>
-           </div>
+               <a @click="topickGoodsPic">取货照片</a>
+               <a @click="toseeDispatch">查看调度</a>
+             </div>
            </a>
          </div>
        </ul>
      </div>
+    <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false" >
+      <div class="closePayment">
+        <i class="icon iconfont icon-guanbi1" @click="show2 = false"></i>
+        <span>确认支付</span>
+        <div></div>
+      </div>
+      <ul class="payNumMode">
+        <li class="totalNum">
+          ￥3000
+        </li>
+        <li class="zhifubao">
+          <div>
+            <img src="../../../assets/images/small/zhifubao1.png" alt="">
+            <span>支付宝支付</span>
+          </div>
+          <i class="icon iconfont icon-zhengque" v-show="true"></i>
+        </li>
+        <li class="weixin">
+          <div>
+            <img src="../../../assets/images/small/weixin1.png" alt="">
+            <span>微信支付</span>
+          </div>
+          <i class="icon iconfont icon-zhengque" v-show="false"></i>
+        </li>
+        <button class="yesPay" @click="show2 = false">确认支付</button>
+      </ul>
+    </yd-popup>
   </div>
 </template>
-
 <script>
     export default {
       data(){
         return {
+          show2:false,
           // 发布订单条数
           // 接受订单条数
 
@@ -192,6 +219,11 @@
             path: '/center/myRelease/evaluate'
           })
         },
+        totripPlayback(){
+          this.$router.push({
+            path:'/center/myRelease/tripPlayback'
+          })
+        }
       }
     }
 </script>

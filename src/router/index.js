@@ -22,6 +22,10 @@ import ISSUEDETAILS from '@/pages/information/issueDetails'// 信息大厅订单
 import INDEX from '@/pages/index'
 // 首页模块
 import HOME from '@/pages/home/index'
+//首面我的二维码页面
+import DIMENSIONALCODE from '@/pages/home/dimensionalCode'
+//首面扫一扫
+import SCAN from '@/pages/home/scan'
 // 首页模块个人信息中的基本信息模块
 import BASICINFORMATION from '@/pages/home/basiInformation'
 // 首页模块个人信息中的基本信息模块下的发票信息
@@ -62,7 +66,16 @@ import EVALUATE from '@/pages/center/myRelease/evaluate'
 import COMMONLYROUTE from '@/pages/center/commonlyRoute/index'
 import ADDROUTE from '@/pages/center/commonlyRoute/addRoute'
 import ROUTEDETAILS from '@/pages/center/commonlyRoute/routeDetails'
-
+import BLACKLIST from '@/pages/center/blacklist/index'
+import BLACKDETAILS from '@/pages/center/blacklist/blackDetails'
+import MYINFORMATION from '@/pages/center/myInformation/index'
+import TRIPPLAYBACK from '@/pages/center/myRelease/tripPlayback'
+import SEEINFORMATION from '@/pages/center/myInformation/seeinformation'
+import SETTING from '@/pages/center/setting/index'
+import CURRENCY from '@/pages/center/setting/currency'
+import ACCOUNTSECURITY from '@/pages/center/setting/accountSecurity'
+import TOACCOUNT from '@/pages/center/setting/toaccountUpdataPwd'
+import UPDATAPHONE from '@/pages/center/setting/updataPhone'
 
 // 测试页面
 import TEST from '@/interfaces/test'
@@ -306,6 +319,54 @@ const vueRouter = new Router({
     {
       path: '/center/commonlyRoute/routeDetails',
       component:  ROUTEDETAILS
+    },
+    {
+      path: '/center/blacklist/index',
+      component:  BLACKLIST
+    },
+    {
+      path: '/center/blacklist/blackDetails',
+      component:  BLACKDETAILS
+    },
+    {
+      path: '/center/myInformation/index',
+      component:  MYINFORMATION
+    },
+    {
+      path: '/center/myRelease/tripPlayback',
+      component:  TRIPPLAYBACK
+    },
+    {
+      path: '/center/myInformation/seeInformation',
+      component:  SEEINFORMATION
+    },
+    {
+      path: '/center/setting/index',
+      component:  SETTING
+    },
+    {
+      path: '/center/setting/currency',
+      component:  CURRENCY
+    },
+    {
+      path: '/center/setting/accountSecurity',
+      component:  ACCOUNTSECURITY
+    },
+    {
+      path: '/center/setting/toaccountUpdataPwd',
+      component:  TOACCOUNT
+    },
+    {
+      path: '/center/setting/updataPhone',
+      component:  UPDATAPHONE
+    },
+    {
+      path: '/home/dimensionalCode',
+      component:  DIMENSIONALCODE
+    },
+    {
+      path: '/home/scan',
+        component:  SCAN
     },
   ]
 });
