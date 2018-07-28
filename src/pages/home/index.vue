@@ -2,7 +2,8 @@
   <div>
     <!--页头-->
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>
+      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="show4 = true" class="loginPicture">
+      <!--<i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>-->
       <span>首页</span>
       <span class="icon iconfont icon-gengduo1 dropdowngengduo">
         <ul class="dropdown" v-show="!isMember">
@@ -23,6 +24,10 @@
     </div>
     <div class="searchBox">
       <div class="selectRegion" @click="skipSearchPage">
+        <div class="addressCity">
+          <span>长沙</span>
+          <i class="icon iconfont icon-xiala"></i>
+        </div>
         <div class="searchBtn">
           <i class="icon iconfont icon-sousuo"></i>
           <span class="sousuo">搜索</span>
@@ -44,7 +49,61 @@
         </div>
       </div>
     </div>
-    <ul class="order_box">
+    <ul class="order_boxIndex">
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
+      <li class="order_list">
+        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
+          class="time">1小时前</span></div>
+        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
+          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      </li>
       <li class="order_list">
         <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
           class="time">1小时前</span></div>
@@ -102,7 +161,7 @@
     data() {
       return {
         show4: false,
-        isMember: false,
+        isMember: true,
         direction: '',
         tipStyle: '',
         compInfo: {

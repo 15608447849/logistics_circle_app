@@ -1,4 +1,40 @@
 @import "../font_ziti/iconfont.css";
+/*搜索组件**************************************************************************************************************/
+.searchHistory{
+  display:block;
+  width:7.5rem;
+  height:auto;
+  padding:0rem .21rem;
+  background:#ffffff;
+}
+.searchHistory .historyRecord{
+  display:block;
+  width:7.08rem;
+  height:.8rem;
+  text-align: left;
+  line-height:.8rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.allEmpty{
+  display:block;
+  width:2rem;
+  height:.6rem;
+  margin:.3rem auto 0rem auto;
+  background:#f9f9f9;
+  border:1px solid transparent;
+  border-radius: 3px;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
 /*登录模块样式*/
 a {
   text-decoration: none
@@ -120,6 +156,13 @@ a {
   letter-spacing: 0px;
   color: #666666;
 }
+.loginPicture{
+  display:inline-block;
+  width:.6rem;
+  height:.6rem;
+  border:1px solid transparent;
+  border-radius: 50%;
+}
 .leftEject{
   width:2rem;
   height:2rem;
@@ -134,12 +177,31 @@ a {
   border:1px solid #e3e3e3;
   border-radius: 4px;
 }
+.searchBox .addressCity{
+  position:absolute;
+  top:.05rem;
+  left:.15rem;
+}
+.searchBox span{
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.searchBox i{
+  font-family: PingFang-SC-Regular;
+  font-size:10px;
+  color: #999999;
+}
 .searchBox .searchBtn{
   position:absolute;
-  top:.15rem;
+  top:.05rem;
   left:3rem;
   width:1.1rem;
-  height:.3rem;
+  height:auto;
   font-size:.24rem;
   vertical-align: top;
   text-align: center;
@@ -202,7 +264,6 @@ a {
   height:.21rem;
   text-align: center;
   margin-top:.1rem;
-  margin-bottom:1.1rem;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
   font-weight: normal;
@@ -1282,10 +1343,24 @@ input[type="radio"] {
   letter-spacing: 1px;
   color: #ffffff;
 }
-
+.order_boxInfom{
+  width:7.5rem;
+  height:11.48rem;
+  background:#ffffff;
+  z-index:100;
+  overflow: auto;
+}
 .order_box{
   width:7.5rem;
   background:#ffffff;
+  z-index:100;
+  overflow: auto;
+}
+.order_boxIndex{
+  width:7.5rem;
+  height:7rem;
+  background:#ffffff;
+  overflow: auto;
   z-index:100;
 }
 .order_list{
@@ -1295,10 +1370,17 @@ input[type="radio"] {
   border-bottom:1px solid #e6e6e6;
   background:#ffffff;
 }
-.order_time , .order_price{
+.order_time {
   display:block;
   width:7.5rem;
-  height:.65rem;
+  height:.57rem;
+  margin-top:.1rem;
+  padding:0px .1rem 0px .1rem;
+}
+.order_price{
+  display:block;
+  width:7.5rem;
+  height:.57rem;
   padding:0px .1rem 0px .1rem;
 }
 .order_time span, .order_price span{
@@ -1620,6 +1702,10 @@ input[type="radio"] {
   height:.87rem;
   vertical-align: middle;
   border:none;
+  line-height:.76rem;
+  white-space: pre;
+  white-space: pre-line;
+  word-wrap: break-word;
 }
 .textarea::-webkit-input-placeholder{
   height: .43rem;line-height: .43rem;
@@ -1870,7 +1956,7 @@ input[type="radio"] {
   width:7.15rem;
   height:.65rem;
   position:fixed;
-  bottom:0rem;
+  bottom:.15rem;
   left:.18rem;
   -webkit-transform: translateZ(0);
   margin:0 auto;
@@ -1894,6 +1980,7 @@ input[type="radio"] {
   height:.7rem;
   padding:.1rem .1rem .05rem .25rem;
   background:#f5f5f5;
+  margin-bottom:1rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -2221,10 +2308,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  height:auto;
+  height:9.7rem;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   margin-bottom:.24rem;
+  overflow: auto;
 }
 .circleList li{
   display:block;
@@ -2305,6 +2393,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
  }
  .friendNum{
    display:block;
+   width:7.5rem;
+   height:.5rem;
    text-align: center;
    font-family: PingFang-SC-Regular;
    font-size: .22rem;
@@ -2615,6 +2705,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 /** 下拉刷新加载框 */
 /*下拉刷新回调的提示*/
+.orderIndexContent{
+  dipslay:block;
+  width:7.5rem;
+  height:11.45rem;
+  background:#ffffff;
+}
 .download-tip{
   z-index: 9900;
   position: fixed;
@@ -2625,7 +2721,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 30px;
   font-size: 12px;
   text-align: center;
-  background-color:	#00BFFF;
+  background-color:	#ffffff;
   color: white;
   -webkit-transition: top 300ms;
   transition: top 300ms;
@@ -3256,14 +3352,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .lineList{
   display:block;
   width:7.5rem;
-  height:auto;
+  height:12.53rem;
   padding:0rem .21rem 0rem .21rem;
   background:#ffffff;
+  overflow: auto;
 }
 .lineList li{
   display:table;
   width:7.08rem;
-  height:.9rem;
+  height:1.24rem;
 }
 .needBorder img{
   width:.48rem;
@@ -3289,7 +3386,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   height:.9rem;
   text-align:center;
   margin-right:.14rem;
-  line-height:.9rem;
+  line-height:1.24rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -3305,7 +3402,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-align: center;
   line-height:.45rem;
   border-radius: 4px;
-  margin-top:.21rem;
+  margin-top:.38rem;
   border:1px solid #b5b5b5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;

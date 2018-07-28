@@ -8,7 +8,7 @@
     <!--下拉刷新回调的提示-->
     <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
     <div class="orderIndexContent" id="mescroll">
-      <ul class="order_box">
+      <ul class="order_boxInfom">
         <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
           <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
             class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>

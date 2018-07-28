@@ -1,16 +1,17 @@
 <template>
   <div style="width: 100%;height: 100%">
-    <!--<yd-navbar title="NavBar">-->
-      <!--<router-link to="/" slot="left">-->
-        <!--<yd-navbar-back-icon></yd-navbar-back-icon>-->
-      <!--</router-link>-->
-    <!--</yd-navbar>-->
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>搜索</span>
       <span></span>
     </div>
     <yd-search v-model="inputVal" :on-submit="submitInput" :on-cancel="returnToPage"></yd-search>
+    <ul class="searchHistory">
+      <li class="historyRecord needBorder">11111
+        <i class="icon iconfont icon-guanbi floatright"></i>
+      </li>
+    </ul>
+    <button class="allEmpty">全部清空</button>
   </div>
 </template>
 <script>
