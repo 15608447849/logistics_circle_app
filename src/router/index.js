@@ -221,7 +221,7 @@ const vueRouter = new Router({
       path: '/information/issue',
       component: ISSUE,
       meta: {
-        keepAlive: true, //此组件不需要被缓存
+        keepAlive: true,
       }
     },
     {
@@ -231,7 +231,10 @@ const vueRouter = new Router({
     },
     {
       path: '/information/issueDetails',
-      component: ISSUEDETAILS
+      component: ISSUEDETAILS,
+      meta: {
+        keepAlive: true,
+      }
     },
     {
       path: '/city',
@@ -239,7 +242,10 @@ const vueRouter = new Router({
     },
     {
       path: '/userInfo',
-      component: USER_INFO
+      component: USER_INFO,
+      meta: {
+        keepAlive: true,
+      }
     },
     {
       name: 'entInfo',

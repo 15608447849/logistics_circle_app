@@ -53,7 +53,8 @@
           path: '/information/issueDetails',
           query: {
             id: item.id,
-            puberid: item.puberid
+            puberid: item.puberid,
+            pubercompid: item.pubercompid
           }
         })
       },

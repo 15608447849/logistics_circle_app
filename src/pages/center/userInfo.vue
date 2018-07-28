@@ -6,7 +6,7 @@
     <div></div>
    </div>
    <div class="enterprisePic">
-     <img src="../../assets/images/small/bussiness-man.png" alt="">
+     <img :src="avatarUrl" alt="">
    </div>
    <span class="pLabel">{{compInfo.fname}}</span>
    <span class="creditGrade">信用等级</span>
@@ -70,10 +70,10 @@
        <span class="uploadState">上传</span>
      </li>
    </ul>
-   <div class="blacklist">
-     <a class="moveDetele" v-show="!isYourCompInfo" @click="removePartner">移除伙伴</a>
-     <a class="addBlacklist" v-show="!isYourCompInfo" @click="addBlacklist">加入黑名单</a>
-   </div>
+   <!--<div class="blacklist">-->
+     <!--<a class="moveDetele" v-show="!isYourCompInfo" @click="removePartner">移除伙伴</a>-->
+     <!--<a class="addBlacklist" v-show="!isYourCompInfo" @click="addBlacklist">加入黑名单</a>-->
+   <!--</div>-->
  </div>
 </template>
 
@@ -82,7 +82,8 @@
       data() {
         return {
           compInfo: {},
-          isYourCompInfo: true
+          isYourCompInfo: true,
+          avatarUrl: '../../assets/images/small/bussiness-man.png'
         }
       },
       mounted() {
@@ -93,16 +94,34 @@
           // 根据企业id获取企业信息
           let compId = this.$route.query.id;
           this.querygetCompByCid(compId);
+          this.queryCompByBasicUid(compId);
+          this.getImages(compId);
         }
       },
       methods:{
+        // 获取企业头像
+        queryCompByBasicUid(compId) {
+          let self = this;
+          this.$Ice_CompService.queryCompByBasicUid(compId,
+            new IceCallback(
+              function (result) {
+                if(result.code === 0) {
+
+                }
+              },
+              function (error) {
+                self.message.Toast(this,'warn','企业信息获取失败',false);
+              }
+            )
+          );
+        },
         // 获取企业信息
         querygetCompByCid(compId) {
           let self = this;
           this.$Ice_CompService.querygetCompByCid(compId,
             new IceCallback(
               function (result) {
-                this.compInfo = result.obj
+                self.compInfo = result.obj
               },
               function (error) {
                 self.message.Toast(this,'warn','企业信息获取失败',false);

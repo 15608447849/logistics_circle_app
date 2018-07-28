@@ -138,7 +138,7 @@
      * 订单实体
      **/
     myOrder.OrderICE = Slice.defineStruct(
-        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority)
+        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, ostatus, priority, revierid, compname, phone, carriage, wmdictcn, numdictcn, padictcn, ctdictcn, vldictcn, vtdictcn, tndictcn, pmdictcn, ptdictcn, dmdictcn, redictcn)
         {
             this.puberid = puberid !== undefined ? puberid : "";
             this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
@@ -181,6 +181,21 @@
             this.arridatetime = arridatetime !== undefined ? arridatetime : "";
             this.ostatus = ostatus !== undefined ? ostatus : 0;
             this.priority = priority !== undefined ? priority : 0;
+            this.revierid = revierid !== undefined ? revierid : "";
+            this.compname = compname !== undefined ? compname : "";
+            this.phone = phone !== undefined ? phone : "";
+            this.carriage = carriage !== undefined ? carriage : 0.0;
+            this.wmdictcn = wmdictcn !== undefined ? wmdictcn : "";
+            this.numdictcn = numdictcn !== undefined ? numdictcn : "";
+            this.padictcn = padictcn !== undefined ? padictcn : "";
+            this.ctdictcn = ctdictcn !== undefined ? ctdictcn : "";
+            this.vldictcn = vldictcn !== undefined ? vldictcn : "";
+            this.vtdictcn = vtdictcn !== undefined ? vtdictcn : "";
+            this.tndictcn = tndictcn !== undefined ? tndictcn : "";
+            this.pmdictcn = pmdictcn !== undefined ? pmdictcn : "";
+            this.ptdictcn = ptdictcn !== undefined ? ptdictcn : "";
+            this.dmdictcn = dmdictcn !== undefined ? dmdictcn : "";
+            this.redictcn = redictcn !== undefined ? redictcn : "";
         },
         false,
         function(__os)
@@ -226,6 +241,21 @@
             __os.writeString(this.arridatetime);
             __os.writeInt(this.ostatus);
             __os.writeInt(this.priority);
+            __os.writeString(this.revierid);
+            __os.writeString(this.compname);
+            __os.writeString(this.phone);
+            __os.writeDouble(this.carriage);
+            __os.writeString(this.wmdictcn);
+            __os.writeString(this.numdictcn);
+            __os.writeString(this.padictcn);
+            __os.writeString(this.ctdictcn);
+            __os.writeString(this.vldictcn);
+            __os.writeString(this.vtdictcn);
+            __os.writeString(this.tndictcn);
+            __os.writeString(this.pmdictcn);
+            __os.writeString(this.ptdictcn);
+            __os.writeString(this.dmdictcn);
+            __os.writeString(this.redictcn);
         },
         function(__is)
         {
@@ -270,8 +300,23 @@
             this.arridatetime = __is.readString();
             this.ostatus = __is.readInt();
             this.priority = __is.readInt();
+            this.revierid = __is.readString();
+            this.compname = __is.readString();
+            this.phone = __is.readString();
+            this.carriage = __is.readDouble();
+            this.wmdictcn = __is.readString();
+            this.numdictcn = __is.readString();
+            this.padictcn = __is.readString();
+            this.ctdictcn = __is.readString();
+            this.vldictcn = __is.readString();
+            this.vtdictcn = __is.readString();
+            this.tndictcn = __is.readString();
+            this.pmdictcn = __is.readString();
+            this.ptdictcn = __is.readString();
+            this.dmdictcn = __is.readString();
+            this.redictcn = __is.readString();
         },
-        81, 
+        103, 
         false);
 
     /**
@@ -372,7 +417,7 @@
      * 走货痕迹
      **/
     myOrder.TracOfOrder = Slice.defineStruct(
-        function(orderid, compid, driverphone, tracdate, states, adrress, remark)
+        function(orderid, compid, driverphone, tracdate, states, adrress, remark, billno)
         {
             this.orderid = orderid !== undefined ? orderid : 0;
             this.compid = compid !== undefined ? compid : 0;
@@ -381,6 +426,7 @@
             this.states = states !== undefined ? states : "";
             this.adrress = adrress !== undefined ? adrress : "";
             this.remark = remark !== undefined ? remark : "";
+            this.billno = billno !== undefined ? billno : "";
         },
         true,
         function(__os)
@@ -392,6 +438,7 @@
             __os.writeString(this.states);
             __os.writeString(this.adrress);
             __os.writeString(this.remark);
+            __os.writeString(this.billno);
         },
         function(__is)
         {
@@ -402,8 +449,9 @@
             this.states = __is.readString();
             this.adrress = __is.readString();
             this.remark = __is.readString();
+            this.billno = __is.readString();
         },
-        24, 
+        25, 
         false);
 
     /**
@@ -429,8 +477,11 @@
         5, 
         false);
 
+    /**
+     * 评价信息
+     **/
     myOrder.OrderEvaluate = Slice.defineStruct(
-        function(orderid, pubcompid, evaluator, revicompid, revierid, grade, service, timely, quality, remarks, cstatus)
+        function(orderid, pubcompid, evaluator, revicompid, revierid, grade, service, timely, quality, remarks, cstatus, picurljson)
         {
             this.orderid = orderid !== undefined ? orderid : 0;
             this.pubcompid = pubcompid !== undefined ? pubcompid : 0;
@@ -443,6 +494,7 @@
             this.quality = quality !== undefined ? quality : 0;
             this.remarks = remarks !== undefined ? remarks : "";
             this.cstatus = cstatus !== undefined ? cstatus : 0;
+            this.picurljson = picurljson !== undefined ? picurljson : "";
         },
         true,
         function(__os)
@@ -458,6 +510,7 @@
             __os.writeInt(this.quality);
             __os.writeString(this.remarks);
             __os.writeInt(this.cstatus);
+            __os.writeString(this.picurljson);
         },
         function(__is)
         {
@@ -472,8 +525,32 @@
             this.quality = __is.readInt();
             this.remarks = __is.readString();
             this.cstatus = __is.readInt();
+            this.picurljson = __is.readString();
         },
-        45, 
+        46, 
+        false);
+
+    /**
+     * 订单详情数据格式
+     **/
+    myOrder.OrderInfoDetail = Slice.defineStruct(
+        function(orderifo, ordereva)
+        {
+            this.orderifo = orderifo !== undefined ? orderifo : new myOrder.OrderICE();
+            this.ordereva = ordereva !== undefined ? ordereva : new myOrder.OrderEvaluate();
+        },
+        false,
+        function(__os)
+        {
+            myOrder.OrderICE.write(__os, this.orderifo);
+            myOrder.OrderEvaluate.write(__os, this.ordereva);
+        },
+        function(__is)
+        {
+            this.orderifo = myOrder.OrderICE.read(__is, this.orderifo);
+            this.ordereva = myOrder.OrderEvaluate.read(__is, this.ordereva);
+        },
+        149, 
         false);
 
     /**
@@ -506,8 +583,15 @@
         "getPickCode": [, , , , , [7], [[3], [7]], , , , ],
         "checkPickPwd": [, , , , , [7], [[3], [7], [7]], , , , ],
         "insertOrderEvaluate": [, , , , , [7], [[myOrder.OrderEvaluate]], , , , ],
-        "conReceipt": [, , , , , [7], [[4], [3]], , , , ],
-        "updateMyPublishOrder": [, , , , , [7], [[myOrder.Order]], , , , ]
+        "conReceipt": [, , , , , [7], [[7], [3]], , , , ],
+        "getOrderDetail": [, , , , , [7], [[7], [3], [3]], , , , ],
+        "updateMyPublishOrder": [, , , , , [7], [[myOrder.OrderICE], [3]], , , , ],
+        "transOrder": [, , , , , [7], [[myOrder.OrderICE], [3]], , , , ],
+        "getOrderInfo": [, , , , , [7], [[7], [3]], , , , ],
+        "flushOrder": [, , , , , [7], [[3], [7]], , , , ],
+        "cancelOrder": [, , , , , [7], [[7], [3]], , , , ],
+        "repubOrder": [, , , , , [7], [[7], [3]], , , , ],
+        "closeOrder": [, , , , , [7], [[7], [3]], , , , ]
     });
     exports.myOrder = myOrder;
 }

@@ -39,7 +39,6 @@
       if (this.dInfo.uid) {
         this.isEditor = true
       }
-
       if(this.dInfo !== null) {
         this.uid = this.dInfo.uid;
         this.dName = this.dInfo.name;

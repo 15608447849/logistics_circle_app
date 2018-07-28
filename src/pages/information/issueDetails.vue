@@ -99,7 +99,8 @@
         detailInfo: {},
         token: '',
         orderId: '',
-        puberId: ''
+        puberId: '',
+        pubercompid: ''
       }
     },
     methods: {
@@ -128,8 +129,9 @@
         this.$router.go(-1)
       },
       getOrderDetailInfo() {
+        debugger
         let self = this;
-        this.$Ice_OrderService.getOrderDetail(this.orderId,this.puberId,
+        this.$Ice_OrderService.getOrderDetail(this.orderId,this.puberId,this.pubercompid,
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
@@ -147,6 +149,7 @@
     activated() {
       this.orderId = this.$route.query.id || '';
       this.puberId = this.$route.query.puberid || '';
+      this.pubercompid = this.$route.query.pubercompid || '';
       this.getOrderDetailInfo();
     }
   }

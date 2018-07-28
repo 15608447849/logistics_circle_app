@@ -766,7 +766,7 @@ input[type="radio"] {
   justify-content: space-between;
   flex-wrap:wrap;
   width:7.5rem;
-  height:11.55rem;
+  height:100%;
   margin:0rem 5rem .64rem 0rem;
   padding:.4rem .21rem 0rem .21rem;
   background:#ffffff;
