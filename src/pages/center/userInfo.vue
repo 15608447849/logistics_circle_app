@@ -129,29 +129,6 @@
             )
           );
         },
-        // 获取图片
-        getImages(compid) {
-          debugger
-          let path = "http://192.168.1.240:8090/getCompPic?compId="+compid;
-          let xhr = new XMLHttpRequest();
-          let self = this;
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              var data = xhr.responseText;
-              data = JSON.parse(data).data;
-              for (var item in data) {
-                if (item != 7){
-                  self.uploadList[item].url = data[item];
-                }
-                if (item == 7) {
-                  localStorage.setItem("$logoImage",data[item]);
-                }
-              }
-            }
-          };
-          xhr.open("GET", path , true);
-          xhr.send();
-        },
         fallback() {
           this.$router.go(-1)
         },
