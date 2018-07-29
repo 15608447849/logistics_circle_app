@@ -22,6 +22,7 @@
 {
     var Ice = require("ice").Ice;
     var __M = Ice.__M;
+    var cstruct = require("cstruct").cstruct;
     var Slice = Ice.Slice;
 
     var comp = __M.module("comp");
@@ -56,7 +57,7 @@
         false);
 
     comp.Staff = Slice.defineStruct(
-        function(name, uid, phone, comp, compid, status, createdate)
+        function(name, uid, phone, comp, compid, status, type, createdate)
         {
             this.name = name !== undefined ? name : "";
             this.uid = uid !== undefined ? uid : 0;
@@ -64,6 +65,7 @@
             this.comp = comp !== undefined ? comp : "";
             this.compid = compid !== undefined ? compid : 0;
             this.status = status !== undefined ? status : 0;
+            this.type = type !== undefined ? type : 0;
             this.createdate = createdate !== undefined ? createdate : "";
         },
         true,
@@ -75,6 +77,7 @@
             __os.writeString(this.comp);
             __os.writeInt(this.compid);
             __os.writeInt(this.status);
+            __os.writeInt(this.type);
             __os.writeString(this.createdate);
         },
         function(__is)
@@ -85,17 +88,19 @@
             this.comp = __is.readString();
             this.compid = __is.readInt();
             this.status = __is.readInt();
+            this.type = __is.readInt();
             this.createdate = __is.readString();
         },
-        16, 
+        20, 
         false);
+    Slice.defineSequence(comp, "staffSeqHelper", "comp.Staff", false);
     Slice.defineSequence(comp, "RouteSeqHelper", "comp.Route", false);
 
     /**
-     * 企业与路线模型
+     * 企业信息模型
      **/
     comp.CompInfo = Slice.defineStruct(
-        function(compid, uoid, fname, sname, ctype, csale, contact, area, address, postcode, pho, pht, invtitle, invtype, taxno, phone, openbank, openaccount, billarea, billaddr, verify, creadit, routeList)
+        function(compid, uoid, fname, sname, ctype, csale, contact, area, address, postcode, pho, pht, invtitle, invtype, taxno, phone, openbank, openaccount, billarea, billaddr, verify, creadit)
         {
             this.compid = compid !== undefined ? compid : "";
             this.uoid = uoid !== undefined ? uoid : "";
@@ -117,6 +122,97 @@
             this.openaccount = openaccount !== undefined ? openaccount : 0;
             this.billarea = billarea !== undefined ? billarea : 0;
             this.billaddr = billaddr !== undefined ? billaddr : "";
+            this.verify = verify !== undefined ? verify : 0;
+            this.creadit = creadit !== undefined ? creadit : 0;
+        },
+        true,
+        function(__os)
+        {
+            __os.writeString(this.compid);
+            __os.writeString(this.uoid);
+            __os.writeString(this.fname);
+            __os.writeString(this.sname);
+            __os.writeInt(this.ctype);
+            __os.writeInt(this.csale);
+            __os.writeLong(this.contact);
+            __os.writeInt(this.area);
+            __os.writeString(this.address);
+            __os.writeString(this.postcode);
+            __os.writeLong(this.pho);
+            __os.writeLong(this.pht);
+            __os.writeString(this.invtitle);
+            __os.writeInt(this.invtype);
+            __os.writeString(this.taxno);
+            __os.writeString(this.phone);
+            __os.writeString(this.openbank);
+            __os.writeLong(this.openaccount);
+            __os.writeInt(this.billarea);
+            __os.writeString(this.billaddr);
+            __os.writeInt(this.verify);
+            __os.writeInt(this.creadit);
+        },
+        function(__is)
+        {
+            this.compid = __is.readString();
+            this.uoid = __is.readString();
+            this.fname = __is.readString();
+            this.sname = __is.readString();
+            this.ctype = __is.readInt();
+            this.csale = __is.readInt();
+            this.contact = __is.readLong();
+            this.area = __is.readInt();
+            this.address = __is.readString();
+            this.postcode = __is.readString();
+            this.pho = __is.readLong();
+            this.pht = __is.readLong();
+            this.invtitle = __is.readString();
+            this.invtype = __is.readInt();
+            this.taxno = __is.readString();
+            this.phone = __is.readString();
+            this.openbank = __is.readString();
+            this.openaccount = __is.readLong();
+            this.billarea = __is.readInt();
+            this.billaddr = __is.readString();
+            this.verify = __is.readInt();
+            this.creadit = __is.readInt();
+        },
+        71, 
+        false);
+
+    /**
+     * 企业与路线模型
+     **/
+    comp.CompsInfo = Slice.defineStruct(
+        function(compid, uoid, fname, sname, ctype, csale, contact, area, address, postcode, pho, pht, invtitle, invtype, taxno, phone, openbank, openaccount, billarea, billaddr, busslic, idcard, trasportlic, insurcert, ntaxcert, ltaxcert, orgcert, logoPath, verify, creadit, routeList)
+        {
+            this.compid = compid !== undefined ? compid : "";
+            this.uoid = uoid !== undefined ? uoid : "";
+            this.fname = fname !== undefined ? fname : "";
+            this.sname = sname !== undefined ? sname : "";
+            this.ctype = ctype !== undefined ? ctype : 0;
+            this.csale = csale !== undefined ? csale : 0;
+            this.contact = contact !== undefined ? contact : 0;
+            this.area = area !== undefined ? area : 0;
+            this.address = address !== undefined ? address : "";
+            this.postcode = postcode !== undefined ? postcode : "";
+            this.pho = pho !== undefined ? pho : 0;
+            this.pht = pht !== undefined ? pht : 0;
+            this.invtitle = invtitle !== undefined ? invtitle : "";
+            this.invtype = invtype !== undefined ? invtype : 0;
+            this.taxno = taxno !== undefined ? taxno : "";
+            this.phone = phone !== undefined ? phone : "";
+            this.openbank = openbank !== undefined ? openbank : "";
+            this.openaccount = openaccount !== undefined ? openaccount : 0;
+            this.billarea = billarea !== undefined ? billarea : 0;
+            this.billaddr = billaddr !== undefined ? billaddr : "";
+            this.busslic = busslic !== undefined ? busslic : "";
+            this.idcard = idcard !== undefined ? idcard : "";
+            this.trasportlic = trasportlic !== undefined ? trasportlic : "";
+            this.insurcert = insurcert !== undefined ? insurcert : "";
+            this.ntaxcert = ntaxcert !== undefined ? ntaxcert : "";
+            this.ltaxcert = ltaxcert !== undefined ? ltaxcert : "";
+            this.orgcert = orgcert !== undefined ? orgcert : "";
+            this.logoPath = logoPath !== undefined ? logoPath : "";
             this.verify = verify !== undefined ? verify : 0;
             this.creadit = creadit !== undefined ? creadit : 0;
             this.routeList = routeList !== undefined ? routeList : null;
@@ -144,6 +240,14 @@
             __os.writeLong(this.openaccount);
             __os.writeInt(this.billarea);
             __os.writeString(this.billaddr);
+            __os.writeString(this.busslic);
+            __os.writeString(this.idcard);
+            __os.writeString(this.trasportlic);
+            __os.writeString(this.insurcert);
+            __os.writeString(this.ntaxcert);
+            __os.writeString(this.ltaxcert);
+            __os.writeString(this.orgcert);
+            __os.writeString(this.logoPath);
             __os.writeInt(this.verify);
             __os.writeInt(this.creadit);
             comp.RouteSeqHelper.write(__os, this.routeList);
@@ -170,22 +274,29 @@
             this.openaccount = __is.readLong();
             this.billarea = __is.readInt();
             this.billaddr = __is.readString();
+            this.busslic = __is.readString();
+            this.idcard = __is.readString();
+            this.trasportlic = __is.readString();
+            this.insurcert = __is.readString();
+            this.ntaxcert = __is.readString();
+            this.ltaxcert = __is.readString();
+            this.orgcert = __is.readString();
+            this.logoPath = __is.readString();
             this.verify = __is.readInt();
             this.creadit = __is.readInt();
             this.routeList = comp.RouteSeqHelper.read(__is);
         },
-        72, 
+        80, 
         false);
 
     /**
      * 企业logo的基本信息模型
      **/
     comp.BasicInfo = Slice.defineStruct(
-        function(compid, fname, logoPath, verify, creadit)
+        function(compid, fname, verify, creadit)
         {
             this.compid = compid !== undefined ? compid : "";
             this.fname = fname !== undefined ? fname : "";
-            this.logoPath = logoPath !== undefined ? logoPath : "";
             this.verify = verify !== undefined ? verify : 0;
             this.creadit = creadit !== undefined ? creadit : 0;
         },
@@ -194,7 +305,6 @@
         {
             __os.writeString(this.compid);
             __os.writeString(this.fname);
-            __os.writeString(this.logoPath);
             __os.writeInt(this.verify);
             __os.writeInt(this.creadit);
         },
@@ -202,12 +312,31 @@
         {
             this.compid = __is.readString();
             this.fname = __is.readString();
-            this.logoPath = __is.readString();
             this.verify = __is.readInt();
             this.creadit = __is.readInt();
         },
-        11, 
+        10, 
         false);
+
+    comp.PhoneInfo = Slice.defineStruct(
+        function(pho, pht)
+        {
+            this.pho = pho !== undefined ? pho : 0;
+            this.pht = pht !== undefined ? pht : 0;
+        },
+        true,
+        function(__os)
+        {
+            __os.writeLong(this.pho);
+            __os.writeLong(this.pht);
+        },
+        function(__is)
+        {
+            this.pho = __is.readLong();
+            this.pht = __is.readLong();
+        },
+        16, 
+        true);
 
     /**
      * 基础数据服务接口
@@ -232,8 +361,12 @@
         "insertCompUser": [, , , , , [7], [[3], [4]], , , , ],
         "selectCompUserByUid": [, , , , , [7], [[3]], , , , ],
         "addLoginCompByRedis": [, , , , , [7], [[3], [3]], , , , ],
-        "selectStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
-        "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ]
+        "selectStaffInfo": [, , , , , [7], [[7], [7], [7], [3], [3], [cstruct.Page]], [[cstruct.Page]], , , ],
+        "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
+        "updateStaffInfo": [, , , , , [7], [[7], [7], [3], [3], [3]], , , , ],
+        "updateStaffstatus": [, , , , , [7], [[3], [3], [3], [3]], , , , ],
+        "updateCompPhone": [, , , , , [3], [[4], [4]], , , , ],
+        "selectPhoAndPht": [, , , , , [7], [[3]], , , , ]
     });
     exports.comp = comp;
 }

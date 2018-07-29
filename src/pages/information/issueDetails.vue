@@ -129,7 +129,6 @@
         this.$router.go(-1)
       },
       getOrderDetailInfo() {
-        debugger
         let self = this;
         this.$Ice_OrderService.getOrderDetail(this.orderId,this.puberId,this.pubercompid,
           new IceCallback(
