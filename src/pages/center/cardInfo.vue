@@ -9,18 +9,15 @@
       <!--<div>-->
       <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
         <p>{{item.title}}</p>
-        <!--<img :src="item.url" class="upcerPic">-->
-        <cube-upload
-          :action="action"
-          :simultaneous-uploads="1"
-          @files-added="filesAdded"
-          @file-success="filesSuccess"
-          @file-error="filesError"/>
-
-        <!--<div class="updataCertificatesBox">-->
-        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
-        <!--</div>-->
+        <Button  class="margin_top_5" @click.native="uploadBtn(index)">
+          <i class="icon iconfont icon-gengduo1 updataCertificatesPic"></i>
+          <form action="http://192.168.1.240:8090/fileUploadCompPic" method="post"
+                enctype ="multipart/form-data" class="formImage" :id="'form_'+index" target="nm_iframe">
+            <input type="file" name="file" mult iple="multiple"  accept=".png,.jpg,.jpeg" @change="handleUpload" class="marginleftCenter opacty0"/>
+            <input type="text" name="picNo" v-model="uploadIndex" class="opacty0"/>
+            <input type="text" name="compId" v-model="compid" class="opacty0"/>
+          </form>
+        </Button>
       </div>
     </div>
   </div>
@@ -32,6 +29,8 @@
       return {
         action: 'http://192.168.1.240:8090/fileUploadCompPic',
         imgUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1685044995,1968324938&fm=27&gp=0.jpg',
+        uploadIndex:0,
+        compid:'',
         uploadList: [
           {
             title:'营业执照',
@@ -105,33 +104,19 @@
         xhr.open("GET", path , true);
         xhr.send();
       },
-      filesSuccess(files) {
-        debugger
+      uploadBtn(key) {
+        this.uploadIndex = key;
       },
-      filesError(files) {
-        debugger
-      },
-      filesAdded(files) {
-        let hasIgnore = false;
-        const maxSize = 5 * 1024 * 1024; // 5M
-        for (let k in files) {
-          const file = files[k];
-          if (file.size > maxSize) {
-            file.ignore = true;
-            hasIgnore = true;
-          }
+      handleUpload(event) {
+        let reader = new FileReader();
+        reader.readAsDataURL(event.currentTarget.files[0]);
+        let self = this;
+        reader.onloadend = function (e) {
+          self.uploadList[self.uploadIndex].url = e.target.result;
+          let sub = document.getElementById('form_'+self.uploadIndex);
+          sub.submit();
+          self.uploadList[self.uploadIndex].uploadBtnShow = false;
         }
-        hasIgnore && this.$createToast({
-          type: 'warn',
-          time: 1000,
-          txt: '你上传的图片 > 5M '
-        }).show()
-      },
-      fileSubmitted(file) {
-        file.base64Value = file.file.base64
-      },
-      fileSuccess(file) {
-        console.log('图片上传成功')
       },
       fallback() {
         this.$router.go(-1)

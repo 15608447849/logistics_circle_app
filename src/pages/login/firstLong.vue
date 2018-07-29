@@ -4,13 +4,13 @@
     <div class="login_input">
       <input type="text" v-model="phone" placeholder="注册的手机号码" class="userNameBorderBottom">
       <div><input type="password" v-model="smsCode" placeholder="请输入短信验证码" class="FuserPwd">
-        <!--<a class="getVerificationCode">获取验证码</a>-->
         <yd-sendcode
           class="getVerificationCode"
           slot="right"
           v-model="start1"
           @click.native="sendCode"
-          type="warning"
+          type="primary"
+          init-str="获取验证码"
         ></yd-sendcode>
       </div>
     </div>

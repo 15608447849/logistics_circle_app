@@ -8,7 +8,7 @@
 
      <div class="orderPadding10">
        <div class="logisticsNameBox">
-         <img src="../../assets/images/small/logo_26.png" alt="">
+         <!--<img src="../../assets/images/small/logo_26.png" alt="">-->
          <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
        </div>
        <ul>

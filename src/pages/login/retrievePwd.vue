@@ -1,31 +1,39 @@
 <template>
   <div>
     <div>
-      <yd-navbar title="找回密码" bgcolor="#1E90FF" color="#FFFFFF" fontsize="18px">
-        <router-link to="" @click.native="backBtnClick" slot="left">
-          <yd-navbar-back-icon  color="#FFFFFF"></yd-navbar-back-icon>
-        </router-link>
-        <img slot="right" src="../../assets/images/small/logo_26.png"/>
-      </yd-navbar>
+      <div class="issueHeaderNav">
+        <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
+        <span>找回密码</span>
+        <div></div>
+      </div>
     </div>
     <div class="phoneNum" v-show="firstStepBool">
       <span class="numText">手机号码</span>
       <span class="eightSix">+86</span>
       <div class="inputNumBox">
-        <input v-model="userPhone" type="text" placeholder="请输入您的手机号" class="inputNum">
+        <input v-model="userPhone" type="number" placeholder="请输入您的手机号" class="inputNum">
       </div>
+      <!--<button class="nextStep" @click="firstStep()" v-show="firstStepBool">下一步</button>-->
+      <!--<button class="nextStep" @click="secondStep()" v-show="secondStepBool">下一步</button>-->
+      <!--<button class="nextStep" @click="thirdStep()" v-show="thirdStepBool">保存</button>-->
+      <van-button size="large" type="primary" @click="firstStep()" v-show="firstStepBool">下一步</van-button>
     </div>
     <div class="verificationBox" v-show="secondStepBool">
       <span class="verificationCode">输入验证码</span>
-      <!--<ul class="verificationList">-->
-        <!--<li><input type="text"></li>-->
-        <!--<li><input type="text"></li>-->
-        <!--<li><input type="text"></li>-->
-        <!--<li><input type="text"></li>-->
-      <!--</ul>-->
-      <div class="inputNumBox">
-        <input v-model="smsCode" type="text" placeholder="请输入您的短信验证码" class="inputNum">
-      </div>
+      <!-- 密码输入框 -->
+      <van-password-input
+        :value="smsCode"
+        info="验证码为 6 位数字"
+        @focus="showKeyboard = true"
+      />
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+      <van-button size="large" type="primary" @click="secondStep()" v-show="secondStepBool">下一步</van-button>
     </div>
     <div class="updataPwdinputBox" v-show="thirdStepBool">
       <div class="inputPassword">
@@ -34,10 +42,8 @@
       <div class="inputPassword">
         <span class="textRed">*</span><span class="inputspan">确认密码</span><div class="inputBox"><input type="password" v-model="rPassword" placeholder="请确认新密码"></div>
       </div>
+      <van-button size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool">保存</van-button>
     </div>
-    <button class="nextStep" @click="firstStep()" v-show="firstStepBool">下一步</button>
-    <button class="nextStep" @click="secondStep()" v-show="secondStepBool">下一步</button>
-    <button class="nextStep" @click="thirdStep()" v-show="thirdStepBool">保存</button>
   </div>
 </template>
 
@@ -45,6 +51,7 @@
   export default {
     data() {
       return {
+        showKeyboard: true,
         firstStepBool: true, // 第一步
         secondStepBool: false, // 第二步
         thirdStepBool: false, // 第三步
@@ -55,6 +62,9 @@
       }
     },
     methods:{
+      fallback() {
+        this.$router.go(-1)
+      },
       firstStep() {
         let self = this;
         // 验证手机号码
@@ -81,9 +91,12 @@
       secondStep() {
         let self = this;
         // 验证短信号码
+
         this.$Ice_UserService.verifySms(this.userPhone,this.smsCode, new IceCallback(
           function (result) {
+
             if (result.code === 0) {
+
               self.secondStepBool = false;
               self.thirdStepBool = true;
             } else {
@@ -153,6 +166,14 @@
       toVerification(){
         this.$router.push({path: '/login/Verification'})
       },
+      onInput(key) {
+        this.smsCode = (this.smsCode + key).slice(0, 6);
+        console.log(this.smsCode)
+      },
+      onDelete() {
+        this.smsCode = this.smsCode.slice(0, this.smsCode.length - 1);
+        console.log(this.value)
+      }
     }
   }
 </script>

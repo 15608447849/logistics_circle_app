@@ -958,16 +958,17 @@ input[type="radio"] {
 }
 .getVerificationCode{
   float:right;
-  width:1.5rem;
-  height:.74rem;
+  width:1.4rem;
+  height:.65rem;
   text-align: right;
+  margin-top:.05rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .74rem;
+  line-height: .65rem;
   letter-spacing: 0px;
-  color: #3189f5;
+  color: #ffffff;
 }
 .displayNone{
   display:none;
@@ -997,7 +998,7 @@ input[type="radio"] {
 }
 .FuserPwd{
   display:inline-block;
-  width:4.1rem;
+  width:3.1rem;
   height:.74rem;
   border:none;
   margin-left:.3rem;
@@ -1261,7 +1262,7 @@ input[type="radio"] {
 .inputspan{
   margin-right:.2rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .24rem;
@@ -1274,11 +1275,11 @@ input[type="radio"] {
 }
 .inputBox input{
   width:4rem;
-  height:.6rem;
+  height:.8rem;
   border:none;
   text-indent: .15rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .24rem;
@@ -1484,7 +1485,6 @@ input[type="radio"] {
 .RobbingBox{
   display:block;
   width:7.5rem;
-  background:#e6e6e6;
   padding:10px 10px 0px 10px;
 }
 .logisticsNameBox{
@@ -3716,4 +3716,27 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-stretch: normal;
   letter-spacing: 1px;
   color: #333333;
+}
+.margin_top_5{
+  display:inline-block;
+  position:relative;
+  left:0rem;
+  top:0rem;
+  width:3.5rem;
+  height:2.5rem;
+}
+.opacty0{
+  opacity: 0;
+}
+.marginleftCenter{
+  width:1rem;
+  height:1rem;
+  margin-top:.6rem;
+}
+.updataCertificatesPic{
+  position:absolute;
+  top:.7rem;
+  left:1.2rem;
+  font-size:1rem;
+  color:#999999;
 }
