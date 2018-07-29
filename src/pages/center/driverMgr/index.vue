@@ -14,26 +14,31 @@
           </div>
         </div>
       </div>
-      <ul class="driverList" id="mescroll">
-        <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
-          <div class="driverInfo">
-            <div class="driverPic">
-              <i class="icon iconfont icon-siji"></i>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        @load="onLoad"
+      >
+        <ul class="driverList">
+          <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
+            <div class="driverInfo">
+              <div class="driverPic">
+                <i class="icon iconfont icon-siji"></i>
+              </div>
+              <span class="driverName">{{item.name}}</span>
+              <span class="driverPhone">{{item.phone}}</span>
             </div>
-            <span class="driverName">{{item.name}}</span>
-            <span class="driverPhone">{{item.phone}}</span>
-          </div>
-          <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
-             @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
-        </li>
-      </ul>
+            <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
+               @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
+          </li>
+        </ul>
+      </van-list>
+
     </div>
   </div>
 </template>
 
 <script>
-  import '../../../assets/css/mescroll.min.css'
-  import '../../../assets/lib/mescroll.m'
   import {searchState} from '../../../utils/config'
   import {SEARCH_STATE} from "../../../store/mutation-types";
 
@@ -44,19 +49,23 @@
         driverName: '',// 司机名称
         driverPhone: '',// 司机手机,
         driverStatus: '',// 状态 0 启用 32 停用
-        driverType: '1', //  1,司机;132,业务员
+        driverType: 1, //  1,司机;132,业务员
         userId: this.$app_store.getters.userId || 4,
         // pageSize: '1'// 当前页数
         page: new cstruct.Page(),
         searchInputVal: '搜索',
-        mescroll:null,
+        loading: false,
+        finished: false
       }
     },
     mounted() {
       this.initData();
-      this.initMescroll();
+      // this.requestDriverList();
     },
     methods: {
+      onLoad() {
+        this.requestDriverList();
+      },
       initData() {
         this.page.pageSize = 10; // 每页页数
         this.page.pageIndex = 1; // 当前页
@@ -68,23 +77,6 @@
           this.driverName = this.searchInputVal;
           console.log(this.$app_store.getters.searchContent)
         }
-      },
-      initMescroll() {
-        this.mescroll = new MeScroll("mescroll", {
-          up: {
-            auto: true,
-            callback: this.onPullingUp, // 上拉回调
-            //以下参数可删除,不配置
-            isBounce: false, // 此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
-            toTop: { //配置回到顶部按钮
-              src: "../../assets/images/small/totop.png", // 默认滚动到1000px显示,可配置offset修改
-              duration: 500// 回到顶部的动画时长, 默认300ms
-            },
-            empty: {
-              // 配置列表无任何数据的提示
-            }
-          }
-        });
       },
       toPageSearch() {
         this.$app_store.commit(SEARCH_STATE, searchState.DRIVER);
@@ -107,15 +99,22 @@
       goBackPage() {
         this.$router.go(-1);
       },
-      requestDriverList(successCallback, errorCallback) {
+      requestDriverList() {
+        let self = this;
         this.$Ice_InfoService.selectStaffInfo(this.driverName, this.driverPhone, this.driverStatus, this.driverType, this.userId, this.page, new IceCallback(
           function (result) {
+            self.loading = false;
             if (result.code === 0) {
-              successCallback(result.obj)
+              self.page.pageIndex += 1; // 页码增加
+              self.drivers = self.drivers.concat(result.obj);
+              if (self.drivers.length >= result.totalItems) {
+                self.finished = true;
+
+              }
             }
           },
           function (error) {
-            errorCallback(error);
+            self.loading = false;
           }
         ))
       },
@@ -156,19 +155,7 @@
           .catch(() => {
 
           })
-      },
-      // 上推加载
-      onPullingUp() {
-        let self = this;
-        this.requestDriverList(function (result) {
-          // 隐藏上推加载状态;
-          self.mescroll.endSuccess();
-          self.drivers = self.drivers.concat(result);
-        }, function (error) {
-          self.mescroll.endErr();
-        });
-      },
-
+      }
     }
   }
 </script>

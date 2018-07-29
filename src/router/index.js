@@ -401,14 +401,14 @@ vueRouter.beforeEach(function (to, from, next) {
   // 判断该路由是否需要登录权限
   if (to.meta.requireAuth) {
     // 通过vuex state获取当前的token是否存在
-    if (store.state.userId) {
+    // if (store.state.userId) {
       next();
-    } else {
+    // } else {
       next({
         path: '/login',
         query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
       })
-    }
+    // }
   } else {
     /* 显示加载中动画 */
     store.commit(UPDATE_LOADING_STATUS, true);

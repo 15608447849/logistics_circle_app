@@ -49,66 +49,22 @@
         </div>
       </div>
     </div>
+    <!--<ul class="order_boxIndex">-->
+    <!--<li class="order_list">-->
+    <!--<div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span-->
+    <!--class="time">1小时前</span></div>-->
+    <!--<div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span-->
+    <!--class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>-->
+    <!--</li>-->
+    <!--</ul>-->
     <ul class="order_boxIndex">
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
-      </li>
-      <li class="order_list">
-        <div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span
-          class="time">1小时前</span></div>
-        <div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span
-          class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>
+      <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
+        <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
+          class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
+        <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
+          class="carWeight"></span><span
+          class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
+        </div>
       </li>
     </ul>
     <div class="seeMore">查看更多</div>
@@ -134,13 +90,17 @@
         <ul class="personalList">
           <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
           </li>
-          <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span></li>
-          <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span></li>
+          <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span>
+          </li>
+          <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
+          </li>
           <li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
           <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
-          <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span class="personalText circle">我的圈子</span></li>
+          <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
+            class="personalText circle">我的圈子</span></li>
           <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
-          <li @click="tomyInformation"><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span></li>
+          <li @click="tomyInformation"><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span>
+          </li>
         </ul>
         <div class="settingCircleBox" @click="tosetting">
           <i class="icon iconfont icon-shezhi1"></i>
@@ -155,11 +115,19 @@
   import {
     SEARCH_STATE
   } from '../../store/mutation-types'
-  import { searchState } from "../../utils/config";
+  import {searchState} from "../../utils/config";
+  import Conversion from '@/utils/conversion';
 
   export default {
     data() {
       return {
+        infoList: [],
+        pageSize: '10', // 订单数
+        address: '', // 地址
+        startTimeStr: '', // 起始订单标识
+        endTimeStr: '', // 结束订单标识
+        key: '',// 关键词
+        requestState: 0, // 获取最新 0, 获取历史1
         show4: false,
         isMember: true,
         direction: '',
@@ -172,15 +140,41 @@
       }
     },
     mounted() {
-      if(this.$app_store.getters.compInfo!== null) {
+      if (this.$app_store.getters.compInfo !== null) {
         this.compInfo = this.$app_store.getters.compInfo;
       }
+      this.requestInfoList();
     },
     methods: {
+      requestInfoList() {
+        let self = this;
+        this.$Ice_OrderService.queryOrderByApp('0', self.pageSize, self.address, self.key, 1, this.endTimeStr,
+          new IceCallback(
+            function (result) {
+              if (result.code !== 0) {
+                self.message.Toast(self, 'error', result.msg, false);
+                return
+              }
+              self.infoList = result.obj;
+            }, function (err) {
+
+            }
+          ))
+      },
       skipSearchPage() {
         this.$app_store.commit(SEARCH_STATE, searchState.INFORMATION);
         this.$router.push({
           path: '/search'
+        })
+      },
+      toPageIssueDetail(item) {
+        this.$router.push({
+          path: '/information/issueDetails',
+          query: {
+            id: item.id,
+            puberid: item.puberid,
+            pubercompid: item.pubercompid
+          }
         })
       },
       toPageIssue() {
@@ -214,50 +208,53 @@
           }
         })
       },
-      toDriverAmd(){
+      toDriverAmd() {
         this.$router.push({
           path: '/center/driverMgr/index'
         })
       },
-      toMycircle(){
+      toMycircle() {
         this.$router.push({
           path: '/center/myCircle/index'
         })
       },
-      toMyRelease(){
+      toMyRelease() {
         this.$router.push({
           path: '/center/myRelease/index'
         })
       },
-      tocommonlyRoute(){
+      tocommonlyRoute() {
         this.$router.push({
-          path:'/center/commonlyRoute/index'
+          path: '/center/commonlyRoute/index'
         })
       },
-      toblacklist(){
+      toblacklist() {
         this.$router.push({
-          path:'/center/blacklist/index'
+          path: '/center/blacklist/index'
         })
       },
-      tomyInformation(){
+      tomyInformation() {
         this.$router.push({
-          path:'/center/myInformation/index'
+          path: '/center/myInformation/index'
         })
       },
-      tosetting(){
+      tosetting() {
         this.$router.push({
-          path:'/center/setting/index'
+          path: '/center/setting/index'
         })
       },
-      todimensionalCode(){
+      todimensionalCode() {
         this.$router.push({
-          path:'home/dimensionalCode'
+          path: 'home/dimensionalCode'
         })
       },
-      toScan(){
+      toScan() {
         this.$router.push({
-          path:'home/scan'
+          path: 'home/scan'
         })
+      },
+      dateConversion(time) {
+        return Conversion.formatMsgTime(time)
       }
     }
   }
