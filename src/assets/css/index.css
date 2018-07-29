@@ -7,6 +7,10 @@
   padding:0rem .21rem;
   background:#ffffff;
 }
+.registerBox{
+  background:white;
+  height:13.25rem;
+}
 .searchHistory .historyRecord{
   display:block;
   width:7.08rem;
@@ -44,7 +48,22 @@ a {
 /*text-align: center;*/
 /*margin-bottom: 20px;*/
 /*}*/
-
+.relaBox{
+  display:block;
+  width:7.5rem;
+  height:13.34rem;
+  position:relative;
+  top:0rem;
+  left:0rem;
+}
+.absoBox{
+  display:block;
+  width:7.5rem;
+  height:13.34rem;
+  position:absolute;
+  top:1rem;
+  left:0rem;
+}
 /*.input_div {*/
 /*display: block;*/
 /*margin-bottom: 20px;*/
@@ -1022,7 +1041,7 @@ input[type="radio"] {
   width:5.8rem;
   height:.74rem;
   margin:0 auto;
-  border-bottom:1px solid #ebeff5;;
+  border:none;
 }
 .loginBut{
   display:block;
@@ -1076,7 +1095,10 @@ input[type="radio"] {
 .start {
   color: red;
 }
-
+.yuyuyu{
+  width:7.5rem;
+  height:13.34rem;
+}
 .verification {
   display: inline-block;
   width: 120px;
@@ -1125,7 +1147,6 @@ input[type="radio"] {
   color: white;
   margin: 0 auto;
 }
-
 .span {
   width: 1.5rem;
 }
@@ -1133,8 +1154,7 @@ input[type="radio"] {
 .phoneNum{
   display:block;
   width:7.5rem;
-  height:7.75rem;
-  margin:0 auto;
+  height:10rem;
 }
 .phoneNum .numText{
   display:block;
@@ -1162,7 +1182,8 @@ input[type="radio"] {
 }
 .inputNumBox{
   display:inline-block;
-  height:.5rem;
+  width:3rem;
+  height:1rem;
   margin-left:.2rem;
   border-bottom:1px solid #ebeff5;;
 }
@@ -1202,12 +1223,12 @@ input[type="radio"] {
 .verificationBox{
   display:block;
   width:7.5rem;
-  height:7.75rem;
+  height:4rem;
   margin:0 auto;
 }
 .verificationCode{
   display:block;
-  margin-top:.36rem;
+  margin-top:.56rem;
   margin-bottom:.58rem;
   margin-left:.22rem;
   font-family: PingFang-SC-Regular;
@@ -1241,6 +1262,7 @@ input[type="radio"] {
 .updataPwdinputBox{
   display:block;
   width:7.3rem;
+  height:4rem;
   margin:0 auto;
 }
 .settingspwd{
@@ -1290,6 +1312,8 @@ input[type="radio"] {
   display:flex;
   justify-content:space-between;
   align-items:center;
+  position:fixed;
+  top:0rem;
   width:7.5rem;
   height:.8rem;
   padding:0px .21rem 0px .21rem;
@@ -1298,11 +1322,48 @@ input[type="radio"] {
   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
   background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
+.issueHeaderLog{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:7.5rem;
+  height:.8rem;
+  padding:0px .21rem 0px .21rem;
+  background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
+}
+.issueHeaderLog span{
+  font-family: PingFang-SC-Regular;
+  font-size: .36rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+.downfixed{
+  margin-top:.8rem;
+}
+.havedownfixed{
+  margin-bottom:1rem;
+}
 .issueHeaderNav .issueHeaderNavPic img{
   display:inline-block;
   width:.52rem;
   height:.52rem;
   vertical-align: middle;
+}
+.Baseline{
+  display:block;
+  width:7.5rem;
+  height:.7rem;
+  margin-bottom:1rem;
+  background:#e3e3e3;
+  color:#999999;
+  text-align: center;
+  line-height:.7rem;
 }
 .issueHeaderNav span{
   font-family: PingFang-SC-Regular;
@@ -1346,7 +1407,7 @@ input[type="radio"] {
 }
 .order_boxInfom{
   width:7.5rem;
-  height:11.48rem;
+  height:11.6rem;
   background:#ffffff;
   z-index:100;
   overflow: auto;
@@ -1482,10 +1543,19 @@ input[type="radio"] {
 /*letter-spacing: 0px;*/
 /*color: #cccccc;*/
 /*}*/
+/*.RobbingBox{*/
+  /*display:block;*/
+  /*width:7.5rem;*/
+/*}*/
 .RobbingBox{
   display:block;
   width:7.5rem;
-  padding:10px 10px 0px 10px;
+  height:2rem;
+}
+.issueDetailsBox{
+  display:block;
+  width:7.5rem;
+  height:13.34rem;
 }
 .logisticsNameBox{
   display: table-cell;
@@ -1549,15 +1619,16 @@ input[type="radio"] {
 }
 .Robbing{
   display:block;
+  height:.3rem;
+  width:7.5rem;
+  padding:0rem .2rem 0rem .2rem;
   font-family: PingFang-SC-Regular;
-  margin-bottom:.63rem;
+  margin-bottom:.3rem;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
   color: #666666;
-  height:30px;
-  width:100%;
 }
 .floatright{
   float:right;
@@ -1577,7 +1648,10 @@ input[type="radio"] {
 }
 .ulWidth100{
   display:block;
-  width:100%;
+  width:7.5rem;
+}
+.ulWidth100 li{
+  padding-left:.2rem;
 }
 .issueText{
   display:inline-block;
@@ -1600,10 +1674,10 @@ input[type="radio"] {
   margin-right:.19rem;
 }
 .marginright7{
-  margin-right:.7rem;
+  margin-right:.63rem;
 }
 .marginright95{
-  margin-right:.95rem;
+  margin-right:.86rem;
 }
 .textMargin-right10{
   margin-right:10px;
@@ -1613,7 +1687,12 @@ input[type="radio"] {
   width:100%;
   height:10px;
   background:#e6e6e6;
-  margin-bottom:5px;
+  margin-bottom:.05rem;
+}
+.RobbingOrderWhite{
+  display:block;
+  width:7.5rem;
+  height:5.05rem;
 }
 .divHeight40{
   display:flex;
@@ -2702,14 +2781,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .cancelRefres div{
   float:right;
   margin-top:.16rem;
-}
-/** 下拉刷新加载框 */
-/*下拉刷新回调的提示*/
-.orderIndexContent{
-  dipslay:block;
-  width:7.5rem;
-  height:11.45rem;
-  background:#ffffff;
 }
 .download-tip{
   z-index: 9900;

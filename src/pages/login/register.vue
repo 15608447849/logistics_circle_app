@@ -1,62 +1,88 @@
 <template>
-  <div class="register">
-    <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
-      <router-link to="" @click.native="backBtnClick" slot="left">
-        <yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>
-      </router-link>
+  <div class="registerBox">
+    <div>
+       <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
+       <router-link to="" @click.native="backBtnClick" slot="left">
+         <yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>
+       </router-link>
 
-      <img slot="right" src="../../assets/images/small/logo_26.png"/>
-    </yd-navbar>
-    <yd-cell-group v-show="firstStepBool">
-      <yd-cell-item>
-        <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
-        <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
-        <yd-sendcode slot="right"
-                     v-model="start1"
-                     @click.native="sendCode"
-                     type="warning"
-        ></yd-sendcode>
-      </yd-cell-item>
-    </yd-cell-group>
-    <yd-cell-group v-show="secondStepBool">
-      <yd-cell-group>
-        <yd-cell-item>
-          <span slot="left">验证码：</span>
-          <yd-input slot="right" v-model="verificationCode" placeholder="请输入短信验证码"></yd-input>
-        </yd-cell-item>
-      </yd-cell-group>
-    </yd-cell-group>
-    <!--<yd-cell-group v-show="thirdStepBool">-->
-    <yd-cell-group v-show="thirdStepBool">
-      <yd-cell-item>
-        <span slot="left" class="span">用户名：</span>
-        <yd-input slot="right" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left" class="span">密码：</span>
-        <yd-input slot="right" type="password" v-model="password" placeholder="请设置登录密码"></yd-input>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left" class="span">确认密码：</span>
-        <yd-input slot="right" type="password" v-model="rPassword" placeholder="请确认登录密码"></yd-input>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left" class="span">邀请码：</span>
-        <yd-input slot="right" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
-      </yd-cell-item>
-    </yd-cell-group>
+       <img slot="right" src="../../assets/images/small/logo_26.png"/>
+     </yd-navbar>
+       <yd-cell-group v-show="firstStepBool">
+         <yd-cell-item>
+           <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
+           <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
+           <yd-sendcode slot="right"
+                        v-model="start1"
+                        @click.native="sendCode"
+                        type="warning"
+           ></yd-sendcode>
+         </yd-cell-item>
+         <van-button size="large" type="primary" @click="firstStep()" v-show="firstStepBool" :disabled='isFirstStepDis'>下一步</van-button>
 
-    <!--<yd-button size="large" type="primary" @click.native="firstStep()" v-show="firstStepBool"-->
-               <!--:disabled='isFirstStepDis'>下一步-->
-    <!--</yd-button>-->
-    <cube-button v-show="firstStepBool" :light="true"  @click="firstStep()" :disabled='isFirstStepDis'>下一步</cube-button>
+         <!--<cube-button v-show="firstStepBool" :light="true"  @click="firstStep()" :disabled='isFirstStepDis'>下一步</cube-button>-->
 
-    <yd-button size="large" type="primary" @click.native="secondStep()" v-show="secondStepBool"
-               :disabled='isFirstStepDis'>下一步
-    </yd-button>
-    <yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"
-               :disabled='isFirstStepDis'>注 册
-    </yd-button>
+         <!--<yd-button size="large" type="primary" @click.native="secondStep()" v-show="secondStepBool"-->
+         <!--:disabled='isFirstStepDis'>下一步-->
+         <!--</yd-button>-->
+         <!--<yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
+         <!--:disabled='isFirstStepDis'>注 册-->
+         <!--</yd-button>-->
+       </yd-cell-group>
+
+
+
+       <yd-cell-group v-show="secondStepBool">
+         <yd-cell-group>
+           <yd-cell-item>
+             <span slot="left">验证码：</span>
+             <yd-input slot="right" v-model="verificationCode" placeholder="请输入短信验证码"></yd-input>
+           </yd-cell-item>
+           <van-button size="large" type="primary" @click="secondStep()" v-show="secondStepBool" :disabled='isFirstStepDis'>下一步</van-button>
+         </yd-cell-group>
+       </yd-cell-group>
+       <!--<yd-cell-group v-show="thirdStepBool">-->
+
+
+
+
+       <yd-cell-group v-show="thirdStepBool">
+         <yd-cell-item>
+           <span slot="left" class="span">用户名：</span>
+           <yd-input slot="right" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
+         </yd-cell-item>
+         <yd-cell-item>
+           <span slot="left" class="span">密码：</span>
+           <yd-input slot="right" type="password" v-model="password" placeholder="请设置登录密码"></yd-input>
+         </yd-cell-item>
+         <yd-cell-item>
+           <span slot="left" class="span">确认密码：</span>
+           <yd-input slot="right" type="password" v-model="rPassword" placeholder="请确认登录密码"></yd-input>
+         </yd-cell-item>
+         <yd-cell-item>
+           <span slot="left" class="span">邀请码：</span>
+           <yd-input slot="right" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
+
+           <!--<yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
+           <!--:disabled='isFirstStepDis'>注 册-->
+           <!--</yd-button>-->
+         </yd-cell-item>
+         <van-button size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" :disabled='isFirstStepDis'>注 册</van-button>
+       </yd-cell-group>
+
+       <!--<yd-button size="large" type="primary" @click.native="firstStep()" v-show="firstStepBool"-->
+       <!--:disabled='isFirstStepDis'>下一步-->
+       <!--</yd-button>-->
+       <!--<cube-button v-show="firstStepBool" :light="true"  @click="firstStep()" :disabled='isFirstStepDis'>下一步</cube-button>-->
+
+       <!--<yd-button size="large" type="primary" @click.native="secondStep()" v-show="secondStepBool"-->
+       <!--:disabled='isFirstStepDis'>下一步-->
+       <!--</yd-button>-->
+       <!--<yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
+       <!--:disabled='isFirstStepDis'>注 册-->
+       <!--</yd-button>--></div>
+
+
   </div>
 </template>
 <script>

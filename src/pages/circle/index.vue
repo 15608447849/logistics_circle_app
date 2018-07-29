@@ -6,22 +6,27 @@
       <span></span>
     </div>
     <!--下拉刷新回调的提示-->
-    <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
-    <van-list
-      v-model="loading"
-      :finished="finished"
-      @load="onLoad"
-    >
-      <ul class="order_box">
-        <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
-          <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
-            class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
-          <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
-            class="carWeight">{{item.wm}}</span><span class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.vlen}}</span><span
-            class="total_price">￥{{item.cost}}元</span></div>
-        </li>
-      </ul>
-    </van-list>
+    <div class="downfixed havedownfixed">
+      <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        @load="onLoad"
+      >
+        <ul class="order_box">
+          <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
+            <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
+              class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
+            <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
+              class="carWeight">{{item.wm}}</span><span class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.vlen}}</span><span
+              class="total_price">￥{{item.cost}}元</span></div>
+          </li>
+        </ul>
+      </van-list>
+    </div>
+    <div class="Baseline">
+      ---------------没有更多的数据了---------------
+    </div>
   </div>
 </template>
 

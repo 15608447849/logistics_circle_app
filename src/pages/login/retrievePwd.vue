@@ -1,49 +1,44 @@
 <template>
   <div>
-    <div>
-      <div class="issueHeaderNav">
-        <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-        <span>找回密码</span>
-        <div></div>
-      </div>
-    </div>
-    <div class="phoneNum" v-show="firstStepBool">
-      <span class="numText">手机号码</span>
-      <span class="eightSix">+86</span>
-      <div class="inputNumBox">
-        <input v-model="userPhone" type="number" placeholder="请输入您的手机号" class="inputNum">
-      </div>
-      <!--<button class="nextStep" @click="firstStep()" v-show="firstStepBool">下一步</button>-->
-      <!--<button class="nextStep" @click="secondStep()" v-show="secondStepBool">下一步</button>-->
-      <!--<button class="nextStep" @click="thirdStep()" v-show="thirdStepBool">保存</button>-->
-      <van-button size="large" type="primary" @click="firstStep()" v-show="firstStepBool">下一步</van-button>
-    </div>
-    <div class="verificationBox" v-show="secondStepBool">
-      <span class="verificationCode">输入验证码</span>
-      <!-- 密码输入框 -->
-      <van-password-input
-        :value="smsCode"
-        info="验证码为 6 位数字"
-        @focus="showKeyboard = true"
-      />
-      <!-- 数字键盘 -->
-      <van-number-keyboard
-        :show="showKeyboard"
-        @input="onInput"
-        @delete="onDelete"
-        @blur="showKeyboard = false"
-      />
-      <van-button size="large" type="primary" @click="secondStep()" v-show="secondStepBool">下一步</van-button>
-    </div>
-    <div class="updataPwdinputBox" v-show="thirdStepBool">
-      <div class="inputPassword">
-        <span class="textRed">*</span><span class="inputspan">密&nbsp&nbsp码</span><div class="inputBox"><input type="password" v-model="password" placeholder="请设置新密码"></div>
-      </div>
-      <div class="inputPassword">
-        <span class="textRed">*</span><span class="inputspan">确认密码</span><div class="inputBox"><input type="password" v-model="rPassword" placeholder="请确认新密码"></div>
-      </div>
-      <van-button size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool">保存</van-button>
-    </div>
+        <div class="issueHeaderLog">
+          <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
+          <span>找回密码</span>
+          <div></div>
+        </div>
+        <div class="phoneNum" v-show="firstStepBool">
+         <span class="numText">手机号码</span>
+         <span class="eightSix">+86</span>
+         <div class="inputNumBox">
+           <input v-model="userPhone" type="number" placeholder="请输入您的手机号" class="inputNum">
+         </div>
+         <van-button size="large" type="primary" @click="firstStep()" v-show="firstStepBool">下一步</van-button>
+        </div>
+         <div class="verificationBox" v-show="secondStepBool">
+           <span class="verificationCode">输入验证码</span>
+           <!-- 密码输入框 -->
+           <van-password-input
+             :value="smsCode"
+             info="验证码为 6 位数字"
+             @focus="showKeyboard = true"
+           />
+           <!-- 数字键盘 -->
+           <van-number-keyboard
+             :show="showKeyboard"
+             @input="onInput"
+             @delete="onDelete"
+             @blur="showKeyboard = false"
+           />
+           <van-button size="large" type="primary" @click="secondStep()" v-show="secondStepBool">下一步</van-button>
+         </div>
+         <div class="updataPwdinputBox" v-show="thirdStepBool">
+           <div class="inputPassword">
+             <span class="textRed">*</span><span class="inputspan">密&nbsp&nbsp码</span><div class="inputBox"><input type="password" v-model="password" placeholder="请设置新密码"></div>
+           </div>
+           <div class="inputPassword">
+             <span class="textRed">*</span><span class="inputspan">确认密码</span><div class="inputBox"><input type="password" v-model="rPassword" placeholder="请确认新密码"></div>
+           </div>
+           <van-button size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool">保存</van-button>
+         </div>
   </div>
 </template>
 
