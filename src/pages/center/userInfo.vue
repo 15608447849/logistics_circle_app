@@ -70,7 +70,7 @@
          <span class="CertificatesName">机构代码证</span>
          <span class="uploadState">上传</span>
        </li>
-     </ul>s
+     </ul>
    </div>
 
    <!--<div class="blacklist">-->
@@ -89,17 +89,18 @@
           avatarUrl: '../../assets/images/small/bussiness-man.png'
         }
       },
-      mounted() {
+      activated() {
+        let compId;
         this.isYourCompInfo = this.$route.query.isYourCompInfo;
         if(this.isYourCompInfo) {
-          this.compInfo = this.$app_store.getters.compInfo
+          this.compInfo = this.$app_store.getters.compInfo;
+          compId = this.compInfo.compid;
         }else {
           // 根据企业id获取企业信息
-          let compId = this.$route.query.id;
-          this.querygetCompByCid(compId);
-          this.queryCompByBasicUid(compId);
-          this.getImages(compId);
+          compId = this.$route.query.id;
         }
+        this.querygetCompByCid(compId);
+        this.queryCompByBasicUid(compId);
       },
       methods:{
         // 获取企业头像
@@ -113,7 +114,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(this,'warn','企业信息获取失败',false);
+                self.message.Toast(this,'warn','企业头像获取失败',false);
               }
             )
           );

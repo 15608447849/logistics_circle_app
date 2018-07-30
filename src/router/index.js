@@ -404,10 +404,10 @@ vueRouter.beforeEach(function (to, from, next) {
     // if (store.state.userId) {
       next();
     // } else {
-      next({
-        path: '/login',
-        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
+    //   next({
+    //     path: '/login',
+    //     query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+    //   })
     // }
   } else {
     /* 显示加载中动画 */

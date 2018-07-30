@@ -110,7 +110,6 @@
               self.drivers = self.drivers.concat(result.obj);
               if (self.drivers.length >= result.totalItems) {
                 self.finished = true;
-
               }
             }
           },

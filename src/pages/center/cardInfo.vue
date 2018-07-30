@@ -1,5 +1,6 @@
 <template>
   <div>
+    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>证件信息</span>
@@ -18,7 +19,24 @@
             <input type="text" name="compId" v-model="compid" class="opacty0"/>
           </form>
         </Button>
+        <div class="upload" v-if="item.url != ''">
+          <div class="upload-list" >
+            <template>
+              <img :src="item.url">
+              <div class="upload-list-cover">
+                <Icon type="ios-eye-outline" @click.native="bigImage(item)"></Icon>
+                <Icon type="ios-trash-outline" @click.native="deletedImages(key)"></Icon>
+                <Icon type="ios-compose-outline"></Icon>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="text_center margin_top_10">
+          <p>{{item.title}}</p>
+          <p>（{{item.smallTitle}}）</p>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -28,7 +46,6 @@
     data() {
       return {
         action: 'http://192.168.1.240:8090/fileUploadCompPic',
-        imgUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1685044995,1968324938&fm=27&gp=0.jpg',
         uploadIndex:0,
         compid:'',
         uploadList: [
@@ -84,6 +101,7 @@
     methods: {
       // 获取图片
       getImages(compid) {
+        debugger
         let path = "http://192.168.1.240:8090/getCompPic?compId="+compid;
         let xhr = new XMLHttpRequest();
         let self = this;
@@ -120,7 +138,36 @@
       },
       fallback() {
         this.$router.go(-1)
-      }
+      },
+      bigImage(img) {
+        this.imgModal = true;
+        this.imgTitle = img.title;
+        this.imgUrl = img.url;
+      },
+      deletedImages(id) {
+        let self = this;
+        let path = "http://192.168.1.240:8090/delCompPic?compId="+this.compid+"&picNo="+id;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = xhr.responseText;
+            data = JSON.parse(data);
+            if (data.code == 0) {
+              self.uploadList[id].uploadBtnShow = true;
+              self.uploadList[id].url = '';
+              self.$Notice.success({
+                title:'删除图片成功 '
+              });
+            } else {
+              self.$Notice.error({
+                title:'删除图片失败 '
+              });
+            }
+          }
+        };
+        xhr.open("GET", path , true);
+        xhr.send();
+      },
     }
   }
 </script>

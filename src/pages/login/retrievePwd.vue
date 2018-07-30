@@ -11,7 +11,7 @@
          <div class="inputNumBox">
            <input v-model="userPhone" type="number" placeholder="请输入您的手机号" class="inputNum">
          </div>
-         <van-button size="large" type="primary" @click="firstStep()" v-show="firstStepBool">下一步</van-button>
+         <van-button  size="large" type="primary" @click="firstStep()" v-show="firstStepBool">下一步</van-button>
         </div>
          <div class="verificationBox" v-show="secondStepBool">
            <span class="verificationCode">输入验证码</span>

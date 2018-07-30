@@ -124,10 +124,9 @@
       // 获取企业信息
       getCompInfo(oid) {
         let self = this;
-        this.$Ice_CompService.querygetCompByUid(oid,
+        this.$Ice_CompService.querygetCompByUid(oid+'',
           new IceCallback(
             function (result) {
-              debugger
               self.$app_store.commit(COMP_INFO,result.obj);
               console.log(self.$app_store.getters.compInfo);
               let redirect = decodeURIComponent(self.$route.query.redirect || '/information');

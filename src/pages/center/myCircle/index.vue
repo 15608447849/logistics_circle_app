@@ -44,104 +44,6 @@
           <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
           <a class="pullBlack" @click.stop="removeClick(item, index, 64)" >移 出</a>
         </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
-        <li class="needBorder">
-          <img src="" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">长沙大唐物流</span><span
-            class="companyPhone floatright">18373278936</span></div>
-          <div class="lineName"><span class="lineInfo">线路：湖南全境；长沙到广东(广州、惠州)</span></div>
-          <a class="pullBlack">移 出</a>
-        </li>
       </ul>
     </div>
     <div class="friendNum" v-show="selectOneTab">共{{sCircleNum}}位朋友</div>
@@ -231,7 +133,6 @@
         } else {
           content = '您确定要将好友移除调度圈嘛?';
         }
-        debugger
         this.message.showAlert(this, title, content)
           .then(() => {
             self.$Ice_CircleService.removeCircle(this.userId,item.compId,ctype, new IceCallback(

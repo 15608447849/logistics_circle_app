@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>常用线路</span>
-      <span @click="toaddRoute">添加</span>
+      <span @click="editorRoute">添加</span>
     </div>
     <!--<div class="LineBox">-->
     <!--<div class="lineSearch">-->
@@ -68,24 +68,9 @@
             }
           },
           function (error) {
-            debugger
+
           }
         ))
-      },
-      toaddRoute() {
-        this.$router.push({
-          path: '/center/commonlyRoute/addRoute'
-        })
-      },
-      // routeDetails() {
-      //   this.$router.push({
-      //     path: '/center/commonlyRoute/routeDetails'
-      //   })
-      // },
-      addRoute() {
-        this.$router.push({
-          name: 'driverInfo'
-        })
       },
       editorRoute(item) {
         this.$router.push({

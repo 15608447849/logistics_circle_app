@@ -1,21 +1,15 @@
-//let token = (localStorage.getItem("$userInformation") == null) ? '' : JSON.parse(localStorage.getItem("$userInformation")).oid;
 module.exports = {
-	/*** 用户oid****/
-	token:()=>{
-		let oid = (localStorage.getItem("$userInformation") == null) ? '' : JSON.parse(localStorage.getItem("$userInformation")).oid;
-		return oid;
-	},
     /*** 企业logo框信息的展示 */
     queryCompByBasicUid:(oid,callback) => {
         queryIce(comp.CompServicePrx, 'CompService', 'queryCompByBasicUid',oid,callback);
     },
     /*** 企业logo框信息的展示 */
-    selectPhoAndPht:(callback) => {
-        queryIce(comp.CompServicePrx, 'CompService', 'selectPhoAndPht',Number(module.exports.token()),callback);
+    selectPhoAndPht:(compId,callback) => {
+        queryIce(comp.CompServicePrx, 'CompService', 'selectPhoAndPht',Number(compId),callback);
     },
     /** 根据用户码查询指定企业信息(不加路线) */
-    querygetCompByUid:(callback)=>{
-        queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByUid', module.exports.token(),callback);
+    querygetCompByUid:(oid,callback)=>{
+        queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByUid', oid,callback);
     },
     /** 根据企业码查询指定企业信息(加路线) */
     querygetCompByCid:(compid,callback)=>{
@@ -30,8 +24,8 @@ module.exports = {
         queryIce(comp.CompServicePrx, 'CompService', 'selectCompUserByUid', oid,callback);
     },
     /*** 登录时添加企业到缓存 */
-    addLoginCompByRedis:(compid,callback) => {
-        queryIce(comp.CompServicePrx, 'CompService', 'addLoginCompByRedis', module.exports.token(),compid,callback);
+    addLoginCompByRedis:(oid,compid,callback) => {
+        queryIce(comp.CompServicePrx, 'CompService', 'addLoginCompByRedis', oid,compid,callback);
     },
     /*** 查询司机、业务员信息(type 查询类型 1,司机;132,业务员;) */
     selectStaffInfo:(name,phone,status,type,cuid,page,callback) => {
@@ -50,4 +44,3 @@ module.exports = {
         queryIce(comp.CompServicePrx, 'CompService', 'updateStaffstatus',cuid,uid,status,type,callback);
     }
 };
-  
