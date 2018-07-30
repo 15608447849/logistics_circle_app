@@ -5,6 +5,7 @@
       <span>司机管理</span>
       <span @click="addDriver">添加</span>
     </div>
+    <div class="downfixed havedownfixed">
     <div class="driverBox">
       <div class="searchDriverBox">
         <div class="searchDriver">
@@ -33,7 +34,7 @@
           </li>
         </ul>
       </van-list>
-
+    </div>
     </div>
   </div>
 </template>

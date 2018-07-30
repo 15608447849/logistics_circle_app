@@ -5,6 +5,7 @@
       <span>黑名单</span>
       <div></div>
     </div>
+    <div class="downfixed havedownfixed">
     <div class="blackList">
       <div class="blackListNum">2个黑名单</div>
       <ul class="circleList">
@@ -15,6 +16,7 @@
           <a class="pullBlack" @click.stop="removeClick">移 出</a>
         </li>
       </ul>
+    </div>
     </div>
   </div>
 </template>

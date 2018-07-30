@@ -5,6 +5,7 @@
       <span>我的圈子</span>
       <span @click="toaddFriend">添加</span>
     </div>
+    <div class="downfixed havedownfixed">
     <div class="driverBox" @click="tosearchFriend">
       <div class="searchDriverBox">
         <div class="searchDriver">
@@ -145,6 +146,7 @@
     </div>
     <div class="friendNum" v-show="selectOneTab">共{{sCircleNum}}位朋友</div>
     <div class="friendNum" v-show="!selectOneTab">共{{SchedulingCircleNum}}位朋友</div>
+    </div>
   </div>
 </template>
 

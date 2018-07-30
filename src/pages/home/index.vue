@@ -22,52 +22,55 @@
         </ul>
       </span>
     </div>
-    <div class="searchBox">
-      <div class="selectRegion" @click="skipSearchPage">
-        <div class="addressCity">
-          <span>长沙</span>
-          <i class="icon iconfont icon-xiala"></i>
-        </div>
-        <div class="searchBtn">
-          <i class="icon iconfont icon-sousuo"></i>
-          <span class="sousuo">搜索</span>
+    <div class="downfixed havedownfixed">
+      <div class="searchBox">
+        <div class="selectRegion" @click="skipSearchPage">
+          <div class="addressCity">
+            <span>长沙</span>
+            <i class="icon iconfont icon-xiala"></i>
+          </div>
+          <div class="searchBtn">
+            <i class="icon iconfont icon-sousuo"></i>
+            <span class="sousuo">搜索</span>
+          </div>
         </div>
       </div>
+      <div class="orderOperation">
+        <div class="banner">
+          <img src="../../assets/images/small/banner@2x.png" alt="">
+        </div>
+        <div class="fastSendRob">
+          <div class="sendOrder">
+            <img src="../../assets/images/small/快速发单@2x.png" alt="">
+            <span @click="toPageIssue">快速发单</span>
+          </div>
+          <div class="already">
+            <img src="../../assets/images/small/已抢订单@2x.png" alt="">
+            <span>我的发布</span>
+          </div>
+        </div>
+      </div>
+      <!--<ul class="order_boxIndex">-->
+      <!--<li class="order_list">-->
+      <!--<div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span-->
+      <!--class="time">1小时前</span></div>-->
+      <!--<div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span-->
+      <!--class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <ul class="order_boxIndex">
+        <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
+          <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
+            class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
+          <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
+            class="carWeight"></span><span
+            class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
+          </div>
+        </li>
+      </ul>
+      <div class="seeMore">查看更多</div>
     </div>
-    <div class="orderOperation">
-      <div class="banner">
-        <img src="../../assets/images/small/banner@2x.png" alt="">
-      </div>
-      <div class="fastSendRob">
-        <div class="sendOrder">
-          <img src="../../assets/images/small/快速发单@2x.png" alt="">
-          <span @click="toPageIssue">快速发单</span>
-        </div>
-        <div class="already">
-          <img src="../../assets/images/small/已抢订单@2x.png" alt="">
-          <span>我的发布</span>
-        </div>
-      </div>
-    </div>
-    <!--<ul class="order_boxIndex">-->
-    <!--<li class="order_list">-->
-    <!--<div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span-->
-    <!--class="time">1小时前</span></div>-->
-    <!--<div class="order_price"><span class="carWeight">家具</span><span class="carWeight">9方</span><span-->
-    <!--class="carWeight">厢式货车</span><span class="carWeight">9.6</span><span class="total_price">￥2000元</span></div>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <ul class="order_boxIndex">
-      <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
-        <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
-          class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
-        <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
-          class="carWeight"></span><span
-          class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
-        </div>
-      </li>
-    </ul>
-    <div class="seeMore">查看更多</div>
+
     <yd-popup v-model="show4" position="left" width="73%">
       <div style="background-color:#fff;">
         <div class="centerPic">

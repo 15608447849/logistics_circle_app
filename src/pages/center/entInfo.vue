@@ -5,6 +5,7 @@
       <span>企业信息</span>
       <div></div>
     </div>
+    <div class="downfixed havedownfixed">
     <ul class="enterpriseList">
       <li class="touxiangBox needBorder">
         <span class="touxiang">头像</span>
@@ -41,6 +42,7 @@
         <span class="invoiceContent">{{compInfo.area}}</span>
       </li>
     </ul>
+    </div>
     <!--<yd-popup v-model="show1" position="center" width="70%">-->
       <!--<div style="background-color:#fff;">-->
         <!--<div class="updataEnterpriseName">-->

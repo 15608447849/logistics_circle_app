@@ -5,6 +5,7 @@
       <span>司机管理</span>
       <div></div>
     </div>
+    <div class="downfixed havedownfixed">
     <ul class="addDriverInfo">
       <li>
         <span class="driverTitle">司机姓名</span>
@@ -16,6 +17,7 @@
       </li>
     </ul>
     <button class="nextStep" @click="dSave">保 存</button>
+    </div>
   </div>
 </template>
 

@@ -5,6 +5,7 @@
       <span>发票信息</span>
       <div></div>
     </div>
+    <div class="downfixed havedownfixed">
     <ul class="invoiceList">
       <li class="needBorder">
         <span class="invoiceTitle">发票抬头</span>
@@ -35,6 +36,8 @@
         <span class="invoiceContent">{{CompInfo.billaddr}}</span>
       </li>
     </ul>
+
+    </div>
   </div>
 </template>
 

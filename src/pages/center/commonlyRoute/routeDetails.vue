@@ -5,6 +5,7 @@
       <span>线路详情</span>
       <div></div>
     </div>
+    <div class="downfixed havedownfixed">
     <div class="addRouterBox">
       <ul class="addRouteList">
         <li class="needBorder" @click="showCascadePicker(0)">
@@ -28,6 +29,7 @@
         </li>
       </ul>
       <button class="nextStep" @click="saveRoutes">保 存</button>
+    </div>
     </div>
   </div>
 </template>

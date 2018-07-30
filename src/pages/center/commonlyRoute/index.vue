@@ -13,6 +13,7 @@
     <!--</div>-->
     <!--</div>-->
     <!--</div>-->
+    <div class="downfixed havedownfixed">
     <ul class="lineList">
       <li class="needBorder" @click="editorRoute(item)" v-for="(item,index) in routeList" :key="index">
         <img src="../../../assets/images/small/line_03.png" alt="">
@@ -24,6 +25,7 @@
            @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
       </li>
     </ul>
+    </div>
   </div>
 </template>
 <script>
