@@ -90,7 +90,7 @@
       methods: {
         // 根据企业编号 获取企业详情
         removePartner() {
-          this.message.showAlert(this,'移除伙伴','伙伴移除后订单信息将不会优先查看,您确定要移除吗?')
+          this.message.showAlert(this,'伙伴移除后订单信息将不会优先查看,您确定要移除吗?')
             .then(() => {
 
             })
@@ -99,7 +99,7 @@
             })
         },
         addBlacklist() {
-          this.message.showAlert(this,'黑名单添加','伙伴添加至黑名单后, 双方发单信息都将无法查看?')
+          this.message.showAlert(this,'伙伴添加至黑名单后, 双方发单信息都将无法查看?')
             .then(() => {
 
             })

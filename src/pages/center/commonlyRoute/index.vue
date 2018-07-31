@@ -14,17 +14,24 @@
     <!--</div>-->
     <!--</div>-->
     <div class="downfixed havedownfixed">
-    <ul class="lineList">
-      <li class="needBorder" @click="editorRoute(item)" v-for="(item,index) in routeList" :key="index">
-        <img src="../../../assets/images/small/line_03.png" alt="">
-        <span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route">途经</span>
-        <!--<span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route" v-for="(itemB,indexB) in item.routevias" :key="indexB">途经{{itemB.placename}}</span>-->
-        <!--<a class="discontinuation">停用</a>-->
-        <!--<a class="discontinuationBlue">启用</a>-->
-        <a :class="item.cstatus === 32 ? 'discontinuationBlue' : 'discontinuation'" @click.stop="isEnable"
-           @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
-      </li>
-    </ul>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        @load="onLoad"
+      >
+        <ul class="lineList">
+          <li class="needBorder" @click="editorRoute(item)" v-for="(item,index) in routeList" :key="index">
+            <img src="../../../assets/images/small/line_03.png" alt="">
+            <span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route">途经</span>
+            <!--<span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route" v-for="(itemB,indexB) in item.routevias" :key="indexB">途经{{itemB.placename}}</span>-->
+            <!--<a class="discontinuation">停用</a>-->
+            <!--<a class="discontinuationBlue">启用</a>-->
+            <a :class="item.cstatus === 32 ? 'discontinuation' : 'discontinuation'" @click.stop="isEnable"
+               @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
+          </li>
+        </ul>
+      </van-list>
+
     </div>
   </div>
 </template>
@@ -39,14 +46,18 @@
         origin: '',// 目的地地区码
         destination: '',// 出发地地区码
         state: '',// 线路状态
-        total: 0
+        total: 0,
+        loading: false,
+        finished: false
       }
     },
     mounted() {
       this.initData();
-      this.queryRoutes();
     },
     methods: {
+      onLoad() {
+        this.queryRoutes();
+      },
       initData() {
         this.page.pageSize = 10; // 每页页数
         this.page.pageIndex = 1; // 当前页
@@ -63,12 +74,18 @@
         let self = this;
         this.$Ice_EnterpriseService.queryRoutes(this.userId, this.origin, this.destination, this.state, this.page, new IceCallback(
           function (result) {
+            self.loading = false;
             if (result.code === 0) {
-              self.routeList = result.obj;
+              self.page.pageIndex += 1; // 页码增加
+              self.routeList = self.routeList.concat(result.obj);
+              if (self.routeList.length >= result.totalItems) {
+                self.finished = true;
+              }
             }
           },
           function (error) {
-
+            self.finished = true;
+            self.loading = false;
           }
         ))
       },
@@ -83,7 +100,6 @@
       },
       /** 是否启用 */
       isEnable(item, index) {
-        let title = '操作确认';
         let content = '';
         let self = this;
         if (item.cstatus === 0) {
@@ -91,7 +107,7 @@
         } else {
           content = '您确定要将常用路线启用吗?';
         }
-        this.message.showAlert(this, title, content)
+        this.message.showAlert(this, content)
           .then(() => {
             if (item.cstatus === 0) {
               // 停用

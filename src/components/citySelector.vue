@@ -11,6 +11,9 @@
       <span>城市选择</span>
       <div></div>
     </div>
+    <div class="downfixed havedownfixed">
+
+    </div>
     <cube-index-list
       :data="cityData"
       :title="title"
@@ -20,7 +23,8 @@
 </template>
 <script>
   import {
-    CURRENT_CITY
+    CURRENT_CITY,
+    RECEIPT_CITY
   } from '../store/mutation-types'
   const cityData = [
     {
@@ -1420,16 +1424,27 @@
       return {
         title: '',
         cityData: cityData,
-        currentCity: ''
+        currentCity: '',
+        status: 0 // 0 定位城市 1 发单定位
       }
     },
-    activated: function () {
-      this.currentCity = this.$app_store.getters.currentCity || '北京';
+    activated(){
+      let status = this.$route.query.status;
+      if (status === 0) {
+        this.currentCity = this.$app_store.getters.currentCity;
+      } else {
+        this.currentCity = this.$app_store.getters.receiptCity;
+      }
       this.title = '当前城市选中:' + this.currentCity;
     },
     methods: {
       selectItem(item) {
-        this.$app_store.commit(CURRENT_CITY,item.name);
+        if (this.status === 0) {
+          this.$app_store.commit(CURRENT_CITY,item.name);
+        } else {
+          this.$app_store.commit(RECEIPT_CITY,item.name);
+        }
+
         this.$router.go(-1);
       },
       clickTitle(title) {

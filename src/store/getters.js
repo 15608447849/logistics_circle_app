@@ -12,6 +12,9 @@ export default {
   compInfo: state => {
     return state.compInfo
   },
+  tabBarIndex: state => {
+    return state.tabBarIndex
+  },
   searchContent: state => {
     return state.searchContent
   },
@@ -29,6 +32,10 @@ export default {
   // 当前城市
   currentCity: state => {
     return state.currentCity
+  },
+  // 发单城市
+  receiptCity: state => {
+    return state.receiptCity
   },
   // 高德地图状态
   geoState: state => {

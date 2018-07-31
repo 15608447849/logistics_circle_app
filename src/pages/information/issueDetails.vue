@@ -59,7 +59,7 @@
        <div class="RobbingBox">
          <div class="Robbing floatleft" >
            <span class="floatleft rderCost">订单费用</span>
-           <span class="textRed textBlod floatright rderCost">{{detailInfo.price}}元</span>
+           <span class="textRed textBlod floatright rderCost">{{detailInfo.carriage}}元</span>
          </div>
          <div class="floatleft ulWidth100">
            <ul class="ulWidth100">
@@ -139,6 +139,7 @@
             function (result) {
               if (result.code !== 0) {
                 self.message.Toast(self,'error',result.msg,false);
+
               }
               self.detailInfo = result.obj;
             },

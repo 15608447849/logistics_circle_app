@@ -40,7 +40,7 @@
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        oid: this.$app_store.getters.userId,
+        oid: this.$app_store.getters.userId || 3,
         pullingMessage: '',
         isShowMessage: false,
         loading: false,
@@ -50,7 +50,10 @@
     methods: {
       toPageIssue() {
         this.$router.push({
-          path: '/information/issue'
+          path: '/information/issue',
+          query: {
+            status: 0
+          }
         })
       },
       toPageIssueDetail(item) {
@@ -128,11 +131,12 @@
           self.infoList = self.infoList.concat(result);
         }, function (error) {
           self.loading = false;
+          self.finished = true;
         });
       },
       requestInfoList(requestState, timeStr, successCallback, errorCallback) {
         let self = this;
-        this.$Ice_OrderService.queryOrderByApp('0', self.pageSize, self.address, self.key, requestState, timeStr,
+        this.$Ice_OrderService.queryOrderByApp(self.oid, self.pageSize, self.address, self.key, requestState, timeStr,
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
@@ -141,7 +145,6 @@
               }
               successCallback(result.obj);
             }, function (err) {
-              console.log(err);
               errorCallback(err);
             }
           ))

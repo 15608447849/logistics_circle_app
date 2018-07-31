@@ -5,45 +5,62 @@
       <span>添加好友</span>
       <div></div>
     </div>
-    <div class="addFriendBox">
-      <div class="searchFriendBox">
-        <div class="searchFriend">
-          <div class="friendSearchBtn" @click="toPageSearch">
-            <i class="icon iconfont icon-sousuo"></i>
-            <input v-model="searchInputVal" type="text" class="friendSousuo" placeholder="输入名称、电话模糊查询">
+    <div class="downfixed havedownfixed">
+      <div class="addFriendBox">
+        <div class="searchFriendBox">
+          <div class="searchFriend">
+            <div class="friendSearchBtn" @click="toPageSearch">
+              <i class="icon iconfont icon-sousuo"></i>
+              <input v-model="searchInputVal" type="text" class="friendSousuo" placeholder="输入名称、电话模糊查询">
+            </div>
           </div>
         </div>
+        <span class="friendCanle" @click="">取消</span>
       </div>
-      <span class="friendCanle" @click="">取消</span>
+
+      <p class="maybe">可能认识的伙伴</p>
+      <tab
+        active-color="#3189f5">
+        <tab-item @on-item-click="tabClick" selected>货源圈</tab-item>
+        <tab-item @on-item-click="tabClick">调度圈</tab-item>
+      </tab>
+      <div v-show="selectOneTab">
+        <van-list
+          v-model="loadingA"
+          :finished="finishedA"
+          @load="onLoadA"
+        >
+          <ul class="circleList">
+            <li class="needBorder" v-for="(item, index) in sCircleList">
+              <img :src="item.logoPath" alt="" class="circlePic">
+              <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
+                class="companyPhone floatright">{{item.contact}}</span></div>
+              <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+              <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
+              <a class="pullBlack" @click="sCircleAdd(item,index,2)">添 加</a>
+            </li>
+          </ul>
+        </van-list>
+      </div>
+      <div v-show="!selectOneTab">
+        <van-list
+          v-model="loadingB"
+          :finished="finishedB"
+          @load="onLoadB"
+        >
+          <ul class="circleList">
+            <li class="needBorder" v-for="(item, index) in SchedulingCircle">
+              <img :src="item.logoPath" alt="" class="circlePic">
+              <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
+                class="companyPhone floatright">{{item.contact}}</span></div>
+              <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+              <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
+              <a class="pullBlack" @click="sCircleAdd(item,index,1)">添 加</a>
+            </li>
+          </ul>
+        </van-list>
+      </div>
     </div>
-
-    <p class="maybe">可能认识的伙伴</p>
-    <tab
-      active-color="#3189f5">
-      <tab-item @on-item-click="tabClick" selected>货源圈</tab-item>
-      <tab-item @on-item-click="tabClick">调度圈</tab-item>
-    </tab>
-    <ul class="circleList" v-show="selectOneTab">
-      <li class="needBorder" v-for="(item, index) in sCircleList">
-        <img :src="item.logoPath" alt="" class="circlePic">
-        <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
-          class="companyPhone floatright">{{item.contact}}</span></div>
-        <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
-        <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
-        <a class="pullBlack" @click="sCircleAdd(item,index,2)">添 加</a>
-      </li>
-    </ul>
-    <ul class="circleList" v-show="!selectOneTab">
-      <li class="needBorder" v-for="(item, index) in SchedulingCircle">
-        <img :src="item.logoPath" alt="" class="circlePic">
-        <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
-          class="companyPhone floatright">{{item.contact}}</span></div>
-        <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
-        <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
-        <a class="pullBlack" @click="sCircleAdd(item,index,1)">添 加</a>
-      </li>
-    </ul>
-
   </div>
 </template>
 
@@ -60,22 +77,25 @@
     data() {
       return {
         selectOneTab: true, // true 货运圈 false 调度圈
-        circleQueryParam: new mycircle.CircleQueryParam(),
+        circleQueryParamA: new mycircle.CircleQueryParam(),
+        circleQueryParamB: new mycircle.CircleQueryParam(),
         page: new cstruct.Page(),
         userId: this.$app_store.getters.userId || 3,
         circleList: [],
         sCircleList: [], // 货源圈
         SchedulingCircle: [],
         searchInputVal: '',
-        cName: ''
+        cName: '',
+        loadingA: false,
+        finishedA: false,
+        loadingB: false,
+        finishedB: false
       }
     },
     mounted() {
       // 初始化查询条件
       this.initData();
-      // 获取圈子推荐
-      this.queryCanAddMyCircle(64);
-      this.queryCanAddMyCircle(128);
+      this.onLoadB();
     },
     methods: {
       sCircleAdd(item, index, ctype) {
@@ -83,39 +103,39 @@
         let content = '';
         let self = this;
         if (ctype === 2) {
-          content = '您确定要添加好友至货源圈嘛?';
+          content = '您确定要添加好友至货源圈吗?';
         } else {
-          content = '您确定要添加好友至调度圈嘛?';
+          content = '您确定要添加好友至调度圈吗?';
         }
-        this.message.showAlert(this, title, content)
+        this.message.showAlert(this, content)
           .then(() => {
-          self.$Ice_CircleService.sendAddMyCircleMsg(this.userId,item.compId,ctype, new IceCallback(
-            function (result) {
-              if (result.code === 0) {
-                if(ctype === 2) {
-                  // self.routeList[index].cstatus = 32;
-                  self.$vux.toast.text('货源圈好友添加成功', 'top');
-                  self.sCircleList.splice(index,1)
-                }else {
-                  self.$vux.toast.text('调度圈好友添加成功', 'top');
-                  self.SchedulingCircle.splice(index,1)
+            self.$Ice_CircleService.sendAddMyCircleMsg(this.userId, item.compId, ctype, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  if (ctype === 2) {
+                    // self.routeList[index].cstatus = 32;
+                    self.$vux.toast.text('货源圈好友添加成功', 'top');
+                    self.sCircleList.splice(index, 1)
+                  } else {
+                    self.$vux.toast.text('调度圈好友添加成功', 'top');
+                    self.SchedulingCircle.splice(index, 1)
+                  }
+                } else {
+                  self.$vux.toast.text('好友圈添加失败', 'top');
                 }
-              } else {
-                self.$vux.toast.text('好友圈添加失败', 'top');
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
               }
-            },
-            function (error) {
-              self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
-            }
-          ))
-        })
+            ))
+          })
           .catch(() => {
 
           })
       },
       initData() {
         // 初始化列表查询条件
-        this.page.pageSize = 100; // 每页页数
+        this.page.pageSize = 10; // 每页页数
         this.page.pageIndex = 1; // 当前页
         this.page.totalItems = 0;
         this.page.totalPageCount = 0;
@@ -123,50 +143,82 @@
         if (this.$app_store.getters.searchState === searchState.CIRCLE_ADD) {
           this.searchInputVal = this.$app_store.getters.searchContent;
           this.cName = this.searchInputVal;
-          // this.driverName = this.searchInputVal;
-          console.log(this.$app_store.getters.searchContent)
         }
-      },
-      queryCanAddMyCircle(cType) {
-        let self = this;
-        this.circleQueryParam.pageSize = this.page.pageSize;
-        this.circleQueryParam.pageIndex = this.page.pageIndex;
-        this.circleQueryParam.cType = cType;
-        this.circleQueryParam.starPlace = '';
-        this.circleQueryParam.endPlace = '';
-        this.circleQueryParam.cname = this.cName;
-        this.$Ice_CircleService.queryCanAddMyCircle(this.circleQueryParam, new IceCallback(
-          function (result) {
-            if (result.code === 0) {
-              // 货源圈
-              if (cType === 128) {
-                self.sCircleList = result.obj.circleSeq;
-                self.sCircleList.forEach((item, index, arr) => {
-                  let disRoute = '';
-                  if (item.routes !== null && item.routes.length > 0) {
-                    // 拼接路线信息, 列表显示
-                    disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
-                  }
-                  item['disRoute'] = disRoute;
-                });
-              } else {
-                // 调度圈
-                self.SchedulingCircle = result.obj.circleSeq;
-                self.SchedulingCircle.forEach((item, index, arr) => {
-                  let disRoute = '';
-                  if (item.routes !== null && item.routes.length > 0) {
-                    disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
-                  }
-                  item['disRoute'] = disRoute;
-                });
-              }
-            } else {
-              // 暂无数据
 
+        this.circleQueryParamA.pageSize = this.page.pageSize;
+        this.circleQueryParamA.pageIndex = this.page.pageIndex;
+        this.circleQueryParamA.cType = 128;
+        this.circleQueryParamA.starPlace = '';
+        this.circleQueryParamA.endPlace = '';
+        this.circleQueryParamA.cname = this.cName;
+
+        this.circleQueryParamB.pageSize = this.page.pageSize;
+        this.circleQueryParamB.pageIndex = this.page.pageIndex;
+        this.circleQueryParamB.cType = 64;
+        this.circleQueryParamB.starPlace = '';
+        this.circleQueryParamB.endPlace = '';
+        this.circleQueryParamB.cname = this.cName;
+      },
+      onLoadA() {
+        let self = this;
+        this.queryCanAddMyCircle(this.circleQueryParamA, function (result) {
+          self.loadingA = false;
+          self.circleQueryParamA.pageIndex += 1; // 页码增加
+          if (result.code !== 0) {
+            self.finishedA = true;
+            return
+          }
+          result = result.obj;
+          result.circleSeq.forEach((item, index, arr) => {
+            let disRoute = '';
+            if (item.routes !== undefined && item.routes !== null && item.routes.length > 0) {
+              disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
             }
+            item['disRoute'] = disRoute;
+          });
+          self.sCircleList = self.sCircleList.concat(result.circleSeq);
+          if (self.sCircleList.length >= result.totalItems) {
+            self.finishedA = true;
+          }
+        }, function (error) {
+          self.finishedA = true;
+          self.loadingA = false;
+        });
+      },
+      onLoadB() {
+        let self = this;
+        this.queryCanAddMyCircle(this.circleQueryParamB, function (result) {
+          self.loadingB = false;
+          self.circleQueryParamB.pageIndex += 1; // 页码增加
+          if (result.code !== 0) {
+            self.finishedB = true;
+            return
+          }
+          result = result.obj;
+          result.circleSeq.forEach((item, index, arr) => {
+            let disRoute = '';
+            if (item.routes !== undefined && item.routes !== null && item.routes.length > 0) {
+              disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
+            }
+            item['disRoute'] = disRoute;
+          });
+          self.SchedulingCircle = self.SchedulingCircle.concat(result.circleSeq);
+          if (self.SchedulingCircle.length >= result.totalItems) {
+            self.finishedB = true;
+          }
+        }, function (error) {
+          self.finishedB = true;
+          self.loadingB = false;
+        });
+      },
+      queryCanAddMyCircle(circleQueryParam, successCallback, errorCallback) {
+        let self = this;
+        this.$Ice_CircleService.queryCanAddMyCircle(circleQueryParam, new IceCallback(
+          function (result) {
+            successCallback(result)
           },
           function (error) {
-
+            errorCallback(error);
           }
         ))
       },

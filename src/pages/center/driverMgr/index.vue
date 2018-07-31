@@ -6,35 +6,35 @@
       <span @click="addDriver">添加</span>
     </div>
     <div class="downfixed havedownfixed">
-    <div class="driverBox">
-      <div class="searchDriverBox">
-        <div class="searchDriver">
-          <div class="driverSearchBtn" @click="toPageSearch">
-            <i class="icon iconfont icon-sousuo"></i>
-            <span class="sousuo">{{searchInputVal}}</span>
+      <div class="driverBox">
+        <div class="searchDriverBox">
+          <div class="searchDriver">
+            <div class="driverSearchBtn" @click="toPageSearch">
+              <i class="icon iconfont icon-sousuo"></i>
+              <span class="sousuo">{{searchInputVal}}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        @load="onLoad"
-      >
-        <ul class="driverList">
-          <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
-            <div class="driverInfo">
-              <div class="driverPic">
-                <i class="icon iconfont icon-siji"></i>
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          @load="onLoad"
+        >
+          <ul class="driverList">
+            <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
+              <div class="driverInfo">
+                <div class="driverPic">
+                  <i class="icon iconfont icon-siji"></i>
+                </div>
+                <span class="driverName">{{item.name}}</span>
+                <span class="driverPhone">{{item.phone}}</span>
               </div>
-              <span class="driverName">{{item.name}}</span>
-              <span class="driverPhone">{{item.phone}}</span>
-            </div>
-            <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
-               @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
-          </li>
-        </ul>
-      </van-list>
-    </div>
+              <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
+                 @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
+            </li>
+          </ul>
+        </van-list>
+      </div>
     </div>
   </div>
 </template>
@@ -55,8 +55,8 @@
         // pageSize: '1'// 当前页数
         page: new cstruct.Page(),
         searchInputVal: '搜索',
-        loading: false,
-        finished: false
+        loading: false, // 控制加载动画
+        finished: false // 控制是否执行上推加载
       }
     },
     mounted() {
@@ -72,7 +72,7 @@
         this.page.pageIndex = 1; // 当前页
         this.page.totalItems = 0;
         this.page.totalPageCount = 0;
-
+        // 搜索框搜索内容
         if (this.$app_store.getters.searchState === searchState.DRIVER) {
           this.searchInputVal = this.$app_store.getters.searchContent;
           this.driverName = this.searchInputVal;
@@ -80,6 +80,7 @@
         }
       },
       toPageSearch() {
+        // 存储到VUX 设置当前搜索状态
         this.$app_store.commit(SEARCH_STATE, searchState.DRIVER);
         this.$router.push({
           name: 'simpleSearch'
@@ -111,16 +112,19 @@
               if (self.drivers.length >= result.totalItems) {
                 self.finished = true;
               }
+            } else {
+              self.finished = true;
+              self.$vux.toast.text('司机管理列表获取失败, 请稍后重试', 'top');
             }
           },
           function (error) {
+            self.finished = true;
             self.loading = false;
           }
         ))
       },
       /** 是否启用 */
       isEnable(item, index) {
-        let title = '操作确认';
         let content = '';
         let self = this;
         let status = 1;
@@ -133,7 +137,7 @@
           status = 0;
           content = '司机启用后, 司机端将可以进行取货等操作 ,您确认吗?';
         }
-        this.message.showAlert(this, title, content)
+        this.message.showAlert(this, content)
           .then(() => {
             self.$Ice_InfoService.updateStaffstatus(self.userId, item.uid, status, self.driverType, new IceCallback(
               function (result) {

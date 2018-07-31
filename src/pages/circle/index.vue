@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
       <span>圈子</span>
-      <span></span>
+      <span @click="toPageIssue">发单</span>
     </div>
     <!--下拉刷新回调的提示-->
     <div class="downfixed havedownfixed">
@@ -32,13 +32,14 @@
 
 <script>
   import Conversion from '@/utils/conversion'
+  import {TABBAR_INDEX} from "../../store/mutation-types";
 
   export default {
     data() {
       return {
         infoList: [],
-        pageSize: '20', // 订单数
-        address: '', // 地址
+        pageSize: '10', // 订单数
+        address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
@@ -72,49 +73,9 @@
           self.infoList = self.infoList.concat(result);
         }, function (error) {
           self.loading = false;
+          self.finished = true;
         });
       },
-      // 下拉刷新
-      // onPullingDown() {
-      // let self = this;
-      // this.requestInfoList(0,this.startTimeStr, function (result) {
-      //   self.mescroll.endSuccess();
-      //   if (result.length === 0) {
-      //     self.pullingMessage = '列表数据已是最新';
-      //     self.showTip();
-      //     return
-      //   }
-      //   self.startTimeStr = result[0].time;
-      //   self.pullingMessage = result.length + '条新发布订单';
-      //   self.showTip();
-      //   // 原有数组与新数组连接
-      //   self.infoList = result.concat(self.infoList);
-      // },function (error) {
-      //   self.mescroll.endErr();
-      // });
-      // },
-      // // 上推加载
-      // onPullingUp() {
-      //   let self = this;
-      //   this.requestInfoList(1,this.endTimeStr, function (result) {
-      //     // 隐藏上推加载状态;
-      //     self.mescroll.endSuccess();
-      //     // 初次加载
-      //     if (self.endTimeStr === '') self.infoList = [];
-      //     // 无数据, 关闭上推加载 提示用户
-      //     if (result.length === 0) {
-      //       return
-      //     }
-      //     // 初始化下拉刷新订单标识
-      //     if (self.startTimeStr === '') self.startTimeStr = result[0].time;
-      //     // 上推加载订单标识
-      //     self.endTimeStr = result[result.length-1].time;
-      //     // 原有数组与新数组连接
-      //     self.infoList = self.infoList.concat(result);
-      //   },function (error) {
-      //     self.mescroll.endErr();
-      //   });
-      // },
       requestInfoList(requestState, timeStr, successCallback, errorCallback) {
         let self = this;
         this.$Ice_OrderService.queryCircleOrderByApp("0", self.pageSize, self.address, self.key, requestState, timeStr,
@@ -126,7 +87,6 @@
               }
               successCallback(result.obj);
             }, function (err) {
-              console.log(err);
               errorCallback(err);
             }
           ))
@@ -136,7 +96,8 @@
           path: '/information/issueDetails',
           query: {
             id: item.id,
-            puberid: item.puberid
+            puberid: item.puberid,
+            pubercompid: item.pubercompid
           }
         })
       },
@@ -144,12 +105,17 @@
         // 跳转详情页面
 
       },
+      toPageIssue() {
+        this.$router.push({
+          path: '/information/issue',
+          query: {
+            status: 1
+          }
+        })
+      },
       dateConversion(time) {
         return Conversion.formatMsgTime(time)
       }
-    },
-    activated() {
-
     }
   }
 </script>

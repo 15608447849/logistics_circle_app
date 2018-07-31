@@ -25,8 +25,8 @@
     <div class="downfixed havedownfixed">
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
-          <div class="addressCity">
-            <span>长沙</span>
+          <div class="addressCity" @click.stop="skipCityPage">
+            <span>{{address}}</span>
             <i class="icon iconfont icon-xiala"></i>
           </div>
           <div class="searchBtn">
@@ -116,7 +116,7 @@
 </template>
 <script>
   import {
-    SEARCH_STATE
+    SEARCH_STATE, TABBAR_INDEX
   } from '../../store/mutation-types'
   import {searchState} from "../../utils/config";
   import Conversion from '@/utils/conversion';
@@ -126,7 +126,7 @@
       return {
         infoList: [],
         pageSize: '10', // 订单数
-        address: '', // 地址
+        address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
@@ -135,6 +135,7 @@
         isMember: true,
         direction: '',
         tipStyle: '',
+        oid: this.$app_store.getters.userId || 3,
         compInfo: {
           fname: '当前用户未登录'
         },
@@ -151,7 +152,7 @@
     methods: {
       requestInfoList() {
         let self = this;
-        this.$Ice_OrderService.queryOrderByApp('0', self.pageSize, self.address, self.key, 1, this.endTimeStr,
+        this.$Ice_OrderService.queryOrderByApp(self.oid, self.pageSize, self.address, self.key, 1, this.endTimeStr,
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
@@ -170,6 +171,14 @@
           path: '/search'
         })
       },
+      skipCityPage() {
+        this.$router.push({
+          path: '/city',
+          query: {
+            status: 0
+          }
+        })
+      },
       toPageIssueDetail(item) {
         this.$router.push({
           path: '/information/issueDetails',
@@ -182,7 +191,10 @@
       },
       toPageIssue() {
         this.$router.push({
-          path: '/information/issue'
+          path: '/information/issue',
+          query: {
+            status: 0
+          }
         })
       },
       toLogin() {

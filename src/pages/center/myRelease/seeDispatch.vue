@@ -76,16 +76,29 @@
       <div>
         <a class="borderRight">加入货源圈</a>
         <a class="borderRight">加入调度圈</a>
-        <a >加入黑名单</a>
+        <a>加入黑名单</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
+  export default {
+    data() {
+      return {
+
+      }
+    },
+    methods: {
+
+    },
+    mounted() {
+
+    },
+    activated() {
 
     }
+  }
 </script>
 
 <style scoped>

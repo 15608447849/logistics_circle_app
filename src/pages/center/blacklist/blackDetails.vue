@@ -70,9 +70,7 @@
         <span class="uploadState">上传</span>
       </li>
     </ul>
-    <div class="blackListBtn">
-      <a class="moveOutBlack">移出黑名单</a>
-    </div>
+
   </div>
 </template>
 

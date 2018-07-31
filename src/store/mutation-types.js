@@ -8,6 +8,8 @@ export const USER_ID = 'USER_ID'
 export const  COMP_INFO = 'COMP_INFO'
 // open_id
 export const UNION_ID = 'UNION_ID'
+// tabBarIndex
+export const TABBAR_INDEX = 'TABBAR_INDEX'
 // 搜索状态
 export const SEARCH_STATE = 'SEARCH_STATE'
 // 搜索内容
@@ -20,6 +22,8 @@ export const DICT  = 'DICT'
 export const AREA = 'AREA'
 // 所在地区
 export const CURRENT_CITY = 'CURRENT_CITY'
+// 发单地区
+export const RECEIPT_CITY =  'RECEIPT_CITY'
 // 高德地图状态
 export const GEOSTATE = 'GEOSTATE'
 // 地理编码信息列表

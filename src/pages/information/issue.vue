@@ -180,7 +180,8 @@
         arriarc: '', // 目的地
         pmList: [],
         disPmList: [],
-        sunPrice: 0
+        sunPrice: 0,
+        userId: this.$app_store.getters.userId || 3,
       }
     },
     activated() {
@@ -204,6 +205,8 @@
     methods: {
       // 初始化页面数据
       initData() {
+        debugger
+        this.OrderDetail.priority = this.$route.query.status;
         this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
@@ -262,7 +265,6 @@
         } else {
           this.setPicker(this.dicData[category]);
         }
-
         this.picker.show();
       },
       showDatePicker(category) {
@@ -384,7 +386,7 @@
       releaseOrder() {
         let self = this;
         if (this.validator()) {
-          self.$Ice_OrderService.releaseOrder(self.OrderDetail.puberid, self.OrderDetail, new IceCallback(
+          self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
             function (result) {
               if (result.code === 0) {
                 self.message.Toast(self, 'correct', '订单发布成功', true);
@@ -453,12 +455,10 @@
     },
     watch: {
       wm(newValue, oldValue) {
-        console.log(newValue)
         // 计算总价
         this.sumPrice()
       },
       price(newValue, oldValue) {
-        console.log(newValue)
         // 计算总价
         this.sumPrice()
       }

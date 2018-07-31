@@ -417,41 +417,32 @@
      * 走货痕迹
      **/
     myOrder.TracOfOrder = Slice.defineStruct(
-        function(orderid, compid, driverphone, tracdate, states, adrress, remark, billno)
+        function(orderno, trancompid, driverid, content, cstatus)
         {
-            this.orderid = orderid !== undefined ? orderid : 0;
-            this.compid = compid !== undefined ? compid : 0;
-            this.driverphone = driverphone !== undefined ? driverphone : 0;
-            this.tracdate = tracdate !== undefined ? tracdate : "";
-            this.states = states !== undefined ? states : "";
-            this.adrress = adrress !== undefined ? adrress : "";
-            this.remark = remark !== undefined ? remark : "";
-            this.billno = billno !== undefined ? billno : "";
+            this.orderno = orderno !== undefined ? orderno : "";
+            this.trancompid = trancompid !== undefined ? trancompid : 0;
+            this.driverid = driverid !== undefined ? driverid : 0;
+            this.content = content !== undefined ? content : "";
+            this.cstatus = cstatus !== undefined ? cstatus : 0;
         },
         true,
         function(__os)
         {
-            __os.writeLong(this.orderid);
-            __os.writeInt(this.compid);
-            __os.writeLong(this.driverphone);
-            __os.writeString(this.tracdate);
-            __os.writeString(this.states);
-            __os.writeString(this.adrress);
-            __os.writeString(this.remark);
-            __os.writeString(this.billno);
+            __os.writeString(this.orderno);
+            __os.writeInt(this.trancompid);
+            __os.writeInt(this.driverid);
+            __os.writeString(this.content);
+            __os.writeInt(this.cstatus);
         },
         function(__is)
         {
-            this.orderid = __is.readLong();
-            this.compid = __is.readInt();
-            this.driverphone = __is.readLong();
-            this.tracdate = __is.readString();
-            this.states = __is.readString();
-            this.adrress = __is.readString();
-            this.remark = __is.readString();
-            this.billno = __is.readString();
+            this.orderno = __is.readString();
+            this.trancompid = __is.readInt();
+            this.driverid = __is.readInt();
+            this.content = __is.readString();
+            this.cstatus = __is.readInt();
         },
-        25, 
+        14, 
         false);
 
     /**
@@ -481,9 +472,9 @@
      * 评价信息
      **/
     myOrder.OrderEvaluate = Slice.defineStruct(
-        function(orderid, pubcompid, evaluator, revicompid, revierid, grade, service, timely, quality, remarks, cstatus, picurljson)
+        function(orderid, pubcompid, evaluator, revicompid, revierid, grade, service, timely, quality, remarks, cstatus, picurlarr)
         {
-            this.orderid = orderid !== undefined ? orderid : 0;
+            this.orderid = orderid !== undefined ? orderid : "";
             this.pubcompid = pubcompid !== undefined ? pubcompid : 0;
             this.evaluator = evaluator !== undefined ? evaluator : 0;
             this.revicompid = revicompid !== undefined ? revicompid : 0;
@@ -494,12 +485,12 @@
             this.quality = quality !== undefined ? quality : 0;
             this.remarks = remarks !== undefined ? remarks : "";
             this.cstatus = cstatus !== undefined ? cstatus : 0;
-            this.picurljson = picurljson !== undefined ? picurljson : "";
+            this.picurlarr = picurlarr !== undefined ? picurlarr : "";
         },
         true,
         function(__os)
         {
-            __os.writeLong(this.orderid);
+            __os.writeString(this.orderid);
             __os.writeInt(this.pubcompid);
             __os.writeInt(this.evaluator);
             __os.writeInt(this.revicompid);
@@ -510,11 +501,11 @@
             __os.writeInt(this.quality);
             __os.writeString(this.remarks);
             __os.writeInt(this.cstatus);
-            __os.writeString(this.picurljson);
+            __os.writeString(this.picurlarr);
         },
         function(__is)
         {
-            this.orderid = __is.readLong();
+            this.orderid = __is.readString();
             this.pubcompid = __is.readInt();
             this.evaluator = __is.readInt();
             this.revicompid = __is.readInt();
@@ -525,10 +516,11 @@
             this.quality = __is.readInt();
             this.remarks = __is.readString();
             this.cstatus = __is.readInt();
-            this.picurljson = __is.readString();
+            this.picurlarr = __is.readString();
         },
-        46, 
+        39, 
         false);
+    Slice.defineSequence(myOrder, "OrderEvaluateSeqHelper", "myOrder.OrderEvaluate", false);
 
     /**
      * 订单详情数据格式
@@ -550,7 +542,7 @@
             this.orderifo = myOrder.OrderICE.read(__is, this.orderifo);
             this.ordereva = myOrder.OrderEvaluate.read(__is, this.ordereva);
         },
-        149, 
+        142, 
         false);
 
     /**
@@ -571,12 +563,12 @@
     {
         "queryMyPublishOrder": [, , , , , [7], [[7], [myOrder.QueryParam]], , , , ],
         "queryMyRecvOrder": [, , , , , [7], [[7], [myOrder.QueryParam]], , , , ],
-        "getOrderTrajectory": [, , , , , [7], [[7], [7]], , , , ],
+        "getOrderTrajectory": [, , , , , [7], [[7]], , , , ],
         "getOrderTraByOrderid": [, , , , , [7], [[7], [3]], , , , ],
         "getAreaData": [, , , , , [myOrder.AreaData], [[7]], , , , ],
         "acceptTravel": [, , , , , [3], [[4], [3], [4], [7]], , , , ],
         "acceptTravelCorrect": [, , , , , [3], [[4], [3], [4], [7]], , , , ],
-        "entryTravel": [, , , , , [3], [[myOrder.TracOfOrder]], , , , ],
+        "entryTravel": [, , , , , [7], [[myOrder.TracOfOrder]], , , , ],
         "refuseOrder": [, , , , , [7], [[3], [7]], , , , ],
         "receiveOrder": [, , , , , [7], [[3], [7]], , , , ],
         "getTransferPoint": [, , , , , ["myOrder.AreaDataSeqHelper"], [[3]], , , , ],
@@ -591,7 +583,9 @@
         "flushOrder": [, , , , , [7], [[3], [7]], , , , ],
         "cancelOrder": [, , , , , [7], [[7], [3]], , , , ],
         "repubOrder": [, , , , , [7], [[7], [3]], , , , ],
-        "closeOrder": [, , , , , [7], [[7], [3]], , , , ]
+        "closeOrder": [, , , , , [7], [[7], [3]], , , , ],
+        "cancelRobbing": [, , , , , [7], [[7], [3]], , , , ],
+        "getOrderEvaluate": [, , , , , ["myOrder.OrderEvaluateSeqHelper"], [[3]], , , , ]
     });
     exports.myOrder = myOrder;
 }

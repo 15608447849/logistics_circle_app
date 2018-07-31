@@ -41,7 +41,8 @@
           title: '我的订单',
           isActive: false,
           name: 'ucenter-outline'
-        }]
+        }],
+        tabBarIndex: this.$app_store.getters.tabBarIndex // 控制tabBar下标显示
       }
     },
     mounted() {
@@ -49,7 +50,6 @@
       this.$app_store.commit(CURRENT_CITY, '长沙');
       this.initBaseData();
       this.initAreaData();
-
     },
     methods: {
       handleActive(position) {
@@ -110,6 +110,11 @@
             }
           )
         );
+      }
+    },
+    watch: {
+      tabBarIndex(newVal, oldVal) {
+        console.log('------------------------'+newVal)
       }
     }
   }

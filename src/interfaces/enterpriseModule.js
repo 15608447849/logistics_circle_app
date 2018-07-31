@@ -78,7 +78,7 @@ module.exports = {
    *  string saveRoute(RouteInfo route, long uphone);
    */
   saveRoute: function (routeInfo, oid, callback) {
-    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'saveRoute', routeInfo, oid, callback);
+    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'saveRoute', routeInfo,oid, callback);
   },
   /**
    * 停用线路

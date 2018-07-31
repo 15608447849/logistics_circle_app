@@ -45,12 +45,12 @@ module.exports = {
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'entryTravel', tracinfo,callback);
 	},
 	/** 拒绝订单 refuseOrder*/
-	refuseOrder:(orderno,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'refuseOrder', module.exports.token(),orderno,callback);
+	refuseOrder:(oid,orderno,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'refuseOrder', oid,orderno,callback);
 	},
 	/** 接收订单 receiveOrder*/
-	receiveOrder:(orderno,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'receiveOrder', module.exports.token(),orderno,callback);
+	receiveOrder:(oid,orderno,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'receiveOrder',oid,orderno,callback);
 	},
 	/** 根据市查询省下所有城市 getTransferPoint*/
 	getTransferPoint:(place,callback)=>{
@@ -85,12 +85,12 @@ module.exports = {
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderInfo',orderid,uoid,callback);
 	},
 	/** 取消订单发布  cancelOrder (orderid:订单号 uoid:用户id)*/
-	cancelOrder:( orderid,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelOrder',orderid,module.exports.token(),callback);
+	cancelOrder:(orderid,oid,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelOrder',orderid,oid,callback);
 	},
 	/** 刷新订单  flushOrder (orderid:订单号 uoid:用户id)*/
-	flushOrder:(orderid,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'flushOrder',module.exports.token(),orderid,callback);
+	flushOrder:(oid,orderid,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'flushOrder',oid,orderid,callback);
 	},
 	/** 重新发布订单  repubOrder (orderid:订单号 uoid:用户id)*/
 	repubOrder:(orderid,callback)=>{

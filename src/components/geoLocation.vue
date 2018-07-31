@@ -3,29 +3,35 @@
     <div class="issueHeaderNavMap">
       <i class="icon iconfont icon-btngoback back" @click="goBack"></i>
       <span>选择地址</span>
-      <button @click="selectCity" class="selectCityBtn">{{searchOption.city}}<i class="icon iconfont icon-xiala xiala"></i></button>
+      <button @click="selectCity" class="selectCityBtn">{{searchOption.city}}<i
+        class="icon iconfont icon-xiala xiala"></i></button>
     </div>
-    <div class="amap-container">
-      <el-amap-search-box class="search" :search-option="searchOption"
-                          :on-search-result="onSearchResult">
-      </el-amap-search-box>
-      <el-amap vid="amapDemo" :center="mapCenter" :zoom="cZoom" class="amap-demo" :events="events">
-        <el-amap-marker v-for="marker in markers" :icon="marker.icon" :position="marker" :key="marker"></el-amap-marker>
-      </el-amap>
+    <div class="downfixed havedownfixed">
+      <div class="amap-container">
+        <el-amap-search-box class="search" :search-option="searchOption"
+                            :on-search-result="onSearchResult">
+        </el-amap-search-box>
+        <el-amap vid="amapDemo" :center="mapCenter" :zoom="cZoom" class="amap-demo" :events="events">
+          <el-amap-marker v-for="marker in markers" :icon="marker.icon" :position="marker"
+                          :key="marker"></el-amap-marker>
+        </el-amap>
+      </div>
+      <ul class="order_boxMap">
+        <li class="order_listMap" v-for="(item,index) in pList" :key="index" @click="selectionPio(item)">
+          <div class="order_timeMap"><span class="siteMap">{{item.name}}</span></div>
+          <div class="order_priceMap"><span class="carWeightMap">{{item.address}}</span></div>
+        </li>
+      </ul>
     </div>
-    <ul class="order_boxMap">
-      <li class="order_listMap" v-for="(item,index) in pList" :key="index" @click="selectionPio(item)">
-        <div class="order_timeMap"><span class="siteMap">{{item.name}}</span></div>
-        <div class="order_priceMap"><span class="carWeightMap">{{item.address}}</span></div>
-      </li>
-    </ul>
+
   </div>
 </template>
 <script>
   import {
     ADDRESSCOM
   } from '../store/mutation-types'
-  import { AMapManager } from "vue-amap";
+  import {AMapManager} from "vue-amap";
+
   export default {
     data() {
       return {
@@ -41,10 +47,10 @@
         mapCenter: [], // 地图中心点
         geocoder: null,
         events: {
-          init :(map) => {
+          init: (map) => {
             console.log(123)
             this.map = map
-            this.map.setCity(this.$app_store.getters.currentCity);
+            this.map.setCity(this.$app_store.getters.receiptCity);
           }
         }
       }
@@ -52,21 +58,24 @@
     mounted() {
       this.initData();
     },
-    activated: function () {
-      if(this.map !== null) {
-        this.searchOption.city = this.$app_store.getters.currentCity;
-        this.map.setCity(this.searchOption.city);
-      }
-    },
+    // activated: function () {
+      // if (this.map !== null) {
+      //   this.searchOption.city = this.$app_store.getters.receiptCity;
+      //   this.map.setCity(this.searchOption.city);
+      // }
+    // },
     methods: {
       initData() {
         // 设置地址搜索框城市
-        this.searchOption.city = this.$app_store.getters.currentCity || '北京';
+        this.searchOption.city = this.$app_store.getters.receiptCity || '长沙';
         this.mapCenter = [113.0068368, 28.212332300000003];
       },
       selectCity() {
         this.$router.push({
-          path: '/city'
+          path: '/city',
+          query: {
+            status: 1
+          }
         })
       },
       onSearchResult(pois) {

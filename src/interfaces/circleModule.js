@@ -17,8 +17,8 @@ module.exports = {
 		 	* uoid 当前登录用户
 		 	* targetid 需要添加目标用户
     */
-    addBlackList:(targetid,callback) => {
-        queryIce(mycircle.CircleServicePrx, 'CircleService', 'addBlackList',token,targetid,callback);
+    addBlackList:(oid,targetid,callback) => {
+        queryIce(mycircle.CircleServicePrx, 'CircleService', 'addBlackList',oid,targetid,callback);
     },
     /**查询我可以添加的成员
     */
@@ -27,8 +27,8 @@ module.exports = {
     },
     /**查询我的圈子黑名单
     */
-   queryMyCircleBlackList:(pageIndex,pageSize,callback) => {
-        queryIce(mycircle.CircleServicePrx, 'CircleService', 'queryMyCircleBlackList',token,pageIndex,pageSize,callback);
+   queryMyCircleBlackList:(oid,pageIndex,pageSize,callback) => {
+        queryIce(mycircle.CircleServicePrx, 'CircleService', 'queryMyCircleBlackList',oid,pageIndex,pageSize,callback);
     },
     /**添加成员到圈子
     */

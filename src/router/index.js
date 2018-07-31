@@ -108,34 +108,25 @@ const vueRouter = new Router({
     {
       path: '/',
       component: INDEX,
-      meta: {
-        requireAuth: true,
-      },
       children: [
         {
           path: '',
-          component: HOME,
-          meta: {
-            keepAlive: true, //此组件不需要被缓存
-          }
+          component: HOME
         },
         {
           name: 'basiInformation',
           path: '/home/basiInformation',
-          component: BASICINFORMATION,
+          component: BASICINFORMATION
         },
         {
           name: 'basiInformation',
           path: '/home/invoice',
-          component: INVOICE,
-          meta: {
-            keepAlive: true, //此组件不需要被缓存
-          }
+          component: INVOICE
         },
         {
           name: 'basiInformation',
           path: '/home/enterprise',
-          component: ENTERPRISE,
+          component: ENTERPRISE
         },
         {
           name: 'basiInformation',
@@ -143,28 +134,18 @@ const vueRouter = new Router({
           component: CERTIFICATES
         },
         {
-          name: 'circle',
           path: '/circle',
-          component: CIRCLE,
-          meta: {
-            keepAlive: true, //此组件不需要被缓存
-          }
+          component: CIRCLE
         },
         {
           name: 'information',
           path: '/information',
-          component: INFO,
-          meta: {
-            keepAlive: true, //此组件不需要被缓存
-          }
+          component: INFO
         },
         {
           name: 'order',
           path: '/order',
-          component: ORDER,
-          meta: {
-            requireAuth: true
-          }
+          component: ORDER
         }
       ]
     },
@@ -210,7 +191,10 @@ const vueRouter = new Router({
     },
     {
       path: '/geo',
-      component: GEOLOCATION
+      component: GEOLOCATION,
+      meta: {
+        keepAlive: true,
+      }
     },
     {
       name: 'simpleSearch',

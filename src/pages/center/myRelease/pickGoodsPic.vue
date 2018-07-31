@@ -5,23 +5,36 @@
       <span>取货照片</span>
       <div></div>
     </div>
-    <div class="pickGoodsPicBox">
-      <div class="pickGoodsPicList">
-        <img src="" alt="">
-      </div>
-      <div class="pickGoodsPicList">
-        <img src="" alt="">
-      </div>
-      <div class="pickGoodsPicList">
-        <img src="" alt="">
+    <div class="downfixed havedownfixed">
+      <div class="pickGoodsPicBox">
+        <div class="pickGoodsPicList">
+          <img src="" alt="">
+        </div>
+        <div class="pickGoodsPicList">
+          <img src="" alt="">
+        </div>
+        <div class="pickGoodsPicList">
+          <img src="" alt="">
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
+  export default {
+    data() {
+      return {
+
+      }
+    },
+    mounted() {
+
+    },
+    methods: {
+
     }
+  }
 </script>
 
 <style scoped>

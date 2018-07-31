@@ -54,15 +54,14 @@ export default class message {
   /**
    *
    * @param context 上下文对象
-   * @param title 标题
    * @param content 内容
    * @returns {Promise<any>} resolve reject
    */
-  static showAlert(context,title, content) {
+  static showAlert(context, content) {
     return new Promise((resolve, reject) => {
       context.$createDialog({
         type: 'confirm',
-        title: title,
+        title: '提示',
         content: content,
         confirmBtn: {
           text: '确定',

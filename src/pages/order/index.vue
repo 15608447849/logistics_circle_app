@@ -7,7 +7,7 @@
         <i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>
       </div>
       <div class="downfixed havedownfixed">
-        <div class="releaseAccept">发布订单{{total}}条</div>
+        <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
         <div class="releaseMenu">
           <span class="releaseState" :class="{'activecircle' : item.isSelected}" v-for="(item , index) in tabList"
                 :key="index" @click.stop="tabItemClick(item)">{{item.name}}</span>
@@ -26,7 +26,7 @@
                 <i class="icon iconfont icon-icon-test"></i>
               </div>
               <!--<span class="releasetext">发布</span>-->
-              <span class="releasetext">取货</span>
+              <span class="releasetext">{{statusToChinese(item.ostatus)}}</span>
             </div>
             <li class="address marginBottom15">
               <div class="addressList"><span>{{item.startc}}</span>-<span>{{item.arriarc}}</span></div>
@@ -54,35 +54,39 @@
             </li>
             <!--抢单-->
             <div class="cancelRefres">
+              <!--重新发布 -->
+              <div class="operationA" v-show="item.ostatus === '20'">
+                <a class="colorsixsix" @click.stop="cancelOrder(item,index)">重新发布</a>
+              </div>
               <!--我的发布 -->
               <div class="operationA" v-show="item.ostatus === '0'">
-                <a class="colorsixsix">取消发布</a>
-                <a class="colorsixsix">刷新</a>
+                <a class="colorsixsix" @click.stop="cancelOrder(item, index)">取消发布</a>
+                <a class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
               </div>
               <!--抢单-->
               <div class="operationA" v-show="item.ostatus === '1'">
-                <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
-                <a class="colorsixsix">接受</a>
-                <a class="colorsixsix">拒绝</a>
+                <a class="colorsixsix" @click.stop="toComPInfo(item)">查看调度</a>
+                <a class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
+                <a class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
               </div>
               <!--线上状态的取货-->
               <div class="operationA" v-show="item.ostatus === '3'">
-                <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
+                <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <a class="colorsixsix" @click="topickGoodsPic">取货照片</a>
                 <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
               </div>
               <!--签收-->
               <div class="operationA" v-show="item.ostatus ===  '4'">
-                <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
+                <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <a class="colorsixsix">行程回放</a>
                 <a class="colorLightBlue">待评价</a>
               </div>
               <!--待评价-->
-              <!--<div class="operationA">-->
-              <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
-              <!--<a class="colorsixsix">行程回放</a>-->
-              <!--<a class="colorLightBlue">待评价</a>-->
-              <!--</div>-->
+              <div class="operationA" v-show="item.ostatus ===  '6'">
+                <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
+                <a class="colorsixsix">行程回放</a>
+                <a class="colorLightBlue">待评价</a>
+              </div>
 
               <!--<a class="releaseDetailsMoreIndex">更多-->
               <!--<div class="pickGoodsBtnIndex">-->
@@ -115,6 +119,7 @@
 
 <script>
   import {Tab, TabItem} from 'vux'
+  import {alertContent} from "../../utils/enum";
 
   export default {
     components: {
@@ -161,10 +166,35 @@
     mounted() {
       // 初始化列表查询条件
       this.initQueryConditions();
-      // 获取我的发布列表
-      this.queryMyPublishOrder();
     },
     methods: {
+      statusToChinese(status) {
+        let cont = '';
+        switch (status) {
+          case '0':
+            cont = '发布';
+            break;
+          case '1':
+            cont = '抢单';
+            break;
+          case '3':
+            cont = '取货';
+            break;
+          case '4':
+            cont = '签收';
+            break;
+          case '6':
+            cont = '待评价';
+            break;
+          case '20':
+            cont = '已关闭';
+            break;
+          default:
+
+            break
+        }
+        return cont
+      },
       tabItemClick(item) {
         this.tabList.forEach((value, index, arr) => {
           value.isSelected = false
@@ -184,9 +214,110 @@
         // 初始化搜索条件
         this.QueryParam.origin = '';
         this.QueryParam.destination = '';
-        this.QueryParam.time = '2018-7-28';
+        this.QueryParam.time = '';
         this.QueryParam.pageNo = this.page.pageIndex;
         this.QueryParam.pageSize = this.page.pageSize;
+      },
+      // 跳转企业详情
+      toComPInfo(item) {
+        this.$router.push({
+          path: '/userInfo',
+          query: {
+            isYourCompInfo: false,
+            id: item.revierid,
+            status: 6
+          }
+        })
+      },
+      // 订单取消发布
+      cancelOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.CANCEL_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.cancelOrder(item.orderno, self.userId, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  // 重新发布
+                  self.releaseList[index].ostatus = '20';
+                  self.$vux.toast.text('订单取消发布成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 刷新订单
+      refreshOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.REFRESH_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.flushOrder(self.userId, item.orderno, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('订单刷新成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 接受订单
+      receiveOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.RECEIVE_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.receiveOrder(self.userId, item.orderno, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('订单接受成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 拒绝订单
+      refuseOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.REFUSE_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.refuseOrder(self.userId, item.orderno, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('订单拒绝成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
       },
       // 获取我的发布列表
       queryMyPublishOrder() {
@@ -202,18 +333,20 @@
                 self.finished = true;
               }
             } else {
-
+              self.finished = true;
             }
+
           },
           function (error) {
             self.loading = false;
+            self.finished = true;
           }
         ))
       },
       onLoad() {
-
+        // 获取我的发布列表
+        this.queryMyPublishOrder();
       },
-
       toreleaseDetails() {
         this.$router.push({
           path: '/center/myRelease/releaseDetails'

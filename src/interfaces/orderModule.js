@@ -132,8 +132,8 @@ module.exports = {
     queryIce(order.OrderServicePrx , 'OrderService', 'generateOrderNo',callback);
   },
   /**发布订单 OrderICE */
-  releaseOrder:(token,OrderICE,callback)=>{
-    queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', token,OrderICE,callback);
+  releaseOrder:(oid,OrderICE,callback)=>{
+    queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', oid,OrderICE,callback);
   },
   /** 传入订单号 获取订单详情 OrderDetail */
   getOrderDetail:(orderNo,puberid,pubercompid,callback)=>{

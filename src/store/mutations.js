@@ -3,6 +3,7 @@ import {
   USER_ID,
   COMP_INFO,
   WX_USER_INFO,
+  RECEIPT_CITY,
   SEARCH_STATE,
   SEARCH_CONTENT,
   UPDATE_LOADING_STATUS,
@@ -10,7 +11,7 @@ import {
   AREA,
   CURRENT_CITY,
   GEOSTATE,
-  ADDRESSCOM
+  ADDRESSCOM, TABBAR_INDEX
 } from './mutation-types'
 
 export default {
@@ -26,7 +27,10 @@ export default {
   [COMP_INFO] (state, v) {
     state.compInfo = v
   },
-
+  // tabBarIndex
+  [TABBAR_INDEX] (state, v) {
+    state.tabBarIndex = v
+  },
   // 搜索内容
   [SEARCH_CONTENT] (state, v) {
     state.searchContent = v
@@ -51,6 +55,10 @@ export default {
   // 当前城市
   [CURRENT_CITY](state, v) {
     state.currentCity = v;
+  },
+  // 当前城市
+  [RECEIPT_CITY](state, v) {
+    state.receiptCity = v;
   },
   // 高德地图状态
   [GEOSTATE](state, v) {
