@@ -12,9 +12,6 @@ export default {
   compInfo: state => {
     return state.compInfo
   },
-  tabBarIndex: state => {
-    return state.tabBarIndex
-  },
   searchContent: state => {
     return state.searchContent
   },

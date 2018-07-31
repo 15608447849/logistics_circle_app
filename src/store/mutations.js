@@ -11,7 +11,7 @@ import {
   AREA,
   CURRENT_CITY,
   GEOSTATE,
-  ADDRESSCOM, TABBAR_INDEX
+  ADDRESSCOM, TABBAR_INDEX, IS_SHOW_SIDEBAR
 } from './mutation-types'
 
 export default {
@@ -26,6 +26,10 @@ export default {
   // 企业信息
   [COMP_INFO] (state, v) {
     state.compInfo = v
+  },
+  // 侧边栏显示
+  [IS_SHOW_SIDEBAR] (state, isShowSidebar) {
+    state.isShowSidebar = isShowSidebar
   },
   // tabBarIndex
   [TABBAR_INDEX] (state, v) {

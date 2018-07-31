@@ -21,7 +21,8 @@ const state = {
   receiptCity: '', // 发单地区
   geoState: 0, // 0: 出发地 1: 目的地
   addressCom: {}, // 地理编码信息列表
-  tabBarIndex: 0
+  tabBarIndex: 0,
+  isShowSidebar: false // 侧边栏
 };
 
 export default new Vuex.Store({

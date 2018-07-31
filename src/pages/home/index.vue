@@ -2,7 +2,7 @@
   <div>
     <!--页头-->
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="show4 = true" class="loginPicture">
+      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
       <!--<i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>-->
       <span>首页</span>
       <span class="icon iconfont icon-gengduo1 dropdowngengduo">
@@ -70,52 +70,12 @@
       </ul>
       <div class="seeMore">查看更多</div>
     </div>
-
-    <yd-popup v-model="show4" position="left" width="73%">
-      <div style="background-color:#fff;">
-        <div class="centerPic">
-          <div class="portrait">
-            <img src="../../assets/images/small/aaaaaaa.png" alt="">
-            <span class="logisticsMing">{{compInfo.fname}}</span>
-          </div>
-          <ul class="startBox">
-            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../../assets/images/small/star36_off@2x.png" alt=""></li>
-          </ul>
-          <div class="money">
-            <img src="../../assets/images/small/jewelry.png" alt="">
-            <span class="yang">￥</span><span class="priceNum">0.00</span>
-          </div>
-        </div>
-        <ul class="personalList">
-          <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
-          </li>
-          <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span>
-          </li>
-          <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
-          </li>
-          <li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
-          <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
-          <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
-            class="personalText circle">我的圈子</span></li>
-          <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
-          <li @click="tomyInformation"><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span>
-          </li>
-        </ul>
-        <div class="settingCircleBox" @click="tosetting">
-          <i class="icon iconfont icon-shezhi1"></i>
-          <div class="settingCircle">设置</div>
-        </div>
-      </div>
-    </yd-popup>
   </div>
 
 </template>
 <script>
   import {
+    IS_SHOW_SIDEBAR,
     SEARCH_STATE, TABBAR_INDEX
   } from '../../store/mutation-types'
   import {searchState} from "../../utils/config";
@@ -131,22 +91,14 @@
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        show4: false,
         isMember: true,
         direction: '',
         tipStyle: '',
-        oid: this.$app_store.getters.userId || 3,
-        compInfo: {
-          fname: '当前用户未登录'
-        },
+        oid: this.$app_store.getters.userId || 3
         // 信息大厅数据
-
       }
     },
     mounted() {
-      if (this.$app_store.getters.compInfo !== null) {
-        this.compInfo = this.$app_store.getters.compInfo;
-      }
       this.requestInfoList();
     },
     methods: {
@@ -197,66 +149,8 @@
           }
         })
       },
-      toLogin() {
-        this.$router.push({path: '/login'})
-      },
-      toRegister() {
-        this.$router.push({path: '/register'})
-      },
-      toPageGeo() {
-        this.$router.push({path: '/geo'})
-      },
-      toPagePickerTest() {
-        this.$router.push({path: '/picker'})
-      },
-      toTest() {
-        this.$router.push({path: '/test'})
-      },
-      toPageInfoTest() {
-        this.$router.push({path: '/infoTest'})
-      },
-      jUserInfo() {
-        this.$router.push({
-          path: '/userInfo',
-          query: {
-            isYourCompInfo: true    //row.hid为变量
-          }
-        })
-      },
-      toDriverAmd() {
-        this.$router.push({
-          path: '/center/driverMgr/index'
-        })
-      },
-      toMycircle() {
-        this.$router.push({
-          path: '/center/myCircle/index'
-        })
-      },
-      toMyRelease() {
-        this.$router.push({
-          path: '/center/myRelease/index'
-        })
-      },
-      tocommonlyRoute() {
-        this.$router.push({
-          path: '/center/commonlyRoute/index'
-        })
-      },
-      toblacklist() {
-        this.$router.push({
-          path: '/center/blacklist/index'
-        })
-      },
-      tomyInformation() {
-        this.$router.push({
-          path: '/center/myInformation/index'
-        })
-      },
-      tosetting() {
-        this.$router.push({
-          path: '/center/setting/index'
-        })
+      avatarClick() {
+        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
       },
       todimensionalCode() {
         this.$router.push({

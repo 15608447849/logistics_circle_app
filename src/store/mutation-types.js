@@ -8,6 +8,8 @@ export const USER_ID = 'USER_ID'
 export const  COMP_INFO = 'COMP_INFO'
 // open_id
 export const UNION_ID = 'UNION_ID'
+// 侧边栏显示
+export const IS_SHOW_SIDEBAR = 'IS_SHOW_SIDEBAR'
 // tabBarIndex
 export const TABBAR_INDEX = 'TABBAR_INDEX'
 // 搜索状态

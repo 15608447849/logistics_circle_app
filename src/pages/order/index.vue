@@ -72,7 +72,7 @@
               <!--线上状态的取货-->
               <div class="operationA" v-show="item.ostatus === '3'">
                 <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
-                <a class="colorsixsix" @click="topickGoodsPic">取货照片</a>
+                <a class="colorsixsix" @click="topickGoodsPic(item)">取货照片</a>
                 <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
               </div>
               <!--签收-->
@@ -190,7 +190,6 @@
             cont = '已关闭';
             break;
           default:
-
             break
         }
         return cont
@@ -362,7 +361,7 @@
           path: '/center/myRelease/seeDispatch'
         })
       },
-      topickGoodsPic() {
+      topickGoodsPic(item) {
         this.$router.push({
           path: '/center/myRelease/pickGoodsPic'
         })
