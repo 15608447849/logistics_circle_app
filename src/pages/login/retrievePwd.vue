@@ -11,7 +11,7 @@
          <div class="inputNumBox">
            <input v-model="userPhone" type="number" placeholder="请输入您的手机号" class="inputNum">
          </div>
-         <van-button  size="large" type="primary" @click="firstStep()" v-show="firstStepBool">下一步</van-button>
+         <van-button style="height:.64rem;margin-left:.21rem;line-height:.64rem;" size="large" type="primary" @click="firstStep()" v-show="firstStepBool" class="updataPwdBtn">下一步</van-button>
         </div>
          <div class="verificationBox" v-show="secondStepBool">
            <span class="verificationCode">输入验证码</span>
@@ -28,7 +28,7 @@
              @delete="onDelete"
              @blur="showKeyboard = false"
            />
-           <van-button size="large" type="primary" @click="secondStep()" v-show="secondStepBool">下一步</van-button>
+           <van-button style="height:.64rem;margin-left:.21rem;line-height:.64rem;" size="large" type="primary" @click="secondStep()" v-show="secondStepBool" class="updataPwdBtn">下一步</van-button>
          </div>
          <div class="updataPwdinputBox" v-show="thirdStepBool">
            <div class="inputPassword">
@@ -37,7 +37,7 @@
            <div class="inputPassword">
              <span class="textRed">*</span><span class="inputspan">确认密码</span><div class="inputBox"><input type="password" v-model="rPassword" placeholder="请确认新密码"></div>
            </div>
-           <van-button size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool">保存</van-button>
+           <van-button style="height:.64rem;margin-left:.21rem;line-height:.64rem;" size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" class="updataPwdBtn">保存</van-button>
          </div>
   </div>
 </template>

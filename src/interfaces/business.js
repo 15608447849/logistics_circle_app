@@ -8,6 +8,7 @@ const circleModule = require('./circleModule');
 const compModule = require('./compModule');
 const informationComp = require('./informationComp');
 const myOrderModule = require('./myOrderModule');
+const MessageModule = require('./messageModule')
 
 import {
   iceGridInstanceName,
@@ -47,6 +48,8 @@ exports.install = function (Vue) {
   Vue.prototype.$Ice_InfoService = informationComp;
 
   Vue.prototype.$Ice_myOrderService = myOrderModule;
+
+  Vue.prototype.$Ice_MessageService = MessageModule;
 
 };
 

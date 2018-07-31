@@ -6,105 +6,106 @@
         <span>我的发布</span>
         <i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>
       </div>
-      <div class="releaseAccept">发布订单{{total}}条</div>
-      <div class="releaseMenu">
-        <span class="releaseState" :class="{'activecircle' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="tabItemClick(item)">{{item.name}}</span>
-      </div>
-
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        @load="onLoad"
-      >
-        <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index">
-          <div class="releaseCompany">
-            <div class="companyBox">
-              <i class="icon iconfont icon-qiyexinxi"></i>
-              <span>{{item.shipperName}}</span>
-              <i class="icon iconfont icon-icon-test"></i>
+      <div class="downfixed">
+        <div class="releaseAccept">发布订单{{total}}条</div>
+        <div class="releaseMenu">
+          <span class="releaseState" :class="{'activecircle' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="tabItemClick(item)">{{item.name}}</span>
+        </div>
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          @load="onLoad"
+        >
+          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index">
+            <div class="releaseCompany">
+              <div class="companyBox">
+                <i class="icon iconfont icon-qiyexinxi"></i>
+                <span>{{item.shipperName}}</span>
+                <i class="icon iconfont icon-icon-test"></i>
+              </div>
+              <!--<span class="releasetext">发布</span>-->
+              <span class="releasetext">取货</span>
             </div>
-            <!--<span class="releasetext">发布</span>-->
-            <span class="releasetext">取货</span>
-          </div>
-          <li class="address marginBottom15">
-            <div class="addressList"><span>{{item.startc}}</span>-<span>{{item.arriarc}}</span></div>
-          </li>
-          <li class="collection marginBottom15">
-            <span>无代收，无保价</span>
-          </li>
-          <li class="specifications marginBottom15">
-            <span>{{item.ctdictc}}，{{item.wm}}{{item.wmdictc}}</span> <span>{{item.vtdictc}},{{item.vldictc}}</span>
-          </li>
-          <li class="specifications marginBottom15">
-            <span>发布日期：</span> <span>{{item.pubdate}}</span><span> {{item.pubtime}}</span>
-          </li>
-          <li class="pickGoods marginBottom15">
-            <div>
-              <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
-            </div>
-            <!--<span class="underPay">线下付款</span>-->
-            <!--线上付款-->
-            <span class="underPay">线上付款</span>
-          </li>
-          <li class="goodsTotalPrice">
-            <div></div>
-            <!--<div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">2680</span></div>-->
-          </li>
-          <!--抢单-->
-          <div class="cancelRefres">
-            <!--我的发布 -->
-            <div class="operationA" v-show="item.ostatus === '0'">
-              <a class="colorsixsix">取消发布</a>
-              <a class="colorsixsix">刷新</a>
-            </div>
+            <li class="address marginBottom15">
+              <div class="addressList"><span>{{item.startc}}</span>-<span>{{item.arriarc}}</span></div>
+            </li>
+            <li class="collection marginBottom15">
+              <span>无代收，无保价</span>
+            </li>
+            <li class="specifications marginBottom15">
+              <span>{{item.ctdictc}}，{{item.wm}}{{item.wmdictc}}</span> <span>{{item.vtdictc}},{{item.vldictc}}</span>
+            </li>
+            <li class="specifications marginBottom15">
+              <span>发布日期：</span> <span>{{item.pubdate}}</span><span> {{item.pubtime}}</span>
+            </li>
+            <li class="pickGoods marginBottom15">
+              <div>
+                <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
+              </div>
+              <!--<span class="underPay">线下付款</span>-->
+              <!--线上付款-->
+              <span class="underPay">线上付款</span>
+            </li>
+            <li class="goodsTotalPrice">
+              <div></div>
+              <!--<div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">2680</span></div>-->
+            </li>
             <!--抢单-->
-            <div class="operationA" v-show="item.ostatus === '1'">
-              <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
-              <a class="colorsixsix">接受</a>
-              <a class="colorsixsix">拒绝</a>
+            <div class="cancelRefres">
+              <!--我的发布 -->
+              <div class="operationA" v-show="item.ostatus === '0'">
+                <a class="colorsixsix">取消发布</a>
+                <a class="colorsixsix">刷新</a>
+              </div>
+              <!--抢单-->
+              <div class="operationA" v-show="item.ostatus === '1'">
+                <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
+                <a class="colorsixsix">接受</a>
+                <a class="colorsixsix">拒绝</a>
+              </div>
+              <!--线上状态的取货-->
+              <div class="operationA" v-show="item.ostatus === '3'">
+                <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
+                <a class="colorsixsix" @click="topickGoodsPic">取货照片</a>
+                <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
+              </div>
+              <!--签收-->
+              <div class="operationA" v-show="item.ostatus ===  '4'">
+                <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
+                <a class="colorsixsix">行程回放</a>
+                <a class="colorLightBlue">待评价</a>
+              </div>
+              <!--待评价-->
+              <!--<div class="operationA">-->
+              <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
+              <!--<a class="colorsixsix">行程回放</a>-->
+              <!--<a class="colorLightBlue">待评价</a>-->
+              <!--</div>-->
+
+              <!--<a class="releaseDetailsMoreIndex">更多-->
+              <!--<div class="pickGoodsBtnIndex">-->
+              <!--<a @click="topickGoodsPic">取货照片</a>-->
+              <!--<a @click="toseeDispatch">查看调度</a>-->
+              <!--</div>-->
+              <!--</a>-->
+
+
+              <!--全部-->
+              <!--<div class="operationA">-->
+              <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
+              <!--<a class="colorsixsix">接受</a>-->
+              <!--<a class="colorsixsix">拒绝</a>-->
+              <!--</div>-->
+
+              <!--<div class="operationA">-->
+              <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
+              <!--<a class="colorsixsix">行程回放</a>-->
+              <!--<a class="colorLightBlue" @click="toevaluate">评价</a>-->
+              <!--</div>-->
             </div>
-            <!--线上状态的取货-->
-            <div class="operationA" v-show="item.ostatus === '3'">
-              <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
-              <a class="colorsixsix" @click="topickGoodsPic">取货照片</a>
-              <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
-            </div>
-            <!--签收-->
-            <div class="operationA" v-show="item.ostatus ===  '4'">
-              <a class="colorsixsix" @click="toseeDispatch">查看调度</a>
-              <a class="colorsixsix">行程回放</a>
-              <a class="colorLightBlue">待评价</a>
-            </div>
-            <!--待评价-->
-            <!--<div class="operationA">-->
-            <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
-            <!--<a class="colorsixsix">行程回放</a>-->
-            <!--<a class="colorLightBlue">待评价</a>-->
-            <!--</div>-->
-
-            <!--<a class="releaseDetailsMoreIndex">更多-->
-            <!--<div class="pickGoodsBtnIndex">-->
-            <!--<a @click="topickGoodsPic">取货照片</a>-->
-            <!--<a @click="toseeDispatch">查看调度</a>-->
-            <!--</div>-->
-            <!--</a>-->
-
-
-            <!--全部-->
-            <!--<div class="operationA">-->
-            <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
-            <!--<a class="colorsixsix">接受</a>-->
-            <!--<a class="colorsixsix">拒绝</a>-->
-            <!--</div>-->
-
-            <!--<div class="operationA">-->
-            <!--<a class="colorsixsix" @click="toseeDispatch">查看调度</a>-->
-            <!--<a class="colorsixsix">行程回放</a>-->
-            <!--<a class="colorLightBlue" @click="toevaluate">评价</a>-->
-            <!--</div>-->
-          </div>
-        </ul>
-      </van-list>
+          </ul>
+        </van-list>
+      </div>
     </div>
   </div>
 

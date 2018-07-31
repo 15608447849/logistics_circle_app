@@ -1,43 +1,42 @@
 <template>
   <div>
-    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>证件信息</span>
       <div></div>
     </div>
+    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
     <div class="identity">
-      <!--<div>-->
-      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-        <p>{{item.title}}</p>
-        <Button  class="margin_top_5" @click.native="uploadBtn(index)">
-          <i class="icon iconfont icon-gengduo1 updataCertificatesPic"></i>
-          <form action="http://192.168.1.240:8090/fileUploadCompPic" method="post"
-                enctype ="multipart/form-data" class="formImage" :id="'form_'+index" target="nm_iframe">
-            <input type="file" name="file" mult iple="multiple"  accept=".png,.jpg,.jpeg" @change="handleUpload" class="marginleftCenter opacty0"/>
-            <input type="text" name="picNo" v-model="uploadIndex" class="opacty0"/>
-            <input type="text" name="compId" v-model="compid" class="opacty0"/>
-          </form>
-        </Button>
-        <div class="upload" v-if="item.url != ''">
-          <div class="upload-list" >
-            <template>
-              <img :src="item.url">
-              <div class="upload-list-cover">
-                <Icon type="ios-eye-outline" @click.native="bigImage(item)"></Icon>
-                <Icon type="ios-trash-outline" @click.native="deletedImages(key)"></Icon>
-                <Icon type="ios-compose-outline"></Icon>
-              </div>
-            </template>
-          </div>
-        </div>
-        <div class="text_center margin_top_10">
+        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
           <p>{{item.title}}</p>
-          <p>（{{item.smallTitle}}）</p>
-        </div>
-      </div>
 
+          <button class="margin_top_5" @click="uploadBtn(index)">
+            <i class="icon iconfont icon-guanbi1 guanbi" v-if="item.url != ''"></i>
+            <img :src="item.url" alt="" class="cardPhoto" v-if="item.url != ''">
+            <i class="icon iconfont icon-gengduo1 updataCertificatesPic" v-else="!isdisplay"></i>
+            <form action="http://192.168.1.240:8090/fileUploadCompPic" method="post"
+                  enctype ="multipart/form-data" class="formImage"  :id="'form_'+index" target="nm_iframe">
+              <input type="file" name="file" multiple="multiple"  accept=".png,.jpg,.jpeg" @change="handleUpload" class="marginleftCenter opacty0"/>
+              <input type="text" name="picNo" v-model="uploadIndex" class="opacty0"/>
+              <input type="text" name="compId" v-model="compid" class="opacty0"/>
+            </form>
+          </button>
+        </div>
     </div>
+    <!--<div class="upload" v-if="item.url != ''">-->
+      <!--<div class="upload-list" >-->
+        <!--<img :src="item.url">-->
+        <!--<div class="upload-list-cover">-->
+          <!--<Icon type="ios-eye-outline" @click.native="bigImage(item)"></Icon>-->
+          <!--<Icon type="ios-trash-outline" @click.native="deletedImages(key)"></Icon>-->
+          <!--<Icon type="ios-compose-outline"></Icon>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="text_center margin_top_10">-->
+      <!--<p>{{item.title}}</p>-->
+      <!--<p>（{{item.smallTitle}}）</p>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -47,7 +46,9 @@
       return {
         action: 'http://192.168.1.240:8090/fileUploadCompPic',
         uploadIndex:0,
-        compid:'',
+        compid: this.$app_store.getters.userId || 4,
+        cardname:'',
+        isdisplay:true,
         uploadList: [
           {
             title:'营业执照',
@@ -96,7 +97,7 @@
       }
     },
     mounted() {
-      this.getImages(4);
+      this.getImages(this.compid);
     },
     methods: {
       // 获取图片
@@ -117,6 +118,7 @@
                 localStorage.setItem("$logoImage",data[item]);
               }
             }
+            console.log(item)
           }
         };
         xhr.open("GET", path , true);
@@ -130,21 +132,26 @@
         reader.readAsDataURL(event.currentTarget.files[0]);
         let self = this;
         reader.onloadend = function (e) {
+          debugger
           self.uploadList[self.uploadIndex].url = e.target.result;
           let sub = document.getElementById('form_'+self.uploadIndex);
           sub.submit();
+          debugger
           self.uploadList[self.uploadIndex].uploadBtnShow = false;
+          isdisplay = true;
         }
       },
       fallback() {
         this.$router.go(-1)
       },
+      // 点击查看大图
       bigImage(img) {
         this.imgModal = true;
         this.imgTitle = img.title;
         this.imgUrl = img.url;
       },
-      deletedImages(id) {
+      //删除图片
+      deletedImages(index) {
         let self = this;
         let path = "http://192.168.1.240:8090/delCompPic?compId="+this.compid+"&picNo="+id;
         var xhr = new XMLHttpRequest();
