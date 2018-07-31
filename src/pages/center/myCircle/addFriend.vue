@@ -89,26 +89,26 @@
         }
         this.message.showAlert(this, title, content)
           .then(() => {
-            self.$Ice_CircleService.sendAddMyCircleMsg(this.userId,item.compId,ctype, new IceCallback(
-              function (result) {
-                if (result.code === 0) {
-                  if(ctype === 2) {
-                    // self.routeList[index].cstatus = 32;
-                    self.$vux.toast.text('货源圈好友添加成功', 'top');
-                    self.sCircleList.splice(index,1)
-                  }else {
-                    self.$vux.toast.text('调度圈好友添加成功', 'top');
-                    self.SchedulingCircle.splice(index,1)
-                  }
-                } else {
-                  self.$vux.toast.text('好友圈添加失败', 'top');
+          self.$Ice_CircleService.sendAddMyCircleMsg(this.userId,item.compId,ctype, new IceCallback(
+            function (result) {
+              if (result.code === 0) {
+                if(ctype === 2) {
+                  // self.routeList[index].cstatus = 32;
+                  self.$vux.toast.text('货源圈好友添加成功', 'top');
+                  self.sCircleList.splice(index,1)
+                }else {
+                  self.$vux.toast.text('调度圈好友添加成功', 'top');
+                  self.SchedulingCircle.splice(index,1)
                 }
-              },
-              function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+              } else {
+                self.$vux.toast.text('好友圈添加失败', 'top');
               }
-            ))
-          })
+            },
+            function (error) {
+              self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+            }
+          ))
+        })
           .catch(() => {
 
           })

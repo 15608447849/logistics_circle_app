@@ -14,7 +14,8 @@
             <i class="icon iconfont icon-guanbi1 guanbi" v-if="item.url != ''"></i>
             <img :src="item.url" alt="" class="cardPhoto" v-if="item.url != ''">
             <i class="icon iconfont icon-gengduo1 updataCertificatesPic" v-else="!isdisplay"></i>
-            <form action="http://192.168.1.240:8090/fileUploadCompPic" method="post"
+            <!--<form action="http://192.168.1.240:8090/fileUploadCompPic" method="post"  -->
+            <form action="http://192.168.1.138:8080/ftc/upload" method="post"
                   enctype ="multipart/form-data" class="formImage"  :id="'form_'+index" target="nm_iframe">
               <input type="file" name="file" multiple="multiple"  accept=".png,.jpg,.jpeg" @change="handleUpload" class="marginleftCenter opacty0"/>
               <input type="text" name="picNo" v-model="uploadIndex" class="opacty0"/>
