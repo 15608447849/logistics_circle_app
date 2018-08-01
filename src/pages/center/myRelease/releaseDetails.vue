@@ -1,171 +1,196 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back"></i>
+      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>订单详情</span>
       <div></div>
     </div>
-    <div class="releaseStateBox">
-      <div class="releaseAndCollect ">
-        <div>发布成功</div>
-        <!--<div>交易已完成</div>-->
-        <!--<div>签收</div>-->
-        <!--<div>抢单</div>-->
-        <!--<div>取货</div>-->
-        <span>等待承运商接单，请耐心等待~ </span>
-        <!--<span>您的订单已经确认签收，可以留下您的评价哟~</span>-->
-        <!--<span>您的订单已签收，请与收货人确认是否签收~</span>-->
-        <!--<span>您的订单已被抢单，请尽快与承运商联系~</span>-->
-        <!--<span>司机已取货，您的货物正在运输中~</span>-->
+    <div class="downfixed havedownfixed">
+      <div class="releaseStateBox">
+        <div class="releaseAndCollect ">
+          // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
+          <div v-show="ostatus === 0">发布成功</div>
+          <span v-show="ostatus === 0">等待承运商接单，请耐心等待~ </span>
+
+          <div v-show="ostatus === 1">抢单</div>
+          <span v-show="ostatus === 1">您的订单已被抢单，请尽快与承运商联系~ </span>
+
+          <div v-show="ostatus === 3">取货</div>
+          <span v-show="ostatus === 3">司机已取货，您的货物正在运输中~</span>
+
+          <div v-show="ostatus === 4">签收</div>
+          <span v-show="ostatus === 4">您的订单已经确认签收，请与收货人确认是否签收~</span>
+
+          <div v-show="ostatus === 8">交易已完成</div>
+          <span v-show="ostatus === 8">您的订单已经确认签收，可以留下您的评价哟~</span>
+
+
+          <!--<span>您的订单已签收，请与收货人确认是否签收~</span>-->
+          <!--<span>您的订单已被抢单，请尽快与承运商联系~</span>-->
+
+        </div>
+        <!--发布成功-->
+        <i class="icon iconfont icon-fabu"></i>
+        <!--交易已完成-->
+        <!--<i class="icon iconfont icon-pingjia"></i>-->
+        <!--签收-->
+        <!--<i class="icon iconfont icon-liaoxiangqianshou"></i>-->
+        <!--抢单 -->
+        <!--<i class="icon iconfont icon-chenggong"></i>-->
+        <!--取货-->
+        <!--<i class="icon iconfont icon-quhuo"></i>-->
       </div>
-      <!--发布成功-->
-      <i class="icon iconfont icon-fabu"></i>
-      <!--交易已完成-->
-      <!--<i class="icon iconfont icon-pingjia"></i>-->
-      <!--签收-->
-      <!--<i class="icon iconfont icon-liaoxiangqianshou"></i>-->
-      <!--抢单 -->
-      <!--<i class="icon iconfont icon-chenggong"></i>-->
-      <!--取货-->
-      <!--<i class="icon iconfont icon-quhuo"></i>-->
-    </div>
-    <div class="orderPadding10 backFF">
-      <div class="logisticsNameBox">
-        <img src="" alt="">
-        <span class="logisticsName">黄旺物流</span>
-      </div>
-      <ul class="backFF">
-        <li class="issueDetailsLiText">
-          <span class="issueText">运单号</span><span>M1313116515</span>
-        </li>
-        <li class="issueDetailsLiText">
-          <span class="issueText">目的地</span><span>广东省，广州市，荔湾区，荔湾大道8号</span>
-        </li>
-        <li class="issueDetailsLiText">
-          <span class="issueText">出发地</span><span>湖南省，长沙市，长沙县，长沙大道10号</span>
-        </li>
-        <li class="issueDetailsLiText">
-          <span class="issueText">货物信息</span><span class="textMargin-right10">1吨</span><span class="textMargin-right10">100件</span><span class="textMargin-right10">木托</span><span class="textMargin-right10">家具</span>
-        </li>
-        <li class="issueDetailsLiText">
-          <span class="issueText">车辆信息</span><span class="textMargin-right10">1台</span><span class="textMargin-right10">9.6米</span><span class="textMargin-right10">厢式货车</span><span class="textMargin-right10">勿压</span>
-        </li>
-        <li class="issueDetailsLiText">
-          <span class="issueText">费用信息</span><span class="textMargin-right10">无代收</span><span class="textMargin-right10">无保价</span><span class="textMargin-right10">线下支付</span><span>3000元整单</span>
-        </li>
-        <li class="issueDetailsLiText">
-          <span class="issueText">时间信息</span><span class="textMargin-right10">2018-07-22 17:20-18:20</span><span>取货</span>
-        </li>
-        <li class="issueDetailsLiTextLi">
-          <span class="issueText">联系方式</span><span class="textMargin-right10">18373270790</span><span>15773146800</span>
-        </li>
-      </ul>
-    </div>
-    <div class="lineHeight10"></div>
-    <div class="orderPadding10 backFF ">
-      <ul>
-        <li class="issueDetailsLiText">
-          <span class="Consignee">收货人</span>
-          <span class="marginright3">小明</span>
-          <span class="marginright3">18373270795</span>
-          <span class="marginright3">送货-不上楼</span>
-          <span class="marginright3">原件返回</span>
-        </li>
-        <li class="issueDetailsLiTextLi">
-          <span class="arrivalTime">到货时间</span>
-          <span>2018-07-22</span>
-          <span>至</span>
-          <span>2018-08-01</span>
-        </li>
-      </ul>
-    </div>
-    <div class="RobbingBox">
-      <div class="Robbing floatleft" >
-        <span class="floatleft rderCost">订单费用</span>
-        <span class="textRed textBlod floatright rderCost">￥2018元</span>
-      </div>
-      <div class="floatleft margin_bottom140 ulWidth100">
-        <ul class="ulWidth100">
-          <li class="orderinfo">
-            <span class="marginright95">订单号</span>
-            <span>M8585858858858885</span>
+      <div class="orderPadding10 backFF">
+        <div class="logisticsNameBox">
+          <img src="" alt="">
+          <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
+        </div>
+        <ul class="backFF">
+          <li class="issueDetailsLiText">
+            <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
           </li>
-          <li class="orderinfo">
-            <span class="marginright7">发单时间</span>
-            <span>2018-02-12 00:15</span>
+          <li class="issueDetailsLiText">
+            <span class="issueText">目的地</span><span>{{detailInfo.arriarc}}</span>
           </li>
-          <li class="orderinfo">
-            <span class="marginright7">抢单时间</span>
-            <span>2018-01-29 00:15</span>
+          <li class="issueDetailsLiText">
+            <span class="issueText">出发地</span><span>{{detailInfo.startc}}</span>
           </li>
-          <li class="orderinfo">
-            <span class="marginright7">取货时间</span>
-            <span>2018-02-15 00:15</span>
+          <li class="issueDetailsLiText">
+            <span class="issueText">货物信息</span><span
+            class="textMargin-right10">{{detailInfo.wm}}{{detailInfo.wmdictc}}</span><span class="textMargin-right10">{{detailInfo.num}}{{detailInfo.numdictc}}</span><span
+            class="textMargin-right10">{{detailInfo.ctdictc}}</span><span class="textMargin-right10"></span>
           </li>
-          <li class="orderinfo">
-            <span class="marginright7">签收时间</span>
-            <span>2018-02-15 00:15</span>
+          <li class="issueDetailsLiText">
+            <span class="issueText">车辆信息</span><span class="textMargin-right10">{{detailInfo.vnum}}台</span><span
+            class="textMargin-right10">{{detailInfo.vldictc}}</span><span class="textMargin-right10">{{detailInfo.vtdictc}}</span><span
+            class="textMargin-right10">{{detailInfo.tndictc}}</span>
+          </li>
+          <li class="issueDetailsLiText">
+            <span class="issueText">费用信息</span><span class="textMargin-right10">{{detailInfo.redictc}}</span><span
+            class="textMargin-right10"></span><span
+            class="textMargin-right10">{{detailInfo.ptdictc}}</span><span></span>
+
+          </li>
+          <li class="issueDetailsLiText">
+            <span class="issueText">时间信息</span><span class="textMargin-right10">{{detailInfo.puedatetime}}</span><span>取货</span>
+
+          </li>
+          <li class="issueDetailsLiTextLi">
+            <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
+
           </li>
         </ul>
       </div>
-    </div>
-    <!--发布成功****************-->
-    <div class="orderOperationBtn">
-      <!--<div  class="operationA">-->
-        <!--<a class="colorsixnine">取消</a>-->
-        <!--<a class="colorBlue">刷新</a>-->
-      <!--</div>-->
+      <div class="lineHeight10"></div>
+      <div class="orderPadding10 backFF ">
+        <ul>
+          <li class="issueDetailsLiText">
+            <span class="Consignee">{{detailInfo.consignee}}</span>
+            <span class="marginright3">{{detailInfo.consphone}}</span>
+            <span class="marginright3">{{detailInfo.dmdictc}}</span>
+            <!--<span class="marginright3">送货-不上楼</span>-->
+            <!--<span class="marginright3">原件返回</span>-->
+          </li>
+          <li class="issueDetailsLiTextLi">
+            <span class="arrivalTime">到货时间</span>
+            <span>{{detailInfo.easdatetime}}</span>
+            <span>至</span>
+            <span>{{detailInfo.eaedatetime}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="RobbingBox">
+        <div class="Robbing floatleft">
+          <span class="floatleft rderCost">订单费用</span>
+          <span class="textRed textBlod floatright rderCost">￥{{detailInfo.carriage}}元</span>
+        </div>
+        <div class="floatleft margin_bottom140 ulWidth100">
+          <ul class="ulWidth100">
+            <li class="orderinfo">
+              <span class="marginright95">订单号</span>
+              <span>{{detailInfo.orderno}}</span>
+            </li>
+            <li class="orderinfo">
+              <span class="marginright7">发单时间</span>
+              <span>{{detailInfo.pubdatetime}}</span>
+            </li>
+            <li class="orderinfo" v-if="detailInfo.revidatetime !== ''">
+              <span class="marginright7">抢单时间</span>
+              <span>{{detailInfo.revidatetime}}</span>
+            </li>
+            <li class="orderinfo" v-if="detailInfo.pusdatetime !== ''">
+              <span class="marginright7">取货时间</span>
+              <span>{{detailInfo.pusdatetime}}</span>
+            </li>
+            <li class="orderinfo" v-if="detailInfo.arridatetime !== ''">
+              <span class="marginright7">签收时间</span>
+              <span>{{detailInfo.arridatetime}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    <!--交易已完成**********-->
+      <div class="orderOperationBtn">
+        <!--发布成功****************-->
+        <div class="operationA" v-show="ostatus === 0">
+          <a class="colorsixnine" @click="cancelOrder">取消</a>
+          <a class="colorBlue" @click="refreshOrder">刷新</a>
+        </div>
 
-      <!--<div  class="operationA">-->
-        <!--<a class="colorsixnine" @click="toseeDispatch">查看调度</a>-->
-        <!--<a class="colorsixnine">行程回放</a>-->
-        <!--<a class="colorBlue" @click="toevaluate">评价</a>-->
-      <!--</div>-->
+        <!--抢单***************-->
+        <div class="operationA" v-show="ostatus === 1">
+          <a class="colorsixnine" @click="toseeDispatch">查看调度</a>
+          <a class="colorsixnine" @click="receiveOrder">接受</a>
+          <a class="colorsixnine" @click="refuseOrder">拒绝</a>
+        </div>
 
-    <!--抢单***************-->
+        <!--取货******************************************************-->
+        <div class="operationA" v-show="ostatus === 3">
+          <a class="colorsixnine" @click="toPickGoodsCode">取货码</a>
+          <!--<a class="colorBlue" @click="show2 = true">付款</a>-->
+        </div>
 
-      <!--<div class="operationA">-->
-        <!--<a class="colorsixnine" @click="toseeDispatch">查看调度</a>-->
-        <!--<a class="colorsixnine">接受</a>-->
-        <!--<a class="colorsixnine">拒绝</a>-->
-      <!--</div>-->
-
-    <!--签收***************-->
-
-        <!--<a class="releaseDetailsMore">更多-->
-          <!--<div class="pickGoodsBtn">-->
-            <!--<a @click="topickGoodsPic">取货照片</a>-->
-            <!--<a @click="toseeDispatch">查看调度</a>-->
-
-        <!--</a>-->
-            <!--<div class="operationA">-->
-              <!--<a class="colorsixnine">签收照片</a>-->
-              <!--<a class="colorsixnine">行程回放</a>-->
-              <!--<a class="colorBlue">确认签收</a>-->
-            <!--</div>-->
-
-      <!--</div>-->
-      <!--取货******************************************************-->
-
-        <a class="releaseDetailsMore">更多
+        <!--签收***************-->
+        <a class="releaseDetailsMore" v-show="ostatus === 4">更多
           <div class="pickGoodsBtn">
             <a @click="topickGoodsPic">取货照片</a>
             <a @click="toseeDispatch">查看调度</a>
           </div>
         </a>
-        <div class="operationA">
-          <a class="colorsixnine" @click="topickGoodsCode">取货码</a>
-          <a class="colorBlue" @click="show2 = true">付款</a>
+
+        <!--交易已完成**********-->
+
+        <div class="operationA" v-show="ostatus === 8">
+          <a class="colorsixnine" @click="toseeDispatch">查看调度</a>
+          <a class="colorsixnine">行程回放</a>
+          <a class="colorBlue" @click="toevaluate">评价</a>
         </div>
+
+      </div>
+      <!--</a>-->
+      <!--<div class="operationA">-->
+      <!--<a class="colorsixnine">签收照片</a>-->
+      <!--<a class="colorsixnine">行程回放</a>-->
+      <!--<a class="colorBlue">确认签收</a>-->
+      <!--</div>-->
+
+      <!--</div>-->
+
+
+      <!--<a class="releaseDetailsMore">更多-->
+      <!--<div class="pickGoodsBtn">-->
+      <!--<a @click="topickGoodsPic">取货照片</a>-->
+      <!--<a @click="toseeDispatch">查看调度</a>-->
+      <!--</div>-->
+      <!--</a>-->
     </div>
-    <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false" >
-        <div class="closePayment">
-          <i class="icon iconfont icon-guanbi1" @click="show2 = false"></i>
-          <span>确认支付</span>
-          <div></div>
-        </div>
+
+    <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
+      <div class="closePayment">
+        <i class="icon iconfont icon-guanbi1" @click="show2 = false"></i>
+        <span>确认支付</span>
+        <div></div>
+      </div>
       <ul class="payNumMode">
         <li class="totalNum">
           ￥3000
@@ -191,35 +216,146 @@
 </template>
 
 <script>
-    export default {
-      data(){
-        return{
-          show2: false,
-        }
-      },
-      methods:{
-        toseeDispatch(){
-          this.$router.push({
-            path: '/center/myRelease/seeDispatch'
-          })
-        },
-        topickGoodsPic(){
-          this.$router.push({
-            path: '/center/myRelease/pickGoodsPic'
-          })
-        },
-        topickGoodsCode(){
-          this.$router.push({
-            path: '/center/myRelease/pickGoodsCode'
-          })
-        },
-        toevaluate(){
-          this.$router.push({
-            path: '/center/myRelease/evaluate'
-          })
-        },
+  import {alertContent} from "../../../utils/enum";
+
+  export default {
+    data() {
+      return {
+        show2: false,
+        detailInfo: {}
+        // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
       }
+    },
+    methods: {
+      // 跳转企业详情
+      toComPInfo(item) {
+        this.$router.push({
+          path: '/userInfo',
+          query: {
+            isYourCompInfo: false,
+            id: item.revierid,
+            status: 6
+          }
+        })
+      },
+      // 订单取消发布
+      cancelOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.CANCEL_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.cancelOrder(item.orderno, self.userId, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  // 重新发布
+                  self.releaseList[index].ostatus = '20';
+                  self.$vux.toast.text('订单取消发布成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 刷新订单
+      refreshOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.REFRESH_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.flushOrder(self.userId, item.orderno, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('订单刷新成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 拒绝订单
+      refuseOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.REFUSE_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.refuseOrder(self.userId, item.orderno, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('订单拒绝成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 订单接受
+      receiveOrder(item, index) {
+        let self = this;
+        this.message.showAlert(this, alertContent.RECEIVE_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.receiveOrder(self.userId, item.orderno, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('订单接受成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      fallback() {
+        this.$router.go(-1)
+      },
+      toseeDispatch() {
+        this.$router.push({
+          path: '/center/myRelease/seeDispatch'
+        })
+      },
+      topickGoodsPic() {
+        this.$router.push({
+          path: '/center/myRelease/pickGoodsPic'
+        })
+      },
+      toPickGoodsCode() {
+        this.$router.push({
+          path: '/center/myRelease/pickGoodsCode',
+          query: {
+            qrCode: 'no12345678'
+          }
+        })
+      },
+      toevaluate() {
+        this.$router.push({
+          path: '/center/myRelease/evaluate'
+        })
+      },
     }
+  }
 </script>
 
 <style scoped>
