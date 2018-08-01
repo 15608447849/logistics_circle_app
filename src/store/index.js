@@ -10,7 +10,8 @@ Vue.use(Vuex);
 const state = {
   userInfo: {}, // 用户信息
   compInfo: {}, // 企业信息
-  userId: '', // 用户ouid
+  userId: '3', // 用户ouid
+  avatarUrl: 'http://192.168.1.240/wlq/compic/comp3/0.jpeg',// 默认用户头像
   openId: '',
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型

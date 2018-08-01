@@ -80,7 +80,7 @@
         circleQueryParamA: new mycircle.CircleQueryParam(),
         circleQueryParamB: new mycircle.CircleQueryParam(),
         page: new cstruct.Page(),
-        userId: this.$app_store.getters.userId || 3,
+        userId: this.$app_store.getters.userId,
         circleList: [],
         sCircleList: [], // 货源圈
         SchedulingCircle: [],

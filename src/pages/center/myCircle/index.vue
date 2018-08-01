@@ -65,7 +65,7 @@
         sCircleList: [], // 货运圈列表
         SchedulingCircle: [],// 调度圈列表
         page: new cstruct.Page(),
-        userId: this.$app_store.getters.userId || 3,
+        userId: this.$app_store.getters.userId,
         sCircleNum: 0,
         SchedulingCircleNum: 0
       }

@@ -51,7 +51,7 @@
         driverPhone: '',// 司机手机,
         driverStatus: '',// 状态 0 启用 32 停用
         driverType: 1, //  1,司机;132,业务员
-        userId: this.$app_store.getters.userId || 4,
+        userId: this.$app_store.getters.userId,
         // pageSize: '1'// 当前页数
         page: new cstruct.Page(),
         searchInputVal: '搜索',
@@ -72,7 +72,6 @@
         this.page.pageIndex = 1; // 当前页
         this.page.totalItems = 0;
         this.page.totalPageCount = 0;
-        debugger
         // 搜索框搜索内容
         if (this.$app_store.getters.searchState === searchState.DRIVER) {
           this.searchInputVal = this.$app_store.getters.searchContent;

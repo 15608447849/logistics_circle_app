@@ -130,7 +130,7 @@
       return {
         QueryParam: new myOrder.QueryParam(),
         page: new cstruct.Page(),
-        userId: this.$app_store.getters.userId || 3,
+        userId: this.$app_store.getters.userId,
         releaseList: [], // 订单发布列表
         total: 0,// 发布订单总条数
         loading: false,

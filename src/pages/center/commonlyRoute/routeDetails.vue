@@ -45,7 +45,7 @@
       return {
         routerInfo: new enterprise.RouteInfo(),
         areaList: [],
-        userId: this.$app_store.getters.userId || 3,
+        userId: this.$app_store.getters.userId,
         origin: '',// 目的地地区码
         destination: '',// 出发地地区码
         state: '',// 线路状态

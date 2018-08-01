@@ -22,15 +22,58 @@
 {
     var Ice = require("ice").Ice;
     var __M = Ice.__M;
+    var cstruct = require("cstruct").cstruct;
     var Slice = Ice.Slice;
 
     var user = __M.module("user");
 
     /**
+     * 企业码信息
+     **/
+    user.CompIdName = Slice.defineStruct(
+        function(compid, fname, pho, phw, contact, address, area, verify)
+        {
+            this.compid = compid !== undefined ? compid : "";
+            this.fname = fname !== undefined ? fname : "";
+            this.pho = pho !== undefined ? pho : "";
+            this.phw = phw !== undefined ? phw : "";
+            this.contact = contact !== undefined ? contact : "";
+            this.address = address !== undefined ? address : "";
+            this.area = area !== undefined ? area : "";
+            this.verify = verify !== undefined ? verify : "";
+        },
+        true,
+        function(__os)
+        {
+            __os.writeString(this.compid);
+            __os.writeString(this.fname);
+            __os.writeString(this.pho);
+            __os.writeString(this.phw);
+            __os.writeString(this.contact);
+            __os.writeString(this.address);
+            __os.writeString(this.area);
+            __os.writeString(this.verify);
+        },
+        function(__is)
+        {
+            this.compid = __is.readString();
+            this.fname = __is.readString();
+            this.pho = __is.readString();
+            this.phw = __is.readString();
+            this.contact = __is.readString();
+            this.address = __is.readString();
+            this.area = __is.readString();
+            this.verify = __is.readString();
+        },
+        8, 
+        false);
+    Slice.defineSequence(user, "ompIdNameseqHelper", "user.CompIdName", false);
+
+    /**
      * 用户基本信息数据模型
      **/
     user.UserIce = Slice.defineStruct(
-        function(oid, uphone, uname, urealname, upw, roleid, ioid, adddate, addtime, cstatus)
+        function(oid, uphone, uname, urealname, upw, roleid, ioid, adddate, addtime, cstatus, comps)
         {
             this.oid = oid !== undefined ? oid : 0;
             this.uphone = uphone !== undefined ? uphone : 0;
@@ -42,6 +85,7 @@
             this.adddate = adddate !== undefined ? adddate : "";
             this.addtime = addtime !== undefined ? addtime : "";
             this.cstatus = cstatus !== undefined ? cstatus : 0;
+            this.comps = comps !== undefined ? comps : null;
         },
         true,
         function(__os)
@@ -56,6 +100,7 @@
             __os.writeString(this.adddate);
             __os.writeString(this.addtime);
             __os.writeShort(this.cstatus);
+            user.ompIdNameseqHelper.write(__os, this.comps);
         },
         function(__is)
         {
@@ -69,8 +114,9 @@
             this.adddate = __is.readString();
             this.addtime = __is.readString();
             this.cstatus = __is.readShort();
+            this.comps = user.ompIdNameseqHelper.read(__is);
         },
-        27, 
+        28, 
         false);
     Slice.defineSequence(user, "stringListHelper", "Ice.StringHelper", false);
     Slice.defineSequence(user, "intListHelper", "Ice.IntHelper", true);
@@ -91,8 +137,7 @@
     {
         "login": [, , , , , [7], [[7], [7], [3]], , , , ],
         "loginBySms": [, , , , , [7], [[4], [7]], , , , ],
-        "loginByToken": [, , , , , [7], [[7]], , , , ],
-        "getUserInfo": [, , , , , ["user.userListHelper"], [[3], ["user.intListHelper"], [3], [7], [4]], , , , ],
+        "getUserInfo": [, , , , , ["user.userListHelper"], [[3], ["user.intListHelper"], [3], [7], [4], [cstruct.Page]], [[cstruct.Page]], , , ],
         "addUser": [, , , , , [user.UserIce], [[3], [4], [7], [3]], , , , ],
         "updateUser": [, , , , , [user.UserIce], [[3], [3], [4], [7]], , , , ],
         "verifyUserName": [, , , , , [7], [[7]], , , , ],

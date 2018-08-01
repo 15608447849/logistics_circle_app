@@ -15,11 +15,10 @@
             <img :src="item.url" class="upcerPic">
           </div>
           <cube-upload
+            ref="upload"
             v-show="item.url === ''"
-            style="position:relative;top:.55rem;left:0rem;"
+            style="position:relative;top:0rem;left:0rem;background:red;"
             :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
-            :simultaneous-uploads="1"
-            @file-removed="filesRemoved"
             @files-added="filesAdded"
             @file-success="filesSuccess"
             @file-error="filesError">
@@ -35,14 +34,13 @@
 </template>
 
 <script>
-
   import {uploadUrl} from "../../utils/config";
 
   export default {
     data() {
       return {
         uploadUrl: uploadUrl,
-        userId: this.$app_store.getters.userId || 4,
+        userId: this.$app_store.getters.userId,
         uploadIndex: 0,
         uploadList: [
           {
@@ -87,22 +85,19 @@
       this.getImages(this.userId);
     },
     methods: {
-      // 删除图片
-      // deleteImage(index){
-      //
-      // },
       deletedImages(id) {
         let self = this;
         let path = "http://192.168.1.240:8090/delCompPic?compId="+this.userId+"&picNo="+id;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.readyState === 4 && xhr.status === 200) {
             var data = xhr.responseText;
             data = JSON.parse(data);
-            if (data.code == 0) {
+            if (data.code === 0) {
               self.uploadList[id].uploadBtnShow = true;
               self.uploadList[id].url = '';
               self.$vux.toast.text('图片删除成功!', 'top');
+              self.$refs.upload[id].removeFile(self.$refs.upload[id].files)
             } else {
               self.$vux.toast.text('图片删除失败!', 'top');
             }
@@ -140,14 +135,9 @@
         this.$vux.toast.text(files.response.msg, 'top');
         if(files.response.code === 0) {
           this.$vux.toast.text('图片上传成功!', 'top');
-          // let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-          // this.uploadList[imgUrl[imgUrl.length-1]].url = files.response.data.nginx + files.response.data.relativeAddr
+          let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
+          this.uploadList[imgUrl[imgUrl.length-1]].url = files.response.data.nginx + files.response.data.relativeAddr
         }
-      },
-      filesRemoved(files) {
-        debugger
-        let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-        this.deletedImages(imgUrl[imgUrl.length-1]);
       },
       filesAdded(files) {
         // 图片压缩(未完成)

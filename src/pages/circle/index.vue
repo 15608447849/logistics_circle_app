@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
+      <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
       <span>圈子</span>
       <span @click="toPageIssue">发单</span>
     </div>
@@ -37,6 +37,7 @@
   export default {
     data() {
       return {
+        avatar: this.$app_store.state.avatarUrl,// 头像
         infoList: [],
         pageSize: '10', // 订单数
         address: this.$app_store.getters.currentCity, // 地址
@@ -50,6 +51,9 @@
         loading: false,
         finished: false
       }
+    },
+    mounted() {
+      this.$app_store.commit(TABBAR_INDEX, 1);
     },
     methods: {
       showTip() {

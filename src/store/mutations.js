@@ -2,7 +2,7 @@ import {
   USER_INFO,
   USER_ID,
   COMP_INFO,
-  WX_USER_INFO,
+  AVATAR_URL,
   RECEIPT_CITY,
   SEARCH_STATE,
   SEARCH_CONTENT,
@@ -19,10 +19,15 @@ export default {
   [USER_INFO] (state, v) {
     state.userInfo = v
   },
-  // 用户token
+  // 用户id
   [USER_ID] (state, v) {
     state.userId = v
   },
+  // 用户头像
+  [AVATAR_URL] (state, v) {
+    state.avatarUrl = v
+  },
+
   // 企业信息
   [COMP_INFO] (state, v) {
     state.compInfo = v
@@ -32,8 +37,8 @@ export default {
     state.isShowSidebar = isShowSidebar
   },
   // tabBarIndex
-  [TABBAR_INDEX] (state, v) {
-    state.tabBarIndex = v
+  [TABBAR_INDEX] (state, tabBarIndex) {
+    state.tabBarIndex = tabBarIndex
   },
   // 搜索内容
   [SEARCH_CONTENT] (state, v) {
