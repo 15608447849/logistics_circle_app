@@ -99,7 +99,7 @@
         compInfo: {},
         isYourCompInfo: true,
         avatarUrl: '../../assets/images/small/bussiness-man.png',
-        status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度
+        status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7消息
         userId: this.$app_store.getters.userId,
       }
     },

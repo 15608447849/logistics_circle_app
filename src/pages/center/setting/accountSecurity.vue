@@ -1,7 +1,7 @@
 <template>
    <div>
-     <div class="issueHeaderNav">
-       <i  @click="fallback" class="icon iconfont icon-btngoback back"></i>
+     <div class="issueHeaderLog">
+       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
        <span>账号与安全</span>
        <div></div>
      </div>
@@ -16,6 +16,9 @@
 <script>
     export default {
       data(){
+        return{
+
+        }
       },
       methods:{
         fallback() {

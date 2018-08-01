@@ -1,7 +1,7 @@
 <template>
    <div>
-     <div class="issueHeaderNav">
-       <i  @click="fallback" class="icon iconfont icon-btngoback back"></i>
+     <div class="issueHeaderLog">
+       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
        <span>绑定手机号</span>
        <div></div>
      </div>

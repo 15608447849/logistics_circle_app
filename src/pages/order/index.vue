@@ -2,7 +2,7 @@
   <div>
     <div class="myReleaseBox">
       <div class="issueHeaderNav">
-        <i class=""></i>
+        <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
         <span>我的发布</span>
         <i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>
       </div>
@@ -120,6 +120,7 @@
 <script>
   import {Tab, TabItem} from 'vux'
   import {alertContent} from "../../utils/enum";
+  import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
 
   export default {
     components: {
@@ -202,6 +203,9 @@
         this.oStatus = item.value;
         // 重置搜索条件, 刷新列表
 
+      },
+      avatarClick() {
+        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
       },
       initQueryConditions() {
         // 初始化分页条件

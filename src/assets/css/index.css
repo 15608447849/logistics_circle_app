@@ -182,6 +182,13 @@ a {
   border:1px solid transparent;
   border-radius: 50%;
 }
+.loginPicture9{
+  display:inline-block;
+  width:.94rem;
+  height:.94rem;
+  border:1px solid transparent;
+  border-radius: 50%;
+}
 .leftEject{
   width:2rem;
   height:2rem;
@@ -432,9 +439,11 @@ a {
 }
 .portrait img{
   display:inline-block;
-  width:.9rem;
-  height:.9rem;
+  width:.94rem;
+  height:.94rem;
   vertical-align: middle;
+  border:1px solid transparent;
+  border-radius: 50%;
 }
 .logisticsMing{
   margin-left:.24rem;
@@ -3455,6 +3464,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   width:7.08rem;
   height:1.24rem;
 }
+/*************************************************************************************************************************/
 .needBorder img{
   width:.48rem;
   height:.48rem;
@@ -3618,6 +3628,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display:inline-block;
   width:.15rem;
   height:.15rem;
+  margin-bottom:.1rem;
   border:1px solid #ff3b30;
   border-radius: 50%;
   background:#ff3b30;

@@ -16,7 +16,7 @@
       <div style="background-color:#fff;">
         <div class="centerPic">
           <div class="portrait">
-            <img src="../assets/images/small/aaaaaaa.png" alt="">
+            <img src="../assets/images/small/evaluate_03.png" alt="">
             <span class="logisticsMing">{{compInfo.fname}}</span>
           </div>
           <ul class="startBox">
@@ -62,6 +62,7 @@
     CURRENT_CITY, IS_SHOW_SIDEBAR
   } from '../store/mutation-types'
   export default {
+    // computed 计算属性
     computed: {
         isShowSidebar: {
           get: function () {

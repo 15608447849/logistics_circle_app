@@ -142,6 +142,7 @@
 
               }
               self.detailInfo = result.obj;
+              console.log(self.detailInfo)
             },
             function (error) {
               self.message.Toast(self,'error','订单详情获取失败, 请稍后重试',false);

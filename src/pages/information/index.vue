@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
       <span>信息大厅</span>
       <span @click="toPageIssue">发单</span>
     </div>
@@ -29,6 +29,7 @@
 </template>
 <script>
   import Conversion from '@/utils/conversion'
+  import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
 
   export default {
     data() {
@@ -65,6 +66,9 @@
             pubercompid: item.pubercompid
           }
         })
+      },
+      avatarClick() {
+        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
       },
       showTip() {
         let self = this;
@@ -159,7 +163,8 @@
     },
     mounted() {
 
-    }
+    },
+
   }
 </script>
 <style>

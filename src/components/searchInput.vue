@@ -38,8 +38,11 @@
       }
     },
     mounted() {
+      // 5 司机
       this.searchState = this.$app_store.getters.searchState;
+      // 清空输入框内容
       this.clearInput();
+      // 获取历史记录
       this.getSearchHistory(this.searchState)
     },
     methods: {
@@ -66,7 +69,6 @@
           this.historyList.push(searchCont)
         }
         this.clearInput();
-        // 存放至VUX
         this.$app_store.commit(SEARCH_CONTENT, searchCont);
         // 返回页面
         this.returnToPage()

@@ -72,9 +72,11 @@
         this.page.pageIndex = 1; // 当前页
         this.page.totalItems = 0;
         this.page.totalPageCount = 0;
+        debugger
         // 搜索框搜索内容
         if (this.$app_store.getters.searchState === searchState.DRIVER) {
           this.searchInputVal = this.$app_store.getters.searchContent;
+          // driverName 后端搜索条件
           this.driverName = this.searchInputVal;
           console.log(this.$app_store.getters.searchContent)
         }

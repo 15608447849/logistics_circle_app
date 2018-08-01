@@ -6,7 +6,7 @@
       <div></div>
     </div>
     <div class="enterprisePic">
-      <img src="../../../assets/images/small/bussiness-man.png" alt="">
+      <img :src="seeInformationPic" alt="">
     </div>
     <span class="pLabel"></span>
     <span class="creditGrade">信用等级</span>
@@ -50,7 +50,9 @@
 <script>
     export default {
       data(){
-
+        return {
+          seeInformationPic:'../../../assets/images/small/evaluate_03.png',
+        }
       },
       methods:{
         fallback() {

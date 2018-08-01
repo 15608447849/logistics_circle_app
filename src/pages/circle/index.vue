@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/logo_26.png" alt="" class="issueHeaderNavPic">
+      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
       <span>圈子</span>
       <span @click="toPageIssue">发单</span>
     </div>
@@ -32,7 +32,7 @@
 
 <script>
   import Conversion from '@/utils/conversion'
-  import {TABBAR_INDEX} from "../../store/mutation-types";
+  import {IS_SHOW_SIDEBAR, TABBAR_INDEX} from "../../store/mutation-types";
 
   export default {
     data() {
@@ -115,7 +115,10 @@
       },
       dateConversion(time) {
         return Conversion.formatMsgTime(time)
-      }
+      },
+      avatarClick() {
+        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+      },
     }
   }
 </script>

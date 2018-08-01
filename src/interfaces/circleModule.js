@@ -35,4 +35,10 @@ module.exports = {
    sendAddMyCircleMsg:(oid,targetid,ctype,callback) => {
         queryIce(mycircle.CircleServicePrx, 'CircleService', 'sendAddMyCircleMsg',oid,targetid,ctype,callback);
     },
+
+  /**确认/拒绝添加
+   */
+  agreeOrRefuse:(msgid,targetid,callback) => {
+    queryIce(mycircle.CircleServicePrx, 'CircleService', 'agreeOrRefuse' ,str2jlong(msgid),targetid,callback);
+  },
 };
