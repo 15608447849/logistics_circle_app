@@ -2,7 +2,7 @@
   <div>
     <div class="myReleaseBox">
       <div class="issueHeaderNav">
-        <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
+        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
         <span>我的发布</span>
         <i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>
       </div>
@@ -120,6 +120,7 @@
 <script>
   import {Tab, TabItem} from 'vux'
   import {alertContent} from "../../utils/enum";
+  import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
 
   export default {
@@ -129,9 +130,10 @@
     },
     data() {
       return {
+        avatar: this.$app_store.state.avatarUrl,// 头像
         QueryParam: new myOrder.QueryParam(),
         page: new cstruct.Page(),
-        userId: this.$app_store.getters.userId || 3,
+        userId: this.$app_store.getters.userId,
         releaseList: [], // 订单发布列表
         total: 0,// 发布订单总条数
         loading: false,
@@ -165,6 +167,7 @@
       }
     },
     mounted() {
+      this.$app_store.commit(TABBAR_INDEX, 3);
       // 初始化列表查询条件
       this.initQueryConditions();
     },

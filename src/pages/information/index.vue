@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
+      <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
       <span>信息大厅</span>
       <span @click="toPageIssue">发单</span>
     </div>
@@ -29,11 +29,13 @@
 </template>
 <script>
   import Conversion from '@/utils/conversion'
+  import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
 
   export default {
     data() {
       return {
+        avatar: this.$app_store.state.avatarUrl,// 头像
         infoList: [],
         pageSize: '10', // 订单数
         address: '', // 地址
@@ -41,7 +43,7 @@
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        oid: this.$app_store.getters.userId || 3,
+        oid: this.$app_store.getters.userId,
         pullingMessage: '',
         isShowMessage: false,
         loading: false,
@@ -162,9 +164,8 @@
       }
     },
     mounted() {
-
-    },
-
+      this.$app_store.commit(TABBAR_INDEX, 2);
+    }
   }
 </script>
 <style>

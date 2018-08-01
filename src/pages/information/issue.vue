@@ -181,7 +181,7 @@
         pmList: [],
         disPmList: [],
         sunPrice: 0,
-        userId: this.$app_store.getters.userId || 3,
+        userId: this.$app_store.getters.userId,
       }
     },
     activated() {

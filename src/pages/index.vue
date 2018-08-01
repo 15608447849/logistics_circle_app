@@ -3,11 +3,10 @@
     <transition :name="transitionName">
       <router-view class="child-view"></router-view>
     </transition>
-
     <div class="nav-bar">
       <yd-tabbar active-color="#1E90FF">
         <yd-tabbar-item :title=item.title link="#" v-for="(item,index) in activeList" :key="index"
-                        @click.native="navBarClick(index)" :active=item.isActive>
+                        @click.native="navBarClick(index)" :active="tabBarIndex === index">
           <yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>
         </yd-tabbar-item>
       </yd-tabbar>
@@ -16,7 +15,7 @@
       <div style="background-color:#fff;">
         <div class="centerPic">
           <div class="portrait">
-            <img src="../assets/images/small/evaluate_03.png" alt="">
+            <img :src="avatar" alt="">
             <span class="logisticsMing">{{compInfo.fname}}</span>
           </div>
           <ul class="startBox">
@@ -40,13 +39,13 @@
           </li>
           <li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
           <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
-          <li @click="toMycircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
+          <li @click="toMyCircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
             class="personalText circle">我的圈子</span></li>
           <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
           <li @click="tomyInformation"><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span>
           </li>
         </ul>
-        <div class="settingCircleBox" @click="tosetting">
+        <div class="settingCircleBox" @click="toSetting">
           <i class="icon iconfont icon-shezhi1"></i>
           <div class="settingCircle">设置</div>
         </div>
@@ -59,22 +58,32 @@
   import {
     DICT,
     AREA,
-    CURRENT_CITY, IS_SHOW_SIDEBAR
+    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX
   } from '../store/mutation-types'
+
   export default {
     // computed 计算属性
     computed: {
-        isShowSidebar: {
-          get: function () {
-            return this.$app_store.state.isShowSidebar
-          },
-          set: function () {
-            this.$app_store.commit(IS_SHOW_SIDEBAR,false);
-          }
+      isShowSidebar: {
+        get: function () {
+          return this.$app_store.state.isShowSidebar
+        },
+        set: function () {
+          this.$app_store.commit(IS_SHOW_SIDEBAR, false);
         }
+      },
+      tabBarIndex: {
+        get: function () {
+          return this.$app_store.state.tabBarIndex
+        },
+        set: function () {
+          // this.$app_store.commit(TABBAR_INDEX, this.tabIndex);
+        }
+      }
     },
     data() {
       return {
+        avatar: this.$app_store.state.avatarUrl,// 头像
         transitionName: '',
         compInfo: {
           fname: '当前用户未登录'
@@ -113,7 +122,7 @@
           path: '/center/driverMgr/index'
         })
       },
-      toMycircle() {
+      toMyCircle() {
         this.$router.push({
           path: '/center/myCircle/index'
         })
@@ -146,7 +155,7 @@
           }
         })
       },
-      tosetting() {
+      toSetting() {
         this.$router.push({
           path: '/center/setting/index'
         })
@@ -157,13 +166,7 @@
         })
       },
       handleActive(position) {
-        this.activeList.forEach((val, index, array) => {
-          if (position === index) {
-            val.isActive = true
-          } else {
-            val.isActive = false
-          }
-        });
+        this.$app_store.commit(TABBAR_INDEX, position);
       },
       navBarClick(index) {
         let path = '/';
@@ -214,11 +217,6 @@
             }
           )
         );
-      }
-    },
-    watch: {
-      tabBarIndex(newVal, oldVal) {
-        console.log('------------------------'+newVal)
       }
     }
   }

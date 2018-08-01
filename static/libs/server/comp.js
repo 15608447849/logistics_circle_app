@@ -366,7 +366,8 @@
         "updateStaffInfo": [, , , , , [7], [[7], [7], [3], [3], [3]], , , , ],
         "updateStaffstatus": [, , , , , [7], [[3], [3], [3], [3]], , , , ],
         "updateCompPhone": [, , , , , [3], [[4], [4]], , , , ],
-        "selectPhoAndPht": [, , , , , [7], [[3]], , , , ]
+        "selectPhoAndPht": [, , , , , [7], [[3]], , , , ],
+        "feedbackCredentRelpath": [, , , , , [7], [[3], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.comp = comp;
 }

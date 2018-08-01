@@ -40,7 +40,7 @@
   export default {
     data() {
       return {
-        userId: this.$app_store.getters.userId || 4,
+        userId: this.$app_store.getters.userId,
         routeList: [],
         page: new cstruct.Page(),
         origin: '',// 目的地地区码

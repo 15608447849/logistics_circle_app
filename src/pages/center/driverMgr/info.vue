@@ -55,7 +55,7 @@
       dSave() {
         let self = this;
         if(this.isEditor) {
-          this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId || 4,this.uid, this.type, new IceCallback(
+          this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId,this.uid, this.type, new IceCallback(
             function (result) {
               if(result.code === 0) {
                 self.goBackPage();
@@ -68,7 +68,7 @@
             }
           ));
         }else {
-          this.$Ice_InfoService.addStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId || 4, this.type, new IceCallback(
+          this.$Ice_InfoService.addStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId, this.type, new IceCallback(
             function (result) {
               if(result.code === 0) {
                 self.goBackPage();

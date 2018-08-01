@@ -66,6 +66,7 @@
             self.finished = true;
           }
         }, function (error) {
+          self.finished = true;
           self.loading = false;
         });
       },

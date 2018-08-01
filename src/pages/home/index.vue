@@ -2,7 +2,7 @@
   <div>
     <!--页头-->
     <div class="issueHeaderNav">
-      <img src="../../assets/images/small/evaluate_03.png" alt="" @click="avatarClick" class="loginPicture">
+      <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
       <!--<i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>-->
       <span>首页</span>
       <span class="icon iconfont icon-gengduo1 dropdowngengduo">
@@ -86,6 +86,7 @@
       return {
         infoList: [],
         pageSize: '10', // 订单数
+        avatar: this.$app_store.state.avatarUrl,// 头像
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
@@ -94,11 +95,12 @@
         isMember: true,
         direction: '',
         tipStyle: '',
-        oid: this.$app_store.getters.userId || 3
+        oid: this.$app_store.getters.userId
         // 信息大厅数据
       }
     },
     mounted() {
+      this.$app_store.commit(TABBAR_INDEX,0);
       this.requestInfoList();
     },
     methods: {

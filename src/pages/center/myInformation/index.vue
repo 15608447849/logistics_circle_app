@@ -35,7 +35,7 @@
           messageList: [],
           display:true,
           nothandle:true,
-          userId: this.$app_store.getters.userId || 3,
+          userId: this.$app_store.getters.userId,
           read:true,
           isredspop:true,
           tabList: [{
