@@ -15,8 +15,9 @@
             <img :src="item.url" class="upcerPic">
           </div>
           <cube-upload
+            ref="upload"
             v-show="item.url === ''"
-            style="position:relative;top:0rem;left:0rem;background:red;"
+            style="position:relative;top:0rem;left:0rem;"
             :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
             @files-added="filesAdded"
             @file-success="filesSuccess"
@@ -93,19 +94,19 @@
         });
         ImagePreview(Images, index);
       },
-      deletedImages(id) {
+      deletedImages(index) {
         let self = this;
-        let path = "http://192.168.1.240:8090/delCompPic?compId=" + this.userId + "&picNo=" + id;
+        let path = "http://192.168.1.240:8090/delCompPic?compId=" + this.userId + "&picNo=" + index;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
             var data = xhr.responseText;
             data = JSON.parse(data);
             if (data.code === 0) {
-              self.uploadList[id].uploadBtnShow = true;
-              self.uploadList[id].url = '';
+              self.uploadList[index].uploadBtnShow = true;
+              self.uploadList[index].url = '';
               self.$vux.toast.text('图片删除成功!', 'top');
-              self.$refs.upload[id].removeFile(self.$refs.upload[id].files)
+              self.$refs.upload[index].removeFile(self.$refs.upload[index].files)
             } else {
               self.$vux.toast.text('图片删除失败!', 'top');
             }
@@ -149,13 +150,13 @@
       },
       filesAdded(files) {
         let self = this;
+        debugger
         // 图片压缩
         this.imgPreview(files);
         // 图片旋转
         EXIF.getData(this.file, function() {
-          self.Orientation = EXIF.getTag(this, 'Orientation');
+          self.Orientation = EXIF.getTag(self, 'Orientation');
         });
-        debugger
         let hasIgnore = false;
         const maxSize = 2 * 1024 * 1024; // 2M
         for (let k in files) {

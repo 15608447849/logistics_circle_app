@@ -862,10 +862,9 @@ input[type="radio"] {
   overflow: auto;
 }
 .identity div{
-  width:3.46rem;
+  width:3.3rem;
   height:3.14rem;
   margin-bottom:.64rem;
-  background:#ffffff;
 }
 .identity div p{
   margin-bottom:.31rem;
@@ -917,9 +916,9 @@ input[type="radio"] {
 }
 .controlPicImg i{
   position:absolute;
-  top:-.1rem;
-  left:3.25rem;
-  font-size:.36rem;
+  top:-.2rem;
+  left:3.1rem;
+  font-size:.42rem;
 }
 .controlPicImg img{
   width:100%;
@@ -3576,6 +3575,22 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-stretch: normal;
   letter-spacing: 0px;
   color: #333333;
+}
+.grayBack{
+  display:inline-block;
+  position:relative;
+  top:0rem;
+  left:0rem;
+  height:.6rem;
+  border:1px solid transparent;
+  border-radius: 5px;
+  background:lightgray;
+  line-height:.6rem;
+  margin-right:.15rem;
+  color:black;
+}
+.grayBack i{
+
 }
 .addRouteList li input{
   font-family: PingFang-SC-Regular;

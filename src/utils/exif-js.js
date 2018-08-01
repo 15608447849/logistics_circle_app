@@ -180,6 +180,7 @@ function readEXIFData(file, start) {
   return tags;
 }
 EXIF.getData = function (img, callback) {
+  debugger
   if ((img instanceof Image || img instanceof HTMLImageElement) && !img.complete) return false;
   if (!imageHasData(img)) {
     getImageData(img, callback);
