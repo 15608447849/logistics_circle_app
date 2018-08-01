@@ -861,12 +861,12 @@ input[type="radio"] {
   background:#ffffff;
   overflow: auto;
 }
-.identity div{
-  width:3.46rem;
-  height:2.6rem;
-  margin-bottom:.64rem;
-  background:#ffffff;
-}
+/*.identity div{*/
+  /*width:3.46rem;*/
+  /*height:2.6rem;*/
+  /*margin-bottom:.64rem;*/
+  /*background:#ffffff;*/
+/*}*/
 .identity div p{
   margin-bottom:.31rem;
   font-family: PingFang-SC-Regular;
@@ -902,9 +902,41 @@ input[type="radio"] {
   z-index:100;
 }
 .updataCertificates{
+  position:relative;
+  top:0rem;
+  left:0rem;
   width: 3.46rem;
   height: 3.14rem;
   background-color: #ffffff;
+  margin-bottom:.64rem;
+}
+.controlPicImg{
+  position:relative;
+  top:0rem;
+  left:0rem;
+  width:3.46rem;
+  height:2.6rem;
+}
+.controlPicImg i{
+  position:absolute;
+  top:.1rem;
+  left:3.1rem;
+}
+.updataCertificates .upcerPic{
+  dipslay:inline-block;
+  width:100%;
+  height:100%;
+}
+.controlPic{
+  position:absolute;
+  top:.55rem;
+  left:0rem;
+  width:3.46rem;
+  height:2.6rem;
+}
+.controInput{
+  margin-left:.9rem;
+  margin-top:.5rem;
 }
 .cardPhoto{
   width:3.5rem;
@@ -916,13 +948,6 @@ input[type="radio"] {
   height:2.6rem;
   background-color: #ffffff;
   border: solid 1px #ebeff5;
-}
-.upcerPic{
-  display:block;
-  width:.8rem;
-  height:.8rem;
-  margin:.9rem auto;
-
 }
 /*登录*/
 .login{

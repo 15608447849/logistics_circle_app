@@ -5,22 +5,29 @@
       <span>证件信息</span>
       <div></div>
     </div>
-    <div class="identity">
-      <!--<div>-->
-      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-        <p>{{item.title}}</p>
-        <!--<img :src="item.url" class="upcerPic">-->
-        <cube-upload
-          :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
-          :simultaneous-uploads="1"
-          @files-added="filesAdded"
-          @file-success="filesSuccess"
-          @file-error="filesError"></cube-upload>
+    <div class="downfixed" >
+      <div class="identity">
+        <!--<div>-->
+        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
+          <p>{{item.title}}</p>
+          <div class="controlPicImg">
+            <i class="icon iconfont icon-guanbi"></i>
+            <img :src="item.url" class="upcerPic">
+          </div>
+          <div class="controlPic">
+            <cube-upload
+              :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
+              :simultaneous-uploads="1"
+              @files-added="filesAdded"
+              @file-success="filesSuccess"
+              @file-error="filesError" class="controInput"></cube-upload>
+          </div>
 
-        <!--<div class="updataCertificatesBox">-->
-        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
-        <!--</div>-->
+          <!--<div class="updataCertificatesBox">-->
+          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+          <!--</div>-->
+        </div>
       </div>
     </div>
   </div>
@@ -108,12 +115,8 @@
         xhr.open("GET", path, true);
         xhr.send();
       },
-      uploadClick(index) {
-        debugger
-        this.uploadIndex = index
-      },
       filesError(files) {
-        self.$vux.toast.text('图片上传失败!', 'top');
+        this.$vux.toast.text('图片上传失败!', 'top');
       },
       filesSuccess(files) {
         debugger
@@ -141,12 +144,6 @@
           txt: '你上传的图片 > 2M '
         }).show()
 
-      },
-      fileSubmitted(file) {
-        file.base64Value = file.file.base64
-      },
-      fileSuccess(file) {
-        console.log('图片上传成功')
       },
       fallback() {
         this.$router.go(-1)
