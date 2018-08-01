@@ -27,6 +27,59 @@
 
     var order = __M.module("order");
 
+    order.FilterConditionICE = Slice.defineStruct(
+        function(keyword, startAddr, destAddr, goodsType, vt, wm, vlen, minCost, maxCost, startTime, endTime, ostatus, maxTime)
+        {
+            this.keyword = keyword !== undefined ? keyword : "";
+            this.startAddr = startAddr !== undefined ? startAddr : "";
+            this.destAddr = destAddr !== undefined ? destAddr : "";
+            this.goodsType = goodsType !== undefined ? goodsType : "";
+            this.vt = vt !== undefined ? vt : "";
+            this.wm = wm !== undefined ? wm : "";
+            this.vlen = vlen !== undefined ? vlen : "";
+            this.minCost = minCost !== undefined ? minCost : "";
+            this.maxCost = maxCost !== undefined ? maxCost : "";
+            this.startTime = startTime !== undefined ? startTime : "";
+            this.endTime = endTime !== undefined ? endTime : "";
+            this.ostatus = ostatus !== undefined ? ostatus : "";
+            this.maxTime = maxTime !== undefined ? maxTime : "";
+        },
+        true,
+        function(__os)
+        {
+            __os.writeString(this.keyword);
+            __os.writeString(this.startAddr);
+            __os.writeString(this.destAddr);
+            __os.writeString(this.goodsType);
+            __os.writeString(this.vt);
+            __os.writeString(this.wm);
+            __os.writeString(this.vlen);
+            __os.writeString(this.minCost);
+            __os.writeString(this.maxCost);
+            __os.writeString(this.startTime);
+            __os.writeString(this.endTime);
+            __os.writeString(this.ostatus);
+            __os.writeString(this.maxTime);
+        },
+        function(__is)
+        {
+            this.keyword = __is.readString();
+            this.startAddr = __is.readString();
+            this.destAddr = __is.readString();
+            this.goodsType = __is.readString();
+            this.vt = __is.readString();
+            this.wm = __is.readString();
+            this.vlen = __is.readString();
+            this.minCost = __is.readString();
+            this.maxCost = __is.readString();
+            this.startTime = __is.readString();
+            this.endTime = __is.readString();
+            this.ostatus = __is.readString();
+            this.maxTime = __is.readString();
+        },
+        13, 
+        false);
+
     /**
      * 订单详细信息(信息大厅,我的圈子)
      **/
@@ -265,8 +318,8 @@
     Slice.defineOperations(order.OrderService, order.OrderServicePrx,
     {
         "generateOrderNo": [, , , , , [7], , , , , ],
-        "queryOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "queryCircleOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryOrderByCurdate": [, , , , , [7], [[7], [7], [7], [order.FilterConditionICE]], , , , ],
+        "queryCircleOrderByCurdate": [, , , , , [7], [[7], [7], [7], [order.FilterConditionICE]], , , , ],
         "queryAppOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "queryAppCircleOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
         "addOrder": [, , , , , [7], [[7], [order.OrderICE]], , , , ],

@@ -3,7 +3,7 @@
     <div class="myReleaseBox">
       <div class="issueHeaderNav">
         <i class=""></i>
-        <span>我的发布</span>
+        <span>我的接受</span>
         <i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>
       </div>
       <div class="downfixed havedownfixed">
@@ -18,7 +18,7 @@
           :finished="finished"
           @load="onLoad"
         >
-          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails">
+          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index">
             <div class="releaseCompany">
               <div class="companyBox">
                 <i class="icon iconfont icon-qiyexinxi"></i>
@@ -321,7 +321,7 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
-        this.$Ice_myOrderService.queryMyPublishOrder(this.userId, this.QueryParam, new IceCallback(
+        this.$Ice_myOrderService.queryMyRecvOrder(this.userId, this.QueryParam, new IceCallback(
           function (result) {
             self.loading = false;
             if (result.code === 0) {
@@ -346,7 +346,7 @@
         // 获取我的发布列表
         this.queryMyPublishOrder();
       },
-      toReleaseDetails() {
+      toreleaseDetails() {
         this.$router.push({
           path: '/center/myRelease/releaseDetails'
         })

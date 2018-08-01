@@ -190,7 +190,6 @@
         let self = this;
         this.$Ice_myOrderService.queryMyPublishOrder(this.userId, this.QueryParam, new IceCallback(
           function (result) {
-            debugger
             if (result.code === 0) {
               self.releaseList = result.orderList;
               self.total = result.total;

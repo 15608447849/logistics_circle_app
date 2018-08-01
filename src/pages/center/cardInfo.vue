@@ -1,43 +1,28 @@
 <template>
   <div>
-    <div class="issueHeaderLog">
+    <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>证件信息</span>
       <div></div>
     </div>
-    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
     <div class="identity">
-        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-          <p>{{item.title}}</p>
+      <!--<div>-->
+      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
+        <p>{{item.title}}</p>
+        <!--<img :src="item.url" class="upcerPic">-->
+        <cube-upload
+          :action="action"
+          :simultaneous-uploads="1"
+          @files-added="filesAdded"
+          @file-success="filesSuccess"
+          @file-error ="filesError"></cube-upload>
 
-          <button class="margin_top_5" @click="uploadBtn(index)">
-            <i class="icon iconfont icon-guanbi1 guanbi" v-if="item.url != ''"></i>
-            <img :src="item.url" alt="" class="cardPhoto" v-if="item.url != ''">
-            <i class="icon iconfont icon-gengduo1 updataCertificatesPic" v-else="!isdisplay"></i>
-            <!--<form action="http://192.168.1.240:8090/fileUploadCompPic" method="post"  -->
-            <form action="http://192.168.1.138:8080/ftc/upload" method="post"
-                  enctype ="multipart/form-data" class="formImage"  :id="'form_'+index" target="nm_iframe">
-              <input type="file" name="file" multiple="multiple"  accept=".png,.jpg,.jpeg" @change="handleUpload" class="marginleftCenter opacty0"/>
-              <input type="text" name="picNo" v-model="uploadIndex" class="opacty0"/>
-              <input type="text" name="compId" v-model="compid" class="opacty0"/>
-            </form>
-          </button>
-        </div>
-    </div>
-    <!--<div class="upload" v-if="item.url != ''">-->
-      <!--<div class="upload-list" >-->
-        <!--<img :src="item.url">-->
-        <!--<div class="upload-list-cover">-->
-          <!--<Icon type="ios-eye-outline" @click.native="bigImage(item)"></Icon>-->
-          <!--<Icon type="ios-trash-outline" @click.native="deletedImages(key)"></Icon>-->
-          <!--<Icon type="ios-compose-outline"></Icon>-->
+        <!--<div class="updataCertificatesBox">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
         <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="text_center margin_top_10">-->
-      <!--<p>{{item.title}}</p>-->
-      <!--<p>（{{item.smallTitle}}）</p>-->
-    <!--</div>-->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,65 +30,69 @@
   export default {
     data() {
       return {
-        action: 'http://192.168.1.240:8090/fileUploadCompPic',
-        uploadIndex:0,
-        compid: this.$app_store.getters.userId || 4,
-        cardname:'',
-        isdisplay:true,
+        action: {
+          target: 'http://192.168.1.240:8090/fileUploadCompPic',
+          data: {
+            'picNo': 0,
+            'compId': 4
+          }
+        },
+        imgUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1685044995,1968324938&fm=27&gp=0.jpg',
+        userId: this.$app_store.getters.userId || 4,
+        uploadIndex: 0,
         uploadList: [
           {
             title:'营业执照',
             smallTitle:'副本',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           },
           {
             title:'企业法人证件',
             smallTitle:'副本',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           },
           {
             title:'道路运输许可证',
             smallTitle:'副本',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           },
           {
             title:'投保证明',
             smallTitle:'原件',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           },
           {
             title:'国税登记证',
             smallTitle:'副本',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           },
           {
             title:'地税登记证',
             smallTitle:'副本',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           },
           {
             title:'机构代码证',
             smallTitle:'副本',
             uploadBtnShow:true,
-            url:''
+            url:'http://192.168.1.240/wlq/compic/comp4/0.jpg'
           }
         ],
         imgObj: {}
       }
     },
     mounted() {
-      this.getImages(this.compid);
+      this.getImages(4);
     },
     methods: {
       // 获取图片
       getImages(compid) {
-        debugger
         let path = "http://192.168.1.240:8090/getCompPic?compId="+compid;
         let xhr = new XMLHttpRequest();
         let self = this;
@@ -119,63 +108,44 @@
                 localStorage.setItem("$logoImage",data[item]);
               }
             }
-            console.log(item)
           }
         };
         xhr.open("GET", path , true);
         xhr.send();
       },
-      uploadBtn(key) {
-        this.uploadIndex = key;
+      filesError(files) {
+        console.log('图片上传失败!');
       },
-      handleUpload(event) {
-        let reader = new FileReader();
-        reader.readAsDataURL(event.currentTarget.files[0]);
-        let self = this;
-        reader.onloadend = function (e) {
-          debugger
-          self.uploadList[self.uploadIndex].url = e.target.result;
-          let sub = document.getElementById('form_'+self.uploadIndex);
-          sub.submit();
-          debugger
-          self.uploadList[self.uploadIndex].uploadBtnShow = false;
-          isdisplay = true;
+      filesSuccess(files) {
+        debugger
+        // 设置显示图片
+
+      },
+      filesAdded(files) {
+        let hasIgnore = false;
+        const maxSize = 2 * 1024 * 1024; // 5M
+        for (let k in files) {
+          const file = files[k];
+          if (file.size > maxSize) {
+            file.ignore = true;
+            hasIgnore = true;
+          }
         }
+        hasIgnore && this.$createToast({
+          type: 'warn',
+          time: 1000,
+          txt: '你上传的图片 > 2M '
+        }).show()
+      },
+      fileSubmitted(file) {
+        file.base64Value = file.file.base64
+      },
+      fileSuccess(file) {
+        console.log('图片上传成功')
       },
       fallback() {
         this.$router.go(-1)
-      },
-      // 点击查看大图
-      bigImage(img) {
-        this.imgModal = true;
-        this.imgTitle = img.title;
-        this.imgUrl = img.url;
-      },
-      //删除图片
-      deletedImages(index) {
-        let self = this;
-        let path = "http://192.168.1.240:8090/delCompPic?compId="+this.compid+"&picNo="+id;
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            var data = xhr.responseText;
-            data = JSON.parse(data);
-            if (data.code == 0) {
-              self.uploadList[id].uploadBtnShow = true;
-              self.uploadList[id].url = '';
-              self.$Notice.success({
-                title:'删除图片成功 '
-              });
-            } else {
-              self.$Notice.error({
-                title:'删除图片失败 '
-              });
-            }
-          }
-        };
-        xhr.open("GET", path , true);
-        xhr.send();
-      },
+      }
     }
   }
 </script>

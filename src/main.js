@@ -9,7 +9,9 @@ import Cube from 'cube-ui'
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 import VueAMap from 'vue-amap';
-import  { ToastPlugin } from 'vux'
+import  {
+  ToastPlugin
+} from 'vux'
 import Vant from 'vant';
 import { PasswordInput, NumberKeyboard } from 'vant';
 // import 'lib-flexible'
