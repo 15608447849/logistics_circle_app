@@ -10,19 +10,20 @@
         <!--<div>-->
         <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
           <p>{{item.title}}</p>
-          <div class="controlPicImg">
-            <i class="icon iconfont icon-guanbi"></i>
+          <div class="controlPicImg" v-show="item.url !== ''">
+            <i class="icon iconfont icon-guanbi" @click="deletedImages(index)"></i>
             <img :src="item.url" class="upcerPic">
           </div>
-          <div class="controlPic">
-            <cube-upload
-              :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
-              :simultaneous-uploads="1"
-              @files-added="filesAdded"
-              @file-success="filesSuccess"
-              @file-error="filesError" class="controInput"></cube-upload>
-          </div>
-
+          <cube-upload
+            v-show="item.url === ''"
+            style="position:relative;top:.55rem;left:0rem;"
+            :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
+            :simultaneous-uploads="1"
+            @file-removed="filesRemoved"
+            @files-added="filesAdded"
+            @file-success="filesSuccess"
+            @file-error="filesError">
+          </cube-upload>
           <!--<div class="updataCertificatesBox">-->
           <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
           <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
@@ -47,44 +48,37 @@
           {
             title: '营业执照',
             smallTitle: '副本',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           },
           {
             title: '企业法人证件',
             smallTitle: '副本',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           },
           {
             title: '道路运输许可证',
             smallTitle: '副本',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           },
           {
             title: '投保证明',
             smallTitle: '原件',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           },
           {
             title: '国税登记证',
             smallTitle: '副本',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           },
           {
             title: '地税登记证',
             smallTitle: '副本',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           },
           {
             title: '机构代码证',
             smallTitle: '副本',
-            uploadBtnShow: true,
-            url: 'http://192.168.1.240/wlq/compic/comp4/0.jpg'
+            url: ''
           }
         ]
       }
@@ -93,6 +87,30 @@
       this.getImages(this.userId);
     },
     methods: {
+      // 删除图片
+      // deleteImage(index){
+      //
+      // },
+      deletedImages(id) {
+        let self = this;
+        let path = "http://192.168.1.240:8090/delCompPic?compId="+this.userId+"&picNo="+id;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var data = xhr.responseText;
+            data = JSON.parse(data);
+            if (data.code == 0) {
+              self.uploadList[id].uploadBtnShow = true;
+              self.uploadList[id].url = '';
+              self.$vux.toast.text('图片删除成功!', 'top');
+            } else {
+              self.$vux.toast.text('图片删除失败!', 'top');
+            }
+          }
+        };
+        xhr.open("GET", path , true);
+        xhr.send();
+      },
       // 获取图片
       getImages(compid) {
         let path = "http://192.168.1.240:8090/getCompPic?compId=" + compid;
@@ -119,12 +137,17 @@
         this.$vux.toast.text('图片上传失败!', 'top');
       },
       filesSuccess(files) {
-        debugger
         this.$vux.toast.text(files.response.msg, 'top');
         if(files.response.code === 0) {
-          let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-          this.uploadList[imgUrl[imgUrl.length-1]].url = files.response.data.nginx + files.response.data.relativeAddr
+          this.$vux.toast.text('图片上传成功!', 'top');
+          // let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
+          // this.uploadList[imgUrl[imgUrl.length-1]].url = files.response.data.nginx + files.response.data.relativeAddr
         }
+      },
+      filesRemoved(files) {
+        debugger
+        let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
+        this.deletedImages(imgUrl[imgUrl.length-1]);
       },
       filesAdded(files) {
         // 图片压缩(未完成)
