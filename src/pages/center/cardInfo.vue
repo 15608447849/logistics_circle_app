@@ -5,13 +5,13 @@
       <span>证件信息</span>
       <div></div>
     </div>
-    <div class="downfixed" >
+    <div class="downfixed">
       <div class="identity">
         <!--<div>-->
         <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
           <p>{{item.title}}</p>
-          <div class="controlPicImg" v-show="item.url !== ''">
-            <i class="icon iconfont icon-guanbi" @click="deletedImages(index)"></i>
+          <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
+            <i class="icon iconfont icon-guanbi" @click.stop="deletedImages(index)"></i>
             <img :src="item.url" class="upcerPic">
           </div>
           <cube-upload
@@ -35,9 +35,9 @@
 </template>
 
 <script>
-
+  import {ImagePreview} from 'vant';
   import {uploadUrl} from "../../utils/config";
-
+  import EXIF from '../../utils/exif-js'
   export default {
     data() {
       return {
@@ -88,11 +88,19 @@
       this.getImages(this.userId);
     },
     methods: {
+      // 点击查看大图
+      imagePreview(index) {
+        let Images = [];
+        this.uploadList.forEach((item, index, arr) => {
+          if (item.url !== '') Images.push(item.url);
+        });
+        ImagePreview(Images, index);
+      },
       deletedImages(id) {
         let self = this;
-        let path = "http://192.168.1.240:8090/delCompPic?compId="+this.userId+"&picNo="+id;
+        let path = "http://192.168.1.240:8090/delCompPic?compId=" + this.userId + "&picNo=" + id;
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
             var data = xhr.responseText;
             data = JSON.parse(data);
@@ -106,7 +114,7 @@
             }
           }
         };
-        xhr.open("GET", path , true);
+        xhr.open("GET", path, true);
         xhr.send();
       },
       // 获取图片
@@ -136,15 +144,21 @@
       },
       filesSuccess(files) {
         this.$vux.toast.text(files.response.msg, 'top');
-        if(files.response.code === 0) {
+        if (files.response.code === 0) {
           this.$vux.toast.text('图片上传成功!', 'top');
           let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-          this.uploadList[imgUrl[imgUrl.length-1]].url = files.response.data.nginx + files.response.data.relativeAddr
+          this.uploadList[imgUrl[imgUrl.length - 1]].url = files.response.data.nginx + files.response.data.relativeAddr
         }
       },
       filesAdded(files) {
-        // 图片压缩(未完成)
-        // 图片旋转(未完成)
+        let self = this;
+        // 图片压缩
+        this.imgPreview(files);
+        // 图片旋转
+        EXIF.getData(this.file, function() {
+          self.Orientation = EXIF.getTag(this, 'Orientation');
+        });
+        debugger
         let hasIgnore = false;
         const maxSize = 2 * 1024 * 1024; // 2M
         for (let k in files) {
@@ -160,6 +174,77 @@
           txt: '你上传的图片 > 2M '
         }).show()
 
+      },
+      imgPreview (file) {   //base64 格式
+        this.imgType=1;
+        this.img_loading=true;
+        let self = this;
+        let imgContent={};
+        imgContent.name=file.name;
+        // 看支持不支持FileReader
+        if (!file || !window.FileReader) return;
+
+        if (/^image/.test(file.type)) {
+          // 创建一个reader
+          var reader = new FileReader();
+          // 将图片将转成 base64 格式
+          reader.readAsDataURL(file);
+          // 读取成功后的回调
+          reader.onloadend = function () {
+            let IMG = new Image();
+            IMG.src = this.result;
+            IMG.onload = function(){
+              let w = this.naturalWidth,
+                h = this.naturalHeight,
+                resizeW = 0,
+                resizeH = 0;
+              //压缩设置
+              let maxSize = {
+                width:1280,      //图片最大宽度
+                height:1280,     //图片最大高度
+                level:0.6       //图片保存质量
+              };
+              //计算缩放比例
+              if(w > maxSize.width || h > maxSize.height){
+                let multiple = Math.max(w / maxSize.width , h / maxSize.height);
+                resizeW = w / multiple;
+                resizeH = h / multiple;
+              }else{
+                resizeW = w;
+                resizeH = h;
+              }
+              let canvas = document.createElement("canvas"),
+                cxt = canvas.getContext('2d');
+              //根据拍摄的角度进行图片旋转调整
+              if (self.Orientation == 3) {
+                canvas.width = resizeW;
+                canvas.height = resizeH;
+                cxt.rotate(Math.PI);
+                cxt.drawImage(IMG, 0, 0, -resizeW, -resizeH)
+              } else if (self.Orientation == 8) {
+                canvas.width = resizeH;
+                canvas.height = resizeW;
+                cxt.rotate(Math.PI * 3 / 2);
+                cxt.drawImage(IMG, 0, 0, -resizeW, resizeH)
+              } else if (self.Orientation == 6) {
+                canvas.width = resizeH;
+                canvas.height = resizeW;
+                cxt.rotate(Math.PI / 2);
+                cxt.drawImage(IMG, 0, 0, resizeW, -resizeH)
+              } else {
+                canvas.width = resizeW;
+                canvas.height = resizeH;
+                cxt.drawImage(IMG, 0, 0, resizeW, resizeH)
+              }
+              //base64,最终输出的压缩文件
+              self.base64 = canvas.toDataURL('image/jpeg',maxSize.level);
+              self.num+=1;
+              self.imgType=0;
+              self.img_loading=false;
+              self.imgData.push(self.base64 )
+            }
+          };
+        }
       },
       fallback() {
         this.$router.go(-1)
