@@ -16,9 +16,9 @@
             <span class="routeTitle">出发地</span>
             <input v-model="routerInfo.startpn" type="text" readonly="readonly" value="">
           </li>
-          <li class=" needBorder" @click="showCascadePicker(2)">
+          <li class=" needBorder" @click.stop="showCascadePicker(2)">
             <span class="routeTitle">途经点</span>
-            <span class="grayBack">长沙</span><span class="grayBack">鄂尔多斯</span>
+            <span class="grayBack">鄂尔多斯<i class="icon iconfont icon-guanbi1"></i></span>
             <span v-for="(item, index) in wayPs" :key="index"><badge @click.native="removeBadge(64,index)"
                                                                      :text=item.placename
                                                                      @click.native.stop="removeBadge"/></span>

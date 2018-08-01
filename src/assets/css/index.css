@@ -3578,19 +3578,20 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .grayBack{
   display:inline-block;
-  position:relative;
-  top:0rem;
-  left:0rem;
   height:.6rem;
   border:1px solid transparent;
   border-radius: 5px;
-  background:lightgray;
+  background:#8F8FBD;
+  padding:0rem .05rem;
   line-height:.6rem;
   margin-right:.15rem;
+  font-size:.28rem;
   color:black;
 }
 .grayBack i{
-
+  margin-left:.1rem;
+  font-size:.16rem;
+  color:#666666;
 }
 .addRouteList li input{
   font-family: PingFang-SC-Regular;
