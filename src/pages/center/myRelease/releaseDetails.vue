@@ -8,7 +8,6 @@
     <div class="downfixed havedownfixed">
       <div class="releaseStateBox">
         <div class="releaseAndCollect ">
-          // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
           <div v-show="ostatus === 0">发布成功</div>
           <span v-show="ostatus === 0">等待承运商接单，请耐心等待~ </span>
 
@@ -224,6 +223,7 @@
         show2: false,
         detailInfo: {}
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
+        // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
       }
     },
     methods: {
@@ -238,6 +238,7 @@
           }
         })
       },
+
       // 订单取消发布
       cancelOrder(item, index) {
         let self = this;
