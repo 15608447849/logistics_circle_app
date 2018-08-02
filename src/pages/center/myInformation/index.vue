@@ -6,11 +6,11 @@
       <div></div>
     </div>
     <div class="informationBox">
-      <!--<div class="handle needBorder">-->
+      <div class="handle needBorder">
 
-        <!--<div class="notHandle" :class="{'activecircle' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="displayTab(item)">{{item.name}}-->
-          <!--<i class="redSpot" ></i>-->
-          <!--</div>-->
+        <div class="notHandle" :class="{'activecircle' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="displayTab(item)">{{item.name}}
+          <i class="redSpot" ></i>
+        </div>
         <ul class="circleList" v-show="">
           <li class="needBorder" @click.stop="seeDetails" v-for="(item, index) in messageList" :key="index">
             <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
@@ -23,7 +23,7 @@
           </li>
         </ul>
       </div>
-
+    </div>
   </div>
 </template>
 <script>

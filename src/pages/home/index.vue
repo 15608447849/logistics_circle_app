@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position:relative;top:0rem;left:0rem;">
     <!--页头-->
     <div class="issueHeaderNav">
       <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
@@ -22,7 +22,7 @@
         </ul>
       </span>
     </div>
-    <div class="downfixed havedownfixed">
+    <div style="position:absolute;top:0rem;left:0rem;">
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
           <div class="addressCity" @click.stop="skipCityPage">
@@ -67,9 +67,12 @@
             class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
           </div>
         </li>
+        <div class="seeMore">查看更多</div>
       </ul>
-      <div class="seeMore">查看更多</div>
+
+      <div class="bottomMargin"></div>
     </div>
+
   </div>
 
 </template>

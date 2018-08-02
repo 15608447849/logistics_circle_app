@@ -5,7 +5,6 @@
       <span>证件信息</span>
       <div></div>
     </div>
-    <div class="downfixed">
       <div class="identity">
         <!--<div>-->
         <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
@@ -29,7 +28,6 @@
           <!--</div>-->
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -150,7 +148,6 @@
       },
       filesAdded(files) {
         let self = this;
-        debugger
         // 图片压缩
         this.imgPreview(files);
         // 图片旋转
