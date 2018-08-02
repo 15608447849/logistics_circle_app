@@ -1,5 +1,5 @@
 <template>
-  <div style="position:relative;top:0rem;left:0rem;">
+  <div>
     <!--页头-->
     <div class="issueHeaderNav">
       <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
@@ -22,7 +22,6 @@
         </ul>
       </span>
     </div>
-    <div style="position:absolute;top:0rem;left:0rem;">
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
           <div class="addressCity" @click.stop="skipCityPage">
@@ -71,8 +70,6 @@
       </ul>
 
       <div class="bottomMargin"></div>
-    </div>
-
   </div>
 
 </template>
