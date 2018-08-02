@@ -12,11 +12,12 @@
       <span class="pLabel">{{compInfo.fname}}</span>
       <span class="creditGrade">信用等级</span>
       <ul class="startBoxCredit">
-        <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-        <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-        <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-        <li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>
-        <li><img src="../../assets/images/small/star36_off@2x.png" alt=""></li>
+
+        <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
+        <!--<li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>-->
+        <!--<li><img :src="../../assets/images/small/star36_on@2x.png" alt=""></li>-->
+        <!--<li><img :src="../../assets/images/small/star36_on@2x.png" alt=""></li>-->
+        <!--<li><img :src="" alt=""></li>-->
       </ul>
       <ul class="enterpriseInformation" @click="toenterprise">
         <li class="enterpriseSmallPic">
@@ -42,34 +43,34 @@
           <i class="icon iconfont icon-zhengjianzhao"></i>
           <span>证件信息</span>
         </li>
-        <li class="alreadyUpload">
-          <span class="CertificatesName">营业执照</span>
-          <span class="uploadState">已上传</span>
-        </li>
-        <li class="alreadyUpload">
-          <span class="CertificatesName">法人证件</span>
-          <span class="uploadState">已上传</span>
-        </li>
-        <li class="alreadyUpload">
-          <span class="CertificatesName">运输许可证</span>
-          <span class="uploadState">已上传</span>
-        </li>
-        <li class="alreadyUpload">
-          <span class="CertificatesName">投保证明</span>
-          <span class="uploadState">已上传</span>
-        </li>
-        <li class="notUpload">
-          <span class="CertificatesName">国税登记证</span>
-          <span class="uploadState">上传</span>
-        </li>
-        <li class="notUpload">
-          <span class="CertificatesName">地税登记证</span>
-          <span class="uploadState">上传</span>
-        </li>
-        <li class="notUpload" id="nomarginBottom">
-          <span class="CertificatesName">机构代码证</span>
-          <span class="uploadState">上传</span>
-        </li>
+        <!--<li class="alreadyUpload">-->
+        <!--<span class="CertificatesName">营业执照</span>-->
+        <!--<span class="uploadState">已上传</span>-->
+        <!--</li>-->
+        <!--<li class="alreadyUpload">-->
+        <!--<span class="CertificatesName">法人证件</span>-->
+        <!--<span class="uploadState">已上传</span>-->
+        <!--</li>-->
+        <!--<li class="alreadyUpload">-->
+        <!--<span class="CertificatesName">运输许可证</span>-->
+        <!--<span class="uploadState">已上传</span>-->
+        <!--</li>-->
+        <!--<li class="alreadyUpload">-->
+        <!--<span class="CertificatesName">投保证明</span>-->
+        <!--<span class="uploadState">已上传</span>-->
+        <!--</li>-->
+        <!--<li class="notUpload">-->
+        <!--<span class="CertificatesName">国税登记证</span>-->
+        <!--<span class="uploadState">上传</span>-->
+        <!--</li>-->
+        <!--<li class="notUpload">-->
+        <!--<span class="CertificatesName">地税登记证</span>-->
+        <!--<span class="uploadState">上传</span>-->
+        <!--</li>-->
+        <!--<li class="notUpload" id="nomarginBottom">-->
+        <!--<span class="CertificatesName">机构代码证</span>-->
+        <!--<span class="uploadState">上传</span>-->
+        <!--</li>-->
       </ul>
     </div>
 
@@ -96,7 +97,10 @@
   export default {
     data() {
       return {
-        compInfo: {},
+        score: 0,
+        cLevel: [],// 认证等级
+        compInfo: {},// 企业详情
+        basicInfo: {}, // 企业LOGO 基本信息模型
         isYourCompInfo: true,
         avatarUrl: '../../assets/images/small/bussiness-man.png',
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7消息
@@ -124,7 +128,11 @@
           new IceCallback(
             function (result) {
               if (result.code === 0) {
-
+                self.basicInfo = result.obj;
+                self.score = self.basicInfo.creadit;
+                self.computeLevel();
+              } else {
+                self.$vux.toast.text('企业认证信息获取失败, 请稍后重试', 'top');
               }
             },
             function (error) {
@@ -162,6 +170,22 @@
           params: this.compInfo
         })
       },
+      computeLevel() {
+        let result = []; // 返回的是一个数组,用来遍历输出星星
+        let score = Math.floor(this.score) / 2; // 计算所有星星的数量
+        // let hasDecimal = score % 1 !== 0; // 非整数星星判断
+        let integer = Math.floor(score); // 整数星星判断
+        for (let i = 0; i < integer; i++) { // 整数星星使用on
+          result.push( require('../../assets/images/small/star36_on@2x.png'));
+        }
+        // if (hasDecimal) { // 半星
+        //   result.push("half");
+        // }
+        while (result.length < 5) {// 余下的用无星星补全,使用off
+          result.push(require('../../assets/images/small/star36_off@2x.png'));
+        }
+        this.cLevel = result;
+      },
       toCertificates() {
         this.$router.push({
           name: 'cartInfo',
@@ -173,7 +197,7 @@
         let self = this;
         let content = '您确定要将好友从好友圈中移除吗?';
         let type = null;
-        if(this.status === 1) {
+        if (this.status === 1) {
           type = 128
         } else {
           type = 64
@@ -280,6 +304,6 @@
   }
 </script>
 
-<style scoped>
+<style>
 
 </style>

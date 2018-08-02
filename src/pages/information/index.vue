@@ -38,7 +38,7 @@
         avatar: this.$app_store.state.avatarUrl,// 头像
         infoList: [],
         pageSize: '10', // 订单数
-        address: '', // 地址
+        address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词

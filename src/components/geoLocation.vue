@@ -48,7 +48,6 @@
         geocoder: null,
         events: {
           init: (map) => {
-            console.log(123)
             this.map = map
             this.map.setCity(this.$app_store.getters.receiptCity);
           }
@@ -58,12 +57,13 @@
     mounted() {
       this.initData();
     },
-    // activated: function () {
-      // if (this.map !== null) {
-      //   this.searchOption.city = this.$app_store.getters.receiptCity;
-      //   this.map.setCity(this.searchOption.city);
-      // }
-    // },
+    activated: function () {
+      console.log(123123)
+      if (this.map !== null) {
+        this.searchOption.city = this.$app_store.getters.receiptCity;
+        this.map.setCity(this.searchOption.city);
+      }
+    },
     methods: {
       initData() {
         // 设置地址搜索框城市

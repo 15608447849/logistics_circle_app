@@ -131,8 +131,8 @@
     data() {
       return {
         avatar: this.$app_store.state.avatarUrl,// 头像
-        QueryParam: new myOrder.QueryParam(),
-        page: new cstruct.Page(),
+        QueryParam: new redundancy.QueryParam(),
+        page: new redundancy.Page(),
         userId: this.$app_store.getters.userId,
         releaseList: [], // 订单发布列表
         total: 0,// 发布订单总条数
@@ -218,11 +218,10 @@
         this.page.totalPageCount = 0;
 
         // 初始化搜索条件
+        this.QueryParam.revicompid = '';
         this.QueryParam.origin = '';
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
-        this.QueryParam.pageNo = this.page.pageIndex;
-        this.QueryParam.pageSize = this.page.pageSize;
       },
       // 跳转企业详情
       toComPInfo(item) {
@@ -328,7 +327,8 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
-        this.$Ice_myOrderService.queryMyPublishOrder(this.userId, this.QueryParam, new IceCallback(
+        debugger
+        this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam,this.page, new IceCallback(
           function (result) {
             self.loading = false;
             if (result.code === 0) {

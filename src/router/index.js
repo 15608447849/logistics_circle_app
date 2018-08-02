@@ -76,11 +76,6 @@ import CURRENCY from '@/pages/center/setting/currency'
 import ACCOUNTSECURITY from '@/pages/center/setting/accountSecurity'
 import TOACCOUNT from '@/pages/center/setting/toaccountUpdataPwd'
 import UPDATAPHONE from '@/pages/center/setting/updataPhone'
-
-// 测试页面
-import TEST from '@/interfaces/test'
-// picker测试
-import PICKER from '@/pages/pickerTest'
 // 城市选择
 import CITY from '@/components/citySelector'
 // 高德地图
@@ -102,52 +97,60 @@ Vue.use(Router);
 const vueRouter = new Router({
   routes: [
     {
-      path: '/test',
-      component: TEST
-    },
-    {
       path: '/',
       component: INDEX,
       children: [
         {
           path: '',
-          component: HOME
-        },
-        {
-          name: 'basiInformation',
-          path: '/home/basiInformation',
-          component: BASICINFORMATION
-        },
-        {
-          name: 'basiInformation',
-          path: '/home/invoice',
-          component: INVOICE
-        },
-        {
-          name: 'basiInformation',
-          path: '/home/enterprise',
-          component: ENTERPRISE
-        },
-        {
-          name: 'basiInformation',
-          path: '/home/certificates',
-          component: CERTIFICATES
+          component: HOME,
+          meta: {
+            keepAlive: true,
+          },
         },
         {
           path: '/circle',
-          component: CIRCLE
+          component: CIRCLE,
+          meta: {
+            keepAlive: true,
+          },
         },
         {
           name: 'information',
           path: '/information',
-          component: INFO
+          component: INFO,
+          meta: {
+            keepAlive: true,
+          },
         },
         {
           name: 'order',
           path: '/order',
-          component: ORDER
+          component: ORDER,
+          meta: {
+            keepAlive: true,
+          },
         }
       ]
+    },
+    {
+      name: 'basiInformation',
+      path: '/home/basiInformation',
+      component: BASICINFORMATION
+    },
+    {
+      name: 'basiInformation',
+      path: '/home/invoice',
+      component: INVOICE
+    },
+    {
+      name: 'basiInformation',
+      path: '/home/enterprise',
+      component: ENTERPRISE
+    },
+    {
+      name: 'basiInformation',
+      path: '/home/certificates',
+      component: CERTIFICATES
     },
     {
       path: '/login',
@@ -207,11 +210,6 @@ const vueRouter = new Router({
       meta: {
         keepAlive: true,
       }
-    },
-    {
-      name: 'picker',
-      path: '/picker',
-      component: PICKER
     },
     {
       path: '/information/issueDetails',

@@ -45,7 +45,7 @@
           </div>
           <div class="already">
             <img src="../../assets/images/small/已抢订单@2x.png" alt="">
-            <span>我的发布</span>
+            <span @click="skipOrder">我的发布</span>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
             class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
           </div>
         </li>
-        <div class="seeMore">查看更多</div>
+        <div class="seeMore" @click="skipInformation">查看更多</div>
       </ul>
 
       <div class="bottomMargin"></div>
@@ -100,7 +100,16 @@
       }
     },
     mounted() {
+      if(this.address !== this.$app_store.state.currentCity) {
+        this.address =  this.$app_store.state.currentCity;
+      }
+      this.requestInfoList();
+    },
+    activated() {
       this.$app_store.commit(TABBAR_INDEX,0);
+      if(this.address !== this.$app_store.state.currentCity) {
+        this.address =  this.$app_store.state.currentCity;
+      }
       this.requestInfoList();
     },
     methods: {
@@ -118,6 +127,22 @@
 
             }
           ))
+      },
+      skipOrder() {
+        this.$router.push({
+          path: '/order',
+          query: {
+            status: 0
+          }
+        })
+      },
+      skipInformation() {
+        this.$router.push({
+          path: '/information',
+          query: {
+            status: 0
+          }
+        })
       },
       skipSearchPage() {
         this.$app_store.commit(SEARCH_STATE, searchState.INFORMATION);

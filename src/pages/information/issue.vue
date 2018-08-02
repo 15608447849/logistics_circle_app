@@ -52,7 +52,7 @@
     <ul class="liNumThreeCompany">
       <li class="inputLong needBorder">
         <span class="liNumThreeCompanySpan">车辆大小</span>
-        <input v-model="OrderDetail.vnum" type="text" placeholder="数量">
+        <input v-model="OrderDetail.vnum" type="number" placeholder="数量">
       </li>
       <span class="carNum">台</span>
       <li class="inputShort needBorder">
@@ -108,7 +108,7 @@
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span>联系方式</span>
-        <input v-model="OrderDetail.consphone" type="text" placeholder="请输入联系方式">
+        <input v-model="OrderDetail.consphone" type="number" placeholder="请输入联系方式">
       </li>
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
@@ -205,7 +205,6 @@
     methods: {
       // 初始化页面数据
       initData() {
-        debugger
         this.OrderDetail.priority = this.$route.query.status;
         this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
@@ -341,7 +340,6 @@
                 this.displayDic.disVtLabel = selectedText;
                 break;
               case '运输要求':
-                debugger
                 this.OrderDetail.tndictarr = selectedVal;
                 this.displayDic.disTnLabel = selectedText;
                 break;

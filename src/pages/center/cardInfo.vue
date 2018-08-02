@@ -92,19 +92,19 @@
         });
         ImagePreview(Images, index);
       },
-      deletedImages(index) {
+      deletedImages(id) {
         let self = this;
-        let path = "http://192.168.1.240:8090/delCompPic?compId=" + this.userId + "&picNo=" + index;
+        let path = "http://192.168.1.240:8090/delCompPic?compId=" + this.userId + "&picNo=" + id;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
             var data = xhr.responseText;
             data = JSON.parse(data);
             if (data.code === 0) {
-              self.uploadList[index].uploadBtnShow = true;
-              self.uploadList[index].url = '';
+              self.uploadList[id].uploadBtnShow = true;
+              self.uploadList[id].url = '';
               self.$vux.toast.text('图片删除成功!', 'top');
-              self.$refs.upload[index].removeFile(self.$refs.upload[index].files)
+              self.$refs.upload[id].removeFile(self.$refs.upload[id].files)
             } else {
               self.$vux.toast.text('图片删除失败!', 'top');
             }
@@ -143,7 +143,7 @@
         if (files.response.code === 0) {
           this.$vux.toast.text('图片上传成功!', 'top');
           let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-          this.uploadList[imgUrl[imgUrl.length - 1]].url = files.response.data.nginx + files.response.data.relativeAddr
+          this.uploadList[imgUrl[imgUrl.length - 1]].url = files.response.data.nginx + files.response.data.relativeAddr + '?' + new Date().getSeconds();
         }
       },
       filesAdded(files) {
@@ -151,9 +151,9 @@
         // 图片压缩
         this.imgPreview(files);
         // 图片旋转
-        EXIF.getData(this.file, function() {
-          self.Orientation = EXIF.getTag(self, 'Orientation');
-        });
+        // EXIF.getData(this.file, function() {
+        //   self.Orientation = EXIF.getTag(this, 'Orientation');
+        // });
         let hasIgnore = false;
         const maxSize = 2 * 1024 * 1024; // 2M
         for (let k in files) {
