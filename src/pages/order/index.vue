@@ -26,20 +26,18 @@
                 <i class="icon iconfont icon-icon-test"></i>
               </div>
               <!--<span class="releasetext">发布</span>-->
-              <span class="releasetext">{{statusToChinese(item.ostatus)}}</span>
+              <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
             </div>
             <li class="address marginBottom15">
-              <div class="addressList"><span>{{item.startc}}</span>-<span>{{item.arriarc}}</span></div>
+              <div class="addressList"><span>{{item.startaddr}}</span>-<span>{{item.arriaddr}}</span></div>
             </li>
             <li class="collection marginBottom15">
               <span>无代收，无保价</span>
             </li>
             <li class="specifications marginBottom15">
-              <span>{{item.ctdictc}}，{{item.wm}}{{item.wmdictc}}</span> <span>{{item.vtdictc}},{{item.vldictc}}</span>
+              <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictc}}</span>
             </li>
-            <li class="specifications marginBottom15">
-              <span>发布日期：</span> <span>{{item.pubdate}}</span><span> {{item.pubtime}}</span>
-            </li>
+
             <li class="pickGoods marginBottom15">
               <div>
                 <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
@@ -55,34 +53,34 @@
             <!--抢单-->
             <div class="cancelRefres">
               <!--重新发布 -->
-              <div class="operationA" v-show="item.ostatus === '20'">
+              <div class="operationA" v-show="item.tstatus === 20">
                 <a class="colorsixsix" @click.stop="cancelOrder(item,index)">重新发布</a>
               </div>
               <!--我的发布 -->
-              <div class="operationA" v-show="item.ostatus === '0'">
+              <div class="operationA" v-show="item.tstatus === 0">
                 <a class="colorsixsix" @click.stop="cancelOrder(item, index)">取消发布</a>
                 <a class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
               </div>
               <!--抢单-->
-              <div class="operationA" v-show="item.ostatus === '1'">
+              <div class="operationA" v-show="item.tstatus === 1">
                 <a class="colorsixsix" @click.stop="toComPInfo(item)">查看调度</a>
                 <a class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
                 <a class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
               </div>
               <!--线上状态的取货-->
-              <div class="operationA" v-show="item.ostatus === '3'">
+              <div class="operationA" v-show="item.tstatus === 3">
                 <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <a class="colorsixsix" @click="topickGoodsPic(item)">取货照片</a>
                 <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
               </div>
               <!--签收-->
-              <div class="operationA" v-show="item.ostatus ===  '4'">
+              <div class="operationA" v-show="item.tstatus ===  4">
                 <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <a class="colorsixsix">行程回放</a>
                 <a class="colorLightBlue">待评价</a>
               </div>
               <!--待评价-->
-              <div class="operationA" v-show="item.ostatus ===  '6'">
+              <div class="operationA" v-show="item.tstatus ===  6">
                 <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <a class="colorsixsix">行程回放</a>
                 <a class="colorLightBlue">待评价</a>
@@ -111,6 +109,9 @@
             </div>
           </ul>
         </van-list>
+        <div v-show="isShowNoData">
+          <img src="../../assets/images/small/nodate.png"/>
+        </div>
       </div>
     </div>
   </div>
@@ -130,7 +131,8 @@
     },
     data() {
       return {
-        avatar: this.$app_store.state.avatarUrl,// 头像
+        isShowNoData: false, // 无数据显示
+        avatar: this.$app_store.state.avatarUrl,
         QueryParam: new redundancy.QueryParam(),
         page: new redundancy.Page(),
         userId: this.$app_store.getters.userId,
@@ -175,22 +177,22 @@
       statusToChinese(status) {
         let cont = '';
         switch (status) {
-          case '0':
+          case 0:
             cont = '发布';
             break;
-          case '1':
+          case 1:
             cont = '抢单';
             break;
-          case '3':
+          case 3:
             cont = '取货';
             break;
-          case '4':
+          case 4:
             cont = '签收';
             break;
-          case '6':
+          case 6:
             cont = '待评价';
             break;
-          case '20':
+          case 20:
             cont = '已关闭';
             break;
           default:
@@ -203,7 +205,7 @@
           value.isSelected = false
         });
         item.isSelected = true;
-        this.oStatus = item.value;
+        this.tstatus = item.value;
         // 重置搜索条件, 刷新列表
 
       },
@@ -243,7 +245,7 @@
               function (result) {
                 if (result.code === 0) {
                   // 重新发布
-                  self.releaseList[index].ostatus = '20';
+                  self.releaseList[index].tstatus = '20';
                   self.$vux.toast.text('订单取消发布成功 !', 'top');
                 } else {
                   self.$vux.toast.text(result.msg, 'top');
@@ -327,21 +329,29 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
-        debugger
         this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam,this.page, new IceCallback(
           function (result) {
             self.loading = false;
             if (result.code === 0) {
+              debugger
               self.QueryParam.pageNo += 1; // 页码增加
-              self.releaseList = self.releaseList.concat(result.orderList);
-              self.total = result.total;
+              if(result.obj !== '[]') {
+                self.releaseList = self.releaseList.concat(JSON.parse(result.obj));
+              } else{
+                self.finished = true;
+              }
+              self.total = result.totalItems;
               if (self.releaseList.length >= self.total) {
                 self.finished = true;
               }
             } else {
               self.finished = true;
             }
-
+            if (self.releaseList !== null && self.releaseList.length > 0) {
+              self.isShowNoData = false;
+            } else {
+              self.isShowNoData = true;
+            }
           },
           function (error) {
             self.loading = false;
