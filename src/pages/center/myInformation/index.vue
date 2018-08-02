@@ -8,7 +8,7 @@
     <div class="informationBox">
       <div class="handle needBorder">
 
-        <div class="notHandle" :class="{'activecircle' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="displayTab(item)">{{item.name}}
+        <div class="notHandle" :class="{'activecircle ziTiColorBlue' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="displayTab(item)">{{item.name}}
           <i class="redSpot" ></i>
         </div>
         <ul class="circleList" v-show="">

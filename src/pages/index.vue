@@ -19,16 +19,12 @@
             <span class="logisticsMing">{{compInfo.fname}}</span>
           </div>
           <ul class="startBox">
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_off@2x.png" alt=""></li>
+            <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
           </ul>
-          <div class="money">
-            <img src="../assets/images/small/jewelry.png" alt="">
-            <span class="yang">￥</span><span class="priceNum">0.00</span>
-          </div>
+          <!--<div class="money">-->
+            <!--<img src="../assets/images/small/jewelry.png" alt="">-->
+            <!--&lt;!&ndash;<span class="yang">￥</span><span class="priceNum">0.00</span>&ndash;&gt;-->
+          <!--</div>-->
         </div>
         <ul class="personalList">
           <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
@@ -62,6 +58,7 @@
   } from '../store/mutation-types'
 
   export default {
+
     // computed 计算属性
     computed: {
       isShowSidebar: {
@@ -83,6 +80,13 @@
     },
     data() {
       return {
+        score: 0,
+        basicInfo: {}, // 企业LOGO 基本信息模型
+        // isYourCompInfo: true,
+        avatarUrl: this.$app_store.state.avatarUrl,// 头像
+        status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7消息
+        userId: this.$app_store.getters.userId,
+        cLevel:[],//设置一个空数组，接收接口企业评分
         avatar: this.$app_store.state.avatarUrl,// 头像
         transitionName: '',
         compInfo: {
@@ -108,15 +112,76 @@
       }
     },
     mounted() {
-      // 获取当前定位城市
-      this.$app_store.commit(CURRENT_CITY, '长沙');
-      if (this.$app_store.getters.compInfo !== null) {
-        this.compInfo = this.$app_store.getters.compInfo;
+    },
+    activated() {
+      let compId;
+      this.isYourCompInfo = this.$route.query.isYourCompInfo;
+      if (this.isYourCompInfo) {
+        compId = this.userId;
+      } else {
+        // 根据企业id获取企业信息
+        compId = this.$route.query.id;
+        this.status = this.$route.query.status;
       }
-      this.initBaseData();
-      this.initAreaData();
+      this.queryCompByCid(compId);
+      this.queryCompByBasicUid(compId);
     },
     methods: {
+      // 获取企业头像
+      queryCompByBasicUid(compId) {
+        let self = this;
+        this.$Ice_CompService.queryCompByBasicUid(compId,
+          new IceCallback(
+            function (result) {
+              if (result.code === 0) {
+                self.basicInfo = result.obj;
+                self.score = self.basicInfo.creadit;
+                self.computeLevel();
+              } else {
+                self.$vux.toast.text('企业认证信息获取失败, 请稍后重试', 'top');
+              }
+            },
+            function (error) {
+              self.message.Toast(this, 'warn', '企业头像获取失败', false);
+            }
+          )
+        );
+      },
+      // 获取企业信息
+      queryCompByCid(compId) {
+        let self = this;
+        this.$Ice_CompService.querygetCompByCid(compId,
+          new IceCallback(
+            function (result) {
+              self.compInfo = result.obj
+            },
+            function (error) {
+              self.message.Toast(this, 'warn', '企业信息获取失败', false);
+            }
+          )
+        );
+      },
+      computeLevel() {
+        //根据接口传过来的企业评分值来显示星星的函数
+        let result = []; // 返回的是一个数组,用来遍历输出星星
+        let score = Math.floor(this.score) / 2; // 计算所有星星的数量
+        // let hasDecimal = score % 1 !== 0; // 非整数星星判断
+        let integer = Math.floor(score); // 整数星星判断
+        for (let i = 0; i < integer; i++) { // 整数星星使用on
+          result.push( require('../assets/images/small/star36_on@2x.png'));
+        }
+        // if (hasDecimal) { // 半星
+        //   result.push("half");
+        // }
+        while (result.length < 5) {// 余下的用无星星补全,使用off
+          result.push(require('../assets/images/small/star36_off@2x.png'));
+        }
+        this.cLevel = result;
+      },
+
+
+
+
       toDriverAmd() {
         this.$router.push({
           path: '/center/driverMgr/index'

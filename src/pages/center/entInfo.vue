@@ -9,7 +9,7 @@
     <ul class="enterpriseList">
       <li class="touxiangBox needBorder">
         <span class="touxiang">头像</span>
-        <img :src="BasicInfo.logoPath" alt="" class="enterprisetouxiang">
+        <img :src="avatarUrl" alt="" class="enterprisetouxiang">
       </li>
       <li class="enterpriseLi needBorder" @click="show1 = true">
         <span class="invoiceTitle">企业名称</span>
@@ -19,7 +19,7 @@
       </li>
       <li class="enterpriseLi needBorder">
         <span class="invoiceTitle">企业简称</span>
-        <span class="invoiceContent"> {{compInfo.sname}}</span>
+        <span class="invoiceContent">{{compInfo.sname}}</span>
       </li>
       <li class="enterpriseLi needBorder" @click="show2 = true">
         <span class="invoiceTitle">企业性质</span>
@@ -37,7 +37,7 @@
         <span class="invoiceTitle">企业地址</span>
         <span class="invoiceContent">{{compInfo.address}}</span>
       </li>
-      <li class="enterpriseLi">
+      <li class="enterpriseLi needBorder">
         <span class="invoiceTitle">邮编</span>
         <span class="invoiceContent">{{compInfo.area}}</span>
       </li>
@@ -85,8 +85,9 @@
 
 <script>
   export default {
-    data(){
+    data: function () {
       return {
+        avatarUrl: this.$app_store.state.avatarUrl,// 头像
         compInfo: {},
         BasicInfo: {},
         show1: false,

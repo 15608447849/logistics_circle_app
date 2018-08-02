@@ -12,36 +12,27 @@
       <span class="pLabel">{{compInfo.fname}}</span>
       <span class="creditGrade">信用等级</span>
       <ul class="startBoxCredit">
-
         <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
-        <!--<li><img src="../../assets/images/small/star36_on@2x.png" alt=""></li>-->
-        <!--<li><img :src="../../assets/images/small/star36_on@2x.png" alt=""></li>-->
-        <!--<li><img :src="../../assets/images/small/star36_on@2x.png" alt=""></li>-->
-        <!--<li><img :src="" alt=""></li>-->
       </ul>
       <ul class="enterpriseInformation" @click="toenterprise">
         <li class="enterpriseSmallPic">
           <i class="icon iconfont icon-qiyexinxi"></i>
           <span>企业信息</span>
-        </li>
-        <li class="contactMode">
-          <span>联系方式：</span>
-          <span>{{compInfo.phone}}</span>
+          <i class="icon iconfont icon-icon-test floatright"></i>
         </li>
       </ul>
       <ul class="enterpriseInformation" @click="toInvoice">
         <li class="enterpriseSmallPic">
-          <i class="icon iconfont icon-fapiao1"></i>
-          <span>发票信息</span>
-        </li>
-        <li class="contactMode">
-          <span>发票信息尚未完整</span>
+           <i class="icon iconfont icon-fapiao1"></i>
+           <span>发票信息</span>
+           <i class="icon iconfont icon-icon-test floatright"></i>
         </li>
       </ul>
-      <ul class="Certificates">
-        <li class="firstCertificates" @click="toCertificates">
+      <ul class="enterpriseInformation">
+        <li class="enterpriseSmallPic" @click="toCertificates">
           <i class="icon iconfont icon-zhengjianzhao"></i>
           <span>证件信息</span>
+          <i class="icon iconfont icon-icon-test floatright"></i>
         </li>
         <!--<li class="alreadyUpload">-->
         <!--<span class="CertificatesName">营业执照</span>-->
@@ -102,7 +93,7 @@
         compInfo: {},// 企业详情
         basicInfo: {}, // 企业LOGO 基本信息模型
         isYourCompInfo: true,
-        avatarUrl: '../../assets/images/small/bussiness-man.png',
+        avatarUrl: this.$app_store.state.avatarUrl,// 头像
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7消息
         userId: this.$app_store.getters.userId,
       }
@@ -110,6 +101,7 @@
     activated() {
       let compId;
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
+
       if (this.isYourCompInfo) {
         compId = this.userId;
       } else {
@@ -121,7 +113,6 @@
       this.queryCompByBasicUid(compId);
     },
     methods: {
-      // 获取企业头像
       queryCompByBasicUid(compId) {
         let self = this;
         this.$Ice_CompService.queryCompByBasicUid(compId,

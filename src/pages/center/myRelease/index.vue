@@ -9,8 +9,9 @@
       <div class="downfixed">
         <div class="releaseAccept">发布订单{{total}}条</div>
         <div class="releaseMenu">
-          <span class="releaseState" :class="{'activecircle' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="tabItemClick(item)">{{item.name}}</span>
+          <span class="releaseState" :class="{'activecircle ziTiColorBlue' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="tabItemClick(item)">{{item.name}}</span>
         </div>
+
         <van-list
           v-model="loading"
           :finished="finished"

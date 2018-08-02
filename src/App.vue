@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="height: 100%;" >
+  <div id="app" style="height: 100%;background:#f5f5f5;" >
     <!--<div class="yd-dialog-white-mask" v-show="isLoading">-->
       <!--<div class="yd-loading">-->
         <!--<div class="yd-loading-icon"></div>-->

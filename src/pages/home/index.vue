@@ -71,7 +71,6 @@
 
       <div class="bottomMargin"></div>
   </div>
-
 </template>
 <script>
   import {
