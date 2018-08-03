@@ -18,7 +18,7 @@
         </tab>
         <ul class="circleList" v-show="isShow">
           <!--<p>这是未处理消息</p>-->
-          <li class="needBorder" @click.stop="seeDetails" v-for="(item, index) in messageList" :key="index">
+          <li class="needBorder" @click.stop="seeDetails(item)" v-for="(item, index) in messageList" :key="index">
             <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
             <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
@@ -28,7 +28,7 @@
         <!--已处理-->
         <ul class="circleList" v-show="!isShow">
           <!--<p>这是已经处理消息</p>-->
-          <li class="needBorder" @click.stop="seeDetails" v-for="(item, index) in readyHandMsg" :key="index">
+          <li class="needBorder" @click.stop="seeDetails()" v-for="(item, index) in readyHandMsg" :key="index">
           <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
           <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
           <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
@@ -124,11 +124,9 @@
         return disContent
       },
       getMessageList() {
-
         let self = this;
         this.$Ice_MessageService.queryMsgListByUid(2, 0, new IceCallback(function (result) {
           if (result.code === 0) {
-
             // 成功
             self.messageList = result.obj;
             console.log(result.obj)
@@ -185,9 +183,12 @@
       fallback() {
         this.$router.go(-1)
       },
-      seeDetails() {
+      seeDetails(item) {
         this.$router.push({
-          path: '/center/myInformation/seeInformation'
+          path: '/center/myInformation/seeInformation',
+          query: {
+            detail: item
+          }
         })
       }
     }

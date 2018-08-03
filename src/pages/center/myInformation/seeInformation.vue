@@ -51,9 +51,53 @@
     export default {
       data(){
         return {
+          compBasicInfoList:[],
+          userId: this.$app_store.getters.userId,
+          details: {}
         }
       },
+      mounted() {
+        this.details = this.$route.query.detail;
+        console.log(this.details)
+        //企业基本信息
+        this.getCompBasicInfo();
+        this.querygetCompByUid();
+      },
       methods:{
+        //获取企业基本信息
+        getCompBasicInfo() {
+          let self = this;
+          this.$Ice_CompService.queryCompByBasicUid(2, new IceCallback(function (result) {
+            if (result.code === 0) {
+              // 成功
+              self.compBasicInfoList = result.obj;
+              console.log(result.obj)
+            } else {
+              self.$vux.toast.text(result.msg, 'top');
+            }
+          }, function (error) {
+            //失败
+          }))
+
+        },
+        //获取企业信息（基本信息）
+        querygetCompByUid() {
+          let self = this;
+          this.$Ice_CompService.queryCompByBasicUid(2, new IceCallback(function (result) {
+            if (result.code === 0) {
+              debugger
+              // 成功
+              self.compBasicInfoList = result.obj;
+              console.log(result.obj)
+            } else {
+              self.$vux.toast.text(result.msg, 'top');
+            }
+          }, function (error) {
+            debugger
+            //失败
+          }))
+
+        },
         fallback() {
           this.$router.go(-1)
         },
