@@ -70,6 +70,7 @@
       this.noHandleMessage();
     },
     methods: {
+      //同意
       addFriend(item, index, msgtype) {
         let content = '';
         let self = this;
