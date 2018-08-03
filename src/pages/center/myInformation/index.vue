@@ -92,9 +92,11 @@
                     self.$vux.toast.text('调度圈好友添加成功', 'top');
                   } else if (msgtype === 2) {
                     self.$vux.toast.text('货源圈好友添加成功', 'top');
+                  } else if (msgtype === 3) {
+                    self.$vux.toast.text('接受订单成功', 'top');
                   }
                 } else {
-                  self.$vux.toast.text('接受订单成功', 'top');
+                  self.$vux.toast.text('您的订单已被受理', 'top');
                 }
               },
               function (error) {
