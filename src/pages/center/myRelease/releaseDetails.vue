@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>订单详情</span>
       <div></div>
     </div>
-    <div class="downfixed havedownfixed">
+
       <div class="releaseStateBox">
         <div class="releaseAndCollect ">
           <div v-show="ostatus === 0">发布成功</div>
@@ -39,12 +39,12 @@
         <!--取货-->
         <!--<i class="icon iconfont icon-quhuo"></i>-->
       </div>
-      <div class="orderPadding10 backFF">
-        <div class="logisticsNameBox">
-          <img src="" alt="">
+      <div class="backFF">
+        <div class="logisticsNameBox orderPadding10">
+          <img src="../../../assets/images/small/evaluate_03.png" alt="">
           <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
         </div>
-        <ul class="backFF">
+        <ul class="orderPadding10 backFF">
           <li class="issueDetailsLiText">
             <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
           </li>
@@ -103,7 +103,7 @@
           <span class="floatleft rderCost">订单费用</span>
           <span class="textRed textBlod floatright rderCost">￥{{detailInfo.carriage}}元</span>
         </div>
-        <div class="floatleft margin_bottom140 ulWidth100">
+        <div class="floatleft ulWidth100">
           <ul class="ulWidth100">
             <li class="orderinfo">
               <span class="marginright95">订单号</span>
@@ -182,7 +182,6 @@
       <!--<a @click="toseeDispatch">查看调度</a>-->
       <!--</div>-->
       <!--</a>-->
-    </div>
 
     <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
       <div class="closePayment">

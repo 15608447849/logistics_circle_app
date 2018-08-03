@@ -1,15 +1,15 @@
 <template>
   <div class="basiInformation">
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>基本信息</span>
       <div></div>
     </div>
-    <div class="downfixed havedownfixed">
+
       <div class="enterprisePic">
         <img :src="avatarUrl" alt="">
       </div>
-      <span class="pLabel">{{compInfo.fname}}</span>
+      <span class="pLabel">{{compInfo.fname}}长沙大唐物流有限公司</span>
       <span class="creditGrade">信用等级</span>
       <ul class="startBoxCredit">
         <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
@@ -63,7 +63,7 @@
         <!--<span class="uploadState">上传</span>-->
         <!--</li>-->
       </ul>
-    </div>
+
 
     <div class="blacklist" v-show="status === 1">
       <a class="moveDetele" @click="removePartner">移除伙伴</a>

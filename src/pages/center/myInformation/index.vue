@@ -3,8 +3,9 @@
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>消息</span>
+      <div></div>
     </div>
-    <div class="downfixed havedownfixed">
+    <div class="downfixed">
       <div class="circleListBox">
         <!--<div class="circleType">-->
         <!--<div class="SourceGoods marginLeft21" @click="tabClick" :class="{'activecircle': selectOneTab}">货源圈</div>-->

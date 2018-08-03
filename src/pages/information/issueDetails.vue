@@ -88,7 +88,7 @@
          </div>
        </div>
        <div class="RobbingOrderWhite">
-         <button class="nextStep" v-if="detailInfo.ostatus === 0" @click="setRobbingOrder">抢单</button>
+         <button class="robOrderBtn" v-if="detailInfo.ostatus === 0" @click="setRobbingOrder">抢单</button>
        </div>
      </div>
 

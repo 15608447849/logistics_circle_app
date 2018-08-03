@@ -1,13 +1,15 @@
 <template>
   <div style="background:white;height:13.25rem;">
     <div>
-      <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">
+      <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px" height=".8rem;">
         <router-link to="" @click.native="backBtnClick" slot="left">
           <yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>
         </router-link>
-
-        <img slot="right" src="../../assets/images/small/logo_26.png"/>
       </yd-navbar>
+      <!--<div class="issueHeaderLog">-->
+        <!--<i @click="fallback" class="icon iconfont icon-btngoback back"></i>-->
+        <!--<span>新用户注册</span>-->
+      <!--</div>-->
       <yd-cell-group v-show="firstStepBool">
         <yd-cell-item>
           <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
@@ -61,7 +63,7 @@
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left" class="span">邀请码：</span>
-          <yd-input slot="right" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
+          <yd-input slot="right" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填></yd-input>
 
           <!--<yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
           <!--:disabled='isFirstStepDis'>注 册-->

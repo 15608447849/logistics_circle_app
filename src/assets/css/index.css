@@ -288,13 +288,13 @@ a {
 }
 .seeMore{
   display:block;
-  height:.3rem;
+  height:.6rem;
   text-align: center;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .3rem;
+  line-height: .6rem;
   letter-spacing: 0px;
   color: #333333;
   background:#f5f5f5;
@@ -551,12 +551,14 @@ a {
   margin:0 auto;
   width:1.4rem;
   height:1.4rem;
-  margin-top:1.46rem;
+  border:1px solid transparent;
+  border-radius: 50%;
+  margin-top:.46rem;
   margin-bottom:.22rem;
 }
 .enterprisePic img{
-  width:1.4rem;
-  height:1.4rem;
+  width:100%;
+  height:100%;
   border:1px solid transparent;
   border-radius: 50%;
 }
@@ -575,7 +577,6 @@ a {
 .startBoxCredit{
   display:inline-block;
   margin-left:.2rem;
-  margin-bottom:.48rem;
 }
 .startBoxCredit li{
   display:inline-block;
@@ -629,7 +630,9 @@ a {
   color: #666666;
 }
 .creditGrade{
-  margin-left:2.41rem;
+  display:inline-block;
+  margin-bottom:.5rem;
+  margin-left:2.4rem;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
   font-weight: normal;
@@ -690,8 +693,7 @@ a {
 .invoiceList{
   display:block;
   width:7.5rem;
-  height:5.02rem;
-  margin-top:.4rem;
+  height:7.07rem;
   padding:0rem .22rem 0rem .22rem;
   background:#ffffff;
 }
@@ -700,7 +702,7 @@ a {
   justify-content: space-between;
   align-items:center;
   width:7.08rem;
-  height:.72rem;
+  height:1rem;
 }
 .needBorder{
   border-bottom:1px solid #f5f5f5;
@@ -852,13 +854,16 @@ input[type="radio"] {
   clip: rect(0, 0, 0, 0);
 }
 /*证件信息**********************************************************************************************/
+#app{
+  background:#ffffff;
+}
 .identity{
   display:flex;
   justify-content: space-between;
   flex-wrap:wrap;
   width:7.5rem;
-  height:12.59rem;
-  margin:0rem .5rem .64rem 0rem;
+  height:15.59rem;
+  margin:.8rem .5rem 0rem 0rem;
   padding:.4rem .21rem 0rem .21rem;
   background:#ffffff;
   overflow: auto;
@@ -1396,6 +1401,10 @@ input[type="radio"] {
   letter-spacing: 1px;
   color: #ffffff;
 }
+.height1559{
+  height:15.59rem;
+  background:#ffffff;
+}
 .downfixed{
   margin-top:.8rem;
 }
@@ -1503,7 +1512,7 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:.57rem;
-  margin-top:.1rem;
+  margin-top:.15rem;
   padding:0px .1rem 0px .1rem;
 }
 .order_price{
@@ -1563,7 +1572,7 @@ input[type="radio"] {
   width:7.5rem;
   height:.3rem;
   margin-top:.15rem;
-  margin-bottom:.1rem;
+  margin-bottom:.25rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1623,18 +1632,21 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:13.34rem;
+  margin-top:.8rem;
 }
 .logisticsNameBox{
   display: table-cell;
   width:7.5rem;
-  height:.81rem;
+  height:1rem;
   border-bottom:1px solid #e6e6e6;
   margin-bottom:.2rem;
   vertical-align:middle;
 }
 .logisticsNameBox img{
-  width:.48rem;
-  height:.48rem;
+  width:.8rem;
+  height:.8rem;
+  border:1px solid transparent;
+  border-radius: 50%;
 }
 .Consignee{
   margin-right:.85rem;
@@ -1667,7 +1679,6 @@ input[type="radio"] {
 .logisticsNameBox img{
   vertical-align: middle;
   margin-right:10px;
-  background:deeppink;
 }
 .margin_bottom140{
   margin-bottom:140px;
@@ -1676,7 +1687,7 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:auto;
-  margin-bottom:.2rem;
+  margin-bottom:.25rem;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
   font-weight: normal;
@@ -1759,7 +1770,29 @@ input[type="radio"] {
 .RobbingOrderWhite{
   display:block;
   width:7.5rem;
-  height:5.05rem;
+  height:.98rem;
+  position:fixed;
+  bottom:0rem;
+  background:#ffffff;
+}
+.robOrderBtn{
+  display:block;
+  width:7.08rem;
+  height:.64rem;
+  margin:.17rem auto 0 auto;
+  border:1px solid #ffffff;
+  border-radius:3px;
+  font-family: PingFang-SC-Regular;
+  font-size:.32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 0px;
+  color: #ffffff;
+  background: -webkit-linear-gradient(45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
 .divHeight40{
   display:flex;
@@ -2317,7 +2350,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   align-items:center;
   margin:0 auto;
   width:7.08rem;
-  height:.89rem;
+  height:1rem;
 }
 .driverList li .driverInfo{
   display:inline-block;
@@ -2696,6 +2729,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   justify-content: space-between;
   align-items:center;
   padding:0rem .31rem 0rem .31rem;
+  position:fixed;
+  top:.8rem;
+  left:0rem;
   width:7.5rem;
   height:.9rem;
   background:#ffffff;
@@ -3507,8 +3543,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 /*************************************************************************************************************************/
 .needBorder img{
   display:inline-block;
-  width:1.2rem;
-  height:1.2rem;
+  width:.8rem;
+  height:.8rem;
   margin-right:.13rem;
   vertical-align: middle;
   margin-bottom:.05rem;
@@ -3814,8 +3850,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .settingList li{
   display:block;
   width:7.08rem;
-  height:1.2rem;
-  line-height:1.2rem;
+  height:1rem;
+  line-height:1rem;
 }
 .backgroundwhite{
   background:#ffffff;
@@ -3835,11 +3871,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .accountUpdataPwd{
   display:block;
   width:7.5rem;
-  height:1.2rem;
+  height:1rem;
   padding:0rem .21rem;
   margin-top:.16rem;
   background:#ffffff;
-  line-height:1.2rem;
+  line-height:1rem;
 }
 .accountName span{
   font-family:PingFang-SC-Regular;

@@ -1,6 +1,6 @@
 <template>
   <div class="issueOrder">
-    <div class="issueHeaderNavFixed">
+    <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发布订单</span>
       <span></span>

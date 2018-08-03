@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>基本信息</span>
       <div></div>
     </div>
     <div class="enterprisePic">
-      <img :src="seeInformationPic" alt="">
+      <img src="../../../assets/images/small/evaluate_03.png" alt="">
     </div>
     <span class="pLabel"></span>
     <span class="creditGrade">信用等级</span>
@@ -51,7 +51,6 @@
     export default {
       data(){
         return {
-          seeInformationPic:'../../../assets/images/small/evaluate_03.png',
         }
       },
       methods:{
