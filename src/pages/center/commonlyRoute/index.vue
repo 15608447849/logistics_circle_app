@@ -13,8 +13,7 @@
     <!--</div>-->
     <!--</div>-->
     <!--</div>-->
-    <div class="downfixed havedownfixed">
-      <van-list
+      <van-list style="margin-top:.8rem;"
         v-model="loading"
         :finished="finished"
         @load="onLoad"
@@ -29,10 +28,10 @@
             <a :class="item.cstatus === 32 ? 'discontinuation' : 'discontinuation'" @click.stop="isEnable"
                @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
           </li>
+
         </ul>
       </van-list>
 
-    </div>
   </div>
 </template>
 <script>

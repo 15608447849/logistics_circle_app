@@ -1,12 +1,11 @@
 <template>
   <div style="height:100%;">
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>证件信息</span>
       <div></div>
     </div>
     <!--<div styel="height:100%;">-->
-    <div class="downfixed height1559">
       <div class="identity">
         <!--<div>-->
         <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
@@ -30,7 +29,6 @@
           <!--</div>-->
         </div>
       </div>
-    </div>
   </div>
 </template>
 

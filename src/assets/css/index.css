@@ -862,8 +862,8 @@ input[type="radio"] {
   justify-content: space-between;
   flex-wrap:wrap;
   width:7.5rem;
-  height:15.59rem;
-  margin:.8rem .5rem 0rem 0rem;
+  height:auto;
+  margin:0rem .5rem 0rem 0rem;
   padding:.4rem .21rem 0rem .21rem;
   background:#ffffff;
   overflow: auto;
@@ -1402,7 +1402,6 @@ input[type="radio"] {
   color: #ffffff;
 }
 .height1559{
-  height:15.59rem;
   background:#ffffff;
 }
 .downfixed{
@@ -2870,6 +2869,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   letter-spacing: 0px;
   color: #666666;
 }
+.margin-top17{
+  margin-top:1.7rem;
+}
 .cancelRefres .colorLightBlue{
   display:inline-block;
   width: 1.2rem;
@@ -2878,6 +2880,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border: solid 1px #3892ff;
   text-align: center;
   line-height:.48rem;
+  margin-right:.24rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -3530,10 +3533,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .lineList{
   display:block;
   width:7.5rem;
-  height:12.53rem;
+  height:auto;
   padding:0rem .21rem 0rem .21rem;
   background:#ffffff;
-  overflow: auto;
 }
 .lineList li{
   display:table;
@@ -3543,8 +3545,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 /*************************************************************************************************************************/
 .needBorder img{
   display:inline-block;
-  width:.8rem;
-  height:.8rem;
+  width:.7rem;
+  height:.7rem;
   margin-right:.13rem;
   vertical-align: middle;
   margin-bottom:.05rem;
