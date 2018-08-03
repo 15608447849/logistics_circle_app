@@ -130,7 +130,6 @@
       onLoad() {
         let self = this;
         this.requestInfoList(1, this.endTimeStr, function (result) {
-          debugger
           self.loading = false;
           if (result.length === 0) {
             self.finished = true;

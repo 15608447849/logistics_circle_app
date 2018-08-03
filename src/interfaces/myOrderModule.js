@@ -69,8 +69,8 @@ module.exports = {
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'insertOrderEvaluate', orderEvaluate,callback);
 	},
 	/** 确认签收——（状态变为待评价）。 conReceipt ( orderid:订单号 uoid:用户id)*/
-	conReceipt:( orderid,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'conReceipt', orderid,module.exports.token(),callback);
+	conReceipt:( orderid,oid,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'conReceipt', orderid, oid,callback);
 	},
 	/** 修改订单 updateMyPublishOrder  uoid:用户id*/
 	updateMyPublishOrder:( order,uoid,callback)=>{
@@ -93,8 +93,8 @@ module.exports = {
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'flushOrder',oid,orderid,callback);
 	},
 	/** 重新发布订单  repubOrder (orderid:订单号 uoid:用户id)*/
-	repubOrder:(orderid,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'repubOrder',orderid,module.exports.token(),callback);
+	repubOrder:(orderid,oid,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'repubOrder',orderid, oid,callback);
 	},
 	/** 关闭订单  repubOrder (orderid:订单号 uoid:用户id)*/
 	closeOrder:(orderid,callback)=>{

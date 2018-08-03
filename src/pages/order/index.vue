@@ -18,7 +18,7 @@
           :finished="finished"
           @load="onLoad"
         >
-          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails">
+          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails(item)">
             <div class="releaseCompany">
               <div class="companyBox">
                 <i class="icon iconfont icon-qiyexinxi"></i>
@@ -32,7 +32,7 @@
               <div class="addressList"><span>{{item.startaddr}}</span>-<span>{{item.arriaddr}}</span></div>
             </li>
             <li class="collection marginBottom15">
-              <span>无代收，无保价</span>
+              <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
             </li>
             <li class="specifications marginBottom15">
               <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictc}}</span>
@@ -44,47 +44,64 @@
               </div>
               <!--<span class="underPay">线下付款</span>-->
               <!--线上付款-->
-              <span class="underPay">线上付款</span>
+              <span class="underPay">{{item.ptdictn}}</span>
             </li>
             <li class="goodsTotalPrice">
               <div></div>
-              <!--<div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">2680</span></div>-->
+              <div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">{{item.carriage}}</span></div>
             </li>
-            <!--抢单-->
             <div class="cancelRefres">
-              <!--重新发布 -->
-              <div class="operationA" v-show="item.tstatus === 20">
-                <a class="colorsixsix" @click.stop="cancelOrder(item,index)">重新发布</a>
+              <div class="operationA">
+                <!--刷新-->
+                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
+                <!--取消-->
+                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消发布</a>
+                <!--接受-->
+                <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="cancelOrder(item,index)">重新发布</a>
+                <!--拒绝-->
+                <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
+                <!--取货码-->
+                <a v-show="item.tstatus === 2" class="colorLightBlue" @click="topickGoodsCode">取货码</a>
+                <a v-show="item.tstatus === 2" class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
+                <!--查看行程-->
+                <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="">查看行程</a>
+                <!--确认签收-->
+                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno)">确认签收</a>
+                <!--评价-->
+                <a v-show="item.tstatus === 6" class="colorLightBlue">待评价</a>
+                <!--重新发布-->
+                <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"  class="colorLightBlue">重新发布</a>
               </div>
-              <!--我的发布 -->
-              <div class="operationA" v-show="item.tstatus === 0">
-                <a class="colorsixsix" @click.stop="cancelOrder(item, index)">取消发布</a>
-                <a class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
-              </div>
-              <!--抢单-->
-              <div class="operationA" v-show="item.tstatus === 1">
-                <a class="colorsixsix" @click.stop="toComPInfo(item)">查看调度</a>
-                <a class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
-                <a class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
-              </div>
-              <!--线上状态的取货-->
-              <div class="operationA" v-show="item.tstatus === 3">
-                <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
-                <a class="colorsixsix" @click="topickGoodsPic(item)">取货照片</a>
-                <a class="colorLightBlue" @click="topickGoodsCode">取货码</a>
-              </div>
-              <!--签收-->
-              <div class="operationA" v-show="item.tstatus ===  4">
-                <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
-                <a class="colorsixsix">行程回放</a>
-                <a class="colorLightBlue">待评价</a>
-              </div>
-              <!--待评价-->
-              <div class="operationA" v-show="item.tstatus ===  6">
-                <a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
-                <a class="colorsixsix">行程回放</a>
-                <a class="colorLightBlue">待评价</a>
-              </div>
+              <!--&lt;!&ndash;我的发布 &ndash;&gt;-->
+              <!--<div class="operationA" v-show="item.tstatus === 0">-->
+                <!--<a class="colorsixsix" @click.stop="cancelOrder(item, index)">取消发布</a>-->
+                <!--<a class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>-->
+              <!--</div>-->
+              <!--&lt;!&ndash;抢单&ndash;&gt;-->
+              <!--<div class="operationA" v-show="item.tstatus === 1">-->
+                <!--<a class="colorsixsix" @click.stop="toComPInfo(item)">查看调度</a>-->
+                <!--<a class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>-->
+                <!--<a class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>-->
+              <!--</div>-->
+
+              <!--&lt;!&ndash;线上状态的取货&ndash;&gt;-->
+              <!--<div class="operationA" v-show="item.tstatus === 3">-->
+                <!--<a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>-->
+                <!--<a class="colorsixsix" @click="topickGoodsPic(item)">取货照片</a>-->
+                <!--<a class="colorLightBlue" @click="topickGoodsCode">取货码</a>-->
+              <!--</div>-->
+              <!--&lt;!&ndash;签收&ndash;&gt;-->
+              <!--<div class="operationA" v-show="item.tstatus ===  4">-->
+                <!--<a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>-->
+                <!--<a class="colorsixsix">行程回放</a>-->
+                <!--<a class="colorLightBlue">待评价</a>-->
+              <!--</div>-->
+              <!--&lt;!&ndash;待评价&ndash;&gt;-->
+              <!--<div class="operationA" v-show="item.tstatus ===  6">-->
+                <!--<a class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>-->
+                <!--<a class="colorsixsix">行程回放</a>-->
+                <!--<a class="colorLightBlue">待评价</a>-->
+              <!--</div>-->
 
               <!--<a class="releaseDetailsMoreIndex">更多-->
               <!--<div class="pickGoodsBtnIndex">-->
@@ -92,7 +109,6 @@
               <!--<a @click="toseeDispatch">查看调度</a>-->
               <!--</div>-->
               <!--</a>-->
-
 
               <!--全部-->
               <!--<div class="operationA">-->
@@ -140,7 +156,7 @@
         total: 0,// 发布订单总条数
         loading: false,
         finished: false,
-        // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
+        // 0 发布 1/2 抢单 3 取货 4 5 签收  6 待评价 8 评价 20 取消
         tabList: [{
           name: '发布',
           value: 0,
@@ -183,14 +199,23 @@
           case 1:
             cont = '抢单';
             break;
+          case 2:
+            cont = '抢单';
+            break;
           case 3:
             cont = '取货';
             break;
           case 4:
             cont = '签收';
             break;
+          case 5:
+            cont = '签收';
+            break;
           case 6:
             cont = '待评价';
+            break;
+          case 8:
+            cont = '评价';
             break;
           case 20:
             cont = '已关闭';
@@ -236,6 +261,53 @@
           }
         })
       },
+      // 确认签收
+      conReceipt(orderId){
+        let self = this;
+        this.message.showAlert(this, alertContent.RECEIVING)
+          .then(() => {
+            self.$Ice_myOrderService.conReceipt(orderId, self.userId, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.page.pageIndex = 1;
+                  self.queryMyPublishOrder();
+                  self.$vux.toast.text(result.msg, 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      //重新发布订单
+      repubOrder(orderid,index){
+        let self = this;
+        this.message.showAlert(this, alertContent.CANCEL_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.repubOrder(orderid, self.userId, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.releaseList[index].tstatus = 0;
+                  self.$vux.toast.text('订单重新发布成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
       // 订单取消发布
       cancelOrder(item, index) {
         let self = this;
@@ -244,8 +316,7 @@
             self.$Ice_myOrderService.cancelOrder(item.orderno, self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
-                  // 重新发布
-                  self.releaseList[index].tstatus = '20';
+                  self.releaseList[index].tstatus = 20;
                   self.$vux.toast.text('订单取消发布成功 !', 'top');
                 } else {
                   self.$vux.toast.text(result.msg, 'top');
@@ -329,14 +400,14 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
-        this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam,this.page, new IceCallback(
+        this.$Ice_redundancyService.queryMyPubOrder(2, this.QueryParam,this.page, new IceCallback(
           function (result) {
             self.loading = false;
             if (result.code === 0) {
-              debugger
-              self.QueryParam.pageNo += 1; // 页码增加
+              self.page.pageIndex += 1;
               if(result.obj !== '[]') {
                 self.releaseList = self.releaseList.concat(JSON.parse(result.obj));
+                console.log(self.releaseList)
               } else{
                 self.finished = true;
               }
@@ -363,10 +434,27 @@
         // 获取我的发布列表
         this.queryMyPublishOrder();
       },
-      toReleaseDetails() {
+      toReleaseDetails(item) {
         this.$router.push({
-          path: '/center/myRelease/releaseDetails'
+          path: '/center/myRelease/releaseDetails',
+          query: {
+            id: item.orderno
+          }
         })
+      },
+      showCodamt(codamt,insureamt) {
+        let str = '';
+        if(codamt > 0) {
+          str = '代收金额: '+ codamt
+        }else {
+          str = '无代收'
+        }
+        if(insureamt > 0) {
+          str += ',保价金额: ' + insureamt
+        } else {
+          str += ',无保价'
+        }
+        return str
       },
       toreleaseSearchpage() {
         this.$router.push({

@@ -144,9 +144,11 @@
       filesSuccess(files) {
         this.$vux.toast.text(files.response.msg, 'top');
         if (files.response.code === 0) {
-          this.$vux.toast.text('图片上传成功!', 'top');
           let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-          this.uploadList[imgUrl[imgUrl.length - 1]].url = files.response.data.nginx + files.response.data.relativeAddr + '?' + new Date().getSeconds();
+          setTimeout(()=>{
+            this.$vux.toast.text('图片上传成功!', 'top');
+            this.uploadList[imgUrl[imgUrl.length - 1]].url = files.response.data.nginx + files.response.data.relativeAddr + '?' + new Date().getSeconds();
+          },500);
         }
       },
       filesAdded(files) {

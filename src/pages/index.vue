@@ -19,11 +19,15 @@
             <span class="logisticsMing">{{compInfo.fname}}</span>
           </div>
           <ul class="startBox">
-            <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
+            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
+            <li><img src="../assets/images/small/star36_off@2x.png" alt=""></li>
           </ul>
           <!--<div class="money">-->
             <!--<img src="../assets/images/small/jewelry.png" alt="">-->
-            <!--&lt;!&ndash;<span class="yang">￥</span><span class="priceNum">0.00</span>&ndash;&gt;-->
+            <!--<span class="yang">￥</span><span class="priceNum">0.00</span>-->
           <!--</div>-->
         </div>
         <ul class="personalList">
@@ -58,7 +62,6 @@
   } from '../store/mutation-types'
 
   export default {
-
     // computed 计算属性
     computed: {
       isShowSidebar: {
@@ -80,14 +83,8 @@
     },
     data() {
       return {
-        score: 0,
-        basicInfo: {}, // 企业LOGO 基本信息模型
-        // isYourCompInfo: true,
-        avatarUrl: this.$app_store.state.avatarUrl,// 头像
-        status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7消息
-        userId: this.$app_store.getters.userId,
-        cLevel:[],//设置一个空数组，接收接口企业评分
         avatar: this.$app_store.state.avatarUrl,// 头像
+        userId: this.$app_store.getters.userId,
         transitionName: '',
         compInfo: {
           fname: '当前用户未登录'
@@ -112,24 +109,20 @@
       }
     },
     mounted() {
-    },
-    activated() {
-      let compId;
-      this.isYourCompInfo = this.$route.query.isYourCompInfo;
-      if (this.isYourCompInfo) {
-        compId = this.userId;
-      } else {
-        // 根据企业id获取企业信息
-        compId = this.$route.query.id;
-        this.status = this.$route.query.status;
+      // 获取当前定位城市
+      this.$app_store.commit(CURRENT_CITY, '长沙');
+      if (this.$app_store.getters.compInfo !== null) {
+        this.compInfo = this.$app_store.getters.compInfo;
       }
-      this.queryCompByCid(compId);
-      this.queryCompByBasicUid(compId);
+      this.queryCompByBasicUid(this.userId);
+      this.initBaseData();
+      this.initAreaData();
     },
     methods: {
-      // 获取企业头像
+      // 获取认证信息
       queryCompByBasicUid(compId) {
         let self = this;
+        debugger
         this.$Ice_CompService.queryCompByBasicUid(compId,
           new IceCallback(
             function (result) {
@@ -142,46 +135,42 @@
               }
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业头像获取失败', false);
+              self.message.Toast(this, 'warn', '企业认证信息获取失败', false);
             }
           )
         );
       },
-      // 获取企业信息
-      queryCompByCid(compId) {
+      initBaseData() {
         let self = this;
-        this.$Ice_CompService.querygetCompByCid(compId,
+        self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              self.compInfo = result.obj
+              self.$app_store.commit(DICT, result);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败', false);
+              setTimeout(() => {
+                self.initBaseData();
+              }, 15000);
             }
           )
         );
       },
-      computeLevel() {
-        //根据接口传过来的企业评分值来显示星星的函数
-        let result = []; // 返回的是一个数组,用来遍历输出星星
-        let score = Math.floor(this.score) / 2; // 计算所有星星的数量
-        // let hasDecimal = score % 1 !== 0; // 非整数星星判断
-        let integer = Math.floor(score); // 整数星星判断
-        for (let i = 0; i < integer; i++) { // 整数星星使用on
-          result.push( require('../assets/images/small/star36_on@2x.png'));
-        }
-        // if (hasDecimal) { // 半星
-        //   result.push("half");
-        // }
-        while (result.length < 5) {// 余下的用无星星补全,使用off
-          result.push(require('../assets/images/small/star36_off@2x.png'));
-        }
-        this.cLevel = result;
+      initAreaData() {
+        let self = this;
+        self.$Ice_SystemService.getAreaCode(
+          new IceCallback(
+            function (result) {
+              self.$app_store.commit(AREA, result.children);
+              // localStorage.setItem("area", JSON.stringify(result.children));
+            },
+            function (error) {
+              setTimeout(() => {
+                self.initAreaData();
+              }, 15000);
+            }
+          )
+        );
       },
-
-
-
-
       toDriverAmd() {
         this.$router.push({
           path: '/center/driverMgr/index'
@@ -251,37 +240,6 @@
         }
         this.handleActive(index);
         this.$router.push(path)
-      },
-      initBaseData() {
-        let self = this;
-        self.$Ice_SystemService.getBaseUnit(
-          new IceCallback(
-            function (result) {
-              self.$app_store.commit(DICT, result);
-            },
-            function (error) {
-              setTimeout(() => {
-                self.initBaseData();
-              }, 15000);
-            }
-          )
-        );
-      },
-      initAreaData() {
-        let self = this;
-        self.$Ice_SystemService.getAreaCode(
-          new IceCallback(
-            function (result) {
-              self.$app_store.commit(AREA, result.children);
-              // localStorage.setItem("area", JSON.stringify(result.children));
-            },
-            function (error) {
-              setTimeout(() => {
-                self.initAreaData();
-              }, 15000);
-            }
-          )
-        );
       }
     }
   }

@@ -1,27 +1,28 @@
 <template>
   <div>
-    <div class="issueHeaderLog">
+    <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>订单详情</span>
       <div></div>
     </div>
-
+    <div class="downfixed havedownfixed">
       <div class="releaseStateBox">
         <div class="releaseAndCollect ">
-          <div v-show="ostatus === 0">发布成功</div>
-          <span v-show="ostatus === 0">等待承运商接单，请耐心等待~ </span>
 
-          <div v-show="ostatus === 1">抢单</div>
-          <span v-show="ostatus === 1">您的订单已被抢单，请尽快与承运商联系~ </span>
+          <div v-show="detailInfo.ostatus === 0">发布成功</div>
+          <span v-show="detailInfo.ostatus === 0">等待承运商接单，请耐心等待~ </span>
 
-          <div v-show="ostatus === 3">取货</div>
-          <span v-show="ostatus === 3">司机已取货，您的货物正在运输中~</span>
+          <div v-show="detailInfo.ostatus === 1">抢单</div>
+          <span v-show="detailInfo.ostatus === 1">您的订单已被抢单，请尽快与承运商联系~ </span>
 
-          <div v-show="ostatus === 4">签收</div>
-          <span v-show="ostatus === 4">您的订单已经确认签收，请与收货人确认是否签收~</span>
+          <div v-show="detailInfo.ostatus === 3">取货</div>
+          <span v-show="detailInfo.ostatus === 3">司机已取货，您的货物正在运输中~</span>
 
-          <div v-show="ostatus === 8">交易已完成</div>
-          <span v-show="ostatus === 8">您的订单已经确认签收，可以留下您的评价哟~</span>
+          <div v-show="detailInfo.ostatus === 4">签收</div>
+          <span v-show="detailInfo.ostatus === 4">您的订单已经确认签收，请与收货人确认是否签收~</span>
+
+          <div v-show="detailInfo.ostatus === 8">交易已完成</div>
+          <span v-show="detailInfo.ostatus === 8">您的订单已经确认签收，可以留下您的评价哟~</span>
 
 
           <!--<span>您的订单已签收，请与收货人确认是否签收~</span>-->
@@ -39,12 +40,12 @@
         <!--取货-->
         <!--<i class="icon iconfont icon-quhuo"></i>-->
       </div>
-      <div class="backFF">
-        <div class="logisticsNameBox orderPadding10">
-          <img src="../../../assets/images/small/evaluate_03.png" alt="">
-          <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
+      <div class="orderPadding10 backFF">
+        <div class="logisticsNameBox">
+          <img src="" alt="">
+          <span class="logisticsName">{{detailInfo.compname}}</span>
         </div>
-        <ul class="orderPadding10 backFF">
+        <ul class="backFF">
           <li class="issueDetailsLiText">
             <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
           </li>
@@ -103,7 +104,7 @@
           <span class="floatleft rderCost">订单费用</span>
           <span class="textRed textBlod floatright rderCost">￥{{detailInfo.carriage}}元</span>
         </div>
-        <div class="floatleft ulWidth100">
+        <div class="floatleft margin_bottom140 ulWidth100">
           <ul class="ulWidth100">
             <li class="orderinfo">
               <span class="marginright95">订单号</span>
@@ -182,6 +183,7 @@
       <!--<a @click="toseeDispatch">查看调度</a>-->
       <!--</div>-->
       <!--</a>-->
+    </div>
 
     <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
       <div class="closePayment">
@@ -225,6 +227,10 @@
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
       }
     },
+    mounted() {
+      this.orderNo = this.$route.query.id
+      this.getOrderInfo(this.orderNo);
+    },
     methods: {
       // 跳转企业详情
       toComPInfo(item) {
@@ -237,18 +243,36 @@
           }
         })
       },
+      // 获取订单详情
+      getOrderInfo(orderNo) {
+        let self = this;
+        self.$Ice_myOrderService.getOrderInfo(orderNo, self.userId, new IceCallback(
+          function (result) {
 
+            if (result.code === 0) {
+              self.detailInfo = result.obj.orderifo;
+              console.log(self.detailInfo)
+              // // 重新发布
+              // self.releaseList[index].ostatus = '20';
+              // self.$vux.toast.text('订单取消发布成功 !', 'top');
+            } else {
+              self.$vux.toast.text(result.msg, 'top');
+            }
+          },
+          function (error) {
+            self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+          }
+        ))
+      },
       // 订单取消发布
-      cancelOrder(item, index) {
+      cancelOrder(orderId) {
         let self = this;
         this.message.showAlert(this, alertContent.CANCEL_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.cancelOrder(item.orderno, self.userId, new IceCallback(
+            self.$Ice_myOrderService.cancelOrder(orderId, 2, new IceCallback(
               function (result) {
                 if (result.code === 0) {
-                  // 重新发布
-                  self.releaseList[index].ostatus = '20';
-                  self.$vux.toast.text('订单取消发布成功 !', 'top');
+                  self.getOrderInfo(orderId);
                 } else {
                   self.$vux.toast.text(result.msg, 'top');
                 }
@@ -263,14 +287,15 @@
           })
       },
       // 刷新订单
-      refreshOrder(item, index) {
+      refreshOrder(orderId) {
         let self = this;
         this.message.showAlert(this, alertContent.REFRESH_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.flushOrder(self.userId, item.orderno, new IceCallback(
+            self.$Ice_myOrderService.flushOrder(self.userId, orderId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.$vux.toast.text('订单刷新成功 !', 'top');
+                  self.getOrderInfo(orderId);
                 } else {
                   self.$vux.toast.text(result.msg, 'top');
                 }
@@ -330,6 +355,9 @@
       },
       fallback() {
         this.$router.go(-1)
+      },
+      replaceAddress(str) {
+       return str.replace(/#/g,",")
       },
       toseeDispatch() {
         this.$router.push({

@@ -259,104 +259,104 @@ const vueRouter = new Router({
     },
     {
       path: '/center/myCircle/addFriend',
-      component:  ADDFRIEND
+      component: ADDFRIEND
     },
     {
       path: '/center/myCircle/friendDetails',
-      component:  FRIENDDETAILS
+      component: FRIENDDETAILS
     },
     {
       path: '/center/myCircle/searchFriend',
-      component:  SEARCHFRIEND
+      component: SEARCHFRIEND
     },
     {
       path: '/center/myRelease/index',
-      component:  MYRELEASE
+      component: MYRELEASE
     },
     {
       path: '/center/myRelease/releaseDetails',
-      component:  RELEASEDETAILS
+      component: RELEASEDETAILS
     },
     {
       path: '/center/myRelease/releaseSearch',
-      component:  RELEASESEARCH
+      component: RELEASESEARCH
     },
     {
       path: '/center/myRelease/seeDispatch',
-      component:  SEEDISPATCH
+      component: SEEDISPATCH
     },
     {
       path: '/center/myRelease/pickGoodsPic',
-      component:  PICKGOODSPIC
+      component: PICKGOODSPIC
     },
     {
       path: '/center/myRelease/pickGoodsCode',
-      component:  PICKGOODSCODE
+      component: PICKGOODSCODE
     },
     {
       path: '/center/myRelease/evaluate',
-      component:  EVALUATE
+      component: EVALUATE
     },
     {
       path: '/center/commonlyRoute/index',
-      component:  COMMONLYROUTE
+      component: COMMONLYROUTE
     },
     {
       path: '/center/commonlyRoute/addRoute',
-      component:  ADDROUTE
+      component: ADDROUTE
     },
     {
       name: 'routeDetails',
       path: '/center/commonlyRoute/routeDetails',
-      component:  ROUTEDETAILS
+      component: ROUTEDETAILS
     },
     {
       path: '/center/blacklist/index',
-      component:  BLACKLIST
+      component: BLACKLIST
     },
     {
       path: '/center/blacklist/blackDetails',
-      component:  BLACKDETAILS
+      component: BLACKDETAILS
     },
     {
       path: '/center/myInformation/index',
-      component:  MYINFORMATION
+      component: MYINFORMATION
     },
     {
       path: '/center/myRelease/tripPlayback',
-      component:  TRIPPLAYBACK
+      component: TRIPPLAYBACK
     },
     {
       path: '/center/myInformation/seeInformation',
-      component:  SEEINFORMATION
+      component: SEEINFORMATION
     },
     {
       path: '/center/setting/index',
-      component:  SETTING
+      component: SETTING
     },
     {
       path: '/center/setting/currency',
-      component:  CURRENCY
+      component: CURRENCY
     },
     {
       path: '/center/setting/accountSecurity',
-      component:  ACCOUNTSECURITY
+      component: ACCOUNTSECURITY
     },
     {
       path: '/center/setting/toaccountUpdataPwd',
-      component:  TOACCOUNT
+      component: TOACCOUNT
     },
     {
       path: '/center/setting/updataPhone',
-      component:  UPDATAPHONE
+      component: UPDATAPHONE
     },
     {
       path: '/home/dimensionalCode',
-      component:  DIMENSIONALCODE
+      component: DIMENSIONALCODE
     },
     {
       path: '/home/scan',
-        component:  SCAN
+      component: SCAN
     },
   ]
 });

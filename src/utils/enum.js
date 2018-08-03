@@ -11,6 +11,7 @@ export const alertContent = {
   REFUSE_ORDER: '您确定要拒绝该用户接受订单吗?',// 拒绝订单
   REFRESH_ORDER: '您确定要刷新该发布订单吗?',// 订单刷新
   CANCEL_ORDER: '您确定要取消该发布订单吗?',// 取消发布
+  RECEIVING: '您确定要签收该发布订单吗?',// 取消发布
   GREEN: 'green',
   BLUE: 'blue'
 };

@@ -94,7 +94,7 @@
         basicInfo: {}, // 企业LOGO 基本信息模型
         isYourCompInfo: true,
         avatarUrl: this.$app_store.state.avatarUrl,// 头像
-        status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7消息
+        status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7 消息 8 订单
         userId: this.$app_store.getters.userId,
       }
     },

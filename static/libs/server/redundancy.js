@@ -56,10 +56,10 @@
      * 接收订单。
      **/
     redundancy.RecOrder = Slice.defineStruct(
-        function(oid, orderno, pubcompid, puberid, revicompid, revierid, pubdate, pubtime, revidate, revitime, tstatus, cstatus, ctdictc, wm, wmdictc, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, vldictn, vtdictns, arriarcn, startn, wmdictn, ctdictn)
+        function(oid, orderno, pubcompid, puberid, revicompid, revierid, pubdate, pubtime, revidate, revitime, tstatus, cstatus, ctdictc, wm, wmdictc, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, vldictn, vtdictn, arriarn, startn, wmdictn, ctdictn, carriage, pubcompname, pubphone, numdictc, numdictn, unum, num, codamt, insureamt, ptdictc, ptdictn)
         {
             this.oid = oid !== undefined ? oid : 0;
-            this.orderno = orderno !== undefined ? orderno : 0;
+            this.orderno = orderno !== undefined ? orderno : "";
             this.pubcompid = pubcompid !== undefined ? pubcompid : 0;
             this.puberid = puberid !== undefined ? puberid : 0;
             this.revicompid = revicompid !== undefined ? revicompid : 0;
@@ -80,17 +80,28 @@
             this.vtdictc = vtdictc !== undefined ? vtdictc : 0;
             this.vldictc = vldictc !== undefined ? vldictc : 0;
             this.vldictn = vldictn !== undefined ? vldictn : "";
-            this.vtdictns = vtdictns !== undefined ? vtdictns : "";
-            this.arriarcn = arriarcn !== undefined ? arriarcn : "";
+            this.vtdictn = vtdictn !== undefined ? vtdictn : "";
+            this.arriarn = arriarn !== undefined ? arriarn : "";
             this.startn = startn !== undefined ? startn : "";
             this.wmdictn = wmdictn !== undefined ? wmdictn : "";
             this.ctdictn = ctdictn !== undefined ? ctdictn : "";
+            this.carriage = carriage !== undefined ? carriage : 0.0;
+            this.pubcompname = pubcompname !== undefined ? pubcompname : "";
+            this.pubphone = pubphone !== undefined ? pubphone : "";
+            this.numdictc = numdictc !== undefined ? numdictc : 0;
+            this.numdictn = numdictn !== undefined ? numdictn : "";
+            this.unum = unum !== undefined ? unum : 0;
+            this.num = num !== undefined ? num : 0;
+            this.codamt = codamt !== undefined ? codamt : 0.0;
+            this.insureamt = insureamt !== undefined ? insureamt : 0.0;
+            this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
+            this.ptdictn = ptdictn !== undefined ? ptdictn : "";
         },
         false,
         function(__os)
         {
             __os.writeInt(this.oid);
-            __os.writeLong(this.orderno);
+            __os.writeString(this.orderno);
             __os.writeInt(this.pubcompid);
             __os.writeInt(this.puberid);
             __os.writeInt(this.revicompid);
@@ -111,16 +122,27 @@
             __os.writeInt(this.vtdictc);
             __os.writeInt(this.vldictc);
             __os.writeString(this.vldictn);
-            __os.writeString(this.vtdictns);
-            __os.writeString(this.arriarcn);
+            __os.writeString(this.vtdictn);
+            __os.writeString(this.arriarn);
             __os.writeString(this.startn);
             __os.writeString(this.wmdictn);
             __os.writeString(this.ctdictn);
+            __os.writeDouble(this.carriage);
+            __os.writeString(this.pubcompname);
+            __os.writeString(this.pubphone);
+            __os.writeInt(this.numdictc);
+            __os.writeString(this.numdictn);
+            __os.writeInt(this.unum);
+            __os.writeInt(this.num);
+            __os.writeDouble(this.codamt);
+            __os.writeDouble(this.insureamt);
+            __os.writeInt(this.ptdictc);
+            __os.writeString(this.ptdictn);
         },
         function(__is)
         {
             this.oid = __is.readInt();
-            this.orderno = __is.readLong();
+            this.orderno = __is.readString();
             this.pubcompid = __is.readInt();
             this.puberid = __is.readInt();
             this.revicompid = __is.readInt();
@@ -141,22 +163,33 @@
             this.vtdictc = __is.readInt();
             this.vldictc = __is.readInt();
             this.vldictn = __is.readString();
-            this.vtdictns = __is.readString();
-            this.arriarcn = __is.readString();
+            this.vtdictn = __is.readString();
+            this.arriarn = __is.readString();
             this.startn = __is.readString();
             this.wmdictn = __is.readString();
             this.ctdictn = __is.readString();
+            this.carriage = __is.readDouble();
+            this.pubcompname = __is.readString();
+            this.pubphone = __is.readString();
+            this.numdictc = __is.readInt();
+            this.numdictn = __is.readString();
+            this.unum = __is.readInt();
+            this.num = __is.readInt();
+            this.codamt = __is.readDouble();
+            this.insureamt = __is.readDouble();
+            this.ptdictc = __is.readInt();
+            this.ptdictn = __is.readString();
         },
-        80, 
+        117, 
         false);
 
     /**
      * 发布订单。
      **/
     redundancy.PubOrder = Slice.defineStruct(
-        function(orderno, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, pubdate, pubtime, revidate, revitime, tstatus, pubcompid, revicompid, ctdictc, wm, wmdictc, puimg, retuimg, numdictc, unum, num, startn, arriarn, vtdictn, vldictn, ctdictn, wmdictn, numdictn)
+        function(orderno, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, pubdate, pubtime, revidate, revitime, tstatus, pubcompid, revicompid, ctdictc, wm, wmdictc, puimg, retuimg, numdictc, unum, num, carriage, codamt, insureamt, ptdictc, startn, arriarn, vtdictn, vldictn, ctdictn, wmdictn, numdictn, ptdictn)
         {
-            this.orderno = orderno !== undefined ? orderno : 0;
+            this.orderno = orderno !== undefined ? orderno : "";
             this.startc = startc !== undefined ? startc : 0;
             this.startaddr = startaddr !== undefined ? startaddr : "";
             this.arriarc = arriarc !== undefined ? arriarc : 0;
@@ -178,6 +211,10 @@
             this.numdictc = numdictc !== undefined ? numdictc : 0;
             this.unum = unum !== undefined ? unum : 0;
             this.num = num !== undefined ? num : 0;
+            this.carriage = carriage !== undefined ? carriage : 0.0;
+            this.codamt = codamt !== undefined ? codamt : 0.0;
+            this.insureamt = insureamt !== undefined ? insureamt : 0.0;
+            this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
             this.startn = startn !== undefined ? startn : "";
             this.arriarn = arriarn !== undefined ? arriarn : "";
             this.vtdictn = vtdictn !== undefined ? vtdictn : "";
@@ -185,11 +222,12 @@
             this.ctdictn = ctdictn !== undefined ? ctdictn : "";
             this.wmdictn = wmdictn !== undefined ? wmdictn : "";
             this.numdictn = numdictn !== undefined ? numdictn : "";
+            this.ptdictn = ptdictn !== undefined ? ptdictn : "";
         },
         false,
         function(__os)
         {
-            __os.writeLong(this.orderno);
+            __os.writeString(this.orderno);
             __os.writeInt(this.startc);
             __os.writeString(this.startaddr);
             __os.writeInt(this.arriarc);
@@ -211,6 +249,10 @@
             __os.writeInt(this.numdictc);
             __os.writeInt(this.unum);
             __os.writeInt(this.num);
+            __os.writeDouble(this.carriage);
+            __os.writeDouble(this.codamt);
+            __os.writeDouble(this.insureamt);
+            __os.writeInt(this.ptdictc);
             __os.writeString(this.startn);
             __os.writeString(this.arriarn);
             __os.writeString(this.vtdictn);
@@ -218,10 +260,11 @@
             __os.writeString(this.ctdictn);
             __os.writeString(this.wmdictn);
             __os.writeString(this.numdictn);
+            __os.writeString(this.ptdictn);
         },
         function(__is)
         {
-            this.orderno = __is.readLong();
+            this.orderno = __is.readString();
             this.startc = __is.readInt();
             this.startaddr = __is.readString();
             this.arriarc = __is.readInt();
@@ -243,6 +286,10 @@
             this.numdictc = __is.readInt();
             this.unum = __is.readInt();
             this.num = __is.readInt();
+            this.carriage = __is.readDouble();
+            this.codamt = __is.readDouble();
+            this.insureamt = __is.readDouble();
+            this.ptdictc = __is.readInt();
             this.startn = __is.readString();
             this.arriarn = __is.readString();
             this.vtdictn = __is.readString();
@@ -250,8 +297,9 @@
             this.ctdictn = __is.readString();
             this.wmdictn = __is.readString();
             this.numdictn = __is.readString();
+            this.ptdictn = __is.readString();
         },
-        79, 
+        101, 
         false);
 
     /**
@@ -327,7 +375,7 @@
         [
             redundancy.SynOrderException
         ], , ],
-        "queryMyRecvOrder": [, , , , , [7], [[redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
+        "queryMyRecvOrder": [, , , , , [7], [[3], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
         "queryMyPubOrder": [, , , , , [7], [[3], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
         "handleReceive": [, , , , , [3], [[3], [7], ["redundancy.stringSeqHelper"]], , , , ],
         "getPickCode": [, , , , , [7], [[3], [7]], , , , ],
