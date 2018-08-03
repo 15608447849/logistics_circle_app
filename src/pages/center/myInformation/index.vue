@@ -1,25 +1,40 @@
 <template>
   <div>
-    <div class="issueHeaderLog">
-      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
+    <div class="issueHeaderNav">
+      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>消息</span>
-      <div></div>
     </div>
-    <div class="informationBox">
-      <div class="handle needBorder">
-
-        <div class="notHandle" :class="{'activecircle ziTiColorBlue' : item.isSelected}"  v-for="(item , index) in tabList" :key="index"  @click.stop="displayTab(item)">{{item.name}}
-          <i class="redSpot" ></i>
-        </div>
-        <ul class="circleList" v-show="">
+    <div class="downfixed havedownfixed">
+      <div class="circleListBox">
+        <!--<div class="circleType">-->
+        <!--<div class="SourceGoods marginLeft21" @click="tabClick" :class="{'activecircle': selectOneTab}">货源圈</div>-->
+        <!--<div class="dispatch  marginRight21" @click="tabClick"  :class="{'activecircle': !selectOneTab}">调度圈</div>-->
+        <!--</div>-->
+        <tab
+          active-color="#3189f5">
+          <tab-item @on-item-click="tabClick" selected>未处理</tab-item>
+          <tab-item @on-item-click="tabClick">已处理</tab-item>
+        </tab>
+        <ul class="circleList" v-show="isShow">
+          <!--<p>这是未处理消息</p>-->
           <li class="needBorder" @click.stop="seeDetails" v-for="(item, index) in messageList" :key="index">
             <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
             <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
-
             <a class="pullBlack" v-show="nothandle" @click.stop="addFriend(item,index,item.msgtype)">同意</a>
-            <a class="handleafter" v-show="display" v-if="item.isread!==0">已同意</a>
-            <a class="read" v-show="read" v-if="item.isread!==0">已阅读</a>
+          </li>
+        </ul>
+        <!--已处理-->
+        <ul class="circleList" v-show="!isShow">
+          <!--<p>这是已经处理消息</p>-->
+          <li class="needBorder" @click.stop="seeDetails" v-for="(item, index) in readyHandMsg" :key="index">
+          <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
+          <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
+          <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
+
+
+          <a class="handleafter" v-show="display" v-if="item.isread!==0">已同意</a>
+          <a class="read" v-show="read" v-if="item.isread==0">已阅读</a>
           </li>
         </ul>
       </div>
@@ -27,121 +42,152 @@
   </div>
 </template>
 <script>
-    import {alertContent} from "../../../utils/enum";
+  import {alertContent} from "../../../utils/enum";
+  import {Tab, TabItem} from 'vux'
 
-    export default {
-      data(){
-        return{
-          messageList: [],
-          display:true,
-          nothandle:true,
-          userId: this.$app_store.getters.userId,
-          read:true,
-          isredspop:true,
-          tabList: [{
-            name: '待处理',
-            value: 0,
-            isSelected: true
-          },
-            {
-            name: '已处理',
-            value: 1,
-            isSelected: false
-          }
-          ]
+  export default {
+    components: {
+      Tab,
+      TabItem
+    },
+    data() {
+      return {
+        messageList: [], //未处理数据集
+        readyHandMsg: [], //已处理数据集
+        alreadyHandle: false,//已处理view显示与否
+        isShow: true,//未处理view显示与否
+        isRedspot: false,//红点显示与否
+        display: true,//已同意显示与否
+        nothandle: true,//同意显示与否
+        userId: this.$app_store.getters.userId,//vuex存储的用户id
+        read: true,//已阅读显示与否
+      }
+
+    },
+    mounted() {
+      this.getMessageList();
+      // this.getNewMessage();
+      this.noHandleMessage();
+    },
+    methods: {
+      addFriend(item, index, msgtype) {
+        let content = '';
+        let self = this;
+        if (msgtype === 1) {
+          content = alertContent.CIRCLE_ADD_DISPATHCHER;
+        } else if (msgtype === 2) {
+          content = alertContent.CIRCLE_ADD_SOURCE;
+        } else {
+          content = alertContent.RECEIVE_ORDER;
         }
-
-      },
-      mounted(){
-        this.getMessageList();
-      },
-      methods:{
-
-        addFriend(item, index, msgtype){
-          let content = '';
-          let self = this;
-          if (msgtype === 1) {
-            content = alertContent.CIRCLE_ADD_DISPATHCHER;
-          } else if(msgtype === 2){
-            content = alertContent.CIRCLE_ADD_SOURCE;
-          }else{
-            content = alertContent.RECEIVE_ORDER;
-          }
-          this.message.showAlert(this, content)
-            .then(() => {
-
-              self.$Ice_CircleService.agreeOrRefuse(item.msgid,item.sender, new IceCallback(
-                function (result) {
-
-                  if (result.code === 0) {
-                    if(msgtype === 1) {
-                      self.messageList.splice(index,1)
-                      self.$vux.toast.text('调度圈好友添加成功', 'top');
-                    }else if(msgtype === 2){
-                      self.$vux.toast.text('货源圈好友添加成功', 'top');
-
-                    }
-                  } else {
-
-                    self.$vux.toast.text('接受订单成功', 'top');
+        this.message.showAlert(this, content)
+          .then(() => {
+            self.$Ice_CircleService.agreeOrRefuse(item.msgid, item.sender, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  if (msgtype === 1) {
+                    // self.messageList.splice(index, 1)
+                    self.$vux.toast.text('调度圈好友添加成功', 'top');
+                  } else if (msgtype === 2) {
+                    self.$vux.toast.text('货源圈好友添加成功', 'top');
                   }
-                },
-                function (error) {
-
-                  self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                } else {
+                  self.$vux.toast.text('接受订单成功', 'top');
                 }
-              ))
-            })
-            .catch(() => {
-
-            })
-        },
-        msgTypeToText(type) {
-          let disContent = '';
-          switch (type) {
-            case 1:
-              disContent = '请求加入你的调度圈'
-              break;
-            case 2:
-              disContent = '请求加入你的货源圈'
-              break;
-            case 3:
-              disContent = '您有新的订单未处理'
-              break;
-          }
-          return disContent
-        },
-        getMessageList() {
-          let self = this;
-          this.$Ice_MessageService.queryMsgListByUno(this.$app_store.getters.userId,new IceCallback( function(result){
-            if(result.code === 0) {
-              // 成功
-              self.messageList = result.obj;
-              console.log(self.messageList)
-                }else{
-
-                }
-          },function(error){
-            //失败
-          }))
-
-        },
-        fallback() {
-          this.$router.go(-1)
-        },
-        seeDetails(){
-          this.$router.push({
-            path:'/center/myInformation/seeInformation'
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+              }
+            ))
           })
-        },
-        displayTab(item) {
-          this.tabList.forEach((value, index, arr) => {
-            value.isSelected = false
-          });
-          item.isSelected = true;
-        },
+          .catch(() => {
+
+          })
+      },
+      msgTypeToText(type) {
+        let disContent = '';
+        switch (type) {
+          case 1:
+            disContent = '请求加入你的调度圈'
+            break;
+          case 2:
+            disContent = '请求加入你的货源圈'
+            break;
+          case 3:
+            disContent = '您有新的订单未处理'
+            break;
+        }
+        return disContent
+      },
+      getMessageList() {
+
+        let self = this;
+        this.$Ice_MessageService.queryMsgListByUid(2, 0, new IceCallback(function (result) {
+          if (result.code === 0) {
+
+            // 成功
+            self.messageList = result.obj;
+            console.log(result.obj)
+          } else {
+            self.$vux.toast.text(result.msg, 'top');
+          }
+        }, function (error) {
+
+          //失败
+        }))
+
+      },
+
+
+      noHandleMessage() {
+        let self = this;
+        this.$Ice_MessageService.queryMsgListByUid(2, 1, new IceCallback(function (result) {
+          if (result.code === 0) {
+            // 成功
+            self.readyHandMsg = result.obj;
+            console.log(result.obj)
+          } else {
+            self.$vux.toast.text(result.msg, 'top');
+          }
+        }, function (error) {
+
+          //失败
+        }))
+      },
+      tabClick() {
+        console.log(this.nothandle)
+        this.isShow = !this.isShow
+        console.log(this.nothandle)
+      },
+
+
+      //查询用户是否有新的消息
+      // getNewMessage() {
+      //   let self = this;
+      //   debugger
+      //   this.$Ice_MessageService.isUnreadMsg(this.$app_store.getters.userId,new IceCallback( function(result){
+      //     debugger
+      //     if(result.code === 0) {
+      //
+      //     }else{
+      //
+      //     }
+      //   },function(error){
+      //     debugger
+      //     //失败
+      //   }))
+      //
+      // },
+      fallback() {
+        this.$router.go(-1)
+      },
+      seeDetails() {
+        this.$router.push({
+          path: '/center/myInformation/seeInformation'
+        })
       }
     }
+  }
 </script>
 
 <style scoped>

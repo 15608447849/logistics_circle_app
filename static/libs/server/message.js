@@ -30,7 +30,7 @@
      * 消息内容
      **/
     message.Msg = Slice.defineStruct(
-        function(sender, receiver, sendName, msgtype, isread, msgtext, sendDate, sendTime)
+        function(sender, receiver, sendName, msgtype, isread, msgtext, sendDate, sendTime, msgid)
         {
             this.sender = sender !== undefined ? sender : 0;
             this.receiver = receiver !== undefined ? receiver : 0;
@@ -40,6 +40,7 @@
             this.msgtext = msgtext !== undefined ? msgtext : "";
             this.sendDate = sendDate !== undefined ? sendDate : "";
             this.sendTime = sendTime !== undefined ? sendTime : "";
+            this.msgid = msgid !== undefined ? msgid : 0;
         },
         true,
         function(__os)
@@ -52,6 +53,7 @@
             __os.writeString(this.msgtext);
             __os.writeString(this.sendDate);
             __os.writeString(this.sendTime);
+            __os.writeLong(this.msgid);
         },
         function(__is)
         {
@@ -63,8 +65,9 @@
             this.msgtext = __is.readString();
             this.sendDate = __is.readString();
             this.sendTime = __is.readString();
+            this.msgid = __is.readLong();
         },
-        20, 
+        28, 
         false);
     Slice.defineSequence(message, "MsgSeqHelper", "message.Msg", false);
 
@@ -85,6 +88,8 @@
     Slice.defineOperations(message.MessageService, message.MessageServicePrx,
     {
         "queryMsgListByUno": [, , , , , [7], [[3]], , , , ],
+        "queryMsgListByUid": [, , , , , [7], [[3], [3]], , , , ],
+        "sendMsg": [, , , , , [7], [[3], [7], [3], [3], [7]], , , , ],
         "addMessage": [, , , , , [7], [[message.Msg]], , , , ],
         "updateMessage": [, , , , , [3], [[message.Msg]], , , , ],
         "isUnreadMsg": [, , , , , [3], [[3]], , , , ],

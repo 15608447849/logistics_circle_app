@@ -1477,6 +1477,15 @@ input[type="radio"] {
   z-index:100;
   overflow: auto;
 }
+.noDataBox{
+  display:block;
+  width:7.5rem;
+  height:10.8rem;
+}
+.noDataBox img{
+  display:block;
+  margin:.5rem auto 0 auto;
+}
 .order_boxIndex{
   width:7.5rem;
   height:10.2rem;
@@ -2434,6 +2443,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height:.89rem;
 }
 .activecircle{
+  color:#3189f5;
   border-bottom:3px solid #3189f5;
 }
 .marginRight21{
@@ -2473,7 +2483,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   height:.54rem;
   position:absolute;
   top:.45rem;
-  left:5.87rem;
+  left:5.66rem;
   background: #3189f5;
   border:1px solid  #3189f5;
   border-radius: 5px;
@@ -3693,7 +3703,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
-  color: #333333;
 }
 .blueBorder{
   border-bottom:3px solid #3189f5;

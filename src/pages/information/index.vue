@@ -24,6 +24,9 @@
             </li>
           </ul>
       </van-list>
+      <div v-show="isShowNoData" class="noDataBox">
+        <img src="../../assets/images/small/nodate.png"/>
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +38,7 @@
   export default {
     data() {
       return {
+        isShowNoData: false, // 无数据显示
         avatar: this.$app_store.state.avatarUrl,// 头像
         infoList: [],
         pageSize: '10', // 订单数
@@ -126,16 +130,26 @@
       onLoad() {
         let self = this;
         this.requestInfoList(1, this.endTimeStr, function (result) {
+          debugger
           self.loading = false;
           if (result.length === 0) {
-            // 列表无数据显示
             self.finished = true;
-            return
+            if (self.infoList !== null && self.infoList.length > 0) {
+              self.isShowNoData = false;
+            } else {
+              self.isShowNoData = true;
+            }
+          }else {
+            self.endTimeStr = result[result.length - 1].time;
+            // 原有数组与新数组连接
+            self.infoList = self.infoList.concat(result);
           }
-          self.endTimeStr = result[result.length - 1].time;
-          // 原有数组与新数组连接
-          self.infoList = self.infoList.concat(result);
         }, function (error) {
+          if (self.releaseList !== null && self.releaseList.length > 0) {
+            self.isShowNoData = false;
+          } else {
+            self.isShowNoData = true;
+          }
           self.loading = false;
           self.finished = true;
         });
