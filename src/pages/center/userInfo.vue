@@ -115,6 +115,7 @@
     methods: {
       queryCompByBasicUid(compId) {
         let self = this;
+        debugger
         this.$Ice_CompService.queryCompByBasicUid(compId,
           new IceCallback(
             function (result) {
@@ -135,6 +136,7 @@
       // 获取企业信息
       queryCompByCid(compId) {
         let self = this;
+        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {

@@ -37,7 +37,7 @@
           </li>
           <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
           </li>
-          <li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>
+          <!--<li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>-->
           <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
           <li @click="toMyCircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
             class="personalText circle">我的圈子</span></li>
@@ -122,7 +122,6 @@
       // 获取认证信息
       queryCompByBasicUid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.queryCompByBasicUid(compId,
           new IceCallback(
             function (result) {
