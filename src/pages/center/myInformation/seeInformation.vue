@@ -6,97 +6,133 @@
       <div></div>
     </div>
     <div class="enterprisePic">
-      <img src="../../../assets/images/small/evaluate_03.png" alt="">
+      <img :src="logoPath" alt="">
     </div>
-    <span class="pLabel"></span>
+    <span class="pLabel">{{compByUid.fname}}</span>
     <span class="creditGrade">信用等级</span>
     <ul class="startBoxCredit">
-      <li><img src="../../../assets/images/small/star36_on@2x.png" alt=""></li>
-      <li><img src="../../../assets/images/small/star36_on@2x.png" alt=""></li>
-      <li><img src="../../../assets/images/small/star36_on@2x.png" alt=""></li>
-      <li><img src="../../../assets/images/small/star36_on@2x.png" alt=""></li>
-      <li><img src="../../../assets/images/small/star36_off@2x.png" alt=""></li>
+      <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
     </ul>
     <ul class="dispatchCircleList">
       <li class="needBorder">
         <span class="circleFirendTitle floatleft">联系方式</span>
-        <span class="circleFirendContent floatright">15878963666</span>
+        <span class="circleFirendContent floatright">{{compByUid.pho}}</span>
+        <span class="circleFirendContent textMargin-right10 floatright">{{compByUid.phone}}</span>
       </li>
       <li class="needBorder">
-        <span class="circleFirendTitle floatleft">地区</span>
-        <span class="circleFirendContent floatright">长沙</span>
+        <span class="circleFirendTitle floatleft">地址</span>
+        <span class="circleFirendContent floatright">{{compByUid.address}}</span>
       </li>
       <li class="needBorder">
         <span class="circleFirendTitle floatleft">发送时间</span>
-        <span class="circleFirendContent floatright"><span class="yearTime">2018-08-01</span><span>09:52</span></span>
+        <span class="circleFirendContent floatright"><span class="yearTime">{{details.sendDate}}</span><span>{{details.sendTime}}</span></span>
       </li>
       <li>
         <span class="circleFirendTitle floatleft">发送内容</span>
         <span class="circleFirendContent floatright"></span>
       </li>
     </ul>
-    <div class="firendContent">
+    <div class="firendContent ">
       <p>请求将您加入他的资源圈</p>
       <p>加入圈子后，您发的订单将被我优先查看和接单</p>
       <p>期待和您的合作，谢谢！</p>
     </div>
-    <div class="agreeAndRefuse">
+    <div class="agreeAndRefuse" v-if="isOperation">
       <a class="agree">拒绝</a>
-      <a class="refuse">同意</a>
+      <a class="refuse" @click.stop="addFriend(details.msgid,details.sender)">同意</a>
     </div>
   </div>
 </template>
 
 <script>
+    import {alertContent} from "../../../utils/enum";
+
     export default {
       data(){
         return {
-          compBasicInfoList:[],
+          isOperation: true,
+          cLevel: [],// 认证等级
+          compByUid:[],
           userId: this.$app_store.getters.userId,
-          details: {}
+          details: {},
+          logoPath: '', // 头像
+          score: 0, // 认证等级
         }
       },
       mounted() {
-        this.details = this.$route.query.detail;
-        console.log(this.details)
+        this.details = this.$route.query.details;
+        console.log(this.details);
         //企业基本信息
-        this.getCompBasicInfo();
         this.querygetCompByUid();
       },
       methods:{
-        //获取企业基本信息
-        getCompBasicInfo() {
+        // 获取企业ID获取企业信息
+        querygetCompByUid () {
           let self = this;
-          this.$Ice_CompService.queryCompByBasicUid(2, new IceCallback(function (result) {
-            if (result.code === 0) {
-              // 成功
-              self.compBasicInfoList = result.obj;
-              console.log(result.obj)
-            } else {
-              self.$vux.toast.text(result.msg, 'top');
-            }
-          }, function (error) {
-            //失败
-          }))
-
-        },
-        //获取企业信息（基本信息）
-        querygetCompByUid() {
-          let self = this;
-          this.$Ice_CompService.queryCompByBasicUid(2, new IceCallback(function (result) {
-            if (result.code === 0) {
-              debugger
-              // 成功
-              self.compBasicInfoList = result.obj;
-              console.log(result.obj)
-            } else {
-              self.$vux.toast.text(result.msg, 'top');
-            }
-          }, function (error) {
+          this.$Ice_CompService.querygetCompByCid(this.details.sender, new IceCallback(function (result) {
+                if (result.code === 0) {
+                  // 成功
+                  debugger
+                  self.compByUid = result.obj;
+                  self.logoPath =  result.obj.logoPath;
+                  self.score = result.obj.creadit;
+                  self.computeLevel();
+                  console.log(result.obj)
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              }, function (error) {
             debugger
-            //失败
-          }))
+                //失败
+              }))
+        },
+        //计算星星
+        computeLevel() {
+          let result = []; // 返回的是一个数组,用来遍历输出星星
+          let score = Math.floor(this.score) / 2; // 计算所有星星的数量
+          // let hasDecimal = score % 1 !== 0; // 非整数星星判断
+          let integer = Math.floor(score); // 整数星星判断
+          for (let i = 0; i < integer; i++) { // 整数星星使用on
+            result.push( require('../../../assets/images/small/star36_on@2x.png'));
+          }
+          // if (hasDecimal) { // 半星
+          //   result.push("half");
+          // }
+          while (result.length < 5) {// 余下的用无星星补全,使用off
+            result.push(require('../../../assets/images/small/star36_off@2x.png'));
+          }
+          this.cLevel = result;
+        },
+        //同意
+        addFriend(item, msgtype) {
+          let content = '';
+          let self = this;
+          if (msgtype === 1) {
+            content = alertContent.CIRCLE_ADD_DISPATHCHER;
+          } else if (msgtype === 2) {
+            content = alertContent.CIRCLE_ADD_SOURCE;
+          } else {
+            content = alertContent.RECEIVE_ORDER;
+          }
+          this.message.showAlert(this, content)
+            .then(() => {
+              self.$Ice_CircleService.agreeOrRefuse(item.msgid, item.sender, new IceCallback(
+                function (result) {
+                  if (result.code === 0) {
+                    self.isOperation = false;
+                    self.$vux.toast.text('好友圈添加成功', 'top');
+                  } else {
+                    self.$vux.toast.text('您的订单已被受理', 'top');
+                  }
+                },
+                function (error) {
+                  self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                }
+              ))
+            })
+            .catch(() => {
 
+            })
         },
         fallback() {
           this.$router.go(-1)

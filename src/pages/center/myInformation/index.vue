@@ -28,14 +28,14 @@
         <!--已处理-->
         <ul class="circleList" v-show="!isShow">
           <!--<p>这是已经处理消息</p>-->
-          <li class="needBorder" @click.stop="seeDetails()" v-for="(item, index) in readyHandMsg" :key="index">
-          <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
-          <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
-          <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
+          <li class="needBorder" @click.stop="seeDetails(item)" v-for="(item, index) in readyHandMsg" :key="index">
+            <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
+            <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
+            <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
 
 
-          <a class="handleafter" v-show="display" v-if="item.isread!==0">已同意</a>
-          <a class="read" v-show="read" v-if="item.isread==0">已阅读</a>
+            <a class="handleafter" v-show="display" v-if="item.isread!==0">已同意</a>
+            <a class="read" v-show="read" v-if="item.isread==0">已阅读</a>
           </li>
         </ul>
       </div>
@@ -73,6 +73,7 @@
     methods: {
       //同意
       addFriend(item, index, msgtype) {
+        debugger
         let content = '';
         let self = this;
         if (msgtype === 1) {
@@ -87,8 +88,8 @@
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, item.sender, new IceCallback(
               function (result) {
                 if (result.code === 0) {
+                  self.messageList.splice(index, 1);
                   if (msgtype === 1) {
-                    // self.messageList.splice(index, 1)
                     self.$vux.toast.text('调度圈好友添加成功', 'top');
                   } else if (msgtype === 2) {
                     self.$vux.toast.text('货源圈好友添加成功', 'top');
@@ -139,8 +140,6 @@
         }))
 
       },
-
-
       noHandleMessage() {
         let self = this;
         this.$Ice_MessageService.queryMsgListByUid(2, 1, new IceCallback(function (result) {
@@ -157,9 +156,7 @@
         }))
       },
       tabClick() {
-        console.log(this.nothandle)
         this.isShow = !this.isShow
-        console.log(this.nothandle)
       },
 
 
@@ -184,10 +181,15 @@
         this.$router.go(-1)
       },
       seeDetails(item) {
+        // 判断item这条数据 是属于什么类型消息
+        // if(==='定向发单' || === ‘抢单信息’) {
+        //   return
+        // }
         this.$router.push({
           path: '/center/myInformation/seeInformation',
           query: {
-            detail: item
+            details: item,
+
           }
         })
       }

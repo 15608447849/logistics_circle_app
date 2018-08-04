@@ -1,40 +1,58 @@
 <template>
   <div>
-    <div class="pickGoodsCodeBox">
-      <div class="issueHeaderNav">
+      <div class="issueHeaderLog">
         <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
         <span>取货码</span>
-        <i class="icon iconfont icon-sousuo white"></i>
+        <i ></i>
       </div>
       <div class="pickGoodsCodePic">
-        <img src="" alt="">
+        <!--<qrcode :value="qrCode" :fg-color="fgColor"></qrcode>-->
+        <img :src="qrCodeUrl"/>
+        <div class="Goodscode">取货码：1566</div>
       </div>
-      <qrcode :value="qrCode" :fg-color="fgColor"></qrcode>
-      <!--<div class="Goodscode">取货码：1566</div>-->
-    </div>
+
+
   </div>
 </template>
 
 <script>
-  import { Qrcode } from 'vux'
-    export default {
-      components: {
-        Qrcode
+  // import { Qrcode } from 'vux'
+  export default {
+    data() {
+      return {
+        orderNo: '',
+        qrCode: '',
+        qrCodeUrl: '',
+        userId: this.$app_store.getters.userId,
+      }
+    },
+    mounted() {
+      this.orderNo = this.$route.query.id;
+      this.getQrCode(this.orderNo);
+    },
+    methods: {
+      getQrCode(orderNo) {
+        let self = this;
+        self.$Ice_myOrderService.getPickCode(this.userId,orderNo, new IceCallback(
+          function (result) {
+            if (result.code === 0) {
+              let urlObj = JSON.parse(result.obj[0]);
+              self.qrCode = JSON.parse(result.obj[1]);
+              self.qrCodeUrl =  urlObj.data.nginx + urlObj.data.relativeAddr;
+            } else {
+              self.$vux.toast.text(result.msg, 'top');
+            }
+          },
+          function (error) {
+            self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+          }
+        ))
       },
-      data() {
-        return {
-          qrCode: ''
-        }
-      },
-      mounted() {
-        this.qrCode = this.$route.query.qrCode || 'no1234567';
-      },
-      methods: {
-        goBackPage() {
-          this.$router.go(-1);
-        }
+      goBackPage() {
+        this.$router.go(-1);
       }
     }
+  }
 </script>
 
 <style scoped>

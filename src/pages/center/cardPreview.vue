@@ -6,44 +6,44 @@
       <div></div>
     </div>
     <!--<div styel="height:100%;">-->
-      <div class="identity">
-        <!--<div>-->
-        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-          <p>{{item.title}}</p>
-          <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
-            <i class="icon iconfont icon-guanbi" @click.stop="deletedImages(index)"></i>
-            <i></i><img :src="item.url" class="upcerPic">
-          </div>
-          <cube-upload
-            ref="upload"
-            v-show="item.url === ''"
-            style="position:relative;top:0rem;left:0rem;"
-            :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
-            @files-added="filesAdded"
-            @file-success="filesSuccess"
-            @file-error="filesError">
-          </cube-upload>
-          <!--<div class="updataCertificatesBox">-->
-          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
-          <!--</div>-->
+    <div class="identity">
+      <!--<div>-->
+      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
+        <p>{{item.title}}</p>
+        <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
+          <i class="icon iconfont icon-guanbi" @click.stop="deletedImages(index)"></i>
+          <i></i><img :src="item.url" class="upcerPic">
         </div>
+        <cube-upload
+          ref="upload"
+          v-show="item.url === ''"
+          style="position:relative;top:0rem;left:0rem;"
+          :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
+          @files-added="filesAdded"
+          @file-success="filesSuccess"
+          @file-error="filesError">
+        </cube-upload>
+        <!--<div class="updataCertificatesBox">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+        <!--</div>-->
       </div>
+    </div>
 
 
-      <!--加了class名为displayNone为显示不可见-->
-      <div class="identity displayNone">
-        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-          <p>{{item.title}}</p>
-          <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
-            <i></i><img :src="item.url" class="upcerPic">
-          </div>
-          <!--<div class="updataCertificatesBox">-->
-          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
-          <!--</div>-->
+    <!--加了class名为displayNone为显示不可见-->
+    <div class="identity displayNone">
+      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
+        <p>{{item.title}}</p>
+        <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
+          <i></i><img :src="item.url" class="upcerPic">
         </div>
+        <!--<div class="updataCertificatesBox">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+        <!--</div>-->
       </div>
+    </div>
   </div>
 </template>
 

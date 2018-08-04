@@ -1,11 +1,11 @@
 module.exports = {
     /*** 企业logo框信息的展示 */
-    queryCompByBasicUid:(callback) => {
-        queryIce(comp.CompServicePrx, 'CompService', 'queryCompByBasicUid',token,callback);
+    queryCompByBasicUid:(compid,callback) => {
+        queryIce(comp.CompServicePrx, 'CompService', 'queryCompByBasicUid',compid,callback);
     },
     /** 根据用户码查询指定企业信息(不加路线) */
-    querygetCompByUid:(callback)=>{
-        queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByUid', token,callback);
+    querygetCompByUid:(compid,callback)=>{
+        queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByUid', compid,callback);
     },
     /** 根据企业码查询指定企业信息(加路线) */
     querygetCompByCid:(compid,callback)=>{

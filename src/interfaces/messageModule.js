@@ -19,18 +19,6 @@ module.exports = {
    */
   queryMsgListByUid: (oid, isDeal, callback) => {
     queryIce(message.MessageServicePrx, 'MessageService', 'queryMsgListByUid', oid , isDeal, callback);
-  },
-  /**
-   企业logo 基本信息，无线路
-   */
-  queryCompByBasicUid:(oid,callback) => {
-    queryIce(comp.CompServicePrx, 'CompService', 'queryCompByBasicUid', oid , callback);
-  },
-  /**
-   企业信息，无线路
-   */
-  querygetCompByUid:(oid,callback) => {
-    queryIce(comp.CompServicePrx, 'CompService', 'queryCompByBasicUid', oid , callback);
   }
 };
 

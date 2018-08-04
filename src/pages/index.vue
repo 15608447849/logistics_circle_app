@@ -122,7 +122,6 @@
       // 获取认证信息
       queryCompByBasicUid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.queryCompByBasicUid(compId,
           new IceCallback(
             function (result) {

@@ -862,14 +862,14 @@ input[type="radio"] {
   justify-content: space-between;
   flex-wrap:wrap;
   width:7.5rem;
-  height:auto;
+  height:12.5rem;
   margin:0rem .5rem 0rem 0rem;
   padding:.4rem .21rem 0rem .21rem;
   background:#ffffff;
   overflow: auto;
 }
 .identity div{
-  width:3.3rem;
+  width:3.4rem;
   height:3.14rem;
   margin-bottom:1rem;
 }
@@ -917,6 +917,9 @@ input[type="radio"] {
   top:0rem;
   left:0rem;
   width:3.46rem;
+  display:table-cell;
+  text-align:center;
+  vertical-align:middle;
   height:3.14rem;
   margin-bottom:.64rem;
   background:#ffffff;
@@ -926,7 +929,7 @@ input[type="radio"] {
 .controlPicImg i{
   position:absolute;
   top:-.2rem;
-  left:3.1rem;
+  left:3.15rem;
   font-size:.42rem;
 }
 .controlPicImg img{
@@ -2487,7 +2490,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  /*height:9.7rem;*/
+  height:88vh;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   margin-bottom:.24rem;
@@ -3283,13 +3286,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   height:100%;
 }
 /*取货码***************************************************************/
-.pickGoodsCodeBox{
-  display:block;
-  height:13.34rem;
-  width:7.5rem;
-  background:#ffffff;
-}
-.pickGoodsCodeBox .pickGoodsCodePic{
+.pickGoodsCodePic{
   display:block;
   width:3.5rem;
   height:3.42rem;
