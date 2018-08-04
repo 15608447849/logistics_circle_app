@@ -19,11 +19,7 @@
             <span class="logisticsMing">{{compInfo.fname}}</span>
           </div>
           <ul class="startBox">
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_on@2x.png" alt=""></li>
-            <li><img src="../assets/images/small/star36_off@2x.png" alt=""></li>
+            <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
           </ul>
           <!--<div class="money">-->
             <!--<img src="../assets/images/small/jewelry.png" alt="">-->
@@ -38,7 +34,7 @@
           <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
           </li>
           <!--<li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>-->
-          <li><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
+          <li @click="toMyRelease"><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
           <li @click="toMyCircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
             class="personalText circle">我的圈子</span></li>
           <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
@@ -83,8 +79,10 @@
     },
     data() {
       return {
+        cLevel: [],// 认证等级
         avatar: this.$app_store.state.avatarUrl,// 头像
         userId: this.$app_store.getters.userId,
+        compId: this.$app_store.getters.compId,
         transitionName: '',
         compInfo: {
           fname: '当前用户未登录'
@@ -111,33 +109,17 @@
     mounted() {
       // 获取当前定位城市
       this.$app_store.commit(CURRENT_CITY, '长沙');
-      if (this.$app_store.getters.compInfo !== null) {
-        this.compInfo = this.$app_store.getters.compInfo;
-      }
-      this.queryCompByBasicUid(this.userId);
+      this.queryCompByCid(this.compId);
       this.initBaseData();
       this.initAreaData();
     },
     methods: {
-      // 获取认证信息
-      queryCompByBasicUid(compId) {
-        let self = this;
-        this.$Ice_CompService.queryCompByBasicUid(compId,
-          new IceCallback(
-            function (result) {
-              if (result.code === 0) {
-                self.basicInfo = result.obj;
-                self.score = self.basicInfo.creadit;
-                self.computeLevel();
-              } else {
-                self.$vux.toast.text('企业认证信息获取失败, 请稍后重试', 'top');
-              }
-            },
-            function (error) {
-              self.message.Toast(this, 'warn', '企业认证信息获取失败', false);
-            }
-          )
-        );
+      /**
+       * 根据企业码查询指定企业信息(不加路线)
+       * @param compId
+       */
+      queryCompByCid(compId) {
+
       },
       initBaseData() {
         let self = this;
@@ -170,6 +152,22 @@
           )
         );
       },
+      computeLevel() {
+        let result = []; // 返回的是一个数组,用来遍历输出星星
+        let score = Math.floor(this.compInfo.creadit) / 2; // 计算所有星星的数量
+        // let hasDecimal = score % 1 !== 0; // 非整数星星判断
+        let integer = Math.floor(score); // 整数星星判断
+        for (let i = 0; i < integer; i++) { // 整数星星使用on
+          result.push( require('../assets/images/small/star36_on@2x.png'));
+        }
+        // if (hasDecimal) { // 半星
+        //   result.push("half");
+        // }
+        while (result.length < 5) {// 余下的用无星星补全,使用off
+          result.push(require('../assets/images/small/star36_off@2x.png'));
+        }
+        this.cLevel = result;
+      },
       toDriverAmd() {
         this.$router.push({
           path: '/center/driverMgr/index'
@@ -182,7 +180,7 @@
       },
       toMyRelease() {
         this.$router.push({
-          path: '/center/myRelease/index'
+          path: '/order/acceptOrders'
         })
       },
       tocommonlyRoute() {

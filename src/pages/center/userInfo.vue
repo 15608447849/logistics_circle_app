@@ -7,9 +7,9 @@
     </div>
 
       <div class="enterprisePic">
-        <img :src="avatarUrl" alt="">
+        <img :src="compInfo.logoPath" alt="">
       </div>
-      <span class="pLabel">{{compInfo.fname}}长沙大唐物流有限公司</span>
+      <span class="pLabel">{{compInfo.fname}}</span>
       <span class="creditGrade">信用等级</span>
       <ul class="startBoxCredit">
         <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
@@ -93,30 +93,67 @@
         compInfo: {},// 企业详情
         basicInfo: {}, // 企业LOGO 基本信息模型
         isYourCompInfo: true,
-        avatarUrl: this.$app_store.state.avatarUrl,// 头像
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7 消息 8 订单
         userId: this.$app_store.getters.userId,
+        compId: this.$app_store.getters.compId
       }
     },
     activated() {
-      let compId;
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
-
-      if (this.isYourCompInfo) {
-        compId = this.userId;
+      if (this.isYourCompInfo == true) {
+        this.queryCompByCid(this.compId);
+        // this.querygetCompByUid(this.userId);
+        // this.queryCompByBasicUid(this.userId);
       } else {
         // 根据企业id获取企业信息
-        compId = this.$route.query.id;
+        this.queryCompByCid(this.$route.query.id);
         this.status = this.$route.query.status;
       }
-      this.queryCompByCid(compId);
-      this.queryCompByBasicUid(compId);
     },
     methods: {
-      queryCompByBasicUid(compId) {
-        let self = this;
+      /**
+       * 根据用户码查询指定企业信息(不加路线)
+       * @param userId
+       */
+      querygetCompByUid(userId) {
         debugger
-        this.$Ice_CompService.queryCompByBasicUid(compId,
+        let self = this;
+        this.$Ice_CompService.querygetCompByUid(Number(userId),
+          new IceCallback(
+            function (result) {
+              self.compInfo = result.obj
+            },
+            function (error) {
+              self.message.Toast(this, 'warn', '企业信息获取失败', false);
+            }
+          )
+        );
+      },
+      /**
+       * 根据企业码查询指定企业信息(不加路线)
+       * @param compId
+       */
+      queryCompByCid(compId) {
+        let self = this;
+        this.$Ice_CompService.querygetCompByCid(compId,
+          new IceCallback(
+            function (result) {
+              self.compInfo = result.obj;
+              self.computeLevel();
+            },
+            function (error) {
+              self.message.Toast(this, 'warn', '企业信息获取失败', false);
+            }
+          )
+        );
+      },
+      /**
+       * 根据企业码查询指定企业认证信息
+       * @param compId
+       */
+      selectPhoAndPht(compId) {
+        let self = this;
+        this.$Ice_CompService.selectPhoAndPht(compId,
           new IceCallback(
             function (result) {
               if (result.code === 0) {
@@ -129,21 +166,6 @@
             },
             function (error) {
               self.message.Toast(this, 'warn', '企业头像获取失败', false);
-            }
-          )
-        );
-      },
-      // 获取企业信息
-      queryCompByCid(compId) {
-        let self = this;
-        debugger
-        this.$Ice_CompService.querygetCompByCid(compId,
-          new IceCallback(
-            function (result) {
-              self.compInfo = result.obj
-            },
-            function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败', false);
             }
           )
         );
@@ -165,7 +187,7 @@
       },
       computeLevel() {
         let result = []; // 返回的是一个数组,用来遍历输出星星
-        let score = Math.floor(this.score) / 2; // 计算所有星星的数量
+        let score = Math.floor(this.compInfo.creadit) / 2; // 计算所有星星的数量
         // let hasDecimal = score % 1 !== 0; // 非整数星星判断
         let integer = Math.floor(score); // 整数星星判断
         for (let i = 0; i < integer; i++) { // 整数星星使用on

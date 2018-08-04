@@ -8,31 +8,31 @@
     <ul class="invoiceList">
       <li class="needBorder">
         <span class="invoiceTitle">发票抬头</span>
-        <span class="invoiceContent">{{CompInfo.invtitle}}</span>
+        <span class="invoiceContent">{{compInfo.invtitle}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">发票类型</span>
-        <span class="invoiceContent">{{CompInfo.invtype}}</span>
+        <span class="invoiceContent">{{compInfo.invtype}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">发票税号</span>
-        <span class="invoiceContent">{{CompInfo.taxno}}</span>
+        <span class="invoiceContent">{{compInfo.taxno}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">电话</span>
-        <span class="invoiceContent">{{CompInfo.phone}}</span>
+        <span class="invoiceContent">{{compInfo.phone}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">开户银行</span>
-        <span class="invoiceContent">{{CompInfo.openbank}}</span>
+        <span class="invoiceContent">{{compInfo.openbank}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">开户账号</span>
-        <span class="invoiceContent">{{CompInfo.openaccount}}</span>
+        <span class="invoiceContent">{{compInfo.openaccount}}</span>
       </li>
       <li>
         <span class="invoiceTitle">发票地址</span>
-        <span class="invoiceContent">{{CompInfo.billaddr}}</span>
+        <span class="invoiceContent">{{compInfo.billaddr}}</span>
       </li>
     </ul>
   </div>
@@ -42,11 +42,12 @@
   export default {
     data() {
       return {
-        CompInfo: {}
+        compInfo: {}
       }
     },
     mounted() {
-      this.CompInfo = this.$route.params;
+      debugger
+      this.compInfo = this.$route.params;
     },
     methods: {
       fallback() {

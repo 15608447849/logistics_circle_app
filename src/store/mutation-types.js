@@ -4,6 +4,8 @@ export const USER_INFO = 'USER_INFO'
 // export const USER_TOKEN = 'USER_TOKEN'
 // userId
 export const USER_ID = 'USER_ID'
+// 企业ID
+export const  COMP_ID = 'COMP_ID'
 // 企业信息
 export const  COMP_INFO = 'COMP_INFO'
 // 用户头像

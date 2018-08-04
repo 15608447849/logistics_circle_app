@@ -44,7 +44,10 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
-
+// 我的接收列表
+import ACCEPT from '@/pages/order/acceptOrders.vue'
+// 我的接收详情
+import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'
 // 个人中心
 import USER_INFO from '@/pages/center/userInfo'
 import ENT_INFO from '@/pages/center/entInfo'
@@ -353,6 +356,14 @@ const vueRouter = new Router({
     {
       path: '/home/dimensionalCode',
       component: DIMENSIONALCODE
+    },
+    {
+      path: '/order/acceptOrders',
+      component: ACCEPT
+    },
+    {
+      path: '/order/acceptDetails',
+      component: ACCEPT_DETAILS
     },
     {
       path: '/home/scan',

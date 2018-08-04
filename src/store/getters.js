@@ -12,6 +12,10 @@ export default {
   compInfo: state => {
     return state.compInfo
   },
+  // 企业id
+  compId: state => {
+    return state.compId
+  },
   searchContent: state => {
     return state.searchContent
   },

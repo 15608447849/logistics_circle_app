@@ -2,8 +2,8 @@
   <div class="login">
     <img src="../../assets/images/small/login_logo.png" alt="" class="loginPic">
     <div class="login_input">
-        <input type="text" v-model="account" placeholder="用户名/手机号码" class="userNameBorderBottom">
-        <input type="password" v-model="password" placeholder="密码" class="userPwd">
+      <input type="text" v-model="account" placeholder="用户名/手机号码" class="userNameBorderBottom">
+      <input type="password" v-model="password" placeholder="密码" class="userPwd">
     </div>
     <div class="Flogin_input displayNone">
       <input type="text" v-model="account" placeholder="注册的手机号" class="FuserNameBorderBottom">
@@ -25,7 +25,7 @@
 <script>
   import {
     USER_INFO,
-    USER_ID, COMP_INFO
+    USER_ID, COMP_INFO, COMP_ID
   } from '../../store/mutation-types'
 
   export default {
@@ -46,26 +46,23 @@
           path: '/login/firstLong'
         })
       },
-      toupdatapwd(){
+      toupdatapwd() {
         this.$router.push({path: '/retrievePwd'})
       },
       loginClick() {
         let self = this;
         if (this.validator()) {
-          debugger
           this.$Ice_UserService.login(this.account, this.password, new IceCallback(
             function (result) {
-              if(result.code === 0) {
-
-                self.$app_store.commit(USER_INFO, result.obj);
+              if (result.code === 0) {
                 self.$app_store.commit(USER_ID, result.obj.oid);
                 self.getCompList(result.obj.oid);
               } else {
-                self.message.Toast(self,'error',result.msg,false);
+                self.message.Toast(self, 'error', result.msg, false);
               }
             },
             function (error) {
-              self.message.Toast(self,'服务器连接失败, 请稍后重试',result.msg,false);
+              self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
             }
           ))
         }
@@ -78,77 +75,82 @@
             function (result) {
               // 登录时添加企业到缓存
               if (result.obj.length === 1) {
-                self.setCompIdByRedis(oid,result.obj[0].compid);
+                self.setCompIdByRedis(oid, result.obj[0].compid);
                 return
               }
               // 弹出选择列表
-              result.obj.forEach((currentValue, index, arr)=>{
+              result.obj.forEach((currentValue, index, arr) => {
                 compList.push({
                   content: currentValue.fname,
                   compid: currentValue.compid
                 });
               });
-              self.showActive(oid,compList);
+              self.showActive(oid, compList);
             },
             function (error) {
-              self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
+              self.message.Toast(this, 'warn', '企业信息获取失败, 请尝试重新登录', false);
             }
           )
         );
       },
-      showActive(oid,dataList) {
+      showActive(oid, dataList) {
         this.$createActionSheet({
           title: '请选择要登录的企业',
           active: 0,
           data: dataList,
           onSelect: (item, index) => {
-            this.setCompIdByRedis(oid,item.compid);
+            self.$app_store.commit(COMP_ID, item.compid);
+            this.setCompIdByRedis(oid, item.compid);
           },
           onCancel: () => {
-            this.message.Toast(this,'warn','未选择企业, 请尝试重新登录',false);
+            this.message.Toast(this, 'warn', '未选择企业, 请尝试重新登录', false);
           }
         }).show()
       },
       // 登录时添加企业到缓存
-      setCompIdByRedis(oid, compid) {
+      setCompIdByRedis(oid, compId) {
         let self = this;
-        this.$Ice_CompService.addLoginCompByRedis(oid,compid,
+        this.$Ice_CompService.addLoginCompByRedis(oid, compId,
           new IceCallback(
             function (result) {
-              self.getCompInfo(oid);
-            },
-            function (error) {
-              self.message.Toast(this,'warn','企业信息添加失败, 请稍后重试',false);
-            }
-          )
-        );
-      },
-      // 获取企业信息
-      getCompInfo(oid) {
-        let self = this;
-        this.$Ice_CompService.querygetCompByUid(oid+'',
-          new IceCallback(
-            function (result) {
-              self.$app_store.commit(COMP_INFO,result.obj);
-              console.log(self.$app_store.getters.compInfo);
+              self.$app_store.commit(COMP_ID, compId);
               let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
               self.$router.push({
                 path: redirect
               })
             },
             function (error) {
-              self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
+              self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
             }
           )
         );
       },
+      // // 获取企业信息
+      // getCompInfo(oid) {
+      //   let self = this;
+      //   this.$Ice_CompService.querygetCompByUid(oid+'',
+      //     new IceCallback(
+      //       function (result) {
+      //         self.$app_store.commit(COMP_INFO,result.obj);
+      //         console.log(self.$app_store.getters.compInfo);
+      //         let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+      //         self.$router.push({
+      //           path: redirect
+      //         })
+      //       },
+      //       function (error) {
+      //         self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
+      //       }
+      //     )
+      //   );
+      // },
       validator() {
         if (this.verifyUtil.isNull(this.account)) {
-          this.message.Toast(this,'warn','账号不能为空',false);
+          this.message.Toast(this, 'warn', '账号不能为空', false);
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          this.message.Toast(this,'warn','密码为空或长度小于6位,请完善输入',false);
+          this.message.Toast(this, 'warn', '密码为空或长度小于6位,请完善输入', false);
           return false
         }
         return true
