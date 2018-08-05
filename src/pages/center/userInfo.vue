@@ -85,25 +85,23 @@
 </template>
 
 <script>
+
   export default {
     data() {
       return {
         score: 0,
         cLevel: [],// 认证等级
         compInfo: {},// 企业详情
-        basicInfo: {}, // 企业LOGO 基本信息模型
         isYourCompInfo: true,
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7 消息 8 订单
-        userId: this.$app_store.getters.userId,
-        compId: this.$app_store.getters.compId
+        userId: ''
       }
     },
     activated() {
+      this.userId = this.$app_store.getters.userId;
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
-      if (this.isYourCompInfo == true) {
-        this.queryCompByCid(this.compId);
-        // this.querygetCompByUid(this.userId);
-        // this.queryCompByBasicUid(this.userId);
+      if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo)) {
+          this.compInfo = this.$app_store.state.compInfo;
       } else {
         // 根据企业id获取企业信息
         this.queryCompByCid(this.$route.query.id);
@@ -116,20 +114,14 @@
        * @param userId
        */
       querygetCompByUid(userId) {
-        debugger
         let self = this;
-<<<<<<< HEAD
-        debugger
-        this.$Ice_CompService.queryCompByBasicUid(compId,
-=======
         this.$Ice_CompService.querygetCompByUid(Number(userId),
->>>>>>> origin/master
           new IceCallback(
             function (result) {
               self.compInfo = result.obj
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败', false);
+              self.$vux.toast.text('企业信息获取失败!', 'top');
             }
           )
         );
@@ -140,7 +132,6 @@
        */
       queryCompByCid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
@@ -148,30 +139,7 @@
               self.computeLevel();
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败', false);
-            }
-          )
-        );
-      },
-      /**
-       * 根据企业码查询指定企业认证信息
-       * @param compId
-       */
-      selectPhoAndPht(compId) {
-        let self = this;
-        this.$Ice_CompService.selectPhoAndPht(compId,
-          new IceCallback(
-            function (result) {
-              if (result.code === 0) {
-                self.basicInfo = result.obj;
-                self.score = self.basicInfo.creadit;
-                self.computeLevel();
-              } else {
-                self.$vux.toast.text('企业认证信息获取失败, 请稍后重试', 'top');
-              }
-            },
-            function (error) {
-              self.message.Toast(this, 'warn', '企业头像获取失败', false);
+              self.$vux.toast.text('企业信息获取失败!', 'top');
             }
           )
         );

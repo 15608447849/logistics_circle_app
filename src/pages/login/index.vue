@@ -25,7 +25,7 @@
 <script>
   import {
     USER_INFO,
-    USER_ID, COMP_INFO, COMP_ID
+    USER_ID, COMP_INFO
   } from '../../store/mutation-types'
 
   export default {
@@ -55,7 +55,8 @@
           this.$Ice_UserService.login(this.account, this.password, new IceCallback(
             function (result) {
               if (result.code === 0) {
-                self.$app_store.commit(USER_ID, result.obj.oid);
+                self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
+                self.$app_store.commit(USER_INFO,JSON.stringify(result.obj));
                 self.getCompList(result.obj.oid);
               } else {
                 self.message.Toast(self, 'error', result.msg, false);
@@ -99,7 +100,6 @@
           active: 0,
           data: dataList,
           onSelect: (item, index) => {
-            self.$app_store.commit(COMP_ID, item.compid);
             this.setCompIdByRedis(oid, item.compid);
           },
           onCancel: () => {
@@ -113,11 +113,8 @@
         this.$Ice_CompService.addLoginCompByRedis(oid, compId,
           new IceCallback(
             function (result) {
-              self.$app_store.commit(COMP_ID, compId);
-              let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
-              self.$router.push({
-                path: redirect
-              })
+              // 获取企业信息
+              self.getCompInfo(oid);
             },
             function (error) {
               self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
@@ -125,25 +122,39 @@
           )
         );
       },
-      // // 获取企业信息
-      // getCompInfo(oid) {
-      //   let self = this;
-      //   this.$Ice_CompService.querygetCompByUid(oid+'',
-      //     new IceCallback(
-      //       function (result) {
-      //         self.$app_store.commit(COMP_INFO,result.obj);
-      //         console.log(self.$app_store.getters.compInfo);
-      //         let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
-      //         self.$router.push({
-      //           path: redirect
-      //         })
-      //       },
-      //       function (error) {
-      //         self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
-      //       }
-      //     )
-      //   );
-      // },
+      // 获取企业信息
+      getCompInfo(oid) {
+        let self = this;
+        this.$Ice_CompService.querygetCompByUid(oid+'',
+          new IceCallback(
+            function (result) {
+              // 获取企业认证信息
+              self.queryCompByBasicUid(oid,result.obj);
+            },
+            function (error) {
+              self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
+            }
+          )
+        );
+      },
+      // 获取企业认证信息
+      queryCompByBasicUid(oid,compInfo) {
+        let self = this;
+        this.$Ice_CompService.queryCompByBasicUid(oid+'',
+          new IceCallback(
+            function (result) {
+              self.$app_store.commit(COMP_INFO, JSON.stringify( Object.assign(compInfo,result.obj)));
+              let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+              self.$router.push({
+                path: redirect
+              })
+            },
+            function (error) {
+              self.message.Toast(this,'warn','企业认证信息获取失败, 请尝试重新登录',false);
+            }
+          )
+        );
+      },
       validator() {
         if (this.verifyUtil.isNull(this.account)) {
           this.message.Toast(this, 'warn', '账号不能为空', false);

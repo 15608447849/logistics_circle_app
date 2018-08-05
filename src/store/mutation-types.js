@@ -8,8 +8,6 @@ export const USER_ID = 'USER_ID'
 export const  COMP_ID = 'COMP_ID'
 // 企业信息
 export const  COMP_INFO = 'COMP_INFO'
-// 用户头像
-export const AVATAR_URL = 'AVATAR_URL'
 // open_id
 export const UNION_ID = 'UNION_ID'
 // 侧边栏显示

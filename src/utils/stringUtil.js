@@ -10,7 +10,7 @@ export function subString (str, len) {
   return str
 }
 
-//字符串验证不为空
+// 字符串验证不为空
 export function stringIsNotNull(str) {
   if (str === null || str === undefined || str === "" ) {
     return false;

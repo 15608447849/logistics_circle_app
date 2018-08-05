@@ -46,7 +46,6 @@
       }
     },
     mounted() {
-      debugger
       this.compInfo = this.$route.params;
     },
     methods: {

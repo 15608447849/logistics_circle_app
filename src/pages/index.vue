@@ -22,8 +22,8 @@
             <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
           </ul>
           <!--<div class="money">-->
-            <!--<img src="../assets/images/small/jewelry.png" alt="">-->
-            <!--<span class="yang">￥</span><span class="priceNum">0.00</span>-->
+          <!--<img src="../assets/images/small/jewelry.png" alt="">-->
+          <!--<span class="yang">￥</span><span class="priceNum">0.00</span>-->
           <!--</div>-->
         </div>
         <ul class="personalList">
@@ -58,7 +58,6 @@
   } from '../store/mutation-types'
 
   export default {
-    // computed 计算属性
     computed: {
       isShowSidebar: {
         get: function () {
@@ -81,8 +80,7 @@
       return {
         cLevel: [],// 认证等级
         avatar: this.$app_store.state.avatarUrl,// 头像
-        userId: this.$app_store.getters.userId,
-        compId: this.$app_store.getters.compId,
+        compId: '',
         transitionName: '',
         compInfo: {
           fname: '当前用户未登录'
@@ -109,38 +107,16 @@
     mounted() {
       // 获取当前定位城市
       this.$app_store.commit(CURRENT_CITY, '长沙');
-      this.queryCompByCid(this.compId);
+      this.compId = this.$app_store.getters.compId;
+      if(this.compInfo !== undefined) {
+        this.compInfo = this.$app_store.state.compInfo;
+        this.computeLevel();
+      }
       this.initBaseData();
       this.initAreaData();
     },
     methods: {
-      // 获取认证信息
-      queryCompByBasicUid(compId) {
-        let self = this;
-        this.$Ice_CompService.queryCompByBasicUid(compId,
-          new IceCallback(
-            function (result) {
-              if (result.code === 0) {
-                self.basicInfo = result.obj;
-                self.score = self.basicInfo.creadit;
-                self.computeLevel();
-              } else {
-                self.$vux.toast.text('企业认证信息获取失败, 请稍后重试', 'top');
-              }
-            },
-            function (error) {
-              self.message.Toast(this, 'warn', '企业认证信息获取失败', false);
-            }
-          )
-        );
-      /**
-       * 根据企业码查询指定企业信息(不加路线)
-       * @param compId
-       */
-      queryCompByCid (compId){
-
-      },
-      initBaseData(){
+      initBaseData() {
         let self = this;
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(

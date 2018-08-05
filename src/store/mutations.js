@@ -18,24 +18,23 @@ import {
 export default {
   // 用户信息
   [USER_INFO] (state, v) {
-    state.userInfo = v
+    state.userInfo = v;
+    localStorage.setItem(USER_INFO, v);
   },
   // 用户id
   [USER_ID] (state, v) {
-    state.userId = v
+    state.userId = v;
+    localStorage.setItem(USER_ID, v);
   },
   // 企业id
   [COMP_ID] (state, v) {
-    state.compId = v
+    state.compId = v;
+    localStorage.setItem(COMP_ID, v);
   },
-  // 用户头像
-  [AVATAR_URL] (state, v) {
-    state.avatarUrl = v
-  },
-
   // 企业信息
   [COMP_INFO] (state, v) {
-    state.compInfo = v
+    state.compInfo = v;
+    localStorage.setItem(COMP_INFO, v);
   },
   // 侧边栏显示
   [IS_SHOW_SIDEBAR] (state, isShowSidebar) {

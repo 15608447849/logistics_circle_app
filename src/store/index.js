@@ -7,12 +7,50 @@ import getters from './getters'
 
 Vue.use(Vuex);
 
+import {
+  USER_ID,
+  COMP_ID,
+  COMP_INFO,
+} from './mutation-types'
+
+let getCompInfo =  function () {
+  if (localStorage.getItem(COMP_INFO)) {
+    try {
+      return JSON.parse(localStorage.getItem(COMP_INFO))
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
+let getUserId =  function () {
+  if (localStorage.getItem(USER_ID)) {
+    try {
+      return JSON.parse(localStorage.getItem(USER_ID))
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
+let getCompId =  function () {
+  if (localStorage.getItem(COMP_ID)) {
+    try {
+      return JSON.parse(localStorage.getItem(COMP_ID))
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 const state = {
   userInfo: {}, // 用户信息
-  compInfo: {}, // 企业信息
-  compId: '',// 企业id
-  userId: '', // 用户ouid
-  avatarUrl: 'http://192.168.1.240/wlq/compic/comp3/0.jpg',// 默认用户头像
+  compInfo: getCompInfo(), // 企业信息
+  compId: getCompId(),// 企业id
+  userId: getUserId(), // 用户ouid
   openId: '',
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型

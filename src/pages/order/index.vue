@@ -204,11 +204,8 @@
         this.QueryParam.origin = '';
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
-<<<<<<< HEAD
         // this.QueryParam.tstatus = '0';
-=======
         this.QueryParam.tstatus = status;
->>>>>>> origin/master
       },
       // 跳转企业详情
       toComPInfo(item) {
@@ -361,15 +358,9 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
-<<<<<<< HEAD
-        debugger
-        this.$Ice_redundancyService.queryMyPubOrder(2, this.QueryParam,this.page, new IceCallback(
-=======
         this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam,this.page, new IceCallback(
->>>>>>> origin/master
           function (result) {
             self.loading = false;
-            debugger
             if (result.code === 0) {
               self.page.pageIndex += 1;
               if(result.obj !== '[]') {
@@ -392,7 +383,6 @@
             }
           },
           function (error) {
-            debugger
             self.loading = false;
             self.finished = true;
           }
