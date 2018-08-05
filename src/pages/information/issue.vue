@@ -293,7 +293,6 @@
         }).show()
       },
       setPmPickerData(category) {
-
         let self = this;
         self.disPmList = [];
         let pmList = this.dicData['pm'];

@@ -37,7 +37,8 @@
   export default {
     data() {
       return {
-        avatar: this.$app_store.state.avatarUrl,// 头像
+        avatar: '',
+        userId: this.$app_store.state.userId,
         infoList: [],
         pageSize: '10', // 订单数
         address: this.$app_store.getters.currentCity, // 地址
@@ -82,7 +83,7 @@
       },
       requestInfoList(requestState, timeStr, successCallback, errorCallback) {
         let self = this;
-        this.$Ice_OrderService.queryCircleOrderByApp("0", self.pageSize, self.address, self.key, requestState, timeStr,
+        this.$Ice_OrderService.queryCircleOrderByApp(self.userId, self.pageSize, self.address, self.key, requestState, timeStr,
           new IceCallback(
             function (result) {
               if (result.code !== 0) {

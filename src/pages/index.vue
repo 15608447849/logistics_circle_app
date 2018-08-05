@@ -82,9 +82,7 @@
         avatar: this.$app_store.state.avatarUrl,// 头像
         compId: '',
         transitionName: '',
-        compInfo: {
-          fname: '当前用户未登录'
-        },
+        compInfo: null,
         activeList: [{
           title: '首页',
           isActive: false,
@@ -108,9 +106,14 @@
       // 获取当前定位城市
       this.$app_store.commit(CURRENT_CITY, '长沙');
       this.compId = this.$app_store.getters.compId;
-      if(this.compInfo !== undefined) {
+      if(this.compInfo !== undefined && this.compInfo !== null) {
         this.compInfo = this.$app_store.state.compInfo;
         this.computeLevel();
+      } else {
+        this.compInfo= {
+          fname: '当前用户未登录',
+          creadit: 0
+        }
       }
       this.initBaseData();
       this.initAreaData();

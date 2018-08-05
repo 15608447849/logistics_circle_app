@@ -46,6 +46,28 @@ let getCompId =  function () {
   return undefined;
 };
 
+let getDict =  function () {
+  if (localStorage.getItem(COMP_ID)) {
+    try {
+      return JSON.parse(localStorage.getItem(COMP_ID))
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
+let getArea =  function () {
+  if (localStorage.getItem(COMP_ID)) {
+    try {
+      return JSON.parse(localStorage.getItem(COMP_ID))
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 const state = {
   userInfo: {}, // 用户信息
   compInfo: getCompInfo(), // 企业信息
