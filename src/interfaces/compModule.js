@@ -5,7 +5,7 @@ module.exports = {
     },
     /*** 企业logo框信息的展示 */
     selectPhoAndPht:(compId,callback) => {
-        queryIce(comp.CompServicePrx, 'CompService', 'selectPhoAndPht',Number(compId),callback);
+        queryIce(comp.CompServicePrx, 'CompService', 'selectPhoAndPht',compId,callback);
     },
     /** 根据用户码查询指定企业信息(不加路线) */
     querygetCompByUid:(oid,callback)=>{

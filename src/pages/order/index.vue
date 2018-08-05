@@ -110,27 +110,27 @@
         // 0 发布 1/2 抢单 3 取货 4 5 签收  6 待评价 8 评价 20 取消
         tabList: [{
           name: '发布',
-          value: 0,
+          value: '0',
           isSelected: true
         }, {
           name: '抢单',
-          value: 1,
+          value: '1',
           isSelected: false
         }, {
           name: '取货',
-          value: 3,
+          value: '3',
           isSelected: false
         }, {
           name: '签收',
-          value: 4,
+          value: '4',
           isSelected: false
         }, {
           name: '待评价',
-          value: 6,
+          value: '6',
           isSelected: false
         }, {
           name: '全部',
-          value: 10,
+          value: '',
           isSelected: false
         }]
       }
@@ -138,7 +138,7 @@
     mounted() {
       this.$app_store.commit(TABBAR_INDEX, 3);
       // 初始化列表查询条件
-      this.initQueryConditions();
+      this.initQueryConditions('0');
     },
     methods: {
       statusToChinese(status) {
@@ -181,14 +181,18 @@
           value.isSelected = false
         });
         item.isSelected = true;
-        this.tstatus = item.value;
-        // 重置搜索条件, 刷新列表
-
+        // 重置搜索条件
+        this.initQueryConditions(item.value);
+        // 清空数据
+        this.releaseList = [];
+        // 刷新列表
+        // this.queryMyPublishOrder();
+        this.onLoad();
       },
       avatarClick() {
         this.$app_store.commit(IS_SHOW_SIDEBAR, true);
       },
-      initQueryConditions() {
+      initQueryConditions(status) {
         // 初始化分页条件
         this.page.pageSize = 10; // 每页页数
         this.page.pageIndex = 1; // 当前页
@@ -200,7 +204,11 @@
         this.QueryParam.origin = '';
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
+<<<<<<< HEAD
         // this.QueryParam.tstatus = '0';
+=======
+        this.QueryParam.tstatus = status;
+>>>>>>> origin/master
       },
       // 跳转企业详情
       toComPInfo(item) {
@@ -208,7 +216,7 @@
           path: '/userInfo',
           query: {
             isYourCompInfo: false,
-            id: item.revierid,
+            id: item.revicompid,
             status: 6
           }
         })
@@ -353,8 +361,12 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
+<<<<<<< HEAD
         debugger
         this.$Ice_redundancyService.queryMyPubOrder(2, this.QueryParam,this.page, new IceCallback(
+=======
+        this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam,this.page, new IceCallback(
+>>>>>>> origin/master
           function (result) {
             self.loading = false;
             debugger
@@ -387,8 +399,11 @@
         ))
       },
       onLoad() {
-        // 获取我的发布列表
-        this.queryMyPublishOrder();
+        // this.isShowNoData = false;
+        // setTimeout(()=>{
+          // 获取我的发布列表
+          this.queryMyPublishOrder();
+        // },500);
       },
       toReleaseDetails(item) {
         this.$router.push({

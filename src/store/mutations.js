@@ -1,6 +1,7 @@
 import {
   USER_INFO,
   USER_ID,
+  COMP_ID,
   COMP_INFO,
   AVATAR_URL,
   RECEIPT_CITY,
@@ -22,6 +23,10 @@ export default {
   // 用户id
   [USER_ID] (state, v) {
     state.userId = v
+  },
+  // 企业id
+  [COMP_ID] (state, v) {
+    state.compId = v
   },
   // 用户头像
   [AVATAR_URL] (state, v) {

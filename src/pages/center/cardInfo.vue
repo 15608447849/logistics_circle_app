@@ -97,6 +97,7 @@
       }
     },
     mounted() {
+
       this.getImages(this.userId);
     },
     methods: {
@@ -143,7 +144,7 @@
                 self.uploadList[item].url = data[item];
               }
               if (item == 7) {
-                localStorage.setItem("$logoImage", data[item]);
+                // localStorage.setItem("$logoImage", data[item]);
               }
             }
           }
