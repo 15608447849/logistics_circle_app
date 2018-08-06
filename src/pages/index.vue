@@ -124,7 +124,14 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              self.$app_store.commit(DICT, result);
+              if(result.code === 0) {
+                debugger
+                self.$app_store.commit(DICT, JSON.stringify(result.data));
+              } else {
+                self.$vux.toast.text('货物类型获取失败', 'top');
+              }
+
+
             },
             function (error) {
               setTimeout(() => {
@@ -139,10 +146,11 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              self.$app_store.commit(AREA, result.children);
+              self.$app_store.commit(AREA, JSON.stringify(result.children));
               // localStorage.setItem("area", JSON.stringify(result.children));
             },
             function (error) {
+              debugger
               setTimeout(() => {
                 self.initAreaData();
               }, 15000);

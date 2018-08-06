@@ -209,7 +209,8 @@
         this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
-        // 数据从本地获取 方便测试
+
+        debugger
         this.dicData = this.$app_store.getters.dict || null;
         this.pmList = this.dicData.pm;
         // 设置默认类型字典选择, 默认取第一个

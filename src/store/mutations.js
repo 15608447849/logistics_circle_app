@@ -60,10 +60,12 @@ export default {
   // 订单字典
   [DICT](state, v) {
     state.dict = v;
+    localStorage.setItem(DICT, v);
   },
   // 地区
   [AREA](state, v) {
     state.area = v;
+    localStorage.setItem(AREA, v);
   },
   // 当前城市
   [CURRENT_CITY](state, v) {

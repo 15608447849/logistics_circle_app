@@ -10,7 +10,7 @@ Vue.use(Vuex);
 import {
   USER_ID,
   COMP_ID,
-  COMP_INFO,
+  COMP_INFO, DICT, AREA,
 } from './mutation-types'
 
 let getCompInfo =  function () {
@@ -47,9 +47,9 @@ let getCompId =  function () {
 };
 
 let getDict =  function () {
-  if (localStorage.getItem(COMP_ID)) {
+  if (localStorage.getItem(DICT)) {
     try {
-      return JSON.parse(localStorage.getItem(COMP_ID))
+      return JSON.parse(localStorage.getItem(DICT))
     } catch (e) {
       return undefined;
     }
@@ -58,9 +58,9 @@ let getDict =  function () {
 };
 
 let getArea =  function () {
-  if (localStorage.getItem(COMP_ID)) {
+  if (localStorage.getItem(AREA)) {
     try {
-      return JSON.parse(localStorage.getItem(COMP_ID))
+      return JSON.parse(localStorage.getItem(AREA))
     } catch (e) {
       return undefined;
     }
@@ -77,8 +77,8 @@ const state = {
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型
   isLoading: false, // 网络加载等待框
-  dict: {}, // 字典
-  area: {}, // 城市地区json数据
+  dict: getDict(), // 字典
+  area: getArea(), // 城市地区json数据
   currentCity: '', // 当前定位地区
   receiptCity: '', // 发单地区
   geoState: 0, // 0: 出发地 1: 目的地
