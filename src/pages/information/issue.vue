@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发布订单</span>
-      <span></span>
+      <span class="alignCenter"></span>
     </div>
     <ul class="liNumThree margintop80">
       <li class="inputNumOne needBorder">

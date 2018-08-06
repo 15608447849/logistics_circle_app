@@ -66,7 +66,7 @@
             class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
           </div>
         </li>
-        <div v-show="isShowNoData">
+        <div v-show="isShowNoData" class="noDataBox">
           <img src="../../assets/images/small/nodate.png"/>
         </div>
         <div class="seeMore" v-show="isShowMore" @click="skipInformation">查看更多</div>

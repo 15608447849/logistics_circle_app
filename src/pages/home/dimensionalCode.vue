@@ -3,7 +3,7 @@
     <div class="backgroundgray">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span class="myTwoCode">我的二维码</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="myTwoCodeBox">
       <div class="nameAndCode">

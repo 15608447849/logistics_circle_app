@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>添加线路</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="addRouterBox">
       <ul class="addRouteList">

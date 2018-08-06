@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>修改密码</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <ul class="settingList margin-bottom56">
       <li class="accountName "><span>用户名：</span><span>长沙大唐物流</span></li>

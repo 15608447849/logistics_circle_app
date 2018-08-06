@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>消息</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="downfixed">
       <div class="circleListBox">
@@ -91,6 +91,7 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
+            debugger
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, item.sender, new IceCallback(
               function (result) {
                 if (result.code === 0) {
@@ -172,7 +173,6 @@
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(2,new IceCallback( function(result){
           if(result.code === 0) {
-            console.log(result);
             self.isNewMsg = result.__state;
           }else{
 

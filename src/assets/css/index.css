@@ -1482,6 +1482,13 @@ input[type="radio"] {
   z-index:100;
   overflow: auto;
 }
+.colorWhite{
+  color:#ffffff;
+}
+.alignCenter{
+  width:.2rem;
+  height:.1rem;
+}
 .order_box{
   width:7.5rem;
   background:#ffffff;
@@ -1492,10 +1499,13 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:10.8rem;
+  padding-top:2rem;
 }
 .noDataBox img{
   display:block;
-  margin:.5rem auto 0 auto;
+  width:3rem;
+  height:4rem;
+  margin:0 auto 0 auto;
 }
 .order_boxIndex{
   width:7.5rem;
@@ -3912,17 +3922,44 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .bindingPhone{
   display:flex;
   width:7.5rem;
-  height:auto;
+  height:.5rem;
   justify-content:center;
   margin-bottom:.55rem;
 }
-.bindingPhone span{
+.newsPhoneBox{
+  display:block;
+  width:7.5rem;
+  height:auto;
+  background:#ffffff;
+}
+.newsPhone{
+  display:block;
+  width:7.5rem;
+  height:1rem;
+  padding:0 .21rem;
+}
+.newsPhone span{
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .28rem;
+  letter-spacing: 1px;
+  color: #333333;
+}
+.bindingPhone span,.bindingPhone input{
+  height:.5rem;
+  line-height:.5rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 1px;
   color: #333333;
+}
+.bindingPhone input{
+  width:2.5rem;
+
 }
 .margin_top_5{
   display:inline-block;

@@ -3,7 +3,7 @@
     <div class="backgroundgray opacity6">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span class="myTwoCode">扫一扫二维码</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="saoyisaopage">
       <div class="scanBorder">

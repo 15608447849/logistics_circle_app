@@ -3,11 +3,11 @@
      <div class="issueHeaderLog">
        <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
        <span>账号与安全</span>
-       <div></div>
+       <div class="alignCenter"></div>
      </div>
      <ul class="settingList backgroundwhite margintop40">
        <li  class="needBorder"><span class="accountUser floatleft">用户名</span><span class="accountUserName floatright">长沙大唐物流有限公司</span></li>
-       <li @click="toupdataPhone"><span class="accountPhone floatleft">手机号码</span><span class="accountPhoneNum floatright">13998765432</span></li>
+       <li @click="toupdataPhone"><span class="accountPhone floatleft">手机号码</span><span class="accountPhoneNum floatright">{{phoneNumber}}</span></li>
      </ul>
      <div class="accountUpdataPwd" @click="toaccountUpdataPwd">修改密码</div>
    </div>
@@ -17,7 +17,7 @@
     export default {
       data(){
         return{
-
+          phoneNumber:18373270790
         }
       },
       methods:{
@@ -30,8 +30,12 @@
           })
         },
         toupdataPhone(){
+
           this.$router.push({
-            path:'/center/setting/updataPhone'
+            path:'/center/setting/updataPhone',
+            query: {
+              userPhone: this.phoneNumber,
+            }
           })
         }
       }

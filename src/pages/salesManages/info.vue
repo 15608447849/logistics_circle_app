@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
       <span>业务员管理</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="downfixed havedownfixed">
     <ul class="addDriverInfo">

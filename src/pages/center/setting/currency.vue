@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>通用</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
       <ul class="settingList backgroundwhite margintop40">
         <li class="needBorder">字体大小</li>

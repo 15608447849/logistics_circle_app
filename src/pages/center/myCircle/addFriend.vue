@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>添加好友</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="downfixed havedownfixed">
       <div class="addFriendBox">

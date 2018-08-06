@@ -4,7 +4,7 @@
       <div class="issueHeaderNav">
         <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
         <span>我的接收</span>
-        <i ></i>
+        <i class="alignCenter"></i>
       </div>
       <div class="downfixed havedownfixed">
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->

@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
       <span>取货码</span>
-      <i ></i>
+      <i class="alignCenter"></i>
     </div>
     <div class="pickGoodsCodePic" >
       <!--<qrcode :value="qrCode" :fg-color="fgColor"></qrcode>-->

@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>证件信息</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <!--<div styel="height:100%;">-->
     <div class="identity">

@@ -3,7 +3,8 @@
     <div class="issueHeaderNav">
       <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
       <span>信息大厅</span>
-      <span @click="toPageIssue">发单</span>
+      <i class="icon iconfont icon-gengduo1 colorWhite" @click="toPageIssue"></i>
+      <!--<span @click="toPageIssue">发单</span>-->
     </div>
     <div class="downfixed havedownfixed">
       <!--下拉刷新回调的提示-->

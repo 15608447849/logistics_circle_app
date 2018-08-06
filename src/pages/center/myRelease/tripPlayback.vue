@@ -3,7 +3,7 @@
     <div class="tripHeader">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>行程回放</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="tripMap">
 

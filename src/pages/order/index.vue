@@ -5,7 +5,7 @@
         <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
         <span>我的发布</span>
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
-        <i></i>
+        <div class="alignCenter"></div>
       </div>
       <div class="downfixed havedownfixed">
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
@@ -76,7 +76,7 @@
             </div>
           </ul>
         </van-list>
-        <div v-show="isShowNoData">
+        <div v-show="isShowNoData" class="noDataBox">
           <img src="../../assets/images/small/nodate.png"/>
         </div>
       </div>

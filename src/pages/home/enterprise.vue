@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back"></i>
       <span>企业信息</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <ul class="enterpriseList">
       <li class="touxiangBox needBorder">

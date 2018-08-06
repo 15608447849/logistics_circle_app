@@ -3,7 +3,8 @@
     <div class="issueHeaderNav">
       <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
       <span>圈子</span>
-      <span @click="toPageIssue">发单</span>
+      <i class="icon iconfont icon-gengduo1 colorWhite"@click="toPageIssue"></i>
+      <!--<span @click="toPageIssue">发单</span>-->
     </div>
     <!--下拉刷新回调的提示-->
     <div class="downfixed havedownfixed">
@@ -23,7 +24,7 @@
           </li>
         </ul>
       </van-list>
-      <div v-show="isShowNoData">
+      <div v-show="isShowNoData" class="noDataBox">
         <img src="../../assets/images/small/nodate.png"/>
       </div>
     </div>

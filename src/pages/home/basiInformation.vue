@@ -3,7 +3,7 @@
    <div class="issueHeaderNav">
     <i class="icon iconfont icon-btngoback back"></i>
     <span>基本信息</span>
-    <div></div>
+    <div class="alignCenter"></div>
    </div>
    <div class="enterprisePic">
      <img src="../../assets/images/small/bussiness-man.png" alt="">

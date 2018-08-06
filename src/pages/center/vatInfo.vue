@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发票信息</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <ul class="invoiceList">
       <li class="needBorder">

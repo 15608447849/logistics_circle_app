@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>基本信息</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="enterprisePic">
       <img :src="logoPath" alt="">
@@ -68,11 +68,14 @@
       // 获取企业ID获取企业信息
       querygetCompByUid: function () {
         let self = this;
-        this.$Ice_CompService.querygetCompByCid(this.details.sender, new IceCallback(function (result) {
+        console.log(34343)
+        this.$Ice_CompService.querygetCompByCid(2, new IceCallback(function (result) {
           if (result.code !== 0) {
+            console.log(1212121)
             self.$vux.toast.text(result.msg, 'top');
           } else {
             // 成功
+
             self.compByUid = result.obj;
             self.logoPath = result.obj.logoPath;
             self.score = result.obj.creadit;
@@ -85,7 +88,6 @@
       },
       //同意
       addFriend: function (details, index, msgtype) {
-        debugger
         let content = '';
         let self = this;
         if (msgtype === 1) {

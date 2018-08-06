@@ -4,7 +4,7 @@
       <div class="issueHeaderNav">
         <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
         <span>查看调度</span>
-        <div></div>
+        <div class="alignCenter"></div>
       </div>
       <div class="enterprisePic">
         <img src="../../../assets/images/small/bussiness-man.png" alt="">

@@ -3,7 +3,7 @@
      <div class="issueHeaderNav">
        <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
        <span>货源信息</span>
-       <span></span>
+       <span class="alignCenter"></span>
      </div>
      <div class="issueDetailsBox">
        <div class="orderPadding10">

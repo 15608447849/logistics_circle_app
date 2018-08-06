@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>基础设置</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <ul class="settingList">
       <li @click="toaccountSecurity" class="needBorder1">账号安全</li>
