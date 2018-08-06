@@ -47,7 +47,7 @@
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        oid: this.$app_store.getters.userId,
+        oid: this.$app_store.getters.userId || '',
         pullingMessage: '',
         isShowMessage: false,
         loading: false,
@@ -177,7 +177,7 @@
       }
     },
     mounted() {
-      this.$app_store.commit(TABBAR_INDEX, 2);
+      this.$app_store.commit(TABBAR_INDEX, 1);
     }
   }
 </script>

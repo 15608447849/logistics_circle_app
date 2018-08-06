@@ -72,6 +72,7 @@ const state = {
   userInfo: {}, // 用户信息
   compInfo: getCompInfo(), // 企业信息
   compId: getCompId(),// 企业id
+  // userId: getUserId(), // 用户ouid
   userId: getUserId(), // 用户ouid
   openId: '',
   searchContent: '', // 搜索内容

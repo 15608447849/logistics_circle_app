@@ -125,7 +125,7 @@
         // 0 发布 1/2 抢单 3 取货 4 5 签收  6 待评价 8 评价 20 取消
         tabList: [{
           name: '抢单',
-          value: '0',
+          value: '1',
           isSelected: true
         }, {
           name: '取货',
@@ -149,7 +149,7 @@
     mounted() {
       this.$app_store.commit(TABBAR_INDEX, 3);
       // 初始化列表查询条件
-      this.initQueryConditions('0');
+      this.initQueryConditions('1');
     },
     methods: {
       statusToChinese(status) {
@@ -245,6 +245,7 @@
       // 获取我的接收列表
       queryMyRecvOrder() {
         let self = this;
+        debugger
         this.$Ice_redundancyService.queryMyRecvOrder(this.userId, this.QueryParam,this.page, new IceCallback(
           function (result) {
             self.loading = false;

@@ -204,7 +204,6 @@
         this.QueryParam.origin = '';
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
-        // this.QueryParam.tstatus = '0';
         this.QueryParam.tstatus = status;
       },
       // 跳转企业详情
@@ -365,7 +364,6 @@
               self.page.pageIndex += 1;
               if(result.obj !== '[]') {
                 self.releaseList = self.releaseList.concat(JSON.parse(result.obj));
-                console.log(self.releaseList)
               } else{
                 self.finished = true;
               }
@@ -445,6 +443,18 @@
           path: '/center/myRelease/evaluate'
         })
       },
+    },
+    watch: {
+      releaseList: {
+        handler: function (newVal) {
+          if(newVal.length === 0) {
+            this.isShowNoData = true
+          } else  {
+            this.isShowNoData = false
+          }
+        },
+        deep: true
+      }
     }
   }
 </script>

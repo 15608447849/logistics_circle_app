@@ -210,7 +210,6 @@
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
 
-        debugger
         this.dicData = this.$app_store.getters.dict || null;
         this.pmList = this.dicData.pm;
         // 设置默认类型字典选择, 默认取第一个

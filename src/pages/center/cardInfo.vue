@@ -6,7 +6,7 @@
       <div></div>
     </div>
     <!--<div styel="height:100%;">-->
-      <div class="identity">
+      <div class="identity" v-show="isEditor">
         <!--<div>-->
         <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
           <p>{{item.title}}</p>
@@ -32,7 +32,7 @@
 
 
       <!--加了class名为displayNone为显示不可见-->
-      <div class="identity displayNone">
+      <div class="identity" v-show="!isEditor">
         <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
           <p>{{item.title}}</p>
           <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
@@ -54,8 +54,9 @@
   export default {
     data() {
       return {
+        isEditor: false,
         uploadUrl: uploadUrl,
-        userId: this.$app_store.getters.userId,
+        userId: this.$app_store.state.userId,
         uploadIndex: 0,
         uploadList: [
           {
@@ -97,7 +98,7 @@
       }
     },
     mounted() {
-
+      this.isEditor = this.$route.query.isEditor;
       this.getImages(this.userId);
     },
     methods: {

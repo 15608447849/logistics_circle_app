@@ -56,7 +56,7 @@
             function (result) {
               if (result.code === 0) {
                 self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
-                self.$app_store.commit(USER_INFO,JSON.stringify(result.obj));
+                self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
                 self.getCompList(result.obj.oid);
               } else {
                 self.message.Toast(self, 'error', result.msg, false);
@@ -114,7 +114,7 @@
           new IceCallback(
             function (result) {
               // 获取企业信息
-              self.getCompInfo(oid);
+              self.queryCompByCid(compId);
             },
             function (error) {
               self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
@@ -122,39 +122,64 @@
           )
         );
       },
-      // 获取企业信息
-      getCompInfo(oid) {
+
+      /**
+       * 根据企业码查询指定企业信息(不加路线)
+       * @param compId
+       */
+      queryCompByCid(compId) {
         let self = this;
-        this.$Ice_CompService.querygetCompByUid(oid+'',
+        debugger
+        this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
-              // 获取企业认证信息
-              self.queryCompByBasicUid(oid,result.obj);
-            },
-            function (error) {
-              self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
-            }
-          )
-        );
-      },
-      // 获取企业认证信息
-      queryCompByBasicUid(oid,compInfo) {
-        let self = this;
-        this.$Ice_CompService.queryCompByBasicUid(oid+'',
-          new IceCallback(
-            function (result) {
-              self.$app_store.commit(COMP_INFO, JSON.stringify( Object.assign(compInfo,result.obj)));
+              debugger
+              self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
               let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
               self.$router.push({
                 path: redirect
               })
             },
             function (error) {
-              self.message.Toast(this,'warn','企业认证信息获取失败, 请尝试重新登录',false);
+              debugger
+              self.$vux.toast.text('企业信息获取失败!', 'top');
             }
           )
         );
       },
+      // // 获取企业信息
+      // getCompInfo(oid) {
+      //   let self = this;
+      //   this.$Ice_CompService.querygetCompByUid(oid+'',
+      //     new IceCallback(
+      //       function (result) {
+      //         // 获取企业认证信息
+      //         self.queryCompByBasicUid(oid,result.obj);
+      //       },
+      //       function (error) {
+      //         self.message.Toast(this,'warn','企业信息获取失败, 请尝试重新登录',false);
+      //       }
+      //     )
+      //   );
+      // },
+      // // 获取企业认证信息
+      // queryCompByBasicUid(oid,compInfo) {
+      //   let self = this;
+      //   this.$Ice_CompService.queryCompByBasicUid(oid+'',
+      //     new IceCallback(
+      //       function (result) {
+      //         self.$app_store.commit(COMP_INFO, JSON.stringify( Object.assign(compInfo,result.obj)));
+      //         let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+      //         self.$router.push({
+      //           path: redirect
+      //         })
+      //       },
+      //       function (error) {
+      //         self.message.Toast(this,'warn','企业认证信息获取失败, 请尝试重新登录',false);
+      //       }
+      //     )
+      //   );
+      // },
       validator() {
         if (this.verifyUtil.isNull(this.account)) {
           this.message.Toast(this, 'warn', '账号不能为空', false);

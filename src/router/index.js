@@ -48,6 +48,9 @@ import ISSUE from '@/pages/information/issue'
 import ACCEPT from '@/pages/order/acceptOrders.vue'
 // 我的接收详情
 import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'
+// 业务员管理
+import SALES_LIST from '@/pages/salesManages/index.vue'
+import SALES_INFO from '@/pages/salesManages/info.vue'
 // 个人中心
 import USER_INFO from '@/pages/center/userInfo'
 import ENT_INFO from '@/pages/center/entInfo'
@@ -108,6 +111,7 @@ const vueRouter = new Router({
           component: HOME,
           meta: {
             keepAlive: true,
+            requireAuth: false
           },
         },
         {
@@ -115,6 +119,7 @@ const vueRouter = new Router({
           component: CIRCLE,
           meta: {
             keepAlive: true,
+            requireAuth: true
           },
         },
         {
@@ -131,6 +136,7 @@ const vueRouter = new Router({
           component: ORDER,
           meta: {
             keepAlive: true,
+            requireAuth: true
           },
         }
       ]
@@ -369,6 +375,16 @@ const vueRouter = new Router({
       path: '/home/scan',
       component: SCAN
     },
+    {
+      name: 'salesManages',
+      path: '/salesManages/index',
+      component: SALES_LIST
+    },
+    {
+      name: 'salesInfo',
+      path: '/salesManages/info',
+      component: SALES_INFO
+    }
   ]
 });
 

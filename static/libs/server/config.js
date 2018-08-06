@@ -3,6 +3,9 @@ export const iceGridInstanceName = "WLQ";
 export const serverIp = "192.168.1.240";
 export const serverPort = 7062;
 
+// 536862910
+// 536862906
+
 // export const serverIp = "192.168.1.122";
 // export const serverPort = 4062;
 

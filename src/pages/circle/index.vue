@@ -23,6 +23,9 @@
           </li>
         </ul>
       </van-list>
+      <div v-show="isShowNoData">
+        <img src="../../assets/images/small/nodate.png"/>
+      </div>
     </div>
     <!--<div class="Baseline">-->
       <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;没有更多的数据了-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
@@ -37,7 +40,8 @@
   export default {
     data() {
       return {
-        avatar: '',
+        isShowNoData: false, // 无数据显示
+        avatar: '', // 头像
         userId: this.$app_store.state.userId,
         infoList: [],
         pageSize: '10', // 订单数
@@ -54,7 +58,7 @@
       }
     },
     mounted() {
-      this.$app_store.commit(TABBAR_INDEX, 1);
+      this.$app_store.commit(TABBAR_INDEX, 2);
     },
     methods: {
       showTip() {
@@ -71,11 +75,15 @@
           if (result.length === 0) {
             // 列表无数据显示
             self.finished = true;
+            if(self.infoList.length === 0) {
+              self.isShowNoData = true
+            }
             return
           }
           self.endTimeStr = result[result.length - 1].time;
           // 原有数组与新数组连接
           self.infoList = self.infoList.concat(result);
+
         }, function (error) {
           self.loading = false;
           self.finished = true;
@@ -108,7 +116,6 @@
       },
       itemClick(item) {
         // 跳转详情页面
-
       },
       toPageIssue() {
         this.$router.push({
@@ -124,6 +131,18 @@
       avatarClick() {
         this.$app_store.commit(IS_SHOW_SIDEBAR, true);
       },
+    },
+    watch: {
+      infoList: {
+        handler: function (newVal) {
+          if(newVal.length === 0) {
+            this.isShowNoData = true
+          }else {
+            this.isShowNoData = false
+          }
+        },
+        deep: true
+      }
     }
   }
 </script>

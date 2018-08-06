@@ -48,7 +48,6 @@ export default {
   [SEARCH_CONTENT] (state, v) {
     state.searchContent = v
   },
-
   // 搜索状态
   [SEARCH_STATE] (state, v) {
     state.searchState = v

@@ -16,7 +16,7 @@
         <div class="centerPic">
           <div class="portrait">
             <img :src="avatar" alt="">
-            <span class="logisticsMing">{{compInfo.fname}}</span>
+            <span class="logisticsMing">{{compName}}</span>
           </div>
           <ul class="startBox">
             <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
@@ -30,6 +30,8 @@
           <li @click="jUserInfo"><i class="icon iconfont icon-jibenxinxi1"></i><span class="personalText">基本信息</span>
           </li>
           <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span>
+          </li>
+          <li @click="toSalesManage"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">业务员管理</span>
           </li>
           <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
           </li>
@@ -79,7 +81,8 @@
     data() {
       return {
         cLevel: [],// 认证等级
-        avatar: this.$app_store.state.avatarUrl,// 头像
+        avatar: '',// 头像
+        compName: '',// 企业名
         compId: '',
         transitionName: '',
         compInfo: null,
@@ -88,13 +91,13 @@
           isActive: false,
           name: 'home'
         }, {
-          title: '圈子',
-          isActive: false,
-          name: 'discover'
-        }, {
           title: '信息大厅',
           isActive: true,
           name: 'feedback'
+        }, {
+          title: '圈子',
+          isActive: false,
+          name: 'discover'
         }, {
           title: '我的订单',
           isActive: false,
@@ -110,10 +113,7 @@
         this.compInfo = this.$app_store.state.compInfo;
         this.computeLevel();
       } else {
-        this.compInfo= {
-          fname: '当前用户未登录',
-          creadit: 0
-        }
+        this.avatar = require('../assets/images/small/avatar.png');
       }
       this.initBaseData();
       this.initAreaData();
@@ -125,7 +125,6 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                debugger
                 self.$app_store.commit(DICT, JSON.stringify(result.data));
               } else {
                 self.$vux.toast.text('货物类型获取失败', 'top');
@@ -150,7 +149,6 @@
               // localStorage.setItem("area", JSON.stringify(result.children));
             },
             function (error) {
-              debugger
               setTimeout(() => {
                 self.initAreaData();
               }, 15000);
@@ -177,6 +175,12 @@
       toDriverAmd() {
         this.$router.push({
           path: '/center/driverMgr/index'
+        })
+      },
+      // 业务员管理
+      toSalesManage() {
+        this.$router.push({
+          name: 'salesManages'
         })
       },
       toMyCircle() {
@@ -232,10 +236,10 @@
             path = '/';
             break;
           case 1:
-            path = '/circle';
+            path = '/information';
             break;
           case 2:
-            path = '/information';
+            path = '/circle';
             break;
           case 3:
             path = '/order';

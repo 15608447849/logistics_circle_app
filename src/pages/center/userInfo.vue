@@ -118,6 +118,7 @@
         this.$Ice_CompService.querygetCompByUid(Number(userId),
           new IceCallback(
             function (result) {
+              debugger
               self.compInfo = result.obj
             },
             function (error) {
@@ -132,6 +133,7 @@
        */
       queryCompByCid(compId) {
         let self = this;
+        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
@@ -165,7 +167,7 @@
         // let hasDecimal = score % 1 !== 0; // 非整数星星判断
         let integer = Math.floor(score); // 整数星星判断
         for (let i = 0; i < integer; i++) { // 整数星星使用on
-          result.push( require('../../assets/images/small/star36_on@2x.png'));
+          result.push(require('../../assets/images/small/star36_on@2x.png'));
         }
         // if (hasDecimal) { // 半星
         //   result.push("half");
@@ -179,7 +181,10 @@
         this.$router.push({
           name: 'cartInfo',
           path: '/cartInfo',
-          params: this.compInfo
+          query: {
+            isEditor: this.isYourCompInfo
+          }
+          // params: this.compInfo
         })
       },
       removePartner() {

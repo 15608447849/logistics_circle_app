@@ -66,9 +66,11 @@
             class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
           </div>
         </li>
-        <div class="seeMore" @click="skipInformation">查看更多</div>
+        <div v-show="isShowNoData">
+          <img src="../../assets/images/small/nodate.png"/>
+        </div>
+        <div class="seeMore" v-show="isShowMore" @click="skipInformation">查看更多</div>
       </ul>
-
       <div class="bottomMargin"></div>
   </div>
 </template>
@@ -94,7 +96,9 @@
         isMember: true,
         direction: '',
         tipStyle: '',
-        oid: this.$app_store.getters.userId
+        oid: this.$app_store.getters.userId,
+        isShowMore: false, // 显示更多
+        isShowNoData: false // 无数据
         // 信息大厅数据
       }
     },
@@ -190,6 +194,21 @@
       },
       dateConversion(time) {
         return Conversion.formatMsgTime(time)
+      }
+    },
+    watch: {
+      infoList: {
+        handler: function (newVal) {
+          if(newVal.length === 0) {
+            this.isShowNoData = true
+          } else  {
+            this.isShowNoData = false
+          }
+          if(newVal.length >= 9) {
+            this.isShowMore = true
+          }
+        },
+        deep: true
       }
     }
   }

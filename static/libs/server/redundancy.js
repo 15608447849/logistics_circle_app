@@ -306,12 +306,13 @@
      * 查询信息
      **/
     redundancy.QueryParam = Slice.defineStruct(
-        function(revicompid, origin, destination, time)
+        function(revicompid, origin, destination, time, tstatus)
         {
             this.revicompid = revicompid !== undefined ? revicompid : "";
             this.origin = origin !== undefined ? origin : "";
             this.destination = destination !== undefined ? destination : "";
             this.time = time !== undefined ? time : "";
+            this.tstatus = tstatus !== undefined ? tstatus : "";
         },
         true,
         function(__os)
@@ -320,6 +321,7 @@
             __os.writeString(this.origin);
             __os.writeString(this.destination);
             __os.writeString(this.time);
+            __os.writeString(this.tstatus);
         },
         function(__is)
         {
@@ -327,8 +329,9 @@
             this.origin = __is.readString();
             this.destination = __is.readString();
             this.time = __is.readString();
+            this.tstatus = __is.readString();
         },
-        4, 
+        5, 
         false);
     Slice.defineSequence(redundancy, "stringSeqHelper", "Ice.StringHelper", false);
 
