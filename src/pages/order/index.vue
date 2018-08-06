@@ -56,16 +56,20 @@
                 <!--刷新-->
                 <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
                 <!--取消-->
-                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消发布</a>
+                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消</a>
                 <!--接受-->
                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
                 <!--拒绝-->
                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
+                <!--取货照片-->
+                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
                 <!--取货码-->
-                <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">取货码</a>
-                <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
+                <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
+                <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <!--查看行程-->
-                <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="">查看行程</a>
+                <a v-show="item.tstatus === 1 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="">行程回放</a>
+                <!--签收照片-->
+                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="refuseOrder(item,index)">签收照片</a>
                 <!--确认签收-->
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno)">确认签收</a>
                 <!--评价-->
@@ -423,34 +427,19 @@
         }
         return str
       },
-      toreleaseSearchpage() {
+      toPickGoodsPic(item) {
         this.$router.push({
-          path: '/center/myRelease/releaseSearch'
+          name: 'pickGoodsPic'
         })
       },
-      toseeDispatch() {
-        this.$router.push({
-          path: '/center/myRelease/seeDispatch'
-        })
-      },
-      topickGoodsPic(item) {
-        this.$router.push({
-          path: '/center/myRelease/pickGoodsPic'
-        })
-      },
-      topickGoodsCode(orderNo) {
+      toPickGoodsCode(orderNo) {
         this.$router.push({
           name: 'pickGoodsCode',
           query: {
             id: orderNo
           }
         })
-      },
-      toevaluate() {
-        this.$router.push({
-          path: '/center/myRelease/evaluate'
-        })
-      },
+      }
     },
     watch: {
       releaseList: {
