@@ -245,7 +245,6 @@
       // 获取我的接收列表
       queryMyRecvOrder() {
         let self = this;
-        debugger
         this.$Ice_redundancyService.queryMyRecvOrder(this.userId, this.QueryParam,this.page, new IceCallback(
           function (result) {
             self.loading = false;
@@ -271,7 +270,6 @@
             }
           },
           function (error) {
-            debugger
             self.loading = false;
             self.finished = true;
           }

@@ -105,16 +105,20 @@
         }]
       }
     },
-    mounted() {
-      // 获取当前定位城市
-      this.$app_store.commit(CURRENT_CITY, '长沙');
+    activated() {
       this.compId = this.$app_store.getters.compId;
+      this.compInfo = JSON.parse(this.$app_store.state.compInfo);
       if(this.compInfo !== undefined && this.compInfo !== null) {
-        this.compInfo = this.$app_store.state.compInfo;
+        this.compName = this.compInfo.fname;
+        this.avatar = this.compInfo.logoPath;
         this.computeLevel();
       } else {
         this.avatar = require('../assets/images/small/avatar.png');
       }
+    },
+    mounted() {
+      // 获取当前定位城市
+      this.$app_store.commit(CURRENT_CITY, '长沙');
       this.initBaseData();
       this.initAreaData();
     },

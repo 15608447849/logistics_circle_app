@@ -69,7 +69,8 @@
                 <!--确认签收-->
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno)">确认签收</a>
                 <!--评价-->
-                <a v-show="item.tstatus === 6" class="colorLightBlue">待评价</a>
+                <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>-->
+                <a  class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>
                 <!--重新发布-->
                 <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"  class="colorLightBlue">重新发布</a>
               </div>
@@ -215,6 +216,13 @@
             id: item.revicompid,
             status: 6
           }
+        })
+      },
+      // 待评价
+      toEvaluatePage() {
+        this.$router.push({
+          path: '/userInfo',
+          name: 'evaluateOrder'
         })
       },
       // 确认签收
@@ -432,7 +440,7 @@
       },
       topickGoodsCode(orderNo) {
         this.$router.push({
-          path: '/center/myRelease/pickGoodsCode',
+          name: 'pickGoodsCode',
           query: {
             id: orderNo
           }

@@ -145,7 +145,7 @@
             self.infoList = self.infoList.concat(result);
           }
         }, function (error) {
-          if (self.releaseList !== null && self.releaseList.length > 0) {
+          if (self.infoList !== null && self.infoList.length > 0) {
             self.isShowNoData = false;
           } else {
             self.isShowNoData = true;
@@ -165,6 +165,7 @@
               }
               successCallback(result.obj);
             }, function (err) {
+
               errorCallback(err);
             }
           ))

@@ -86,6 +86,11 @@
           self.infoList = self.infoList.concat(result);
 
         }, function (error) {
+          if (self.infoList !== null && self.infoList.length > 0) {
+            self.isShowNoData = false;
+          } else {
+            self.isShowNoData = true;
+          }
           self.loading = false;
           self.finished = true;
         });

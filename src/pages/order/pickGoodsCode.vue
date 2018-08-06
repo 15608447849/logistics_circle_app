@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
       <span>取货码</span>
-      <i class="alignCenter"></i>
+      <i ></i>
     </div>
     <div class="pickGoodsCodePic" >
       <!--<qrcode :value="qrCode" :fg-color="fgColor"></qrcode>-->
@@ -31,7 +31,7 @@
     methods: {
       getQrCode(orderNo) {
         let self = this;
-        self.$Ice_myOrderService.getPickCode(this.userId,orderNo, new IceCallback(
+        this.$Ice_redundancyService.getQrCode(this.userId,orderNo, new IceCallback(
           function (result) {
             if (result.code === 0) {
               let urlObj = JSON.parse(result.obj[0]);

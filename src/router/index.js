@@ -48,6 +48,10 @@ import ISSUE from '@/pages/information/issue'
 import ACCEPT from '@/pages/order/acceptOrders.vue'
 // 我的接收详情
 import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'
+// 我的发布
+import PICK_GOODS_CODE from '@/pages/order/pickGoodsCode'
+
+import PICK_GOODS_PIC from '@/pages/order/pickGoodsPic'
 // 业务员管理
 import SALES_LIST from '@/pages/salesManages/index.vue'
 import SALES_INFO from '@/pages/salesManages/info.vue'
@@ -66,9 +70,9 @@ import MYRELEASE from '@/pages/center/myRelease/index'
 import RELEASEDETAILS from '@/pages/center/myRelease/releaseDetails'
 import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
-import PICKGOODSPIC from '@/pages/center/myRelease/pickGoodsPic'
-import PICKGOODSCODE from '@/pages/center/myRelease/pickGoodsCode'
-import EVALUATE from '@/pages/center/myRelease/evaluate'
+
+
+import EVALUATE from '@/pages/order/evaluateOrder'
 import COMMONLYROUTE from '@/pages/center/commonlyRoute/index'
 import ADDROUTE from '@/pages/center/commonlyRoute/addRoute'
 import ROUTEDETAILS from '@/pages/center/commonlyRoute/routeDetails'
@@ -295,15 +299,18 @@ const vueRouter = new Router({
       component: SEEDISPATCH
     },
     {
-      path: '/center/myRelease/pickGoodsPic',
-      component: PICKGOODSPIC
+      name:  'pickGoodsPic',
+      path: '/order/pickGoodsPic',
+      component: PICK_GOODS_PIC
     },
     {
-      path: '/center/myRelease/pickGoodsCode',
-      component: PICKGOODSCODE
+      name: 'pickGoodsCode',
+      path: 'order/pickGoodsCode',
+      component: PICK_GOODS_CODE
     },
     {
-      path: '/center/myRelease/evaluate',
+      name: 'evaluateOrder',
+      path: '/order/evaluateOrder',
       component: EVALUATE
     },
     {

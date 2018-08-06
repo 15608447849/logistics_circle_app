@@ -63,17 +63,13 @@
         <!--<span class="uploadState">上传</span>-->
         <!--</li>-->
       </ul>
-
-
     <div class="blacklist" v-show="status === 1">
       <a class="moveDetele" @click="removePartner">移除伙伴</a>
       <a class="addBlacklist" @click="addBlacklist">加入黑名单</a>
     </div>
-
     <div class="blackListBtn" v-show="status === 5">
       <a class="moveOutBlack" @click="removeBlackList">移出黑名单</a>
     </div>
-
     <div class="dispatchBottomBtn" v-show="status === 6">
       <div>
         <a class="borderRight" @click="sCircleAdd(2)">加入货源圈</a>
@@ -83,9 +79,7 @@
     </div>
   </div>
 </template>
-
 <script>
-
   export default {
     data() {
       return {
@@ -98,10 +92,11 @@
       }
     },
     activated() {
-      this.userId = this.$app_store.getters.userId;
+      this.userId = this.$app_store.state.userId;
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
       if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo)) {
-          this.compInfo = this.$app_store.state.compInfo;
+          this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+          this.computeLevel();
       } else {
         // 根据企业id获取企业信息
         this.queryCompByCid(this.$route.query.id);
@@ -118,7 +113,6 @@
         this.$Ice_CompService.querygetCompByUid(Number(userId),
           new IceCallback(
             function (result) {
-              debugger
               self.compInfo = result.obj
             },
             function (error) {
@@ -133,7 +127,6 @@
        */
       queryCompByCid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {

@@ -199,6 +199,9 @@
     watch: {
       infoList: {
         handler: function (newVal) {
+          if(newVal === undefined) {
+            return
+          }
           if(newVal.length === 0) {
             this.isShowNoData = true
           } else  {
