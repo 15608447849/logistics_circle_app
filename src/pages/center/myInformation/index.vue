@@ -13,8 +13,13 @@
         <!--</div>-->
         <tab
           active-color="#3189f5">
-          <tab-item @on-item-click="tabClick" selected>未处理</tab-item>
-          <tab-item @on-item-click="tabClick">已处理</tab-item>
+          <tab-item @on-item-click="tabClick" selected>
+            未处理
+            <i class="redSpot" v-if="isNewMsg > 0"></i>
+          </tab-item>
+          <tab-item @on-item-click="tabClick">
+            已处理
+          </tab-item>
         </tab>
         <ul class="circleList" v-show="isShow">
           <!--<p>这是未处理消息</p>-->
@@ -62,10 +67,12 @@
         nothandle: true,//同意显示与否
         userId: this.$app_store.getters.userId,//vuex存储的用户id
         read: true,//已阅读显示与否
+        isNewMsg:0//是否有新的消息
       }
 
     },
     mounted() {
+      this.getNewMessage();//查询用户是否有新的消息
       this.getMessageList();
       // this.getNewMessage();
       this.noHandleMessage();
@@ -73,7 +80,6 @@
     methods: {
       //同意
       addFriend(item, index, msgtype) {
-        debugger
         let content = '';
         let self = this;
         if (msgtype === 1) {
@@ -145,6 +151,7 @@
         this.$Ice_MessageService.queryMsgListByUid(2, 1, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
+
             self.readyHandMsg = result.obj;
             console.log(result.obj)
           } else {
@@ -161,26 +168,27 @@
 
 
       //查询用户是否有新的消息
-      // getNewMessage() {
-      //   let self = this;
-      //   debugger
-      //   this.$Ice_MessageService.isUnreadMsg(this.$app_store.getters.userId,new IceCallback( function(result){
-      //     debugger
-      //     if(result.code === 0) {
-      //
-      //     }else{
-      //
-      //     }
-      //   },function(error){
-      //     debugger
-      //     //失败
-      //   }))
-      //
-      // },
+      getNewMessage() {
+        let self = this;
+        this.$Ice_MessageService.isUnreadMsg(2,new IceCallback( function(result){
+          if(result.code === 0) {
+            console.log(result);
+            self.isNewMsg = result.__state;
+          }else{
+
+          }
+        },function(error){
+          //失败
+        }))
+
+      },
       fallback() {
         this.$router.go(-1)
       },
       seeDetails(item) {
+        if(item.msgtype > 2){
+          return
+        }
         // 判断item这条数据 是属于什么类型消息
         // if(==='定向发单' || === ‘抢单信息’) {
         //   return
