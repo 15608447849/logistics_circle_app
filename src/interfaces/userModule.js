@@ -5,10 +5,12 @@ module.exports =  {
 
   /**验证用户名是否重复
    * int verifyUserName(string uname);
+   * int verifyUserName(string uname);
    * */
   checkUsernameRepetition: function (username, callback) {
     queryIce(user.UserServicePrx, 'UserService', 'verifyUserName', username, callback);
   },
+  //////////////////////////////////////////////////////////////
   /** 检测手机号码是否重复
    * int verifyPhone(long phone);
    */
@@ -35,7 +37,7 @@ module.exports =  {
   verifySms:function(phone,sms,callback){
     queryIce(user.UserServicePrx, 'UserService', 'verifyCode', str2jlong(phone),sms, callback);
   },
-
+//////////////////////////////////////////////////////////////////////////////////////
   /**通过手机号码,短信 修改密码
    * int forgetUserPassword(long phone ,string sms ,string newPassword);
    * */
@@ -54,8 +56,8 @@ module.exports =  {
   /**修改手机号码 用户唯一标识,新手机号,短信验证码
    *int updateUserPhone(string token,long oldPhone ,long newPhone,string sms);
    * */
-  changePhone: function (token, newPhone, smsCode, callback) {
-    queryIce(user.UserServicePrx, 'UserService', 'updateUserPhone', token, str2jlong(newPhone), smsCode, callback);
+  changePhone: function (phone, newPhone, smsCode, callback) {
+    queryIce(user.UserServicePrx, 'UserService', 'updateUserPhone', str2jlong(phone), str2jlong(newPhone), smsCode, callback);
   },
 
   /** 注册: 用户名,手机号码,密码(MD5),邀请码(可选项),短信验证码

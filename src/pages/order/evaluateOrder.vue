@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <div class="issueHeaderNav">
+  <div style="background:#ffffff;">
+    <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发表评论</span>
       <div></div>
     </div>
-    <div class="evaluateBox">
       <div class="evaluateName">
         <div class="evalogisticsNameBox">
           <img src="../../assets/images/small/evaluate_03.png" alt="">
@@ -15,10 +14,10 @@
       <ul class="evaluateList">
         <li class="expressionList">
           <span class="evaluateTitle margin-right63">评价</span>
-          <div v-for="(item, index) in evaluateList" :key="index" @click='appraiseBtn(item,index)'>
+          <div v-for="(item, index) in evaluateList" :key="index" @click='appraiseBtn(item,index)' class="evaluateExpression">
             <img v-show="item.isSelected" src="../../assets/images/small/evaluate_07.png" alt="" class="marginright13">
             <img v-show="!item.isSelected" src="../../assets/images/small/evaluate_09.png" alt="" class="marginright13">
-            <span class="evaluateTitle margin-right56" >{{item.name}}</span>
+            <span class="evaluateTitle">{{item.name}}</span>
           </div>
 
           <!--<img src="../../assets/images/small/evaluate_09.png" alt="" class="marginright13">-->
@@ -32,15 +31,15 @@
         <ul class="evaluateStart">
           <li>
             <span class="evaluateTitle margin-right31">服务态度</span>
-            <van-rate :disabled="isEditor" v-model="star1" />
+            <van-rate style="display:inline-block;width:3rem;" :disabled="isEditor" v-model="star1"/>
           </li>
           <li>
             <span class="evaluateTitle margin-right31">运输质量</span>
-            <van-rate :disabled="isEditor"  v-model="star2" />
+            <van-rate style="display:inline-block;width:3rem;" :disabled="isEditor"  v-model="star2" />
           </li>
           <li>
-            <span class="evaluateTitle margin-right31">时&nbsp&nbsp效</span>
-            <van-rate :disabled="isEditor" v-model="star3" />
+            <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
+            <van-rate style="display:inline-block;width:3rem;" :disabled="isEditor" v-model="star3" />
           </li>
         </ul>
       </div>
@@ -49,18 +48,24 @@
         <textarea v-model="remarks" class="evaluateTextarea" placeholder="说说你对本次服务的感受吧~"></textarea>
       </div>
       <!--isEditor 控制当前是编辑 还是预览-->
-      <cube-upload
-        ref="upload"
-        style="position:relative;top:0rem;left:0rem;"
-        :action="uploadEvalUrl"
-        @files-added="filesAdded"
-        @file-success="filesSuccess"
-        @file-error="filesError">
-      </cube-upload>
+
+      <div v-show="isEditor" class="pingjiaPic">
+        <span class="addCommentPic">添加图片</span>
+        <cube-upload
+          ref="upload"
+          style="position:relative;top:0rem;left:1.33rem;"
+          :action="uploadEvalUrl"
+          @files-added="filesAdded"
+          @file-success="filesSuccess"
+          @file-error="filesError">
+        </cube-upload>
+      </div>
+      <div>
+
+      </div>
       <div class="SubmissionBox">
         <button @click="saveEvaluate" v-show="isEditor">提交评价</button>
       </div>
-    </div>
   </div>
 </template>
 
@@ -69,7 +74,7 @@
     export default {
       data(){
         return {
-          isEditor: false,
+          isEditor: true,
           uploadEvalUrl: uploadEvalUrl, // 图片上传地址
           remarks: '', // 描述
           orderInfo: {},
