@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tripHeader">
+    <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>行程回放</span>
       <div class="alignCenter"></div>

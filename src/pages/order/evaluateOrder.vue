@@ -53,7 +53,7 @@
         <span class="addCommentPic">添加图片</span>
         <cube-upload
           ref="upload"
-          style="position:relative;top:0rem;left:1.33rem;"
+          style="position:relative;top:0rem;left:1.7rem;"
           :action="uploadEvalUrl"
           @files-added="filesAdded"
           @file-success="filesSuccess"
