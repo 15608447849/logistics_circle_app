@@ -3557,6 +3557,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   height:95vh;
 }
 /*常用线路*************************************************************************************************/
+.colorNine{
+  color:#999999;
+}
 .LineBox{
   display:block;
   width:7.5rem;

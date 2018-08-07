@@ -5,35 +5,35 @@
          <span>绑定手机号</span>
          <div class="alignCenter"></div>
        </div>
-      <div v-show="firstStepBool">
-        <div class="updataPhonePic">
-          <img src="../../../assets/images/small/updataphone.png" alt="">
-        </div>
-        <div class="bindingPhone"><span>绑定的手机号：</span><input type="text" :value="oldUserPhone"> </div>
-        <button class="moveOutBlack" @click="toUpdataPhone">更换手机号</button>
+      <!--<div v-show="firstStepBool">-->
+        <!--<div class="updataPhonePic">-->
+          <!--<img src="../../../assets/images/small/updataphone.png" alt="">-->
+        <!--</div>-->
+        <!--<div class="bindingPhone"><span>绑定的手机号：</span><input type="text" :value="oldUserPhone"> </div>-->
+        <!--<button class="moveOutBlack" @click="toUpdataPhone">更换手机号</button>-->
 
-      </div>
+      <!--</div>-->
 
      <!--<van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;" size="large" type="primary" @click="firstStep()"-->
                  <!--class="updataPwdBtn">123</van-button>-->
 
-     <div class="verificationBox" v-show="secondStepBool">
-       <span class="verificationCode">输入验证码</span>
-       <!-- 密码输入框 -->
-       <van-password-input
-         :value="smsCode"
-         info="验证码为 6 位数字"
-         @focus="showKeyboard = true"
-       />
-       <!-- 数字键盘 -->
-       <van-number-keyboard
-         :show="showKeyboard"
-         @input="onInput"
-         @delete="onDelete"
-         @blur="showKeyboard = false"
-       />
-       <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="secondStep()" v-show="secondStepBool" class="updataPwdBtn">下一步</van-button>
-     </div>
+     <!--<div class="verificationBox" v-show="secondStepBool">-->
+       <!--<span class="verificationCode">输入验证码</span>-->
+       <!--&lt;!&ndash; 密码输入框 &ndash;&gt;-->
+       <!--<van-password-input-->
+         <!--:value="smsCode"-->
+         <!--info="验证码为 6 位数字"-->
+         <!--@focus="showKeyboard = true"-->
+       <!--/>-->
+       <!--&lt;!&ndash; 数字键盘 &ndash;&gt;-->
+       <!--<van-number-keyboard-->
+         <!--:show="showKeyboard"-->
+         <!--@input="onInput"-->
+         <!--@delete="onDelete"-->
+         <!--@blur="showKeyboard = false"-->
+       <!--/>-->
+       <!--<van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="secondStep()" v-show="secondStepBool" class="updataPwdBtn">下一步</van-button>-->
+     <!--</div>-->
 
 
 
@@ -76,72 +76,79 @@
    </div>
 </template>
 <script>
+    import {USER_INFO} from "../../../store/mutation-types";
+
     export default {
       data(){
         return{
+          userInfo: {},
           userId: this.$app_store.state.userId,
           showKeyboard: true,
-          firstStepBool: true, // 第一步
-          secondStepBool: false, // 第二步
-          thirdStepBool: false, // 第三步
-          oldUserPhone: 18373270790,// 旧的手机号码
+          // secondStepBool: true, // 第二步
+          thirdStepBool: true, // 第三步
+          oldUserPhone: '',// 旧的手机号码
           smsCode: '',
-          newsPhone:0, // 新的手机号码
-          newsPhoneCode:0,
+          newsPhone: '', // 新的手机号码
+          newsPhoneCode: '',
           start1:false // 控制输入验证码
         }
         // 第一步 从缓存内取出userInfo.uphone
         // 第二步 修改手机号码 若修改成功 替换本地保存的userInfo.uphone = 新手机号码
+
+        // 不需要验证以前旧手机
+
+        // 1.  调用changePhone这个接口 发送短信验证码 2.调用修改手机号接口
+      },
+      mounted() {
+        debugger
+        this.userInfo = JSON.parse(this.$app_store.state.userInfo);
+        this.oldUserPhone = this.userInfo.uphone
       },
       methods:{
         fallback(){
           this.$router.go(-1)
         },
-        toUpdataPhone(){
-          let self = this;
-          if (this.verifyUtil.isPhoneNum(this.oldUserPhone)) {
-            this.message.Toast(this,'warn','手机号格式错误, 请重新输入',false);
-            return false
-          }
-          let param = ['forgetpw',this.oldUserPhone,'0'];
-          debugger
-          this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
-            function (result) {
-              if (result.code === 0) {
-                self.firstStepBool = false;
-                self.secondStepBool = true;
-              } else {
-                self.$vux.toast.text(result.msg, 'top');
-              }
-            },
-            function (error) {
-              self.$dialog.loading.close();
-              self.$vux.toast.text(error, 'top');
-              // self.message.Toast(self,'error','错误' + error,'error',false);
-            },
-
-          ));
-        },
-        secondStep() {
-          let self = this;
-          // 校验验证码
-          debugger
-          this.$Ice_UserService.verifySms(this.oldUserPhone, this.smsCode, new IceCallback(
-            function (result) {
-              if (result.code === 0) {
-                debugger
-                self.secondStepBool = false;
-                self.thirdStepBool = true;
-              } else {
-                self.message.Toast(self,'error',result.msg,false);
-              }
-            },
-            function (error) {
-              debugger
-              self.message.Toast(self,'error','错误' + error ,false);
-            }
-          ));
-        },
+        // toUpdataPhone(){
+        //   let self = this;
+        //   if (this.verifyUtil.isPhoneNum(this.oldUserPhone)) {
+        //     this.message.Toast(this,'warn','手机号格式错误, 请重新输入',false);
+        //     return false
+        //   }
+        //   let param = ['changephone',this.oldUserPhone,'0'];
+        //   this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
+        //     function (result) {
+        //       if (result.code === 0) {
+        //         self.firstStepBool = false;
+        //         self.secondStepBool = true;
+        //       } else {
+        //         self.$vux.toast.text(result.msg, 'top');
+        //       }
+        //     },
+        //     function (error) {
+        //       self.$dialog.loading.close();
+        //       self.$vux.toast.text(error, 'top');
+        //       // self.message.Toast(self,'error','错误' + error,'error',false);
+        //     },
+        //
+        //   ));
+        // },
+        // secondStep() {
+        //   let self = this;
+        //   // 校验验证码
+        //   this.$Ice_UserService.verifySms(this.oldUserPhone, this.smsCode, new IceCallback(
+        //     function (result) {
+        //       if (result.code === 0) {
+        //         self.secondStepBool = false;
+        //         self.thirdStepBool = true;
+        //       } else {
+        //         self.message.Toast(self,'error',result.msg,false);
+        //       }
+        //     },
+        //     function (error) {
+        //       self.message.Toast(self,'error','错误' + error ,false);
+        //     }
+        //   ));
+        // },
         sendCode() {
           if (this.verifyUtil.isPhoneNum(this.newsPhone)) {
             this.message.Toast(this, 'warn', '手机号格式错误, 请重新输入', false);
@@ -149,19 +156,18 @@
           }
           this.$dialog.loading.open('验证码发送中...');
           let self = this;
-          let param = ['login', this.newsPhone, '0'];
+          // ?????????????????????????????????????????????????
+          let param = ['changephone', this.newsPhone, '0'];
           this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
             function (result) {
-              debugger
+              self.$vux.toast.text(result.msg, 'top');
               if (result.code === 0) {
                 self.start1 = true;
                 self.$dialog.loading.close();
                 self.isFirstStepDis = false;
-                self.message.Toast(self, 'correct', result.msg, false);
               } else {
                 // 发送失败
                 self.$dialog.loading.close();
-                self.message.Toast(self, 'error', result.msg, false);
               }
             },
             function (error) {
@@ -170,26 +176,30 @@
             }
           ));
         },
-
         changePhone () {
           let self = this;
-          debugger
           this.$Ice_UserService.changePhone(this.oldUserPhone,this.newsPhone,this.newsPhoneCode, new IceCallback(
             function (result) {
               if (result.code === 0) {
-                self.start1 = true;
-                self.$dialog.loading.close();
-                self.isFirstStepDis = false;
-                self.message.Toast(self, 'correct', result.msg, false);
+                debugger
+                // 提示框 result.msg
+                self.$vux.toast.text(result.msg, 'top');
+                // 修改本地保存的手机号 newsPhone
+                self.userInfo.uphone = self.newsPhone;
+                localStorage.setItem(USER_INFO,JSON.stringify(self.userInfo));
+                // 退出这个页面
+                setTimeout(()=>{
+                  self.$router.go(-1);
+                },1000);
               } else {
                 // 发送失败
+                self.$vux.toast.text(result.msg, 'top');
                 self.$dialog.loading.close();
-                self.message.Toast(self, 'error', result.msg, false);
               }
             },
             function (error) {
               self.$dialog.loading.close();
-              self.message.Toast(self, 'error', '错误' + error, 'error', false);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ));
           // queryIce(user.UserServicePrx, 'UserService', 'updateUserPhone', token, str2jlong(newPhone), smsCode, callback);

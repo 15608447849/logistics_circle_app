@@ -20,7 +20,7 @@ module.exports =  {
 
   /** 发送手机验证码
    * list<String>
-   * 第一个参数:register(注册),login(登录),forgotpw(忘记密码),changephone(更换手机)...后续添加
+   * 第一个参数:register(注册), (登录),forgotpw(忘记密码),changephone(更换手机)...后续添加
    * 第二个参数手机号码
    * 第三个参数订单号码,如果没有就传"0"
    * */
@@ -49,8 +49,8 @@ module.exports =  {
    * updateUserPassword
    * int updateUserPassword(string token,string oldPassword ,string newPassword);
    * */
-  updatePasswordByOld: function (token, oldPassword, newPassword, callback) {
-    queryIce(user.UserServicePrx, 'UserService', 'updateUserPassword', token, md5(oldPassword), md5(newPassword), callback);
+  updatePasswordByOld: function (phone, oldPassword, newPassword, callback) {
+    queryIce(user.UserServicePrx, 'UserService', 'updateUserPassword', str2jlong(phone), md5(oldPassword), md5(newPassword), callback);
   },
 
   /**修改手机号码 用户唯一标识,新手机号,短信验证码

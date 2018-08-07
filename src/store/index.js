@@ -10,13 +10,24 @@ Vue.use(Vuex);
 import {
   USER_ID,
   COMP_ID,
-  COMP_INFO, DICT, AREA,
+  COMP_INFO, DICT, AREA, USER_INFO,
 } from './mutation-types'
+
+let getUserInfo =  function () {
+  if (localStorage.getItem(USER_INFO)) {
+    try {
+      return localStorage.getItem(USER_INFO)
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
 
 let getCompInfo =  function () {
   if (localStorage.getItem(COMP_INFO)) {
     try {
-      return JSON.parse(localStorage.getItem(COMP_INFO))
+      return localStorage.getItem(COMP_INFO)
     } catch (e) {
       return undefined;
     }
@@ -27,7 +38,7 @@ let getCompInfo =  function () {
 let getUserId =  function () {
   if (localStorage.getItem(USER_ID)) {
     try {
-      return JSON.parse(localStorage.getItem(USER_ID))
+      return localStorage.getItem(USER_ID)
     } catch (e) {
       return undefined;
     }
@@ -38,7 +49,7 @@ let getUserId =  function () {
 let getCompId =  function () {
   if (localStorage.getItem(COMP_ID)) {
     try {
-      return JSON.parse(localStorage.getItem(COMP_ID))
+      return localStorage.getItem(COMP_ID)
     } catch (e) {
       return undefined;
     }
@@ -49,7 +60,7 @@ let getCompId =  function () {
 let getDict =  function () {
   if (localStorage.getItem(DICT)) {
     try {
-      return JSON.parse(localStorage.getItem(DICT))
+      return localStorage.getItem(DICT)
     } catch (e) {
       return undefined;
     }
@@ -60,7 +71,7 @@ let getDict =  function () {
 let getArea =  function () {
   if (localStorage.getItem(AREA)) {
     try {
-      return JSON.parse(localStorage.getItem(AREA))
+      return localStorage.getItem(AREA)
     } catch (e) {
       return undefined;
     }
@@ -69,7 +80,7 @@ let getArea =  function () {
 };
 
 const state = {
-  userInfo: {}, // 用户信息
+  userInfo: getUserInfo(), // 用户信息
   compInfo: getCompInfo(), // 企业信息
   compId: getCompId(),// 企业id
   // userId: getUserId(), // 用户ouid
