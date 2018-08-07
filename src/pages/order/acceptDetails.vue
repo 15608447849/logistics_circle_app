@@ -238,6 +238,7 @@
   export default {
     data() {
       return {
+        type: 0,// 0 我的发布 1 我的发布
         show2: false,
         detailInfo: {},
         userId: this.$app_store.getters.userId,

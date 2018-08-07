@@ -87,7 +87,7 @@
       return {
         infoList: [],
         pageSize: '10', // 订单数
-        avatar: this.$app_store.state.avatarUrl,// 头像
+        avatar: this.$app_store.state.avatar,// 头像
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识

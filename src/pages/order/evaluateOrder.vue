@@ -5,12 +5,12 @@
       <span>发表评论</span>
       <div></div>
     </div>
-      <div class="evaluateName">
-        <div class="evalogisticsNameBox">
-          <img src="../../assets/images/small/evaluate_03.png" alt="">
-          <span class="evaLogisticsName">黄旺物流</span>
-        </div>
-      </div>
+      <!--<div class="evaluateName">-->
+        <!--<div class="evalogisticsNameBox">-->
+          <!--<img src="../../assets/images/small/evaluate_03.png" alt="">-->
+          <!--<span class="evaLogisticsName">黄旺物流</span>-->
+        <!--</div>-->
+      <!--</div>-->
       <ul class="evaluateList">
         <li class="expressionList">
           <span class="evaluateTitle margin-right63">评价</span>
@@ -97,16 +97,20 @@
           star2: 5, //运输质量
           star3: 5, //运输时效
           current: 3, // 好评 中评 差评
+          type: 0 // 0 列表  1 详情
         }
+      },
+      mounted() {
+        this.orderInfo = this.$route.params
       },
       methods:{
         // 保存评价信息
         saveEvaluate(){
           let self = this;
-          this.OrderEvaluate.orderid = this.orderInfo.orderId; //订单id
-          this.OrderEvaluate.pubcompid = this.orderInfo.puberid; //发布企业
+          this.OrderEvaluate.pubcompid = this.orderInfo.pubcompid; //发布企业
+          this.OrderEvaluate.revicompid = this.orderInfo.revicompid; //运输企业
+          this.OrderEvaluate.orderid = this.orderInfo.orderno; //订单id
           this.OrderEvaluate.evaluator = this.userId; //用户id
-          this.OrderEvaluate.revicompid = this.orderInfo.revierid; //运输企业
           this.OrderEvaluate.grade = this.current; //评价等级
           this.OrderEvaluate.service = this.star1; //服务态度
           this.OrderEvaluate.quality = this.star2; //运输质量
@@ -118,11 +122,12 @@
           }
           this.$Ice_myOrderService.insertOrderEvaluate(this.OrderEvaluate,new IceCallback(
             function(res){
-              // 评价成功
-              self.$vux.toast.text('评价成功!', 'top');
-              setTimeout(()=> {
-                self.$router.go(-1);
-              });
+              self.$vux.toast.text(res.msg, 'top');
+              if(res.code === 0) {
+                setTimeout(()=> {
+                  self.$router.go(-1);
+                });
+              }
             }
           ))
         },

@@ -7,33 +7,7 @@
     </div>
     <div class="downfixed havedownfixed">
       <div class="releaseStateBox">
-        <div class="releaseAndCollect ">
-          <!--case 0:-->
-          <!--cont = '发布';-->
-          <!--break;-->
-          <!--case 1:-->
-          <!--cont = '抢单';-->
-          <!--break;-->
-          <!--case 3:-->
-          <!--cont = '取货';-->
-          <!--break;-->
-          <!--case 4:-->
-          <!--cont = '签收';-->
-          <!--break;-->
-          <!--case 5:-->
-          <!--cont = '签收';-->
-          <!--break;-->
-          <!--case 6:-->
-          <!--cont = '待评价';-->
-          <!--break;-->
-          <!--case 7:-->
-          <!--cont = '抢单';-->
-          <!--break;-->
-          <!--case 8:-->
-          <!--cont = '评价';-->
-          <!--break;-->
-          <!--case 20:-->
-          <!--cont = '已关闭';-->
+        <div class="releaseAndCollect" v-show="type === 0">
           <div v-show="detailInfo.tstatus === 0">发布成功</div>
           <span v-show="detailInfo.tstatus === 0">等待承运商接单，请耐心等待~ </span>
 
@@ -54,10 +28,27 @@
 
           <div v-show="detailInfo.tstatus === 20">订单已关闭</div>
           <span v-show="detailInfo.tstatus === 20">您的订单已关闭~</span>
+        </div>
 
-          <!--<span>您的订单已签收，请与收货人确认是否签收~</span>-->
-          <!--<span>您的订单已被抢单，请尽快与承运商联系~</span>-->
+        <div class="releaseAndCollect" v-show="type === 1">
 
+          <div v-show="detailInfo.tstatus === 1">抢单</div>
+          <span v-show="detailInfo.tstatus === 1">您已抢单，请尽快与承运商联系~ </span>
+
+          <div v-show="detailInfo.tstatus === 3">取货</div>
+          <span v-show="detailInfo.tstatus === 3">司机已取货，您的货物正在运输中~</span>
+
+          <div v-show="detailInfo.tstatus === 4">签收</div>
+          <span v-show="detailInfo.tstatus === 4">您的订单已经确认签收，请与收货人确认是否签收~</span>
+
+          <div v-show="detailInfo.tstatus === 7">已接单</div>
+          <span v-show="detailInfo.tstatus === 7">您的订单已被抢单，请尽快与承运商联系~ </span>
+
+          <div v-show="detailInfo.tstatus === 8">交易已完成</div>
+          <span v-show="detailInfo.tstatus === 8">您的订单已经确认签收，可以留下您的评价哟~</span>
+
+          <div v-show="detailInfo.tstatus === 20">订单已关闭</div>
+          <span v-show="detailInfo.tstatus === 20">您的订单已关闭~</span>
         </div>
         <!--发布成功-->
         <i class="icon iconfont icon-fabu"></i>
@@ -80,10 +71,10 @@
             <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
           </li>
           <li class="issueDetailsLiText">
-            <span class="issueText">目的地</span><span>{{detailInfo.arriarcext}}</span>
+            <span class="issueText">目的地</span><span>{{replaceAddress(detailInfo.arriarcext)}}</span>
           </li>
           <li class="issueDetailsLiText">
-            <span class="issueText">出发地</span><span>{{detailInfo.startcext}}</span>
+            <span class="issueText">出发地</span><span>{{replaceAddress(detailInfo.startcext)}}</span>
           </li>
           <li class="issueDetailsLiText">
             <span class="issueText">货物信息</span><span
@@ -162,7 +153,7 @@
 
       <div class="orderOperationBtn">
 
-        <div class="operationA">
+        <div class="operationA" v-show="type === 0">
           <!--刷新-->
           <a v-show="detailInfo.tstatus === 0" class="colorsixnine" @click.stop="refreshOrder()">刷新</a>
           <!--取消-->
@@ -173,7 +164,6 @@
           <a v-show="detailInfo.tstatus === 1" class="colorsixnine" @click.stop="refuseOrder()">拒绝</a>
           <!--取货照片-->
           <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
-
           <!--取货码-->
           <a v-show="detailInfo.tstatus === 7" class="colorBlue" @click.stop ="toPickGoodsCode()">取货码</a>
           <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
@@ -184,9 +174,29 @@
           <!--确认签收-->
           <a v-show="detailInfo.tstatus === 4" class="colorBlue" @click.stop="conReceipt()">确认签收</a>
           <!--评价-->
-          <a v-show="detailInfo.tstatus === 6" class="colorBlue">待评价</a>
+          <a v-show="detailInfo.tstatus === 6" @click.stop="toEvaluatePage()"  class="colorBlue">待评价</a>
           <!--重新发布-->
           <a v-show="detailInfo.tstatus === 20" @click.stop="repubOrder()"  class="colorBlue">重新发布</a>
+        </div>
+        <!--'1':'已抢单',-->
+        <!--'3':'已取货',-->
+        <!--'4':'已签收',-->
+        <!--'6':'待评价',-->
+        <!--'7':'抢单成功',-->
+        <!--'8':'已完成'-->
+        <div class="operationA" v-show="type === 0">
+          <!--接受-->
+          <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="cancelOrder()">取消抢单</a>
+          <!--取货照片-->
+          <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
+          <!--取货码-->
+          <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
+          <!--查看行程-->
+          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
+          <!--签收照片-->
+          <a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
+          <!--评价-->
+          <!--<a v-show="detailInfo.tstatus === 6" @click.stop="toEvaluatePage()"  class="colorBlue">待评价</a>-->
         </div>
       </div>
       <!--</a>-->
@@ -219,14 +229,14 @@
         </li>
         <li class="zhifubao">
           <div>
-            <img src="../../../assets/images/small/zhifubao1.png" alt="">
+            <img src="../../assets/images/small/zhifubao1.png" alt="">
             <span>支付宝支付</span>
           </div>
           <i class="icon iconfont icon-zhengque" v-show="true"></i>
         </li>
         <li class="weixin">
           <div>
-            <img src="../../../assets/images/small/weixin1.png" alt="">
+            <img src="../../assets/images/small/weixin1.png" alt="">
             <span>微信支付</span>
           </div>
           <i class="icon iconfont icon-zhengque" v-show="false"></i>
@@ -238,27 +248,30 @@
 </template>
 
 <script>
-  import {alertContent} from "../../../utils/enum";
+  import {alertContent} from "../../utils/enum";
+
+
 
   export default {
     data() {
       return {
+        type: 0, // 0 发布 1 接受
         show2: false,
         detailInfo: {},
         userId: this.$app_store.getters.userId,
-        orderNo: ''
+        order: {}
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
       }
     },
     mounted() {
-      this.orderNo = this.$route.query.id
+      this.order = this.$route.params;
+      this.type = this.order.type;
       this.getOrderInfo();
     },
     methods: {
       // 跳转企业详情
       toCompInfo() {
-        debugger
         this.$router.push({
           path: '/userInfo',
           query: {
@@ -271,7 +284,7 @@
       // 获取订单详情
       getOrderInfo() {
         let self = this;
-        self.$Ice_myOrderService.getOrderInfo(self.orderNo, self.userId,0, new IceCallback(
+        self.$Ice_myOrderService.getOrderInfo(self.order.orderno, self.userId,0, new IceCallback(
           function (result) {
             if (result.code === 0) {
               self.detailInfo = result.obj.orderifo;
@@ -293,7 +306,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.RECEIVING)
           .then(() => {
-            self.$Ice_myOrderService.conReceipt(self.orderNo, self.userId, new IceCallback(
+            self.$Ice_myOrderService.conReceipt(self.order.orderno, self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.releaseList[index].tstatus = 6;
@@ -316,7 +329,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.CANCEL_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.repubOrder(self.orderNo, self.userId, new IceCallback(
+            self.$Ice_myOrderService.repubOrder(self.order.orderno, self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.detailInfo.tstatus = 0;
@@ -339,7 +352,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.CANCEL_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.cancelOrder(self.orderNo, self.userId, new IceCallback(
+            self.$Ice_myOrderService.cancelOrder(self.order.orderno, self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.detailInfo.tstatus = 20;
@@ -362,7 +375,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.REFRESH_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.flushOrder(self.userId, self.orderNo, new IceCallback(
+            self.$Ice_myOrderService.flushOrder(self.userId, self.order.orderno, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.$vux.toast.text('订单刷新成功 !', 'top');
@@ -384,7 +397,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.RECEIVE_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.receiveOrder(self.userId, self.orderNo, new IceCallback(
+            self.$Ice_myOrderService.receiveOrder(self.userId, self.order.orderno, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.detailInfo.tstatus = 7;
@@ -407,7 +420,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.REFUSE_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.refuseOrder(self.userId, self.orderNo, new IceCallback(
+            self.$Ice_myOrderService.refuseOrder(self.userId, self.order.orderno, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.detailInfo.tstatus = 0;
@@ -436,9 +449,40 @@
           params: this.detailInfo
         })
       },
+      // 待评价
+      toEvaluatePage() {
+        this.detailInfo.pubcompid = this.order.pubcompid;
+        this.detailInfo.revicompid = this.order.revicompid;
+        this.$router.push({
+          name: 'evaluateOrder',
+          params: this.detailInfo
+        })
+      },
+      // 取消抢单
+      cancelOrder() {
+        let self = this;
+        this.message.showAlert(this, alertContent.CANCEL_ORDER)
+          .then(() => {
+            self.$Ice_myOrderService.cancelRobbing(this.detailInfo.orderno,self.userId, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.releaseList.splice(index,1);
+                  self.$vux.toast.text('订单取消成功 !', 'top');
+                } else {
+                  self.$vux.toast.text(result.msg, 'top');
+                }
+              },
+              function (error) {
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
       // 行程回放
       toSchedulePlayBack() {
-        debugger
         this.$router.push({
           name: 'schedulePlayBack',
           params: this.detailInfo
@@ -449,7 +493,7 @@
         this.$router.push({
           name: 'pickGoodsCode',
           query: {
-            id: this.orderNo
+            id: this.order.orderno
           }
         })
       },
@@ -457,6 +501,9 @@
         this.$router.go(-1)
       },
       replaceAddress(str) {
+        if(str === undefined) {
+          return
+        }
         let address = str.replace(/#/g,",");
        return address
       }

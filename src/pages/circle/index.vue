@@ -42,7 +42,7 @@
     data() {
       return {
         isShowNoData: false, // 无数据显示
-        avatar: '', // 头像
+        avatar: this.$app_store.state.avatar,// 头像
         userId: this.$app_store.state.userId,
         infoList: [],
         pageSize: '10', // 订单数

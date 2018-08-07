@@ -45,6 +45,9 @@ import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
 
+// 订单 发布/接受 详情
+import ORDER_DETAIL from '@/pages/order/orderDetail.vue'
+
 // 我的接收
 import ACCEPT from '@/pages/order/acceptOrders.vue'// 列表
 import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'// 详情
@@ -68,7 +71,6 @@ import MYCIRCLE from '@/pages/center/myCircle/index'
 import ADDFRIEND from '@/pages/center/myCircle/addFriend'
 import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
 import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
-import RELEASEDETAILS from '@/pages/center/myRelease/releaseDetails'
 import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
 
@@ -283,10 +285,6 @@ const vueRouter = new Router({
       component: SEARCHFRIEND
     },
     {
-      path: '/center/myRelease/releaseDetails',
-      component: RELEASEDETAILS
-    },
-    {
       path: '/center/myRelease/releaseSearch',
       component: RELEASESEARCH
     },
@@ -361,6 +359,11 @@ const vueRouter = new Router({
     {
       path: '/home/dimensionalCode',
       component: DIMENSIONALCODE
+    },
+    {
+      name: 'orderDetail',
+      path: '/order/orderDetail',
+      component: ORDER_DETAIL
     },
     {
       path: '/order/acceptOrders',
