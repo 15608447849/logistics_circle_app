@@ -96,6 +96,7 @@
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
       if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo)) {
           this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+          this.status = 0;
           this.computeLevel();
       } else {
         // 根据企业id获取企业信息

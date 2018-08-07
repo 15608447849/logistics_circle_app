@@ -216,7 +216,7 @@
         this.$router.push({
           path: '/userInfo',
           query: {
-            isYourCompInfo: true    //row.hid为变量
+            isYourCompInfo: true,    //row.hid为变量
           }
         })
       },

@@ -28,7 +28,8 @@
       }
     },
     mounted() {
-
+      debugger
+      console.log(this.$route.params)
     },
     methods: {
       // 点击查看大图

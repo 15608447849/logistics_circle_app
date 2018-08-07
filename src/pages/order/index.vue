@@ -67,14 +67,14 @@
                 <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
                 <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <!--查看行程-->
-                <a v-show="item.tstatus === 1 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="">行程回放</a>
+                <a v-show="item.tstatus === 1 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                 <!--签收照片-->
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="refuseOrder(item,index)">签收照片</a>
                 <!--确认签收-->
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno)">确认签收</a>
                 <!--评价-->
                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>-->
-                <a  class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>
+                <a  v-show="item.tstatus === 6" class="colorLightBlue"  @click.stop="toEvaluatePage(item)">待评价</a>
                 <!--重新发布-->
                 <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"  class="colorLightBlue">重新发布</a>
               </div>
@@ -190,6 +190,8 @@
         this.initQueryConditions(item.value);
         // 清空数据
         this.releaseList = [];
+        // 隐藏无数据显示
+        this.isShowNoData = false
         // 刷新列表
         // this.queryMyPublishOrder();
         this.onLoad();
@@ -210,24 +212,6 @@
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
         this.QueryParam.tstatus = status;
-      },
-      // 跳转企业详情
-      toComPInfo(item) {
-        this.$router.push({
-          path: '/userInfo',
-          query: {
-            isYourCompInfo: false,
-            id: item.revicompid,
-            status: 6
-          }
-        })
-      },
-      // 待评价
-      toEvaluatePage() {
-        this.$router.push({
-          path: '/userInfo',
-          name: 'evaluateOrder'
-        })
       },
       // 确认签收
       conReceipt(orderId){
@@ -358,7 +342,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -427,17 +411,49 @@
         }
         return str
       },
+      // 取货照片
       toPickGoodsPic(item) {
+        if(item.puimg === '0') {
+          this.$vux.toast.text('暂无取货照片', 'top');
+          return
+        }
         this.$router.push({
-          name: 'pickGoodsPic'
+          name: 'pickGoodsPic',
+          params: item
         })
       },
+      // 取货码
       toPickGoodsCode(orderNo) {
         this.$router.push({
           name: 'pickGoodsCode',
           query: {
             id: orderNo
           }
+        })
+      },
+      // 行程回放
+      toSchedulePlayBack(item) {
+        this.$router.push({
+          name: 'schedulePlayBack',
+          params: item
+        })
+      },
+      // 跳转企业详情
+      toComPInfo(item) {
+        this.$router.push({
+          path: '/userInfo',
+          query: {
+            isYourCompInfo: false,
+            id: item.revierid,
+            status: 6
+          }
+        })
+      },
+      // 待评价
+      toEvaluatePage() {
+        this.$router.push({
+          path: '/userInfo',
+          name: 'evaluateOrder'
         })
       }
     },

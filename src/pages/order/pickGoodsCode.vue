@@ -31,7 +31,7 @@
     methods: {
       getQrCode(orderNo) {
         let self = this;
-        this.$Ice_redundancyService.getQrCode(this.userId,orderNo, new IceCallback(
+        this.$Ice_myOrderService.getPickCode(this.userId,orderNo, new IceCallback(
           function (result) {
             if (result.code === 0) {
               let urlObj = JSON.parse(result.obj[0]);

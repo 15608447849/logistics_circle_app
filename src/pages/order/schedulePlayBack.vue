@@ -18,12 +18,13 @@
     export default {
       data(){
         return {
+          userId: this.$app_store.getters.userId,
           zoom: 12,
           center: [116.380298, 39.907771],
           lines: [
             {
               path: [
-                [116.39, 39.91, 116.37, 39.91],
+                [34.185642, 108.881905, 39.91, 116.37, 39.91],
                 [116.380298, 39.907771, 116.38, 39.90],
                 [116.385298, 39.907771, 116.40, 39.90]
               ],
@@ -43,15 +44,16 @@
       },
       mounted() {
         this.order = this.$route.params;
-        // this.getOrderTrajectory();
+        this.getOrderTrajectory();
       },
       methods:{
         // 获取轨迹
         getOrderTrajectory() {
           let self = this;
-          this.$Ice_myOrderService.getOrderTrajectory(this.userId,this.order.orderId,new IceCallback(
+          this.$Ice_myOrderService.getOrderTrajectory(this.userId,this.order.orderno,new IceCallback(
             function(result){
               if (result[0].code === 0) {
+                debugger
                 let jsonPath = JSON.parse(result[0].obj[0].content);
                 if (jsonPath.length > 0) {
                   self.mapPath = result[0].obj[0].content;
@@ -62,6 +64,10 @@
               } else {
                 self.$vux.toast.text('获取轨迹失败', 'top');
               }
+            },
+            function (error) {
+              debugger
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ))
         },

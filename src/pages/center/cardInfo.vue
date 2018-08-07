@@ -108,7 +108,6 @@
         this.uploadList.forEach((item, index, arr) => {
           if (item.url !== '') Images.push(item.url);
         });
-        ImagePreview(Images, index);
       },
       deletedImages(id) {
         let self = this;
