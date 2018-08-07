@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>我的圈子</span>
-      <span @click="toaddFriend">添加</span>
+      <i class="icon iconfont icon-gengduo1 colorWhite" @click="toaddFriend"></i>
     </div>
     <div class="downfixed havedownfixed">
       <div class="driverBox" @click="tosearchFriend">

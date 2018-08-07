@@ -1,6 +1,6 @@
 <template>
    <div>
-     <div class="issueHeaderNav">
+     <div class="issueHeaderLog">
        <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
        <span>货源信息</span>
        <span class="alignCenter"></span>

@@ -6,7 +6,7 @@
        <div class="alignCenter"></div>
      </div>
      <ul class="settingList backgroundwhite margintop40">
-       <li  class="needBorder"><span class="accountUser floatleft">用户名</span><span class="accountUserName floatright">{{userInfo.uname}}</span></li>
+       <li class="needBorder"><span class="accountUser floatleft">用户名</span><span class="accountUserName floatright">{{userInfo.uname}}</span></li>
        <li @click="toupdataPhone">
          <span class="accountPhone floatleft">手机号码</span>
          <i class="icon iconfont icon-icon-test floatright marginLeft21 colorNine"></i>
@@ -28,7 +28,6 @@
         }
       },
       mounted() {
-        debugger
         this.userInfo = JSON.parse(this.$app_store.state.userInfo) ;
       },
       methods:{

@@ -91,7 +91,7 @@
             </div>
           </ul>
         </van-list>
-        <div v-show="isShowNoData">
+        <div v-show="isShowNoData" class="noDataBox">
           <img src="../../assets/images/small/nodate.png"/>
         </div>
       </div>
