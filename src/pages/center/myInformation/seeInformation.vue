@@ -38,7 +38,7 @@
       <p>期待和您的合作，谢谢！</p>
     </div>
     <div class="agreeAndRefuse" v-show="isOperation" v-if="details.isread === 0">
-      <a class="agree">拒绝</a>
+      <a class="agree" @click.stop="refuseFriend(details,details.msgid,details.msgtype)">拒绝</a>
       <a class="refuse" @click.stop="addFriend(details,details.msgid,details.msgtype)">同意</a>
     </div>
   </div>
@@ -68,14 +68,13 @@
       // 获取企业ID获取企业信息
       querygetCompByUid: function () {
         let self = this;
-        console.log(34343)
-        this.$Ice_CompService.querygetCompByCid(2, new IceCallback(function (result) {
+        this.$Ice_CompService.querygetCompByCid(self.details.sender, new IceCallback(function (result) {
+          debugger
           if (result.code !== 0) {
-            console.log(1212121)
             self.$vux.toast.text(result.msg, 'top');
           } else {
             // 成功
-
+            debugger
             self.compByUid = result.obj;
             self.logoPath = result.obj.logoPath;
             self.score = result.obj.creadit;
@@ -86,8 +85,9 @@
           //失败
         }))
       },
-      //同意
+      // 同意
       addFriend: function (details, index, msgtype) {
+        debugger
         let content = '';
         let self = this;
         if (msgtype === 1) {
@@ -99,13 +99,56 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
-            self.$Ice_CircleService.agreeOrRefuse(details.msgid, details.sender, new IceCallback(
+            // 成功
+            // details.sender
+            self.$Ice_CircleService.agreeOrRefuse(details.msgid, 0, new IceCallback(
+
               function (result) {
+                debugger
                 if (result.code === 0) {
                   self.isOperation = false;
                   self.$vux.toast.text('好友圈添加成功', 'top');
                 } else {
+                  debugger
                   self.$vux.toast.text('您的订单已被受理', 'top');
+                }
+              },
+              function (error) {
+                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
+      // 拒绝
+      refuseFriend(item, index, msgtype) {
+        let content = '';
+        let self = this;
+        if (msgtype === 1) {
+          content = alertContent. CIRCLE_REFUSE_DISPATHCHER;
+        } else if (msgtype === 2) {
+          content = alertContent.CIRCLE_REFUSE_SOURCE;
+        } else {
+          content = alertContent.REFUSE_ORDER;
+        }
+        this.message.showAlert(this, content)
+          .then(() => {
+            debugger
+            self.$Ice_CircleService.agreeOrRefuse(item.msgid, 1, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.messageList.splice(index, 1);
+                  if (msgtype === 1) {
+                    self.$vux.toast.text(' 已拒绝对方添加调度圈', 'top');
+                  } else if (msgtype === 2) {
+                    self.$vux.toast.text('已拒绝对方添加货源圈', 'top');
+                  } else if (msgtype === 3) {
+                    self.$vux.toast.text('拒绝订单成功', 'top');
+                  }
+                } else {
+                  self.$vux.toast.text('您的订单未被受理', 'top');
                 }
               },
               function (error) {

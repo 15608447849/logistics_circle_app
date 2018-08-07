@@ -29,7 +29,6 @@
       },
       methods:{
         exitLogin() {
-          debugger
           let self = this;
           this.message.showAlert(this,alertContent.EXIT_LOGIN)
             .then(() => {

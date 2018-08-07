@@ -6,6 +6,9 @@ export const alertContent = {
   /* 消息 */
   CIRCLE_ADD_DISPATHCHER:  '您同意添加好友至调度圈吗?',
   CIRCLE_ADD_SOURCE:  '您同意添加好友至货源圈吗?',
+  CIRCLE_REFUSE_DISPATHCHER:  '您确认拒绝添加好友至调度圈吗?',
+  CIRCLE_REFUSE_SOURCE:  '您确认拒绝添加好友至货源圈吗?',
+
   /*  我的发布 */
   RECEIVE_ORDER: '您确定要接受该用户发起的订单吗?',// 接受订单
   REFUSE_ORDER: '您确定要拒绝该用户接受订单吗?',// 拒绝订单

@@ -65,7 +65,7 @@
         isRedspot: false,//红点显示与否
         display: true,//已同意显示与否
         nothandle: true,//同意显示与否
-        userId: this.$app_store.getters.userId,//vuex存储的用户id
+        userId: this.$app_store.state.userId,//vuex存储的用户id
         read: true,//已阅读显示与否
         isNewMsg:0//是否有新的消息
       }
@@ -73,12 +73,12 @@
     },
     mounted() {
       this.getNewMessage();//查询用户是否有新的消息
-      this.getMessageList();
+      this.getMessageList();// 已处理消息
       // this.getNewMessage();
-      this.noHandleMessage();
+      this.YesHandleMessage();// 未处理消息
     },
     methods: {
-      //同意
+      // 同意
       addFriend(item, index, msgtype) {
         let content = '';
         let self = this;
@@ -91,8 +91,7 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
-            debugger
-            self.$Ice_CircleService.agreeOrRefuse(item.msgid, item.sender, new IceCallback(
+            self.$Ice_CircleService.agreeOrRefuse(item.msgid, 0, new IceCallback(
               function (result) {
                 if (result.code === 0) {
                   self.messageList.splice(index, 1);
@@ -120,24 +119,23 @@
         let disContent = '';
         switch (type) {
           case 1:
-            disContent = '请求加入你的调度圈'
+            disContent = '请求加入你的调度圈';
             break;
           case 2:
-            disContent = '请求加入你的货源圈'
+            disContent = '请求加入你的货源圈';
             break;
           case 3:
-            disContent = '您有新的订单未处理'
+            disContent = '您有新的订单未处理';
             break;
         }
         return disContent
       },
       getMessageList() {
         let self = this;
-        this.$Ice_MessageService.queryMsgListByUid(2, 0, new IceCallback(function (result) {
+        this.$Ice_MessageService.queryMsgListByUid(self.userId,0, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
             self.messageList = result.obj;
-            console.log(result.obj)
           } else {
             self.$vux.toast.text(result.msg, 'top');
           }
@@ -147,9 +145,9 @@
         }))
 
       },
-      noHandleMessage() {
+      YesHandleMessage() {
         let self = this;
-        this.$Ice_MessageService.queryMsgListByUid(2, 1, new IceCallback(function (result) {
+        this.$Ice_MessageService.queryMsgListByUid(self.userId, 1, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
 
@@ -171,7 +169,7 @@
       //查询用户是否有新的消息
       getNewMessage() {
         let self = this;
-        this.$Ice_MessageService.isUnreadMsg(2,new IceCallback( function(result){
+        this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback( function(result){
           if(result.code === 0) {
             self.isNewMsg = result.__state;
           }else{
