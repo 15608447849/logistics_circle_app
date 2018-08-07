@@ -44,14 +44,16 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import ISSUE from '@/pages/information/issue'
-// 我的接收列表
-import ACCEPT from '@/pages/order/acceptOrders.vue'
-// 我的接收详情
-import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'
-// 我的发布
-import PICK_GOODS_CODE from '@/pages/order/pickGoodsCode'
 
-import PICK_GOODS_PIC from '@/pages/order/pickGoodsPic'
+// 我的接收
+import ACCEPT from '@/pages/order/acceptOrders.vue'// 列表
+import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'// 详情
+
+// 我的发布
+
+import PICK_GOODS_CODE from '@/pages/order/pickGoodsCode'// 收货码
+import PICK_GOODS_PIC from '@/pages/order/pickGoodsPic'// 收货照片
+import SCHEDULE_PLAY_BACK from '@/pages/order/schedulePlayBack'// 行程回放
 // 业务员管理
 import SALES_LIST from '@/pages/salesManages/index.vue'
 import SALES_INFO from '@/pages/salesManages/info.vue'
@@ -66,7 +68,6 @@ import MYCIRCLE from '@/pages/center/myCircle/index'
 import ADDFRIEND from '@/pages/center/myCircle/addFriend'
 import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
 import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
-import MYRELEASE from '@/pages/center/myRelease/index'
 import RELEASEDETAILS from '@/pages/center/myRelease/releaseDetails'
 import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
@@ -79,7 +80,6 @@ import ROUTEDETAILS from '@/pages/center/commonlyRoute/routeDetails'
 import BLACKLIST from '@/pages/center/blacklist/index'
 import BLACKDETAILS from '@/pages/center/blacklist/blackDetails'
 import MYINFORMATION from '@/pages/center/myInformation/index'
-import TRIPPLAYBACK from '@/pages/center/myRelease/tripPlayback'
 import SEEINFORMATION from '@/pages/center/myInformation/seeinformation'
 import SETTING from '@/pages/center/setting/index'
 import CURRENCY from '@/pages/center/setting/currency'
@@ -283,10 +283,6 @@ const vueRouter = new Router({
       component: SEARCHFRIEND
     },
     {
-      path: '/center/myRelease/index',
-      component: MYRELEASE
-    },
-    {
       path: '/center/myRelease/releaseDetails',
       component: RELEASEDETAILS
     },
@@ -339,10 +335,6 @@ const vueRouter = new Router({
       component: MYINFORMATION
     },
     {
-      path: '/center/myRelease/tripPlayback',
-      component: TRIPPLAYBACK
-    },
-    {
       path: '/center/myInformation/seeInformation',
       component: SEEINFORMATION
     },
@@ -391,6 +383,11 @@ const vueRouter = new Router({
       name: 'salesInfo',
       path: '/salesManages/info',
       component: SALES_INFO
+    },
+    {
+      name: 'schedulePlayBack',
+      path: '/order/schedulePlayBack',
+      component: SCHEDULE_PLAY_BACK
     }
   ]
 });

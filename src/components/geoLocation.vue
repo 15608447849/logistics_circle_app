@@ -30,7 +30,6 @@
   import {
     ADDRESSCOM
   } from '../store/mutation-types'
-  import {AMapManager} from "vue-amap";
 
   export default {
     data() {
@@ -43,6 +42,7 @@
           city: '',
           citylimit: true
         },
+
         markers: [], // 搜索标记
         mapCenter: [], // 地图中心点
         geocoder: null,
