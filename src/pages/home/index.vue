@@ -2,10 +2,18 @@
   <div>
     <!--页头-->
     <div class="issueHeaderNav">
-      <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
+
+        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" style="float:left;">
+
+
+      <div class="width60">
+        <span>首页</span>
+      </div>
       <!--<i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>-->
-      <span class="middle">首页</span>
-      <i class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite">
+      <div class="width20">
+        <i class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
+      </div>
+
         <ul class="dropdown" v-show="!isMember">
             <li @click="todimensionalCode">
               <i class="icon iconfont icon-erweima"></i>

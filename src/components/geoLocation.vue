@@ -6,7 +6,6 @@
       <button @click="selectCity" class="selectCityBtn">{{searchOption.city}}<i
         class="icon iconfont icon-xiala xiala"></i></button>
     </div>
-    <div class="downfixed havedownfixed">
       <div class="amap-container">
         <el-amap-search-box class="search" :search-option="searchOption"
                             :on-search-result="onSearchResult">
@@ -22,7 +21,6 @@
           <div class="order_priceMap"><span class="carWeightMap">{{item.address}}</span></div>
         </li>
       </ul>
-    </div>
 
   </div>
 </template>

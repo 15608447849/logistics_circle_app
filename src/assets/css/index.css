@@ -184,8 +184,25 @@ a {
   display:inline-block;
   width:.6rem;
   height:.6rem;
+  position:relative;
+  top:0rem;
+  left:0rem;
   border:1px solid transparent;
   border-radius: 50%;
+}
+img.loginPicture:after{
+  content: '';
+  background-image:url('../../assets/images/small/moren.png');
+  background-size:.6rem .6rem;
+  display: inline-block;
+  width:.6rem;
+  height:.6rem;
+  border:1px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 2;
+  top: 0rem;
+  left: 0rem;
 }
 .loginPicture9{
   display:inline-block;
@@ -1390,6 +1407,13 @@ input[type="radio"] {
   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
   background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
+.width20{
+  width:20%;
+}
+.width60{
+  width:60%;
+  text-align: center;
+}
 .issueHeaderLog{
   display:flex;
   justify-content:space-between;
@@ -1521,7 +1545,7 @@ input[type="radio"] {
 }
 .order_boxIndex{
   width:7.5rem;
-  height:10.2rem;
+  height:55vh;
   background:#ffffff;
   overflow: auto;
 }
@@ -2266,7 +2290,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   align-items:center;
   width:7.5rem;
   height:.8rem;
-  padding:0px .08rem 0px .08rem;
+  padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
@@ -2286,7 +2310,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .order_boxMap{
   width:7.5rem;
-  height:4.45rem;
+  height:34vh;
   overflow: auto;
   background:#ffffff;
   z-index:100;
