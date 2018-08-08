@@ -267,7 +267,7 @@ a {
   justify-content:space-between;
   align-items:center;
   width:7.5rem;
-  height:.96rem;
+  height:1rem;
   padding:0rem 1rem 0rem 1rem;
 }
 .sendOrder,.already{
@@ -275,7 +275,7 @@ a {
   justify-content:space-between;
   align-items:center;
   width:2rem;
-  height:.64rem;
+  height:.69rem;
 }
 .sendOrder img,.already img{
   width:.64rem;
@@ -495,8 +495,8 @@ a {
 .personalList{
   display:block;
   width:3rem;
-  height:5.5rem;
-  margin:.5rem 0rem 2.1rem .45rem;
+  height:5.4rem;
+  margin:.5rem 0rem .6rem .45rem;
 }
 .personalList .personalText{
   width: 1.1rem;
@@ -509,7 +509,7 @@ a {
   color: #666666;
 }
 .personalList li{
-  width:2rem;
+  width:2.5rem;
   height:.35rem;
   margin-bottom:.36rem;
 }
@@ -523,7 +523,7 @@ a {
 .settingCircleBox{
   display:block;
   width:.6rem;
-  height:.1rem;
+  height:1.1rem;
   margin-left:.4rem;
 }
 .settingCircleBox i{
@@ -1347,6 +1347,8 @@ input[type="radio"] {
   width:4rem;
 }
 .inputspan{
+  display:inline-block;
+  width:1.5rem;
   margin-right:.2rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
@@ -1377,6 +1379,7 @@ input[type="radio"] {
   display:flex;
   justify-content:space-between;
   align-items:center;
+  text-align:center;
   position:fixed;
   top:0rem;
   width:7.5rem;
@@ -1400,6 +1403,8 @@ input[type="radio"] {
   background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
 .issueHeaderLog span{
+  display:inline-block;
+  width:1.6rem;
   font-family: PingFang-SC-Regular;
   font-size: .36rem;
   font-weight: normal;
@@ -1425,6 +1430,7 @@ input[type="radio"] {
 }
 .issueHeaderNav .issueHeaderNavPic img{
   display:inline-block;
+  float:left;
   width:.52rem;
   height:.52rem;
   vertical-align: middle;
@@ -1440,6 +1446,7 @@ input[type="radio"] {
   line-height:.7rem;
 }
 .issueHeaderNav span{
+  display:inline-block;
   font-family: PingFang-SC-Regular;
   font-size: .36rem;
   font-weight: normal;
@@ -1490,7 +1497,8 @@ input[type="radio"] {
   color:#ffffff;
 }
 .alignCenter{
-  width:.2rem;
+  display:inline-block;
+  width:.4rem;
   height:.1rem;
 }
 .order_box{
@@ -2566,9 +2574,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
  .lineInfo{
    display:block;
    width:4rem;
-   height:.375rem;
    white-space: nowrap;
-   overflow: hidden;
    text-overflow: ellipsis;
    -o-text-overflow: ellipsis;
    font-family: PingFang-SC-Regular;

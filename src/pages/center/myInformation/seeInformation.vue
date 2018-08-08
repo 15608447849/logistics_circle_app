@@ -49,6 +49,7 @@
   export default {
     data(){
       return {
+        messageList:[],
         isOperation: true,
         cLevel: [],// 认证等级
         compByUid:[],
@@ -59,12 +60,30 @@
       }
     },
     mounted() {
+      this.getMessageList();// 未处理消息
+      console.log(this.messageList)
       this.details = this.$route.query.details;
       console.log(this.details);
       //企业基本信息
       this.querygetCompByUid();
     },
     methods:{
+      // 未处理列表
+      getMessageList() {
+        let self = this;
+        this.$Ice_MessageService.queryMsgListByUid(self.userId,0, new IceCallback(function (result) {
+          if (result.code === 0) {
+            // 成功
+            self.messageList = result.obj;
+          } else {
+            self.$vux.toast.text(result.msg, 'top');
+          }
+        }, function (error) {
+
+          //失败
+        }))
+
+      },
       // 获取企业ID获取企业信息
       querygetCompByUid: function () {
         let self = this;
@@ -107,6 +126,7 @@
                 debugger
                 if (result.code === 0) {
                   self.isOperation = false;
+                  self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
                 } else {
                   debugger
@@ -124,6 +144,7 @@
       },
       // 拒绝
       refuseFriend(item, index, msgtype) {
+        debugger
         let content = '';
         let self = this;
         if (msgtype === 1) {
@@ -140,6 +161,8 @@
               function (result) {
                 if (result.code === 0) {
                   self.messageList.splice(index, 1);
+                  self.isOperation = false;
+                  self.$vux.toast.text('已拒绝对方的好友圈', 'top');
                   if (msgtype === 1) {
                     self.$vux.toast.text(' 已拒绝对方添加调度圈', 'top');
                   } else if (msgtype === 2) {

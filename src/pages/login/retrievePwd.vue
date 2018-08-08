@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>找回密码</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="phoneNum" v-show="firstStepBool">
       <span class="numText">手机号码</span>

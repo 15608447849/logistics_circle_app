@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
       <span>业务员管理</span>
-      <span @click="addDriver">添加</span>
+      <i @click="addDriver" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite"></i>
     </div>
     <div class="downfixed havedownfixed">
       <div class="driverBox">

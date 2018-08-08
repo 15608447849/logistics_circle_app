@@ -3,7 +3,7 @@
     <div class="issueHeaderLog">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>发表评论</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
       <div class="evaluateName">
         <div class="evalogisticsNameBox">

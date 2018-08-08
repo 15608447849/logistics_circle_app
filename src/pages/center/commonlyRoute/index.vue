@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>常用线路</span>
-      <span @click="editorRoute">添加</span>
+      <i @click="editorRoute" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite"></i>
     </div>
     <!--<div class="LineBox">-->
     <!--<div class="lineSearch">-->

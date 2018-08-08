@@ -4,8 +4,8 @@
     <div class="issueHeaderNav">
       <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
       <!--<i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>-->
-      <span>首页</span>
-      <span class="icon iconfont icon-gengduo1 dropdowngengduo">
+      <span class="middle">首页</span>
+      <i class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite">
         <ul class="dropdown" v-show="!isMember">
             <li @click="todimensionalCode">
               <i class="icon iconfont icon-erweima"></i>
@@ -20,7 +20,7 @@
               <span>邀请有礼</span>
             </li>
         </ul>
-      </span>
+      </i>
     </div>
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">

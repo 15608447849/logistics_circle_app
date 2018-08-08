@@ -3,7 +3,7 @@
     <div class="issueHeaderNav">
       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
       <span>搜索</span>
-      <span></span>
+      <div class="alignCenter"></div>
     </div>
     <div class="downfixed havedownfixed">
       <yd-search v-model="inputVal" :on-submit="submitInput" :on-cancel="returnToPage"></yd-search>

@@ -7,9 +7,9 @@
       <!--&lt;!&ndash;<img slot="right" src="../../assets/images/small/logo_26.png"/>&ndash;&gt;-->
     <!--</yd-navbar>-->
     <div class="issueHeaderNav">
-      <i  class="icon iconfont icon-btngoback back" @click="fallback"></i>
+      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
       <span>城市选择</span>
-      <div></div>
+      <div class="alignCenter"></div>
     </div>
     <div class="downfixed havedownfixed">
 

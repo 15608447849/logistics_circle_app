@@ -73,13 +73,14 @@
     },
     mounted() {
       this.getNewMessage();//查询用户是否有新的消息
-      this.getMessageList();// 已处理消息
+      this.getMessageList();// 未处理消息
       // this.getNewMessage();
-      this.YesHandleMessage();// 未处理消息
+      this.YesHandleMessage();// 已处理消息
     },
     methods: {
       // 同意
       addFriend(item, index, msgtype) {
+        debugger
         let content = '';
         let self = this;
         if (msgtype === 1) {
@@ -91,6 +92,7 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
+            debugger
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, 0, new IceCallback(
               function (result) {
                 if (result.code === 0) {
@@ -195,7 +197,6 @@
           path: '/center/myInformation/seeInformation',
           query: {
             details: item,
-
           }
         })
       }
