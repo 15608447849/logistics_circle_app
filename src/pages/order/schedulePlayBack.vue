@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderLog">
-      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-      <span>行程回放</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
+      </div>
+      <div class="width60">
+        <span>行程回放</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <div class="tripMap">
         <el-amap class="amap-box" vid="'amap-vue'" :plugin="plugin" :zoom="zoom" :center="center">

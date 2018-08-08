@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderLog">
-      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
-      <span>修改密码</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+      </div>
+      <div class="width60">
+        <span>修改密码</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <ul class="settingList margin-bottom56">
       <li class="accountName "><span>用户名：</span><span>{{fname}}</span></li>

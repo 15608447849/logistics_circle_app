@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="issueHeaderLog">
-      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
-      <span>基础设置</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+      </div>
+      <div class="width60">
+        <span>基础设置</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
     </div>
     <ul class="settingList">
       <li @click="toaccountSecurity" class="needBorder1">账号安全</li>

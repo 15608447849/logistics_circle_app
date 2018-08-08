@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
-      <span>圈子</span>
-      <i class="icon iconfont icon-gengduo1 colorWhite"@click="toPageIssue"></i>
+      <div class="width20">
+        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft">
+      </div>
+      <div class="width60">
+        <span>圈子</span>
+      </div>
+      <div class="width20">
+        <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toPageIssue"></i>
+      </div>
+
+
+
       <!--<span @click="toPageIssue">发单</span>-->
     </div>
     <!--下拉刷新回调的提示-->

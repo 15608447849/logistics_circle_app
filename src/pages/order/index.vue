@@ -2,10 +2,19 @@
   <div>
     <div class="myReleaseBox">
       <div class="issueHeaderNav">
-        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture">
-        <span>我的发布</span>
+        <div class="width20">
+          <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft">
+        </div>
+        <div class="width60">
+          <span>我的发布</span>
+        </div>
+        <div class="width20">
+          <div class="alignCenter floatright"></div>
+        </div>
+
+
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
-        <div class="alignCenter"></div>
+
       </div>
       <div class="downfixed havedownfixed">
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->

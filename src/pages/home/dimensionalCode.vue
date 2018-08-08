@@ -1,10 +1,19 @@
 <template>
   <div>
     <div class="backgroundgray">
-      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-      <span class="myTwoCode">我的二维码</span>
-      <div class="alignCenter"></div>
-    </div>
+      <div class="width20">
+        <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
+      </div>
+      <div class="width60">
+        <span class="myTwoCode">我的二维码</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+      </div>
+
+
+
     <div class="myTwoCodeBox">
       <div class="nameAndCode">
         <div class="twoCodePicBox">

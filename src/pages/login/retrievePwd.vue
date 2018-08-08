@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderLog">
-      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-      <span>找回密码</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
+      </div>
+      <div class="width60">
+        <span>找回密码</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <div class="phoneNum" v-show="firstStepBool">
       <span class="numText">手机号码</span>

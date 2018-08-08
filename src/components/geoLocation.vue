@@ -1,10 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderNavMap">
-      <i class="icon iconfont icon-btngoback back" @click="goBack"></i>
-      <span>选择地址</span>
-      <button @click="selectCity" class="selectCityBtn">{{searchOption.city}}<i
-        class="icon iconfont icon-xiala xiala"></i></button>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="goBack"></i>
+      </div>
+      <div class="width60">
+        <span style="font-size:.36rem;">选择地址</span>
+      </div>
+      <div class="width20">
+        <button @click="selectCity" class="selectCityBtn floatright">{{searchOption.city}}
+          <i class="icon iconfont icon-xiala xiala"></i>
+        </button>
+      </div>
+
     </div>
       <div class="amap-container">
         <el-amap-search-box class="search" :search-option="searchOption"

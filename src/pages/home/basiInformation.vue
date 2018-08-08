@@ -1,9 +1,18 @@
 <template>
  <div class="basiInformation">
    <div class="issueHeaderNav">
-    <i class="icon iconfont icon-btngoback back"></i>
-    <span>基本信息</span>
-    <div class="alignCenter"></div>
+     <div class="width20">
+       <i class="icon iconfont icon-btngoback back floatleft"></i>
+     </div>
+     <div class="width60">
+       <span>基本信息</span>
+     </div>
+     <div class="width20">
+       <div class="alignCenter floatright"></div>
+     </div>
+
+
+
    </div>
    <div class="enterprisePic">
      <img src="../../assets/images/small/bussiness-man.png" alt="">

@@ -1,20 +1,12 @@
 <template>
   <div style="height: 100%;">
-    <!--<yd-navbar title="城市选择" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px">-->
-      <!--<router-link to="#" slot="left">-->
-        <!--<yd-navbar-back-icon " color="#FFFFFF"></yd-navbar-back-icon>-->
-      <!--</router-link>-->
-      <!--&lt;!&ndash;<img slot="right" src="../../assets/images/small/logo_26.png"/>&ndash;&gt;-->
-    <!--</yd-navbar>-->
     <div class="issueHeaderNav">
       <div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>
       <div  class="width60"><span>城市选择</span></div>
       <div class="width20"><div class="alignCenter floatright"></div></div>
     </div>
-    <div class="downfixed havedownfixed">
-
-    </div>
     <cube-index-list
+      style="margin-top:.8rem;"
       :data="cityData"
       :title="title"
       @select="selectItem"

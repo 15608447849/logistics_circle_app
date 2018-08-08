@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
-      <span>司机管理</span>
-      <i @click="addDriver" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite"></i>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="goBackPage"></i>
+      </div>
+      <div class="width60">
+        <span>司机管理</span>
+      </div>
+      <div class="width20">
+        <i @click="addDriver" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
+      </div>
     </div>
     <div class="downfixed havedownfixed">
       <div class="driverBox">

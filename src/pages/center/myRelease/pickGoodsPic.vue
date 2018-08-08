@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back"></i>
-      <span>取货照片</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft"></i>
+      </div>
+      <div class="width60">
+        <span>取货照片</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <div class="downfixed havedownfixed">
       <div class="pickGoodsPicBox">

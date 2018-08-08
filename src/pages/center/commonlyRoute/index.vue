@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
-      <span>常用线路</span>
-      <i @click="editorRoute" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite"></i>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+      </div>
+      <div class="width60">
+        <span>常用线路</span>
+      </div>
+      <div class="width20">
+        <i @click="editorRoute" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
+      </div>
+
+
+
     </div>
     <!--<div class="LineBox">-->
     <!--<div class="lineSearch">-->

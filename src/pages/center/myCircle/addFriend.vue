@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-      <span>添加好友</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
+      </div>
+      <div class="width60">
+        <span>添加好友</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
     </div>
     <div class="downfixed havedownfixed">
       <div class="addFriendBox">

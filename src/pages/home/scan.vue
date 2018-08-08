@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="backgroundgray opacity6">
-      <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-      <span class="myTwoCode">扫一扫二维码</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
+      </div>
+      <div class="width60">
+        <span class="myTwoCode">扫一扫二维码</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <div class="saoyisaopage">
       <div class="scanBorder">

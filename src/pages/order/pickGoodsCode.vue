@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderLog">
-      <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
-      <span>取货码</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="goBackPage"></i>
+      </div>
+      <div class="width60">
+        <span>取货码</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <div class="pickGoodsCodePic" >
       <!--<qrcode :value="qrCode" :fg-color="fgColor"></qrcode>-->

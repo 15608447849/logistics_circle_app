@@ -1,9 +1,18 @@
 <template>
    <div>
      <div class="issueHeaderLog">
-       <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
-       <span>账号与安全</span>
-       <div class="alignCenter"></div>
+       <div class="width20">
+         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+       </div>
+       <div class="width60">
+         <span>账号与安全</span>
+       </div>
+       <div class="width20">
+         <div class="alignCenter floatright"></div>
+       </div>
+
+
+
      </div>
      <ul class="settingList backgroundwhite margintop40">
        <li class="needBorder"><span class="accountUser floatleft">用户名</span><span class="accountUserName floatright">{{userInfo.uname}}</span></li>

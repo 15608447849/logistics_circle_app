@@ -2,9 +2,18 @@
   <div>
     <div class="myReleaseBox">
       <div class="issueHeaderNav">
-        <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
-        <span>我的接收</span>
-        <div class="alignCenter"></div>
+        <div class="width20">
+          <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+        </div>
+        <div class="width60">
+          <span>我的接收</span>
+        </div>
+        <div class="width20">
+          <div class="alignCenter floatright"></div>
+        </div>
+
+
+
       </div>
       <div class="downfixed havedownfixed">
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->

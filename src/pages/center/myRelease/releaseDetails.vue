@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back" @click="fallback"></i>
-      <span>订单详情</span>
-      <div class="alignCenter"></div>
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+      </div>
+      <div class="width60">
+        <span>订单详情</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
+
+
+
     </div>
     <div class="downfixed havedownfixed">
       <div class="releaseStateBox">

@@ -1428,7 +1428,7 @@ input[type="radio"] {
 }
 .issueHeaderLog span{
   display:inline-block;
-  width:1.6rem;
+  width:2rem;
   font-family: PingFang-SC-Regular;
   font-size: .36rem;
   font-weight: normal;
@@ -1545,7 +1545,7 @@ input[type="radio"] {
 }
 .order_boxIndex{
   width:7.5rem;
-  height:55vh;
+  height:50vh;
   background:#ffffff;
   overflow: auto;
 }
@@ -2353,6 +2353,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #999999;
 }
 .xiala{
+  margin-left:.1rem;
  font-size:.1rem;
 }
 /*司机管理模块****************************************************************************************************/
@@ -2535,7 +2536,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  height:88vh;
+  height:75vh;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   margin-bottom:.24rem;
@@ -2734,7 +2735,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .searchFri{
   width:7.5rem;
-  height:13.34rem;
+  height:94vh;
   background:#ffffff;
 }
 .searchFri p{

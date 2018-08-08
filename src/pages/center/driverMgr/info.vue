@@ -1,11 +1,16 @@
 <template>
   <div class="addDriver">
-    <div class="issueHeaderNav">
-      <i class="icon iconfont icon-btngoback back" @click="goBackPage"></i>
-      <span>司机管理</span>
-      <div class="alignCenter"></div>
+    <div class="issueHeaderLog">
+      <div class="width20">
+        <i class="icon iconfont icon-btngoback back floatleft" @click="goBackPage"></i>
+      </div>
+      <div class="width60">
+        <span>司机管理</span>
+      </div>
+      <div class="width20">
+        <div class="alignCenter floatright"></div>
+      </div>
     </div>
-    <div class="downfixed havedownfixed">
     <ul class="addDriverInfo">
       <li>
         <span class="driverTitle">司机姓名</span>
@@ -17,7 +22,6 @@
       </li>
     </ul>
     <button class="nextStep" @click="dSave">保 存</button>
-    </div>
   </div>
 </template>
 

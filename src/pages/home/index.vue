@@ -2,10 +2,9 @@
   <div>
     <!--页头-->
     <div class="issueHeaderNav">
-
-        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" style="float:left;">
-
-
+      <div class="width20">
+        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft">
+      </div>
       <div class="width60">
         <span>首页</span>
       </div>

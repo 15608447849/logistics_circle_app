@@ -1,9 +1,18 @@
 <template>
    <div>
      <div class="issueHeaderLog">
-       <i @click="fallback" class="icon iconfont icon-btngoback back"></i>
-       <span>货源信息</span>
-       <span class="alignCenter"></span>
+       <div class="width20">
+         <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
+       </div>
+       <div class="width60">
+         <span>货源信息</span>
+       </div>
+       <div class="width20">
+         <span class="alignCenter floatright"></span>
+       </div>
+
+
+
      </div>
      <div class="issueDetailsBox">
        <div class="orderPadding10">
