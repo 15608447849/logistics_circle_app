@@ -18,12 +18,11 @@
                   :finished="finished"
                   @load="onLoad"
         >
-          <!--@click="toReleaseDetails(item)"-->
-          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" >
+          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails(item)">
             <div class="releaseCompany">
               <div class="companyBox">
                 <i class="icon iconfont icon-qiyexinxi"></i>
-                <span>路路通物流无限公司</span>
+                <span>{{item.pubcompname}}</span>
                 <i class="icon iconfont icon-icon-test"></i>
               </div>
               <!--<span class="releasetext">发布</span>-->
@@ -57,18 +56,19 @@
                 <!--&lt;!&ndash;刷新&ndash;&gt;-->
                 <!--<a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>-->
                 <!--&lt;!&ndash;取消&ndash;&gt;-->
+                <!-- 抢单 -->
                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消抢单</a>
-
-                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="cancelOrder(item, index)">取货照片</a>
+                <!-- 取货 -->
+                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
                 <!--<a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="cancelOrder(item, index)">录入行程</a>-->
+                <!-- 签收 -->
+                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,0)">取货照片</a>
+                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,1)">签收照片</a>
 
-                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="cancelOrder(item, index)">取货照片</a>
-                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="cancelOrder(item, index)">签收照片</a>
+                <a v-show="item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
 
-                <a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="cancelOrder(item, index)">评价</a>
-
-
-                <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="">行程回放</a>
+                <!-- 待评价 -->
+                <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">待评价</a>-->
 
                 <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="">转发布</a>
 
@@ -136,10 +136,6 @@
           value: '4',
           isSelected: false
         }, {
-          name: '待评价',
-          value: '6',
-          isSelected: false
-        }, {
           name: '全部',
           value: '',
           isSelected: false
@@ -165,7 +161,7 @@
             cont = '已签收';
             break;
           case 6:
-            cont = '待评价';
+            cont = '评价';
             break;
           case 7:
             cont = '抢单成功';
@@ -217,6 +213,13 @@
             id: item.revierid,
             status: 6
           }
+        })
+      },
+      toReleaseDetails(item) {
+        item.type = 1;
+        this.$router.push({
+          name: 'orderDetail',
+          params : item
         })
       },
       // 取消抢单
@@ -282,14 +285,6 @@
         this.queryMyRecvOrder();
         // },500);
       },
-      toReleaseDetails(item) {
-        this.$router.push({
-          path: '/order/acceptDetails',
-          query: {
-            id: item.orderno
-          }
-        })
-      },
       showCodamt(codamt,insureamt) {
         let str = '';
         if(codamt > 0) {
@@ -304,33 +299,20 @@
         }
         return str
       },
-      toreleaseSearchpage() {
+      // 行程回放
+      toSchedulePlayBack(item) {
         this.$router.push({
-          path: '/center/myRelease/releaseSearch'
+          name: 'schedulePlayBack',
+          params: item
         })
       },
-      toseeDispatch() {
-        this.$router.push({
-          path: '/center/myRelease/seeDispatch'
-        })
-      },
-      topickGoodsPic(item) {
-        this.$router.push({
-          path: '/center/myRelease/pickGoodsPic'
-        })
-      },
-      topickGoodsCode(orderNo) {
-        this.$router.push({
-          path: '/center/myRelease/pickGoodsCode',
-          query: {
-            id: orderNo
-          }
-        })
-      },
-      toevaluate() {
-        this.$router.push({
-          path: '/center/myRelease/evaluate'
-        })
+      // 取货照片
+      toPickGoodsPic(item,type) {
+        if(type === 0) {
+          this.$vux.toast.text('暂无取货照片', 'top');
+        } else {
+          this.$vux.toast.text('暂无签收照片', 'top');
+        }
       },
       fallback() {
         this.$router.go(-1)

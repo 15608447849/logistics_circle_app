@@ -56,7 +56,7 @@
   import {
     DICT,
     AREA,
-    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX
+    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL
   } from '../store/mutation-types'
 
   export default {
@@ -111,6 +111,7 @@
       if(this.compInfo !== undefined && this.compInfo !== null) {
         this.compName = this.compInfo.fname;
         this.avatar = this.compInfo.logoPath;
+        this.$app_store.commit(AVATAR_URL,this.avatar);
         this.computeLevel();
       } else {
         this.avatar = require('../assets/images/small/avatar.png');

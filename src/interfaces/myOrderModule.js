@@ -80,9 +80,9 @@ module.exports = {
 	getOrderDetail:( orderid,uoid,type,callback)=>{
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderDetail',orderid,uoid,type,callback);
 	},
-	/** 获取查看订单详情  getOrderInfo (orderid:订单号 uoid:用户id)*/
-	getOrderInfo:( orderid,uoid,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderInfo',orderid,uoid,callback);
+	/** 获取查看订单详情  getOrderInfo (orderid:订单号 uoid:用户id type:0:我发布的 1：我接收的)*/
+	getOrderInfo:( orderid,uoid,type,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderInfo',orderid,uoid,type,callback);
 	},
 	/** 取消订单发布  cancelOrder (orderid:订单号 uoid:用户id)*/
 	cancelOrder:(orderid,oid,callback)=>{

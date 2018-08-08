@@ -6,9 +6,5 @@ module.exports = {
   /** 查询我的接收订单 queryMyRecvOrder */
   queryMyRecvOrder: (oid, queryParam, page, callback) => {
     queryIce(redundancy.RedundancyServerPrx, 'RedundancyServer', 'queryMyRecvOrder', oid, queryParam, page, callback);
-  },
-  /** 取货码 */
-  getPickCode: (pubcompid, orderno) => {
-    queryIce(redundancy.RedundancyServerPrx, 'RedundancyServer', 'getPickCode', pubcompid, orderno, callback);
   }
 };

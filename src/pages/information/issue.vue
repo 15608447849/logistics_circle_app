@@ -209,8 +209,8 @@
         this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
-
-        this.dicData = this.$app_store.getters.dict || null;
+        debugger
+        this.dicData = JSON.parse(this.$app_store.getters.dict)  || null;
         this.pmList = this.dicData.pm;
         // 设置默认类型字典选择, 默认取第一个
         this.OrderDetail.wmdictc = this.dicData.wm[0].value;

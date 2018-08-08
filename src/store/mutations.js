@@ -36,6 +36,13 @@ export default {
     state.compInfo = v;
     localStorage.setItem(COMP_INFO, v);
   },
+  // 头像
+  [AVATAR_URL] (state, v) {
+    state.avatar = v;
+    localStorage.setItem(AVATAR_URL, v);
+  },
+
+
   // 侧边栏显示
   [IS_SHOW_SIDEBAR] (state, isShowSidebar) {
     state.isShowSidebar = isShowSidebar

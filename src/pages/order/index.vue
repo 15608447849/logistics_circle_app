@@ -23,7 +23,7 @@
             <div class="releaseCompany">
               <div class="companyBox">
                 <i class="icon iconfont icon-qiyexinxi"></i>
-                <span>路路通物流无限公司</span>
+                <span>{{fName}}</span>
                 <i class="icon iconfont icon-icon-test"></i>
               </div>
               <!--<span class="releasetext">发布</span>-->
@@ -36,7 +36,7 @@
               <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
             </li>
             <li class="specifications marginBottom15">
-              <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictc}}</span>
+              <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictn}}</span>
             </li>
 
             <li class="pickGoods marginBottom15">
@@ -67,7 +67,7 @@
                 <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
                 <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <!--查看行程-->
-                <a v-show="item.tstatus === 1 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
+                <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                 <!--签收照片-->
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="refuseOrder(item,index)">签收照片</a>
                 <!--确认签收-->
@@ -103,8 +103,9 @@
     },
     data() {
       return {
+        fName: '',
         isShowNoData: false, // 无数据显示
-        avatar: this.$app_store.state.avatarUrl,
+        avatar: this.$app_store.state.avatar,
         QueryParam: new redundancy.QueryParam(),
         page: new redundancy.Page(),
         userId: this.$app_store.getters.userId,
@@ -141,6 +142,8 @@
       }
     },
     mounted() {
+      this.fName = JSON.parse(this.$app_store.state.compInfo).fname
+      console.log(this.$app_store.state.compInfo);
       this.$app_store.commit(TABBAR_INDEX, 3);
       // 初始化列表查询条件
       this.initQueryConditions('0');
@@ -218,6 +221,7 @@
         let self = this;
         this.message.showAlert(this, alertContent.RECEIVING)
           .then(() => {
+            debugger
             self.$Ice_myOrderService.conReceipt(orderId, self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
@@ -228,7 +232,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试 !', 'top');
               }
             ))
           })
@@ -251,7 +255,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试 !', 'top');
               }
             ))
           })
@@ -390,11 +394,10 @@
         // },500);
       },
       toReleaseDetails(item) {
+        item.type = 0;
         this.$router.push({
-          path: '/center/myRelease/releaseDetails',
-          query: {
-            id: item.orderno
-          }
+          name: 'orderDetail',
+          params : item
         })
       },
       showCodamt(codamt,insureamt) {
@@ -444,16 +447,17 @@
           path: '/userInfo',
           query: {
             isYourCompInfo: false,
-            id: item.revierid,
+            id: item.revicompid,
             status: 6
           }
         })
       },
       // 待评价
-      toEvaluatePage() {
+      toEvaluatePage(item) {
+        item.type = 0;
         this.$router.push({
-          path: '/userInfo',
-          name: 'evaluateOrder'
+          name: 'evaluateOrder',
+          params: item,
         })
       }
     },

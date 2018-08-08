@@ -40,7 +40,7 @@
     data() {
       return {
         isShowNoData: false, // 无数据显示
-        avatar: this.$app_store.state.avatarUrl,// 头像
+        avatar: this.$app_store.state.avatar,// 头像
         infoList: [],
         pageSize: '10', // 订单数
         address: this.$app_store.getters.currentCity, // 地址
