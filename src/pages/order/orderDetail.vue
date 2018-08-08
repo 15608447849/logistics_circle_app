@@ -64,7 +64,7 @@
       <div class="orderPadding10 backFF">
         <div class="logisticsNameBox">
           <img src="" alt="">
-          <span class="logisticsName">路路通物流无限公司</span>
+          <span class="logisticsName"></span>
         </div>
         <ul class="backFF">
           <li class="issueDetailsLiText">
