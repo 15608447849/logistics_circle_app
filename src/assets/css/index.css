@@ -1451,6 +1451,7 @@ input[type="radio"] {
 }
 .downfixed{
   margin-top:.8rem;
+  overflow: auto;
 }
 .havedownfixed{
   margin-bottom:9vh;
@@ -1536,9 +1537,10 @@ input[type="radio"] {
 }
 .order_box{
   width:7.5rem;
+  height:90vh;
+  margin-bottom:1rem;
   background:#ffffff;
-  z-index:100;
-  overflow: auto;
+  overflow:auto;
 }
 .noDataBox{
   display:block;
@@ -2964,22 +2966,24 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-top:.16rem;
 }
 .download-tip{
-  z-index: 9900;
-  position: fixed;
-  height:.6rem;
-  left: 0;
-  width: 100%;
-  line-height: .6rem;
-  font-size: .24rem;
-  text-align: center;
-  background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
-  background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
-  color: white;
-  -webkit-transition: top 300ms;
-  transition: top 300ms;
-}
+   z-index: 9900;
+   position: fixed;
+   height:.6rem;
+   top:.8rem;
+   left: 0;
+   width: 100%;
+   line-height: .6rem;
+   font-size: .24rem;
+   text-align: center;
+   overflow: auto;
+   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+   background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
+   color: white;
+   -webkit-transition: top 300ms;
+   transition: top 300ms;
+ }
 /*我的发布详情********************************************************************************************/
 .releaseStateBox{
   display:flex;
