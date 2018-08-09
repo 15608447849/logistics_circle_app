@@ -10,14 +10,12 @@
       <div class="width20">
         <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toPageIssue"></i>
       </div>
-
-
-
       <!--<span @click="toPageIssue">发单</span>-->
     </div>
     <!--下拉刷新回调的提示-->
     <div class="downfixed havedownfixed">
       <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
+      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <van-list
         v-model="loading"
         :finished="finished"
@@ -33,6 +31,7 @@
           </li>
         </ul>
       </van-list>
+      </van-pull-refresh>
       <div v-show="isShowNoData" class="noDataBox">
         <img src="../../assets/images/small/nodate.png"/>
       </div>
@@ -42,7 +41,6 @@
     <!--</div>-->
   </div>
 </template>
-
 <script>
   import Conversion from '@/utils/conversion'
   import {IS_SHOW_SIDEBAR, TABBAR_INDEX} from "../../store/mutation-types";
@@ -54,7 +52,7 @@
         avatar: this.$app_store.state.avatar,// 头像
         userId: this.$app_store.state.userId,
         infoList: [],
-        pageSize: '10', // 订单数
+        pageSize: '50', // 订单数
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
@@ -64,7 +62,8 @@
         pullingMessage: '',
         isShowMessage: false,
         loading: false,
-        finished: false
+        finished: false,
+        isLoading: false // 下拉刷新
       }
     },
     mounted() {
@@ -77,6 +76,25 @@
         setTimeout(() => {
           self.isShowMessage = false;
         }, 1500);
+      },
+      // 下拉刷新
+      onRefresh() {
+        setTimeout(()=>{
+          let self = this;
+          this.requestInfoList(0, this.startTimeStr, function (result) {
+            self.isLoading = false;
+            if (result.length === 0) {
+              self.pullingMessage = '列表数据已是最新'
+            }else {
+              self.startTimeStr = result[0].time;
+              self.pullingMessage = result.length + '条新发布订单';
+              self.infoList = result.concat(self.infoList);
+            }
+            self.showTip();
+          }, function (error) {
+            self.isLoading = false;
+          });
+        },500);
       },
       onLoad() {
         let self = this;
@@ -110,7 +128,7 @@
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
-                self.message.Toast(self, 'error', result.msg, false);
+                self.$vux.toast.text(result.msg, 'top');
                 return
               }
               successCallback(result.obj);
@@ -121,7 +139,7 @@
       },
       toPageIssueDetail(item) {
         this.$router.push({
-          path: '/information/issueDetails',
+          path: '/information/releaseOrders',
           query: {
             id: item.id,
             puberid: item.puberid,
@@ -134,7 +152,7 @@
       },
       toPageIssue() {
         this.$router.push({
-          path: '/information/issue',
+          path: '/information/releaseOrders',
           query: {
             status: 1
           }
@@ -144,7 +162,14 @@
         return Conversion.formatMsgTime(time)
       },
       avatarClick() {
-        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+        // 验证登录
+        if (this.$app_store.state.userId) {
+          this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+        }else {
+          this.$router.push({
+            path: '/login'
+          })
+        }
       },
     },
     watch: {

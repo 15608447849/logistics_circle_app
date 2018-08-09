@@ -107,7 +107,7 @@
         isMember: true,
         direction: '',
         tipStyle: '',
-        oid: this.$app_store.getters.userId,
+        oid: this.$app_store.getters.userId || '',
         isShowMore: false, // 显示更多
         isShowNoData: false // 无数据
         // 信息大厅数据
@@ -133,7 +133,7 @@
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
-                self.message.Toast(self, 'error', result.msg, false);
+                self.$vux.toast.text(result.msg, 'top');
                 return
               }
               self.infoList = result.obj;
@@ -174,7 +174,7 @@
       },
       toPageIssueDetail(item) {
         this.$router.push({
-          path: '/information/issueDetails',
+          path: '/information/releaseOrders',
           query: {
             id: item.id,
             puberid: item.puberid,
@@ -184,14 +184,21 @@
       },
       toPageIssue() {
         this.$router.push({
-          path: '/information/issue',
+          path: '/information/releaseOrders',
           query: {
             status: 0
           }
         })
       },
       avatarClick() {
-        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+        // 验证登录
+        if (this.$app_store.state.userId) {
+          this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+        }else {
+          this.$router.push({
+            path: '/login'
+          })
+        }
       },
       todimensionalCode() {
         this.$router.push({

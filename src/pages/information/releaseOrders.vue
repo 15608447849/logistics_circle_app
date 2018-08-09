@@ -165,7 +165,7 @@
   import {
     GEOSTATE
   } from '../../store/mutation-types'
-
+  import { Toast } from 'vant';
   export default {
     data() {
       return {
@@ -218,7 +218,6 @@
         this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
-        debugger
         this.dicData = JSON.parse(this.$app_store.getters.dict)  || null;
         this.pmList = this.dicData.pm;
         // 设置默认类型字典选择, 默认取第一个
@@ -295,11 +294,7 @@
         this.OrderDetail[this.selectDataPicker] = selectedVal[0] + '-' + selectedVal[1] + '-' + selectedVal[2] + ' ' + selectedVal[3] + ':' + selectedVal[4] + ':' + selectedVal[5]
       },
       cancelHandle() {
-        this.$createToast({
-          type: 'correct',
-          txt: 'Picker canceled',
-          time: 1000
-        }).show()
+
       },
       setPmPickerData(category) {
         let self = this;
@@ -382,7 +377,7 @@
             self.OrderDetail.orderno = result
           },
           function (error) {
-            self.message.Toast(self, 'error', '订单号生成失败，请稍后重试', false);
+            self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             setTimeout(() => {
               self.$router.go(-1);
             }, 1500)
@@ -392,22 +387,25 @@
       releaseOrder() {
         let self = this;
         if (this.validator()) {
+          Toast.loading({
+            mask: true,
+            message: '加载中...'
+          });
           self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
             function (result) {
+              self.$vux.toast.text(result.msg, 'top');
               if (result.code === 0) {
-                self.message.Toast(self, 'correct', '订单发布成功', true);
                 setTimeout(()=>{
                   self.$router.go(-1);
                 },1500);
               } else {
                 // 发送失败
                 self.$dialog.loading.close();
-                self.message.Toast(self, 'error', '订单发布失败', false);
               }
             },
             function (error) {
               self.$dialog.loading.close();
-              self.message.Toast(self, 'error', '错误' + error, 'error', false);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ));
         }
@@ -415,23 +413,23 @@
       validator() {
         // 货物数量
         if (this.verifyUtil.isNull(this.OrderDetail.num)) {
-          this.message.Toast(this, 'warn', '请填写货物重量', false);
+          this.$vux.toast.text('请填写货物重量', 'top');
           return false
         }
         // 货物运费
         if (this.verifyUtil.isNull(this.OrderDetail.price) || Number(this.OrderDetail.price) <= 0) {
-          this.message.Toast(this, 'warn', '请填写货物运费，并且金额不能为零', false);
+          this.$vux.toast.text('请填写货物运费，并且金额不能为零', 'top');
           return false
         }
 
         // 收货人
         if (this.verifyUtil.isNull(this.OrderDetail.consignee)) {
-          this.message.Toast(this, 'warn', '请填写收货人信息', false);
+          this.$vux.toast.text('请填写收货人信息', 'top');
           return false
         }
         // 联系方式
         if (this.verifyUtil.isNull(this.OrderDetail.consphone)) {
-          this.message.Toast(this, 'warn', '请填写联系方式', false);
+          this.$vux.toast.text('请填写联系方式', 'top');
           return false
         }
         return true

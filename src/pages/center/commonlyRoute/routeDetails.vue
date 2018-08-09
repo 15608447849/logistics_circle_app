@@ -98,7 +98,7 @@
       }
 
       // 初始化地区选择数据
-      this.cascadeData = this.$app_store.getters.area;
+      this.cascadeData = JSON.parse(this.$app_store.getters.area);
       // 初始化地区选择器
       this.cascadePicker = this.$createCascadePicker({
         title: '地区选择',

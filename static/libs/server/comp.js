@@ -119,7 +119,7 @@
             this.taxno = taxno !== undefined ? taxno : "";
             this.phone = phone !== undefined ? phone : "";
             this.openbank = openbank !== undefined ? openbank : "";
-            this.openaccount = openaccount !== undefined ? openaccount : 0;
+            this.openaccount = openaccount !== undefined ? openaccount : "";
             this.billarea = billarea !== undefined ? billarea : 0;
             this.billaddr = billaddr !== undefined ? billaddr : "";
             this.verify = verify !== undefined ? verify : 0;
@@ -145,7 +145,7 @@
             __os.writeString(this.taxno);
             __os.writeString(this.phone);
             __os.writeString(this.openbank);
-            __os.writeLong(this.openaccount);
+            __os.writeString(this.openaccount);
             __os.writeInt(this.billarea);
             __os.writeString(this.billaddr);
             __os.writeInt(this.verify);
@@ -170,13 +170,13 @@
             this.taxno = __is.readString();
             this.phone = __is.readString();
             this.openbank = __is.readString();
-            this.openaccount = __is.readLong();
+            this.openaccount = __is.readString();
             this.billarea = __is.readInt();
             this.billaddr = __is.readString();
             this.verify = __is.readInt();
             this.creadit = __is.readInt();
         },
-        71, 
+        64, 
         false);
 
     /**
@@ -202,7 +202,7 @@
             this.taxno = taxno !== undefined ? taxno : "";
             this.phone = phone !== undefined ? phone : "";
             this.openbank = openbank !== undefined ? openbank : "";
-            this.openaccount = openaccount !== undefined ? openaccount : 0;
+            this.openaccount = openaccount !== undefined ? openaccount : "";
             this.billarea = billarea !== undefined ? billarea : 0;
             this.billaddr = billaddr !== undefined ? billaddr : "";
             this.busslic = busslic !== undefined ? busslic : "";
@@ -237,7 +237,7 @@
             __os.writeString(this.taxno);
             __os.writeString(this.phone);
             __os.writeString(this.openbank);
-            __os.writeLong(this.openaccount);
+            __os.writeString(this.openaccount);
             __os.writeInt(this.billarea);
             __os.writeString(this.billaddr);
             __os.writeString(this.busslic);
@@ -271,7 +271,7 @@
             this.taxno = __is.readString();
             this.phone = __is.readString();
             this.openbank = __is.readString();
-            this.openaccount = __is.readLong();
+            this.openaccount = __is.readString();
             this.billarea = __is.readInt();
             this.billaddr = __is.readString();
             this.busslic = __is.readString();
@@ -286,7 +286,7 @@
             this.creadit = __is.readInt();
             this.routeList = comp.RouteSeqHelper.read(__is);
         },
-        80, 
+        73, 
         false);
 
     /**

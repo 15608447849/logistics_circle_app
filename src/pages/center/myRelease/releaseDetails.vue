@@ -312,7 +312,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -335,7 +335,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -358,7 +358,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -380,7 +380,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -403,7 +403,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -426,7 +426,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })

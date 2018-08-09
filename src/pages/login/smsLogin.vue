@@ -69,11 +69,11 @@
               // })
               console.log(result)
             } else {
-              self.message.toast(self,'登录失败','error');
+              self.$vux.toast.text('登录失败', 'top');
             }
           },
           function (error) {
-            self.message.toast(self,'登录失败' + error,'error');
+            self.$vux.toast.text('登录失败', 'top');
           }
         ))
       }

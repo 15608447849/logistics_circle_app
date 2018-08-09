@@ -13,7 +13,7 @@
     </div>
     <ul class="settingList">
       <li @click="toaccountSecurity" class="needBorder1">账号安全</li>
-      <li @click="tocurrency" class="needBorder1">通用</li>
+      <!--<li @click="tocurrency" class="needBorder1">通用</li>-->
       <li class="needBorder1">关于我们</li>
       <li class="needBorder1">帮助与反馈</li>
       <li class="needBorder1" @click="exitLogin">退出</li>

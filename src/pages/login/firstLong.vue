@@ -43,7 +43,7 @@
       },
       sendCode() {
         if (this.verifyUtil.isPhoneNum(this.phone)) {
-          this.message.Toast(this, 'warn', '手机号格式错误, 请重新输入', false);
+          self.$vux.toast.text('手机号格式错误, 请重新输入', 'top');
           return false
         }
         this.$dialog.loading.open('验证码发送中...');
@@ -51,30 +51,28 @@
         let param = ['login', this.phone, '0'];
         this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
           function (result) {
+            self.$vux.toast.text(result.msg, 'top');
             if (result.code === 0) {
               self.start1 = true;
               self.$dialog.loading.close();
               self.isFirstStepDis = false;
-              self.message.Toast(self, 'correct', result.msg, false);
             } else {
               // 发送失败
               self.$dialog.loading.close();
-              self.message.Toast(self, 'error', result.msg, false);
             }
           },
           function (error) {
             self.$dialog.loading.close();
-            self.message.Toast(self, 'error', '错误' + error, 'error', false);
+            self.$vux.toast.text(error, 'top');
           }
         ));
       },
       loginClick() {
         let self = this;
         if (this.verifyUtil.isNull(this.smsCode)) {
-          this.message.Toast(this, 'warn', '验证码不能为空, 请完善输入', false);
+          this.$vux.toast.text('验证码不能为空, 请完善输入', 'top');
           return
         }
-        debugger
         this.$Ice_UserService.userVerifyBySms(this.phone,this.smsCode, new IceCallback(
           function (result) {
             if (result.code === 0) {
@@ -88,12 +86,12 @@
               //   path: redirect
               // });
             } else {
-              self.message.Toast(self, 'error', result.msg, false);
+              self.$vux.toast.text(result.msg, 'top');
             }
           },
           function (error) {
             self.$dialog.loading.close();
-            self.message.Toast(self, 'error', '错误' + error, 'error', false);
+            self.$vux.toast.text(error, 'top');
           }
         ));
       },
@@ -118,7 +116,7 @@
               self.showActive(oid, compList);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败, 请尝试重新登录', false);
+              self.$vux.toast.text('企业信息获取失败, 请尝试重新登录', 'top');
             }
           )
         );
@@ -132,7 +130,7 @@
             this.setCompIdByRedis(oid, item.compid);
           },
           onCancel: () => {
-            this.message.Toast(this, 'warn', '未选择企业, 请尝试重新登录', false);
+            self.$vux.toast.text('未选择企业, 请尝试重新登录', 'top');
           }
         }).show()
       },
@@ -146,7 +144,7 @@
               self.queryCompByCid(compId);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
+              self.$vux.toast.text('企业信息获取失败, 请尝试重新登录', 'top');
             }
           )
         );

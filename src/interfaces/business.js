@@ -34,6 +34,9 @@ exports.install = function (Vue) {
     },
     getTransferPoint: (place,callback) => {
       queryIce(system.SystemServicePrx , 'SystemService', 'getTransferPoint',place, callback);
+    },
+    getProperties:(callback) => {
+      queryIce(system.SystemServicePrx , 'SystemService', 'getProperties', callback);
     }
   };
 

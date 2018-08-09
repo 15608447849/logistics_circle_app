@@ -11,18 +11,17 @@
         <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toPageIssue"></i>
       </div>
 
-
-
       <!--<span @click="toPageIssue">发单</span>-->
     </div>
     <div class="downfixed havedownfixed">
       <!--下拉刷新回调的提示-->
       <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        @load="onLoad"
-      >
+      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          @load="onLoad"
+        >
           <ul class="order_box">
             <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
               <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
@@ -33,7 +32,9 @@
               </div>
             </li>
           </ul>
-      </van-list>
+        </van-list>
+      </van-pull-refresh>
+
       <div v-show="isShowNoData" class="noDataBox">
         <img src="../../assets/images/small/nodate.png"/>
       </div>
@@ -51,7 +52,7 @@
         isShowNoData: false, // 无数据显示
         avatar: this.$app_store.state.avatar,// 头像
         infoList: [],
-        pageSize: '10', // 订单数
+        pageSize: '50', // 订单数
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
@@ -61,13 +62,14 @@
         pullingMessage: '',
         isShowMessage: false,
         loading: false,
-        finished: false
+        finished: false,
+        isLoading: false // 下拉刷新
       }
     },
     methods: {
       toPageIssue() {
         this.$router.push({
-          path: '/information/issue',
+          path: '/information/releaseOrders',
           query: {
             status: 0
           }
@@ -75,7 +77,7 @@
       },
       toPageIssueDetail(item) {
         this.$router.push({
-          path: '/information/issueDetails',
+          path: '/information/releaseDetails',
           query: {
             id: item.id,
             puberid: item.puberid,
@@ -84,7 +86,14 @@
         })
       },
       avatarClick() {
-        this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+        // 验证登录
+        if (this.$app_store.state.userId) {
+          this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+        }else {
+          this.$router.push({
+            path: '/login'
+          })
+        }
       },
       showTip() {
         let self = this;
@@ -135,7 +144,25 @@
       //     self.mescroll.endErr();
       //   });
       // },
-
+      // 下拉刷新
+      onRefresh() {
+        setTimeout(()=>{
+          let self = this;
+          this.requestInfoList(0, this.startTimeStr, function (result) {
+            self.isLoading = false;
+            if (result.length === 0) {
+              self.pullingMessage = '列表数据已是最新'
+            }else {
+              self.startTimeStr = result[0].time;
+              self.pullingMessage = result.length + '条新发布订单';
+              self.infoList = result.concat(self.infoList);
+            }
+            self.showTip();
+          }, function (error) {
+            self.isLoading = false;
+          });
+        },500);
+      },
       // 上推加载
       onLoad() {
         let self = this;
@@ -149,6 +176,7 @@
               self.isShowNoData = true;
             }
           }else {
+            self.startTimeStr = result[0].time;
             self.endTimeStr = result[result.length - 1].time;
             // 原有数组与新数组连接
             self.infoList = self.infoList.concat(result);
@@ -169,7 +197,7 @@
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
-                self.message.Toast(self, 'error', result.msg, false);
+                self.$vux.toast.text(result.msg, 'top');
                 return
               }
               successCallback(result.obj);

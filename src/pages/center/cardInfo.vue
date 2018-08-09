@@ -11,48 +11,46 @@
         <div class="alignCenter floatright"></div>
       </div>
 
-
-
     </div>
     <!--<div styel="height:100%;">-->
-      <div class="identity" v-show="isEditor">
-        <!--<div>-->
-        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-          <p>{{item.title}}</p>
-          <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
-            <i class="icon iconfont icon-guanbi" @click.stop="deletedImages(index)"></i>
-            <i></i><img :src="item.url" class="upcerPic">
-          </div>
-          <cube-upload
-            ref="upload"
-            v-show="item.url === ''"
-            style="position:relative;top:0rem;left:0rem;"
-            :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
-            @files-added="filesAdded"
-            @file-success="filesSuccess"
-            @file-error="filesError">
-          </cube-upload>
-          <!--<div class="updataCertificatesBox">-->
-          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
-          <!--</div>-->
+    <div class="identity" v-show="isEditor">
+      <!--<div>-->
+      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
+        <p>{{item.title}}</p>
+        <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
+          <i class="icon iconfont icon-guanbi" @click.stop="deletedImages(index)"></i>
+          <i></i><img :src="item.url" class="upcerPic">
         </div>
+        <cube-upload
+          ref="upload"
+          v-show="item.url === ''"
+          style="position:relative;top:0rem;left:0rem;"
+          :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
+          @files-added="filesAdded"
+          @file-success="filesSuccess"
+          @file-error="filesError">
+        </cube-upload>
+        <!--<div class="updataCertificatesBox">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+        <!--</div>-->
       </div>
+    </div>
 
 
-      <!--加了class名为displayNone为显示不可见-->
-      <div class="identity" v-show="!isEditor">
-        <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
-          <p>{{item.title}}</p>
-          <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
-            <i></i><img :src="item.url" class="upcerPic">
-          </div>
-          <!--<div class="updataCertificatesBox">-->
-          <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
-          <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
-          <!--</div>-->
+    <!--加了class名为displayNone为显示不可见-->
+    <div class="identity" v-show="!isEditor">
+      <div class="updataCertificates" v-for="(item,index) in uploadList" :key="index">
+        <p>{{item.title}}</p>
+        <div class="controlPicImg" v-show="item.url !== ''" @click="imagePreview(index)">
+          <i></i><img :src="item.url" class="upcerPic">
         </div>
+        <!--<div class="updataCertificatesBox">-->
+        <!--&lt;!&ndash;<i class="icon iconfont icon-gengduo"></i>&ndash;&gt;-->
+        <!--<img src="../../assets/images/small/jiahao.png" class="upcerPic">-->
+        <!--</div>-->
       </div>
+    </div>
   </div>
 </template>
 
@@ -60,6 +58,7 @@
   import {ImagePreview} from 'vant';
   import {uploadUrl} from "../../utils/config";
   import EXIF from '../../utils/exif-js'
+
   export default {
     data() {
       return {
@@ -107,13 +106,17 @@
       }
     },
     mounted() {
-      this.isEditor = this.$route.query.isEditor;
+      debugger
+      if(this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
+        this.isEditor = true;
+      }else {
+        this.isEditor = false;
+      }
       this.getImages(this.userId);
     },
     methods: {
       // 点击查看大图
       imagePreview(index) {
-        console.log(123123)
         let Images = [];
         this.uploadList.forEach((item, index, arr) => {
           if (item.url !== '') Images.push(item.url);
@@ -170,11 +173,60 @@
         this.$vux.toast.text(files.response.msg, 'top');
         if (files.response.code === 0) {
           let imgUrl = files.response.data.relativeAddr.split(".")[0].split('/');
-          setTimeout(()=>{
+          setTimeout(() => {
             this.$vux.toast.text('图片上传成功!', 'top');
             this.uploadList[imgUrl[imgUrl.length - 1]].url = files.response.data.nginx + files.response.data.relativeAddr + '?' + new Date().getSeconds();
-          },500);
+          }, 500);
+          this.loadImage(imgUrl[imgUrl.length - 1], files.response.data.nginx + "" + files.response.data.relativeAddr);
         }
+      },
+      loadImage(imgId, url) {
+        let imgPath = ['', '', '', '', '', '', '', ''];
+        imgPath[imgId] = url;
+        let self = this;
+        this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
+          new IceCallback(
+            function (result) {
+              self.updateComp();
+            },
+            function (error) {
+            }
+          )
+        );
+      },
+      updateComp() {		//保存信息
+        let self = this;
+        let compJson = new comp.CompInfo();
+        let companyInfo = JSON.parse(this.$app_store.state.compInfo);
+        compJson.compid = companyInfo.compid;
+        compJson.uoid = companyInfo.uoid;
+        compJson.fname = companyInfo.fname;
+        compJson.sname = companyInfo.sname;
+        compJson.ctype = companyInfo.ctype;
+        compJson.csale = companyInfo.csale;
+        compJson.contact = num2jlong(Number(companyInfo.contact));
+        compJson.postcode = companyInfo.postcode;
+        compJson.pho = num2jlong(Number(companyInfo.pho));
+        compJson.pht = num2jlong(Number(companyInfo.pht));
+        compJson.area = companyInfo.area.length > 0 ? companyInfo.area[companyInfo.area.length-1] : companyInfo.area;
+        compJson.address = companyInfo.address;
+        compJson.invtitle = companyInfo.invtitle;
+        compJson.invtype = companyInfo.invtype;
+        compJson.taxno = companyInfo.taxno;
+        compJson.phone = companyInfo.pho+ '-' + companyInfo.pht;
+        compJson.landline = companyInfo.pht;
+        compJson.openbank = companyInfo.openbank;
+        compJson.openaccount = companyInfo.openaccount.toString();
+        compJson.billarea = companyInfo.billarea.length > 0 ? companyInfo.billarea[companyInfo.billarea.length-1] : companyInfo.billarea;
+        compJson.billaddr = companyInfo.billaddr;
+        this.$Ice_InfoService.updateComp(compJson, new IceCallback(
+          function (result) {
+
+          },
+          function (error) {
+            this.$vux.toast.text(error, 'top');
+          }
+        ))
       },
       filesAdded(files) {
         let self = this;
@@ -199,13 +251,14 @@
           txt: '你上传的图片 > 2M '
         }).show()
 
-      },
-      imgPreview (file) {   //base64 格式
-        this.imgType=1;
-        this.img_loading=true;
+      }
+      ,
+      imgPreview(file) {   //base64 格式
+        this.imgType = 1;
+        this.img_loading = true;
         let self = this;
-        let imgContent={};
-        imgContent.name=file.name;
+        let imgContent = {};
+        imgContent.name = file.name;
         // 看支持不支持FileReader
         if (!file || !window.FileReader) return;
 
@@ -218,23 +271,23 @@
           reader.onloadend = function () {
             let IMG = new Image();
             IMG.src = this.result;
-            IMG.onload = function(){
+            IMG.onload = function () {
               let w = this.naturalWidth,
                 h = this.naturalHeight,
                 resizeW = 0,
                 resizeH = 0;
               //压缩设置
               let maxSize = {
-                width:1280,      //图片最大宽度
-                height:1280,     //图片最大高度
-                level:0.6       //图片保存质量
+                width: 1280,      //图片最大宽度
+                height: 1280,     //图片最大高度
+                level: 0.6       //图片保存质量
               };
               //计算缩放比例
-              if(w > maxSize.width || h > maxSize.height){
-                let multiple = Math.max(w / maxSize.width , h / maxSize.height);
+              if (w > maxSize.width || h > maxSize.height) {
+                let multiple = Math.max(w / maxSize.width, h / maxSize.height);
                 resizeW = w / multiple;
                 resizeH = h / multiple;
-              }else{
+              } else {
                 resizeW = w;
                 resizeH = h;
               }
@@ -262,11 +315,11 @@
                 cxt.drawImage(IMG, 0, 0, resizeW, resizeH)
               }
               //base64,最终输出的压缩文件
-              self.base64 = canvas.toDataURL('image/jpeg',maxSize.level);
-              self.num+=1;
-              self.imgType=0;
-              self.img_loading=false;
-              self.imgData.push(self.base64 )
+              self.base64 = canvas.toDataURL('image/jpeg', maxSize.level);
+              self.num += 1;
+              self.imgType = 0;
+              self.img_loading = false;
+              self.imgData.push(self.base64)
             }
           };
         }

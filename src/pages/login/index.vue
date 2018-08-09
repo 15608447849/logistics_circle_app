@@ -59,11 +59,11 @@
                 self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
                 self.getCompList(result.obj.oid);
               } else {
-                self.message.Toast(self, 'error', result.msg, false);
+                self.$vux.toast.text(result.msg, 'top');
               }
             },
             function (error) {
-              self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ))
         }
@@ -89,7 +89,7 @@
               self.showActive(oid, compList);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败, 请尝试重新登录', false);
+              self.$vux.toast.text('企业信息获取失败, 请尝试重新登录', 'top');
             }
           )
         );
@@ -103,7 +103,7 @@
             this.setCompIdByRedis(oid, item.compid);
           },
           onCancel: () => {
-            this.message.Toast(this, 'warn', '未选择企业, 请尝试重新登录', false);
+            this.$vux.toast.text('未选择企业, 请尝试重新登录', 'top');
           }
         }).show()
       },
@@ -117,12 +117,11 @@
               self.queryCompByCid(compId);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
+              self.$vux.toast.text('企业信息添加失败, 请稍后重试', 'top');
             }
           )
         );
       },
-
       /**
        * 根据企业码查询指定企业信息(不加路线)
        * @param compId
@@ -179,11 +178,11 @@
       // },
       validator() {
         if (this.verifyUtil.isNull(this.account)) {
-          this.message.Toast(this, 'warn', '账号不能为空', false);
+          self.$vux.toast.text('账号不能为空', 'top');
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          this.message.Toast(this, 'warn', '密码为空或长度小于6位,请完善输入', false);
+          self.$vux.toast.text('密码为空或长度小于6位,请完善输入', 'top');
           return false
         }
         return true

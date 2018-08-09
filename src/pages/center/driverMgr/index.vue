@@ -150,16 +150,16 @@
               function (result) {
                 if (result.code === 0) {
                   if (status === 0) {
-                    self.message.Toast(self, 'correct', '司机启用成功', false);
+                    self.$vux.toast.text('司机启用成功', 'top');
                   } else {
-                    self.message.Toast(self, 'correct', '司机停用成功', false);
+                    self.$vux.toast.text('司机停用成功', 'top');
                   }
                   // 更新item
                   self.drivers[index].status = status;
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })

@@ -84,7 +84,7 @@
      * 订单详细信息(信息大厅,我的圈子)
      **/
     order.OrderDetail = Slice.defineStruct(
-        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime, puberid, pubercompid)
+        function(time, ostatus, cost, wm, vlen, startAddr, destAddr, id, vt, goodsType, pubername, insureamt, codamt, payType, pustime, puetime, puberid, pubercompid, rank)
         {
             this.time = time !== undefined ? time : "";
             this.ostatus = ostatus !== undefined ? ostatus : "";
@@ -104,6 +104,7 @@
             this.puetime = puetime !== undefined ? puetime : "";
             this.puberid = puberid !== undefined ? puberid : "";
             this.pubercompid = pubercompid !== undefined ? pubercompid : "";
+            this.rank = rank !== undefined ? rank : "";
         },
         true,
         function(__os)
@@ -126,6 +127,7 @@
             __os.writeString(this.puetime);
             __os.writeString(this.puberid);
             __os.writeString(this.pubercompid);
+            __os.writeString(this.rank);
         },
         function(__is)
         {
@@ -147,8 +149,9 @@
             this.puetime = __is.readString();
             this.puberid = __is.readString();
             this.pubercompid = __is.readString();
+            this.rank = __is.readString();
         },
-        18, 
+        19, 
         false);
     Slice.defineSequence(order, "OrderSeqHelper", "order.OrderDetail", false);
 

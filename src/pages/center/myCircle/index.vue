@@ -171,7 +171,6 @@
         })
       },
       toComPInfo(item) {
-        debugger
         this.$router.push({
           path: '/userInfo',
           query: {

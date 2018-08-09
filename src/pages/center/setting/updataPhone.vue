@@ -157,7 +157,7 @@
         // },
         sendCode() {
           if (this.verifyUtil.isPhoneNum(this.newsPhone)) {
-            this.message.Toast(this, 'warn', '手机号格式错误, 请重新输入', false);
+            this.$vux.toast.text('手机号格式错误, 请重新输入', 'top');
             return false
           }
           this.$dialog.loading.open('验证码发送中...');
@@ -178,7 +178,7 @@
             },
             function (error) {
               self.$dialog.loading.close();
-              self.message.Toast(self, 'error', '错误' + error, 'error', false);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ));
         },

@@ -12,7 +12,6 @@
           <i class="icon iconfont icon-xiala xiala"></i>
         </button>
       </div>
-
     </div>
       <div class="amap-container">
         <el-amap-search-box class="search" :search-option="searchOption"
@@ -29,7 +28,6 @@
           <div class="order_priceMap"><span class="carWeightMap">{{item.address}}</span></div>
         </li>
       </ul>
-
   </div>
 </template>
 <script>
@@ -48,14 +46,12 @@
           city: '',
           citylimit: true
         },
-
         markers: [], // 搜索标记
         mapCenter: [], // 地图中心点
         geocoder: null,
         events: {
           init: (map) => {
-            this.map = map
-            this.map.setCity(this.$app_store.getters.receiptCity);
+
           }
         }
       }
@@ -64,7 +60,6 @@
       this.initData();
     },
     activated: function () {
-      console.log(123123)
       if (this.map !== null) {
         this.searchOption.city = this.$app_store.getters.receiptCity;
         this.map.setCity(this.searchOption.city);

@@ -127,7 +127,7 @@
                   }
                 },
                 function (error) {
-                  self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                  self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
                 }
               ))
             } else {
@@ -139,7 +139,7 @@
                   }
                 },
                 function (error) {
-                  self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                  self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
                 }
               ))
             }

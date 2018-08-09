@@ -135,12 +135,11 @@
                   self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
                 } else {
-                  debugger
                   self.$vux.toast.text('您的订单已被受理', 'top');
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -181,7 +180,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })

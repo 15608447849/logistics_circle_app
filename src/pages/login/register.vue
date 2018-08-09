@@ -7,8 +7,8 @@
         </router-link>
       </yd-navbar>
       <!--<div class="issueHeaderLog">-->
-        <!--<i @click="fallback" class="icon iconfont icon-btngoback back"></i>-->
-        <!--<span>新用户注册</span>-->
+      <!--<i @click="fallback" class="icon iconfont icon-btngoback back"></i>-->
+      <!--<span>新用户注册</span>-->
       <!--</div>-->
       <yd-cell-group v-show="firstStepBool">
         <yd-cell-item>
@@ -20,7 +20,10 @@
                        type="warning"
           ></yd-sendcode>
         </yd-cell-item>
-        <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="firstStep()" v-show="firstStepBool" :disabled='isFirstStepDis'>下一步</van-button>
+        <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;"
+                    size="large" type="primary" @click="firstStep()" v-show="firstStepBool" :disabled='isFirstStepDis'>
+          下一步
+        </van-button>
 
         <!--<cube-button v-show="firstStepBool" :light="true"  @click="firstStep()" :disabled='isFirstStepDis'>下一步</cube-button>-->
 
@@ -33,19 +36,19 @@
       </yd-cell-group>
 
 
-
       <yd-cell-group v-show="secondStepBool">
         <yd-cell-group>
           <yd-cell-item>
             <span slot="left">验证码：</span>
             <yd-input slot="right" v-model="verificationCode" placeholder="请输入短信验证码"></yd-input>
           </yd-cell-item>
-          <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="secondStep()" v-show="secondStepBool" :disabled='isFirstStepDis'>下一步</van-button>
+          <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;"
+                      size="large" type="primary" @click="secondStep()" v-show="secondStepBool"
+                      :disabled='isFirstStepDis'>下一步
+          </van-button>
         </yd-cell-group>
       </yd-cell-group>
       <!--<yd-cell-group v-show="thirdStepBool">-->
-
-
 
 
       <yd-cell-group v-show="thirdStepBool">
@@ -65,11 +68,15 @@
           <span slot="left" class="span">邀请码：</span>
           <yd-input slot="right" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填></yd-input>
 
-          <!--<yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
+          <!--<yd-button size=" large
+          " type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
           <!--:disabled='isFirstStepDis'>注 册-->
           <!--</yd-button>-->
         </yd-cell-item>
-        <van-button  style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" :disabled='isFirstStepDis'>注 册</van-button>
+        <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;"
+                    size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" :disabled='isFirstStepDis'>注
+          册
+        </van-button>
       </yd-cell-group>
 
       <!--<yd-button size="large" type="primary" @click.native="firstStep()" v-show="firstStepBool"-->
@@ -89,9 +96,11 @@
 </template>
 <script>
   import {
+    COMP_INFO, USER_ID,
     USER_INFO,
     USER_TOKEN
   } from '../../store/mutation-types'
+
   export default {
     data() {
       return {
@@ -113,20 +122,20 @@
     methods: {
       backBtnClick() {
         // 第一步
-        if(this.firstStepBool) {
+        if (this.firstStepBool) {
           this.$router.push({
             path: '/login'
           });
           return
         }
         // 第二步
-        if(this.secondStepBool) {
+        if (this.secondStepBool) {
           this.firstStepBool = true;
           this.secondStepBool = false;
           return
         }
         // 第三步
-        if(this.thirdStepBool) {
+        if (this.thirdStepBool) {
           this.secondStepBool = true;
           this.thirdStepBool = false;
           return
@@ -135,43 +144,42 @@
       // 验证账号输入格式
       registerValidator() {
         if (this.verifyUtil.isNull(this.account)) {
-          this.message.Toast(this,'warn','账号不能为空',false);
+          this.message.Toast(this, 'warn', '账号不能为空', false);
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          this.message.Toast(this,'warn','密码为空或长度小于6位, 请完善输入',false);
+          this.message.Toast(this, 'warn', '密码为空或长度小于6位, 请完善输入', false);
           return false
         }
         if (this.verifyUtil.isTwoPsd(this.password, this.rPassword)) {
-          this.message.Toast(this,'warn','密码两次输入不一致',false);
+          this.message.Toast(this, 'warn', '密码两次输入不一致', false);
           return false
         }
         return true
       },
       sendCode() {
         if (this.verifyUtil.isPhoneNum(this.phone)) {
-          this.message.Toast(this,'warn','手机号格式错误, 请重新输入',false);
+          this.message.Toast(this, 'warn', '手机号格式错误, 请重新输入', false);
           return false
         }
         this.$dialog.loading.open('验证码发送中...');
         let self = this;
-        let param = ['register',this.phone,'0'];
+        let param = ['register', this.phone, '0'];
         this.$Ice_UserService.requestPhoneSms(param, new IceCallback(
           function (result) {
+            self.$vux.toast.text(result.msg, 'top');
             if (result.code === 0) {
               self.start1 = true;
               self.$dialog.loading.close();
               self.isFirstStepDis = false;
-              self.message.Toast(self,'correct',result.msg,false);
             } else {
               // 发送失败
               self.$dialog.loading.close();
-              self.message.Toast(self,'error',result.msg,false);
             }
           },
           function (error) {
             self.$dialog.loading.close();
-            self.message.Toast(self,'error','错误' + error,'error',false);
+            self.$vux.toast.text(error, 'top');
           }
         ));
       },
@@ -188,11 +196,12 @@
               self.secondStepBool = false;
               self.thirdStepBool = true;
             } else {
-              self.message.Toast(self,'error',result.msg,false);
+
+              self.message.Toast(self, 'error', result.msg, false);
             }
           },
           function (error) {
-            self.message.Toast(self,'error','错误' + error ,false);
+            self.message.Toast(self, 'error', '错误' + error, false);
           }
         ));
       },
@@ -207,29 +216,105 @@
                 self.$Ice_UserService.userRegister(self.account, self.phone, self.password, self.invitationCode, self.verificationCode, new IceCallback(
                   function (result) {
                     if (result.code === 0) {
-                      self.$app_store.commit(USER_INFO, result.obj);
-                      let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
-                      // 跳转信息大厅
-                      self.$router.push({
-                        path: redirect
-                      });
+                      debugger
+                      self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
+                      self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
+                      self.getCompList(result.obj.oid);
                     } else {
-                      self.message.Toast(self,'error',result.msg ,false);
+                      self.message.Toast(self, 'error', result.msg, false);
                     }
                   },
                   function (error) {
-                    self.message.Toast(self,'error','注册失败' + error ,false);
+                    self.message.Toast(self, 'error', '注册失败' + error, false);
                   }
                 ))
               } else {
-                self.message.Toast(self,'error',result.msg ,false);
+                self.message.Toast(self, 'error', result.msg, false);
               }
             },
             function (error) {
-              self.message.Toast(self,'error','错误' + error  ,false);
+              self.message.Toast(self, 'error', '错误' + error, false);
             }
           ));
         }
+      },
+      getCompList(oid) {
+        debugger
+        let self = this;
+        let compList = [];
+        this.$Ice_CompService.selectCompUserByUid(oid,
+          new IceCallback(
+            function (result) {
+              debugger
+              // 登录时添加企业到缓存
+              if (result.obj.length === 1) {
+                self.setCompIdByRedis(oid, result.obj[0].compid);
+                return
+              }
+              // 弹出选择列表
+              result.obj.forEach((currentValue, index, arr) => {
+                compList.push({
+                  content: currentValue.fname,
+                  compid: currentValue.compid
+                });
+              });
+              self.showActive(oid, compList);
+            },
+            function (error) {
+              self.message.Toast(this, 'warn', '企业信息获取失败, 请尝试重新登录', false);
+            }
+          )
+        );
+      },
+      showActive(oid, dataList) {
+        this.$createActionSheet({
+          title: '请选择要登录的企业',
+          active: 0,
+          data: dataList,
+          onSelect: (item, index) => {
+            this.setCompIdByRedis(oid, item.compid);
+          },
+          onCancel: () => {
+            this.message.Toast(this, 'warn', '未选择企业, 请尝试重新登录', false);
+          }
+        }).show()
+      },
+      // 登录时添加企业到缓存
+      setCompIdByRedis(oid, compId) {
+        let self = this;
+        this.$Ice_CompService.addLoginCompByRedis(oid, compId,
+          new IceCallback(
+            function (result) {
+              debugger
+              // 获取企业信息
+              self.queryCompByCid(compId);
+            },
+            function (error) {
+              self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
+            }
+          )
+        );
+      },
+      /**
+       * 根据企业码查询指定企业信息(不加路线)
+       * @param compId
+       */
+      queryCompByCid(compId) {
+        let self = this;
+        debugger
+        this.$Ice_CompService.querygetCompByCid(compId,
+          new IceCallback(
+            function (result) {
+              let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+              self.$router.push({
+                path: redirect
+              })
+            },
+            function (error) {
+              self.$vux.toast.text('企业信息获取失败!', 'top');
+            }
+          )
+        );
       }
     }
   }

@@ -103,6 +103,7 @@
       }
     },
     mounted() {
+      debugger
       this.compInfo = this.$route.params;
       this.getBasicInfo();
     },

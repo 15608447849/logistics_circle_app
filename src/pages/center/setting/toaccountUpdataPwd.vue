@@ -51,7 +51,6 @@
       }
     },
     mounted() {
-      debugger
       this.userInfo = JSON.parse(this.$app_store.state.userInfo);//获取用户信息
       this.uPhone = this.userInfo.uphone;
       this.fname = this.userInfo.uname;

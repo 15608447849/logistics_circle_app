@@ -96,8 +96,8 @@
            <div class="lineHeight10"></div>
          </div>
        </div>
-       <div class="RobbingOrderWhite">
-         <button class="robOrderBtn" v-if="detailInfo.ostatus === 0" @click="setRobbingOrder">抢单</button>
+       <div class="RobbingOrderWhite" v-if="detailInfo.ostatus === 0">
+         <button class="robOrderBtn" @click="setRobbingOrder">抢单</button>
        </div>
      </div>
 
@@ -122,16 +122,18 @@
       },
       setRobbingOrder() {
         let self = this;
-        this.message.Toast(this,'loading','正在努力抢单中...',true);
-        this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,
+        // this.message.Toast(this,'loading','正在努力抢单中...',true);
+        this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,this.detailInfo.pubercompid,
           new IceCallback(
             function (result) {
-              self.message.Toast(self,'correct','抢单成功',false);
-              // 刷新订单数据
-              self.getOrderDetailInfo()
+              self.$vux.toast.text(result.msg, 'top');
+              if(result.code === 0) {
+                // 刷新订单数据
+                self.getOrderDetailInfo();
+              }
             },
             function (error) {
-              self.message.Toast(this,'loading',error,true);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试!', 'top');
               // 刷新订单数据
               self.getOrderDetailInfo()
             }
@@ -147,14 +149,13 @@
           new IceCallback(
             function (result) {
               if (result.code !== 0) {
-                self.message.Toast(self,'error',result.msg,false);
-
+                self.$vux.toast.text(result.msg, 'top');
               }
               self.detailInfo = result.obj;
               console.log(self.detailInfo)
             },
             function (error) {
-              self.message.Toast(self,'error','订单详情获取失败, 请稍后重试',false);
+              self.$vux.toast.text('订单详情获取失败, 请稍后重试', 'top');
             }
           )
         );

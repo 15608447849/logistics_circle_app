@@ -42,5 +42,9 @@ module.exports = {
     /*** 修改司机业务员状态(type 人员对象：1,添加司机;132,添加业务员; cuid 当前登录用户 ,uid需要修改的用户,status 修改的状态 （0 启用 32 停用）) */
     updateStaffstatus:(cuid,uid,status,type,callback) => {
         queryIce(comp.CompServicePrx, 'CompService', 'updateStaffstatus',cuid,uid,status,type,callback);
+    },
+    /*** 反馈上传证件图片的相对路径 */
+    feedbackCredentRelpath:(oid,imgPath,callback) => {
+      queryIce(comp.CompServicePrx, 'CompService', 'feedbackCredentRelpath',oid,imgPath,callback);
     }
 };

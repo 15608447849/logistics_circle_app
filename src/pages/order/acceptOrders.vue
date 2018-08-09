@@ -158,6 +158,7 @@
     },
     methods: {
       statusToChinese(status) {
+        debugger
         let cont = '';
         switch (status) {
           case 1:

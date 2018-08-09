@@ -86,7 +86,7 @@
               // 关闭上推加载
               self.finished = true;
               // 显示列表无数据
-              self.message.Toast(self, 'error', result.msg, false);
+              self.$vux.toast.text(result.msg, 'top');
               return
             }
             successCallback(result.obj)
@@ -115,7 +115,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', result.msg, false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })

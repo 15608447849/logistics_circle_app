@@ -15,7 +15,7 @@ import REPWD from '@/pages/login/retrievePwd'// 找回密码
 import UPDATAPWD from '@/pages/login/updatapwd' // 修改密码
 import VERIFICATION from '@/pages/login/verification' // 手机验证码验证
 import CONFIRMPWD from '@/pages/login/confirmpwd' // 修改密码确认密码
-import ISSUEDETAILS from '@/pages/information/issueDetails'// 信息大厅订单详情模块
+import RELEASE_DETAILS from '@/pages/information/releaseDetails'// 信息大厅订单详情模块
 
 
 // 初始页
@@ -43,7 +43,7 @@ import ORDER from '@/pages/order/index'
 // 搜索页
 import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
-import ISSUE from '@/pages/information/issue'
+import RELEASE_ORDERS from '@/pages/information/releaseOrders'
 
 // 订单 发布/接受 详情
 import ORDER_DETAIL from '@/pages/order/orderDetail.vue'
@@ -220,15 +220,16 @@ const vueRouter = new Router({
       component: SEARCH
     },
     {
-      path: '/information/issue',
-      component: ISSUE,
+      path: '/information/releaseOrders',
+      component: RELEASE_ORDERS,
       meta: {
         keepAlive: true,
+        requireAuth: true
       }
     },
     {
-      path: '/information/issueDetails',
-      component: ISSUEDETAILS,
+      path: '/information/releaseDetails',
+      component: RELEASE_DETAILS,
       meta: {
         keepAlive: true,
       }

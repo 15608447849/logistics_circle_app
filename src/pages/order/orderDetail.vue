@@ -193,15 +193,15 @@
         <!--'6':'待评价',-->
         <!--'7':'抢单成功',-->
         <!--'8':'已完成'-->
-        <div class="operationA" v-show="type === 0">
+        <div class="operationA" v-show="type === 1">
           <!--接受-->
           <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="cancelOrder()">取消抢单</a>
           <!--取货照片-->
           <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
           <!--取货码-->
-          <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
+          <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixsix"  @click.stop="toCompInfo()">查看调度</a>
           <!--查看行程-->
-          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
+          <a v-show="detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--签收照片-->
           <a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
           <!--评价-->
@@ -259,8 +259,6 @@
 <script>
   import {alertContent} from "../../utils/enum";
 
-
-
   export default {
     data() {
       return {
@@ -293,14 +291,11 @@
       // 获取订单详情
       getOrderInfo() {
         let self = this;
-        self.$Ice_myOrderService.getOrderInfo(self.order.orderno, self.userId,0, new IceCallback(
+        self.$Ice_myOrderService.getOrderInfo(self.order.orderno, self.userId,self.type, new IceCallback(
           function (result) {
             if (result.code === 0) {
               self.detailInfo = result.obj.orderifo;
               console.log(self.detailInfo)
-              // // 重新发布
-              // self.releaseList[index].ostatus = '20';
-              // self.$vux.toast.text('订单取消发布成功 !', 'top');
             } else {
               self.$vux.toast.text(result.msg, 'top');
             }
@@ -318,14 +313,13 @@
             self.$Ice_myOrderService.conReceipt(self.order.orderno, self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
-                  self.releaseList[index].tstatus = 6;
                   self.$vux.toast.text(result.msg, 'top');
                 } else {
                   self.$vux.toast.text(result.msg, 'top');
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -348,36 +342,14 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
           .catch(() => {
 
           })
-      },
-      // 订单取消发布
-      cancelOrder() {
-        let self = this;
-        this.message.showAlert(this, alertContent.CANCEL_ORDER)
-          .then(() => {
-            self.$Ice_myOrderService.cancelOrder(self.order.orderno, self.userId, new IceCallback(
-              function (result) {
-                if (result.code === 0) {
-                  self.detailInfo.tstatus = 20;
-                  self.$vux.toast.text('订单取消发布成功 !', 'top');
-                } else {
-                  self.$vux.toast.text(result.msg, 'top');
-                }
-              },
-              function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
-              }
-            ))
-          })
-          .catch(() => {
 
-          })
       },
       // 刷新订单
       refreshOrder() {
@@ -393,7 +365,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -416,7 +388,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -439,7 +411,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -472,10 +444,10 @@
         let self = this;
         this.message.showAlert(this, alertContent.CANCEL_ORDER)
           .then(() => {
-            self.$Ice_myOrderService.cancelRobbing(this.detailInfo.orderno,self.userId, new IceCallback(
+            self.$Ice_myOrderService.cancelOrder(this.detailInfo.orderno,self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
-                  self.releaseList.splice(index,1);
+                  self.detailInfo.tstatus = 20;
                   self.$vux.toast.text('订单取消成功 !', 'top');
                 } else {
                   self.$vux.toast.text(result.msg, 'top');

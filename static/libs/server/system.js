@@ -78,7 +78,9 @@
         "getAllDict": [, , , , , [7], , , , , ],
         "getChineseAllAreas": [, , , , , [7], , , , , ],
         "getChineseAllAreasByPc": [, , , , , [7], , , , , ],
-        "getTransferPoint": [, , , , , [7], [[3]], , , , ]
+        "getTransferPoint": [, , , , , [7], [[3]], , , , ],
+        "getCityAreaAll": [, , , , , [7], , , , , ],
+        "getProperties": [, , , , , [7], , , , , ]
     });
     exports.system = system;
 }
