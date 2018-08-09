@@ -13,7 +13,7 @@
       <!--<span @click="toPageIssue">发单</span>-->
     </div>
     <!--下拉刷新回调的提示-->
-    <div class="downfixed havedownfixed">
+
       <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <van-list
@@ -35,7 +35,7 @@
       <div v-show="isShowNoData" class="noDataBox">
         <img src="../../assets/images/small/nodate.png"/>
       </div>
-    </div>
+
     <!--<div class="Baseline">-->
       <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;没有更多的数据了-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
     <!--</div>-->

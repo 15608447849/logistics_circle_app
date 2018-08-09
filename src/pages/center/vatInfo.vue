@@ -53,6 +53,7 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
+      console.log(this.compInfo);
     },
     methods: {
       fallback() {

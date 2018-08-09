@@ -990,7 +990,7 @@ input[type="radio"] {
   top:0rem;
   left:0rem;
   width:7.5rem;
-  height:100%;
+  height:100vh;
   padding-top:1.2rem;
   background:url("../../assets/images/small/backgrond_login.png") no-repeat;
 }
@@ -1161,7 +1161,7 @@ input[type="radio"] {
    line-height: .24rem;
    letter-spacing: 0px;
    color: #2b73cc;
-   margin-bottom:3.5rem;
+   margin-bottom:23vh;
  }
 .forgetPwd{
   display:flex;
@@ -1410,6 +1410,7 @@ input[type="radio"] {
   top:0rem;
   width:7.5rem;
   height:.8rem;
+  z-index:1;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
@@ -1537,7 +1538,8 @@ input[type="radio"] {
 }
 .order_box{
   width:7.5rem;
-  height:90vh;
+  /*height:90vh;*/
+  margin-top:.8rem;
   margin-bottom:1rem;
   background:#ffffff;
   overflow:auto;
@@ -2976,12 +2978,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
    font-size: .24rem;
    text-align: center;
    overflow: auto;
-   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
-   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
-   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
-   background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
    color: white;
-   -webkit-transition: top 300ms;
+  z-index:100;
+  background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
+  background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
+ -webkit-transition: top 300ms;
    transition: top 300ms;
  }
 /*我的发布详情********************************************************************************************/
