@@ -359,7 +359,7 @@
         "updateComp": [, , , , , [7], [[comp.CompInfo]], , , , ],
         "queryCompByBasicUid": [, , , , , [7], [[7]], , , , ],
         "insertCompUser": [, , , , , [7], [[3], [4]], , , , ],
-        "selectCompUserByUid": [, , , , , [7], [[3]], , , , ],
+        "selectCompUserByUid": [, , , , , [7], [[3], ["cstruct.intSeqHelper"]], , , , ],
         "addLoginCompByRedis": [, , , , , [7], [[3], [3]], , , , ],
         "selectStaffInfo": [, , , , , [7], [[7], [7], [7], [3], [3], [cstruct.Page]], [[cstruct.Page]], , , ],
         "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],

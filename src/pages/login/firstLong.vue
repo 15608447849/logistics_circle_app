@@ -73,13 +73,24 @@
           this.$vux.toast.text('验证码不能为空, 请完善输入', 'top');
           return
         }
+        let compList = [];
         this.$Ice_UserService.userVerifyBySms(this.phone,this.smsCode, new IceCallback(
           function (result) {
             if (result.code === 0) {
               self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
               self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
-              self.getCompList(result.obj.oid);
-
+              // self.getCompList(result.obj.oid);
+              if (result.obj.comps.length === 1) {
+                self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
+                return
+              }
+              result.obj.comps.forEach((currentValue, index, arr) => {
+                compList.push({
+                  content: currentValue.fname,
+                  compid: currentValue.compid
+                });
+              });
+              self.showActive(result.obj.oid, compList);
               // let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
               // // 跳转信息大厅
               // self.$router.push({
@@ -156,7 +167,6 @@
        */
       queryCompByCid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
@@ -167,7 +177,6 @@
               })
             },
             function (error) {
-              debugger
               self.$vux.toast.text('企业信息获取失败!', 'top');
             }
           )

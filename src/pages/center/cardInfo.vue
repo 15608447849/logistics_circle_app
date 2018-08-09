@@ -106,7 +106,6 @@
       }
     },
     mounted() {
-      debugger
       if(this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
         this.isEditor = true;
       }else {
