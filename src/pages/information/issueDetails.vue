@@ -57,7 +57,7 @@
              <span class="marginright3">{{detailInfo.dmdictc}}</span>
              <span class="marginright3"></span>
            </li>
-           <li class="issueDetailsLiText ">
+           <li class="issueDetailsLiText" v-if="detailInfo.easdatetime === ''">
              <span class="arrivalTime">到货时间</span>
              <span>{{detailInfo.easdatetime}}</span>
              <span>至</span>
@@ -73,23 +73,23 @@
          <div class="floatleft ulWidth100">
            <ul class="ulWidth100">
              <li class="orderinfo">
-               <span class="marginright95">订单号</span>
-               <span>{{detailInfo.orderno}}</span>
+               <span class="issueTextOrder">订单号</span>
+               <span class="Consignee">{{detailInfo.orderno}}</span>
              </li>
              <li class="orderinfo">
-               <span class="marginright7">发单时间</span>
-               <span>{{detailInfo.pubdatetime}}</span>
+               <span class="issueTextOrder">发单时间</span>
+               <span class="Consignee">{{detailInfo.pubdatetime}}</span>
              </li>
              <li class="orderinfo"  v-if="detailInfo.revidatetime !== ''">
-               <span class="marginright7">抢单时间</span>
+               <span class="issueTextOrder">抢单时间</span>
                <span>{{detailInfo.revidatetime}}</span>
              </li>
              <li class="orderinfo"  v-if="detailInfo.pusdatetime !== ''">
-               <span class="marginright7">取货时间</span>
+               <span class="issueTextOrder">取货时间</span>
                <span>{{detailInfo.pusdatetime}}</span>
              </li>
              <li class="orderinfo"  v-if="detailInfo.arridatetime !== ''">
-               <span class="marginright7">签收时间</span>
+               <span class="issueTextOrder">签收时间</span>
                <span>{{detailInfo.arridatetime}}</span>
              </li>
            </ul>

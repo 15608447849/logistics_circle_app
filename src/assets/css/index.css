@@ -184,26 +184,35 @@ a {
   display:inline-block;
   width:.6rem;
   height:.6rem;
+  border:1px solid #31b8f5;
+  border-radius: 50%;
+  /*background-image:url('../../assets/images/small/moren.png');*/
+  /*background-size:.6rem .6rem;*/
+  /*background-repeat: no-repeat;*/
+}
+.loginPictureDefault{
   position:relative;
   top:0rem;
   left:0rem;
-  border:1px solid transparent;
-  border-radius: 50%;
-}
-img.loginPicture:after{
-  content: '';
-  background-image:url('../../assets/images/small/moren.png');
-  background-size:.6rem .6rem;
-  display: inline-block;
   width:.6rem;
   height:.6rem;
   border:1px solid transparent;
   border-radius: 50%;
-  position: absolute;
-  z-index: 2;
-  top: 0rem;
-  left: 0rem;
 }
+/*img.loginPicture:after{*/
+  /*content: '';*/
+  /*background-image:url('../../assets/images/small/moren.png');*/
+  /*background-size:.6rem .6rem;*/
+  /*display: inline-block;*/
+  /*width:.6rem;*/
+  /*height:.6rem;*/
+  /*border:1px solid transparent;*/
+  /*border-radius: 50%;*/
+  /*position: absolute;*/
+  /*z-index: 2;*/
+  /*top: 0rem;*/
+  /*left: 0rem;*/
+/*}*/
 .loginPicture9{
   display:inline-block;
   width:.94rem;
@@ -513,7 +522,7 @@ img.loginPicture:after{
   display:block;
   width:3rem;
   height:5.4rem;
-  margin:.5rem 0rem .6rem .45rem;
+  margin:.5rem 0rem .8rem .45rem;
 }
 .personalList .personalText{
   width: 1.1rem;
@@ -1545,9 +1554,10 @@ input[type="radio"] {
 }
 .order_boxIndex{
   width:7.5rem;
-  height:50vh;
+  height:56%;
   background:#ffffff;
   overflow: auto;
+  margin-bottom:1rem;
 }
 .order_list{
   display:block;
@@ -1575,7 +1585,7 @@ input[type="radio"] {
 .order_time .site{
   float:left;
   font-family: PingFang-SC-Regular;
-  font-size: 14px;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: 24px;
@@ -1642,10 +1652,10 @@ input[type="radio"] {
 }
 .rderCost{
   font-family: PingFang-SC-Regular;
-  font-size: 12px;
+  font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: 24px;
+  line-height: .24rem;
   letter-spacing: 0px;
   color: #666666;
 }
@@ -1783,7 +1793,18 @@ input[type="radio"] {
   width:1.2rem;
   margin-right:.5rem;
   font-family: PingFang-SC-Regular;
-  font-size: 12px;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.issueTextOrder{
+  display:inline-block;
+  width:1.2rem;
+  margin-right:.42rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -1851,14 +1872,14 @@ input[type="radio"] {
 }
 .textRed{
   font-family: PingFang-SC-Regular;
-  font-size: .12rem;
+  font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
   color: #ff5047;
 }
 .size10{
-  font-size:.2rem;
+  font-size:.24rem;
 }
 .size14{
   font-size:.28rem;
@@ -1924,7 +1945,7 @@ input[type="radio"] {
   height:.69rem;
 }
 .textarea{
-  width:5.55rem;
+  width:5.9rem;
   height:.87rem;
   vertical-align: middle;
   border:none;
@@ -1968,7 +1989,7 @@ input[type="radio"] {
   z-index: 1;
 }
 .liNumThreeCompanySpan{
-  margin-left:.22rem;
+  margin-left:.18rem;
 }
 .liNumThreeCompany .inputLong{
   display:inline-block;
@@ -1996,7 +2017,7 @@ input[type="radio"] {
 }
 .liNumThreeCompany .inputNumOneC input{
   display:inline-block;
-  width:5.9rem;
+  width:6.05rem;
   text-align: right;
 }
 .pingfang3{
@@ -2074,7 +2095,7 @@ input[type="radio"] {
   padding-right:.05rem;
 }
 .inputShort input{
-  width:1.5rem;
+  width:1.47rem;
   text-align: right;
 }
 .inputShorter{
@@ -2124,8 +2145,9 @@ input[type="radio"] {
 /*text-align:right;*/
 /*}*/
 .noStart{
-  font-size:.12rem;
-  margin-left:.23rem;
+
+  font-size:.24rem;
+  margin-left:.17rem;
 }
 /*.inputLong span{*/
 /*display:inline-block;*/
@@ -2204,7 +2226,7 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:.7rem;
-  padding:.1rem .1rem .05rem .25rem;
+  padding:.1rem .25rem .05rem .25rem;
   background:#f5f5f5;
   margin-bottom:1rem;
   font-family: PingFang-SC-Regular;
@@ -2316,16 +2338,18 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   z-index:100;
 }
 .order_listMap{
-  display:block;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
   width:7.5rem;
-  height:1.2rem;
+  height:2.4rem;
   border-bottom:1px solid #e6e6e6;
   background:#ffffff;
 }
 .order_timeMap , .order_priceMap{
   display:block;
   width:7.5rem;
-  height:.65rem;
+  height:auto;
   padding:0px .1rem 0px .1rem;
 }
 .order_timeMap span, .order_priceMap span{
@@ -2343,12 +2367,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .carWeightMap{
   float:left;
-  margin-right:5px;
+  margin-right:.1rem;
   font-family: PingFang-SC-Regular;
-  font-size: 12px;
+  font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: 24px;
+  line-height: .24rem;
   letter-spacing: 0px;
   color: #999999;
 }
@@ -2536,7 +2560,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  height:75vh;
+  height:89vh;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   margin-bottom:.24rem;

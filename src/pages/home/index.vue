@@ -3,7 +3,10 @@
     <!--页头-->
     <div class="issueHeaderNav">
       <div class="width20">
-        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft">
+        <!--<img src="../../assets/images/small/快速发单@2x.png" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">-->
+        <!--<img src="../../assets/images/small/已抢订单@2x.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">-->
+        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">
+        <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">
       </div>
       <div class="width60">
         <span>首页</span>
@@ -78,7 +81,6 @@
         </div>
         <div class="seeMore" v-show="isShowMore" @click="skipInformation">查看更多</div>
       </ul>
-      <div class="bottomMargin"></div>
   </div>
 </template>
 <script>
@@ -94,7 +96,9 @@
       return {
         infoList: [],
         pageSize: '10', // 订单数
+        // avatar: '../../assets/images/small/bussiness-man.png',
         avatar: this.$app_store.state.avatar,// 头像
+        // avatarDefault: "../../assets/images/small/moren.png",
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识

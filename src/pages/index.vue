@@ -16,6 +16,7 @@
         <div class="centerPic">
           <div class="portrait">
             <img :src="avatar" alt="">
+
             <span class="logisticsMing">{{compName}}</span>
           </div>
           <ul class="startBox">

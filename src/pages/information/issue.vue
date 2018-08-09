@@ -17,7 +17,7 @@
     <ul class="liNumThree margintop80">
       <li class="inputNumOne needBorder">
         <span class="waybillNum">运单号</span>
-        <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号">
+        <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号" style="width:6.25rem;">
       </li>
       <li class="tworow needBorder" @click="toPageGeo(2)">
         <span class="textRed">*</span>
@@ -112,7 +112,7 @@
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span class="marginright13">收货人</span>
-        <input type="text" v-model="OrderDetail.consignee" placeholder="请输入联系人">
+        <input type="text" v-model="OrderDetail.consignee" placeholder="请输入联系人" style="width:6.2rem;">
       </li>
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
