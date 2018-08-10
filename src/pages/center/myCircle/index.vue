@@ -73,11 +73,6 @@
             <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
             <a class="pullBlack" @click.stop="removeClick(item, index, 64)">移 出</a>
           </li>
-
-
-
-
-
         </ul>
         <div class="friendNum" v-show="!selectOneTab">共{{SchedulingCircleNum}}位朋友</div>
 

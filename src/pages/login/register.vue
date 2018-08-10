@@ -238,7 +238,6 @@
         }
       },
       getCompList(oid) {
-        debugger
         let self = this;
         let compList = [];
         this.$Ice_CompService.selectCompUserByUid(oid,
