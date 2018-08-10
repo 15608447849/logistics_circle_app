@@ -8,7 +8,7 @@
         <span>查找好友</span>
       </div>
       <div class="width20">
-        <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toaddFriend"></i>
+
       </div>
     </div>
     <div class="searchFri">

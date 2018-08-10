@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="circleListBox">
+
         <!--<div class="circleType">-->
         <!--<div class="SourceGoods marginLeft21" @click="tabClick" :class="{'activecircle': selectOneTab}">货源圈</div>-->
         <!--<div class="dispatch  marginRight21" @click="tabClick"  :class="{'activecircle': !selectOneTab}">调度圈</div>-->
@@ -34,15 +34,37 @@
           <tab-item @on-item-click="tabClick" selected>货源圈</tab-item>
           <tab-item @on-item-click="tabClick">调度圈</tab-item>
         </tab>
+
+
+
         <ul class="circleList" v-show="selectOneTab">
           <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in sCircleList" :key="index">
-            <img src="" alt="" class="circlePic">
-            <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
-              class="companyPhone floatright">{{item.contact}}</span></div>
-            <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+            <img :src="item.logoPath" alt="" class="circlePic">
+            <div class="companyNamePhone">
+              <span class="companyName floatleft">{{item.fname}}</span>
+              <span class="companyPhone floatright">{{item.contact}}</span></div>
+            <div class="lineName">
+              <span class="lineInfo">线路：{{item.disRoute}}</span>
+            </div>
             <a class="pullBlack" @click.stop="removeClick(item, index, 128)">移 出</a>
           </li>
+
+
+          <li class="needBorder">
+            <img src="" alt="" class="circlePic">
+            <div class="companyNamePhone">
+              <span class="companyName floatleft"></span>
+              <span class="companyPhone floatright"></span></div>
+            <div class="lineName">
+              <span class="lineInfo"></span>
+            </div>
+            <a class="pullBlack">移 出</a>
+          </li>
+
         </ul>
+        <div class="friendNum" v-show="selectOneTab">共{{sCircleNum}}位朋友</div>
+
+
         <ul class="circleList" v-show="!selectOneTab">
           <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in SchedulingCircle" :key="index">
             <img src="" alt="" class="circlePic">
@@ -51,10 +73,14 @@
             <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
             <a class="pullBlack" @click.stop="removeClick(item, index, 64)">移 出</a>
           </li>
+
+
+
+
+
         </ul>
-      </div>
-      <div class="friendNum" v-show="selectOneTab">共{{sCircleNum}}位朋友</div>
-      <div class="friendNum" v-show="!selectOneTab">共{{SchedulingCircleNum}}位朋友</div>
+        <div class="friendNum" v-show="!selectOneTab">共{{SchedulingCircleNum}}位朋友</div>
+
   </div>
 </template>
 
@@ -99,7 +125,9 @@
             if (result.code === 0) {
               if (circleT === 128) {
                 self.sCircleList = result.obj.circleSeq;
+                console.log(self.sCircleList);
                 self.sCircleNum = result.obj.totalItems;
+                console.log(self.sCircleNum);
                 self.sCircleList.forEach((item, index, arr) => {
                   let disRoute = '';
                   if (item.routes !== null && item.routes.length > 0) {

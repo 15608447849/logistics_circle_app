@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
@@ -10,11 +10,8 @@
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
-
-
-
     </div>
-    <div class="downfixed havedownfixed">
+
       <div class="releaseStateBox">
         <div class="releaseAndCollect" v-show="type === 0">
           <div v-show="detailInfo.tstatus === 0">发布成功</div>
@@ -121,7 +118,7 @@
             <!--<span class="marginright3">送货-不上楼</span>-->
             <!--<span class="marginright3">原件返回</span>-->
           </li>
-          <li class="issueDetailsLiTextLi">
+          <li class="issueDetailsLiTextLi" v-show = "isDisplayTime">
             <span class="arrivalTime">到货时间</span>
             <span>{{detailInfo.easdatetime}}</span>
             <span>至</span>
@@ -224,7 +221,7 @@
       <!--<a @click="toseeDispatch">查看调度</a>-->
       <!--</div>-->
       <!--</a>-->
-    </div>
+
 
     <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
       <div class="closePayment">
@@ -262,6 +259,7 @@
   export default {
     data() {
       return {
+        isDisplayTime:false,
         type: 0, // 0 发布 1 接受
         show2: false,
         detailInfo: {},
@@ -295,6 +293,9 @@
           function (result) {
             if (result.code === 0) {
               self.detailInfo = result.obj.orderifo;
+              if(self.detailInfo.eaedatetime == '' || self.detailInfo.easdatetime == ''){
+                self.isDisplayTime == true
+              }
               console.log(self.detailInfo)
             } else {
               self.$vux.toast.text(result.msg, 'top');

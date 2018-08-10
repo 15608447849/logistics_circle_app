@@ -23,7 +23,7 @@
                 :key="index" @click.stop="tabItemClick(item)">{{item.name}}</span>
         </div>
 
-        <van-list style="margin-top:1.7rem;"
+        <van-list
           v-model="loading"
           :finished="finished"
           @load="onLoad"

@@ -22,6 +22,7 @@
           </div>
         </div>
         <van-list
+          style="background:#f5f5f5;"
           v-model="loading"
           :finished="finished"
           @load="onLoad"

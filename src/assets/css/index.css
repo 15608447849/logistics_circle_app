@@ -112,6 +112,15 @@ a {
 /*color: blue;*/
 /*}*/
 /*首页*/
+.shangmian{
+  position:absolute;
+  top:.8rem;
+  left:0rem;
+  width:7.5rem;
+  height:29vh;
+  z-index: 9999;
+  overflow: hidden;
+}
 .searchBox{
   display:flex;
   justify-content:center;
@@ -1557,8 +1566,11 @@ input[type="radio"] {
   margin:0 auto 0 auto;
 }
 .order_boxIndex{
+  position:absolute;
+  top:5rem;
+  left:0rem;
   width:7.5rem;
-  height:56%;
+  height:63vh;
   background:#ffffff;
   overflow: auto;
   margin-bottom:1rem;
@@ -1710,7 +1722,9 @@ input[type="radio"] {
   border-radius: 50%;
 }
 .Consignee{
-  margin-right:.9rem;
+  display:inline-block;
+  width:.95rem;
+  margin-right:.69rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1742,7 +1756,7 @@ input[type="radio"] {
   margin-right:10px;
 }
 .margin_bottom140{
-  margin-bottom:140px;
+  margin-bottom:2.5rem;
 }
 .orderinfo{
   display:block;
@@ -1824,10 +1838,10 @@ input[type="radio"] {
   margin-right:.19rem;
 }
 .marginright7{
-  margin-right:.55rem;
+  margin-right:.72rem;
 }
 .marginright95{
-  margin-right:.8rem;
+  margin-right:.95rem;
 }
 .textMargin-right10{
   margin-right:10px;
@@ -2386,23 +2400,24 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 /*司机管理模块****************************************************************************************************/
 .driverBox{
-  display:block;
-  padding-top:.12rem;
+  display:block;;
   width:7.5rem;
-  height:auto;
+  height:.88rem;
+  margin-bottom:.2rem;
   background:#ffffff;
 }
 .searchDriverBox{
   display:block;
   width:7.5rem;
   height:.88rem;
+  padding-top:.12rem;
   background:#ffffff;
 }
 .searchDriverBox .searchDriver{
   display:block;
-  margin:0 auto;
   width: 7.08rem;
   height: .64rem;
+  margin:0rem auto 0rem auto;
   background: #f2f2f2;
   border:1px solid #f2f2f2;
   border-radius: 4px;
@@ -2564,7 +2579,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  height:89vh;
+  height:73vh;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   margin-bottom:.24rem;
@@ -2582,9 +2597,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display:inline-block;
   width:.9rem;
   height:.9rem;
-  margin-top:.3rem;
-  margin-right:.2rem;
   vertical-align: middle;
+  margin-top:.28rem;
 }
 .pullBlack{
   display:inline-block;
@@ -2609,6 +2623,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display:inline-block;
   width:4rem;
   height:auto;
+  margin-left:.08rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
@@ -2617,6 +2632,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #333333;
 }
 .companyNamePhone .companyName{
+  display:inline-block;
+  height:.4rem;
+  width:2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height:.4rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
@@ -2624,12 +2646,19 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   letter-spacing: 0px;
   color: #333333;
 }
+.companyPhone{
+  display:inline-block;
+  height:.4rem;
+  line-height:.4rem;
+}
  .lineInfo{
    display:block;
-   width:4rem;
+   width:3.8rem;
+   height:.3rem;
+   overflow: hidden;
    white-space: nowrap;
    text-overflow: ellipsis;
-   -o-text-overflow: ellipsis;
+   line-height:.3rem;
    font-family: PingFang-SC-Regular;
    font-size: .2rem;
    font-weight: normal;
@@ -2649,12 +2678,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
    display:block;
    width:7.5rem;
    height:.5rem;
+   margin-top:.3rem;
    text-align: center;
    font-family: PingFang-SC-Regular;
    font-size: .22rem;
    font-weight: normal;
    font-stretch: normal;
-   line-height: .22rem;
+   line-height: .25rem;
    letter-spacing: 0px;
    color: #999999;
  }
@@ -3061,6 +3091,22 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   letter-spacing: 0px;
   color: #3189f5;
 }
+.colorsixsix{
+  display:inline-block;
+  width: 1.58rem;
+  height: .64rem;
+  margin-right:.24rem;
+  border: solid 1px #666666;
+  border-radius: 4px;
+  text-align: center;
+  line-height:.64rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #666666;
+}
 .orderOperationBtn div{
   float:right;
   margin-top:.17rem;
@@ -3433,7 +3479,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #999999;
 }
 .pingjiaPic{
-  width:6.8rem;
+  width:6.3rem;
   max-height:4.85rem;
   padding:.3rem 0rem .3rem 0rem;
 }
