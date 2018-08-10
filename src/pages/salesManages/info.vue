@@ -34,8 +34,8 @@
   export default {
     data() {
       return {
-        dName: '', // 司机姓名
-        dPhone: '', // 司机手机
+        dName: '', // 业务员姓名
+        dPhone: '', // 业务员手机
         type: '132', // 当前类别 1,添加司机;132,添加业务员;
         dInfo: null,
         uid: '',
@@ -63,6 +63,9 @@
       // 司机新增保存
       dSave() {
         let self = this;
+        if(!this.validator()) {
+          return
+        }
         if(this.isEditor) {
           this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId,this.uid, this.type, new IceCallback(
             function (result) {
@@ -86,12 +89,21 @@
               }
             },
             function (error) {
-              self.message.Toast(self,'服务器连接失败, 请稍后重试',result.msg,false);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ));
         }
-
-
+      },
+      validator() {
+        if (this.verifyUtil.isNull(this.dName)) {
+          this.$vux.toast.text('业务员姓名不能为空', 'top');
+          return false
+        }
+        if (this.verifyUtil.isPhoneNum(this.dPhone)) {
+          this.$vux.toast.text('请输入正确的手机号', 'top');
+          return false
+        }
+        return true
       }
     }
   }

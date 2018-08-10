@@ -13,7 +13,6 @@
         </div>
 
 
-
       </div>
       <div class="downfixed havedownfixed">
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
@@ -38,7 +37,7 @@
               <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
             </div>
             <li class="address marginBottom15">
-              <div class="addressList"><span>{{item.startaddr}}</span>-<span>{{item.arriaddr}}</span></div>
+              <div class="addressList"><span>{{addressSubStr(item.startn)}}</span>-<span>{{addressSubStr(item.arriarn)}}</span></div>
             </li>
             <li class="collection marginBottom15">
               <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
@@ -75,10 +74,8 @@
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,1)">签收照片</a>
 
                 <a v-show="item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
-
                 <!-- 待评价 -->
                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">待评价</a>-->
-
                 <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="">转发布</a>
 
                 <!--&lt;!&ndash;接受&ndash;&gt;-->
@@ -158,7 +155,6 @@
     },
     methods: {
       statusToChinese(status) {
-        debugger
         let cont = '';
         switch (status) {
           case 1:
@@ -327,6 +323,10 @@
       fallback() {
         this.$router.go(-1)
       },
+      // 字符串截取
+      addressSubStr(str) {
+        return  str.split(',')[1]
+      }
     }
   }
 </script>

@@ -8,7 +8,7 @@
         <span>业务员管理</span>
       </div>
       <div class="width20">
-        <i @click="addDriver" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
+        <i @click="addSales" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
       </div>
     </div>
     <div class="downfixed havedownfixed">
@@ -95,9 +95,9 @@
         })
       },
       // 业务员添加
-      addDriver() {
+      addSales() {
         this.$router.push({
-          name: 'driverInfo'
+          name: 'salesInfo'
         })
       },
       editorDriver(item) {

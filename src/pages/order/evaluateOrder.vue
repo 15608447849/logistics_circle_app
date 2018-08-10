@@ -79,7 +79,7 @@
 </template>
 
 <script>
-  import {uploadEvalUrl} from "../../utils/config";
+  import {uploadEvalUrl} from "../../../static/libs/server/config";
     export default {
       data(){
         return {

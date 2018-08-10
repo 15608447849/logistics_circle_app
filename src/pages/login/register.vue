@@ -144,22 +144,22 @@
       // 验证账号输入格式
       registerValidator() {
         if (this.verifyUtil.isNull(this.account)) {
-          this.message.Toast(this, 'warn', '账号不能为空', false);
+          this.$vux.toast.text('账号不能为空', 'top');
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          this.message.Toast(this, 'warn', '密码为空或长度小于6位, 请完善输入', false);
+          this.$vux.toast.text('密码为空或长度小于6位, 请完善输入', 'top');
           return false
         }
         if (this.verifyUtil.isTwoPsd(this.password, this.rPassword)) {
-          this.message.Toast(this, 'warn', '密码两次输入不一致', false);
+          this.$vux.toast.text('密码两次输入不一致', 'top');
           return false
         }
         return true
       },
       sendCode() {
         if (this.verifyUtil.isPhoneNum(this.phone)) {
-          this.message.Toast(this, 'warn', '手机号格式错误, 请重新输入', false);
+          this.$vux.toast.text('手机号格式错误, 请重新输入', 'top');
           return false
         }
         this.$dialog.loading.open('验证码发送中...');
@@ -245,7 +245,6 @@
         this.$Ice_CompService.selectCompUserByUid(oid,
           new IceCallback(
             function (result) {
-              debugger
               // 登录时添加企业到缓存
               if (result.obj.length === 1) {
                 self.setCompIdByRedis(oid, result.obj[0].compid);

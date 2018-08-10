@@ -56,14 +56,15 @@
 
 <script>
   import {ImagePreview} from 'vant';
-  import {uploadUrl} from "../../utils/config";
+  import { uploadUrl,cardUrl } from '../../../static/libs/server/config'
   import EXIF from '../../utils/exif-js'
 
   export default {
     data() {
       return {
         isEditor: false,
-        uploadUrl: uploadUrl,
+        uploadUrl: uploadUrl, // 证件上传地址
+        cardUrl: cardUrl,// 获取地址
         userId: this.$app_store.state.userId,
         uploadIndex: 0,
         uploadList: [
@@ -145,7 +146,7 @@
       },
       // 获取图片
       getImages(compid) {
-        let path = "http://192.168.1.240:8090/getCompPic?compId=" + compid;
+        let path = cardUrl + compid;
         let xhr = new XMLHttpRequest();
         let self = this;
         xhr.onreadystatechange = function () {

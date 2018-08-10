@@ -93,7 +93,6 @@
 
             },
             function (error) {
-              debugger
               self.$vux.toast.text('企业信息获取失败, 请尝试重新登录', 'top');
             }
           )

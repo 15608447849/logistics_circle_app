@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import { Toast } from 'vant';
   export default {
     data() {
       return {
@@ -58,6 +59,9 @@
       // 司机新增保存
       dSave() {
         let self = this;
+        if(!this.validator()) {
+          return
+        }
         if(this.isEditor) {
           this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId,this.uid, this.type, new IceCallback(
             function (result) {
@@ -85,8 +89,17 @@
             }
           ));
         }
-
-
+      },
+      validator() {
+        if (this.verifyUtil.isNull(this.dName)) {
+          this.$vux.toast.text('姓名不能为空', 'top');
+          return false
+        }
+        if (this.verifyUtil.isPhoneNum(this.dPhone)) {
+          this.$vux.toast.text('请输入正确的手机号', 'top');
+          return false
+        }
+        return true
       }
     }
   }

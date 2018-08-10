@@ -39,7 +39,7 @@
               <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
             </div>
             <li class="address marginBottom15">
-              <div class="addressList"><span>{{item.startaddr}}</span>-<span>{{item.arriaddr}}</span></div>
+              <div class="addressList"><span>{{addressSubStr(item.startn)}}</span>-<span>{{addressSubStr(item.arriarn)}}</span></div>
             </li>
             <li class="collection marginBottom15">
               <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
@@ -480,13 +480,11 @@
           console.log(imgName[i]);
           imgUrlList.push('http://192.168.1.110:8029/' + imgUrl + '/' + imgName[i])
         }
-        debugger
         console.log(imgUrlList);
         this.imgUrl = imgUrlList;
       },
       // 获取图片地址
       getImgUrl(orderId,compId){
-        debugger
         let dirs = [];
         if(compId){
           let dir1 = compId % 100;
@@ -509,6 +507,10 @@
         }
         return dirs.join("/");
       },
+      // 字符串截取
+      addressSubStr(str) {
+        return  str.split(',')[1]
+      }
     },
     watch: {
       releaseList: {

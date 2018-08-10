@@ -175,7 +175,7 @@
       },
       toPageIssueDetail(item) {
         this.$router.push({
-          path: '/information/releaseOrders',
+          path: '/information/releaseDetails',
           query: {
             id: item.id,
             puberid: item.puberid,
