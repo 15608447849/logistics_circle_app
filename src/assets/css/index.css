@@ -1434,7 +1434,7 @@ input[type="radio"] {
   position:fixed;
   top:0rem;
   width:7.5rem;
-  height:6vh;
+  height:5.5vh;
   z-index:1;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
@@ -1455,7 +1455,7 @@ input[type="radio"] {
   justify-content:space-between;
   align-items:center;
   width:7.5rem;
-  height:6vh;
+  height:5.5vh;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */

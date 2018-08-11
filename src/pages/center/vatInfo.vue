@@ -98,7 +98,7 @@
       />
     </van-cell-group>
 
-    <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor">保存</van-button>
+    <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor" style="background-color:#3189f5;width:7.08rem;margin:10vh 0rem 0rem .21rem;">保存</van-button>
   </div>
 </template>
 

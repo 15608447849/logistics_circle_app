@@ -11,7 +11,7 @@
         <div class="alignCenter floatright"></div>
       </div>
     </div>
-    <div class="downfixed havedownfixed">
+    <div style="margin-top:5.5vh;">
       <!--<div class="blackList">-->
       <!--<div class="blackListNum">2个黑名单</div>-->
 

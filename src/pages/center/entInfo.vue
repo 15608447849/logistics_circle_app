@@ -1,6 +1,6 @@
 <template>
   <div class="enterpriseBox">
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
       </div>
@@ -10,11 +10,9 @@
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
-
-
-
     </div>
-    <div class="downfixed havedownfixed">
+
+    <div>
       <ul class="enterpriseList" v-show="!isEditor">
         <li class="enterpriseLi needBorder" @click="show1 = true">
           <span class="invoiceTitle">企业名称</span>
@@ -47,6 +45,8 @@
           <span class="invoiceContent">{{compInfo.postcode}}</span>
         </li>
       </ul>
+
+
       <van-cell-group v-show="isEditor">
         <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
         <van-field
@@ -117,7 +117,7 @@
         />
       </van-cell-group>
 
-      <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor">保存</van-button>
+      <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor" style="background-color:#3189f5;width:7.08rem;margin:10vh 0rem 0rem .21rem;">保存</van-button>
 
     </div>
   </div>
