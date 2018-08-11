@@ -16,11 +16,6 @@
     </div>
     <div class="downfixed havedownfixed">
       <ul class="enterpriseList" v-show="!isEditor">
-        <li class="touxiangBox needBorder">
-          <span class="touxiang">头像</span>
-          <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang" v-if="compInfo.logoPath !== ''">
-          <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="compInfo.logoPath === ''">
-        </li>
         <li class="enterpriseLi needBorder" @click="show1 = true">
           <span class="invoiceTitle">企业名称</span>
           <span class="invoiceContent">
@@ -49,15 +44,11 @@
         </li>
         <li class="enterpriseLi needBorder">
           <span class="invoiceTitle">邮编</span>
-          <span class="invoiceContent">{{compInfo.area}}</span>
+          <span class="invoiceContent">{{compInfo.postcode}}</span>
         </li>
       </ul>
       <van-cell-group v-show="isEditor">
         <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
-        <li class="touxiangBox needBorder">
-          <span class="touxiang">头像</span>
-          <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang">
-        </li>
         <van-field
           v-model="compInfo.fname"
           label="企业名称"
@@ -84,12 +75,12 @@
           placeholder="请选择企业规模"
           :error-message="v4"
         />
-        <van-field
-          v-model="compInfo.contact"
-          label="联系人电话"
-          placeholder="请填写联系人电话"
-          :error-message="v5"
-        />
+        <!--<van-field-->
+          <!--v-model="compInfo.contact"-->
+          <!--label="联系人电话"-->
+          <!--placeholder="请填写联系人电话"-->
+          <!--:error-message="v5"-->
+        <!--/>-->
         <van-field
           v-model="compInfo.postcode"
           label="邮编"
@@ -213,14 +204,14 @@
         // 保存信息
         let self = this;
         let compJson = new comp.CompInfo();
-
+        debugger
         compJson.compid = this.compInfo.compid;
         compJson.uoid = this.userId;
         compJson.fname = this.compInfo.fname;
         compJson.sname = this.compInfo.sname;
         compJson.ctype = this.compInfo.ctype;
         compJson.csale = this.compInfo.csale;
-        compJson.contact = num2jlong(Number(this.compInfo.contact));
+        // compJson.contact = num2jlong(Number(this.compInfo.contact));
         compJson.postcode = this.compInfo.postcode;
         compJson.pho = num2jlong(Number(this.compInfo.pho));
         compJson.pht = num2jlong(Number(this.compInfo.pht));
@@ -230,7 +221,7 @@
         compJson.invtype = this.compInfo.invtype;
         compJson.taxno = this.compInfo.taxno;
         compJson.phone = this.compInfo.pho + '-' + this.compInfo.pht;
-        compJson.landline = this.compInfo.landline;
+        // compJson.landline = this.compInfo.landline;
         compJson.openbank = this.compInfo.openbank;
         compJson.openaccount = this.compInfo.openaccount.toString();
         compJson.billarea = this.compInfo.billarea;
@@ -295,13 +286,13 @@
           } else {
             this.v4 = ''
           }
-          // 联系人电话
-          if (this.verifyUtil.isPhoneNum(newValue.contact)) {
-            isBtnClick = false;
-            this.v5 = '请输入联系人电话';
-          } else {
-            this.v5 = ''
-          }
+          // // 联系人电话
+          // if (this.verifyUtil.isPhoneNum(newValue.contact)) {
+          //   isBtnClick = false;
+          //   this.v5 = '请输入联系人电话';
+          // } else {
+          //   this.v5 = ''
+          // }
           // 邮编
           if (this.verifyUtil.isNull(newValue.postcode)) {
             isBtnClick = false;

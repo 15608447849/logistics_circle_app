@@ -207,16 +207,17 @@
     },
     activated() {
       let addressCom = this.$app_store.getters.addressCom || null;
-      if (addressCom !== null && addressCom.province !== undefined) {
-        if (this.$app_store.getters.geoState === 1) {
-          this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
-          this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
-        } else if (this.$app_store.getters.geoState === 2) {
-          this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
-          this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
-        }
+      if (addressCom === null || addressCom.province === undefined || addressCom.province === null) {
+        return
+      }
+      if (this.$app_store.getters.geoState === 1) {
+        this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
+        this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+        this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
+      } else if (this.$app_store.getters.geoState === 2) {
+        this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
+        this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+        this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
       }
     },
     mounted() {

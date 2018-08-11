@@ -256,7 +256,6 @@
         let self = this;
         this.$Ice_redundancyService.queryMyRecvOrder(this.userId, this.QueryParam,this.page, new IceCallback(
           function (result) {
-            debugger
             self.loading = false;
             if (result.code === 0) {
               self.page.pageIndex += 1;

@@ -197,6 +197,7 @@
           self.loadingB = false;
           self.circleQueryParamB.pageIndex += 1; // 页码增加
           if (result.code !== 0) {
+            self.$vux.toast.text(result.msg, 'top');
             self.finishedB = true;
             return
           }
@@ -219,6 +220,7 @@
       },
       queryCanAddMyCircle(circleQueryParam, successCallback, errorCallback) {
         let self = this;
+        debugger
         this.$Ice_CircleService.queryCanAddMyCircle(circleQueryParam, new IceCallback(
           function (result) {
             successCallback(result)

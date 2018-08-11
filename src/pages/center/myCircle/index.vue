@@ -14,16 +14,16 @@
 
 
     </div>
-      <div class="driverBox" @click="tosearchFriend">
-        <div class="searchDriverBox">
-          <div class="searchDriver">
-            <div class="driverSearchBtn">
-              <i class="icon iconfont icon-sousuo"></i>
-              <span class="sousuo">搜索</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!--<div class="driverBox" @click="tosearchFriend">-->
+        <!--<div class="searchDriverBox">-->
+          <!--<div class="searchDriver">-->
+            <!--<div class="driverSearchBtn">-->
+              <!--<i class="icon iconfont icon-sousuo"></i>-->
+              <!--<span class="sousuo">搜索</span>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
         <!--<div class="circleType">-->
         <!--<div class="SourceGoods marginLeft21" @click="tabClick" :class="{'activecircle': selectOneTab}">货源圈</div>-->
@@ -107,7 +107,6 @@
           function (result) {
             if (result.code === 0) {
               if (circleT === 128) {
-
                 self.sCircleList = result.obj.circleSeq;
                 console.log(self.sCircleList);
                 self.sCircleNum = result.obj.totalItems;
@@ -153,7 +152,6 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
-
             self.$Ice_CircleService.removeCircle(this.userId, item.compId, ctype, new IceCallback(
               function (result) {
                 if (result.code === 0) {

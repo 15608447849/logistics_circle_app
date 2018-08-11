@@ -25,7 +25,7 @@
           ref="upload"
           v-show="item.url === ''"
           style="position:relative;top:0rem;left:0rem;"
-          :action="{target: uploadUrl,data: {'picNo': index,'compId': userId}}"
+          :action="{target: uploadUrl,data: {'picNo': index,'compId': compInfo.compid}}"
           @files-added="filesAdded"
           @file-success="filesSuccess"
           @file-error="filesError">
@@ -56,16 +56,16 @@
 
 <script>
   import {ImagePreview} from 'vant';
-  import { uploadUrl,cardUrl } from '../../../static/libs/server/config'
-  import EXIF from '../../utils/exif-js'
+  import { uploadUrl,cardUrl ,delCardUrl} from '../../../static/libs/server/config'
 
   export default {
     data() {
       return {
+        compInfo: {},
         isEditor: false,
         uploadUrl: uploadUrl, // 证件上传地址
         cardUrl: cardUrl,// 获取地址
-        userId: this.$app_store.state.userId,
+        delCardUrl: delCardUrl, // 删除地址
         uploadIndex: 0,
         uploadList: [
           {
@@ -107,12 +107,13 @@
       }
     },
     mounted() {
+      this.compInfo = this.$route.params;
       if(this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
         this.isEditor = true;
       }else {
         this.isEditor = false;
       }
-      this.getImages(this.userId);
+      this.getImages(this.compInfo.compid);
     },
     methods: {
       // 点击查看大图
@@ -125,7 +126,7 @@
       },
       deletedImages(id) {
         let self = this;
-        let path = "http://192.168.1.240:8090/delCompPic?compId=" + this.userId + "&picNo=" + id;
+        let path = delCardUrl + this.compInfo.compid + "&picNo=" + id;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -136,6 +137,7 @@
               self.uploadList[id].url = '';
               self.$vux.toast.text('图片删除成功!', 'top');
               self.$refs.upload[id].removeFile(self.$refs.upload[id].files)
+              self.loadImage(id,'1');
             } else {
               self.$vux.toast.text('图片删除失败!', 'top');
             }
@@ -184,7 +186,7 @@
         let imgPath = ['', '', '', '', '', '', '', ''];
         imgPath[imgId] = url;
         let self = this;
-        this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
+        this.$Ice_InfoService.feedbackCredentRelpath(this.compInfo.compid, imgPath,
           new IceCallback(
             function (result) {
               self.updateComp();
@@ -197,28 +199,27 @@
       updateComp() {		//保存信息
         let self = this;
         let compJson = new comp.CompInfo();
-        let companyInfo = JSON.parse(this.$app_store.state.compInfo);
-        compJson.compid = companyInfo.compid;
-        compJson.uoid = companyInfo.uoid;
-        compJson.fname = companyInfo.fname;
-        compJson.sname = companyInfo.sname;
-        compJson.ctype = companyInfo.ctype;
-        compJson.csale = companyInfo.csale;
-        compJson.contact = num2jlong(Number(companyInfo.contact));
-        compJson.postcode = companyInfo.postcode;
-        compJson.pho = num2jlong(Number(companyInfo.pho));
-        compJson.pht = num2jlong(Number(companyInfo.pht));
-        compJson.area = companyInfo.area.length > 0 ? companyInfo.area[companyInfo.area.length-1] : companyInfo.area;
-        compJson.address = companyInfo.address;
-        compJson.invtitle = companyInfo.invtitle;
-        compJson.invtype = companyInfo.invtype;
-        compJson.taxno = companyInfo.taxno;
-        compJson.phone = companyInfo.pho+ '-' + companyInfo.pht;
-        compJson.landline = companyInfo.pht;
-        compJson.openbank = companyInfo.openbank;
-        compJson.openaccount = companyInfo.openaccount.toString();
-        compJson.billarea = companyInfo.billarea.length > 0 ? companyInfo.billarea[companyInfo.billarea.length-1] : companyInfo.billarea;
-        compJson.billaddr = companyInfo.billaddr;
+        compJson.compid = this.compInfo.compid;
+        compJson.uoid = this.userId;
+        compJson.fname = this.compInfo.fname;
+        compJson.sname = this.compInfo.sname;
+        compJson.ctype = this.compInfo.ctype;
+        compJson.csale = this.compInfo.csale;
+        compJson.contact = num2jlong(Number(this.compInfo.contact));
+        compJson.postcode = this.compInfo.postcode;
+        compJson.pho = num2jlong(Number(this.compInfo.pho));
+        compJson.pht = num2jlong(Number(this.compInfo.pht));
+        compJson.area = this.compInfo.area;
+        compJson.address = this.compInfo.address;
+        compJson.invtitle = this.compInfo.invtitle;
+        compJson.invtype = this.compInfo.invtype;
+        compJson.taxno = this.compInfo.taxno;
+        compJson.phone = this.compInfo.pho + '-' + this.compInfo.pht;
+        compJson.landline = this.compInfo.landline;
+        compJson.openbank = this.compInfo.openbank;
+        compJson.openaccount = this.compInfo.openaccount.toString();
+        compJson.billarea = this.compInfo.billarea;
+        compJson.billaddr = this.compInfo.billaddr;
         this.$Ice_InfoService.updateComp(compJson, new IceCallback(
           function (result) {
 

@@ -215,7 +215,6 @@
                 self.$Ice_UserService.userRegister(self.account, self.phone, self.password, self.invitationCode, self.verificationCode, new IceCallback(
                   function (result) {
                     if (result.code === 0) {
-                      debugger
                       self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                       self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
                       self.getCompList(result.obj.oid);

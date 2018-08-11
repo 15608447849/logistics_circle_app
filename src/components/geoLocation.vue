@@ -106,12 +106,14 @@
           if (status === "complete" && result.info === "OK") {
             if (result && result.regeocode) {
               self.$app_store.commit(ADDRESSCOM, result.regeocode.addressComponent);
-              self.goBack()
+              self.$router.go(-1);
             }
           }
         });
       },
       goBack() {
+        // 内容初始化
+        this.$app_store.commit(ADDRESSCOM,null);
         this.$router.go(-1);
       }
     },

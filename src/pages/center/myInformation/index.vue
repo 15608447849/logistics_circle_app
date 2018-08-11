@@ -91,7 +91,6 @@
       agreeOrRefuse(item, index, msgtype) {
         let content = '';
         let self = this;
-
         if (msgtype === 1) {
           content = alertContent.CIRCLE_ADD_DISPATHCHER;
         } else if (msgtype === 2) {
@@ -101,7 +100,6 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
-
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, 1, new IceCallback(
               function (result) {
                 if (result.code === 0) {
@@ -145,7 +143,6 @@
       },
       getMessageList() {
         let self = this;
-
         this.$Ice_MessageService.queryMsgListByUid(self.userId,0, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
@@ -162,7 +159,6 @@
       },
       YesHandleMessage() {
         let self = this;
-
         this.$Ice_MessageService.queryMsgListByUid(self.userId, 1, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
@@ -184,7 +180,6 @@
       //查询用户是否有新的消息
       isUnreadMsg() {
         let self = this;
-
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback( function(result){
           if(result.code === 0) {
             self.isNewMsg = result.__state;
@@ -193,7 +188,6 @@
 
           }
         },function(error){
-          debugger
           //失败
         }))
 

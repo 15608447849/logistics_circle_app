@@ -77,17 +77,14 @@
         });
       },
       queryMyCircleBlackList(successCallback, errorCallback) {
-        debugger
         let self = this;
         this.$Ice_CircleService.queryMyCircleBlackList(this.userId, this.page.pageIndex, this.page.pageSize, new IceCallback(
           function (result) {
-            debugger
             // 关闭加载动画
             self.loading = false;
             if (result.code !== 0) {
               // 关闭上推加载
               self.finished = true;
-              debugger
               // 显示列表无数据
               self.$vux.toast.text(result.msg, 'top');
               return

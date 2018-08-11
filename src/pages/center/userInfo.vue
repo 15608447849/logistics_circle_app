@@ -191,11 +191,10 @@
       toCertificates() {
         this.$router.push({
           name: 'cartInfo',
-          path: '/cartInfo',
+          params: this.compInfo,
           query: {
-            isEditor: this.isYourCompInfo
+            isEditor: this.isYourCompInfo,
           }
-          // params: this.compInfo
         })
       },
       removePartner() {
@@ -260,6 +259,7 @@
           })
       },
       addBlacklist() {
+        debugger
         let self = this;
         let content = '您确定要将好友添加至黑名单吗?';
         this.message.showAlert(this, content)

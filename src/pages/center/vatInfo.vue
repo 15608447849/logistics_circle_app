@@ -186,8 +186,7 @@
         compJson.invtitle = this.compInfo.invtitle;
         compJson.invtype = this.compInfo.invtype;
         compJson.taxno = this.compInfo.taxno;
-        compJson.phone = this.compInfo.pho + '-' + this.compInfo.pht;
-        compJson.landline = this.compInfo.landline;
+        compJson.phone = '0' + '-'+this.compInfo.landline;
         compJson.openbank = this.compInfo.openbank;
         compJson.openaccount = this.compInfo.openaccount.toString();
         compJson.billarea = this.compInfo.billarea;

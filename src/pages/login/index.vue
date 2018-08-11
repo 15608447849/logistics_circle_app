@@ -131,8 +131,8 @@
        * @param compId
        */
       queryCompByCid(compId) {
-        let self = this;
         debugger
+        let self = this;
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
