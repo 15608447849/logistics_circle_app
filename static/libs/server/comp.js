@@ -379,7 +379,7 @@
         "selectStaffInfo": [, , , , , [7], [[7], [7], [7], [3], [3], [cstruct.Page]], [[cstruct.Page]], , , ],
         "searchDriver4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
         "searchStaff4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
-        "searchEnterprise4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
+        "searchEnterprise4App": [, , , , , [7], [[7], [3], [3]], , , , ],
         "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
         "updateStaffInfo": [, , , , , [7], [[7], [7], [3], [3], [3]], , , , ],
         "updateStaffstatus": [, , , , , [7], [[3], [3], [3], [3]], , , , ],

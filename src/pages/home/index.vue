@@ -108,7 +108,7 @@
         isMember: true,
         direction: '',
         tipStyle: '',
-        oid: this.$app_store.getters.userId || '',
+        oid: this.$app_store.getters.userId || '0',
         isShowMore: false, // 显示更多
         isShowNoData: false // 无数据
         // 信息大厅数据

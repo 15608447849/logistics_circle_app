@@ -11,7 +11,37 @@
         <div class="alignCenter floatright "></div>
       </div>
     </div>
-    <van-cell-group>
+    <ul class="invoiceList" v-show="!isEditor">
+      <li class="needBorder">
+        <span class="invoiceTitle">发票抬头</span>
+        <span class="invoiceContent">{{compInfo.invtitle}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">发票类型</span>
+        <span class="invoiceContent">{{compInfo.invtype}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">发票税号</span>
+        <span class="invoiceContent">{{compInfo.taxno}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">电话</span>
+        <span class="invoiceContent">{{compInfo.phone}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">开户银行</span>
+        <span class="invoiceContent">{{compInfo.openbank}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">开户账号</span>
+        <span class="invoiceContent">{{compInfo.openaccount}}</span>
+      </li>
+      <li>
+        <span class="invoiceTitle">发票地址</span>
+        <span class="invoiceContent">{{compInfo.billaddr}}</span>
+      </li>
+    </ul>
+    <van-cell-group v-show="isEditor">
       <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
       <van-field
         v-model="compInfo.invtitle"
@@ -70,7 +100,7 @@
       />
     </van-cell-group>
 
-    <van-button :disabled=disabled @click="updateComp" size="large">保存</van-button>
+    <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor">保存</van-button>
   </div>
 </template>
 
@@ -80,6 +110,7 @@
   export default {
     data() {
       return {
+        isEditor: false,
         compInfo: {},
         invtypeArr: {},
         invoiceType: '',
@@ -99,6 +130,11 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
+      if (this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
+        this.isEditor = true;
+      } else {
+        this.isEditor = false;
+      }
       this.invtypeArr = this.dicData = JSON.parse(this.$app_store.getters.dict).fplx;
       // 初始化地区选择数据
       this.cascadeData = JSON.parse(this.$app_store.getters.area);

@@ -15,80 +15,156 @@
 
     </div>
     <div class="downfixed havedownfixed">
-    <ul class="enterpriseList">
-      <li class="touxiangBox needBorder">
-        <span class="touxiang">头像</span>
-        <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang" v-if="compInfo.logoPath !== ''">
-        <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="compInfo.logoPath === ''">
-      </li>
-      <li class="enterpriseLi needBorder" @click="show1 = true">
-        <span class="invoiceTitle">企业名称</span>
-        <span class="invoiceContent">
-          {{compInfo.fname}}
-        </span>
-      </li>
-      <li class="enterpriseLi needBorder">
-        <span class="invoiceTitle">企业简称</span>
-        <span class="invoiceContent">{{compInfo.sname}}</span>
-      </li>
-      <li class="enterpriseLi needBorder" @click="show2 = true">
-        <span class="invoiceTitle">企业性质</span>
-        <span class="invoiceContent">{{compInfo.ctype}}</span>
-      </li>
-      <li class="enterpriseLi needBorder">
-        <span class="invoiceTitle">企业规模</span>
-        <span class="invoiceContent">{{compInfo.csale}}</span>
-      </li>
-      <li class="enterpriseLi needBorder">
-        <span class="invoiceTitle">联系方式</span>
-        <span class="invoiceContent">{{compInfo.contact}}</span>
-      </li>
-      <li class="enterpriseLi needBorder">
-        <span class="invoiceTitle">企业地址</span>
-        <span class="invoiceContent">{{compInfo.address}}</span>
-      </li>
-      <li class="enterpriseLi needBorder">
-        <span class="invoiceTitle">邮编</span>
-        <span class="invoiceContent">{{compInfo.area}}</span>
-      </li>
-    </ul>
+      <ul class="enterpriseList" v-show="!isEditor">
+        <li class="touxiangBox needBorder">
+          <span class="touxiang">头像</span>
+          <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang" v-if="compInfo.logoPath !== ''">
+          <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="compInfo.logoPath === ''">
+        </li>
+        <li class="enterpriseLi needBorder" @click="show1 = true">
+          <span class="invoiceTitle">企业名称</span>
+          <span class="invoiceContent">
+      {{compInfo.fname}}
+      </span>
+        </li>
+        <li class="enterpriseLi needBorder">
+          <span class="invoiceTitle">企业简称</span>
+          <span class="invoiceContent">{{compInfo.sname}}</span>
+        </li>
+        <li class="enterpriseLi needBorder" @click="show2 = true">
+          <span class="invoiceTitle">企业性质</span>
+          <span class="invoiceContent">{{compInfo.ctype}}</span>
+        </li>
+        <li class="enterpriseLi needBorder">
+          <span class="invoiceTitle">企业规模</span>
+          <span class="invoiceContent">{{compInfo.csale}}</span>
+        </li>
+        <li class="enterpriseLi needBorder">
+          <span class="invoiceTitle">联系方式</span>
+          <span class="invoiceContent">{{compInfo.contact}}</span>
+        </li>
+        <li class="enterpriseLi needBorder">
+          <span class="invoiceTitle">企业地址</span>
+          <span class="invoiceContent">{{compInfo.address}}</span>
+        </li>
+        <li class="enterpriseLi needBorder">
+          <span class="invoiceTitle">邮编</span>
+          <span class="invoiceContent">{{compInfo.area}}</span>
+        </li>
+      </ul>
+      <van-cell-group v-show="isEditor">
+        <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
+        <li class="touxiangBox needBorder">
+          <span class="touxiang">头像</span>
+          <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang">
+        </li>
+        <van-field
+          v-model="compInfo.fname"
+          label="企业名称"
+          placeholder="请输入企业名称"
+          :error-message="v1"
+        />
+        <van-field
+          v-model="compInfo.sname"
+          label="企业简称"
+          placeholder="请输入企业简称"
+          :error-message="v2"
+        />
+        <van-field
+          @click="showPicker('qyxz')"
+          v-model="nature"
+          label="企业性质"
+          placeholder="请选择企业性质"
+          :error-message="v3"
+        />
+        <van-field
+          @click="showPicker('qygm')"
+          v-model="scale"
+          label="企业规模"
+          placeholder="请选择企业规模"
+          :error-message="v4"
+        />
+        <van-field
+          v-model="compInfo.contact"
+          label="联系人电话"
+          placeholder="请填写联系人电话"
+          :error-message="v5"
+        />
+        <van-field
+          v-model="compInfo.postcode"
+          label="邮编"
+          placeholder="请填写邮编"
+          :error-message="v6"
+        />
+        <van-field
+          v-model="compInfo.pho"
+          label="业务员手机1"
+          placeholder="请填写业务员手机1"
+          :error-message="v7"
+        />
+        <van-field
+          v-model="compInfo.pht"
+          label="业务员手机2"
+          placeholder="请填写业务员手机2"
+          :error-message="v8"
+        />
+        <van-field
+          @click="showCascadePicker"
+          v-model="areaText"
+          label="企业地址"
+          placeholder="请选择企业地址"
+          :error-message="v9"
+        />
+        <van-field
+          v-model="compInfo.address"
+          label="详细地址"
+          type="textarea"
+          placeholder="请输入详细地址"
+          :error-message="v10"
+          rows="1"
+          autosize
+        />
+      </van-cell-group>
+
+      <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor">保存</van-button>
+
     </div>
     <!--<yd-popup v-model="show1" position="center" width="70%">-->
-      <!--<div style="background-color:#fff;">-->
-        <!--<div class="updataEnterpriseName">-->
-          <!--<p>修改企业名称</p>-->
-          <!--<input type="text">-->
-          <!--<div>-->
-            <!--<span class="cancel" @click="show1 = false">取消</span>-->
-            <!--<span class="sure" @click="show1 = false">确定</span>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div style="background-color:#fff;">-->
+    <!--<div class="updataEnterpriseName">-->
+    <!--<p>修改企业名称</p>-->
+    <!--<input type="text">-->
+    <!--<div>-->
+    <!--<span class="cancel" @click="show1 = false">取消</span>-->
+    <!--<span class="sure" @click="show1 = false">确定</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</yd-popup>-->
     <!--<yd-popup v-model="show2" position="bottom" height="30%" close-on-masker="true">-->
-      <!--<div style="background-color:#fff;">-->
-        <!--<div class="updataEnterpriseNature">-->
-          <!--<p>修改企业性质</p>-->
-          <!--<div class="natureBox">-->
-            <!--<div @click="show2 = false">-->
-              <!--<input type="radio" value="" name="Nature" id="Nature1">-->
-              <!--<label for="Nature1"> &nbsp&nbsp国有企业</label>-->
-            <!--</div>-->
-            <!--<div @click="show2 = false">-->
-              <!--<input type="radio" value="" name="Nature" id="Nature2">-->
-              <!--<label for="Nature2"> &nbsp&nbsp集体企业</label>-->
-            <!--</div>-->
-            <!--<div @click="show2 = false">-->
-              <!--<input type="radio" value="" name="Nature" id="Nature3">-->
-              <!--<label for="Nature3"> &nbsp&nbsp民营企业</label>-->
-            <!--</div>-->
-            <!--<div @click="show2 = false">-->
-              <!--<input type="radio" value="" name="Nature" id="Nature4">-->
-              <!--<label for="Nature4"> &nbsp&nbsp股份合作制企业</label>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div style="background-color:#fff;">-->
+    <!--<div class="updataEnterpriseNature">-->
+    <!--<p>修改企业性质</p>-->
+    <!--<div class="natureBox">-->
+    <!--<div @click="show2 = false">-->
+    <!--<input type="radio" value="" name="Nature" id="Nature1">-->
+    <!--<label for="Nature1"> &nbsp&nbsp国有企业</label>-->
+    <!--</div>-->
+    <!--<div @click="show2 = false">-->
+    <!--<input type="radio" value="" name="Nature" id="Nature2">-->
+    <!--<label for="Nature2"> &nbsp&nbsp集体企业</label>-->
+    <!--</div>-->
+    <!--<div @click="show2 = false">-->
+    <!--<input type="radio" value="" name="Nature" id="Nature3">-->
+    <!--<label for="Nature3"> &nbsp&nbsp民营企业</label>-->
+    <!--</div>-->
+    <!--<div @click="show2 = false">-->
+    <!--<input type="radio" value="" name="Nature" id="Nature4">-->
+    <!--<label for="Nature4"> &nbsp&nbsp股份合作制企业</label>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</yd-popup>-->
   </div>
 </template>
@@ -122,6 +198,11 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
+      if (this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
+        this.isEditor = true;
+      } else {
+        this.isEditor = false;
+      }
       this.initData();
       this.getBasicInfo();
     },

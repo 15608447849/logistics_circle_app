@@ -18,6 +18,9 @@ export const cardUrl = 'http://192.168.1.241:8090/getCompPic?compId='; // 证件
 // export const serverIp = "192.168.1.119";
 // export const serverPort = 8062;
 
+// export const serverIp = "192.168.1.117";
+// export const serverPort = 8062;
+
 // 陈
 // export const serverIp = "192.168.1.179";
 // export const serverPort = 7062;
