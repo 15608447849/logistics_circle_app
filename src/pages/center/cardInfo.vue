@@ -146,7 +146,7 @@
       },
       // 获取图片
       getImages(compid) {
-        let path = cardUrl + compid;
+        let path = this.cardUrl += compid;
         let xhr = new XMLHttpRequest();
         let self = this;
         xhr.onreadystatechange = function () {

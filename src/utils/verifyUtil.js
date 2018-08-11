@@ -42,7 +42,22 @@ export default class verifyUtil {
    * @return {Boolean}
    */
   static isPhoneNum(str) {
-    return ! /^(0|86|17951)?(1[3-9][0-9])[0-9]{8}$/.test(str)
+    return !/^(0|86|17951)?(1[3-9][0-9])[0-9]{8}$/.test(str)
+  }
+
+  /**
+   * 验证银行账号
+   */
+  static isBankNo(str) {
+    return !/^([1-9]{1})(\d{15}|\d{18})$/.test(str)
+  }
+
+  /**
+   * 验证税号
+   * 15或者17或者18或者20位字母、数字组成
+   */
+  static checkTax(str) {
+    return !/^[A-Z0-9]{15}$|^[A-Z0-9]{17}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/.test(str);
   }
 
   /**
@@ -51,18 +66,18 @@ export default class verifyUtil {
    * @return {Boolean}
    */
   static isIdCard(str) {
-    return ! /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(str)
+    return !/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/.test(str)
   }
 
-  static stringIsBoolean(str){
-    if(this.isString(str)) {
+  static stringIsBoolean(str) {
+    if (this.isString(str)) {
       return eval(str.toLowerCase())
     }
     return str
   }
 
-  static isString(str){
-    return (typeof str==='string')&&str.constructor===String;
+  static isString(str) {
+    return (typeof str === 'string') && str.constructor === String;
   }
 
 }

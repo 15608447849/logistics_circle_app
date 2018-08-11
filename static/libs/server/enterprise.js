@@ -177,7 +177,10 @@
         "enableRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
         "disableRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
         "deleteRoute": [, , , , , [7], [["cstruct.intSeqHelper"]], , , , ],
-        "getPassingPoint": [, , , , , [7], [[3], [3]], , , , ]
+        "getPassingPoint": [, , , , , [7], [[3], [3]], , , , ],
+        "searchDriver4App": [, , , , , [7], [[7]], , , , ],
+        "searchStaff4App": [, , , , , [7], [[7]], , , , ],
+        "searchEnterprise4App": [, , , , , [7], [[7]], , , , ]
     });
     exports.enterprise = enterprise;
 }

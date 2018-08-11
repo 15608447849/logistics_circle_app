@@ -64,6 +64,7 @@
                   self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
                   return
                 }
+                debugger
                 result.obj.comps.forEach((currentValue, index, arr) => {
                   compList.push({
                     content: currentValue.fname,
@@ -117,6 +118,7 @@
         this.$Ice_CompService.addLoginCompByRedis(oid, compId,
           new IceCallback(
             function (result) {
+              debugger
               // 获取企业信息
               self.queryCompByCid(compId);
             },
@@ -131,6 +133,7 @@
        * @param compId
        */
       queryCompByCid(compId) {
+        debugger
         let self = this;
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(

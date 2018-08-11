@@ -196,12 +196,11 @@
               self.secondStepBool = false;
               self.thirdStepBool = true;
             } else {
-
-              self.message.Toast(self, 'error', result.msg, false);
+              self.$vux.toast.text(result.msg, 'top');
             }
           },
           function (error) {
-            self.message.Toast(self, 'error', '错误' + error, false);
+            self.$vux.toast.text('错误', 'top');
           }
         ));
       },
@@ -221,25 +220,24 @@
                       self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
                       self.getCompList(result.obj.oid);
                     } else {
-                      self.message.Toast(self, 'error', result.msg, false);
+                      self.$vux.toast.text(result.msg, 'top');
                     }
                   },
                   function (error) {
-                    self.message.Toast(self, 'error', '注册失败' + error, false);
+                    self.$vux.toast.text('注册失败', 'top');
                   }
                 ))
               } else {
-                self.message.Toast(self, 'error', result.msg, false);
+                self.$vux.toast.text(result.msg, 'top');
               }
             },
             function (error) {
-              self.message.Toast(self, 'error', '错误' + error, false);
+              self.$vux.toast.text('错误', 'top');
             }
           ));
         }
       },
       getCompList(oid) {
-        debugger
         let self = this;
         let compList = [];
         this.$Ice_CompService.selectCompUserByUid(oid,
@@ -260,7 +258,7 @@
               self.showActive(oid, compList);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息获取失败, 请尝试重新登录', false);
+              self.$vux.toast.text('企业信息获取失败, 请尝试重新登录!', 'top');
             }
           )
         );
