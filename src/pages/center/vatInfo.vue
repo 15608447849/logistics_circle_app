@@ -18,7 +18,7 @@
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">发票类型</span>
-        <span class="invoiceContent">{{compInfo.invtype}}</span>
+        <span class="invoiceContent">{{compInfo.invtypes}}</span>
       </li>
       <li class="needBorder">
         <span class="invoiceTitle">发票税号</span>
@@ -38,11 +38,10 @@
       </li>
       <li>
         <span class="invoiceTitle">发票地址</span>
-        <span class="invoiceContent">{{compInfo.billaddr}}</span>
+        <span class="invoiceContent">{{compInfo.billareas}}{{compInfo.billaddr}}</span>
       </li>
     </ul>
     <van-cell-group v-show="isEditor">
-      <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
       <van-field
         v-model="compInfo.invtitle"
         label="发票抬头"
@@ -75,20 +74,19 @@
       />
       <van-field
         @click = 'showPicker'
-        v-model="invoiceType"
+        v-model="compInfo.invtypes"
         label="发票类型"
         placeholder="请选择发票类型"
         :error-message="v6"
       />
       <van-field
         @click="showCascadePicker"
-        v-model="billAreaText"
+        v-model="compInfo.billareas"
         label="地址"
         placeholder="请选择地址"
         :error-message="v7"
       />
       <!--billaddr-->
-      <!--<van-cell @click="showCascadePicker" title="地址" is-link arrow-direction="down" :value="billAreaText"/>-->
       <van-field
         v-model="compInfo.billaddr"
         label="详细地址"
@@ -113,9 +111,7 @@
         isEditor: false,
         compInfo: {},
         invtypeArr: {},
-        invoiceType: '',
         cascadeData: {},
-        billAreaText: '',
         disabled: true,
         userId: this.$app_store.getters.userId,
         v1: '',
@@ -159,7 +155,7 @@
           data: [pickerList],
           onSelect: (selectedVal, selectedIndex, selectedText) => {
             this.compInfo.invtype = selectedVal[0];
-            this.invoiceType = selectedText[0];
+            this.compInfo.invtypes = selectedText[0];
           },
           onCancel: () => {
 
@@ -210,7 +206,7 @@
         ))
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
-        this.billAreaText = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
+        this.compInfo.billareas = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
         this.compInfo.billarea = selectedVal[2];
       },
       cancelHandle() {

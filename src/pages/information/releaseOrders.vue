@@ -207,7 +207,7 @@
     },
     activated() {
       let addressCom = this.$app_store.getters.addressCom || null;
-      if (addressCom !== null || addressCom.province !== undefined) {
+      if (addressCom !== null && addressCom.province !== undefined) {
         if (this.$app_store.getters.geoState === 1) {
           this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
           this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;

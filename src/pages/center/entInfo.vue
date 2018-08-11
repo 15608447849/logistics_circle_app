@@ -33,11 +33,11 @@
         </li>
         <li class="enterpriseLi needBorder" @click="show2 = true">
           <span class="invoiceTitle">企业性质</span>
-          <span class="invoiceContent">{{compInfo.ctype}}</span>
+          <span class="invoiceContent">{{compInfo.ctypes}}</span>
         </li>
         <li class="enterpriseLi needBorder">
           <span class="invoiceTitle">企业规模</span>
-          <span class="invoiceContent">{{compInfo.csale}}</span>
+          <span class="invoiceContent">{{compInfo.csales}}</span>
         </li>
         <li class="enterpriseLi needBorder">
           <span class="invoiceTitle">联系方式</span>
@@ -45,7 +45,7 @@
         </li>
         <li class="enterpriseLi needBorder">
           <span class="invoiceTitle">企业地址</span>
-          <span class="invoiceContent">{{compInfo.address}}</span>
+          <span class="invoiceContent">{{compInfo.areas}}{{compInfo.address}}</span>
         </li>
         <li class="enterpriseLi needBorder">
           <span class="invoiceTitle">邮编</span>
@@ -72,14 +72,14 @@
         />
         <van-field
           @click="showPicker('qyxz')"
-          v-model="nature"
+          v-model="compInfo.ctypes"
           label="企业性质"
           placeholder="请选择企业性质"
           :error-message="v3"
         />
         <van-field
           @click="showPicker('qygm')"
-          v-model="scale"
+          v-model="compInfo.csales"
           label="企业规模"
           placeholder="请选择企业规模"
           :error-message="v4"
@@ -110,7 +110,7 @@
         />
         <van-field
           @click="showCascadePicker"
-          v-model="areaText"
+          v-model="compInfo.areas"
           label="企业地址"
           placeholder="请选择企业地址"
           :error-message="v9"
@@ -129,43 +129,6 @@
       <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor">保存</van-button>
 
     </div>
-    <!--<yd-popup v-model="show1" position="center" width="70%">-->
-    <!--<div style="background-color:#fff;">-->
-    <!--<div class="updataEnterpriseName">-->
-    <!--<p>修改企业名称</p>-->
-    <!--<input type="text">-->
-    <!--<div>-->
-    <!--<span class="cancel" @click="show1 = false">取消</span>-->
-    <!--<span class="sure" @click="show1 = false">确定</span>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</yd-popup>-->
-    <!--<yd-popup v-model="show2" position="bottom" height="30%" close-on-masker="true">-->
-    <!--<div style="background-color:#fff;">-->
-    <!--<div class="updataEnterpriseNature">-->
-    <!--<p>修改企业性质</p>-->
-    <!--<div class="natureBox">-->
-    <!--<div @click="show2 = false">-->
-    <!--<input type="radio" value="" name="Nature" id="Nature1">-->
-    <!--<label for="Nature1"> &nbsp&nbsp国有企业</label>-->
-    <!--</div>-->
-    <!--<div @click="show2 = false">-->
-    <!--<input type="radio" value="" name="Nature" id="Nature2">-->
-    <!--<label for="Nature2"> &nbsp&nbsp集体企业</label>-->
-    <!--</div>-->
-    <!--<div @click="show2 = false">-->
-    <!--<input type="radio" value="" name="Nature" id="Nature3">-->
-    <!--<label for="Nature3"> &nbsp&nbsp民营企业</label>-->
-    <!--</div>-->
-    <!--<div @click="show2 = false">-->
-    <!--<input type="radio" value="" name="Nature" id="Nature4">-->
-    <!--<label for="Nature4"> &nbsp&nbsp股份合作制企业</label>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</yd-popup>-->
   </div>
 </template>
 
@@ -175,15 +138,13 @@
   export default {
     data: function () {
       return {
+        isEditor: false,
         compInfo: {},
         BasicInfo: {},
         show1: false,
         show2: false,
         disabled: false,
         userId: this.$app_store.getters.userId,
-        nature: '', // 企业性质
-        scale: '', // 企业规模
-        areaText: '', // 企业地址
         v1: '',
         v2: '',
         v3: '',
@@ -208,6 +169,7 @@
     },
     methods: {
       initData() {
+
         this.dicData = JSON.parse(this.$app_store.getters.dict)  || null;
         // 初始化地区选择数据
         this.cascadeData = JSON.parse(this.$app_store.getters.area);
@@ -234,11 +196,11 @@
             switch (pickerList[0].remark) {
               case '企业性质':
                 this.compInfo.ctype = selectedVal;
-                this.nature = selectedText;
+                this.compInfo.ctypes = selectedText;
                 break;
               case '企业规模':
                 this.compInfo.csale = selectedVal;
-                this.scale = selectedText;
+                this.compInfo.csales = selectedText;
                 break;
             }
           },
@@ -287,7 +249,7 @@
         ))
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
-        this.areaText = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
+        this.compInfo.areas = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
         this.compInfo.area = selectedVal[2];
       },
       cancelHandle() {
