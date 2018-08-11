@@ -93,6 +93,7 @@
   export default {
     data() {
       return {
+        isEditor: false,
         score: 0,
         cLevel: [],// 认证等级
         compInfo: {},// 企业详情
@@ -156,13 +157,19 @@
       toInvoice() {
         this.$router.push({
           name: 'vatInfo',
-          params: this.compInfo
+          params: this.compInfo,
+          query: {
+            isEditor: this.isYourCompInfo
+          }
         })
       },
       toenterprise() {
         this.$router.push({
           name: 'entInfo',
-          params: this.compInfo
+          params: this.compInfo,
+          query: {
+            isEditor: this.isYourCompInfo
+          }
         })
       },
       computeLevel() {

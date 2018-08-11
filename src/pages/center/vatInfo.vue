@@ -11,8 +11,37 @@
         <div class="alignCenter floatright "></div>
       </div>
     </div>
-    <van-cell-group>
-      <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
+    <ul class="invoiceList" v-show="!isEditor">
+      <li class="needBorder">
+        <span class="invoiceTitle">发票抬头</span>
+        <span class="invoiceContent">{{compInfo.invtitle}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">发票类型</span>
+        <span class="invoiceContent">{{compInfo.invtypes}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">发票税号</span>
+        <span class="invoiceContent">{{compInfo.taxno}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">电话</span>
+        <span class="invoiceContent">{{compInfo.phone}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">开户银行</span>
+        <span class="invoiceContent">{{compInfo.openbank}}</span>
+      </li>
+      <li class="needBorder">
+        <span class="invoiceTitle">开户账号</span>
+        <span class="invoiceContent">{{compInfo.openaccount}}</span>
+      </li>
+      <li>
+        <span class="invoiceTitle">发票地址</span>
+        <span class="invoiceContent">{{compInfo.billareas}}{{compInfo.billaddr}}</span>
+      </li>
+    </ul>
+    <van-cell-group v-show="isEditor">
       <van-field
         v-model="compInfo.invtitle"
         label="发票抬头"
@@ -45,20 +74,19 @@
       />
       <van-field
         @click = 'showPicker'
-        v-model="invoiceType"
+        v-model="compInfo.invtypes"
         label="发票类型"
         placeholder="请选择发票类型"
         :error-message="v6"
       />
       <van-field
         @click="showCascadePicker"
-        v-model="billAreaText"
+        v-model="compInfo.billareas"
         label="地址"
         placeholder="请选择地址"
         :error-message="v7"
       />
       <!--billaddr-->
-      <!--<van-cell @click="showCascadePicker" title="地址" is-link arrow-direction="down" :value="billAreaText"/>-->
       <van-field
         v-model="compInfo.billaddr"
         label="详细地址"
@@ -70,7 +98,7 @@
       />
     </van-cell-group>
 
-    <van-button :disabled=disabled @click="updateComp" size="large">保存</van-button>
+    <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor">保存</van-button>
   </div>
 </template>
 
@@ -80,11 +108,10 @@
   export default {
     data() {
       return {
+        isEditor: false,
         compInfo: {},
         invtypeArr: {},
-        invoiceType: '',
         cascadeData: {},
-        billAreaText: '',
         disabled: true,
         userId: this.$app_store.getters.userId,
         v1: '',
@@ -99,6 +126,11 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
+      if (this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
+        this.isEditor = true;
+      } else {
+        this.isEditor = false;
+      }
       this.invtypeArr = this.dicData = JSON.parse(this.$app_store.getters.dict).fplx;
       // 初始化地区选择数据
       this.cascadeData = JSON.parse(this.$app_store.getters.area);
@@ -123,7 +155,7 @@
           data: [pickerList],
           onSelect: (selectedVal, selectedIndex, selectedText) => {
             this.compInfo.invtype = selectedVal[0];
-            this.invoiceType = selectedText[0];
+            this.compInfo.invtypes = selectedText[0];
           },
           onCancel: () => {
 
@@ -174,7 +206,7 @@
         ))
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
-        this.billAreaText = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
+        this.compInfo.billareas = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
         this.compInfo.billarea = selectedVal[2];
       },
       cancelHandle() {
