@@ -17,7 +17,7 @@
      <div class="issueDetailsBox">
        <div class="orderPadding10">
          <div class="logisticsNameBox">
-           <!--<img src="../../assets/images/small/logo_26.png" alt="">-->
+           <img src="../../assets/images/small/moren.png" alt="">
            <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
          </div>
          <ul>
@@ -68,7 +68,7 @@
        <div class="RobbingBox">
          <div class="Robbing floatleft" >
            <span class="floatleft rderCost">订单费用</span>
-           <span class="textRed textBlod floatright rderCost">{{detailInfo.carriage}}元</span>
+           <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}元</span>
          </div>
          <div class="floatleft ulWidth100">
            <ul class="ulWidth100">
@@ -78,7 +78,7 @@
              </li>
              <li class="orderinfo">
                <span class="issueTextOrder">发单时间</span>
-               <span class="Consignee">{{detailInfo.pubdatetime}}</span>
+               <span>{{detailInfo.pubdatetime}}</span>
              </li>
              <li class="orderinfo"  v-if="detailInfo.revidatetime !== ''">
                <span class="issueTextOrder">抢单时间</span>

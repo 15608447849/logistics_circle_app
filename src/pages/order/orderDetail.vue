@@ -77,10 +77,10 @@
             <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
           </li>
           <li class="issueDetailsLiText">
-            <span class="issueText">目的地</span><span>{{replaceAddress(detailInfo.arriarcext)}}</span>
+            <span class="issueText">出发地</span><span>{{replaceAddress(detailInfo.startcext)}}</span>
           </li>
           <li class="issueDetailsLiText">
-            <span class="issueText">出发地</span><span>{{replaceAddress(detailInfo.startcext)}}</span>
+            <span class="issueText">目的地</span><span>{{replaceAddress(detailInfo.arriarcext)}}</span>
           </li>
           <li class="issueDetailsLiText">
             <span class="issueText">货物信息</span><span
@@ -104,7 +104,6 @@
           </li>
           <li class="issueDetailsLiTextLi">
             <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
-
           </li>
         </ul>
       </div>
@@ -128,8 +127,8 @@
       </div>
       <div class="RobbingBox">
         <div class="Robbing floatleft">
-          <span class="floatleft rderCost">订单费用</span>
-          <span class="textRed textBlod floatright rderCost">￥{{detailInfo.carriage}}元</span>
+          <span class="rderCostA">订单费用</span>
+          <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}元</span>
         </div>
         <div class="floatleft margin_bottom140 ulWidth100">
           <ul class="ulWidth100">
@@ -139,11 +138,11 @@
             </li>
             <li class="orderinfo">
               <span class="marginright7">发单时间</span>
-              <span>{{detailInfo.pubdatetime}}</span>
+              <span>{{detailInfo.revidatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.revidatetime !== ''">
               <span class="marginright7">抢单时间</span>
-              <span>{{detailInfo.revidatetime}}</span>
+              <span>{{detailInfo.pubdatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.pusdatetime !== ''">
               <span class="marginright7">取货时间</span>

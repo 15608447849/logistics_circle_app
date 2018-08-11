@@ -1683,6 +1683,17 @@ input[type="radio"] {
   color: #333333;
 }
 .rderCost{
+  margin-right:.65rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 0px;
+  color: #666666;
+}
+.rderCostA{
+  margin-right:.58rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1740,7 +1751,7 @@ input[type="radio"] {
 .Consignee{
   display:inline-block;
   width:.95rem;
-  margin-right:.69rem;
+  margin-right:.64rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1749,7 +1760,7 @@ input[type="radio"] {
   color: #999999;
 }
 .arrivalTime{
-  margin-right:.5rem;
+  margin-right:.62rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1825,7 +1836,7 @@ input[type="radio"] {
 .issueText{
   display:inline-block;
   width:1.2rem;
-  margin-right:.5rem;
+  margin-right:.45rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;

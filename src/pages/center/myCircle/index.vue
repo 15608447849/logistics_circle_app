@@ -103,13 +103,11 @@
       },
       queryMyCircleByUser(circleT) {
         let self = this;
-        debugger
         this.$Ice_CircleService.queryMyCircleByUser(this.userId, circleT, this.page.pageIndex, this.page.pageSize, new IceCallback(
           function (result) {
-            debugger
             if (result.code === 0) {
               if (circleT === 128) {
-                debugger
+
                 self.sCircleList = result.obj.circleSeq;
                 console.log(self.sCircleList);
                 self.sCircleNum = result.obj.totalItems;
@@ -155,10 +153,9 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
-            debugger
+
             self.$Ice_CircleService.removeCircle(this.userId, item.compId, ctype, new IceCallback(
               function (result) {
-                debugger
                 if (result.code === 0) {
                   if (ctype === 128) {
                     // self.routeList[index].cstatus = 32;

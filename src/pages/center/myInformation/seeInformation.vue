@@ -13,7 +13,7 @@
     </div>
     <div class="enterprisePic">
       <img :src="logoPath" alt="" v-if="logoPath != ''">
-      <!--<img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault widthHeight140 floatleft" v-if="logoPath == ''">-->
+      <img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault widthHeight140 floatleft" v-if="logoPath == ''">
       <!--<img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="logoPath === ''">-->
     </div>
     <span class="pLabel">{{compByUid.fname}}</span>
@@ -114,7 +114,7 @@
       },
       // 同意
       agreeOrRefuse: function (details, index, msgtype) {
-        debugger
+
         let content = '';
         let self = this;
         if (msgtype === 1) {
@@ -128,16 +128,17 @@
           .then(() => {
             // 成功
             // details.sender
-            debugger
+
             self.$Ice_CircleService.agreeOrRefuse(details.msgid, 1, new IceCallback(
 
               function (result) {
 
                 if (result.code === 0) {
-                  debugger
+
                   self.isOperation = false;
                   self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
+                  this.getMessageList();
                 } else {
                   self.$vux.toast.text('您的订单已被受理', 'top');
                 }
@@ -156,7 +157,7 @@
         let content = '';
         let self = this;
         if (msgtype === 1) {
-          debugger
+
           content = alertContent. CIRCLE_REFUSE_DISPATHCHER;
         } else if (msgtype === 2) {
           content = alertContent.CIRCLE_REFUSE_SOURCE;
@@ -168,11 +169,12 @@
             debugger
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, 0, new IceCallback(
               function (result) {
-                debugger
+
                 if (result.code === 0) {
                   self.messageList.splice(index, 1);
                   self.isOperation = false;
                   self.$vux.toast.text('已拒绝对方的好友圈', 'top');
+                  this.getMessageList();
                   if (msgtype === 1) {
                     self.$vux.toast.text(' 已拒绝对方添加调度圈', 'top');
                   } else if (msgtype === 2) {
