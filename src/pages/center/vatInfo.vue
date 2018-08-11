@@ -54,12 +54,17 @@
         placeholder="请输入发票税号"
         :error-message="v2"
       />
-      <van-field
-        v-model="compInfo.landline"
-        label="联系人电话"
-        placeholder="请填写电话"
-        :error-message="v3"
-      />
+      <!--<van-field-->
+        <!--v-model="compInfo.landline"-->
+      <!--label="联系人电话"-->
+      <!--placeholder="请填写电话"-->
+      <!--:error-message="v3"-->
+      <!--/>-->
+      <div class="zuoji">
+        <span class="zuojiNum">电话号码</span>
+        <input type="number" placeholder="请填写区号" class="quhao"> <span style="margin-right:.3rem;">-</span><input type="number" placeholder="请填写座机号码" class="haoma">
+      </div>
+
       <van-field
         v-model="compInfo.openbank"
         label="开户银行"
@@ -98,7 +103,13 @@
       />
     </van-cell-group>
 
-    <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor" style="background-color:#3189f5;width:7.08rem;margin:10vh 0rem 0rem .21rem;">保存</van-button>
+    <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor" style=" background: -webkit-linear-gradient(-45deg, #31bff5,#3190f5); /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(-45deg, #31bff5,#3190f5); /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(-45deg, #31bff5,#3190f5); /* Firefox 3.6 - 15 */
+      background: linear-gradient(-45deg, #31bff5,#3190f5); /* 标准的语法 */
+      width:7.5rem;
+      margin-top:10vh;
+      color:#ffffff;"">保存</van-button>
   </div>
 </template>
 

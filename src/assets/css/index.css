@@ -1442,6 +1442,28 @@ input[type="radio"] {
   background: -moz-linear-gradient(-45deg, #3190f5,#31bff5); /* Firefox 3.6 - 15 */
   background: linear-gradient(-45deg, #3190f5,#31bff5); /* 标准的语法 */
 }
+.zuoji{
+  width:7.5rem;
+  height:5vh;
+  border-top:1px solid #fafafa;
+  border-bottom:1px solid #fafafa;
+}
+.quhao{
+  width:1.5rem;
+  font-size:.26rem;
+}
+.zuojiNum{
+  width:1.5rem;
+  margin-left:.28rem;
+  margin-right:.5rem;
+  line-height:5vh;
+  font-size:.26rem;
+  color:#333;
+}
+.haoma{
+  width:2rem;
+  font-size:.26rem;
+}
 .width20{
   position:relative;
   width:20%;
