@@ -340,6 +340,7 @@ a {
 .seeMore{
   display:block;
   height:.6rem;
+  margin-bottom:8vh;
   text-align: center;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
@@ -1433,7 +1434,7 @@ input[type="radio"] {
   position:fixed;
   top:0rem;
   width:7.5rem;
-  height:.8rem;
+  height:6vh;
   z-index:1;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
@@ -1454,7 +1455,7 @@ input[type="radio"] {
   justify-content:space-between;
   align-items:center;
   width:7.5rem;
-  height:.8rem;
+  height:6vh;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
@@ -1476,8 +1477,8 @@ input[type="radio"] {
   background:#ffffff;
 }
 .downfixed{
-  margin-top:.8rem;
-  overflow: auto;
+  /*margin-top:.8rem;*/
+  /*overflow: auto;*/
 }
 .havedownfixed{
   margin-bottom:9vh;
@@ -1508,7 +1509,7 @@ input[type="radio"] {
 .issueHeaderNav span{
   display:inline-block;
   font-family: PingFang-SC-Regular;
-  font-size: .36rem;
+  font-size: .32rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .24rem;
@@ -1589,7 +1590,7 @@ input[type="radio"] {
   height:63vh;
   background:#ffffff;
   overflow: auto;
-  margin-bottom:1rem;
+  /*margin-bottom:8vh;*/
 }
 .order_list{
   display:block;
@@ -1760,7 +1761,7 @@ input[type="radio"] {
   color: #999999;
 }
 .arrivalTime{
-  margin-right:.62rem;
+  margin-right:.5rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -3732,7 +3733,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .lineList{
   display:block;
   width:7.5rem;
-  height:80vh;
+  height: 1rem;
   overflow: auto;
   padding:0rem .21rem 0rem .21rem;
   background:#ffffff;
@@ -3757,7 +3758,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display:inline-block;
   /*position:relative;*/
   /*top:.06rem;*/
-  width:3.2rem;
+  width:3rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

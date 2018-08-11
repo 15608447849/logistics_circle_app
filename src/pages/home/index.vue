@@ -32,33 +32,34 @@
         </ul>
       </i>
     </div>
-       <div class="searchBox">
-         <div class="selectRegion" @click="skipSearchPage">
-           <div class="addressCity" @click.stop="skipCityPage">
-             <span>{{address}}</span>
-             <i class="icon iconfont icon-xiala"></i>
-           </div>
-           <div class="searchBtn">
-             <i class="icon iconfont icon-sousuo"></i>
-             <span class="sousuo">搜索</span>
-           </div>
-         </div>
-       </div>
-       <div class="orderOperation">
-         <div class="banner">
-           <img src="../../assets/images/small/banner@2x.png" alt="">
-         </div>
-         <div class="fastSendRob">
-           <div class="sendOrder">
-             <img src="../../assets/images/small/快速发单@2x.png" alt="">
-             <span @click="toPageIssue">快速发单</span>
-           </div>
-           <div class="already">
-             <img src="../../assets/images/small/已抢订单@2x.png" alt="">
-             <span @click="skipOrder">我的发布</span>
-           </div>
-         </div>
-       </div>
+    <div style="height:95vh;margin-top:5vh;" class="fdfdfdfdf">
+      <div class="searchBox">
+        <div class="selectRegion" @click="skipSearchPage">
+          <div class="addressCity" @click.stop="skipCityPage">
+            <span>{{address}}</span>
+            <i class="icon iconfont icon-xiala"></i>
+          </div>
+          <div class="searchBtn">
+            <i class="icon iconfont icon-sousuo"></i>
+            <span class="sousuo">搜索</span>
+          </div>
+        </div>
+      </div>
+      <div class="orderOperation">
+        <div class="banner">
+          <img src="../../assets/images/small/banner@2x.png" alt="">
+        </div>
+        <div class="fastSendRob">
+          <div class="sendOrder">
+            <img src="../../assets/images/small/快速发单@2x.png" alt="">
+            <span @click="toPageIssue">快速发单</span>
+          </div>
+          <div class="already">
+            <img src="../../assets/images/small/已抢订单@2x.png" alt="">
+            <span @click="skipOrder">我的发布</span>
+          </div>
+        </div>
+      </div>
 
       <!--<ul class="order_boxIndex">-->
       <!--<li class="order_list">-->
@@ -80,8 +81,10 @@
         <div v-show="isShowNoData" class="noDataBox">
           <img src="../../assets/images/small/nodate.png"/>
         </div>
-        <div class="seeMore" v-show="isShowMore" @click="skipInformation">查看更多</div>
+
       </ul>
+    </div>
+    <div class="seeMore" v-show="isShowMore" @click="skipInformation">查看更多</div>
   </div>
 </template>
 <script>

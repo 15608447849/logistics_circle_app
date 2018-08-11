@@ -13,7 +13,7 @@
     </div>
     <div class="enterprisePic">
       <img :src="logoPath" alt="" v-if="logoPath != ''">
-      <img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault widthHeight140 floatleft" v-if="logoPath == ''">
+      <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="logoPath == ''">
       <!--<img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="logoPath === ''">-->
     </div>
     <span class="pLabel">{{compByUid.fname}}</span>
