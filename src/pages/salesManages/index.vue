@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="goBackPage"></i>
       </div>
@@ -11,7 +11,6 @@
         <i @click="addSales" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
       </div>
     </div>
-    <div class="downfixed havedownfixed">
       <div class="driverBox">
         <div class="searchDriverBox">
           <div class="searchDriver">
@@ -39,10 +38,13 @@
               <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
                  @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
             </li>
+
+
+
+
           </ul>
         </van-list>
       </div>
-    </div>
   </div>
 </template>
 

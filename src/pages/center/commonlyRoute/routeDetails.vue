@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
@@ -14,7 +14,7 @@
 
 
     </div>
-    <div class="downfixed havedownfixed">
+
       <div class="addRouterBox">
         <ul class="addRouteList">
           <li class="needBorder" @click="showCascadePicker(0)">
@@ -38,9 +38,9 @@
               :text=item.placename @click.native="removeBadge(64,index)" @click.native.stop="removeBadge"/></span>
           </li>
         </ul>
-        <button class="nextStep" @click="saveRoutes">保 存</button>
+        <button class="nextStep fixedBottom" @click="saveRoutes">保 存</button>
       </div>
-    </div>
+
   </div>
 </template>
 

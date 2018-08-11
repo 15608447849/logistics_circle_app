@@ -13,7 +13,7 @@
       </div>
       <!--<i class="icon iconfont icon-jibenxinxi1" @click="show4 = true"></i>-->
       <div class="width20">
-        <i class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
+        <i class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright displayNone"></i>
       </div>
 
         <ul class="dropdown" v-show="!isMember">

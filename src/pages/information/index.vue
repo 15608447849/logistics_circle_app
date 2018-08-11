@@ -2,7 +2,8 @@
   <div>
     <div class="issueHeaderNav">
       <div class="width20">
-        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft">
+        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">
+        <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">
       </div>
       <div class="width60">
         <span>信息大厅</span>

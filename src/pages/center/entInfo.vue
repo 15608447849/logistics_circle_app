@@ -18,7 +18,8 @@
     <ul class="enterpriseList">
       <li class="touxiangBox needBorder">
         <span class="touxiang">头像</span>
-        <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang">
+        <img :src="compInfo.logoPath" alt="" class="enterprisetouxiang" v-if="compInfo.logoPath !== ''">
+        <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="compInfo.logoPath === ''">
       </li>
       <li class="enterpriseLi needBorder" @click="show1 = true">
         <span class="invoiceTitle">企业名称</span>

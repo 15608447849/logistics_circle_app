@@ -39,7 +39,8 @@
 
         <ul class="circleList" v-show="selectOneTab">
           <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in sCircleList" :key="index">
-            <img :src="item.logoPath" alt="" class="circlePic">
+            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== ''">
+            <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight90 floatleft" v-if="item.logoPath === ''">
             <div class="companyNamePhone">
               <span class="companyName floatleft">{{item.fname}}</span>
               <span class="companyPhone floatright">{{item.contact}}</span></div>
@@ -48,19 +49,6 @@
             </div>
             <a class="pullBlack" @click.stop="removeClick(item, index, 128)">移 出</a>
           </li>
-
-
-          <li class="needBorder">
-            <img src="" alt="" class="circlePic">
-            <div class="companyNamePhone">
-              <span class="companyName floatleft"></span>
-              <span class="companyPhone floatright"></span></div>
-            <div class="lineName">
-              <span class="lineInfo"></span>
-            </div>
-            <a class="pullBlack">移 出</a>
-          </li>
-
         </ul>
         <div class="friendNum" v-show="selectOneTab">共{{sCircleNum}}位朋友</div>
 
@@ -120,10 +108,13 @@
       },
       queryMyCircleByUser(circleT) {
         let self = this;
+        debugger
         this.$Ice_CircleService.queryMyCircleByUser(this.userId, circleT, this.page.pageIndex, this.page.pageSize, new IceCallback(
           function (result) {
+            debugger
             if (result.code === 0) {
               if (circleT === 128) {
+                debugger
                 self.sCircleList = result.obj.circleSeq;
                 console.log(self.sCircleList);
                 self.sCircleNum = result.obj.totalItems;
@@ -169,8 +160,10 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
+            debugger
             self.$Ice_CircleService.removeCircle(this.userId, item.compId, ctype, new IceCallback(
               function (result) {
+                debugger
                 if (result.code === 0) {
                   if (ctype === 128) {
                     // self.routeList[index].cstatus = 32;

@@ -16,7 +16,8 @@
     </div>
 
       <div class="enterprisePic">
-        <img :src="compInfo.logoPath" alt="">
+        <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
+        <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
       </div>
       <span class="pLabel">{{compInfo.fname}}</span>
       <span class="creditGrade">信用等级</span>

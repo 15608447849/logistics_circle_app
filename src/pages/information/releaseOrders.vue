@@ -108,7 +108,7 @@
         <input v-model="displayDic.disPtLabel" @click="showPicker('pt')" type="text" placeholder="请选择" readonly="readonly">
       </li>
     </ul>
-    <ul class="liNumFour">
+    <ul class="liNumSix">
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span class="marginright13">收货人</span>
@@ -118,6 +118,18 @@
         <span class="textRed">*</span>
         <span>联系方式</span>
         <input v-model="OrderDetail.consphone" type="number" placeholder="请输入联系方式">
+      </li>
+      <li class="inputNumOne needBorder">
+        <span class="textRed">*</span>
+        <span class="marginright13">发货人</span>
+        <input type="text" placeholder="请输入联系人" style="width:6.2rem;">
+      </li>
+      <li class="inputNumOneSend needBorder">
+        <span class="textRed">*</span>
+        <span>业务员联系方式</span>
+        <input type="number" placeholder="请输入业务员联系方式" class="sendOrderPhone">
+        <span>/</span>
+        <input type="number" placeholder="请输入业务员联系方式" class="sendOrderPhone">
       </li>
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>

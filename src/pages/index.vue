@@ -16,7 +16,7 @@
         <div class="centerPic">
           <div class="portrait">
             <img :src="avatar" alt="">
-
+            <img src="../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="avatar === ''">
             <span class="logisticsMing">{{compName}}</span>
           </div>
           <ul class="startBox">
@@ -41,7 +41,10 @@
           <li @click="toMyCircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
             class="personalText circle">我的圈子</span></li>
           <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
-          <li @click="tomyInformation"><i class="icon iconfont icon-xiaoxi"></i><span class="personalText">消息</span>
+          <li @click="tomyInformation">
+            <i class="icon iconfont icon-xiaoxi"></i>
+            <span class="personalText">消息</span>
+            <i class="redSpot"  v-show="!isNewMsg"></i>
           </li>
         </ul>
         <div class="settingCircleBox" @click="toSetting">
@@ -81,6 +84,7 @@
     },
     data() {
       return {
+        isNewMsg:true,// 是否有新的消息
         cLevel: [],// 认证等级
         avatar: '',// 头像
         compName: '',// 企业名
@@ -121,10 +125,26 @@
     mounted() {
       // 获取当前定位城市
       this.$app_store.commit(CURRENT_CITY, '长沙');
+      this.isUnreadMsg();// 是否有新的消息
       this.initBaseData();
       this.initAreaData();
     },
     methods: {
+      isUnreadMsg() {
+        // 查询个人消息模块内是否有新的信息
+        let self = this;
+        this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback( function(result){
+          if(result.code === 0) {
+            self.isNewMsg = result.__state;
+            self.isNewMsg = false;
+          }else{
+
+          }
+        },function(error){
+          //失败
+        }))
+
+      },
       initBaseData() {
         let self = this;
         self.$Ice_SystemService.getBaseUnit(

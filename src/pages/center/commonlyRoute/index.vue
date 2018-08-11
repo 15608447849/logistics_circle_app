@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
@@ -10,19 +10,16 @@
       <div class="width20">
         <i @click="editorRoute" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
       </div>
-
-
-
     </div>
     <!--<div class="LineBox">-->
-    <!--<div class="lineSearch">-->
-    <!--<div class="driverSearchBtn">-->
-    <!--<i class="icon iconfont icon-sousuo"></i>-->
-    <!--<span class="sousuo">搜索</span>-->
+      <!--<div class="lineSearch">-->
+        <!--<div class="driverSearchBtn">-->
+           <!--<i class="icon iconfont icon-sousuo"></i>-->
+           <!--<span class="sousuo">搜索</span>-->
+        <!--</div>-->
+      <!--</div>-->
     <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-      <van-list style="margin-top:.8rem;"
+      <van-list
         v-model="loading"
         :finished="finished"
         @load="onLoad"
@@ -37,6 +34,12 @@
             <a :class="item.cstatus === 32 ? 'discontinuation' : 'discontinuation'" @click.stop="isEnable"
                @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
           </li>
+
+
+
+
+
+
 
         </ul>
       </van-list>

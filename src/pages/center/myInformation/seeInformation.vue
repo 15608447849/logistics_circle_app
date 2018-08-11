@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="enterprisePic">
-      <img :src="logoPath" alt="">
+      <img :src="logoPath" alt="" v-if="logoPath != ''">
+      <!--<img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault widthHeight140 floatleft" v-if="logoPath == ''">-->
+      <!--<img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="logoPath === ''">-->
     </div>
     <span class="pLabel">{{compByUid.fname}}</span>
     <span class="creditGrade">信用等级</span>
@@ -44,8 +46,8 @@
       <p>期待和您的合作，谢谢！</p>
     </div>
     <div class="agreeAndRefuse" v-show="isOperation" v-if="details.isread === 0">
-      <a class="agree" @click.stop="refuseFriend(details,details.msgid,details.msgtype)">拒绝</a>
-      <a class="refuse" @click.stop="addFriend(details,details.msgid,details.msgtype)">同意</a>
+      <a class="agree" @click.stop="agreeOrRefuse(details,details.msgid,details.msgtype)">拒绝</a>
+      <a class="refuse" @click.stop="agreeOrRefuse(details,details.msgid,details.msgtype)">同意</a>
     </div>
   </div>
 </template>
@@ -94,12 +96,12 @@
       querygetCompByUid: function () {
         let self = this;
         this.$Ice_CompService.querygetCompByCid(self.details.sender, new IceCallback(function (result) {
-          debugger
+
           if (result.code !== 0) {
             self.$vux.toast.text(result.msg, 'top');
           } else {
             // 成功
-            debugger
+
             self.compByUid = result.obj;
             self.logoPath = result.obj.logoPath;
             self.score = result.obj.creadit;
@@ -111,7 +113,7 @@
         }))
       },
       // 同意
-      addFriend: function (details, index, msgtype) {
+      agreeOrRefuse: function (details, index, msgtype) {
         debugger
         let content = '';
         let self = this;
@@ -126,11 +128,13 @@
           .then(() => {
             // 成功
             // details.sender
-            self.$Ice_CircleService.agreeOrRefuse(details.msgid, 0, new IceCallback(
+            debugger
+            self.$Ice_CircleService.agreeOrRefuse(details.msgid, 1, new IceCallback(
 
               function (result) {
-                debugger
+
                 if (result.code === 0) {
+                  debugger
                   self.isOperation = false;
                   self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
@@ -148,11 +152,11 @@
           })
       },
       // 拒绝
-      refuseFriend(item, index, msgtype) {
-        debugger
+      agreeOrRefuse(item, index, msgtype) {
         let content = '';
         let self = this;
         if (msgtype === 1) {
+          debugger
           content = alertContent. CIRCLE_REFUSE_DISPATHCHER;
         } else if (msgtype === 2) {
           content = alertContent.CIRCLE_REFUSE_SOURCE;
@@ -162,8 +166,9 @@
         this.message.showAlert(this, content)
           .then(() => {
             debugger
-            self.$Ice_CircleService.agreeOrRefuse(item.msgid, 1, new IceCallback(
+            self.$Ice_CircleService.agreeOrRefuse(item.msgid, 0, new IceCallback(
               function (result) {
+                debugger
                 if (result.code === 0) {
                   self.messageList.splice(index, 1);
                   self.isOperation = false;

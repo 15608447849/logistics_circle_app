@@ -11,8 +11,8 @@
         <i @click="addDriver" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
       </div>
     </div>
-    <div class="downfixed havedownfixed">
-      <div class="driverBox">
+    <div class="downfixed">
+
         <div class="searchDriverBox">
           <div class="searchDriver">
             <div class="driverSearchBtn" @click="toPageSearch">
@@ -22,7 +22,7 @@
           </div>
         </div>
         <van-list
-          style="background:#f5f5f5;"
+          style="background:#ffffff;"
           v-model="loading"
           :finished="finished"
           @load="onLoad"
@@ -39,9 +39,11 @@
               <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
                  @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
             </li>
+
+
+
           </ul>
         </van-list>
-      </div>
     </div>
   </div>
 </template>
