@@ -609,7 +609,24 @@ a {
   width:1.4rem;
   height:1.4rem;
 }
+/*.cube-upload-input,.cube-upload cube-upload-btn-def,.cube-upload-def clear-fix,.cube-upload-btn,.cube-upload-btn-def{*/
+  /*width:1.4rem;*/
+  /*height:1.4rem;*/
+  /*border:1px solid transparent;*/
+  /*border-radius: 50%;*/
+  /*background:transparent;*/
+/*}*/
+/*.cube-upload-btn-def:after{*/
+  /*width:1.4rem;*/
+  /*height:1.4rem;*/
+  /*border:1px solid transparent;*/
+  /*border-radius: 50%;*/
+  /*background:transparent;*/
+/*}*/
 .enterprisePic{
+  position:relative;
+  top:0rem;
+  left:0rem;
   display:block;
   margin:0 auto;
   width:1.4rem;
@@ -618,12 +635,21 @@ a {
   border-radius: 50%;
   margin-top:.46rem;
   margin-bottom:.22rem;
+  background:transparent;
 }
 .enterprisePic img{
+  position:absolute;
+  top:0rem;
+  left:0rem;
   width:1.4rem;
   height:1.4rem;
   border: 1px solid transparent;
   border-radius: 50%;
+  z-index:9999;
+}
+.enterprisePic div{
+  width:1rem;
+  height:1rem;
 }
 .pLabel{
   display:block;
@@ -1898,8 +1924,17 @@ input[type="radio"] {
 .marginright7{
   margin-right:.72rem;
 }
+.cube-upload-btn-def{
+
+}
+.marginright70{
+  margin-right:.62rem;
+}
 .marginright95{
   margin-right:.95rem;
+}
+.marginright90{
+  margin-right:.87rem;
 }
 .textMargin-right10{
   margin-right:10px;

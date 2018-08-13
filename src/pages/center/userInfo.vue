@@ -16,12 +16,14 @@
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
         <cube-upload
+          class="cube-upload-btn-def"
           ref="upload"
-          style="position:relative;top:0rem;left:0rem;"
+          style="position:relative;top:.25rem;left:.25rem;width:1rem;height:1rem;"
           :action="{target: uploadUrl,data: {'picNo': 7,'compId': compInfo.compid}}"
           @files-added="filesAdded"
           @file-success="filesSuccess"
           @file-error="filesError">
+
         </cube-upload>
       </div>
       <span class="pLabel">{{compInfo.fname}}</span>

@@ -133,23 +133,23 @@
         <div class="floatleft margin_bottom140 ulWidth100">
           <ul class="ulWidth100">
             <li class="orderinfo">
-              <span class="marginright95">订单号</span>
+              <span class="marginright90">订单号</span>
               <span>{{detailInfo.orderno}}</span>
             </li>
             <li class="orderinfo">
-              <span class="marginright7">发单时间</span>
+              <span class="marginright70">发单时间</span>
               <span>{{detailInfo.revidatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.revidatetime !== ''">
-              <span class="marginright7">抢单时间</span>
+              <span class="marginright70">抢单时间</span>
               <span>{{detailInfo.pubdatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.pusdatetime !== ''">
-              <span class="marginright7">取货时间</span>
+              <span class="marginright70">取货时间</span>
               <span>{{detailInfo.pusdatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.arridatetime !== ''">
-              <span class="marginright7">签收时间</span>
+              <span class="marginright70">签收时间</span>
               <span>{{detailInfo.arridatetime}}</span>
             </li>
           </ul>
