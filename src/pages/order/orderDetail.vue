@@ -11,7 +11,6 @@
         <div class="alignCenter floatright"></div>
       </div>
     </div>
-
       <div class="releaseStateBox">
         <div class="releaseAndCollect" v-show="type === 0">
           <div v-show="detailInfo.tstatus === 0">发布成功</div>
@@ -72,6 +71,7 @@
           <img src="" alt="">
           <span class="logisticsName"></span>
         </div>
+
         <ul class="backFF">
           <li class="issueDetailsLiText">
             <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
@@ -98,7 +98,7 @@
             class="textMargin-right10">{{detailInfo.ptdictcn}}</span><span></span>
 
           </li>
-          <li class="issueDetailsLiText">
+          <li class="issueDetailsLiText" v-if="detailInfo.puedatetime !== ''">
             <span class="issueText">时间信息</span><span class="textMargin-right10">{{detailInfo.puedatetime}}</span><span>取货</span>
 
           </li>
@@ -222,33 +222,34 @@
       <!--</a>-->
 
 
-    <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
-      <div class="closePayment">
-        <i class="icon iconfont icon-guanbi1" @click="show2 = false"></i>
-        <span>确认支付</span>
-        <div></div>
-      </div>
-      <ul class="payNumMode">
-        <li class="totalNum">
-          ￥3000
-        </li>
-        <li class="zhifubao">
-          <div>
-            <img src="../../assets/images/small/zhifubao1.png" alt="">
-            <span>支付宝支付</span>
-          </div>
-          <i class="icon iconfont icon-zhengque" v-show="true"></i>
-        </li>
-        <li class="weixin">
-          <div>
-            <img src="../../assets/images/small/weixin1.png" alt="">
-            <span>微信支付</span>
-          </div>
-          <i class="icon iconfont icon-zhengque" v-show="false"></i>
-        </li>
-        <button class="yesPay" @click="show2 = false">确认支付</button>
-      </ul>
-    </yd-popup>
+      <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
+        <div class="closePayment">
+          <i class="icon iconfont icon-guanbi1" @click="show2 = false"></i>
+          <span>确认支付</span>
+          <div></div>
+        </div>
+        <ul class="payNumMode">
+          <li class="totalNum">
+            ￥3000
+          </li>
+          <li class="zhifubao">
+            <div>
+              <img src="../../assets/images/small/zhifubao1.png" alt="">
+              <span>支付宝支付</span>
+            </div>
+            <i class="icon iconfont icon-zhengque" v-show="true"></i>
+          </li>
+          <li class="weixin">
+            <div>
+              <img src="../../assets/images/small/weixin1.png" alt="">
+              <span>微信支付</span>
+            </div>
+            <i class="icon iconfont icon-zhengque" v-show="false"></i>
+          </li>
+          <button class="yesPay" @click="show2 = false">确认支付</button>
+        </ul>
+      </yd-popup>
+
   </div>
 </template>
 

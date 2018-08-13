@@ -65,13 +65,14 @@
         details: {},
         logoPath: '', // 头像
         score: 0, // 认证等级
+        // address:'',
       }
     },
     mounted() {
       this.getMessageList();// 未处理消息
-      console.log(this.messageList)
+      // console.log(this.messageList);
       this.details = this.$route.query.details;
-      console.log(this.details);
+      // console.log(this.details);
       //企业基本信息
       this.querygetCompByUid();
     },
@@ -93,20 +94,19 @@
 
       },
       // 获取企业ID获取企业信息
-      querygetCompByUid: function () {
+        querygetCompByUid: function () {
         let self = this;
         this.$Ice_CompService.querygetCompByCid(self.details.sender, new IceCallback(function (result) {
-
           if (result.code !== 0) {
             self.$vux.toast.text(result.msg, 'top');
           } else {
             // 成功
-
             self.compByUid = result.obj;
+            console.log(result.obj);
             self.logoPath = result.obj.logoPath;
             self.score = result.obj.creadit;
+            // self.address = result.obj.address;
             self.computeLevel();
-            console.log(result.obj)
           }
         }, function (error) {
           //失败
@@ -157,7 +157,7 @@
         let content = '';
         let self = this;
         if (msgtype === 1) {
-
+        debugger
           content = alertContent. CIRCLE_REFUSE_DISPATHCHER;
         } else if (msgtype === 2) {
           content = alertContent.CIRCLE_REFUSE_SOURCE;
@@ -169,7 +169,7 @@
             debugger
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, 0, new IceCallback(
               function (result) {
-
+                debugger
                 if (result.code === 0) {
                   self.messageList.splice(index, 1);
                   self.isOperation = false;

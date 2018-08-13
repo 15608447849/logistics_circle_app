@@ -92,7 +92,7 @@
       },
       validator() {
         if (this.verifyUtil.isNull(this.dName)) {
-          this.$vux.toast.text('姓名不能为空', 'top');
+          this.$vux.toast.text('司机姓名不能为空', 'top');
           return false
         }
         if (this.verifyUtil.isPhoneNum(this.dPhone)) {

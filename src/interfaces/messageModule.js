@@ -3,6 +3,7 @@ module.exports = {
    * 查询当前用户是否有未读信息
    */
   isUnreadMsg: (oid, callback) => {
+    debugger
     queryIce(message.MessageServicePrx, 'MessageService', 'isUnreadMsg', oid, callback);
   },
   /**

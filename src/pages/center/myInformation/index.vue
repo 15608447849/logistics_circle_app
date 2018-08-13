@@ -44,9 +44,8 @@
              <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
              <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
-
-
-             <a class="handleafter" v-show="display" v-if="item.isread!==0">已同意</a>
+             <a class="handleafter" v-show="display" v-if="messageList.opstatus===1">已同意</a>
+             <a class="handleafter" v-show="display" v-if="messageList.opstatus===2">已拒绝</a>
              <a class="read" v-show="read" v-if="item.isread==0">已阅读</a>
            </li>
          </ul>
@@ -84,7 +83,7 @@
       this.isUnreadMsg();//查询用户是否有新的消息
       this.getMessageList();// 未处理消息
       // this.getNewMessage();
-      this.YesHandleMessage();// 已处理消息
+
     },
     methods: {
       // 同意
@@ -141,13 +140,13 @@
         }
         return disContent
       },
+      // 未处理消息
       getMessageList() {
         let self = this;
         this.$Ice_MessageService.queryMsgListByUid(self.userId,0, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
             self.messageList = result.obj;
-            console.log(result.obj)
           } else {
             self.$vux.toast.text(result.msg, 'top');
           }
@@ -157,13 +156,14 @@
         }))
 
       },
+      // 已处理的消息
       YesHandleMessage() {
         let self = this;
         this.$Ice_MessageService.queryMsgListByUid(self.userId, 1, new IceCallback(function (result) {
           if (result.code === 0) {
             // 成功
             self.readyHandMsg = result.obj;
-            console.log(result.obj)
+            console.log(self.readyHandMsg)
           } else {
             self.$vux.toast.text(result.msg, 'top');
           }
@@ -173,6 +173,7 @@
         }))
       },
       tabClick() {
+        this.YesHandleMessage();// 已处理消息
         this.isShow = !this.isShow
       },
 
@@ -180,9 +181,17 @@
       //查询用户是否有新的消息
       isUnreadMsg() {
         let self = this;
-        this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback( function(result){
+        debugger
+        console.log(232323)
+        this.$Ice_MessageService.isUnreadMsg(Number(self.userId),new IceCallback(function(result){
+          console.log(self.userId)
+          debugger
           if(result.code === 0) {
-            self.isNewMsg = result.__state;
+            debugger
+            console.log(565656)
+            self.isNewMsg = result.obj;
+            console.log(222)
+            console.log(self.isNewMsg)
             self.isNewMsg = false;
           }else{
 

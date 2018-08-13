@@ -60,7 +60,7 @@
       goBackPage() {
         this.$router.go(-1);
       },
-      // 司机新增保存
+      // 业务员新增保存
       dSave() {
         let self = this;
         if(!this.validator()) {

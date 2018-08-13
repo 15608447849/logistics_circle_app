@@ -118,6 +118,7 @@
         this.avatar = this.compInfo.logoPath;
         this.$app_store.commit(AVATAR_URL,this.avatar);
         this.computeLevel();
+        console.log(this.compName);
       } else {
         this.avatar = require('../assets/images/small/avatar.png');
       }

@@ -30,7 +30,7 @@
             <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
               <div class="driverInfo">
                 <div class="driverPic">
-                  <i class="icon iconfont icon-siji"></i>
+                  <i class="icon iconfont icon-yonghu"></i>
                 </div>
                 <span class="driverName">{{item.name}}</span>
                 <span class="driverPhone">{{item.phone}}</span>
