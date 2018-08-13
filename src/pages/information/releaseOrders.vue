@@ -177,7 +177,7 @@
       <span class="floatleft marginBottom60">订单总价</span><span
       class="floatright textRed size14 textBlod marginBottom60">￥{{sunPrice}}元</span>
     </div>
-    <button class="releaseBtn" @click="releaseOrder">发 布</button>
+    <button class="releaseBtn" v-show="isReleaseOrder" @click="releaseOrder">发 布</button>
   </div>
 </template>
 <script>
@@ -195,7 +195,7 @@
         selectDataPicker: '',
         insureamt: 0, // 保价金额
         codamt: 0, // 代收金额
-
+        isReleaseOrder: false,
 
         displayDic: { // 用于展示用户
           disWmLabel: '',// 货物大小
@@ -241,6 +241,13 @@
       // 初始化页面数据
       initData() {
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+        // 当前企业未认证无法抢单
+        if(this.compInfo.verify === 0) {
+          this.isReleaseOrder = false;
+          this.$vux.toast.text('当前企业未认证，无法进行发单操作!', 'top');
+        }else {
+          this.isReleaseOrder = true;
+        }
         // 添加发布人联系方式
         if (this.compInfo.pho !== '' && this.compInfo.pht !== '') {
           this.OrderDetail.phone1 = this.compInfo.pho;

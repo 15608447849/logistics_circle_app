@@ -13,8 +13,8 @@ module.exports = {
     },
     /** 根据企业码查询指定企业信息(加路线) */
     querygetCompByCid:(compid,callback)=>{
-        queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByCid', compid,callback);
-      // queryIce(comp.CompServicePrx, 'CompService', 'querygetCompAll', compid,callback);
+        // queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByCid', compid,callback);
+      queryIce(comp.CompServicePrx, 'CompService', 'querygetCompAll', compid,callback);
     },
     /*** 修改保存企业信息 */
     updateComp:(compJson,callback) => {

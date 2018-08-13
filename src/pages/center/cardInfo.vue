@@ -67,6 +67,7 @@
         cardUrl: cardUrl,// 获取地址
         delCardUrl: delCardUrl, // 删除地址
         uploadIndex: 0,
+        userId: this.$app_store.getters.userId,
         uploadList: [
           {
             title: '营业执照',
@@ -186,7 +187,7 @@
         let imgPath = ['', '', '', '', '', '', '', ''];
         imgPath[imgId] = url;
         let self = this;
-        this.$Ice_InfoService.feedbackCredentRelpath(this.compInfo.compid, imgPath,
+        this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
           new IceCallback(
             function (result) {
               self.updateComp();

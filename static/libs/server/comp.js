@@ -377,6 +377,7 @@
         "selectCompUserByUid": [, , , , , [7], [[3], ["cstruct.intSeqHelper"]], , , , ],
         "addLoginCompByRedis": [, , , , , [7], [[3], [3]], , , , ],
         "selectStaffInfo": [, , , , , [7], [[7], [7], [7], [3], [3], [cstruct.Page]], [[cstruct.Page]], , , ],
+        "querygetCompAll": [, , , , , [7], [[7]], , , , ],
         "searchDriver4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
         "searchStaff4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
         "searchEnterprise4App": [, , , , , [7], [[7], [3], [3]], , , , ],

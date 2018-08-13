@@ -14,8 +14,8 @@
      <div class="issueDetailsBox">
        <div class="orderPadding10">
          <div class="logisticsNameBox">
-           <img :src="compInfoA.logoPath" alt="">
-
+           <img :src="compInfoA.logoPath" v-if="compInfoA.logoPath !== ''">
+           <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfoA.logoPath === ''">
            <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
          </div>
          <ul>
@@ -123,6 +123,17 @@
       },
       setRobbingOrder() {
         let self = this;
+        // 当前企业未认证无法抢单
+        if(this.compInfo.verify === 0) {
+          this.$router.push({
+            path: '/userInfo',
+            query: {
+              isYourCompInfo: true,    //row.hid为变量
+            }
+          });
+          return
+        }
+        console.log(self.compInfoA);
         // this.message.Toast(this,'loading','正在努力抢单中...',true);
         this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,this.detailInfo.pubercompid,
           new IceCallback(
@@ -166,7 +177,6 @@
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
-              debugger
               self.compInfoA = result.obj;
             },
             function (error) {
@@ -180,7 +190,6 @@
       this.orderId = this.$route.query.id || '';
       this.puberId = this.$route.query.puberid || '';
       this.pubercompid = this.$route.query.pubercompid || '';
-      debugger
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
       if(this.pubercompid !== this.compInfo.compid) {
         // 当前本人订单
