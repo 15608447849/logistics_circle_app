@@ -19,7 +19,7 @@
         <!--</div>-->
       <!--</div>-->
     <!--</div>-->
- <div class="downfixed" style="height:95vh;background:#ffffff;overflow: auto">
+ <div style="height:95vh;background:#ffffff;overflow: auto">
    <van-list
      v-model="loading"
      :finished="finished"
