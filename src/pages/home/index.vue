@@ -32,7 +32,10 @@
         </ul>
       </i>
     </div>
-    <div style="height:95vh;margin-top:5vh;" class="fdfdfdfdf">
+
+
+
+    <div class="homeContent">
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
           <div class="addressCity" @click.stop="skipCityPage">
@@ -81,10 +84,12 @@
         <div v-show="isShowNoData" class="noDataBox">
           <img src="../../assets/images/small/nodate.png"/>
         </div>
-
       </ul>
     </div>
-    <div class="seeMore" v-show="isShowMore" @click="skipInformation">查看更多</div>
+
+
+
+    <div class="seeMore" v-show="!isShowMore" @click="skipInformation">查看更多</div>
   </div>
 </template>
 <script>

@@ -16,6 +16,10 @@
     </div>
 
       <p v-show="isShowMessage" class="download-tip">{{pullingMessage}}</p>
+    <div class="circleLists">
+      <div v-show="isShowNoData" class="noDataBox">
+        <img src="../../assets/images/small/nodate.png"/>
+      </div>
       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -34,10 +38,8 @@
           </ul>
         </van-list>
       </van-pull-refresh>
+    </div>
 
-      <div v-show="isShowNoData" class="noDataBox">
-        <img src="../../assets/images/small/nodate.png"/>
-      </div>
       <!--下拉刷新回调的提示-->
 
   </div>
