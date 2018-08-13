@@ -151,6 +151,7 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
+              debugger
               if(result.code === 0) {
                 self.$app_store.commit(DICT, JSON.stringify(result.data));
               } else {

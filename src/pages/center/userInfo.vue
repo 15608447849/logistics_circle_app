@@ -156,8 +156,13 @@
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
-              self.compInfo = result.obj;
-              self.computeLevel();
+              if(result.code === 0) {
+                self.compInfo = result.obj;
+                self.computeLevel();
+              }else {
+                self.$vux.toast.text(result.msg, 'top');
+              }
+
             },
             function (error) {
               self.$vux.toast.text('企业信息获取失败!', 'top');
@@ -181,10 +186,10 @@
         let imgPath = ['', '', '', '', '', '', '', ''];
         imgPath[imgId] = url;
         let self = this;
-        this.$Ice_InfoService.feedbackCredentRelpath(this.compInfo.compid, imgPath,
+        this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
           new IceCallback(
             function (result) {
-              localStorage.setItem(COMP_INFO, self.compInfo);
+              localStorage.setItem(COMP_INFO, JSON.stringify(self.compInfo));
             },
             function (error) {
             }
@@ -206,7 +211,7 @@
       filesAdded(files) {
         let self = this;
         // 图片压缩
-        this.imgPreview(files);
+        // this.imgPreview(files);
         // 图片旋转
         // EXIF.getData(this.file, function() {
         //   self.Orientation = EXIF.getTag(this, 'Orientation');

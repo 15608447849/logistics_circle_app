@@ -12,7 +12,6 @@
       </div>
 
 
-
     </div>
     <ul class="liNumThree margintop80">
       <li class="inputNumOne needBorder">
@@ -47,15 +46,18 @@
         <input v-model="OrderDetail.num" type="text" placeholder="货物数量">
       </li>
       <li class="inputShort needBorder">
-        <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"  readonly="readonly">
+        <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"
+               readonly="readonly">
       </li>
       <li class="inputLong">
         <span class="textRed">*</span>
         <span>货物信息</span>
-        <input type="text" v-model="displayDic.disCtLabel" @click="showPicker('ct')" placeholder="货物类别" readonly="readonly">
+        <input type="text" v-model="displayDic.disCtLabel" @click="showPicker('ct')" placeholder="货物类别"
+               readonly="readonly">
       </li>
       <li class="inputShort">
-        <input type="text" v-model="displayDic.disPaLabel" @click="showPicker('pa')" placeholder="是否包装" readonly="readonly">
+        <input type="text" v-model="displayDic.disPaLabel" @click="showPicker('pa')" placeholder="是否包装"
+               readonly="readonly">
       </li>
     </ul>
     <ul class="liNumThreeCompany">
@@ -65,16 +67,19 @@
       </li>
       <span class="carNum">台</span>
       <li class="inputShort needBorder">
-        <input v-model="displayDic.disVlLabel" @click="showPicker('vl')" type="text" placeholder="长度"  readonly="readonly">
+        <input v-model="displayDic.disVlLabel" @click="showPicker('vl')" type="text" placeholder="长度"
+               readonly="readonly">
       </li>
       <span class="carNum">米</span>
       <li class="inputNumOneC needBorder">
         <span class="liNumThreeCompanySpan">车辆要求</span>
-        <input v-model="displayDic.disVtLabel" @click="showPicker('vt')" type="text" placeholder="请选择车辆型号" readonly="readonly">
+        <input v-model="displayDic.disVtLabel" @click="showPicker('vt')" type="text" placeholder="请选择车辆型号"
+               readonly="readonly">
       </li>
       <li class="inputNumOneC">
         <span class="liNumThreeCompanySpan">运输要求</span>
-        <input v-model="displayDic.disTnLabel" @click="showPicker('tn')" type="text" placeholder="请选择运输要求" readonly="readonly">
+        <input v-model="displayDic.disTnLabel" @click="showPicker('tn')" type="text" placeholder="请选择运输要求"
+               readonly="readonly">
       </li>
     </ul>
     <ul class="liNumFour">
@@ -84,28 +89,28 @@
         <input v-model="OrderDetail.price" type="text" placeholder="费用">
       </li>
       <li class="inputShort needBorder">
-        <input v-model="displayDic.disPmLabel" @click="showPicker('pm')" type="text" placeholder="单"  readonly="readonly">
+        <input v-model="displayDic.disPmLabel" @click="showPicker('pm')" type="text" placeholder="单"
+               readonly="readonly">
+      </li>
+      <li class="inputNumOne">
+        <span class="textRed">*</span>
+        <span>付款方式</span>
+        <input v-model="displayDic.disPtLabel" @click="showPicker('pt')" type="text" placeholder="请选择"
+               readonly="readonly">
       </li>
       <li class="inputShorter needBorder">
         <span class="textRed">*</span>
         <span class="size10">声明保价</span>
-        <input type="text" v-model="OrderDetail.insureamt">
+        <input type="text" v-model="insureamt">
         <span>元</span>
         <span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>
       </li>
-
       <li class="inputShorter needBorder">
         <span class="textRed">*</span>
         <span class="size10">代收货款</span>
-        <input v-model="OrderDetail.codamt" type="text">
+        <input v-model="codamt" type="text">
         <span>元</span>
         <span class="textRed size10 def">有代收不支持线上支付，不填默认为0</span>
-      </li>
-
-      <li class="inputNumOne">
-        <span class="textRed">*</span>
-        <span>付款方式</span>
-        <input v-model="displayDic.disPtLabel" @click="showPicker('pt')" type="text" placeholder="请选择" readonly="readonly">
       </li>
     </ul>
     <ul class="liNumSix">
@@ -119,27 +124,29 @@
         <span>联系方式</span>
         <input v-model="OrderDetail.consphone" type="number" placeholder="请输入联系方式">
       </li>
-      <li class="inputNumOne needBorder">
-        <span class="textRed">*</span>
-        <span class="marginright13">发货人</span>
-        <input type="text" placeholder="请输入联系人" style="width:6.2rem;">
-      </li>
+      <!--<li class="inputNumOne needBorder">-->
+      <!--<span class="textRed">*</span>-->
+      <!--<span class="marginright13">发货人</span>-->
+      <!--<input type="text" placeholder="请输入联系人" style="width:6.2rem;">-->
+      <!--</li>-->
       <li class="inputNumOneSend needBorder">
         <span class="textRed">*</span>
-        <span>业务员联系方式</span>
-        <input type="number" placeholder="请输入业务员联系方式" class="sendOrderPhone">
+        <span>发布人联系方式</span>
+        <input type="number" v-model="OrderDetail.phone1" placeholder="请输入发布人联系方式" class="sendOrderPhone">
         <span>/</span>
-        <input type="number" placeholder="请输入业务员联系方式" class="sendOrderPhone">
+        <input type="number" v-model="OrderDetail.phone2" placeholder="请输入发布人联系方式" class="sendOrderPhone">
       </li>
       <li class="inputNumOne needBorder">
         <span class="textRed">*</span>
         <span>取货方式</span>
-        <input v-model="displayDic.disDmLabel" @click="showPicker('dm')" type="text" placeholder="请选择取货方式" readonly="readonly">
+        <input v-model="displayDic.disDmLabel" @click="showPicker('dm')" type="text" placeholder="请选择取货方式"
+               readonly="readonly">
       </li>
       <li class="inputNumOne">
         <span class="textRed">*</span>
         <span>回单要求</span>
-        <input v-model="displayDic.disReLabel" @click="showPicker('re')" type="text" placeholder="请请选择回单要求" readonly="readonly">
+        <input v-model="displayDic.disReLabel" @click="showPicker('re')" type="text" placeholder="请请选择回单要求"
+               readonly="readonly">
       </li>
     </ul>
     <ul class="liNumTwo">
@@ -163,7 +170,7 @@
       <li class="inputNumOneLong">
         <span class="noStart">预计到达时间</span>
         <input v-model="OrderDetail.eaedatetime" @click="showDatePicker('eaedatetime')" type="text"
-               placeholder="预计到达时间止" readonly="readonly"  class="goodsTime">
+               placeholder="预计到达时间止" readonly="readonly" class="goodsTime">
       </li>
     </ul>
     <div class="totalPrice marginBottom65">
@@ -177,13 +184,19 @@
   import {
     GEOSTATE
   } from '../../store/mutation-types'
-  import { Toast } from 'vant';
+  import {Toast} from 'vant';
+
   export default {
     data() {
       return {
         OrderDetail: new order.OrderICE(),
+        compInfo: {},
         dicData: {},// 选择器字典数据, store中获取
         selectDataPicker: '',
+        insureamt: 0, // 保价金额
+        codamt: 0, // 代收金额
+
+
         displayDic: { // 用于展示用户
           disWmLabel: '',// 货物大小
           disCtLabel: '',// 货物类型
@@ -227,11 +240,26 @@
     methods: {
       // 初始化页面数据
       initData() {
+        this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+        // 添加发布人联系方式
+        if (this.compInfo.pho !== '' && this.compInfo.pht !== '') {
+          this.OrderDetail.phone1 = this.compInfo.pho;
+          this.OrderDetail.phone2 = this.compInfo.pht;
+        }else if(this.compInfo.pho !== '' && this.compInfo.pht === '') {
+          this.OrderDetail.phone1 = this.compInfo.contact;
+          this.OrderDetail.phone2 = this.compInfo.pho;
+        } else if(this.compInfo.pho === '' && this.compInfo.pht !== '') {
+          this.OrderDetail.phone1 = this.compInfo.contact;
+          this.OrderDetail.phone2 = this.compInfo.pht;
+        } else {
+          this.OrderDetail.phone1 = this.compInfo.contact;
+          this.OrderDetail.phone2 = '';
+        }
         this.OrderDetail.priority = this.$route.query.status;
         this.OrderDetail.puberid = this.$app_store.getters.userId;
         this.OrderDetail.startc = 0;
         this.OrderDetail.arriarc = 0;
-        this.dicData = JSON.parse(this.$app_store.getters.dict)  || null;
+        this.dicData = JSON.parse(this.$app_store.getters.dict) || null;
         this.pmList = this.dicData.pm;
         // 设置默认类型字典选择, 默认取第一个
         this.OrderDetail.wmdictc = this.dicData.wm[0].value;
@@ -280,7 +308,7 @@
         this.OrderDetail.vnum = null;
       },
       showPicker(category) {
-        if(category === 'pm') {
+        if (category === 'pm') {
           this.setPicker(this.disPmList);
         } else {
           this.setPicker(this.dicData[category]);
@@ -313,11 +341,11 @@
         let self = this;
         self.disPmList = [];
         let pmList = this.dicData['pm'];
-        pmList.forEach((item,index,arr) => {
-          if(item.label === '整单') {
+        pmList.forEach((item, index, arr) => {
+          if (item.label === '整单') {
             self.disPmList.push(item);
           }
-          if(item.label === category) {
+          if (item.label === category) {
             this.OrderDetail.pmdictc = item.value;
             this.displayDic.disPmLabel = item.label;
             self.disPmList.push(item);
@@ -360,6 +388,12 @@
                 this.displayDic.disTnLabel = selectedText;
                 break;
               case '支付方式':
+                if(selectedVal[0] === 21) {
+                  // 线上支付
+                  this.codamt = 0;
+                  this.insureamt = 0 ;
+
+                }
                 this.OrderDetail.ptdictc = selectedVal;
                 this.displayDic.disPtLabel = selectedText;
                 break;
@@ -404,13 +438,15 @@
             mask: true,
             message: '加载中...'
           });
+          self.OrderDetail.codamt = self.codamt;
+          self.OrderDetail.insureamt = self.insureamt ;
           self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
             function (result) {
               self.$vux.toast.text(result.msg, 'top');
               if (result.code === 0) {
-                setTimeout(()=>{
+                setTimeout(() => {
                   self.$router.go(-1);
-                },1500);
+                }, 1500);
               } else {
                 // 发送失败
                 self.$dialog.loading.close();
@@ -466,7 +502,7 @@
       sumPrice() {
         if (this.displayDic.disPmLabel[0] === '整单') {
           this.sunPrice = this.OrderDetail.price
-        }else {
+        } else {
           this.sunPrice = Number(this.OrderDetail.price) * Number(this.OrderDetail.wm)
         }
       }
@@ -481,6 +517,20 @@
       }
     },
     watch: {
+      // 保价
+      insureamt(newValue, oldValue) {
+        if(newValue >0) {
+          this.OrderDetail.ptdictc = 22;
+          this.displayDic.disPtLabel = '线下支付';
+        }
+      },
+      codamt(newValue, oldValue) {
+        if(newValue >0) {
+          this.OrderDetail.ptdictc = 22;
+          this.displayDic.disPtLabel = '线下支付';
+        }
+      },
+      //
       wm(newValue, oldValue) {
         // 计算总价
         this.sumPrice()

@@ -216,7 +216,6 @@
         // 保存信息
         let self = this;
         let compJson = new comp.CompInfo();
-        debugger
         compJson.compid = this.compInfo.compid;
         compJson.uoid = this.userId;
         compJson.fname = this.compInfo.fname;
@@ -277,56 +276,56 @@
           } else {
             this.v1 = ''
           }
-          // 企业简称
-          if (this.verifyUtil.isNull(newValue.sname)) {
-            isBtnClick = false;
-            this.v2 = '企业简称不能为空';
-          } else {
-            this.v2 = ''
-          }
-          // 企业性质
-          if (newValue.ctype === 0) {
-            isBtnClick = false;
-            this.v3 = '请选择企业性质';
-          } else {
-            this.v3 = ''
-          }
-          //  企业规模
-          if (newValue.csale === 0) {
-            isBtnClick = false;
-            this.v4 = '请选择企业规模';
-          } else {
-            this.v4 = ''
-          }
-          // // 联系人电话
-          // if (this.verifyUtil.isPhoneNum(newValue.contact)) {
+          // // 企业简称
+          // if (this.verifyUtil.isNull(newValue.sname)) {
           //   isBtnClick = false;
-          //   this.v5 = '请输入联系人电话';
+          //   this.v2 = '企业简称不能为空';
           // } else {
-          //   this.v5 = ''
+          //   this.v2 = ''
           // }
-          // 邮编
-          if (this.verifyUtil.isNull(newValue.postcode)) {
-            isBtnClick = false;
-            this.v6 = '请输入邮编';
-          } else {
-            this.v6 = ''
-          }
-
-          // 企业地址
-          if (newValue.area === 0) {
-            isBtnClick = false;
-            this.v9 = '请选择企业地址';
-          } else {
-            this.v9 = ''
-          }
-          // 详细地址
-          if (this.verifyUtil.isNull(newValue.billaddr)) {
-            isBtnClick = false;
-            this.v10 = '请输入详细地址';
-          } else {
-            this.v10 = ''
-          }
+          // // 企业性质
+          // if (newValue.ctype === 0) {
+          //   isBtnClick = false;
+          //   this.v3 = '请选择企业性质';
+          // } else {
+          //   this.v3 = ''
+          // }
+          // //  企业规模
+          // if (newValue.csale === 0) {
+          //   isBtnClick = false;
+          //   this.v4 = '请选择企业规模';
+          // } else {
+          //   this.v4 = ''
+          // }
+          // // // 联系人电话
+          // // if (this.verifyUtil.isPhoneNum(newValue.contact)) {
+          // //   isBtnClick = false;
+          // //   this.v5 = '请输入联系人电话';
+          // // } else {
+          // //   this.v5 = ''
+          // // }
+          // // 邮编
+          // if (this.verifyUtil.isNull(newValue.postcode)) {
+          //   isBtnClick = false;
+          //   this.v6 = '请输入邮编';
+          // } else {
+          //   this.v6 = ''
+          // }
+          //
+          // // 企业地址
+          // if (newValue.area === 0) {
+          //   isBtnClick = false;
+          //   this.v9 = '请选择企业地址';
+          // } else {
+          //   this.v9 = ''
+          // }
+          // // 详细地址
+          // if (this.verifyUtil.isNull(newValue.billaddr)) {
+          //   isBtnClick = false;
+          //   this.v10 = '请输入详细地址';
+          // } else {
+          //   this.v10 = ''
+          // }
           this.disabled = !isBtnClick;
         },
         deep: true

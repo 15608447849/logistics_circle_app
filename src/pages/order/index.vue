@@ -12,10 +12,7 @@
         <div class="width20">
           <div class="alignCenter floatright"></div>
         </div>
-
-
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
-
       </div>
 
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
@@ -153,7 +150,7 @@
       }
     },
     mounted() {
-      this.fName = JSON.parse(this.$app_store.state.compInfo).fname
+      this.fName = JSON.parse(this.$app_store.state.compInfo).fname;
       console.log(this.$app_store.state.compInfo);
       this.$app_store.commit(TABBAR_INDEX, 3);
       // 初始化列表查询条件

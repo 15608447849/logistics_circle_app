@@ -44,7 +44,7 @@
           </div>
           <div class="searchBtn">
             <i class="icon iconfont icon-sousuo"></i>
-            <span class="sousuo">搜索</span>
+            <span class="sousuo">{{key}}</span>
           </div>
         </div>
       </div>
@@ -86,9 +86,6 @@
         </div>
       </ul>
     </div>
-
-
-
     <div class="seeMore" v-show="!isShowMore" @click="skipInformation">查看更多</div>
   </div>
 </template>
@@ -130,9 +127,19 @@
     },
     activated() {
       this.$app_store.commit(TABBAR_INDEX,0);
+      // 搜索框搜索内容
+      if (this.$app_store.getters.searchState === searchState.INFORMATION) {
+        this.key = this.$app_store.getters.searchContent;
+        // driverName 后端搜索条件
+        // this.driverName = this.searchInputVal;
+        // console.log(this.$app_store.getters.searchContent)
+
+      }
       if(this.address !== this.$app_store.state.currentCity) {
         this.address =  this.$app_store.state.currentCity;
       }
+
+
       this.requestInfoList();
     },
     methods: {

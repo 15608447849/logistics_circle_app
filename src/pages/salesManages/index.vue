@@ -63,7 +63,7 @@
         userId: this.$app_store.getters.userId,
         // pageSize: '1'// 当前页数
         page: new cstruct.Page(),
-        searchInputVal: '搜索',
+        searchInputVal: '业务员名称搜索',
         loading: false, // 控制加载动画
         finished: false // 控制是否执行上推加载
       }

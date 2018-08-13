@@ -14,6 +14,7 @@ module.exports = {
     /** 根据企业码查询指定企业信息(加路线) */
     querygetCompByCid:(compid,callback)=>{
         queryIce(comp.CompServicePrx, 'CompService', 'querygetCompByCid', compid,callback);
+      // queryIce(comp.CompServicePrx, 'CompService', 'querygetCompAll', compid,callback);
     },
     /*** 修改保存企业信息 */
     updateComp:(compJson,callback) => {
@@ -42,5 +43,9 @@ module.exports = {
     /*** 修改司机业务员状态(type 人员对象：1,添加司机;132,添加业务员; cuid 当前登录用户 ,uid需要修改的用户,status 修改的状态 （0 启用 32 停用）) */
     updateStaffstatus:(cuid,uid,status,type,callback) => {
         queryIce(comp.CompServicePrx, 'CompService', 'updateStaffstatus',cuid,uid,status,type,callback);
+    },
+    /** 获取司机列表 */
+    searchDriver4App:(cuid,arg,pageNo,pageSize,callback) => {
+      queryIce(comp.CompServicePrx, 'CompService', 'searchDriver4App',cuid,arg,pageNo,pageSize,callback);
     }
 };

@@ -10,14 +10,12 @@
        <div class="width20">
          <span class="alignCenter floatright"></span>
        </div>
-
-
-
      </div>
      <div class="issueDetailsBox">
        <div class="orderPadding10">
          <div class="logisticsNameBox">
-           <img src="../../assets/images/small/moren.png" alt="">
+           <img :src="compInfoA.logoPath" alt="">
+
            <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
          </div>
          <ul>
@@ -96,7 +94,7 @@
            <div class="lineHeight10"></div>
          </div>
        </div>
-       <div class="RobbingOrderWhite" v-if="detailInfo.ostatus === 0">
+       <div class="RobbingOrderWhite" v-if="detailInfo.ostatus === 0 && isRob === true">
          <button class="robOrderBtn" @click="setRobbingOrder">抢单</button>
        </div>
      </div>
@@ -110,10 +108,13 @@
     data() {
       return {
         detailInfo: {},
+        isRob: false,
         token: '',
         orderId: '',
         puberId: '',
-        pubercompid: ''
+        pubercompid: '',
+        compInfo: {},
+        compInfoA: {}
       }
     },
     methods: {
@@ -159,12 +160,34 @@
             }
           )
         );
-      }
+      },
+      queryCompByCid(compId) {
+        let self = this;
+        this.$Ice_CompService.querygetCompByCid(compId,
+          new IceCallback(
+            function (result) {
+              debugger
+              self.compInfoA = result.obj;
+            },
+            function (error) {
+              self.$vux.toast.text('企业信息获取失败!', 'top');
+            }
+          )
+        );
+      },
     },
     activated() {
       this.orderId = this.$route.query.id || '';
       this.puberId = this.$route.query.puberid || '';
       this.pubercompid = this.$route.query.pubercompid || '';
+      debugger
+      this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+      if(this.pubercompid !== this.compInfo.compid) {
+        // 当前本人订单
+        this.isRob = true
+      }
+      // 根据发布人企业id 获取企业认证信息
+      this.queryCompByCid(this.pubercompid);
       this.getOrderDetailInfo();
     }
   }

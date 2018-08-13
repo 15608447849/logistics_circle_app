@@ -17,7 +17,7 @@
           <div class="searchFriend">
             <div class="friendSearchBtn" @click="toPageSearch">
               <i class="icon iconfont icon-sousuo"></i>
-              <input v-model="searchInputVal" type="text" class="friendSousuo" placeholder="输入名称、电话模糊查询">
+              <input v-model="searchInputVal" type="text" class="friendSousuo" placeholder="输入企业名称查询">
             </div>
           </div>
         </div>
@@ -220,7 +220,6 @@
       },
       queryCanAddMyCircle(circleQueryParam, successCallback, errorCallback) {
         let self = this;
-        debugger
         this.$Ice_CircleService.queryCanAddMyCircle(circleQueryParam, new IceCallback(
           function (result) {
             successCallback(result)

@@ -244,47 +244,47 @@
       compInfo: {
         handler(newValue, oldValue) {
           let isBtnClick = true;
-          if (this.verifyUtil.isNull(newValue.invtitle)) {
-            isBtnClick = false;
-            this.v1 = '发票税号不能为空'
-          } else {
-            this.v1 = ''
-          }
-          // 发票税号
-          if (this.verifyUtil.checkTax(newValue.taxno)) {
-            isBtnClick = false;
-            this.v2 = '发票税号不正确';
-          } else {
-            this.v2 = ''
-          }
-          // // 联系电话
-          // if (this.verifyUtil.isNull(newValue.landline)) {
+          // if (this.verifyUtil.isNull(newValue.invtitle)) {
           //   isBtnClick = false;
-          //   this.v3 = '联系电话不能为空';
+          //   this.v1 = '发票税号不能为空'
           // } else {
-          //   this.v3 = ''
+          //   this.v1 = ''
           // }
-          //  开户银行
-          if (this.verifyUtil.isNull(newValue.openbank)) {
-            isBtnClick = false;
-            this.v4 = '开户银行不能为空';
-          } else {
-            this.v4 = ''
-          }
-          // 开户银行账号
-          if (this.verifyUtil.isBankNo(newValue.openaccount)) {
-            isBtnClick = false;
-            this.v5 = '开户银行账号输入有误';
-          } else {
-            this.v5 = ''
-          }
-          // 详细地址
-          if(this.verifyUtil.isNull(newValue.billaddr)) {
-            isBtnClick = false;
-            this.v8 = '详细地址不能为空';
-          } else {
-            this.v8 = ''
-          }
+          // // 发票税号
+          // if (this.verifyUtil.checkTax(newValue.taxno)) {
+          //   isBtnClick = false;
+          //   this.v2 = '发票税号不正确';
+          // } else {
+          //   this.v2 = ''
+          // }
+          // // // 联系电话
+          // // if (this.verifyUtil.isNull(newValue.landline)) {
+          // //   isBtnClick = false;
+          // //   this.v3 = '联系电话不能为空';
+          // // } else {
+          // //   this.v3 = ''
+          // // }
+          // //  开户银行
+          // if (this.verifyUtil.isNull(newValue.openbank)) {
+          //   isBtnClick = false;
+          //   this.v4 = '开户银行不能为空';
+          // } else {
+          //   this.v4 = ''
+          // }
+          // // 开户银行账号
+          // if (this.verifyUtil.isBankNo(newValue.openaccount)) {
+          //   isBtnClick = false;
+          //   this.v5 = '开户银行账号输入有误';
+          // } else {
+          //   this.v5 = ''
+          // }
+          // // 详细地址
+          // if(this.verifyUtil.isNull(newValue.billaddr)) {
+          //   isBtnClick = false;
+          //   this.v8 = '详细地址不能为空';
+          // } else {
+          //   this.v8 = ''
+          // }
           this.disabled = !isBtnClick;
         },
         deep: true

@@ -126,20 +126,22 @@
           )
         );
       },
-      /**
-       * 根据企业码查询指定企业信息(不加路线)
-       * @param compId
-       */
       queryCompByCid(compId) {
         let self = this;
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
-              self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
-              let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
-              self.$router.push({
-                path: redirect
-              })
+              debugger
+              if(result.code === 0) {
+                self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
+                let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+                self.$router.push({
+                  path: redirect
+                })
+              } else {
+                self.$vux.toast.text(result.msg, 'top');
+              }
+
             },
             function (error) {
               self.$vux.toast.text('企业信息获取失败!', 'top');

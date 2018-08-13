@@ -13,37 +13,34 @@
     </div>
     <div class="downfixed">
 
-        <div class="searchDriverBox">
-          <div class="searchDriver">
-            <div class="driverSearchBtn" @click="toPageSearch">
-              <i class="icon iconfont icon-sousuo"></i>
-              <span class="sousuo">{{searchInputVal}}</span>
-            </div>
+      <div class="searchDriverBox">
+        <div class="searchDriver">
+          <div class="driverSearchBtn" @click="toPageSearch">
+            <i class="icon iconfont icon-sousuo"></i>
+            <span class="sousuo">{{searchInputVal}}</span>
           </div>
         </div>
-        <van-list
-          style="background:#ffffff;"
-          v-model="loading"
-          :finished="finished"
-          @load="onLoad"
-        >
-          <ul class="driverList">
-            <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
-              <div class="driverInfo">
-                <div class="driverPic">
-                  <i class="icon iconfont icon-siji"></i>
-                </div>
-                <span class="driverName">{{item.name}}</span>
-                <span class="driverPhone">{{item.phone}}</span>
+      </div>
+      <van-list
+        style="background:#ffffff;"
+        v-model="loading"
+        :finished="finished"
+        @load="onLoad"
+      >
+        <ul class="driverList">
+          <li class="needBorder" v-for="(item,index) in drivers" :key="index" @click="editorDriver(item)">
+            <div class="driverInfo">
+              <div class="driverPic">
+                <i class="icon iconfont icon-siji"></i>
               </div>
-              <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
-                 @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
-            </li>
-
-
-
-          </ul>
-        </van-list>
+              <span class="driverName">{{item.name}}</span>
+              <span class="driverPhone">{{item.phone}}</span>
+            </div>
+            <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
+               @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
+          </li>
+        </ul>
+      </van-list>
     </div>
   </div>
 </template>
@@ -63,7 +60,7 @@
         userId: this.$app_store.getters.userId,
         // pageSize: '1'// 当前页数
         page: new cstruct.Page(),
-        searchInputVal: '搜索',
+        searchInputVal: '司机名称搜索',
         loading: false, // 控制加载动画
         finished: false // 控制是否执行上推加载
       }
