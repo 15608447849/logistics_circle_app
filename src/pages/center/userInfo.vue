@@ -73,14 +73,14 @@
         <!--<span class="uploadState">上传</span>-->
         <!--</li>-->
       </ul>
-    <div class="blacklist" v-show="status === 1">
+    <div class="blacklist" v-show="status == 1">
       <a class="moveDetele" @click="removePartner">移除伙伴</a>
       <a class="addBlacklist" @click="addBlacklist">加入黑名单</a>
     </div>
-    <div class="blackListBtn" v-show="status === 5">
+    <div class="blackListBtn" v-show="status == 5">
       <a class="moveOutBlack" @click="removeBlackList">移出黑名单</a>
     </div>
-    <div class="dispatchBottomBtn" v-show="status === 6">
+    <div class="dispatchBottomBtn" v-show="status == 6">
       <div>
         <a class="borderRight" @click="sCircleAdd(2)">加入货源圈</a>
         <a class="borderRight" @click="sCircleAdd(1)">加入调度圈</a>

@@ -217,7 +217,8 @@
                     if (result.code === 0) {
                       self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                       self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
-                      self.getCompList(result.obj.oid);
+                      // self.getCompList(result.obj.oid);
+                      self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
                     } else {
                       self.$vux.toast.text(result.msg, 'top');
                     }
@@ -235,32 +236,6 @@
             }
           ));
         }
-      },
-      getCompList(oid) {
-        let self = this;
-        let compList = [];
-        this.$Ice_CompService.selectCompUserByUid(oid,
-          new IceCallback(
-            function (result) {
-              // 登录时添加企业到缓存
-              if (result.obj.length === 1) {
-                self.setCompIdByRedis(oid, result.obj[0].compid);
-                return
-              }
-              // 弹出选择列表
-              result.obj.forEach((currentValue, index, arr) => {
-                compList.push({
-                  content: currentValue.fname,
-                  compid: currentValue.compid
-                });
-              });
-              self.showActive(oid, compList);
-            },
-            function (error) {
-              self.$vux.toast.text('企业信息获取失败, 请尝试重新登录!', 'top');
-            }
-          )
-        );
       },
       showActive(oid, dataList) {
         this.$createActionSheet({
@@ -281,12 +256,11 @@
         this.$Ice_CompService.addLoginCompByRedis(oid, compId,
           new IceCallback(
             function (result) {
-              debugger
               // 获取企业信息
               self.queryCompByCid(compId);
             },
             function (error) {
-              self.message.Toast(this, 'warn', '企业信息添加失败, 请稍后重试', false);
+              self.$vux.toast.text('企业信息添加失败, 请稍后重试', 'top');
             }
           )
         );
@@ -297,7 +271,6 @@
        */
       queryCompByCid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {

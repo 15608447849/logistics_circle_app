@@ -23,7 +23,7 @@
       >
         <ul class="circleList">
           <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in blackList" :key="index">
-            <img src="" alt="" class="circlePic">
+            <img :src="item.logoPath" alt="" class="circlePic">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span></div>
             <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
             <a class="pullBlack" @click.stop="removeClick(item,index)">移 出</a>
