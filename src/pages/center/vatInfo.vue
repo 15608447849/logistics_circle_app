@@ -139,6 +139,9 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
+      let phone = (this.compInfo.phone != '') ? this.compInfo.phone.split('-') : ['',''];
+      this.phoneArea = phone[0]==0 ? '' : phone[0];// 电话区号
+      this.landline = phone[1]==0 ? '' : phone[1];// 座机号
       if (this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
         this.isEditor = true;
       } else {
@@ -183,7 +186,7 @@
         // 保存信息
         let self = this;
         let compJson = new comp.CompInfo();
-
+        this.compInfo.phone = this.phoneArea + '-'+ this.landline;
         compJson.compid = this.compInfo.compid;
         compJson.uoid = this.userId;
         compJson.fname = this.compInfo.fname;
@@ -199,7 +202,8 @@
         compJson.invtitle = this.compInfo.invtitle;
         compJson.invtype = this.compInfo.invtype;
         compJson.taxno = this.compInfo.taxno;
-        compJson.phone = this.phoneArea + '-'+ this.landline;
+        debugger
+        compJson.phone = this.compInfo.phone;
         compJson.openbank = this.compInfo.openbank;
         compJson.openaccount = this.compInfo.openaccount.toString();
         compJson.billarea = this.compInfo.billarea;

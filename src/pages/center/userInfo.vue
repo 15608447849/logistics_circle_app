@@ -15,6 +15,14 @@
       <div class="enterprisePic">
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
+        <cube-upload
+          ref="upload"
+          style="position:relative;top:0rem;left:0rem;"
+          :action="{target: uploadUrl,data: {'picNo': 7,'compId': compInfo.compid}}"
+          @files-added="filesAdded"
+          @file-success="filesSuccess"
+          @file-error="filesError">
+        </cube-upload>
       </div>
       <span class="pLabel">{{compInfo.fname}}</span>
       <span class="creditGrade">信用等级</span>
@@ -87,9 +95,14 @@
   </div>
 </template>
 <script>
+  import { uploadUrl,cardUrl ,delCardUrl} from '../../../static/libs/server/config'
+  import {COMP_INFO} from "../../store/mutation-types";
   export default {
     data() {
       return {
+        uploadUrl: uploadUrl, // 证件上传地址
+        cardUrl: cardUrl,// 获取地址
+        delCardUrl: delCardUrl, // 删除地址
         isEditor: false,
         score: 0,
         cLevel: [],// 认证等级
@@ -105,12 +118,15 @@
       if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo)) {
           this.compInfo = JSON.parse(this.$app_store.state.compInfo);
           this.status = 0;
-          this.computeLevel();
+        this.queryCompByCid(this.compInfo.compid);
+          // this.computeLevel();
       } else {
-        // 根据企业id获取企业信息
         this.queryCompByCid(this.$route.query.id);
         this.status = this.$route.query.status;
       }
+      // debugger
+      // 根据企业id获取企业信息
+
     },
     methods: {
       /**
@@ -159,6 +175,56 @@
             isEditor: this.isYourCompInfo
           }
         })
+      },
+      loadImage(imgId, url) {
+        let imgPath = ['', '', '', '', '', '', '', ''];
+        imgPath[imgId] = url;
+        let self = this;
+        this.$Ice_InfoService.feedbackCredentRelpath(this.compInfo.compid, imgPath,
+          new IceCallback(
+            function (result) {
+              localStorage.setItem(COMP_INFO, self.compInfo);
+            },
+            function (error) {
+            }
+          )
+        );
+      },
+      filesError(files) {
+        this.$vux.toast.text('头像上传失败!', 'top');
+      },
+      filesSuccess(files) {
+        this.$vux.toast.text(files.response.msg, 'top');
+        if (files.response.code === 0) {
+          // setTimeout(() => {
+            this.$vux.toast.text('头像上传成功!', 'top');
+          this.compInfo.logoPath = files.response.data.nginx+""+ files.response.data.relativeAddr + '?' + new Date().getSeconds();
+          this.loadImage(7,files.response.data.nginx+""+ files.response.data.relativeAddr);
+        }
+      },
+      filesAdded(files) {
+        let self = this;
+        // 图片压缩
+        this.imgPreview(files);
+        // 图片旋转
+        // EXIF.getData(this.file, function() {
+        //   self.Orientation = EXIF.getTag(this, 'Orientation');
+        // });
+        let hasIgnore = false;
+        const maxSize = 2 * 1024 * 1024; // 2M
+        for (let k in files) {
+          const file = files[k];
+          if (file.size > maxSize) {
+            file.ignore = true;
+            hasIgnore = true;
+          }
+        }
+        hasIgnore && this.$createToast({
+          type: 'warn',
+          time: 1000,
+          txt: '你上传的图片 > 2M '
+        }).show()
+
       },
       toenterprise() {
         this.$router.push({
@@ -256,7 +322,6 @@
           })
       },
       addBlacklist() {
-        debugger
         let self = this;
         let content = '您确定要将好友添加至黑名单吗?';
         this.message.showAlert(this, content)
@@ -301,7 +366,8 @@
           .catch(() => {
 
           })
-      }
+      },
+
     }
   }
 </script>
