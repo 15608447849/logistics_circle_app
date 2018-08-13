@@ -638,9 +638,6 @@ a {
   background:transparent;
 }
 .enterprisePic img{
-  position:absolute;
-  top:0rem;
-  left:0rem;
   width:1.4rem;
   height:1.4rem;
   border: 1px solid transparent;

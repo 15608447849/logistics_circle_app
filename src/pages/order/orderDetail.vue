@@ -170,14 +170,14 @@
           <!--取货照片-->
           <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
           <!--取货码-->
-          <a v-show="detailInfo.tstatus === 7" class="colorBlue" @click.stop ="toPickGoodsCode()">取货码</a>
+          <a v-show="detailInfo.tstatus === 7" class="colorBlue marginright13" @click.stop ="toPickGoodsCode()">取货码</a>
           <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
           <!--查看行程-->
           <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--签收照片-->
           <a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
           <!--确认签收-->
-          <a v-show="detailInfo.tstatus === 4" class="colorBlue" @click.stop="conReceipt()">确认签收</a>
+          <a v-show="detailInfo.tstatus === 4" class="colorBlue marginright13" @click.stop="conReceipt()">确认签收</a>
           <!--评价-->
           <a v-show="detailInfo.tstatus === 6" @click.stop="toEvaluatePage()"  class="colorBlue">待评价</a>
           <!--重新发布-->
