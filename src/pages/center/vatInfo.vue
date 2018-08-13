@@ -78,6 +78,7 @@
         :error-message="v5"
       />
       <van-field
+        readonly="readonly"
         @click = 'showPicker'
         v-model="compInfo.invtypes"
         label="发票类型"
@@ -85,6 +86,7 @@
         :error-message="v6"
       />
       <van-field
+        readonly="readonly"
         @click="showCascadePicker"
         v-model="compInfo.billareas"
         label="地址"

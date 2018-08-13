@@ -70,6 +70,7 @@
           :error-message="v3"
         />
         <van-field
+          readonly="readonly"
           @click="showPicker('qygm')"
           v-model="compInfo.csales"
           label="企业规模"
@@ -101,6 +102,8 @@
           :error-message="v8"
         />
         <van-field
+          readonly="readonly"
+          v-model="compInfo.areas"
           @click="showCascadePicker"
           label="企业地址"
           placeholder="请选择企业地址"

@@ -1747,7 +1747,7 @@ input[type="radio"] {
   color: #666666;
 }
 .rderCostA{
-  margin-right:.58rem;
+  margin-right:.6rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -1925,13 +1925,15 @@ input[type="radio"] {
 
 }
 .marginright70{
-  margin-right:.62rem;
+  font-size:.24rem;
+  margin-right:.67rem;
 }
 .marginright95{
   margin-right:.95rem;
 }
 .marginright90{
-  margin-right:.87rem;
+  font-size:.24rem;
+  margin-right:.92rem;
 }
 .textMargin-right10{
   margin-right:10px;
