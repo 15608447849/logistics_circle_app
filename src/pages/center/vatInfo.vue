@@ -109,7 +109,7 @@
       background: linear-gradient(-45deg, #31bff5,#3190f5); /* 标准的语法 */
       width:7.5rem;
       margin-top:10vh;
-      color:#ffffff;"">保存</van-button>
+      color:#ffffff;">保存</van-button>
   </div>
 </template>
 

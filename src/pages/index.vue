@@ -32,7 +32,7 @@
           </li>
           <li @click="toDriverAmd"><i class="icon iconfont icon-sijiguanli"></i><span class="personalText">司机管理</span>
           </li>
-          <li @click="toSalesManage"><i class="icon iconfont icon-iconfontzhizuobiaozhun0250 salesman"></i><span class="personalText">业务员管理</span>
+          <li @click="toSalesManage"><i class="icon iconfont icon-yewuyuan"></i><span class="personalText">业务员管理</span>
           </li>
           <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
           </li>

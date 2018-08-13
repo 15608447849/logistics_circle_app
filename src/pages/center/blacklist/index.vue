@@ -57,6 +57,7 @@
         this.page.totalPageCount = 0;
       },
       onLoad() {
+        debugger
         let self = this;
         this.queryMyCircleBlackList(function (result) {
           self.page.pageIndex += 1; // 页码增加
@@ -77,6 +78,7 @@
         });
       },
       queryMyCircleBlackList(successCallback, errorCallback) {
+        debugger
         let self = this;
         this.$Ice_CircleService.queryMyCircleBlackList(this.userId, this.page.pageIndex, this.page.pageSize, new IceCallback(
           function (result) {

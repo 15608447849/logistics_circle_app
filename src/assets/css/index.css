@@ -1,5 +1,5 @@
 @import "../font_ziti/iconfont.css";
-@import "../font_76/iconfont.css";
+@import "../font_729289_r3lk0k4ihfn/iconfont.css";
 /*搜索组件**************************************************************************************************************/
 .searchHistory{
   display:block;
@@ -121,6 +121,13 @@ a {
   z-index: 9999;
   overflow: hidden;
 }
+.homeContent{
+  display:block;
+  width:7.5rem;
+  height:83.5vh;
+  z-index:9999;
+  margin-top:5.5vh;
+}
 .searchBox{
   display:flex;
   justify-content:center;
@@ -128,7 +135,6 @@ a {
   width:7.5rem;
   height:.88rem;
   background-color: #efefef;
-  margin-top:.8rem;
 }
 .dropdowngengduo{
   position:relative;
@@ -339,8 +345,10 @@ a {
 }
 .seeMore{
   display:block;
+  width:7.5rem;
   height:.6rem;
-  margin-bottom:8vh;
+  position:fixed;
+  bottom:1rem;
   text-align: center;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
@@ -1499,8 +1507,7 @@ input[type="radio"] {
   background:#ffffff;
 }
 .downfixed{
-  /*margin-top:.8rem;*/
-  /*overflow: auto;*/
+  margin-top:5.5vh;
 }
 .havedownfixed{
   margin-bottom:9vh;
@@ -1584,9 +1591,12 @@ input[type="radio"] {
   width:.4rem;
   height:.1rem;
 }
+.circleLists{
+  width:7.5rem;
+  height:94vh;
+}
 .order_box{
   width:7.5rem;
-  /*height:90vh;*/
   margin-top:.8rem;
   margin-bottom:1rem;
   background:#ffffff;
@@ -1605,14 +1615,12 @@ input[type="radio"] {
   margin:0 auto 0 auto;
 }
 .order_boxIndex{
-  position:absolute;
-  top:5rem;
-  left:0rem;
+  display:block;
   width:7.5rem;
-  height:63vh;
+  height:58.5vh;
   background:#ffffff;
   overflow: auto;
-  /*margin-bottom:8vh;*/
+  margin-bottom:11vh;
 }
 .order_list{
   display:block;
@@ -2903,7 +2911,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   align-items:center;
   padding:0rem .31rem 0rem .31rem;
   position:fixed;
-  top:.8rem;
+  top:5.5vh;
   left:0rem;
   width:7.5rem;
   height:.7rem;
@@ -2951,6 +2959,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-stretch: normal;
   letter-spacing: 1px;
   color: #3189f5;
+}
+.orderList{
+  display:block;
+  width:7.5rem;
+  height:89vh;
+  overflow: auto;
+  margin-top:4vh;
+  /*background:pink;*/
 }
 .myReleaseList{
   display:block;
@@ -3070,7 +3086,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
    z-index: 9900;
    position: fixed;
    height:.6rem;
-   top:.8rem;
+   top:5.5vh;
    left: 0;
    width: 100%;
    line-height: .6rem;

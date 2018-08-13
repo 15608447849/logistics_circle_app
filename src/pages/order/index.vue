@@ -17,85 +17,85 @@
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
 
       </div>
-      <div class="downfixed havedownfixed">
+
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
         <div class="releaseMenu">
           <span class="releaseState" :class="{'activecircle ziTiColorBlue' : item.isSelected}" v-for="(item , index) in tabList"
                 :key="index" @click.stop="tabItemClick(item)">{{item.name}}</span>
         </div>
+       <div class="orderList">
+         <div v-show="isShowNoData" class="noDataBox">
+           <img src="../../assets/images/small/nodate.png"/>
+         </div>
+         <van-list
+           style="margin-top:7vh;"
+           v-model="loading"
+           :finished="finished"
+           @load="onLoad"
+         >
+           <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails(item)">
+             <div class="releaseCompany">
+               <div class="companyBox">
+                 <i class="icon iconfont icon-qiyexinxi"></i>
+                 <span>{{fName}}</span>
+                 <i class="icon iconfont icon-icon-test"></i>
+               </div>
+               <!--<span class="releasetext">发布</span>-->
+               <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
+             </div>
+             <li class="address marginBottom15">
+               <div class="addressList"><span>{{addressSubStr(item.startn)}}</span>-<span>{{addressSubStr(item.arriarn)}}</span></div>
+             </li>
+             <li class="collection marginBottom15">
+               <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
+             </li>
+             <li class="specifications marginBottom15">
+               <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictn}}</span>
+             </li>
 
-        <van-list
-          style="margin-top:.8rem;"
-          v-model="loading"
-          :finished="finished"
-          @load="onLoad"
-        >
-          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails(item)">
-            <div class="releaseCompany">
-              <div class="companyBox">
-                <i class="icon iconfont icon-qiyexinxi"></i>
-                <span>{{fName}}</span>
-                <i class="icon iconfont icon-icon-test"></i>
-              </div>
-              <!--<span class="releasetext">发布</span>-->
-              <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
-            </div>
-            <li class="address marginBottom15">
-              <div class="addressList"><span>{{addressSubStr(item.startn)}}</span>-<span>{{addressSubStr(item.arriarn)}}</span></div>
-            </li>
-            <li class="collection marginBottom15">
-              <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
-            </li>
-            <li class="specifications marginBottom15">
-              <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictn}}</span>
-            </li>
-
-            <li class="pickGoods marginBottom15">
-              <div>
-                <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
-              </div>
-              <!--<span class="underPay">线下付款</span>-->
-              <!--线上付款-->
-              <span class="underPay">{{item.ptdictn}}</span>
-            </li>
-            <li class="goodsTotalPrice">
-              <div></div>
-              <div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">{{item.carriage}}</span></div>
-            </li>
-            <div class="cancelRefres">
-              <div class="operationA">
-                <!--刷新-->
-                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
-                <!--取消-->
-                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消</a>
-                <!--接受-->
-                <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
-                <!--拒绝-->
-                <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
-                <!--取货照片-->
-                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
-                <!--取货码-->
-                <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
-                <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
-                <!--查看行程-->
-                <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
-                <!--签收照片-->
-                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="refuseOrder(item,index)">签收照片</a>
-                <!--确认签收-->
-                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno,index)">确认签收</a>
-                <!--评价-->
-                <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>-->
-                <a  v-show="item.tstatus === 6" class="colorLightBlue"  @click.stop="toEvaluatePage(item)">待评价</a>
-                <!--重新发布-->
-                <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"  class="colorLightBlue">重新发布</a>
-              </div>
-            </div>
-          </ul>
-        </van-list>
-        <div v-show="isShowNoData" class="noDataBox">
-          <img src="../../assets/images/small/nodate.png"/>
-        </div>
-      </div>
+             <li class="pickGoods marginBottom15">
+               <div>
+                 <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
+               </div>
+               <!--<span class="underPay">线下付款</span>-->
+               <!--线上付款-->
+               <span class="underPay">{{item.ptdictn}}</span>
+             </li>
+             <li class="goodsTotalPrice">
+               <div></div>
+               <div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">{{item.carriage}}</span></div>
+             </li>
+             <div class="cancelRefres">
+               <div class="operationA">
+                 <!--刷新-->
+                 <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
+                 <!--取消-->
+                 <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消</a>
+                 <!--接受-->
+                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
+                 <!--拒绝-->
+                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
+                 <!--取货照片-->
+                 <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
+                 <!--取货码-->
+                 <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
+                 <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
+                 <!--查看行程-->
+                 <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
+                 <!--签收照片-->
+                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="refuseOrder(item,index)">签收照片</a>
+                 <!--确认签收-->
+                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno,index)">确认签收</a>
+                 <!--评价-->
+                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>-->
+                 <a  v-show="item.tstatus === 6" class="colorLightBlue"  @click.stop="toEvaluatePage(item)">待评价</a>
+                 <!--重新发布-->
+                 <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"  class="colorLightBlue">重新发布</a>
+               </div>
+             </div>
+           </ul>
+         </van-list>
+       </div>
     </div>
   </div>
 

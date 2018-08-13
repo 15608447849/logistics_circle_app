@@ -62,6 +62,7 @@
           :error-message="v2"
         />
         <van-field
+          readonly="readonly"
           @click="showPicker('qyxz')"
           v-model="compInfo.ctypes"
           label="企业性质"
@@ -101,7 +102,6 @@
         />
         <van-field
           @click="showCascadePicker"
-          v-model="compInfo.areas"
           label="企业地址"
           placeholder="请选择企业地址"
           :error-message="v9"
