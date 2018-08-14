@@ -79,8 +79,9 @@
 
     },
     mounted() {
-      this.isUnreadMsg();//查询用户是否有新的消息
+
       this.getMessageList();// 未处理消息
+      this.isUnreadMsg();//查询用户是否有新的消息
       // this.getNewMessage();
 
     },
@@ -101,7 +102,6 @@
           .then(() => {
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, 1, new IceCallback(
               function (result) {
-                debugger
                 if (result.code === 0) {
                   self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
@@ -188,12 +188,12 @@
         debugger
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(Number(self.userId),new IceCallback(function(result){
-
           if(result.code === 0) {
+            console.log(777);
             self.isNewMsg = result.obj;
+            console.log(self.isNewMsg);
             self.isNewMsg = false;
           }else{
-
           }
         },function(error){
           //失败

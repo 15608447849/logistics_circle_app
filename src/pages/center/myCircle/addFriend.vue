@@ -46,7 +46,7 @@
                 <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
                 <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
                 <a class="pullBlack" @click="sCircleAdd(item,index,2)">添 加</a>
-                <span slot="right" @click="onClose(item,index,2)">删除</span>
+                <span slot="right" @click="onClose(item,index,2)" class="deteleFriend">删除</span>
               </van-cell-swipe>
 
             </li>
@@ -69,7 +69,7 @@
                 <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
                 <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
                 <a class="pullBlack" @click="sCircleAdd(item,index,1)">添 加</a>
-                <span slot="right" @click="onClose(item,index,2)">删除</span>
+                <span slot="right" @click="onClose(item,index,2)" class="deteleFriend">删除</span>
               </van-cell-swipe>
             </li>
           </ul>

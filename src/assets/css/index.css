@@ -1621,7 +1621,6 @@ input[type="radio"] {
 .order_box{
   width:7.5rem;
   margin-top:.8rem;
-  margin-bottom:1rem;
   background:#ffffff;
   overflow:auto;
 }
@@ -2729,6 +2728,19 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: .54rem;
   letter-spacing: 0px;
   color: #ffffff;
+}
+.deteleFriend{
+  display:inline-block;
+  width:1.2rem;
+  height:1.5rem;
+  background:rgb(255,68,68);
+  text-align: center;
+  line-height:1.5rem;
+  color:#ffffff;
+}
+.van-cell-swipe{
+  width:7.08rem;
+  height:1.5rem;
 }
 .companyNamePhone{
   display:inline-block;
