@@ -46,8 +46,9 @@
       <p>期待和您的合作，谢谢！</p>
     </div>
     <div class="agreeAndRefuse" v-show="isOperation" v-if="details.isread === 0">
-      <a class="agree" @click.stop="agreeOrRefuse(details,details.msgid,details.msgtype)">拒绝</a>
-      <a class="refuse" @click.stop="agreeOrRefuse(details,details.msgid,details.msgtype)">同意</a>
+
+      <a class="agree" @click.stop="agreeOrRefuse()">拒绝</a>
+      <a class="refuse" @click.stop="YesagreeOrRefuse()">同意</a>
     </div>
   </div>
 </template>
@@ -58,6 +59,7 @@
     data(){
       return {
         messageList:[],
+        readyHandMsg:[],
         isOperation: true,
         cLevel: [],// 认证等级
         compByUid:[],
@@ -69,16 +71,17 @@
       }
     },
     mounted() {
+      this. YesHandleMessage();
       this.getMessageList();// 未处理消息
       // console.log(this.messageList);
       this.details = this.$route.query.details;
-      // console.log(this.details);
+      console.log(this.details);
       //企业基本信息
       this.querygetCompByUid();
     },
     methods:{
       // 未处理列表
-      getMessageList() {
+      getMessageList ()  {
         let self = this;
         this.$Ice_MessageService.queryMsgListByUid(self.userId,0, new IceCallback(function (result) {
           if (result.code === 0) {
@@ -93,6 +96,23 @@
         }))
 
       },
+      // 已处理的消息
+      YesHandleMessage() {
+        let self = this;
+        this.$Ice_MessageService.queryMsgListByUid(self.userId, 1, new IceCallback(function (result) {
+          if (result.code === 0) {
+            // 成功
+            self.readyHandMsg = result.obj;
+
+            console.log(self.readyHandMsg)
+          } else {
+            self.$vux.toast.text(result.msg, 'top');
+          }
+        }, function (error) {
+
+          //失败
+        }))
+      },
       // 获取企业ID获取企业信息
         querygetCompByUid: function () {
         let self = this;
@@ -102,7 +122,7 @@
           } else {
             // 成功
             self.compByUid = result.obj;
-            console.log(result.obj);
+            // console.log(result.obj);
             self.logoPath = result.obj.logoPath;
             self.score = result.obj.creadit;
             // self.address = result.obj.address;
@@ -113,13 +133,12 @@
         }))
       },
       // 同意
-      agreeOrRefuse: function (details, index, msgtype) {
-
+      YesagreeOrRefuse() {
         let content = '';
         let self = this;
-        if (msgtype === 1) {
+        if (self.details.msgtype === 1) {
           content = alertContent.CIRCLE_ADD_DISPATHCHER;
-        } else if (msgtype === 2) {
+        } else if (self.details.msgtype === 2) {
           content = alertContent.CIRCLE_ADD_SOURCE;
         } else {
           content = alertContent.RECEIVE_ORDER;
@@ -128,17 +147,14 @@
           .then(() => {
             // 成功
             // details.sender
-
-            self.$Ice_CircleService.agreeOrRefuse(details.msgid, 1, new IceCallback(
+            debugger
+            self.$Ice_CircleService.agreeOrRefuse(self.details.msgid, 1, new IceCallback(
 
               function (result) {
-
                 if (result.code === 0) {
-
                   self.isOperation = false;
-                  self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
-                  this.getMessageList();
+
                 } else {
                   self.$vux.toast.text('您的订单已被受理', 'top');
                 }
@@ -153,13 +169,13 @@
           })
       },
       // 拒绝
-      agreeOrRefuse(item, index, msgtype) {
+      agreeOrRefuse() {
         let content = '';
         let self = this;
-        if (msgtype === 1) {
+        if (self.details.msgtype === 1) {
         debugger
           content = alertContent. CIRCLE_REFUSE_DISPATHCHER;
-        } else if (msgtype === 2) {
+        } else if (self.details.msgtype === 2) {
           content = alertContent.CIRCLE_REFUSE_SOURCE;
         } else {
           content = alertContent.REFUSE_ORDER;
@@ -167,23 +183,21 @@
         this.message.showAlert(this, content)
           .then(() => {
             debugger
-            self.$Ice_CircleService.agreeOrRefuse(item.msgid, 0, new IceCallback(
+            self.$Ice_CircleService.agreeOrRefuse(self.details.msgid,2, new IceCallback(
               function (result) {
                 debugger
                 if (result.code === 0) {
-                  self.messageList.splice(index, 1);
                   self.isOperation = false;
                   self.$vux.toast.text('已拒绝对方的好友圈', 'top');
-                  this.getMessageList();
-                  if (msgtype === 1) {
+                  if (self.details.msgtype === 1) {
                     self.$vux.toast.text(' 已拒绝对方添加调度圈', 'top');
-                  } else if (msgtype === 2) {
+                  } else if (self.details.msgtype === 2) {
                     self.$vux.toast.text('已拒绝对方添加货源圈', 'top');
-                  } else if (msgtype === 3) {
+                  } else if (self.details.msgtype === 3) {
                     self.$vux.toast.text('拒绝订单成功', 'top');
+                  }else {
+                    self.$vux.toast.text('您的订单未被受理', 'top');
                   }
-                } else {
-                  self.$vux.toast.text('您的订单未被受理', 'top');
                 }
               },
               function (error) {
