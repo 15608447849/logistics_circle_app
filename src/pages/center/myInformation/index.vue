@@ -30,7 +30,7 @@
          </tab>
          <ul class="circleList" v-show="isShow">
            <!--<p>这是未处理消息</p>-->
-           <li class="needBorder" @click.stop="seeDetails(item)" v-for="(item, index) in messageList" :key="index">
+           <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in messageList" :key="index">
              <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
              <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
@@ -40,12 +40,12 @@
          <!--已处理-->
          <ul class="circleList" v-show="!isShow">
            <!--<p>这是已经处理消息</p>-->
-           <li class="needBorder" @click.stop="seeDetails(item)" v-for="(item, index) in readyHandMsg" :key="index">
+           <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in readyHandMsg" :key="index" v-if="item.isread !== 0">
              <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
              <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
-             <a class="handleafter" v-show="display" v-if="messageList.opstatus===1">已同意</a>
-             <a class="handleafter" v-show="display" v-if="messageList.opstatus===2">已拒绝</a>
+             <a class="handleafter" v-if="item.opstatus===1">已同意</a>
+             <a class="handleafter" v-if="item.opstatus===2">已拒绝</a>
              <a class="read" v-show="read" v-if="item.isread==0">已阅读</a>
            </li>
          </ul>
@@ -71,7 +71,6 @@
         alreadyHandle: false,//已处理view显示与否
         isShow: true,//未处理view显示与否
         isRedspot: false,//红点显示与否
-        display: true,//已同意显示与否
         nothandle: true,//同意显示与否
         userId: this.$app_store.state.userId,//vuex存储的用户id
         read: true,//已阅读显示与否
@@ -90,6 +89,7 @@
       agreeOrRefuse(item, index, msgtype) {
         let content = '';
         let self = this;
+        debugger
         if (msgtype === 1) {
           content = alertContent.CIRCLE_ADD_DISPATHCHER;
         } else if (msgtype === 2) {
@@ -101,8 +101,8 @@
           .then(() => {
             self.$Ice_CircleService.agreeOrRefuse(item.msgid, 1, new IceCallback(
               function (result) {
+                debugger
                 if (result.code === 0) {
-                  console.log(item.msgid)
                   self.messageList.splice(index, 1);
                   self.$vux.toast.text('好友圈添加成功', 'top');
                   if (msgtype === 1) {
@@ -111,9 +111,12 @@
                     self.$vux.toast.text('货源圈好友添加成功', 'top');
                   } else if (msgtype === 3) {
                     self.$vux.toast.text('接受订单成功', 'top');
+                  }else {
+                    self.$vux.toast.text('您的订单已被受理', 'top');
                   }
                 } else {
-                  self.$vux.toast.text('您的订单已被受理', 'top');
+                  // 接口请求失败了
+                  self.$vux.toast.text(result.msg, 'top');
                 }
               },
               function (error) {
@@ -147,6 +150,7 @@
           if (result.code === 0) {
             // 成功
             self.messageList = result.obj;
+            console.log(self.messageList);
           } else {
             self.$vux.toast.text(result.msg, 'top');
           }
@@ -163,6 +167,7 @@
           if (result.code === 0) {
             // 成功
             self.readyHandMsg = result.obj;
+
             console.log(self.readyHandMsg)
           } else {
             self.$vux.toast.text(result.msg, 'top');
@@ -180,18 +185,12 @@
 
       //查询用户是否有新的消息
       isUnreadMsg() {
-        let self = this;
         debugger
-        console.log(232323)
+        let self = this;
         this.$Ice_MessageService.isUnreadMsg(Number(self.userId),new IceCallback(function(result){
-          console.log(self.userId)
-          debugger
+
           if(result.code === 0) {
-            debugger
-            console.log(565656)
             self.isNewMsg = result.obj;
-            console.log(222)
-            console.log(self.isNewMsg)
             self.isNewMsg = false;
           }else{
 
@@ -215,7 +214,7 @@
         this.$router.push({
           path: '/center/myInformation/seeInformation',
           query: {
-            details: item,
+            details: item
           }
         })
       }

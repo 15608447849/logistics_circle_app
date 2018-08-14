@@ -15,7 +15,7 @@
       <div style="background-color:#fff;">
         <div class="centerPic">
           <div class="portrait">
-            <img :src="avatar" alt="">
+            <img :src="avatar" alt="" v-if="avatar !== ''">
             <img src="../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="avatar === ''">
             <span class="logisticsMing">{{compName}}</span>
           </div>

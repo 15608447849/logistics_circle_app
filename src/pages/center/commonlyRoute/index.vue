@@ -39,9 +39,6 @@
 
    </van-list>
  </div>
-
-
-
   </div>
 </template>
 <script>
@@ -99,10 +96,14 @@
         ))
       },
       editorRoute(item) {
-        this.$router.push({
-          name: 'routeDetails',
-          params: item
-        });
+        var el = event.currentTarget;
+        if(el === 0){
+          this.$router.push({
+            name: 'routeDetails',
+            params: item
+          });
+        }
+
       },
       fallback() {
         this.$router.go(-1)
