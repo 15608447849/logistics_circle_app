@@ -25,7 +25,7 @@
           <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in blackList" :key="index">
             <img :src="item.logoPath" alt="" class="circlePic">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span></div>
-            <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+            <div class="lineName"><span class="lineInfo">加入时间：{{item.addTime}}</span></div>
             <a class="pullBlack" @click.stop="removeClick(item,index)">移 出</a>
           </li>
         </ul>
@@ -57,17 +57,17 @@
         this.page.totalPageCount = 0;
       },
       onLoad() {
-        debugger
         let self = this;
         this.queryMyCircleBlackList(function (result) {
+          debugger
           self.page.pageIndex += 1; // 页码增加
-          result.circleSeq.forEach((item, index, arr) => {
-            let disRoute = '';
-            if (item.routes !== null && item.routes.length > 0) {
-              disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
-            }
-            item['disRoute'] = disRoute;
-          });
+          // result.circleSeq.forEach((item, index, arr) => {
+          //   let disRoute = '';
+          //   if (item.routes !== null && item.routes.length > 0) {
+          //     disRoute = item.routes[0].origin + '-' + item.routes[0].destination + '(' + item.routes[0].channel + ')';
+          //   }
+          //   item['disRoute'] = disRoute;
+          // });
           self.blackList = self.blackList.concat(result.circleSeq);
           if (self.blackList.length >= result.totalItems) {
             self.finished = true;
@@ -78,7 +78,6 @@
         });
       },
       queryMyCircleBlackList(successCallback, errorCallback) {
-        debugger
         let self = this;
         this.$Ice_CircleService.queryMyCircleBlackList(this.userId, this.page.pageIndex, this.page.pageSize, new IceCallback(
           function (result) {

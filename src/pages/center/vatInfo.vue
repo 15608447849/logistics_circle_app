@@ -204,7 +204,6 @@
         compJson.invtitle = this.compInfo.invtitle;
         compJson.invtype = this.compInfo.invtype;
         compJson.taxno = this.compInfo.taxno;
-        debugger
         compJson.phone = this.compInfo.phone;
         compJson.openbank = this.compInfo.openbank;
         compJson.openaccount = this.compInfo.openaccount.toString();

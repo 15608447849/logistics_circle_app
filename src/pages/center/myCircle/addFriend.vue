@@ -36,15 +36,21 @@
           :finished="finishedA"
           @load="onLoadA"
         >
+
           <ul class="circleList">
             <li class="needBorder" v-for="(item, index) in sCircleList">
-              <img :src="item.logoPath" alt="" class="circlePic">
-              <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
-                class="companyPhone floatright">{{item.contact}}</span></div>
-              <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
-              <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
-              <a class="pullBlack" @click="sCircleAdd(item,index,2)">添 加</a>
+              <van-cell-swipe :right-width="65" :left-width="65">
+                <img :src="item.logoPath" alt="" class="circlePic">
+                <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
+                  class="companyPhone floatright">{{item.contact}}</span></div>
+                <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+                <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
+                <a class="pullBlack" @click="sCircleAdd(item,index,2)">添 加</a>
+                <span slot="right" @click="onClose(item,index,2)">删除</span>
+              </van-cell-swipe>
+
             </li>
+
           </ul>
         </van-list>
       </div>
@@ -56,12 +62,15 @@
         >
           <ul class="circleList">
             <li class="needBorder" v-for="(item, index) in SchedulingCircle">
-              <img :src="item.logoPath" alt="" class="circlePic">
-              <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
-                class="companyPhone floatright">{{item.contact}}</span></div>
-              <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
-              <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
-              <a class="pullBlack" @click="sCircleAdd(item,index,1)">添 加</a>
+              <van-cell-swipe :right-width="65" :left-width="65">
+                <img :src="item.logoPath" alt="" class="circlePic">
+                <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
+                  class="companyPhone floatright">{{item.contact}}</span></div>
+                <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
+                <!--<div class="lineName"><span class="lineInfo">线路:</span></div>-->
+                <a class="pullBlack" @click="sCircleAdd(item,index,1)">添 加</a>
+                <span slot="right" @click="onClose(item,index,2)">删除</span>
+              </van-cell-swipe>
             </li>
           </ul>
         </van-list>
@@ -104,6 +113,37 @@
       this.onLoadB();
     },
     methods: {
+      onClose(item,index,type) {
+        // console.log(item)
+        this.addBlacklist(item,index,type)
+      },
+      addBlacklist(item, index, ctype) {
+        let self = this;
+        let content = '您确定要将好友添加至黑名单吗?';
+        this.message.showAlert(this, content)
+          .then(() => {
+            self.$Ice_CircleService.addBlackList(this.userId, item.compId, new IceCallback(
+              function (result) {
+                if (result.code === 0) {
+                  self.$vux.toast.text('黑名单添加成功', 'top');
+                  if (ctype === 2) {
+                    self.sCircleList.splice(index, 1)
+                  } else {
+                    self.SchedulingCircle.splice(index, 1)
+                  }
+                } else {
+                  self.$vux.toast.text('黑名单添加失败', 'top');
+                }
+              },
+              function (error) {
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+      },
       sCircleAdd(item, index, ctype) {
         let title = '提示';
         let content = '';

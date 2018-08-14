@@ -84,6 +84,8 @@
           <!--:error-message="v5"-->
         <!--/>-->
         <van-field
+          maxlength="11"
+          type="number"
           v-model="compInfo.postcode"
           label="邮编"
           placeholder="请填写邮编"
@@ -213,6 +215,10 @@
         })
       },
       updateComp() {
+        if (this.compInfo.postcode.length > 6) {
+          this.$vux.toast.text('邮编格式大于6位, 请重新输入', 'top');
+          return
+        }
         // 保存信息
         let self = this;
         let compJson = new comp.CompInfo();
@@ -304,13 +310,6 @@
           // // } else {
           // //   this.v5 = ''
           // // }
-          // // 邮编
-          // if (this.verifyUtil.isNull(newValue.postcode)) {
-          //   isBtnClick = false;
-          //   this.v6 = '请输入邮编';
-          // } else {
-          //   this.v6 = ''
-          // }
           //
           // // 企业地址
           // if (newValue.area === 0) {

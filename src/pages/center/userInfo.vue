@@ -15,15 +15,16 @@
       <div class="enterprisePic">
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
-        <cube-upload
-          class="cube-upload-btn-def"
-          ref="upload"
-          style="position:absolute;top:.2rem;left:.2rem;width:1rem;height:1rem;opacity: 0;"
-          :action="{target: uploadUrl,data: {'picNo': 7,'compId': compInfo.compid}}"
-          @files-added="filesAdded"
-          @file-success="filesSuccess"
-          @file-error="filesError">
-        </cube-upload>
+          <cube-upload
+            style="position:absolute;top:.2rem;left:.2rem;width:1rem;height:1rem;opacity: 0;"
+            ref="upload"
+            class="cube-upload-btn-def"
+            :action="{target: uploadUrl,data: {'picNo': 7,'compId': compInfo.compid}}"
+            @files-added="filesAdded"
+            @file-success="filesSuccess"
+            @file-error="filesError">
+          </cube-upload>
+
       </div>
       <span class="pLabel">{{compInfo.fname}}</span>
       <span class="creditGrade">信用等级</span>
