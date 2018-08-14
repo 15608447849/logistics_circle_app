@@ -100,28 +100,34 @@
      * 企业信息模型
      **/
     comp.CompInfo = Slice.defineStruct(
-        function(compid, uoid, fname, sname, ctype, csale, contact, area, address, postcode, pho, pht, invtitle, invtype, taxno, phone, openbank, openaccount, billarea, billaddr, verify, creadit)
+        function(compid, uoid, fname, sname, ctype, ctypes, csale, csales, contact, area, areas, address, postcode, pho, pht, invtitle, invtype, invtypes, taxno, phone, openbank, openaccount, billarea, billaddr, billareas, logoPath, verify, creadit)
         {
             this.compid = compid !== undefined ? compid : "";
             this.uoid = uoid !== undefined ? uoid : "";
             this.fname = fname !== undefined ? fname : "";
             this.sname = sname !== undefined ? sname : "";
             this.ctype = ctype !== undefined ? ctype : 0;
+            this.ctypes = ctypes !== undefined ? ctypes : "";
             this.csale = csale !== undefined ? csale : 0;
+            this.csales = csales !== undefined ? csales : "";
             this.contact = contact !== undefined ? contact : 0;
             this.area = area !== undefined ? area : 0;
+            this.areas = areas !== undefined ? areas : "";
             this.address = address !== undefined ? address : "";
             this.postcode = postcode !== undefined ? postcode : "";
             this.pho = pho !== undefined ? pho : 0;
             this.pht = pht !== undefined ? pht : 0;
             this.invtitle = invtitle !== undefined ? invtitle : "";
             this.invtype = invtype !== undefined ? invtype : 0;
+            this.invtypes = invtypes !== undefined ? invtypes : "";
             this.taxno = taxno !== undefined ? taxno : "";
             this.phone = phone !== undefined ? phone : "";
             this.openbank = openbank !== undefined ? openbank : "";
             this.openaccount = openaccount !== undefined ? openaccount : "";
             this.billarea = billarea !== undefined ? billarea : 0;
             this.billaddr = billaddr !== undefined ? billaddr : "";
+            this.billareas = billareas !== undefined ? billareas : "";
+            this.logoPath = logoPath !== undefined ? logoPath : "";
             this.verify = verify !== undefined ? verify : 0;
             this.creadit = creadit !== undefined ? creadit : 0;
         },
@@ -133,21 +139,27 @@
             __os.writeString(this.fname);
             __os.writeString(this.sname);
             __os.writeInt(this.ctype);
+            __os.writeString(this.ctypes);
             __os.writeInt(this.csale);
+            __os.writeString(this.csales);
             __os.writeLong(this.contact);
             __os.writeInt(this.area);
+            __os.writeString(this.areas);
             __os.writeString(this.address);
             __os.writeString(this.postcode);
             __os.writeLong(this.pho);
             __os.writeLong(this.pht);
             __os.writeString(this.invtitle);
             __os.writeInt(this.invtype);
+            __os.writeString(this.invtypes);
             __os.writeString(this.taxno);
             __os.writeString(this.phone);
             __os.writeString(this.openbank);
             __os.writeString(this.openaccount);
             __os.writeInt(this.billarea);
             __os.writeString(this.billaddr);
+            __os.writeString(this.billareas);
+            __os.writeString(this.logoPath);
             __os.writeInt(this.verify);
             __os.writeInt(this.creadit);
         },
@@ -158,25 +170,31 @@
             this.fname = __is.readString();
             this.sname = __is.readString();
             this.ctype = __is.readInt();
+            this.ctypes = __is.readString();
             this.csale = __is.readInt();
+            this.csales = __is.readString();
             this.contact = __is.readLong();
             this.area = __is.readInt();
+            this.areas = __is.readString();
             this.address = __is.readString();
             this.postcode = __is.readString();
             this.pho = __is.readLong();
             this.pht = __is.readLong();
             this.invtitle = __is.readString();
             this.invtype = __is.readInt();
+            this.invtypes = __is.readString();
             this.taxno = __is.readString();
             this.phone = __is.readString();
             this.openbank = __is.readString();
             this.openaccount = __is.readString();
             this.billarea = __is.readInt();
             this.billaddr = __is.readString();
+            this.billareas = __is.readString();
+            this.logoPath = __is.readString();
             this.verify = __is.readInt();
             this.creadit = __is.readInt();
         },
-        64, 
+        70, 
         false);
 
     /**

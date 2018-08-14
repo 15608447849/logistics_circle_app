@@ -68,7 +68,8 @@
       </div>
       <div class="orderPadding10 backFF">
         <div class="logisticsNameBox">
-          <img src="" alt="">
+          <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
+          <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
           <span class="logisticsName"></span>
         </div>
 
@@ -169,6 +170,7 @@
           <a v-show="detailInfo.tstatus === 1" class="colorsixnine" @click.stop="refuseOrder()">拒绝</a>
           <!--取货照片-->
           <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
+          <a v-show="detailInfo.tstatus === 7 && detailInfo.ptdictc === 21" class="colorLightBlue" @click.stop ="OrderPay()">支付</a>
           <!--取货码-->
           <a v-show="detailInfo.tstatus === 7" class="colorBlue marginright13" @click.stop ="toPickGoodsCode()">取货码</a>
           <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
@@ -264,13 +266,30 @@
         show2: false,
         detailInfo: {},
         userId: this.$app_store.getters.userId,
-        order: {}
+        order: {},
+        pubcompid: '',
+        revicompid: '',
+        puimg: '',
+        compInfo: {},// 企业详情
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
       }
     },
+    // activated() {
+    //   debugger
+    //   this.order = this.$route.params;
+    //   this.pubcompid = this.order.pubcompid;
+    //   this.revicompid = this.order.revicompid;
+    //   this.puimg = this.order.puimg;
+    //   this.type = this.order.type;
+    //   this.getOrderInfo();
+    // },
     mounted() {
-      this.order = this.$route.params;
+      this.order = JSON.parse(this.$route.query.params);
+      this.pubcompid = this.order.pubcompid;
+      this.revicompid = this.order.revicompid;
+      this.queryCompByCid(this.pubcompid);
+      this.puimg = this.order.puimg;
       this.type = this.order.type;
       this.getOrderInfo();
     },
@@ -286,6 +305,28 @@
           }
         })
       },
+      /**
+       * 根据企业码查询指定企业信息(不加路线)
+       * @param compId
+       */
+      queryCompByCid(compId) {
+        let self = this;
+        this.$Ice_CompService.querygetCompByCid(compId,
+          new IceCallback(
+            function (result) {
+              if(result.code === 0) {
+                self.compInfo = result.obj;
+              }else {
+                self.$vux.toast.text(result.msg, 'top');
+              }
+
+            },
+            function (error) {
+              self.$vux.toast.text('企业信息获取失败!', 'top');
+            }
+          )
+        );
+      },
       // 获取订单详情
       getOrderInfo() {
         let self = this;
@@ -293,10 +334,12 @@
           function (result) {
             if (result.code === 0) {
               self.detailInfo = result.obj.orderifo;
+              self.detailInfo.pubcompid = self.pubcompid;
+              self.detailInfo.revicompid = self.revicompid;
+              self.detailInfo.puimg = self.puimg;
               if(self.detailInfo.eaedatetime == '' || self.detailInfo.easdatetime == ''){
                 self.isDisplayTime == true
               }
-              console.log(self.detailInfo)
             } else {
               self.$vux.toast.text(result.msg, 'top');
             }
@@ -329,7 +372,7 @@
           })
       },
       // 重新发布订单
-      repubOrder(){
+      repubOrder() {
         let self = this;
         this.message.showAlert(this, alertContent.CANCEL_ORDER)
           .then(() => {
@@ -396,6 +439,10 @@
           .catch(() => {
 
           })
+      },
+      // 支付
+      OrderPay() {
+        this.$vux.toast.text('支付功能正在建设中', 'top');
       },
       // 拒绝订单
       refuseOrder() {

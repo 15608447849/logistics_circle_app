@@ -3,8 +3,8 @@
     <div class="myReleaseBox">
       <div class="issueHeaderNav">
         <div class="width20">
-          <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">
-          <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">
+          <img :src="isAvatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="isAvatar !== ''">
+          <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="isAvatar === ''">
         </div>
         <div class="width60">
           <span>我的发布</span>
@@ -74,6 +74,8 @@
                  <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
                  <!--取货照片-->
                  <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
+                 <!-- 支付 -->
+                 <a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue" @click.stop="OrderPay()">支付</a>
                  <!--取货码-->
                  <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
                  <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
@@ -109,11 +111,20 @@
       Tab,
       TabItem
     },
+    computed: {
+      isAvatar: {
+        get: function () {
+          return this.$app_store.state.avatar
+        },
+        set: function () {
+          // this.$app_store.commit(IS_SHOW_SIDEBAR, false);
+        }
+      }
+    },
     data() {
       return {
         fName: '',
         isShowNoData: false, // 无数据显示
-        avatar: this.$app_store.state.avatar,
         QueryParam: new redundancy.QueryParam(),
         page: new redundancy.Page(),
         userId: this.$app_store.getters.userId,
@@ -285,13 +296,17 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
           .catch(() => {
 
           })
+      },
+      // 支付
+      OrderPay() {
+        this.$vux.toast.text('支付功能正在努力建设中', 'top');
       },
       // 刷新订单
       refreshOrder(item, index) {
@@ -404,7 +419,9 @@
         item.type = 0;
         this.$router.push({
           name: 'orderDetail',
-          params : item
+          query: {
+            params : JSON.stringify(item)
+          },
         })
       },
       showCodamt(codamt,insureamt) {

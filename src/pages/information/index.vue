@@ -2,8 +2,8 @@
   <div>
     <div class="issueHeaderNav">
       <div class="width20">
-        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">
-        <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">
+        <img :src="isAvatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="isAvatar !== ''">
+        <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="isAvatar === ''">
       </div>
       <div class="width60">
         <span>信息大厅</span>
@@ -50,10 +50,19 @@
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
 
   export default {
+    computed: {
+      isAvatar: {
+        get: function () {
+          return this.$app_store.state.avatar
+        },
+        set: function () {
+          // this.$app_store.commit(IS_SHOW_SIDEBAR, false);
+        }
+      }
+    },
     data() {
       return {
         isShowNoData: false, // 无数据显示
-        avatar: this.$app_store.state.avatar,// 头像
         infoList: [],
         pageSize: '50', // 订单数
         address: this.$app_store.getters.currentCity, // 地址

@@ -60,6 +60,10 @@
           this.$Ice_myOrderService.getOrderTrajectory(this.userId,this.order.orderno,new IceCallback(
             function(result){
               if (result.code === 0) {
+                if(result.obj.length === 0) {
+                  self.$vux.toast.text('暂无订单轨迹～', 'top');
+                  return
+                }
                 let jsonPath = JSON.parse(result.obj[0].content);
                 if (jsonPath.length > 0) {
                   self.mapPath = jsonPath;

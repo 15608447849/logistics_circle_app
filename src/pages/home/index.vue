@@ -5,8 +5,8 @@
       <div class="width20">
         <!--<img src="../../assets/images/small/快速发单@2x.png" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">-->
         <!--<img src="../../assets/images/small/已抢订单@2x.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">-->
-        <img :src="avatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">
-        <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="avatar === ''">
+        <img :src="isAvatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="isAvatar !== ''">
+        <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="isAvatar === ''">
       </div>
       <div class="width60">
         <span>首页</span>
@@ -98,12 +98,21 @@
   import Conversion from '@/utils/conversion';
 
   export default {
+    computed: {
+      isAvatar: {
+        get: function () {
+          return this.$app_store.state.avatar
+        },
+        set: function () {
+          // this.$app_store.commit(IS_SHOW_SIDEBAR, false);
+        }
+      }
+    },
     data() {
       return {
         infoList: [],
         pageSize: '10', // 订单数
         // avatar: '../../assets/images/small/bussiness-man.png',
-        avatar: this.$app_store.state.avatar,// 头像
         // avatarDefault: "../../assets/images/small/moren.png",
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
@@ -133,13 +142,10 @@
         // driverName 后端搜索条件
         // this.driverName = this.searchInputVal;
         // console.log(this.$app_store.getters.searchContent)
-
       }
       if(this.address !== this.$app_store.state.currentCity) {
         this.address =  this.$app_store.state.currentCity;
       }
-
-
       this.requestInfoList();
     },
     methods: {

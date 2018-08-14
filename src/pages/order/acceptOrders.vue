@@ -225,7 +225,9 @@
         item.type = 1;
         this.$router.push({
           name: 'orderDetail',
-          params : item
+          query: {
+            params : JSON.stringify(item)
+          },
         })
       },
       // 取消抢单

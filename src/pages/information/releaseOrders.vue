@@ -86,7 +86,7 @@
       <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物运费</span>
-        <input v-model="OrderDetail.price" type="text" placeholder="费用">
+        <input v-model="OrderDetail.price" type="text" placeholder="费用"> /元
       </li>
       <li class="inputShort needBorder">
         <input v-model="displayDic.disPmLabel" @click="showPicker('pm')" type="text" placeholder="单"

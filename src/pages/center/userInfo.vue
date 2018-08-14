@@ -157,7 +157,6 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                debugger
                 self.compInfo = result.obj;
                 self.computeLevel();
               }else {
