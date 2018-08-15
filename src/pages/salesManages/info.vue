@@ -5,7 +5,7 @@
         <i class="icon iconfont icon-btngoback back floatleft" @click="goBackPage"></i>
       </div>
       <div class="width60">
-        <span>业务员管理</span>
+        <span>添加业务员</span>
       </div>
       <div class="width20">
         <div class="alignCenter floatright"></div>

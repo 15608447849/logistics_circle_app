@@ -80,7 +80,7 @@
     },
     mounted() {
 
-      this.getMessageList();// 未处理消息
+      // this.getMessageList();// 未处理消息
       this.isUnreadMsg();//查询用户是否有新的消息
       // this.getNewMessage();
 

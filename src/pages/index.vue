@@ -44,11 +44,12 @@
           </li>
           <!--<li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>-->
           <li @click="toMyRelease"><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
-          <li @click="toMyCircle"><i class="icon iconfont icon-quanzi marginright3"></i><span
+          <li @click="toMyCircle">
+            <i class="icon iconfont icon-quanzi marginright3" style="margin-right:.3rem;"></i><span
             class="personalText circle">我的圈子</span></li>
-          <li @click="toblacklist"><i class="icon iconfont icon-kttx"></i><span class="personalText">黑名单</span></li>
+          <li @click="toblacklist"><i class="icon iconfont icon-kttx" style="margin-right:.25rem;"></i><span class="personalText">黑名单</span></li>
           <li @click="tomyInformation">
-            <i class="icon iconfont icon-xiaoxi"></i>
+            <i class="icon iconfont icon-xiaoxi" style="margin-right:.18rem;"></i>
             <span class="personalText">消息</span>
             <i class="redSpot"  v-show="!isNewMsg"></i>
           </li>
