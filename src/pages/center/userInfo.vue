@@ -98,7 +98,7 @@
 </template>
 <script>
   import { uploadUrl,cardUrl ,delCardUrl} from '../../../static/libs/server/config'
-  import {COMP_INFO} from "../../store/mutation-types";
+  import {AVATAR_URL, COMP_INFO} from "../../store/mutation-types";
   export default {
     data() {
       return {
@@ -143,7 +143,7 @@
               self.compInfo = result.obj
             },
             function (error) {
-              self.$vux.toast.text('企业信息获取失败!', 'top');
+              self.$vux.toast.text('服务器连接失败，请稍后重试!', 'top');
             }
           )
         );
@@ -158,8 +158,13 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
+                result.obj.logoPath = result.obj.logoPath + '?' + new Date().getSeconds();
                 self.compInfo = result.obj;
                 self.computeLevel();
+                if(self.isYourCompInfo) {
+                  self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
+                  self.$app_store.commit(AVATAR_URL,result.obj.logoPath);
+                }
               }else {
                 self.$vux.toast.text(result.msg, 'top');
               }
@@ -190,7 +195,9 @@
         this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
           new IceCallback(
             function (result) {
-              localStorage.setItem(COMP_INFO, JSON.stringify(self.compInfo));
+              self.$app_store.commit(COMP_INFO, JSON.stringify(self.compInfo));
+              self.$app_store.commit(AVATAR_URL,self.compInfo.logoPath);
+              console.log(self.$app_store.state.avatar)
             },
             function (error) {
             }

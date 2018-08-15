@@ -236,7 +236,10 @@ const vueRouter = new Router({
     },
     {
       path: '/city',
-      component: CITY
+      component: CITY,
+      meta: {
+        keepAlive: true,
+      }
     },
     {
       path: '/userInfo',

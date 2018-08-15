@@ -62,7 +62,6 @@ function init(iceGridInstanceName,host,port){
 }
 
 function queryIce (moduleProxy,moduleName,methodName,args) {
-
     let len = arguments.length;
     let params = [];
     for (let i = 3; i < len - 1; i++) {
@@ -80,7 +79,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
         let proxy = communication
           .stringToProxy(moduleName)
           // .ice_timeout(300000)
-          // .ice_invocationTimeout(10000)
+          .ice_invocationTimeout(15000);
           // .ice_twoway()
           // .ice_preferSecure(true);
         // proxy.ice_timeout(1000).ice_twoway().ice_secure(false);
@@ -118,7 +117,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
     .exception(
         function (e) {
           callback.onCallback(CALLBACK_ACTION.ERROR,e);
-          process.exit(1);
+          // process.exit(1);
         }
     )
 }

@@ -30,7 +30,7 @@
      * 消息内容
      **/
     message.Msg = Slice.defineStruct(
-        function(sender, receiver, sendName, msgtype, isread, msgtext, sendDate, sendTime, msgid)
+        function(sender, receiver, sendName, msgtype, isread, msgtext, sendDate, sendTime, msgid, opstatus)
         {
             this.sender = sender !== undefined ? sender : 0;
             this.receiver = receiver !== undefined ? receiver : 0;
@@ -41,6 +41,7 @@
             this.sendDate = sendDate !== undefined ? sendDate : "";
             this.sendTime = sendTime !== undefined ? sendTime : "";
             this.msgid = msgid !== undefined ? msgid : 0;
+            this.opstatus = opstatus !== undefined ? opstatus : 0;
         },
         true,
         function(__os)
@@ -54,6 +55,7 @@
             __os.writeString(this.sendDate);
             __os.writeString(this.sendTime);
             __os.writeLong(this.msgid);
+            __os.writeInt(this.opstatus);
         },
         function(__is)
         {
@@ -66,8 +68,9 @@
             this.sendDate = __is.readString();
             this.sendTime = __is.readString();
             this.msgid = __is.readLong();
+            this.opstatus = __is.readInt();
         },
-        28, 
+        32, 
         false);
     Slice.defineSequence(message, "MsgSeqHelper", "message.Msg", false);
 

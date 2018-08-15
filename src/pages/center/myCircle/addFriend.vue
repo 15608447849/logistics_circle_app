@@ -167,7 +167,7 @@
                     self.SchedulingCircle.splice(index, 1)
                   }
                 } else {
-                  self.$vux.toast.text('好友圈添加失败', 'top');
+                  self.$vux.toast.text(result.msg, 'top');
                 }
               },
               function (error) {

@@ -78,6 +78,9 @@
         isLoading: false // 下拉刷新
       }
     },
+    activated() {
+      this.$app_store.commit(TABBAR_INDEX,1);
+    },
     methods: {
       toPageIssue() {
         this.$router.push({

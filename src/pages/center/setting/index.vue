@@ -23,7 +23,7 @@
 
 <script>
     import {alertContent} from "../../../utils/enum";
-    import {COMP_INFO, USER_INFO, USER_ID} from "../../../store/mutation-types";
+    import {COMP_INFO, USER_INFO, USER_ID, AVATAR_URL} from "../../../store/mutation-types";
 
     export default {
       data(){
@@ -38,10 +38,14 @@
           let self = this;
           this.message.showAlert(this,alertContent.EXIT_LOGIN)
             .then(() => {
-              // 确认操作
+              // 清空用户信息
               self.$app_store.commit(USER_INFO, this.userInfo);
+              // 清空企业信息
               self.$app_store.commit(COMP_INFO, this.compInfo);
+              // 清空用户id
               self.$app_store.commit(USER_ID, this.userId);
+              // 清空头像
+              self.$app_store.commit(AVATAR_URL,'');
               // 跳转登陆页
               self.$router.push({
                 path: '/login'

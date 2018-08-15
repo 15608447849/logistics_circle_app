@@ -158,10 +158,32 @@
         return true
       },
       sendCode() {
+        let self = this;
         if (this.verifyUtil.isPhoneNum(this.phone)) {
           this.$vux.toast.text('手机号格式错误, 请重新输入', 'top');
           return false
         }
+        // 验证手机短信
+        this.$Ice_UserService.checkPhoneRepetition(this.phone,new IceCallback(
+          function (result) {
+            self.$vux.toast.text(result.msg, 'top');
+            if (result.code === 0) {
+              self.sendSMSV();
+            } else {
+              self.$vux.toast.text(result.msg, 'top');
+            }
+          },
+          function (error) {
+            self.$dialog.loading.close();
+            self.$vux.toast.text(error, 'top');
+          }
+        ))
+      },
+      firstStep() {
+        this.firstStepBool = false;
+        this.secondStepBool = true;
+      },
+      sendSMSV() {
         this.$dialog.loading.open('验证码发送中...');
         let self = this;
         let param = ['register', this.phone, '0'];
@@ -182,10 +204,6 @@
             self.$vux.toast.text(error, 'top');
           }
         ));
-      },
-      firstStep() {
-        this.firstStepBool = false;
-        this.secondStepBool = true;
       },
       secondStep() {
         let self = this;

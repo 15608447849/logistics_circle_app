@@ -1421,8 +1421,8 @@
       }
     },
     activated(){
-      let status = this.$route.query.status;
-      if (status === 0) {
+      this.status = this.$route.query.status;
+      if (this.status === 0) {
         this.currentCity = this.$app_store.getters.currentCity;
       } else {
         this.currentCity = this.$app_store.getters.receiptCity;

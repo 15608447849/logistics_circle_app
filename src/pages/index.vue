@@ -4,19 +4,25 @@
       <router-view class="child-view"></router-view>
     </transition>
     <div class="nav-bar">
-      <yd-tabbar active-color="#1E90FF">
-        <yd-tabbar-item :title=item.title link="#" v-for="(item,index) in activeList" :key="index"
-                        @click.native="navBarClick(index)" :active="tabBarIndex === index">
-          <yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>
-        </yd-tabbar-item>
-      </yd-tabbar>
+      <!--<yd-tabbar active-color="#1E90FF">-->
+        <!--<yd-tabbar-item :title=item.title link="#" v-for="(item,index) in activeList" :key="index"-->
+                        <!--@click.native="navBarClick(index)" :active="tabBarIndex === index">-->
+          <!--<yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>-->
+        <!--</yd-tabbar-item>-->
+      <!--</yd-tabbar>-->
+      <van-tabbar v-model="active">
+        <van-tabbar-item icon="wap-home">首页</van-tabbar-item>
+        <van-tabbar-item icon="chat">信息大厅</van-tabbar-item>
+        <van-tabbar-item icon="exchange-record">圈子</van-tabbar-item>
+        <van-tabbar-item icon="records">订单</van-tabbar-item>
+      </van-tabbar>
     </div>
     <yd-popup v-model="isShowSidebar" position="left" width="73%">
       <div style="background-color:#fff;">
         <div class="centerPic">
           <div class="portrait">
-            <img :src="avatar" alt="" v-if="avatar !== ''">
-            <img src="../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="avatar === ''">
+            <img :src="isAvatar" alt="" v-if="isAvatar !== ''">
+            <img src="../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="isAvatar === ''">
             <span class="logisticsMing">{{compName}}</span>
           </div>
           <ul class="startBox">
@@ -73,6 +79,14 @@
           this.$app_store.commit(IS_SHOW_SIDEBAR, false);
         }
       },
+      isAvatar: {
+        get: function () {
+          return this.$app_store.state.avatar
+        },
+        set: function () {
+          // this.$app_store.commit(IS_SHOW_SIDEBAR, false);
+        }
+      },
       tabBarIndex: {
         get: function () {
           return this.$app_store.state.tabBarIndex
@@ -91,28 +105,14 @@
         compId: '',
         transitionName: '',
         compInfo: null,
-        activeList: [{
-          title: '首页',
-          isActive: false,
-          name: 'home'
-        }, {
-          title: '信息大厅',
-          isActive: true,
-          name: 'feedback'
-        }, {
-          title: '圈子',
-          isActive: false,
-          name: 'discover'
-        }, {
-          title: '我的订单',
-          isActive: false,
-          name: 'ucenter-outline'
-        }]
+        userId: this.$app_store.getters.userId,
+        active: 1
       }
     },
     activated() {
       this.compId = this.$app_store.getters.compId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+
       if(this.compInfo !== undefined && this.compInfo !== null) {
         this.compName = this.compInfo.fname;
         this.avatar = this.compInfo.logoPath;
@@ -134,7 +134,9 @@
       isUnreadMsg() {
         // 查询个人消息模块内是否有新的信息
         let self = this;
-        this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback( function(result){
+        debugger
+        this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
+          function(result){
           if(result.code === 0) {
             self.isNewMsg = result.__state;
             self.isNewMsg = false;
@@ -142,6 +144,7 @@
 
           }
         },function(error){
+          debugger
           //失败
         }))
 
@@ -151,7 +154,6 @@
         self.$Ice_SystemService.getBaseUnit(
           new IceCallback(
             function (result) {
-              debugger
               if(result.code === 0) {
                 self.$app_store.commit(DICT, JSON.stringify(result.data));
               } else {
@@ -257,9 +259,30 @@
       handleActive(position) {
         this.$app_store.commit(TABBAR_INDEX, position);
       },
-      navBarClick(index) {
+      // navBarClick(index) {
+      //   let path = '/';
+      //   switch (index) {
+      //     case 0:
+      //       path = '/';
+      //       break;
+      //     case 1:
+      //       path = '/information';
+      //       break;
+      //     case 2:
+      //       path = '/circle';
+      //       break;
+      //     case 3:
+      //       path = '/order';
+      //       break;
+      //   }
+      //   this.handleActive(index);
+      //   this.$router.push(path)
+      // },
+    },
+    watch: {
+      active(newActive, oldActive) {
         let path = '/';
-        switch (index) {
+        switch (newActive) {
           case 0:
             path = '/';
             break;
@@ -273,7 +296,7 @@
             path = '/order';
             break;
         }
-        this.handleActive(index);
+        this.handleActive(newActive);
         this.$router.push(path)
       }
     }

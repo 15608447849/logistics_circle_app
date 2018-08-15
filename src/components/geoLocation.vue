@@ -51,7 +51,8 @@
         geocoder: null,
         events: {
           init: (map) => {
-
+            // map.setCity(this.searchOption.city)
+            this.setCity();
           }
         }
       }
@@ -59,16 +60,18 @@
     mounted() {
       this.initData();
     },
-    activated: function () {
-      if (this.map !== null) {
-        this.searchOption.city = this.$app_store.getters.receiptCity;
-        this.map.setCity(this.searchOption.city);
-      }
-    },
     methods: {
+      setCity() {
+        if (this.$app_store.state.receiptCity !== '') {
+          this.searchOption.city = this.$app_store.state.receiptCity || '长沙';
+        } else {
+          this.searchOption.city = this.$app_store.state.receiptCity || '长沙';
+        }
+        // if (this.map !== null) {
+          // this.map.setCity(this.searchOption.city);
+        // }
+      },
       initData() {
-        // 设置地址搜索框城市
-        this.searchOption.city = this.$app_store.getters.receiptCity || '长沙';
         this.mapCenter = [113.0068368, 28.212332300000003];
       },
       selectCity() {

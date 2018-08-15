@@ -131,7 +131,6 @@
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
-              debugger
               if(result.code === 0) {
                 self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
                 let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
