@@ -185,12 +185,9 @@
 
       //查询用户是否有新的消息
       isUnreadMsg() {
-        debugger
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(Number(self.userId),new IceCallback(function (result){
-          debugger
           if(result.code === 0) {
-            debugger
             console.log(777);
             self.isNewMsg = result.obj;
             console.log(self.isNewMsg);
@@ -199,7 +196,6 @@
           }
         },function(error){
           // 失败
-          debugger
         }))
 
       },

@@ -147,7 +147,6 @@
           .then(() => {
             // 成功
             // details.sender
-            debugger
             self.$Ice_CircleService.agreeOrRefuse(self.details.msgid, 1, new IceCallback(
 
               function (result) {
