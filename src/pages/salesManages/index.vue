@@ -119,6 +119,7 @@
             if (result.code === 0) {
               self.page.pageIndex += 1; // 页码增加
               self.drivers = self.drivers.concat(result.obj);
+              console.log(self.drivers)
               if (self.drivers.length >= result.totalItems) {
                 self.finished = true;
               }

@@ -37,10 +37,10 @@
            <li class="issueDetailsLiText">
              <span class="issueText">费用信息</span><span class="textMargin-right10">{{detailInfo.redictc}}</span><span class="textMargin-right10"></span><span class="textMargin-right10">{{detailInfo.ptdictc}}</span><span></span>
            </li>
-           <li class="issueDetailsLiText">
+           <li class="issueDetailsLiText" v-if="detailInfo.puedatetime !== ''">
              <span class="issueText">时间信息</span><span class="textMargin-right10">{{detailInfo.puedatetime}}</span><span>取货</span>
            </li>
-           <li class="issueDetailsLiText">
+           <li class="issueDetailsLiText" v-if="detailInfo.phone1 === 0 && detailInfo.phone2 === 0">
              <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
            </li>
          </ul>
@@ -55,8 +55,8 @@
              <span class="marginright3">{{detailInfo.dmdictc}}</span>
              <span class="marginright3"></span>
            </li>
-           <li class="issueDetailsLiText" v-if="detailInfo.easdatetime === ''">
-             <span class="arrivalTime">到货时间</span>
+           <li class="issueDetailsLiText" v-if="detailInfo.easdatetime !== ''">
+             <span class="arrivalTimeRel">到货时间</span>
              <span>{{detailInfo.easdatetime}}</span>
              <span>至</span>
              <span>{{detailInfo.eaedatetime}}</span>
@@ -164,7 +164,8 @@
                 self.$vux.toast.text(result.msg, 'top');
               }
               self.detailInfo = result.obj;
-              console.log(self.detailInfo)
+              console.log(self.detailInfo.phone1)
+              console.log(self.detailInfo.phone2)
             },
             function (error) {
               self.$vux.toast.text('订单详情获取失败, 请稍后重试', 'top');

@@ -124,7 +124,7 @@ a {
 .homeContent{
   display:block;
   width:7.5rem;
-  height:83.5vh;
+  height:87.5vh;
   z-index:9999;
   margin-top:5.5vh;
 }
@@ -263,10 +263,11 @@ a {
 }
 .searchBox .addressCity{
   position:absolute;
-  top:.05rem;
+  top:.08rem;
   left:.15rem;
 }
-.searchBox span{
+.addressCity span{
+  height:.2rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -282,15 +283,15 @@ a {
 }
 .searchBox .searchBtn{
   position:absolute;
-  top:.05rem;
-  left:3rem;
-  width:1.1rem;
+  top:.18rem;
+  left:2.45rem;
+  width:2rem;
   height:auto;
   font-size:.24rem;
   vertical-align: top;
   text-align: center;
 }
-.sousuo{
+.searchBtn .sousuo{
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -348,7 +349,7 @@ a {
   width:7.5rem;
   height:.6rem;
   position:fixed;
-  bottom:.98rem;
+  bottom:.8rem;
   text-align: center;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
@@ -1059,7 +1060,7 @@ input[type="radio"] {
   width:2.05rem;
   height:2.05rem;
   margin:0 auto;
-  margin-bottom:2rem;
+  margin-bottom:1.5rem;
 }
 .login_input{
   display:block;
@@ -1621,11 +1622,14 @@ input[type="radio"] {
 }
 .circleLists{
   width:7.5rem;
-  height:94vh;
+  height:87.5vh;
+  margin-top:5.5vh;
+  background:#ffffff;
 }
 .order_box{
   width:7.5rem;
-  margin-top:.8rem;
+  height:auto;
+  margin-bottom:7vh;
   background:#ffffff;
   overflow:auto;
 }
@@ -1644,10 +1648,10 @@ input[type="radio"] {
 .order_boxIndex{
   display:block;
   width:7.5rem;
-  height:58vh;
+  height:63vh;
   background:#ffffff;
   overflow: auto;
-  margin-bottom:11vh;
+  margin-bottom:6vh;
 }
 .order_list{
   display:block;
@@ -1826,6 +1830,15 @@ input[type="radio"] {
   letter-spacing: 0px;
   color: #999999;
 }
+.arrivalTimeRel{
+  margin-right:.62rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
 .logisticsNameBox .logisticsName{
   display:inline-block;
   text-align: center;
@@ -1842,6 +1855,9 @@ input[type="radio"] {
 }
 .margin_bottom140{
   margin-bottom:2.5rem;
+}
+.margin_bottom14{
+  margin-bottom:14vh;
 }
 .orderinfo{
   display:block;
@@ -2486,7 +2502,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   flex-direction:column;
   justify-content:space-around;
   width:7.5rem;
-  height:2.4rem;
+  height:auto;
   border-bottom:1px solid #e6e6e6;
   background:#ffffff;
 }
@@ -2528,7 +2544,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .driverBox{
   display:block;;
   width:7.5rem;
-  height:auto;
+  height:94.5vh;
   background:#ffffff;
 }
 .searchDriverBox{
@@ -2659,9 +2675,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .24rem;
+  line-height: .89rem;
   letter-spacing: 0px;
   color: #333333;
+}
+.addDriverInfo li input{
+  text-align:right;
 }
 .driverTitle{
    width:auto;
@@ -3029,6 +3048,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   overflow: auto;
   margin-top:4vh;
   /*background:pink;*/
+}
+.myReceive{
+  display:block;
+  width:7.5rem;
+  height:91vh;
+  margin-top:10.5vh;
+  overflow: auto;
 }
 .myReleaseList{
   display:block;
@@ -3875,7 +3901,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   height:.9rem;
   text-align:center;
   margin-right:.14rem;
-  line-height:1.24rem;
+  line-height:8vh;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -3886,12 +3912,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .discontinuation{
   display:inline-block;
   width: 1.2rem;
-  height: .48rem;
+  height: 3.3vh;
   float:right;
   text-align: center;
-  line-height:.45rem;
+  line-height:3.3vh;
   border-radius: 4px;
-  margin-top:.38rem;
+  margin-top:2.35vh;
   border:1px solid #b5b5b5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;

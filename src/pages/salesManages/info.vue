@@ -18,11 +18,11 @@
     <ul class="addDriverInfo">
       <li>
         <span class="driverTitle">业务员姓名</span>
-        <input v-model="dName" type="text" placeholder="请输入司机姓名">
+        <input v-model="dName" type="text" placeholder="请输入司机姓名" class="floatright">
       </li>
       <li>
         <span class="driverTitle">业务员电话</span>
-        <input v-model="dPhone" type="number" placeholder="请输入司机电话">
+        <input v-model="dPhone" type="number" placeholder="请输入司机电话" class="floatright">
       </li>
     </ul>
     <button class="nextStep" @click="dSave">保 存</button>

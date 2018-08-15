@@ -127,7 +127,7 @@
       background: -o-linear-gradient(-45deg, #31bff5,#3190f5); /* Opera 11.1 - 12.0 */
       background: -moz-linear-gradient(-45deg, #31bff5,#3190f5); /* Firefox 3.6 - 15 */
       background: linear-gradient(-45deg, #31bff5,#3190f5); /* 标准的语法 */
-      margin-top:10vh;
+      margin-top:10vh;margin-top:12vh;
       color:#ffffff;">
         保存
       </van-button>

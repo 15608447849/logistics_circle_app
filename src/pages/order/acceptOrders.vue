@@ -20,8 +20,8 @@
           <span class="releaseState" :class="{'activecircle ziTiColorBlue' : item.isSelected}" v-for="(item , index) in tabList"
                 :key="index" @click.stop="tabItemClick(item)">{{item.name}}</span>
         </div>
-
-        <van-list style="margin-top:1.7rem;"
+      <div class="myReceive">
+        <van-list
                   v-model="loading"
                   :finished="finished"
                   @load="onLoad"
@@ -97,6 +97,8 @@
             </div>
           </ul>
         </van-list>
+      </div>
+
         <div v-show="isShowNoData" class="noDataBox">
           <img src="../../assets/images/small/nodate.png"/>
         </div>

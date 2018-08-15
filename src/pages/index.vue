@@ -10,7 +10,7 @@
           <!--<yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>-->
         <!--</yd-tabbar-item>-->
       <!--</yd-tabbar>-->
-      <van-tabbar v-model="active">
+      <van-tabbar v-model="active" style="height:7vh;">
         <van-tabbar-item icon="wap-home">首页</van-tabbar-item>
         <van-tabbar-item icon="chat">信息大厅</van-tabbar-item>
         <van-tabbar-item icon="exchange-record">圈子</van-tabbar-item>
@@ -134,7 +134,6 @@
       isUnreadMsg() {
         // 查询个人消息模块内是否有新的信息
         let self = this;
-        debugger
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
           function(result){
           if(result.code === 0) {
@@ -144,7 +143,6 @@
 
           }
         },function(error){
-          debugger
           //失败
         }))
 
