@@ -76,7 +76,7 @@
                 <a v-show="item.tstatus === 2 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                 <!-- 待评价 -->
                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">待评价</a>-->
-                <!--<a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="">转发布</a>-->
+                <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="toAgainRelease()">转发布</a>
 
                 <!--&lt;!&ndash;接受&ndash;&gt;-->
                 <!--<a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>-->
@@ -234,6 +234,11 @@
           query: {
             params : JSON.stringify(item)
           },
+        })
+      },
+      toAgainRelease(){
+        this.$router.push({
+          path: '/center/myRelease/againRelease',
         })
       },
       // 取消抢单

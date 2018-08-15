@@ -40,6 +40,7 @@ import CIRCLE from '@/pages/circle/index'
 import INFO from '@/pages/information/index'
 // 我的订单模块
 import ORDER from '@/pages/order/index'
+
 // 搜索页
 import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
@@ -51,7 +52,6 @@ import ORDER_DETAIL from '@/pages/order/orderDetail.vue'
 // 我的接收
 import ACCEPT from '@/pages/order/acceptOrders.vue'// 列表
 import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'// 详情
-
 // 我的发布
 
 import PICK_GOODS_CODE from '@/pages/order/pickGoodsCode'// 收货码
@@ -73,7 +73,7 @@ import FRIENDDETAILS from '@/pages/center/myCircle/friendDetails'
 import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
 import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
-
+import AGAINRELEASE from '@/pages/order/againRelease'
 
 import EVALUATE from '@/pages/order/evaluateOrder'
 import COMMONLYROUTE from '@/pages/center/commonlyRoute/index'
@@ -311,6 +311,13 @@ const vueRouter = new Router({
       path: '/order/evaluateOrder',
       component: EVALUATE
     },
+
+    {
+      name: 'againRelease',
+      path: '/order/againRelease',
+      component: AGAINRELEASE
+    },
+
     {
       path: '/center/commonlyRoute/index',
       component: COMMONLYROUTE
