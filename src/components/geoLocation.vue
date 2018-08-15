@@ -44,13 +44,14 @@
         map: null,
         searchOption: {
           city: '',
-          citylimit: true
+          citylimit: false
         },
         markers: [], // 搜索标记
         mapCenter: [], // 地图中心点
         geocoder: null,
         events: {
           init: (map) => {
+            this.map = map
             // map.setCity(this.searchOption.city)
             this.setCity();
           }
@@ -67,9 +68,9 @@
         } else {
           this.searchOption.city = this.$app_store.state.receiptCity || '长沙';
         }
-        // if (this.map !== null) {
-          // this.map.setCity(this.searchOption.city);
-        // }
+        if (this.map !== null) {
+          this.map.setCity(this.searchOption.city);
+        }
       },
       initData() {
         this.mapCenter = [113.0068368, 28.212332300000003];

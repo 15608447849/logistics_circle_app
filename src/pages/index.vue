@@ -10,11 +10,11 @@
           <!--<yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>-->
         <!--</yd-tabbar-item>-->
       <!--</yd-tabbar>-->
-      <van-tabbar v-model="active" style="height:7vh;">
-        <van-tabbar-item icon="wap-home">首页</van-tabbar-item>
-        <van-tabbar-item icon="chat">信息大厅</van-tabbar-item>
-        <van-tabbar-item icon="exchange-record">圈子</van-tabbar-item>
-        <van-tabbar-item icon="records">订单</van-tabbar-item>
+      <van-tabbar v-model="tabBarIndex" style="height:7vh;">
+        <van-tabbar-item icon="wap-home" @click="tabItemClick(0)">首页</van-tabbar-item>
+        <van-tabbar-item icon="chat" @click="tabItemClick(1)">信息大厅</van-tabbar-item>
+        <van-tabbar-item icon="exchange-record" @click="tabItemClick(2)">圈子</van-tabbar-item>
+        <van-tabbar-item icon="records" @click="tabItemClick(3)">订单</van-tabbar-item>
       </van-tabbar>
     </div>
     <yd-popup v-model="isShowSidebar" position="left" width="73%">
@@ -89,10 +89,11 @@
       },
       tabBarIndex: {
         get: function () {
+          this.active = this.$app_store.state.tabBarIndex;
           return this.$app_store.state.tabBarIndex
         },
         set: function () {
-          // this.$app_store.commit(TABBAR_INDEX, this.tabIndex);
+          this.$app_store.commit(TABBAR_INDEX, this.active);
         }
       }
     },
@@ -131,19 +132,20 @@
       this.initAreaData();
     },
     methods: {
+      tabItemClick(index) {
+        console.log(index)
+        this.active = index
+      },
       isUnreadMsg() {
         // 查询个人消息模块内是否有新的信息
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
           function(result){
-          if(result.code === 0) {
             self.isNewMsg = result.__state;
             self.isNewMsg = false;
-          }else{
-
-          }
         },function(error){
           //失败
+            debugger
         }))
 
       },

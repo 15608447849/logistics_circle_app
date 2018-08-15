@@ -11,8 +11,6 @@
         <div class="alignCenter floatright"></div>
       </div>
 
-
-
     </div>
     <div class="downfixed havedownfixed">
     <ul class="addDriverInfo">
@@ -69,23 +67,21 @@
         if(this.isEditor) {
           this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId,this.uid, this.type, new IceCallback(
             function (result) {
+              self.$vux.toast.text(result.msg, 'top');
               if(result.code === 0) {
                 self.goBackPage();
-              } else {
-                self.message.Toast(self,'error',result.msg,false);
               }
             },
             function (error) {
-              self.message.Toast(self,'服务器连接失败, 请稍后重试',result.msg,false);
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
           ));
         }else {
           this.$Ice_InfoService.addStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId, this.type, new IceCallback(
             function (result) {
+              self.$vux.toast.text(result.msg, 'top');
               if(result.code === 0) {
                 self.goBackPage();
-              } else {
-                self.message.Toast(self,'error',result.msg,false);
               }
             },
             function (error) {

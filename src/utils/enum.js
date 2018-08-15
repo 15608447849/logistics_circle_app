@@ -16,6 +16,9 @@ export const alertContent = {
   CANCEL_ORDER: '您确定要取消该发布订单吗?',// 取消发布
   RECEIVING: '您确定要签收该发布订单吗?',// 取消发布
   GREEN: 'green',
-  BLUE: 'blue'
+  BLUE: 'blue',
+
+  /* 我的接受 */
+  CANCEL_SINGLE: '您确定要取消吗?' // 取消抢单
 };
 

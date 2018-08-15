@@ -5,7 +5,7 @@
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
       <div class="width60">
-        <span>取货照片</span>
+        <span>查看照片</span>
         <!--<span v-if="orderState.tstatus === 4">签收照片</span>-->
       </div>
       <div class="width20">
@@ -35,7 +35,6 @@
       }
     },
     mounted() {
-      this.orderState = this.$route.query.orderState;
       this.detailInfo = this.$route.params;
       this.viewPhoto(this.detailInfo.orderno,this.detailInfo.revicompid,this.detailInfo.puimg);
     },
@@ -48,18 +47,32 @@
         this.$router.go(-1)
       },
       //查看取货照片
+      // viewPhoto(orderid,compid,imgArr){
+      //   debugger
+      //   console.log(orderid,compid)
+      //   console.log(this.getImgUrl(orderid,compid))
+      //   // let imgUrl = this.getImgUrl(orderid,compid);
+      //   let imgName = eval ("(" + imgArr + ")");
+      //   let imgUrlList = [];
+      //   console.log(imgName);
+      //   for(let i=0;i<imgName.length;i++){
+      //     console.log(imgName[i]);
+      //     imgUrlList.push(this.pickupUrl + imgUrl + '/' + imgName[i])
+      //   }
+      //   this.viewModal = true;
+      //   this.imgList = imgUrlList;
+      // },
       viewPhoto(orderid,compid,imgArr){
-        console.log(orderid,compid)
-        console.log(this.getImgUrl(orderid,compid))
-        let imgUrl = this.getImgUrl(orderid,compid);
+//     		console.log(this.getImgUrl(orderid,compid))
+//     		var imgUrl = this.getImgUrl(orderid,compid);
         let imgName = eval ("(" + imgArr + ")");
         let imgUrlList = [];
         console.log(imgName);
         for(let i=0;i<imgName.length;i++){
           console.log(imgName[i]);
-          imgUrlList.push(this.pickupUrl + imgUrl + '/' + imgName[i])
+          imgUrlList.push(this.pickupUrl + imgName[i])
         }
-        this.viewModal = true;
+        console.log(imgUrlList);
         this.imgList = imgUrlList;
       },
       //获取图片地址

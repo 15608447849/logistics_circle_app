@@ -70,7 +70,7 @@
         <div class="logisticsNameBox">
           <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
           <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
-          <span class="logisticsName"></span>
+          <span class="logisticsName">{{compInfo.fname}}</span>
         </div>
 
         <ul class="backFF">
@@ -159,7 +159,6 @@
       </div>
 
       <div class="orderOperationBtn">
-
         <div class="operationA" v-show="type === 0">
           <!--刷新-->
           <a v-show="detailInfo.tstatus === 0" class="colorsixnine" @click.stop="refreshOrder()">刷新</a>
@@ -194,7 +193,7 @@
         <!--'8':'已完成'-->
         <div class="operationA" v-show="type === 1">
           <!--接受-->
-          <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="cancelOrder()">取消抢单</a>
+          <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="cancelRobbing()">取消抢单</a>
           <!--取货照片-->
           <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
           <!--取货码-->
@@ -216,13 +215,12 @@
 
       <!--</div>-->
 
-
-      <a class="releaseDetailsMore" v-show="detailInfo.tstatus === 4">更多
-        <div class="pickGoodsBtn">
-          <a @click="topickGoodsPic">取货照片</a>
-          <a @click="toseeDispatch">查看调度</a>
-        </div>
-      </a>
+      <!--<a class="releaseDetailsMore" v-show="detailInfo.tstatus === 4">更多-->
+        <!--<div class="pickGoodsBtn">-->
+          <!--<a @click="topickGoodsPic">取货照片</a>-->
+          <!--<a @click="toseeDispatch">查看调度</a>-->
+        <!--</div>-->
+      <!--</a>-->
 
 
       <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
@@ -271,7 +269,7 @@
         pubcompid: '',
         revicompid: '',
         puimg: '',
-        compInfo: {},// 企业详情
+        compInfo: {}// 企业详情
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
       }
@@ -372,6 +370,28 @@
 
           })
       },
+      // 取消抢单
+      cancelRobbing() {
+        let self = this;
+        this.message.showAlert(this, alertContent.CANCEL_SINGLE)
+          .then(() => {
+            self.$Ice_myOrderService.cancelRobbing(self.order.orderno,self.userId, new IceCallback(
+              function (result) {
+                self.$vux.toast.text(result.msg, 'top');
+                if (result.code === 0) {
+                  self.detailInfo.tstatus = 0;
+                }
+              },
+              function (error) {
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
+              }
+            ))
+          })
+          .catch(() => {
+
+          })
+
+      },
       // 重新发布订单
       repubOrder() {
         let self = this;
@@ -418,6 +438,8 @@
 
           })
       },
+      // 取消抢单
+
       // 接受订单
       receiveOrder() {
         let self = this;
@@ -496,8 +518,9 @@
             self.$Ice_myOrderService.cancelOrder(this.detailInfo.orderno,self.userId, new IceCallback(
               function (result) {
                 if (result.code === 0) {
-                  self.detailInfo.tstatus = 20;
-                  self.$vux.toast.text('订单取消成功 !', 'top');
+                  // 取消抢单
+                  self.detailInfo.tstatus = 30;
+                  self.$vux.toast.text('取消抢单成功 !', 'top');
                 } else {
                   self.$vux.toast.text(result.msg, 'top');
                 }

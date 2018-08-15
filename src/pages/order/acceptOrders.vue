@@ -73,10 +73,10 @@
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,0)">取货照片</a>
                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,1)">签收照片</a>
 
-                <a v-show="item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
+                <a v-show="item.tstatus === 2 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                 <!-- 待评价 -->
                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">待评价</a>-->
-                <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="">转发布</a>
+                <!--<a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="">转发布</a>-->
 
                 <!--&lt;!&ndash;接受&ndash;&gt;-->
                 <!--<a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>-->
@@ -84,7 +84,7 @@
                 <!--<a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>-->
                 <!--&lt;!&ndash;取货码&ndash;&gt;-->
                 <!--<a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">取货码</a>-->
-                <!--<a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>-->
+                <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                 <!--&lt;!&ndash;查看行程&ndash;&gt;-->
                 <!--<a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="">查看行程</a>-->
                 <!--&lt;!&ndash;确认签收&ndash;&gt;-->
@@ -132,7 +132,7 @@
         finished: false,
         // 0 发布 1/2 抢单 3 取货 4 5 签收  6 待评价 8 评价 20 取消
         tabList: [{
-          name: '抢单',
+          name: '抢单', // 取消 -> 扔了 //
           value: '1',
           isSelected: true
         }, {
@@ -161,6 +161,9 @@
         switch (status) {
           case 1:
             cont = '已抢单';
+            break;
+          case 2:
+            cont = '已中转';
             break;
           case 3:
             cont = '已取货';
@@ -214,6 +217,7 @@
       },
       // 跳转企业详情
       toComPInfo(item) {
+        debugger
         this.$router.push({
           path: '/userInfo',
           query: {

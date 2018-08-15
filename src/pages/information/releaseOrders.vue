@@ -10,8 +10,6 @@
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
-
-
     </div>
     <ul class="liNumThree margintop80">
       <li class="inputNumOne needBorder">
@@ -248,14 +246,15 @@
         }else {
           this.isReleaseOrder = true;
         }
+        debugger
         // 添加发布人联系方式
-        if (this.compInfo.pho !== '' && this.compInfo.pht !== '') {
+        if (this.compInfo.pho !== 0 && this.compInfo.pht !== 0) {
           this.OrderDetail.phone1 = this.compInfo.pho;
           this.OrderDetail.phone2 = this.compInfo.pht;
-        }else if(this.compInfo.pho !== '' && this.compInfo.pht === '') {
+        }else if(this.compInfo.pho !== 0 && this.compInfo.pht === 0) {
           this.OrderDetail.phone1 = this.compInfo.contact;
           this.OrderDetail.phone2 = this.compInfo.pho;
-        } else if(this.compInfo.pho === '' && this.compInfo.pht !== '') {
+        } else if(this.compInfo.pho === 0 && this.compInfo.pht !== 0) {
           this.OrderDetail.phone1 = this.compInfo.contact;
           this.OrderDetail.phone2 = this.compInfo.pht;
         } else {
@@ -399,7 +398,6 @@
                   // 线上支付
                   this.codamt = 0;
                   this.insureamt = 0 ;
-
                 }
                 this.OrderDetail.ptdictc = selectedVal;
                 this.displayDic.disPtLabel = selectedText;

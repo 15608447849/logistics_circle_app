@@ -101,7 +101,8 @@ module.exports = {
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'closeOrder',orderid,module.exports.token(),callback);
 	},
   /** 取消订单 */
-  cancelRobbing:(oid,orderid,callback)=>{
-   queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelRobbing',oid,orderid,callback);
+  cancelRobbing:(orderid,oid,callback)=>{
+      debugger
+      queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelRobbing',orderid, oid,callback);
  },
 };
