@@ -349,7 +349,7 @@ a {
   width:7.5rem;
   height:.6rem;
   position:fixed;
-  bottom:.8rem;
+  bottom:.9rem;
   text-align: center;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
@@ -1567,7 +1567,7 @@ input[type="radio"] {
 .issueHeaderNav span{
   display:inline-block;
   font-family: PingFang-SC-Regular;
-  font-size: .32rem;
+  font-size: .36rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .24rem;
@@ -1636,7 +1636,7 @@ input[type="radio"] {
 .noDataBox{
   display:block;
   width:7.5rem;
-  height:10.8rem;
+  height:63vh;
   padding-top:2rem;
 }
 .noDataBox img{
@@ -2144,8 +2144,9 @@ input[type="radio"] {
 }
 .liNumThreeCompany .inputShort{
   display:inline-block;
-  width:2rem;
+  width:1.9rem;
   height:.89rem;
+  margin-right:.12rem;
 }
 .liNumThreeCompany .inputShort input{
   width:1.9rem;
