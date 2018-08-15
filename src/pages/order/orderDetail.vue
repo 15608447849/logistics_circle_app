@@ -112,7 +112,8 @@
       <div class="orderPadding10 backFF ">
         <ul>
           <li class="issueDetailsLiText">
-            <span class="Consignee">{{detailInfo.consignee}}</span>
+            <span class="issueTextA">收货人</span>
+            <span class="marginright3">{{detailInfo.consignee}}</span>
             <span class="marginright3">{{detailInfo.consphone}}</span>
             <span class="marginright3">{{detailInfo.dmdictcn}}</span>
             <!--<span class="marginright3">送货-不上楼</span>-->
@@ -169,11 +170,11 @@
           <!--拒绝-->
           <a v-show="detailInfo.tstatus === 1" class="colorsixnine" @click.stop="refuseOrder()">拒绝</a>
           <!--取货照片-->
-          <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
+          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
           <a v-show="detailInfo.tstatus === 7 && detailInfo.ptdictc === 21" class="colorLightBlue" @click.stop ="OrderPay()">支付</a>
           <!--取货码-->
           <a v-show="detailInfo.tstatus === 7" class="colorBlue marginright13" @click.stop ="toPickGoodsCode()">取货码</a>
-          <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
+          <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 || detailInfo.tstatus === 3"  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
           <!--查看行程-->
           <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--签收照片-->
@@ -216,12 +217,12 @@
       <!--</div>-->
 
 
-      <!--<a class="releaseDetailsMore">更多-->
-      <!--<div class="pickGoodsBtn">-->
-      <!--<a @click="topickGoodsPic">取货照片</a>-->
-      <!--<a @click="toseeDispatch">查看调度</a>-->
-      <!--</div>-->
-      <!--</a>-->
+      <a class="releaseDetailsMore" v-show="detailInfo.tstatus === 4">更多
+        <div class="pickGoodsBtn">
+          <a @click="topickGoodsPic">取货照片</a>
+          <a @click="toseeDispatch">查看调度</a>
+        </div>
+      </a>
 
 
       <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">

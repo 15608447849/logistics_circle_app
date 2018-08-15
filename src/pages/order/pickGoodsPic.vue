@@ -6,6 +6,7 @@
       </div>
       <div class="width60">
         <span>取货照片</span>
+        <!--<span v-if="orderState.tstatus === 4">签收照片</span>-->
       </div>
       <div class="width20">
         <div class="alignCenter floatright"></div>
@@ -27,12 +28,14 @@
   export default {
     data() {
       return {
+        orderState:{},// 列表页面传过来的值
         pickupUrl: pickupUrl,
         imgList: [],
         detailInfo: {}
       }
     },
     mounted() {
+      this.orderState = this.$route.query.orderState;
       this.detailInfo = this.$route.params;
       this.viewPhoto(this.detailInfo.orderno,this.detailInfo.revicompid,this.detailInfo.puimg);
     },

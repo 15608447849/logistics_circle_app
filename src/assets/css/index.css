@@ -348,7 +348,7 @@ a {
   width:7.5rem;
   height:.6rem;
   position:fixed;
-  bottom:1rem;
+  bottom:.98rem;
   text-align: center;
   font-family: PingFang-SC-Regular;
   font-size: .2rem;
@@ -511,7 +511,7 @@ a {
   height:.8rem;
   margin-left:.24rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .8rem;
@@ -806,6 +806,7 @@ a {
   color: #333333;
 }
 .invoiceContent{
+  text-align: right;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -813,6 +814,9 @@ a {
   line-height: .24rem;
   letter-spacing: 0px;
   color: #999999;
+}
+.van-field__control{
+  text-align:right;
 }
 /*首面个人中心基本信息的企业信息*****************************************************************************/
 .enterpriseBox{
@@ -1475,24 +1479,25 @@ input[type="radio"] {
 }
 .zuoji{
   width:7.5rem;
-  height:5vh;
-  border-top:1px solid #fafafa;
-  border-bottom:1px solid #fafafa;
+  height:7vh;
+  border-bottom:1px solid #f4f4f4;
 }
 .quhao{
-  width:1.5rem;
+  width:1.8rem;
   font-size:.26rem;
+  line-height:7vh;
 }
 .zuojiNum{
   width:1.5rem;
   margin-left:.28rem;
   margin-right:.5rem;
-  line-height:5vh;
+  line-height:7vh;
   font-size:.26rem;
   color:#333;
 }
 .haoma{
   width:2rem;
+  line-height:7vh;
   font-size:.26rem;
 }
 .width20{
@@ -1639,7 +1644,7 @@ input[type="radio"] {
 .order_boxIndex{
   display:block;
   width:7.5rem;
-  height:58.5vh;
+  height:58vh;
   background:#ffffff;
   overflow: auto;
   margin-bottom:11vh;
@@ -1890,6 +1895,17 @@ input[type="radio"] {
   display:inline-block;
   width:1.2rem;
   margin-right:.45rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.issueTextA{
+  display:inline-block;
+  width:1.2rem;
+  margin-right:.38rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;

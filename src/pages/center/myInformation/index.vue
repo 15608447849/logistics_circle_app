@@ -74,7 +74,7 @@
         nothandle: true,//同意显示与否
         userId: this.$app_store.state.userId,//vuex存储的用户id
         read: true,//已阅读显示与否
-        isNewMsg:true,//是否有新的消息
+        isNewMsg:{},//是否有新的消息
       }
 
     },
@@ -187,8 +187,10 @@
       isUnreadMsg() {
         debugger
         let self = this;
-        this.$Ice_MessageService.isUnreadMsg(Number(self.userId),new IceCallback(function(result){
+        this.$Ice_MessageService.isUnreadMsg(Number(self.userId),new IceCallback(function (result){
+          debugger
           if(result.code === 0) {
+            debugger
             console.log(777);
             self.isNewMsg = result.obj;
             console.log(self.isNewMsg);
@@ -196,7 +198,8 @@
           }else{
           }
         },function(error){
-          //失败
+          // 失败
+          debugger
         }))
 
       },

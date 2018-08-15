@@ -73,7 +73,7 @@
                  <!--拒绝-->
                  <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
                  <!--取货照片-->
-                 <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
+                 <a v-show="item.tstatus === 3 || item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
                  <!-- 支付 -->
                  <a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue" @click.stop="OrderPay()">支付</a>
                  <!--取货码-->
@@ -82,7 +82,7 @@
                  <!--查看行程-->
                  <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                  <!--签收照片-->
-                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="refuseOrder(item,index)">签收照片</a>
+                 <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toSign(item)">签收照片</a>
                  <!--确认签收-->
                  <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="conReceipt(item.orderno,index)">确认签收</a>
                  <!--评价-->
@@ -352,6 +352,14 @@
           .catch(() => {
 
           })
+      },
+      toSign(item){
+         this.$router.push({
+           path:'/order/pickGoodsPic',
+           query:{
+             orderState:item
+           }
+         })
       },
       // 拒绝订单
       refuseOrder(item, index) {

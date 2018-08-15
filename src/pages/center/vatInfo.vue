@@ -62,7 +62,7 @@
       <!--/>-->
       <div class="zuoji">
         <span class="zuojiNum">电话号码</span>
-        <input type="number" v-model="phoneArea" placeholder="请填写区号" class="quhao"> <span style="margin-right:.3rem;">-</span><input type="number" v-model="landline" placeholder="请填写座机号码" class="haoma">
+        <input type="number" v-model="phoneArea" placeholder="请填写区号" class="quhao floatright"> <span style="margin-right:.3rem;line-height:7vh;" class="floatright">-</span><input type="number" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
       </div>
 
       <van-field
