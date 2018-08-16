@@ -10,11 +10,7 @@
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
-
-
-
     </div>
-
       <div class="addRouterBox">
         <ul class="addRouteList">
           <li class="needBorder" @click="showCascadePicker(0)">
@@ -35,7 +31,7 @@
           <li class="needBorder" @click="showCascadePicker(3)">
             <span class="routeTitle">中转点</span>
             <span v-for="(item, index) in TransitP" :key="index"><badge
-              :text=item.placename @click.native="removeBadge(64,index)" @click.native.stop="removeBadge"/></span>
+              :text=item.placename @click.native="removeBadge(128,index)" @click.native.stop="removeBadge"/></span>
           </li>
         </ul>
         <button class="nextStep fixedBottom" @click="saveRoutes">保 存</button>

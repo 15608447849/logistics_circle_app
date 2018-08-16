@@ -69,18 +69,18 @@
                 <!--&lt;!&ndash;取消&ndash;&gt;-->
                 <!-- 抢单 -->
                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消抢单</a>
-                <!-- 取货 -->
-                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
-                <!--<a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="cancelOrder(item, index)">录入行程</a>-->
+                <!-- 录入行程 -->
+                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="entryTrip(item.orderno)">录入行程</a>
+                <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="printOrder(item, index)">查看中转单</a>
+
                 <!-- 签收 -->
-                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,0)">取货照片</a>
-                <a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item,1)">签收照片</a>
+                <!--<a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>-->
+                <!--<a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item)">签收照片</a>-->
 
                 <a v-show="item.tstatus === 2 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                 <!-- 待评价 -->
                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop ="topickGoodsCode(item.orderno)">待评价</a>-->
-                <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="toAgainRelease()">转发布</a>
-
+                <a v-show="item.tstatus === 7" class="colorsixsix"  @click.stop="toAgainRelease(item)">转发布</a>
                 <!--&lt;!&ndash;接受&ndash;&gt;-->
                 <!--<a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>-->
                 <!--&lt;!&ndash;拒绝&ndash;&gt;-->
@@ -186,6 +186,7 @@
         return cont
       },
       tabItemClick(item) {
+        debugger
         this.tabList.forEach((value, index, arr) => {
           value.isSelected = false
         });
@@ -200,6 +201,35 @@
       },
       avatarClick() {
         this.$app_store.commit(IS_SHOW_SIDEBAR, true);
+      },
+      // 录入行程
+      entryTrip(orderno) {
+        this.$router.push({
+          name: 'entryTravel',
+          query: {
+            orderno: orderno
+          }
+        })
+      },
+      // 打印中转单
+      printOrder(item) {
+        let self = this;
+        this.$Ice_myOrderService.getTrancCode(this.userId,item.orderno,item.tstatus,new IceCallback(
+          function(result){
+            if (result.code === 0) {
+              let data = JSON.parse(result.obj[0]);
+              let	dataImg = data.data.nginx + data.data.relativeAddr;
+              self.$router.push({
+                name: 'preview',
+                query: {
+                  url: dataImg
+                }
+              })
+            } else {
+              self.$vux.toast.text('转运单获取失败', 'top');
+            }
+          }
+        ))
       },
       initQueryConditions(status) {
         // 初始化分页条件
@@ -217,7 +247,6 @@
       },
       // 跳转企业详情
       toComPInfo(item) {
-        debugger
         this.$router.push({
           path: '/userInfo',
           query: {
@@ -236,9 +265,13 @@
           },
         })
       },
-      toAgainRelease(){
+      toAgainRelease(item){
         this.$router.push({
-          path: '/center/myRelease/againRelease',
+          name: 'againRelease',
+          query: {
+            orderId: item.orderno
+          }
+          // path: '/center/myRelease/againRelease',
         })
       },
       // 取消抢单
@@ -256,7 +289,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -326,12 +359,15 @@
         })
       },
       // 取货照片
-      toPickGoodsPic(item,type) {
-        if(type === 0) {
+      toPickGoodsPic(item) {
+        if(item.puimg === '0') {
           this.$vux.toast.text('暂无取货照片', 'top');
-        } else {
-          this.$vux.toast.text('暂无签收照片', 'top');
+          return
         }
+        this.$router.push({
+          name: 'pickGoodsPic',
+          params: item
+        })
       },
       fallback() {
         this.$router.go(-1)

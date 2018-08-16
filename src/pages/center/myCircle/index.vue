@@ -10,9 +10,6 @@
       <div class="width20">
         <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toaddFriend"></i>
       </div>
-
-
-
     </div>
       <!--<div class="driverBox" @click="tosearchFriend">-->
         <!--<div class="searchDriverBox">-->
@@ -38,9 +35,9 @@
 
 
         <ul class="circleList" v-show="selectOneTab">
-          <li class="needBorderF5" @click="toComPInfo(item)" v-for="(item, index) in sCircleList" :key="index">
-            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== ''">
-            <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultCircle widthHeight90 floatleft" v-if="item.logoPath === ''">
+          <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in sCircleList" :key="index">
+            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== undefined">
+            <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight90 floatleft" v-if="item.logoPath === undefined">
             <div class="companyNamePhone">
               <span class="companyName floatleft">{{item.fname}}</span>
               <span class="companyPhone floatright">{{item.contact}}</span></div>
@@ -54,9 +51,9 @@
 
 
         <ul class="circleList" v-show="!selectOneTab">
-          <li class="needBorderF5" @click="toComPInfo(item)" v-for="(item, index) in SchedulingCircle" :key="index">
-            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== ''">
-            <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultCircle widthHeight90 floatleft" v-if="item.logoPath === ''">
+          <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in SchedulingCircle" :key="index">
+            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== undefined">
+            <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight90 floatleft" v-if="item.logoPath === undefined">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
               class="companyPhone floatright">{{item.contact}}</span></div>
             <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>

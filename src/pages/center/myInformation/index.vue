@@ -19,7 +19,7 @@
         <!--</div>-->
 
          <tab
-           active-color="#3189f5" style="margin-top:6vh;">
+           active-color="#3189f5" style="margin-top:.75rem;">
            <tab-item @on-item-click="tabClick" selected>
              未处理
              <i class="redSpot" v-show="!isNewMsg"></i>

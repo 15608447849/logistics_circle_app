@@ -50,8 +50,9 @@ import RELEASE_ORDERS from '@/pages/information/releaseOrders'
 import ORDER_DETAIL from '@/pages/order/orderDetail.vue'
 
 // 我的接收
-import ACCEPT from '@/pages/order/acceptOrders.vue'// 列表
-import ACCEPT_DETAILS from '@/pages/order/acceptDetails.vue'// 详情
+import ACCEPT from '@/pages/order/acceptOrders'// 列表
+import ACCEPT_DETAILS from '@/pages/order/acceptDetails'// 详情
+import ENTRY_TRAVEL from '@/pages/order/entryTravel'// 录入行程
 // 我的发布
 
 import PICK_GOODS_CODE from '@/pages/order/pickGoodsCode'// 收货码
@@ -74,8 +75,7 @@ import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
 import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
 import AGAINRELEASE from '@/pages/order/againRelease'
-import GOODSPHOTO from '@/pages/order/goodsPhoto'
-import ENTRYTRAVEL from '@/pages/order/entryTravel'
+import PREVIEW  from '@/pages/order/preview'
 import EVALUATE from '@/pages/order/evaluateOrder'
 import COMMONLYROUTE from '@/pages/center/commonlyRoute/index'
 import ADDROUTE from '@/pages/center/commonlyRoute/addRoute'
@@ -221,11 +221,13 @@ const vueRouter = new Router({
       component: SEARCH
     },
     {
+      name: 'releaseOrders',
       path: '/information/releaseOrders',
       component: RELEASE_ORDERS,
       meta: {
         keepAlive: true,
-        requireAuth: true
+        requireAuth: true,
+        isUseCache: false,
       }
     },
     {
@@ -316,18 +318,18 @@ const vueRouter = new Router({
     {
       name: 'againRelease',
       path: '/order/againRelease',
-      component: AGAINRELEASE
+      component: AGAINRELEASE,
+      meta: {
+        keepAlive: true,
+        isUseCache: false,
+      }
     },
     {
-      name: 'goodsPhoto',
-      path: '/order/goodsPhoto',
-      component: GOODSPHOTO
+      name: 'preview',
+      path: '/order/preview',
+      component: PREVIEW
     },
-    {
-      name: 'entryTravel',
-      path: '/order/entryTravel',
-      component: ENTRYTRAVEL
-    },
+
     {
       path: '/center/commonlyRoute/index',
       component: COMMONLYROUTE
@@ -412,6 +414,11 @@ const vueRouter = new Router({
       name: 'schedulePlayBack',
       path: '/order/schedulePlayBack',
       component: SCHEDULE_PLAY_BACK
+    },
+    {
+      name: 'entryTravel',
+      path: '/order/entryTravel',
+      component: ENTRY_TRAVEL
     }
   ]
 });

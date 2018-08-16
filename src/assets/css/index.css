@@ -2724,7 +2724,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display:inline-block;
   width:10%;
   height:.6rem;
-  border-right:1px solid gainsboro;
+  border-right: .1px solid gainsboro;
 }
 .magnifier i{
   text-align: center;

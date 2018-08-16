@@ -42,8 +42,7 @@
           </li>
           <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
           </li>
-          <!--<li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>-->
-          <li @click="toMyRelease"><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
+          <li @click="toAccept"><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
           <li @click="toMyCircle">
             <i class="icon iconfont icon-quanzi marginright3" style="margin-right:.3rem;"></i><span
             class="personalText circle">我的圈子</span></li>
@@ -74,6 +73,7 @@
     computed: {
       isShowSidebar: {
         get: function () {
+          this.isUnreadMsg();// 是否有新的消息
           return this.$app_store.state.isShowSidebar
         },
         set: function () {
@@ -112,15 +112,14 @@
       }
     },
     activated() {
+      this.isUnreadMsg();// 是否有新的消息
       this.compId = this.$app_store.getters.compId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
-
       if(this.compInfo !== undefined && this.compInfo !== null) {
         this.compName = this.compInfo.fname;
         this.avatar = this.compInfo.logoPath;
         this.$app_store.commit(AVATAR_URL,this.avatar);
         this.computeLevel();
-        console.log(this.compName);
       } else {
         this.avatar = require('../assets/images/small/avatar.png');
       }
@@ -128,13 +127,11 @@
     mounted() {
       // 获取当前定位城市
       this.$app_store.commit(CURRENT_CITY, '长沙');
-      this.isUnreadMsg();// 是否有新的消息
       this.initBaseData();
       this.initAreaData();
     },
     methods: {
       tabItemClick(index) {
-        console.log(index)
         this.active = index
       },
       isUnreadMsg() {
@@ -142,11 +139,11 @@
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
           function(result){
-            self.isNewMsg = result.__state;
+            // self.isNewMsg = result.__state;
             self.isNewMsg = false;
         },function(error){
-          //失败
-
+          // 失败
+            self.isNewMsg = true;
         }))
 
       },
@@ -160,8 +157,6 @@
               } else {
                 self.$vux.toast.text('货物类型获取失败', 'top');
               }
-
-
             },
             function (error) {
               setTimeout(() => {
@@ -219,7 +214,7 @@
           path: '/center/myCircle/index'
         })
       },
-      toMyRelease() {
+      toAccept() {
         this.$router.push({
           path: '/order/acceptOrders'
         })
