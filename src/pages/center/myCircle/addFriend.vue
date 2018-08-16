@@ -37,7 +37,7 @@
           @load="onLoadA"
         >
 
-          <ul class="circleListAdd">
+          <ul class="circleList">
             <li class="needBorder" v-for="(item, index) in sCircleList">
               <van-cell-swipe :right-width="65" :left-width="65">
                 <img :src="item.logoPath" alt="" class="circlePic">
@@ -60,7 +60,7 @@
           :finished="finishedB"
           @load="onLoadB"
         >
-          <ul class="circleListAdd">
+          <ul class="circleList">
             <li class="needBorder" v-for="(item, index) in SchedulingCircle">
               <van-cell-swipe :right-width="65" :left-width="65">
                 <img :src="item.logoPath" alt="" class="circlePic">
