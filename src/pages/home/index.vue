@@ -39,12 +39,12 @@
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
           <div class="addressCity" @click.stop="skipCityPage">
-            <span>{{address}}</span>
-            <i class="icon iconfont icon-xiala"></i>
+            <span class="cityName">{{address}}</span>
+            <i class="icon iconfont icon-xiala cityNameI"></i>
+            <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
           </div>
           <div class="searchBtn">
-            <i class="icon iconfont icon-sousuo"></i>
-            <span class="sousuo">{{key}}</span>
+            <input type="text" :value="key" class="cityInput" placeholder="请输入想要搜索的城市">
           </div>
         </div>
       </div>

@@ -146,7 +146,7 @@
             self.isNewMsg = false;
         },function(error){
           //失败
-            debugger
+
         }))
 
       },

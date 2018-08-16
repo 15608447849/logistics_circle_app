@@ -28,7 +28,7 @@
              已处理
            </tab-item>
          </tab>
-         <ul class="circleList" v-show="isShow">
+         <ul class="circleList" v-show="isShow" style="height:88.5vh;">
            <!--<p>这是未处理消息</p>-->
            <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in messageList" :key="index">
              <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
@@ -38,7 +38,7 @@
            </li>
          </ul>
          <!--已处理-->
-         <ul class="circleList" v-show="!isShow">
+         <ul class="circleList" v-show="!isShow" style="height:88.5vh;">
            <!--<p>这是已经处理消息</p>-->
            <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in readyHandMsg" :key="index" v-if="item.isread !== 0">
              <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
@@ -80,7 +80,7 @@
     },
     mounted() {
 
-      // this.getMessageList();// 未处理消息
+      this.getMessageList();// 未处理消息
       this.isUnreadMsg();//查询用户是否有新的消息
       // this.getNewMessage();
 

@@ -74,7 +74,7 @@ import SEARCHFRIEND from '@/pages/center/myCircle/searchFriend'
 import RELEASESEARCH from '@/pages/center/myRelease/releaseSearch'
 import SEEDISPATCH from '@/pages/center/myRelease/seeDispatch'
 import AGAINRELEASE from '@/pages/order/againRelease'
-
+import GOODSPHOTO from '@/pages/order/goodsPhoto'
 import EVALUATE from '@/pages/order/evaluateOrder'
 import COMMONLYROUTE from '@/pages/center/commonlyRoute/index'
 import ADDROUTE from '@/pages/center/commonlyRoute/addRoute'
@@ -316,6 +316,11 @@ const vueRouter = new Router({
       name: 'againRelease',
       path: '/order/againRelease',
       component: AGAINRELEASE
+    },
+    {
+      name: 'againRelease',
+      path: '/order/goodsPhoto',
+      component: GOODSPHOTO
     },
 
     {

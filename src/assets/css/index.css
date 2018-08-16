@@ -263,10 +263,20 @@ a {
 }
 .searchBox .addressCity{
   position:absolute;
-  top:.08rem;
+  top:0rem;
   left:.15rem;
+  width:auto;
+  height:.62rem;
+  border-right:1px solid #999999;
 }
-.addressCity span{
+.cityNameI{
+  display:inline-block;
+  margin-top:.1rem;
+  margin-right:.1rem;
+}
+.cityName{
+  display:inline-block;
+  margin-top:.1rem;
   height:.2rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
@@ -278,19 +288,46 @@ a {
 }
 .searchBox i{
   font-family: PingFang-SC-Regular;
-  font-size:10px;
   color: #999999;
 }
 .searchBox .searchBtn{
   position:absolute;
-  top:.18rem;
-  left:2.45rem;
-  width:2rem;
-  height:auto;
+  top:0rem;
+  left:2.2rem;
+  width:3rem;
+  height:.62rem;
   font-size:.24rem;
   vertical-align: top;
   text-align: center;
 }
+.cityInput{
+  display:inline-block;
+  width:100%;
+  height:.62rem;
+  font-size:.26rem;
+  color:#999999;
+}
+.cityInput::-webkit-input-placeholder {
+  color: #999999;
+}
+.cityInput:-moz-placeholder {
+  color: #999999;
+}
+.cityInput:-ms-input-placeholder {
+  color: #999999;
+}​
+.magnifierziti{
+  float:right;
+  margin-left:.35rem;
+  margin-right:.1rem;
+  margin-top:.15rem;
+  font-size:.28rem;
+}
+/*.searchBtn i{*/
+  /*float:left;*/
+  /*margin-top:.15rem;*/
+  /*font-size:.28rem;*/
+/*}*/
 .searchBtn .sousuo{
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
@@ -1535,7 +1572,7 @@ input[type="radio"] {
   background:#ffffff;
 }
 .downfixed{
-  margin-top:7vh;
+  margin-top:6vh;
 }
 .havedownfixed{
   margin-bottom:9vh;
@@ -2754,7 +2791,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  height:81vh;
+  height:83vh;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   overflow: auto;
@@ -2931,7 +2968,7 @@ circleListAdd li .circlePic{
   line-height:.64rem;
 }
 .friendSousuo{
-  width:5.5rem;
+  width:80%;
   height:.64rem;
   text-align: center;
   text-indent: .5rem;

@@ -16,8 +16,12 @@
         <div class="searchFriendBox">
           <div class="searchFriend">
             <div class="friendSearchBtn" @click="toPageSearch">
-              <i class="icon iconfont icon-sousuo"></i>
+              <div class="magnifier floatleft">
+                <i class="icon iconfont icon-sousuo"></i>
+              </div>
               <input v-model="searchInputVal" type="text" class="friendSousuo" placeholder="输入企业名称查询">
+              <div class="width10 floatright">
+              </div>
             </div>
           </div>
         </div>
@@ -37,7 +41,7 @@
           @load="onLoadA"
         >
 
-          <ul class="circleList">
+          <ul class="circleList" style="height:78vh;">
             <li class="needBorder" v-for="(item, index) in sCircleList">
               <van-cell-swipe :right-width="65" :left-width="65">
                 <img :src="item.logoPath" alt="" class="circlePic">
@@ -60,7 +64,7 @@
           :finished="finishedB"
           @load="onLoadB"
         >
-          <ul class="circleList">
+          <ul class="circleList" style="height:78vh;">
             <li class="needBorder" v-for="(item, index) in SchedulingCircle">
               <van-cell-swipe :right-width="65" :left-width="65">
                 <img :src="item.logoPath" alt="" class="circlePic">
