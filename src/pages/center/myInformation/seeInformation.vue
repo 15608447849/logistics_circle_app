@@ -71,8 +71,8 @@
       }
     },
     mounted() {
-      this. YesHandleMessage();
-      this.getMessageList();// 未处理消息
+      // this. YesHandleMessage();
+      // this.getMessageList();// 未处理消息
       // console.log(this.messageList);
       this.details = this.$route.query.details;
       console.log(this.details);

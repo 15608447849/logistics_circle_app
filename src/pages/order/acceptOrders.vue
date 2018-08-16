@@ -21,6 +21,9 @@
                 :key="index" @click.stop="tabItemClick(item)">{{item.name}}</span>
         </div>
       <div class="myReceive">
+        <div v-show="isShowNoData" class="noDataBox">
+          <img src="../../assets/images/small/nodate.png"/>
+        </div>
         <van-list
                   v-model="loading"
                   :finished="finished"
@@ -99,9 +102,6 @@
         </van-list>
       </div>
 
-        <div v-show="isShowNoData" class="noDataBox">
-          <img src="../../assets/images/small/nodate.png"/>
-        </div>
       </div>
     </div>
   </div>

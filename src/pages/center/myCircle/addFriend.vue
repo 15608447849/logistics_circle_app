@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
       </div>
@@ -11,7 +11,7 @@
         <div class="alignCenter floatright"></div>
       </div>
     </div>
-    <div style="margin-top:5.5vh;">
+    <div>
       <div class="addFriendBox">
         <div class="searchFriendBox">
           <div class="searchFriend">
@@ -37,7 +37,7 @@
           @load="onLoadA"
         >
 
-          <ul class="circleList">
+          <ul class="circleListAdd">
             <li class="needBorder" v-for="(item, index) in sCircleList">
               <van-cell-swipe :right-width="65" :left-width="65">
                 <img :src="item.logoPath" alt="" class="circlePic">
@@ -60,7 +60,7 @@
           :finished="finishedB"
           @load="onLoadB"
         >
-          <ul class="circleList">
+          <ul class="circleListAdd">
             <li class="needBorder" v-for="(item, index) in SchedulingCircle">
               <van-cell-swipe :right-width="65" :left-width="65">
                 <img :src="item.logoPath" alt="" class="circlePic">

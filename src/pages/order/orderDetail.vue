@@ -132,7 +132,7 @@
           <span class="rderCostA">订单费用</span>
           <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}元</span>
         </div>
-        <div class="floatleft margin_bottom14 ulWidth100">
+
           <ul class="ulWidth100">
             <li class="orderinfo">
               <span class="marginright90">订单号</span>
@@ -155,7 +155,7 @@
               <span>{{detailInfo.arridatetime}}</span>
             </li>
           </ul>
-        </div>
+
       </div>
 
       <div class="orderOperationBtn">

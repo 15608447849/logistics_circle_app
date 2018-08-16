@@ -1470,7 +1470,7 @@ input[type="radio"] {
   position:fixed;
   top:0rem;
   width:7.5rem;
-  height:5.5vh;
+  height:7vh;
   z-index:1;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
@@ -1514,7 +1514,7 @@ input[type="radio"] {
   justify-content:space-between;
   align-items:center;
   width:7.5rem;
-  height:5.5vh;
+  height:7vh;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
@@ -1528,7 +1528,6 @@ input[type="radio"] {
   font-size: .36rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .24rem;
   letter-spacing: 1px;
   color: #ffffff;
 }
@@ -1536,7 +1535,7 @@ input[type="radio"] {
   background:#ffffff;
 }
 .downfixed{
-  margin-top:5.5vh;
+  margin-top:7vh;
 }
 .havedownfixed{
   margin-bottom:9vh;
@@ -2579,10 +2578,31 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .driverSearchBtn{
   display:block;
-  width:7.5rem;
+  width:7.08rem;
   height:.64rem;
   text-align:center;
   line-height:.64rem;
+}
+.magnifier{
+  display:inline-block;
+  width:10%;
+  height:.6rem;
+  border-right:1px solid gainsboro;
+}
+.magnifier i{
+  text-align: center;
+}
+.width10{
+  display:inline-block;
+  width:10%;
+  height:.62rem;
+}
+.seachCity{
+  width:80%;
+  height:.64rem;
+  text-align:center;
+  font-size:.26rem;
+  color:#999999;
 }
 .driverList{
   display:block;
@@ -2738,10 +2758,26 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .circleList{
   display:block;
   width:7.5rem;
-  height:90vh;
+  height:81vh;
   background:#ffffff;
   padding:0rem .21rem 0rem .21rem;
   overflow: auto;
+}
+.circleListAdd{
+  display:block;
+  width:7.5rem;
+  height:76vh;
+  background:#ffffff;
+  padding:0rem .21rem 0rem .21rem;
+  overflow: auto;
+}
+.circleListAdd li{
+  display:block;
+  position:relative;
+  top:0rem;
+  left:0rem;
+  width:7.08rem;
+  height:1.5rem;
 }
 .circleList li{
   display:block;
@@ -2750,6 +2786,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   left:0rem;
   width:7.08rem;
   height:1.5rem;
+}
+circleListAdd li .circlePic{
+  display:inline-block;
+  width:.9rem;
+  height:.9rem;
+  vertical-align: middle;
+  margin-top:.28rem;
 }
 .circleList li .circlePic{
   display:inline-block;
@@ -2849,13 +2892,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
    display:block;
    width:7.5rem;
    height:.5rem;
-   margin-top:.3rem;
    text-align: center;
    font-family: PingFang-SC-Regular;
    font-size: .22rem;
    font-weight: normal;
    font-stretch: normal;
-   line-height: .25rem;
+   line-height: .5rem;
    letter-spacing: 0px;
    color: #999999;
  }
@@ -2895,6 +2937,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .friendSousuo{
   width:5.5rem;
   height:.64rem;
+  text-align: center;
+  text-indent: .5rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -2917,12 +2961,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #3189f5;
 }
 .maybe{
+  height:.4rem;
   text-indent: .21rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .24rem;
+  line-height: .4rem;
   letter-spacing: 0px;
   color: #999999;
   background:#ffffff;
@@ -3005,10 +3050,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   align-items:center;
   padding:0rem .31rem 0rem .31rem;
   position:fixed;
-  top:5.5vh;
+  top:7vh;
   left:0rem;
   width:7.5rem;
-  height:.7rem;
+  height:5vh;
   background:#ffffff;
   border:1px solid #ebeff5;
   color:#333333;
@@ -3065,8 +3110,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .myReceive{
   display:block;
   width:7.5rem;
-  height:91vh;
-  margin-top:10.5vh;
+  height:88vh;
+  margin-top:12vh;
   overflow: auto;
 }
 .myReleaseList{
@@ -3713,6 +3758,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .margin-left5{
   margin-left:.03rem;
+}
+.margin-left10{
+  margin-left:.1rem;
 }
 .margin-top22{
   margin-top:.2rem;

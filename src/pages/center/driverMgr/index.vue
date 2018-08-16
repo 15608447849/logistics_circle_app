@@ -16,8 +16,11 @@
       <div class="searchDriverBox">
         <div class="searchDriver">
           <div class="driverSearchBtn" @click="toPageSearch">
-            <i class="icon iconfont icon-sousuo"></i>
-            <span class="sousuo">{{searchInputVal}}</span>
+            <div class="magnifier floatleft">
+              <i class="icon iconfont icon-sousuo"></i>
+            </div>
+            <input type="text" placeholder="请输入想要搜索的司机" class="seachCity floatleft" :value="searchInputVal">
+            <div class="width10"></div>
           </div>
         </div>
       </div>
