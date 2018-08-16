@@ -134,9 +134,9 @@
             function (result) {
               if(result.code === 0) {
                 self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
-                // let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
+                let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
                 self.$router.push({
-                  path: '/information'
+                  path: redirect
                 })
               } else {
                 self.$vux.toast.text(result.msg, 'top');

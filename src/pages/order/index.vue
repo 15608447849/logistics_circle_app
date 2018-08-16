@@ -52,7 +52,7 @@
 
              <li class="pickGoods marginBottom15">
                <div>
-                 <span>取货时间：</span> <span>{{item.pubdate}}</span><span> {{item.pubtime}}</span>
+                 <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
                </div>
                <!--<span class="underPay">线下付款</span>-->
                <!--线上付款-->
@@ -162,6 +162,7 @@
     },
     mounted() {
       this.fName = JSON.parse(this.$app_store.state.compInfo).fname;
+      console.log(this.$app_store.state.compInfo);
       this.$app_store.commit(TABBAR_INDEX, 3);
       // 初始化列表查询条件
       this.initQueryConditions('0');
@@ -485,12 +486,17 @@
       },
       // 查看取货照片
       getPickupPhotosUrl(orderId,compId,imgArr){
+        console.log(orderId,compId);
+        console.log(this.getImgUrl(orderId,compId));
         let imgUrl = this.getImgUrl(orderId,compId);
         let imgName = eval ("(" + imgArr + ")");
         let imgUrlList = [];
+        console.log(imgName);
         for(let i=0;i<imgName.length;i++){
+          console.log(imgName[i]);
           imgUrlList.push('http://192.168.1.110:8029/' + imgUrl + '/' + imgName[i])
         }
+        console.log(imgUrlList);
         this.imgUrl = imgUrlList;
       },
       // 获取图片地址
@@ -498,6 +504,7 @@
         let dirs = [];
         if(compId){
           let dir1 = compId % 100;
+          console.log(dir1);
           dir1 = dir1 < 10 ? ("0" + dir1) : dir1;
           dir1 = "EP" + dir1;
           dirs.push(dir1);

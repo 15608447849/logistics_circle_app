@@ -11,6 +11,8 @@
         <div class="alignCenter floatright"></div>
       </div>
 
+
+
     </div>
     <ul class="settingList margin-bottom56">
       <li class="accountName "><span>用户名：</span><span>{{fname}}</span></li>

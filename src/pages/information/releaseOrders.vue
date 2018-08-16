@@ -195,7 +195,19 @@
         codamt: 0, // 代收金额
         isReleaseOrder: false,
 
-        displayDic: {},
+        displayDic: { // 用于展示用户
+          disWmLabel: '',// 货物大小
+          disCtLabel: '',// 货物类型
+          disNumLabel: '',// 件数单位
+          disPaLabel: '', // 是否包装
+          disVlLabel: '',// 车长
+          disVtLabel: '',// 车型
+          disTnLabel: '',// 运输要求
+          disPtLabel: '',// 支付方式
+          disReLabel: '',// 回单要求
+          disDmLabel: '',// 提货方式
+          disPmLabel: ''// 运费度量单位
+        },
         startc: '', // 出发地
         arriarc: '', // 目的地
         pmList: [],
@@ -205,26 +217,18 @@
       }
     },
     activated() {
-      // 是否页面需要缓存
-      if(this.$route.meta.isUseCache){
-        this.$route.meta.isUseCache = false;
-        let addressCom = this.$app_store.getters.addressCom || null;
-        if (addressCom === null || addressCom.province === undefined || addressCom.province === null) {
-          return
-        }
-        if (this.$app_store.getters.geoState === 1) {
-          this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
-          this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
-        } else if (this.$app_store.getters.geoState === 2) {
-          this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
-          this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
-        }
-      } else {
-        this.OrderDetail = new order.OrderICE();
-        this.generateOrderNo();
-        this.initData();
+      let addressCom = this.$app_store.getters.addressCom || null;
+      if (addressCom === null || addressCom.province === undefined || addressCom.province === null) {
+        return
+      }
+      if (this.$app_store.getters.geoState === 1) {
+        this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
+        this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+        this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
+      } else if (this.$app_store.getters.geoState === 2) {
+        this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
+        this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+        this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
       }
     },
     mounted() {
@@ -235,23 +239,6 @@
       // 初始化页面数据
       initData() {
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
-        this.arriarc = '';
-        this.startc = '';
-        this.displayDic = { // 用于展示用户
-            disWmLabel: '',// 货物大小
-            disCtLabel: '',// 货物类型
-            disNumLabel: '',// 件数单位
-            disPaLabel: '', // 是否包装
-            disVlLabel: '',// 车长
-            disVtLabel: '',// 车型
-            disTnLabel: '',// 运输要求
-            disPtLabel: '',// 支付方式
-            disReLabel: '',// 回单要求
-            disDmLabel: '',// 提货方式
-            disPmLabel: ''// 运费度量单位
-        },
-        this.insureamt = 0; // 保价金额
-        this.codamt = 0; // 代收金额
         // 当前企业未认证无法抢单
         if(this.compInfo.verify === 0) {
           this.isReleaseOrder = false;
@@ -259,6 +246,7 @@
         }else {
           this.isReleaseOrder = true;
         }
+        debugger
         // 添加发布人联系方式
         if (this.compInfo.pho !== 0 && this.compInfo.pht !== 0) {
           this.OrderDetail.phone1 = this.compInfo.pho;
@@ -524,6 +512,7 @@
         }
       }
     },
+
     computed: {
       wm() {
         return this.OrderDetail.wm
