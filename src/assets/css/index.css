@@ -1646,6 +1646,95 @@ input[type="radio"] {
   z-index:100;
   overflow: auto;
 }
+.entryTravelBox{
+  display:block;
+  width:7.5rem;
+  height:94vh;
+  background:#ffffff;
+}
+.entryTravelList{
+  display:block;
+  margin:0 auto;
+  width:7.08rem;
+  height:22vh;
+  background:#ffffff;
+  padding-top:1vh;
+  margin-bottom:3vh;
+}
+.describeBox{
+  dispaly:block;
+  width:7.5rem;
+  height:18vh;
+}
+.describe{
+  display:inline-block;
+  margin-top:.3rem;
+  margin-left:.38rem;
+
+}
+.describeInfo{
+  float:right;
+  width:6.2rem;
+  min-height:12vh;
+  _height: 15px;
+  overflow-y:visible;
+  margin-right:.21rem;
+  border:1px solid #f5f5f5;
+  border-radius: 3px;
+  padding:.2rem;
+  outline: 0;
+  box-shadow: 0px 2px 8px 1px
+  rgba(37, 117, 188, 0.2);
+  line-height:2vh;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-user-modify: read-write-plaintext-only;
+}
+.describeSure{
+  display:block;
+  width:7.08rem;
+  margin:0 auto;
+  height:4vh;
+  background:#31bff5;
+  color:#ffffff;
+  border:1px solid transparent;
+  border-radius: 3px;
+}
+.test-textarea {
+  width: 400px;
+  min-height: 26px;
+  line-height: 20px;
+  _height: 30px;
+  /* max-height: 150px;*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px;
+  outline: 0;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-user-modify: read-write-plaintext-only;
+  border-radius: 4px;
+}
+.entryTravelList li{
+  display:block;
+  width:7.08rem;
+  height:7vh;
+}
+.entryTravelList li input{
+  display:block;
+  float:right;
+  width:6rem;
+  height:7vh;
+  text-align:right;
+}
+.entryTravelList li span{
+  display:inline-block;
+  line-height:7vh;
+}
 .colorWhite{
   color:#ffffff;
 }
