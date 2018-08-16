@@ -179,7 +179,7 @@
           <!--签收照片-->
           <a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
           <!--确认签收-->
-          <a v-show="detailInfo.tstatus === 4" class="colorBlue marginright13" @click.stop="conReceipt()">确认签收</a>
+          <a v-show="detailInfo.tstatus === 4" class="colorBlue" @click.stop="conReceipt()">确认签收</a>
           <!--评价-->
           <a v-show="detailInfo.tstatus === 6" @click.stop="toEvaluatePage()"  class="colorBlue">待评价</a>
           <!--重新发布-->

@@ -42,9 +42,10 @@
         >
 
           <ul class="circleList" style="height:78vh;">
-            <li class="needBorder" v-for="(item, index) in sCircleList">
+            <li class="needBorderF5" v-for="(item, index) in sCircleList">
               <van-cell-swipe :right-width="65" :left-width="65">
-                <img :src="item.logoPath" alt="" class="circlePic">
+                <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== ''">
+                <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultCircle widthHeight90 floatleft" v-if="item.logoPath === ''">
                 <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
                   class="companyPhone floatright">{{item.contact}}</span></div>
                 <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>
@@ -65,9 +66,10 @@
           @load="onLoadB"
         >
           <ul class="circleList" style="height:78vh;">
-            <li class="needBorder" v-for="(item, index) in SchedulingCircle">
+            <li class="needBorderF5" v-for="(item, index) in SchedulingCircle">
               <van-cell-swipe :right-width="65" :left-width="65">
-                <img :src="item.logoPath" alt="" class="circlePic">
+                <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== ''">
+                <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultCircle widthHeight90 floatleft" v-if="item.logoPath === ''">
                 <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span><span
                   class="companyPhone floatright">{{item.contact}}</span></div>
                 <div class="lineName"><span class="lineInfo">线路：{{item.disRoute}}</span></div>

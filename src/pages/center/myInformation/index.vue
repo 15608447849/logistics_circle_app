@@ -31,7 +31,7 @@
          <ul class="circleList" v-show="isShow" style="height:88.5vh;">
            <!--<p>这是未处理消息</p>-->
            <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in messageList" :key="index">
-             <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
+             <img src="../../../assets/images/small/yikuai.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
              <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
              <a class="pullBlack" v-show="nothandle" @click.stop="agreeOrRefuse(item,index,item.msgtype)">同意</a>
@@ -41,7 +41,7 @@
          <ul class="circleList" v-show="!isShow" style="height:88.5vh;">
            <!--<p>这是已经处理消息</p>-->
            <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in readyHandMsg" :key="index" v-if="item.isread !== 0">
-             <img src="../../../assets/images/small/evaluate_03.png" alt="" class="circlePic">
+             <img src="../../../assets/images/small/yikuai.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
              <div class="lineName"><span class="lineInfo"> {{msgTypeToText(item.msgtype)}}</span></div>
              <a class="handleafter" v-if="item.opstatus===1">已同意</a>
