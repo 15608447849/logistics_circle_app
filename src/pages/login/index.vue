@@ -27,7 +27,7 @@
 <script>
   import {
     USER_INFO,
-    USER_ID, COMP_INFO
+    USER_ID, COMP_INFO, ROID
   } from '../../store/mutation-types'
 
   export default {
@@ -60,17 +60,21 @@
               if (result.code === 0) {
                 self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                 self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
+                debugger
+                console.log(self.$app_store.state.userId);
                 if (result.obj.comps.length === 1) {
+                  self.$app_store.commit(ROID,result.obj.comps[0].roid);
                   self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
                   return
                 }
                 result.obj.comps.forEach((currentValue, index, arr) => {
                   compList.push({
                     content: currentValue.fname,
-                    compid: currentValue.compid
+                    compid: currentValue.compid,
+                    roid: currentValue.roid
                   });
                 });
-                self.showActive(result.obj.oid, compList);
+                self.showActive(result.obj, compList);
                 // self.getCompList(result.obj.oid);
               } else {
                 self.$vux.toast.text(result.msg, 'top');
@@ -84,13 +88,11 @@
       },
       getCompList(oid) {
         let self = this;
-
         this.$Ice_CompService.selectCompUserByUid(oid,
           new IceCallback(
             function (result) {
               // 登录时添加企业到缓存
               // 弹出选择列表
-
             },
             function (error) {
               self.$vux.toast.text('企业信息获取失败, 请尝试重新登录', 'top');
@@ -98,13 +100,14 @@
           )
         );
       },
-      showActive(oid, dataList) {
+      showActive(obj, dataList) {
         this.$createActionSheet({
           title: '请选择要登录的企业',
           active: 0,
           data: dataList,
           onSelect: (item, index) => {
-            this.setCompIdByRedis(oid, item.compid);
+            this.$app_store.commit(ROID,item.roid);
+            this.setCompIdByRedis(obj.oid, item.compid);
           },
           onCancel: () => {
             this.$vux.toast.text('未选择企业, 请尝试重新登录', 'top');
@@ -128,15 +131,13 @@
       },
       queryCompByCid(compId) {
         let self = this;
-        debugger
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
               if(result.code === 0) {
                 self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
-                let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
                 self.$router.push({
-                  path: redirect
+                  path: '/information'
                 })
               } else {
                 self.$vux.toast.text(result.msg, 'top');

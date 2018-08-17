@@ -34,7 +34,7 @@ export default {
   },
   // 角色id
   [ROID] (state, v) {
-    state.compId = v;
+    state.roid = v;
     localStorage.setItem(ROID, v);
   },
   // 企业信息

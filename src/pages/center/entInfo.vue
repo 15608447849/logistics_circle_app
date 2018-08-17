@@ -147,7 +147,7 @@
         show1: false,
         show2: false,
         disabled: false,
-        userId: this.$app_store.getters.userId,
+        userId: this.$app_store.state.userId,
         v1: '',
         v2: '',
         v3: '',
@@ -162,6 +162,7 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
+      debugger
       if (this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
         this.isEditor = true;
       } else {

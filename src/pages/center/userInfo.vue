@@ -111,7 +111,7 @@
         compInfo: {},// 企业详情
         isYourCompInfo: true,
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7 消息 8 订单
-        userId: ''
+        userId: '',
       }
     },
     activated() {
@@ -126,7 +126,10 @@
         this.queryCompByCid(this.$route.query.id);
         this.status = this.$route.query.status;
       }
-      // debugger
+      // 判断当前登录角色
+      if(this.isYourCompInfo) {
+        this.isYourCompInfo  =  Number(this.$app_store.state.roid) !== 132;
+      }
       // 根据企业id获取企业信息
 
     },
@@ -210,35 +213,27 @@
       filesSuccess(files) {
         this.$vux.toast.text(files.response.msg, 'top');
         if (files.response.code === 0) {
-          // setTimeout(() => {
             this.$vux.toast.text('头像上传成功!', 'top');
           this.compInfo.logoPath = files.response.data.nginx+""+ files.response.data.relativeAddr + '?' + new Date().getSeconds();
           this.loadImage(7,files.response.data.nginx+""+ files.response.data.relativeAddr);
         }
       },
       filesAdded(files) {
-        let self = this;
-        // 图片压缩
-        // this.imgPreview(files);
-        // 图片旋转
-        // EXIF.getData(this.file, function() {
-        //   self.Orientation = EXIF.getTag(this, 'Orientation');
-        // });
-        let hasIgnore = false;
-        const maxSize = 2 * 1024 * 1024; // 2M
-        for (let k in files) {
-          const file = files[k];
-          if (file.size > maxSize) {
-            file.ignore = true;
-            hasIgnore = true;
-          }
-        }
-        hasIgnore && this.$createToast({
-          type: 'warn',
-          time: 1000,
-          txt: '你上传的图片 > 2M '
-        }).show()
-
+        // let self = this;
+        // let hasIgnore = false;
+        // const maxSize = 2 * 1024 * 1024; // 2M
+        // for (let k in files) {
+        //   const file = files[k];
+        //   if (file.size > maxSize) {
+        //     file.ignore = true;
+        //     hasIgnore = true;
+        //   }
+        // }
+        // hasIgnore && this.$createToast({
+        //   type: 'warn',
+        //   time: 1000,
+        //   txt: '你上传的图片 > 2M '
+        // }).show()
       },
       toenterprise() {
         this.$router.push({

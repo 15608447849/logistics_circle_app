@@ -41,10 +41,6 @@
               <a :class="item.status === 32 ? 'driverStateYes' : 'driverStateNo'" @click.stop="isEnable"
                  @click="isEnable(item,index)">{{item.status === 32 ? '启用' : '停用'}}</a>
             </li>
-
-
-
-
           </ul>
         </van-list>
       </div>
@@ -54,7 +50,6 @@
 <script>
   import {searchState} from '../../utils/config'
   import {SEARCH_STATE} from "../../store/mutation-types"
-
   export default {
     data() {
       return {
@@ -68,10 +63,13 @@
         page: new cstruct.Page(),
         searchInputVal: '业务员名称搜索',
         loading: false, // 控制加载动画
-        finished: false // 控制是否执行上推加载
+        finished: false, // 控制是否执行上推加载
+        isEidtor: false
       }
     },
     mounted() {
+
+      this.isEditor = Number(this.$app_store.state.roid) !== 132;
       this.initData();
       // this.requestDriverList();
     },
@@ -101,11 +99,19 @@
       },
       // 业务员添加
       addSales() {
+        if(!this.isEditor) {
+          this.$vux.toast.text('当前不是管理员用户,无操作权限', 'top');
+          return
+        }
         this.$router.push({
           name: 'salesInfo'
         })
       },
       editorDriver(item) {
+        if(!this.isEditor) {
+          this.$vux.toast.text('当前不是管理员用户,无操作权限', 'top');
+          return
+        }
         this.$router.push({
           name: 'salesInfo',
           params: item
@@ -122,7 +128,6 @@
             if (result.code === 0) {
               self.page.pageIndex += 1; // 页码增加
               self.drivers = self.drivers.concat(result.obj);
-              console.log(self.drivers)
               if (self.drivers.length >= result.totalItems) {
                 self.finished = true;
               }
@@ -139,6 +144,10 @@
       },
       /** 是否启用 */
       isEnable(item, index) {
+        if(!this.isEditor) {
+          this.$vux.toast.text('当前不是管理员用户,无操作权限', 'top');
+          return
+        }
         let content = '';
         let self = this;
         let status = 1;

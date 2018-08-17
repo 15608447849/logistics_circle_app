@@ -24,8 +24,8 @@
     <ul class="dispatchCircleList">
       <li class="needBorder">
         <span class="circleFirendTitle floatleft">联系方式</span>
-        <span class="circleFirendContent floatright">{{compByUid.pho}}</span>
-        <span class="circleFirendContent textMargin-right10 floatright">{{compByUid.phone}}</span>
+        <span class="circleFirendContent floatright">{{compByUid.contact}}</span>
+        <!--<span class="circleFirendContent textMargin-right10 floatright">{{compByUid.phone}}</span>-->
       </li>
       <li class="needBorder">
         <span class="circleFirendTitle floatleft">地址</span>
@@ -117,6 +117,7 @@
         querygetCompByUid: function () {
         let self = this;
         this.$Ice_CompService.querygetCompByCid(self.details.sender, new IceCallback(function (result) {
+          debugger
           if (result.code !== 0) {
             self.$vux.toast.text(result.msg, 'top');
           } else {
