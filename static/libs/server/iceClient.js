@@ -111,6 +111,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
             if(typeof (args1) === "string") args1 = JSON.parse(args1);
             result = Object.assign(result,args1);
           }
+          console.log("ICE : ",moduleName,methodName,result);
           callback.onCallback(CALLBACK_ACTION.COMPLETE,result);
         }
       )

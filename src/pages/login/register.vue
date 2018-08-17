@@ -147,6 +147,15 @@
           this.$vux.toast.text('账号不能为空', 'top');
           return false
         }
+        // 密码 字母+数字
+        let pwdReg = /(?=^.*?\d)(?=^.*?[a-zA-Z])^[0-9a-zA-Z]{6,16}$/;
+        if(!pwdReg.test(this.password)){
+          this.$vux.toast.text('请输入字母或数字组成的密码', 'top');
+          this.password = '';
+          this.rPassword = '';
+          return false
+        }
+
         if (this.verifyUtil.isEffPwd(this.password)) {
           this.$vux.toast.text('密码为空或长度小于6位, 请完善输入', 'top');
           return false
@@ -164,7 +173,7 @@
           return false
         }
         // 验证手机短信
-        this.$Ice_UserService.checkPhoneRepetition(this.phone,new IceCallback(
+        this.$Ice_UserService.checkPhoneRepetition(this.phone, new IceCallback(
           function (result) {
             self.$vux.toast.text(result.msg, 'top');
             if (result.code === 0) {
