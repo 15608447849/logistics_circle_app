@@ -44,7 +44,7 @@
           function (result) {
             if (result.code === 0) {
               let urlObj = JSON.parse(result.obj[0]);
-              self.qrCode = JSON.parse(result.obj[1]);
+              self.qrCode = result.obj[1];
               self.qrCodeUrl =  urlObj.data.nginx + urlObj.data.relativeAddr;
             } else {
               self.$vux.toast.text(result.msg, 'top');
