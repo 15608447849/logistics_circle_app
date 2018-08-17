@@ -43,6 +43,9 @@
           <div v-show="detailInfo.tstatus === 1">抢单</div>
           <span v-show="detailInfo.tstatus === 1">您已抢单，请尽快与承运商联系~ </span>
 
+          <div v-show="detailInfo.tstatus === 2">订单已中转</div>
+          <span v-show="detailInfo.tstatus === 2">司机已取货，您的货物正在运输中~~</span>
+
           <div v-show="detailInfo.tstatus === 3">取货</div>
           <span v-show="detailInfo.tstatus === 3">司机已取货，您的货物正在运输中~</span>
 

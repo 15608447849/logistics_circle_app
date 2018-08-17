@@ -10,9 +10,6 @@
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
-
-
-
     </div>
     <div class="tripMap">
         <el-amap class="amap-box" vid="'amap-vue'" :plugin="plugin" :zoom="zoom" :center="center">
@@ -57,6 +54,7 @@
         // 获取轨迹
         getOrderTrajectory() {
           let self = this;
+          debugger
           this.$Ice_myOrderService.getOrderTrajectory(this.userId,this.order.orderno,new IceCallback(
             function(result){
               if (result.code === 0) {

@@ -2,7 +2,7 @@
   <div class="issueOrder">
     <div class="issueHeaderNav">
       <div class="width20">
-        <i class="icon iconfont icon-btngoback back floatleft"></i>
+        <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
       <div class="width60">
         <span>转发布</span>
@@ -127,10 +127,6 @@
       <!--<span class="marginright13">发货人</span>-->
       <!--<input type="text" placeholder="请输入联系人" style="width:6.2rem;">-->
       <!--</li>-->
-      <li class="inputNumOne needBorder">
-        <span class="waybillNum">发布人</span>
-        <input type="text" placeholder="请填写发布人" style="width:6.25rem;">
-      </li>
       <li class="inputNumOneSend needBorder">
         <span class="textRed">*</span>
         <span>发布人联系方式</span>
@@ -179,7 +175,7 @@
       <span class="floatleft marginBottom60">订单总价</span><span
       class="floatright textRed size14 textBlod marginBottom60">￥{{sunPrice}}元</span>
     </div>
-    <button class="releaseBtn" v-show="isReleaseOrder" @click="releaseOrder">发 布</button>
+    <button class="releaseBtn" v-show="isReleaseOrder" @click="saveTransOrder">转发布</button>
   </div>
 </template>
 <script>
@@ -218,21 +214,30 @@
         disPmList: [],
         sunPrice: 0,
         userId: this.$app_store.getters.userId,
+        orderid: ''
       }
     },
     activated() {
-      let addressCom = this.$app_store.getters.addressCom || null;
-      if (addressCom === null || addressCom.province === undefined || addressCom.province === null) {
-        return
-      }
-      if (this.$app_store.getters.geoState === 1) {
-        this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-        this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
-        this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
-      } else if (this.$app_store.getters.geoState === 2) {
-        this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-        this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
-        this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
+      if(this.$route.meta.isUseCache){
+        this.$route.meta.isUseCache = false;
+        let addressCom = this.$app_store.getters.addressCom || null;
+        if (addressCom === null || addressCom.province === undefined || addressCom.province === null) {
+          return
+        }
+        if (this.$app_store.getters.geoState === 1) {
+          this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
+          this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
+        } else if (this.$app_store.getters.geoState === 2) {
+          this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
+          this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
+        }
+
+      } else {
+        this.OrderDetail = new order.OrderICE();
+        this.generateOrderNo();
+        this.initData();
       }
     },
     mounted() {
@@ -243,80 +248,127 @@
       // 初始化页面数据
       initData() {
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+        this.orderid = this.$route.query.orderId;
+        this.dicData = JSON.parse(this.$app_store.getters.dict) || null;
         // 当前企业未认证无法抢单
         if(this.compInfo.verify === 0) {
           this.isReleaseOrder = false;
-          this.$vux.toast.text('当前企业未认证，无法进行发单操作!', 'top');
+          this.$vux.toast.text('当前企业未认证，无法进行转发操作!', 'top');
         }else {
           this.isReleaseOrder = true;
         }
-        debugger
-        // 添加发布人联系方式
-        if (this.compInfo.pho !== 0 && this.compInfo.pht !== 0) {
-          this.OrderDetail.phone1 = this.compInfo.pho;
-          this.OrderDetail.phone2 = this.compInfo.pht;
-        }else if(this.compInfo.pho !== 0 && this.compInfo.pht === 0) {
-          this.OrderDetail.phone1 = this.compInfo.contact;
-          this.OrderDetail.phone2 = this.compInfo.pho;
-        } else if(this.compInfo.pho === 0 && this.compInfo.pht !== 0) {
-          this.OrderDetail.phone1 = this.compInfo.contact;
-          this.OrderDetail.phone2 = this.compInfo.pht;
-        } else {
-          this.OrderDetail.phone1 = this.compInfo.contact;
-          this.OrderDetail.phone2 = '';
-        }
-        this.OrderDetail.priority = this.$route.query.status;
-        this.OrderDetail.puberid = this.$app_store.getters.userId;
-        this.OrderDetail.startc = 0;
-        this.OrderDetail.arriarc = 0;
-        this.dicData = JSON.parse(this.$app_store.getters.dict) || null;
-        this.pmList = this.dicData.pm;
-        // 设置默认类型字典选择, 默认取第一个
-        this.OrderDetail.wmdictc = this.dicData.wm[0].value;
-        this.displayDic.disWmLabel = this.dicData.wm[0].label;
-
-        this.OrderDetail.ctdictc = this.dicData.ct[0].value;
-        this.displayDic.disCtLabel = this.dicData.ct[0].label;
-
-        this.OrderDetail.numdictc = this.dicData.num[0].value;
-        this.displayDic.disNumLabel = this.dicData.num[0].label;
-
-        this.OrderDetail.padictc = this.dicData.pa[0].value;
-        this.displayDic.disPaLabel = this.dicData.pa[0].label;
-
-        this.OrderDetail.vldictc = this.dicData.vl[0].value;
-        this.displayDic.disVlLabel = this.dicData.vl[0].label;
-
-        this.OrderDetail.vtdictc = this.dicData.vt[0].value;
-        this.displayDic.disVtLabel = this.dicData.vt[0].label;
-
-        let tndictarr = [];
-        tndictarr.push(this.dicData.tn[0].value);
-        this.OrderDetail.tndictarr = tndictarr;
-        this.displayDic.disTnLabel = this.dicData.tn[0].label;
-
-        this.OrderDetail.ptdictc = this.dicData.pt[0].value;
-        this.displayDic.disPtLabel = this.dicData.pt[0].label;
-
-        this.OrderDetail.redictc = this.dicData.re[0].value;
-        this.displayDic.disReLabel = this.dicData.re[0].label;
-
-        this.OrderDetail.dmdictc = this.dicData.dm[0].value;
-        this.displayDic.disDmLabel = this.dicData.dm[0].label;
-
-        this.OrderDetail.pmdictc = this.dicData.pm[0].value;
-        this.displayDic.disPmLabel = this.dicData.pm[0].label;
-
-        // 初始化Pm List 数据
-        this.setPmPickerData(this.displayDic.disWmLabel);
-
-        // 声明保价
-        this.OrderDetail.insureamt = 0.0;
-        // 代收货款
-        this.OrderDetail.codamt = 0.0;
-        // 车辆大小
-        this.OrderDetail.vnum = null;
+        this.getOrderDetail();
       },
+
+      getOrderDetail(){
+        let that = this;
+        that.$Ice_myOrderService.getOrderDetail(this.orderid,that.userId,1,new IceCallback(
+          function(data){
+            let orderData = data.obj;
+            that.OrderDetail.billno = orderData.billno; // 运单号
+            that.OrderDetail.orderno = orderData.orderno; // 自动生成的订单号
+            that.OrderDetail.arriarc = orderData.arriarc; // 目的地编码
+            that.arriarc = orderData.arriarcext + orderData.arriaddr; // 目的地
+            that.startc = orderData.startcext + orderData.startaddr;
+
+            that.OrderDetail.startcext = orderData.startcext;
+            that.OrderDetail.startaddr = orderData.startaddr;
+
+            that.OrderDetail.arriarcext =  orderData.arriarcext;
+            that.OrderDetail.arriaddr = orderData.arriaddr;
+
+            that.OrderDetail.wm = orderData.wm; // 货物内容(重量/体积) 数量
+
+            that.OrderDetail.wmdictc = parseInt(orderData.wmdictc); // 货物内容(重量/体积) 单位
+            that.displayDic.disWmLabel = orderData.wmdictcn;
+            that.setPmPickerData(that.displayDic.disWmLabel);
+            // 货物内容 (单位数量)
+            that.OrderDetail.num = parseInt(orderData.num);
+            // 货物内容(单位
+            that.OrderDetail.numdictc = parseInt(orderData.numdictc);
+            that.displayDic.disNumLabel = orderData.numdictcn;
+            // 包装要求
+            that.OrderDetail.padictc = parseInt(orderData.padictc);
+            that.displayDic.disPaLabel = orderData.padictcn;
+
+            that.OrderDetail.ctdictc = parseInt(orderData.ctdictc); //货物类型
+            that.displayDic.disCtLabel = orderData.ctdictcn;
+
+            that.OrderDetail.vnum = orderData.vnum; // 车数量(台)
+
+            that.OrderDetail.vldictc = parseInt(orderData.vldictc); //车长字典码
+            that.displayDic.disVlLabel = orderData.vldictcn;
+
+            that.OrderDetail.vtdictc = parseInt(orderData.vtdictc); //车型字典码
+            that.displayDic.disVtLabel =  orderData.vtdictcn;
+
+            that.OrderDetail.pmdictc = parseInt(orderData.pmdictc); //运费度量单位
+            that.displayDic.disPmLabel = orderData.pmdictcn;
+
+            that.OrderDetail.ptdictc = parseInt(orderData.ptdictc); //付款方式
+            that.displayDic.disPtLabel = orderData.ptdictcn;
+
+            that.OrderDetail.dmdictc = parseInt(orderData.dmdictc); //送货方式
+            that.displayDic.disDmLabel = orderData.dmdictcn;
+
+            that.OrderDetail.redictc = parseInt(orderData.redictc); //是否返单
+            that.displayDic.disReLabel =  orderData.redictcn;
+
+            that.OrderDetail.tndictc = orderData.tndictc; //运输要求字典码
+            that.displayDic.disTnLabel = orderData.tndictcn;
+
+            that.OrderDetail.price = parseFloat(orderData.price); //货物运费
+
+            that.insureamt =  orderData.insureamt;
+            that.codamt = orderData.codamt;
+
+            that.OrderDetail.codamt = orderData.codamt; //代收货款金额
+            that.OrderDetail.insureamt = orderData.insureamt; //声明保价
+
+            that.OrderDetail.consignee = orderData.consignee; //收货人
+            that.OrderDetail.consphone = orderData.consphone; //手机号码
+            that.OrderDetail.pusdatetime = orderData.pusdatetime; //取货时间开始
+            that.OrderDetail.puedatetime = orderData.puedatetime; //取货结束时间
+            that.OrderDetail.easdatetime = orderData.easdatetime; //期望到货时间起始
+            that.OrderDetail.eaedatetime = orderData.eaedatetime; //期望到货结束时间
+            //orderData.phone1 == 0 ? that.formValidate.phone1 = '' : that.formValidate.phone1 = orderData.phone1; //发布人电话1
+            //orderData.phone2 == 0 ? that.formValidate.phone2 = '' : that.formValidate.phone2 = orderData.phone2; //发布人电话2
+            that.OrderDetail.phone1 = that.compInfo.pho===0 ? '' : that.compInfo.pho; //发布人电话1
+            that.OrderDetail.phone2 = that.compInfo.pht===0 ? '' : that.compInfo.pht; //发布人电话2
+//	                    that.formValidate.phone2 = orderData.phone2; //发布人电话2
+            that.pubdatetime = orderData.pubdatetime; //发布时间
+            that.changeNum();
+
+            // 添加发布人联系方式
+            if (that.compInfo.pho !== 0 && that.compInfo.pht !== 0) {
+              that.OrderDetail.phone1 = that.compInfo.pho;
+              that.OrderDetail.phone2 = that.compInfo.pht;
+            }else if(that.compInfo.pho !== 0 && that.compInfo.pht === 0) {
+              that.OrderDetail.phone1 = that.compInfo.contact;
+              that.OrderDetail.phone2 = that.compInfo.pho;
+            } else if(that.compInfo.pho === 0 && that.compInfo.pht !== 0) {
+              that.OrderDetail.phone1 = that.compInfo.contact;
+              that.OrderDetail.phone2 = that.compInfo.pht;
+            } else {
+              that.OrderDetail.phone1 = that.compInfo.contact;
+              that.OrderDetail.phone2 = '';
+            }
+          },
+          function(error) {
+            this.$vux.toast.text(error, 'top');
+          }
+        ))
+      },
+      changeNum(e){
+        if (Number(this.OrderDetail.insureamt) > 0 || Number(this.OrderDetail.codamt) > 0){
+          // this.fkDisabled = true;
+          this.OrderDetail.ptdictc = 22;
+        } else {
+          // this.fkDisabled = false;
+          this.OrderDetail.ptdictc = 21;
+        }
+      },
+
       showPicker(category) {
         if (category === 'pm') {
           this.setPicker(this.disPmList);
@@ -368,7 +420,6 @@
               case '货物重量/体积单位':
                 this.OrderDetail.wmdictc = selectedVal;
                 this.displayDic.disWmLabel = selectedText;
-                this.setPmPickerData(selectedText[0]);
                 break;
               case '货物类型':
                 this.OrderDetail.ctdictc = selectedVal;
@@ -395,10 +446,13 @@
                 this.displayDic.disTnLabel = selectedText;
                 break;
               case '支付方式':
+                // 线上支付
                 if(selectedVal[0] === 21) {
-                  // 线上支付
-                  this.codamt = 0;
-                  this.insureamt = 0 ;
+                  // 判断是否存在保价与代收金额
+                  if(this.OrderDetail.codamt > 0 || this.OrderDetail.insureamt> 0) {
+                    this.$vux.toast.text('存在声明保价与代收货款金额,无法选择线上支付', 'top');
+                    return
+                  }
                 }
                 this.OrderDetail.ptdictc = selectedVal;
                 this.displayDic.disPtLabel = selectedText;
@@ -437,32 +491,66 @@
           }
         ));
       },
-      releaseOrder() {
+      fallback() {
+        this.$router.go(-1)
+      },
+      // 转发不
+      saveTransOrder() {
         let self = this;
-        if (this.validator()) {
-          Toast.loading({
-            mask: true,
-            message: '加载中...'
-          });
-          self.OrderDetail.codamt = self.codamt;
-          self.OrderDetail.insureamt = self.insureamt ;
-          self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
-            function (result) {
-              self.$vux.toast.text(result.msg, 'top');
-              if (result.code === 0) {
-                setTimeout(() => {
-                  self.$router.go(-1);
-                }, 1500);
-              } else {
-                // 发送失败
-                self.$dialog.loading.close();
+        if(this.validator()) {
+          let jsonObj = new myOrder.OrderICE();
+          jsonObj.puberid = this.userId;				//收货人
+          jsonObj.phone1 = (self.OrderDetail.check ? self.OrderDetail.phone1.toString() : '0'); 			// 手机号码1
+          jsonObj.phone2 = (self.OrderDetail.check ? self.OrderDetail.phone2.toString() : '0'); 			// 手机号码2
+          jsonObj.billno = self.OrderDetail.billno;						// TMS运单号
+          jsonObj.orderno = self.OrderDetail.orderno.toString();					// 订单号
+          // var startcArr = self.OrderDetail.startcArr[self.OrderDetail.startcArr.length - 1],
+          //   arriarcArr = self.OrderDetail.arriarcArr[self.OrderDetail.arriarcArr.length - 1];
+          // jsonObj.startc = startcArr.toString();  					// 出发地地区码
+          // jsonObj.arriarc = arriarcArr.toString();  			// 到达地地区码
+          jsonObj.startcext = self.OrderDetail.startcext;
+          jsonObj.startaddr =self.OrderDetail.startaddr;  			 // 出发地详细地址
+          jsonObj.arriarcext =  self.OrderDetail.arriarcext;
+          jsonObj.arriaddr =self.OrderDetail.arriaddr; 				 // 到达地详细地址
+          jsonObj.wm = parseFloat(self.OrderDetail.wm); 	//货物重量/体积
+          jsonObj.wmdictc = self.OrderDetail.wmdictc.toString(); 	//货物重量/体积单位字典码id
+          jsonObj.num = Number(self.OrderDetail.num); //件数
+          jsonObj.numdictc = self.OrderDetail.numdictc.toString();					//件数单位字典码id
+          jsonObj.padictc = self.OrderDetail.padictc.toString();					//包装要求字典码id
+          jsonObj.ctdictc =self.OrderDetail.ctdictc.toString();					//货物类型字典码id
+          jsonObj.vnum = Number(self.OrderDetail.vnum);							//车数量
+          jsonObj.vldictc = self.OrderDetail.vldictc.toString();					//车长字典码id
+          jsonObj.vtdictc = self.OrderDetail.vtdictc.toString();					//车型字典码id
+          if(self.OrderDetail.tndictc.length === 0){
+            self.OrderDetail.tndictc.push(71)
+          }
+          jsonObj.tndictarr = [];					//运输要求字典码id
+          jsonObj.tndictc = self.OrderDetail.tndictc.toString();
+          jsonObj.price = parseFloat(self.OrderDetail.price);					//价格(元)
+          jsonObj.codamt = parseFloat(self.OrderDetail.codamt);					//代收货款金额(元)
+          jsonObj.insureamt = parseFloat(self.OrderDetail.insureamt);				//声明保价金额(元)
+          jsonObj.ptdictc = self.OrderDetail.ptdictc.toString();				//付款方式字典码id
+          jsonObj.consignee = self.OrderDetail.consignee; 					// 收货人
+          jsonObj.consphone = self.OrderDetail.consphone; 	 			// 收货联系方式
+          jsonObj.dmdictc = self.OrderDetail.dmdictc.toString(); 	 			//提货方式字典码id
+          jsonObj.redictc = self.OrderDetail.redictc.toString(); 	 			//回单要求字典码id
+          jsonObj.pusdatetime = self.OrderDetail.pusdatetime;	//取货时间开始 yyyy-MM-dd hh:mm:ss
+          jsonObj.puedatetime = self.OrderDetail.puedatetime;			//取货结束时间 yyyy-MM-dd hh:mm:ss
+          jsonObj.easdatetime = self.OrderDetail.easdatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
+          jsonObj.eaedatetime = self.OrderDetail.eaedatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
+          jsonObj.pmdictc = self.OrderDetail.pmdictc.toString();				//运费度量单位
+          debugger
+          self.$Ice_myOrderService.transOrder(self.userId,jsonObj,new IceCallback(
+            function(data){
+              self.$vux.toast.text(data.msg, 'top');
+              if (data.code === 0) {
+                self.$router.go(-1);
               }
             },
             function (error) {
-              self.$dialog.loading.close();
               self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             }
-          ));
+          ))
         }
       },
       validator() {
