@@ -123,7 +123,7 @@
           } else {
             // 成功
             self.compByUid = result.obj;
-            // console.log(result.obj);
+            console.log(result.obj);
             self.logoPath = result.obj.logoPath;
             self.score = result.obj.creadit;
             // self.address = result.obj.address;

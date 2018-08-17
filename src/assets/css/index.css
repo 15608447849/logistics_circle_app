@@ -555,19 +555,19 @@ a {
 .logisticsMing{
   display:inline-block;
   width:3.3rem;
-  height:.8rem;
+  height:auto;
   margin-left:.24rem;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: .8rem;
+  line-height: .35rem;
   letter-spacing: 1px;
   color: #fefefe;
 }
 .startBox{
   display:inline-block;
-  margin-left:.4rem;
+  margin-left:.6rem;
 }
 .startBox li{
   display:inline-block;
@@ -855,6 +855,33 @@ a {
   letter-spacing: 0px;
   color: #333333;
 }
+.enterpriseLiAutoSpan{
+  display:inline-block;
+  float:left;
+  width:1.2rem;
+  height:.9rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .9rem;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.enterpriseSpecific{
+  display:inline-block;
+  float:right;
+  width:5.5rem;
+  height:auto;
+  text-align: left;
+  font-family: PingFang-SC-Regular;
+  font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .35rem;
+  letter-spacing: 0px;
+  color: #999999;
+}
 .invoiceContent{
   text-align: right;
   font-family: PingFang-SC-Regular;
@@ -874,10 +901,9 @@ a {
 }
 .enterpriseList{
   width:7.5rem;
-  height:8rem;
+  height:auto;
   padding:0rem .22rem 0rem .22rem;
   background:#ffffff;
-  margin-top:.4rem;
 }
 .touxiangBox{
   display:flex;
@@ -901,6 +927,13 @@ a {
   align-items:center;
   width:7.08rem;
   height:.9rem;
+}
+.enterpriseLiAuto{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  width:7.08rem;
+  height:auto;
 }
 /*修改企业名称****************************************************************************/
 .updataEnterpriseName{
@@ -1533,8 +1566,16 @@ input[type="radio"] {
   border-bottom:1px solid #f4f4f4;
 }
 .quhao{
+  text-align: right;
   width:1.8rem;
   font-size:.26rem;
+  line-height:7vh;
+}
+.fengefu{
+  display:inline-block;
+  width:.5rem;
+  height:7vh;
+  margin-left:1rem;
   line-height:7vh;
 }
 .zuojiNum{
@@ -1546,7 +1587,9 @@ input[type="radio"] {
   color:#333;
 }
 .haoma{
+  display:inline-block;
   width:2rem;
+  margin-right:.1rem;
   line-height:7vh;
   font-size:.26rem;
 }
