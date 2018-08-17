@@ -10,6 +10,8 @@ export const  COMP_ID = 'COMP_ID'
 export const  COMP_INFO = 'COMP_INFO'
 // 头像
 export const AVATAR_URL = 'AVATAR_URL'
+// 登录角色
+export const ROID = 'ROID'
 // open_id
 export const UNION_ID = 'UNION_ID'
 // 侧边栏显示

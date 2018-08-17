@@ -8,6 +8,9 @@ export default {
   userId: state => {
     return state.userId
   },
+  roid: state => {
+    return state.roid
+  },
   // 企业信息
   compInfo: state => {
     return state.compInfo

@@ -1,6 +1,7 @@
 import {
   USER_INFO,
   USER_ID,
+  ROID,
   COMP_ID,
   COMP_INFO,
   AVATAR_URL,
@@ -30,6 +31,11 @@ export default {
   [COMP_ID] (state, v) {
     state.compId = v;
     localStorage.setItem(COMP_ID, v);
+  },
+  // 角色id
+  [ROID] (state, v) {
+    state.compId = v;
+    localStorage.setItem(ROID, v);
   },
   // 企业信息
   [COMP_INFO] (state, v) {

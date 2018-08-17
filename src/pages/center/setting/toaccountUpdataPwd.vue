@@ -61,6 +61,14 @@
       },
       updatePasswordByOld() {
         let self = this;
+        // 密码 字母+数字
+        let pwdReg = /(?=^.*?\d)(?=^.*?[a-zA-Z])^[0-9a-zA-Z]{6,16}$/;
+        if(!pwdReg.test(this.newsPassword)){
+          this.$vux.toast.text('请输入字母或数字组成的密码', 'top');
+          this.newsPassword = '';
+          this.repeatPassword = '';
+          return false
+        }
         if (self.newsPassword !== self.repeatPassword) {
           self.$vux.toast.text('两次输入的密码不致，请重新输入', 'top');
           return

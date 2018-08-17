@@ -10,6 +10,7 @@ Vue.use(Vuex);
 import {
   USER_ID,
   COMP_ID,
+  ROID,
   COMP_INFO, DICT, AREA, USER_INFO,
 } from './mutation-types'
 
@@ -39,6 +40,17 @@ let getUserId =  function () {
   if (localStorage.getItem(USER_ID)) {
     try {
       return localStorage.getItem(USER_ID)
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
+let getRoid =  function () {
+  if (localStorage.getItem(ROID)) {
+    try {
+      return localStorage.getItem(ROID)
     } catch (e) {
       return undefined;
     }
@@ -84,6 +96,7 @@ const state = {
   compInfo: getCompInfo(), // 企业信息
   compId: getCompId(),// 企业id
   avatar: '',
+  roid: getRoid(),// 132：业务员 66：管理员
   // userId: getUserId(), // 用户ouid
   userId: getUserId(), // 用户ouid
   openId: '',

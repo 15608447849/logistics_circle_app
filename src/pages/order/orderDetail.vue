@@ -50,7 +50,7 @@
           <span v-show="detailInfo.tstatus === 7">您的订单已被抢单，请尽快与承运商联系~ </span>
 
           <div v-show="detailInfo.tstatus === 8">交易已完成</div>
-          <span v-show="detailInfo.tstatus === 8">您的订单已经确认签收，可以留下您的评价哟~</span>
+          <span v-show="detailInfo.tstatus === 8">您的订单已经完成~</span>
 
           <div v-show="detailInfo.tstatus === 20">订单已关闭</div>
           <span v-show="detailInfo.tstatus === 20">您的订单已关闭~</span>

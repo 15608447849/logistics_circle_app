@@ -14,7 +14,6 @@
         </div>
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
       </div>
-
         <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
         <div class="releaseMenu">
           <span class="releaseState" :class="{'activecircle ziTiColorBlue' : item.isSelected}" v-for="(item , index) in tabList"
@@ -178,7 +177,7 @@
             cont = '抢单';
             break;
           case 3:
-            cont = '取货';
+            cont = '取货'; // 待取货 已取货
             break;
           case 4: // 确认 -> 待评价
             cont = '签收';
@@ -186,14 +185,14 @@
           case 5:
             cont = '签收';
             break;
-          case 6: // 评价 -> 已评价
-            cont = '待评价';
+          case 6: // 评价 -> 已评价 // 待评价 已评价
+            cont = '评价';
             break;
           case 7:
-            cont = '抢单';
+            cont = '已抢单';
             break;
           case 8:
-            cont = '评价';
+            cont = '完成';
             break;
           case 20: // 重新发布
             cont = '已关闭';
