@@ -20,11 +20,11 @@
 
          <tab
            active-color="#3189f5" style="margin-top:6vh;">
-           <tab-item @on-item-click="tabClick" selected>
+           <tab-item @on-item-click="tabClick(0)" selected>
              未处理
              <i class="redSpot" v-show="!isNewMsg"></i>
            </tab-item>
-           <tab-item @on-item-click="tabClick" >
+           <tab-item @on-item-click="tabClick(1)" >
              已处理
            </tab-item>
          </tab>
@@ -69,7 +69,7 @@
         messageList: [], //未处理数据集
         readyHandMsg: [], //已处理数据集
         alreadyHandle: false,//已处理view显示与否
-        isShow: true,//未处理view显示与否
+        isShow: true,// true：未处理
         isRedspot: false,//红点显示与否
         nothandle: true,//同意显示与否
         userId: this.$app_store.state.userId,//vuex存储的用户id
@@ -79,7 +79,6 @@
 
     },
     mounted() {
-
       this.getMessageList();// 未处理消息
       this.isUnreadMsg();//查询用户是否有新的消息
       // this.getNewMessage();
@@ -176,9 +175,15 @@
           //失败
         }))
       },
-      tabClick() {
-        this.YesHandleMessage();// 已处理消息
-        this.isShow = !this.isShow
+      tabClick(position) {
+
+        if(position === 1) {
+          this.YesHandleMessage();// 已处理消息
+          this.isShow = !this.isShow
+        } else if(position === 0){
+          this.getMessageList();
+          this.isShow = !this.isShow
+        }
       },
 
 
