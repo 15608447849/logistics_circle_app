@@ -19,6 +19,9 @@
           <div v-show="detailInfo.tstatus === 1">抢单</div>
           <span v-show="detailInfo.tstatus === 1">您的订单已被抢单，请尽快与承运商联系~ </span>
 
+          <div v-show="detailInfo.tstatus === 2">订单已中转</div>
+          <span v-show="detailInfo.tstatus === 2">司机已取货，您的货物正在运输中~~</span>
+
           <div v-show="detailInfo.tstatus === 3">取货</div>
           <span v-show="detailInfo.tstatus === 3">司机已取货，您的货物正在运输中~</span>
 
@@ -140,11 +143,11 @@
             </li>
             <li class="orderinfo">
               <span class="marginright70">发单时间</span>
-              <span>{{detailInfo.revidatetime}}</span>
+              <span>{{detailInfo.pubdatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.revidatetime !== ''">
               <span class="marginright70">抢单时间</span>
-              <span>{{detailInfo.pubdatetime}}</span>
+              <span>{{detailInfo.revidatetime}}</span>
             </li>
             <li class="orderinfo" v-if="detailInfo.pusdatetime !== ''">
               <span class="marginright70">取货时间</span>
@@ -169,7 +172,7 @@
           <!--拒绝-->
           <a v-show="detailInfo.tstatus === 1" class="colorsixnine" @click.stop="refuseOrder()">拒绝</a>
           <!--取货照片-->
-          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
+          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
           <a v-show="detailInfo.tstatus === 7 && detailInfo.ptdictc === 21" class="colorLightBlue" @click.stop ="OrderPay()">支付</a>
           <!--取货码-->
           <a v-show="detailInfo.tstatus === 7" class="colorBlue marginright13" @click.stop ="toPickGoodsCode()">取货码</a>
@@ -177,9 +180,9 @@
           <!--查看行程-->
           <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--签收照片-->
-          <a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
+          <a v-show="detailInfo.tstatus === 4 || detailInfo.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
           <!--确认签收-->
-          <a v-show="detailInfo.tstatus === 4" class="colorBlue" @click.stop="conReceipt()">确认签收</a>
+          <a v-show="detailInfo.tstatus === 4" class="colorBlue marginright13" @click.stop="conReceipt()">确认签收</a>
           <!--评价-->
           <a v-show="detailInfo.tstatus === 6" @click.stop="toEvaluatePage()"  class="colorBlue">待评价</a>
           <!--重新发布-->
@@ -195,13 +198,19 @@
           <!--接受-->
           <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="cancelRobbing()">取消抢单</a>
           <!--取货照片-->
-          <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
+          <!--<a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>-->
           <!--取货码-->
           <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixsix"  @click.stop="toCompInfo()">查看调度</a>
           <!--查看行程-->
           <a v-show="detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--签收照片-->
-          <a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
+          <!--<a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>-->
+          <!--转发布-->
+          <a v-show="detailInfo.tstatus === 7" class="colorsixsix"  @click.stop="toAgainRelease()">转发布</a>
+          <!-- 录入行程 -->
+          <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="entryTrip()">录入行程</a>
+          <!--查看中转单-->
+          <a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="printOrder()">查看中转单</a>
           <!--评价-->
           <!--<a v-show="detailInfo.tstatus === 6" @click.stop="toEvaluatePage()"  class="colorBlue">待评价</a>-->
         </div>
@@ -392,6 +401,35 @@
           })
 
       },
+      // 录入行程
+      entryTrip() {
+        this.$router.push({
+          name: 'entryTravel',
+          query: {
+            orderno: this.detailInfo.orderno
+          }
+        })
+      },
+      // 打印中转单
+      printOrder() {
+        let self = this;
+        this.$Ice_myOrderService.getTrancCode(this.userId,this.detailInfo.orderno,this.detailInfo.tstatus,new IceCallback(
+          function(result){
+            if (result.code === 0) {
+              let data = JSON.parse(result.obj[0]);
+              let	dataImg = data.data.nginx + data.data.relativeAddr;
+              self.$router.push({
+                name: 'preview',
+                query: {
+                  url: dataImg
+                }
+              })
+            } else {
+              self.$vux.toast.text('转运单获取失败', 'top');
+            }
+          }
+        ))
+      },
       // 重新发布订单
       repubOrder() {
         let self = this;
@@ -415,6 +453,17 @@
 
           })
 
+      },
+      // 转发不
+      toAgainRelease(){
+        debugger
+        this.$router.push({
+          name: 'againRelease',
+          query: {
+            orderId: this.detailInfo.orderno
+          }
+          // path: '/center/myRelease/againRelease',
+        })
       },
       // 刷新订单
       refreshOrder() {

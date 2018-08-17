@@ -62,10 +62,11 @@
       <!--/>-->
       <div class="zuoji">
         <span class="zuojiNum">电话号码</span>
-        <input type="number" v-model="phoneArea" placeholder="请填写区号" class="quhao floatright"> <span style="margin-right:.3rem;line-height:7vh;" class="floatright">-</span><input type="number" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
+        <input maxlength="4" type="tel" v-model="phoneArea" placeholder="请填写区号" class="quhao floatright"> <span style="margin-right:.3rem;line-height:7vh;" class="floatright">-</span><input maxlength="32" type="tel" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
       </div>
 
       <van-field
+        maxlength="36"
         v-model="compInfo.openbank"
         label="开户银行"
         placeholder="请填写开户银行"
@@ -226,8 +227,16 @@
         ))
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
-        this.compInfo.billareas = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
-        this.compInfo.billarea = selectedVal[2];
+        let areas = '';
+        for(let i=0;i<selectedText.length;i++) {
+          if(areas === '') {
+            areas = selectedText[i]
+          } else {
+            areas += ','+ selectedText[i]
+          }
+        }
+        this.compInfo.billareas = areas;
+        this.compInfo.billarea = selectedVal[selectedVal.length-1];
       },
       cancelHandle() {
 

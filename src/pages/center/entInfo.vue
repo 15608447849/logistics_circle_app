@@ -162,7 +162,6 @@
     },
     mounted() {
       this.compInfo = this.$route.params;
-      debugger
       if (this.verifyUtil.stringIsBoolean(this.$route.query.isEditor)) {
         this.isEditor = true;
       } else {
@@ -173,7 +172,6 @@
     },
     methods: {
       initData() {
-
         this.dicData = JSON.parse(this.$app_store.getters.dict)  || null;
         // 初始化地区选择数据
         this.cascadeData = JSON.parse(this.$app_store.getters.area);
@@ -242,6 +240,7 @@
         compJson.openaccount = this.compInfo.openaccount.toString();
         compJson.billarea = this.compInfo.billarea;
         compJson.billaddr = this.compInfo.billaddr;
+        compJson.contact = num2jlong(Number(this.compInfo.contact));
         this.$Ice_InfoService.updateComp(compJson, new IceCallback(
           function (result) {
             self.$vux.toast.text(result.msg, 'top');
@@ -256,8 +255,16 @@
         ))
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
-        this.compInfo.areas = selectedText[0] + ',' + selectedText[1] + ',' + selectedText[2];
-        this.compInfo.area = selectedVal[2];
+        let areas = '';
+        for(let i=0;i<selectedText.length;i++) {
+          if(areas === '') {
+            areas = selectedText[i]
+          } else {
+            areas += ','+ selectedText[i]
+          }
+        }
+        this.compInfo.areas = areas;
+        this.compInfo.area = selectedVal[selectedVal.length-1];
       },
       cancelHandle() {
 

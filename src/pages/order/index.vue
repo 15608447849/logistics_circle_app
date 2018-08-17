@@ -33,7 +33,7 @@
              <div class="releaseCompany">
                <div class="companyBox">
                  <i class="icon iconfont icon-qiyexinxi"></i>
-                 <span>{{fName}}</span>
+                 <span>{{strSub(fName,14) }}</span>
                  <i class="icon iconfont icon-icon-test"></i>
                </div>
                <!--<span class="releasetext">发布</span>-->
@@ -72,14 +72,14 @@
                  <!--拒绝-->
                  <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
                  <!--取货照片-->
-                 <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
+                 <a v-show="item.tstatus === 2 || item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
                  <!-- 支付 -->
                  <a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue" @click.stop="OrderPay()">支付</a>
                  <!--取货码-->
                  <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
                  <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
                  <!--查看行程-->
-                 <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
+                 <a v-show="item.tstatus === 2 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
                  <!--签收照片-->
                  <a v-show="item.tstatus === 4 || item.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(item)">签收照片</a>
                  <!--确认签收-->
@@ -104,6 +104,7 @@
   import {alertContent} from "../../utils/enum";
   import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
+  import {subString} from "../../utils/stringUtil"
 
   export default {
     components: {
@@ -176,6 +177,9 @@
           case 1: // 接受 -> 抢单成功 拒绝-> 发布
             cont = '抢单';
             break;
+          case 2:
+            cont = '中转';
+            break;
           case 3:
             cont = '取货'; // 待取货 已取货
             break;
@@ -233,6 +237,8 @@
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
         this.QueryParam.tstatus = status;
+        // 重置下拉刷新
+        this.finished = false;
       },
       // 确认签收
       conReceipt(orderId, index){
@@ -256,6 +262,9 @@
           .catch(() => {
 
           })
+      },
+      strSub(str,len) {
+        return subString(str,len)
       },
       // 重新发布订单
       repubOrder(orderid,index){
@@ -321,7 +330,7 @@
                 }
               },
               function (error) {
-                self.message.Toast(self, '服务器连接失败, 请稍后重试', false);
+                self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
               }
             ))
           })
@@ -411,6 +420,7 @@
         // this.isShowNoData = false;
         // setTimeout(()=>{
           // 获取我的发布列表
+        console.log(123123);
           this.queryMyPublishOrder();
         // },500);
       },

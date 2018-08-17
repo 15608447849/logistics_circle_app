@@ -43,7 +43,7 @@
           </div>
           <div class="searchBtn">
             <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
-            <input type="text" :value="key" class="cityInput" placeholder="请输入想要搜索的城市">
+            <input type="text" :value="key" class="cityInput" placeholder="请输入关键词搜索订单">
           </div>
         </div>
       </div>

@@ -105,4 +105,12 @@ module.exports = {
       debugger
       queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelRobbing',orderid, oid,callback);
  },
+  /** 转发布 */
+  transOrder:(oid,orderDetail,callback) => {
+    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'transOrder',orderDetail,oid,callback);
+  },
+  /** 打印转运单 (OrderICE order, int uoid)*/
+  getTrancCode:(oid,order,status,callback)=>{
+    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getTrancCode',oid,order,status,callback);
+  },
 };

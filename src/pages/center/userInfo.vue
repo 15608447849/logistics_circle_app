@@ -16,8 +16,10 @@
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
           <cube-upload
+            v-show="isYourCompInfo"
             style="position:absolute;top:.2rem;left:.2rem;width:1rem;height:1rem;opacity: 0;"
             ref="upload"
+            v-model="files"
             class="cube-upload-btn-def"
             :action="{target: uploadUrl,data: {'picNo': 7,'compId': compInfo.compid}}"
             @files-added="filesAdded"
@@ -107,6 +109,7 @@
         delCardUrl: delCardUrl, // 删除地址
         isEditor: false,
         score: 0,
+        files: [],
         cLevel: [],// 认证等级
         compInfo: {},// 企业详情
         isYourCompInfo: true,
@@ -213,12 +216,15 @@
       filesSuccess(files) {
         this.$vux.toast.text(files.response.msg, 'top');
         if (files.response.code === 0) {
-            this.$vux.toast.text('头像上传成功!', 'top');
+          this.$vux.toast.text('头像上传成功!', 'top');
+          const file = this.files[0]
+          file && this.$refs.upload.removeFile(file)
           this.compInfo.logoPath = files.response.data.nginx+""+ files.response.data.relativeAddr + '?' + new Date().getSeconds();
           this.loadImage(7,files.response.data.nginx+""+ files.response.data.relativeAddr);
         }
       },
       filesAdded(files) {
+
         // let self = this;
         // let hasIgnore = false;
         // const maxSize = 2 * 1024 * 1024; // 2M
