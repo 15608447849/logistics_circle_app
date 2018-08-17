@@ -38,7 +38,7 @@
               :text=item.placename @click.native="removeBadge(64,index)" @click.native.stop="removeBadge"/></span>
           </li>
         </ul>
-        <button class="nextStep fixedBottom" @click="saveRoutes">保 存</button>
+        <button class="nextStep" @click="saveRoutes">保 存</button>
       </div>
 
   </div>

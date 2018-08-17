@@ -4062,9 +4062,7 @@ circleListAdd li .circlePic{
   height:50vh;
 }
 .lineListDiv{
-  display:table-cell;
-  text-align: center;
-  vertical-align:middle;
+  display:block;
   width:7.5rem;
   height: 1.1rem;
   overflow: auto;
@@ -4076,7 +4074,7 @@ circleListAdd li .circlePic{
   width:.7rem;
   height:.7rem;
   vertical-align: middle;
-  margin-bottom:.1rem;
+  margin-bottom:.25rem;
 }
 .lineList li{
   display:table;
@@ -4131,7 +4129,7 @@ circleListAdd li .circlePic{
   text-align: center;
   line-height:3.3vh;
   border-radius: 4px;
-  margin-top:2.2vh;
+  margin-top:1.8vh;
   border:1px solid #b5b5b5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
@@ -4168,7 +4166,7 @@ circleListAdd li .circlePic{
 .addRouteList{
   display:block;
   width:7.08rem;
-  height:3.6rem;
+  height:auto;
   margin-bottom:.56rem;
 }
 .addRouteList li{
