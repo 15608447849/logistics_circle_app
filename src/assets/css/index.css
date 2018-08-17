@@ -276,7 +276,6 @@ a {
   left:.15rem;
   width:auto;
   height:.62rem;
-  border-right:1px solid #999999;
 }
 .cityNameI{
   display:inline-block;
@@ -286,7 +285,7 @@ a {
 }
 .cityName{
   display:inline-block;
-  margin-top:.1rem;
+  margin-top:.06rem;
   height:.2rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
@@ -1110,7 +1109,7 @@ input[type="radio"] {
   width:2.05rem;
   height:2.05rem;
   margin:0 auto;
-  margin-bottom:1.5rem;
+  margin-bottom:2.5rem;
 }
 .login_input{
   display:block;
@@ -2724,7 +2723,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display:inline-block;
   width:10%;
   height:.6rem;
-  border-right:1px solid gainsboro;
 }
 .magnifier i{
   text-align: center;
@@ -4060,12 +4058,25 @@ circleListAdd li .circlePic{
   border-radius: 4px;
 }
 .lineList{
-  display:block;
   width:7.5rem;
-  height: 1rem;
+  height:50vh;
+}
+.lineListDiv{
+  display:table-cell;
+  text-align: center;
+  vertical-align:middle;
+  width:7.5rem;
+  height: 1.1rem;
   overflow: auto;
-  padding:0rem .21rem 0rem .21rem;
   background:#ffffff;
+  border:1px solid #f5f5f5;
+  padding:0rem .21rem 0rem .21rem;
+}
+.lineListDiv img{
+  width:.7rem;
+  height:.7rem;
+  vertical-align: middle;
+  margin-bottom:.1rem;
 }
 .lineList li{
   display:table;
@@ -4120,7 +4131,7 @@ circleListAdd li .circlePic{
   text-align: center;
   line-height:3.3vh;
   border-radius: 4px;
-  margin-top:2.35vh;
+  margin-top:2.2vh;
   border:1px solid #b5b5b5;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;

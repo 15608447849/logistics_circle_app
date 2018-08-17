@@ -7,8 +7,10 @@
       <div class="width60">
         <span>常用线路</span>
       </div>
-
+      <div class="width20">
         <i @click="editorRoute" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
+      </div>
+
 
     </div>
     <!--<div class="LineBox">-->
@@ -25,17 +27,15 @@
      :finished="finished"
      @load="onLoad"
    >
-     <ul class="lineList" >
-       <div style="width:7.5rem;height:8vh;padding:0rem .21rem;" class="needBorder" @click="editorRoute(item)" v-for="(item,index) in routeList" :key="index">
-         <img src="../../../assets/images/small/line_03.png" alt="">
-         <span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route">途经</span>
-         <!--<span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route" v-for="(itemB,indexB) in item.routevias" :key="indexB">途经{{itemB.placename}}</span>-->
-         <!--<a class="discontinuation">停用</a>-->
-         <!--<a class="discontinuationBlue">启用</a>-->
-         <a :class="item.cstatus === 32 ? 'discontinuation' : 'discontinuation'" @click.stop="isEnable"
-            @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
-       </div>
-     </ul>
+         <div @click="editorRoute(item)" class="needBorderF5 lineListDiv" v-for="(item,index) in routeList" :key="index">
+           <img src="../../../assets/images/small/line_03.png" alt="">
+           <span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route">途经</span>
+           <!--<span class="startAndEnd">{{item.startpn}} - {{item.endpn}}</span> <span class="route" v-for="(itemB,indexB) in item.routevias" :key="indexB">途经{{itemB.placename}}</span>-->
+           <!--<a class="discontinuation">停用</a>-->
+           <!--<a class="discontinuationBlue">启用</a>-->
+           <a :class="item.cstatus === 32 ? 'discontinuation' : 'discontinuation'" @click.stop="isEnable"
+              @click="isEnable(item,index)">{{item.cstatus === 32 ? '启用' : '停用'}}</a>
+         </div>
    </van-list>
  </div>
   </div>
@@ -95,14 +95,12 @@
         ))
       },
       editorRoute(item) {
-        var el = event.currentTarget;
-        console.log(el);
-        if(el === 0){
+
           this.$router.push({
             name: 'routeDetails',
             params: item
           });
-        }
+
 
       },
       fallback() {

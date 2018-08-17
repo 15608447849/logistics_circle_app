@@ -91,7 +91,7 @@
                <span>{{detailInfo.arridatetime}}</span>
              </li>
            </ul>
-           <div class="lineHeight10"></div>
+
          </div>
        </div>
        <div class="RobbingOrderWhite" v-if="detailInfo.ostatus === 0 && isRob === true">

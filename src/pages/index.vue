@@ -43,7 +43,10 @@
           <li @click="tocommonlyRoute"><i class="icon iconfont icon-xianlu"></i><span class="personalText">常用线路</span>
           </li>
           <!--<li @click="toMyRelease"><i class="icon iconfont icon-fabu1"></i><span class="personalText">我的发布</span></li>-->
-          <li @click="toMyRelease"><i class="icon iconfont icon-jieshoulianmai"></i><span class="personalText">我的接受</span></li>
+          <li @click="toMyRelease">
+            <i class="icon iconfont icon-jieshoulianmai"></i>
+            <span class="personalText" style="margin-left:-.07rem;">我的接受</span>
+          </li>
           <li @click="toMyCircle">
             <i class="icon iconfont icon-quanzi marginright3" style="margin-right:.3rem;"></i><span
             class="personalText circle">我的圈子</span></li>
@@ -146,9 +149,7 @@
             self.isNewMsg = false;
         },function(error){
           //失败
-
         }))
-
       },
       initBaseData() {
         let self = this;

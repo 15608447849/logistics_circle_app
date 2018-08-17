@@ -11,7 +11,7 @@
         <div class="alignCenter floatright"></div>
       </div>
     </div>
-    <div style="margin-top:5.5vh;">
+    <div style="margin-top:6vh;">
       <!--<div class="blackList">-->
       <!--<div class="blackListNum">2个黑名单</div>-->
 
@@ -23,7 +23,8 @@
       >
         <ul class="circleList">
           <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in blackList" :key="index">
-            <img :src="item.logoPath" alt="" class="circlePic">
+            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== 'undefined'">
+            <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultCircle widthHeight90 floatleft" v-if="item.logoPath === 'undefined'">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span></div>
             <div class="lineName"><span class="lineInfo">加入时间：{{item.addTime}}</span></div>
             <a class="pullBlack" @click.stop="removeClick(item,index)">移 出</a>
