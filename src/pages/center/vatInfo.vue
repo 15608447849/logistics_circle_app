@@ -62,7 +62,7 @@
       <!--/>-->
       <div class="zuoji">
         <span class="zuojiNum">电话号码</span>
-        <input type="number" v-model="phoneArea" placeholder="请填写区号" class="quhao floatright"> <span style="margin-right:.3rem;line-height:7vh;" class="floatright">-</span><input type="number" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
+        <input type="number" v-model="phoneArea" placeholder="请填写区号" class="quhao"> <span class="fengefu">-</span><input type="number" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
       </div>
 
       <van-field
@@ -107,8 +107,10 @@
 
     <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor"
       style="
-      background: #31bff5;
+      background: #3190f5;
       width:7.08rem;
+      height:6vh;
+      line-height:6vh;
       margin-left:.21rem;
       margin-top:10vh;margin-top:12vh;
       color:#ffffff;"

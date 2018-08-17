@@ -37,12 +37,12 @@
           <span class="invoiceContent">{{compInfo.contact}}</span>
         </li>
         <li class="enterpriseLi needBorder">
-          <span class="invoiceTitle">企业地址</span>
-          <span class="invoiceContent">{{compInfo.areas}}{{compInfo.address}}</span>
-        </li>
-        <li class="enterpriseLi needBorder">
           <span class="invoiceTitle">邮编</span>
           <span class="invoiceContent">{{compInfo.postcode}}</span>
+        </li>
+        <li class="enterpriseLiAuto needBorder">
+          <span class="enterpriseLiAutoSpan">企业地址</span>
+          <span class="enterpriseSpecific">{{compInfo.areas}}{{compInfo.address}}</span>
         </li>
       </ul>
 
@@ -123,8 +123,10 @@
       </van-cell-group>
 
       <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor" style="
-      background: #31bff5;
+      background: #3190f5;
       width:7.08rem;
+      height:6vh;
+      line-height:6vh;
       margin-left:.21rem;
       margin-top:10vh;margin-top:12vh;
       color:#ffffff;">

@@ -408,6 +408,7 @@
         ))
       },
       onLoad() {
+        console.log(123123)
         // this.isShowNoData = false;
         // setTimeout(()=>{
           // 获取我的发布列表
