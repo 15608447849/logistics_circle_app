@@ -1,18 +1,27 @@
 <template>
   <div style="background:white;height:13.25rem;">
     <div>
-      <yd-navbar title="新用户注册" bgcolor="#1E90FF" color="#FFFFFF" fontsize="16px" height=".8rem;">
-        <router-link to="" @click.native="backBtnClick" slot="left">
-          <yd-navbar-back-icon color="#FFFFFF"></yd-navbar-back-icon>
-        </router-link>
-      </yd-navbar>
+      <div class="issueHeaderLog">
+        <div class="width20">
+          <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
+        </div>
+        <div class="width60">
+          <span>新用户注册</span>
+        </div>
+        <div class="width20">
+          <div class="alignCenter floatright"></div>
+        </div>
+
+
+
+      </div>
       <!--<div class="issueHeaderLog">-->
       <!--<i @click="fallback" class="icon iconfont icon-btngoback back"></i>-->
       <!--<span>新用户注册</span>-->
       <!--</div>-->
       <yd-cell-group v-show="firstStepBool">
         <yd-cell-item>
-          <yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>
+          <!--<yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>-->
           <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
           <yd-sendcode slot="right"
                        v-model="start1"
@@ -20,7 +29,7 @@
                        type="warning"
           ></yd-sendcode>
         </yd-cell-item>
-        <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;"
+        <van-button style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;"
                     size="large" type="primary" @click="firstStep()" v-show="firstStepBool" :disabled='isFirstStepDis'>
           下一步
         </van-button>
@@ -42,7 +51,7 @@
             <span slot="left">验证码：</span>
             <yd-input slot="right" v-model="verificationCode" placeholder="请输入短信验证码"></yd-input>
           </yd-cell-item>
-          <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;"
+          <van-button style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;"
                       size="large" type="primary" @click="secondStep()" v-show="secondStepBool"
                       :disabled='isFirstStepDis'>下一步
           </van-button>
@@ -73,7 +82,7 @@
           <!--:disabled='isFirstStepDis'>注 册-->
           <!--</yd-button>-->
         </yd-cell-item>
-        <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;"
+        <van-button style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;"
                     size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" :disabled='isFirstStepDis'>注
           册
         </van-button>
@@ -140,6 +149,9 @@
           this.thirdStepBool = false;
           return
         }
+      },
+      fallback(){
+        this.$router.go(-1);
       },
       // 验证账号输入格式
       registerValidator() {

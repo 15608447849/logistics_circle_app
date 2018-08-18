@@ -20,7 +20,7 @@
       <div class="inputNumBox">
         <input v-model="userPhone" type="number" placeholder="请输入您的手机号" class="inputNum">
       </div>
-      <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;" size="large" type="primary" @click="firstStep()" v-show="firstStepBool" class="updataPwdBtn">下一步</van-button>
+      <van-button style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;" size="large" type="primary" @click="firstStep()" v-show="firstStepBool" class="updataPwdBtn">下一步</van-button>
     </div>
     <div class="verificationBox" v-show="secondStepBool">
       <span class="verificationCode">输入验证码</span>
@@ -37,7 +37,7 @@
         @delete="onDelete"
         @blur="showKeyboard = false"
       />
-      <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="secondStep()" v-show="secondStepBool" class="updataPwdBtn">下一步</van-button>
+      <van-button style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;" size="large" type="primary" @click="secondStep()" v-show="secondStepBool" class="updataPwdBtn">下一步</van-button>
     </div>
     <div class="updataPwdinputBox" v-show="thirdStepBool">
       <div class="inputPassword">
@@ -46,7 +46,7 @@
       <div class="inputPassword">
         <span class="textRed">*</span><span class="inputspan">确认密码</span><div class="inputBox"><input type="password" v-model="rPassword" placeholder="请确认新密码"></div>
       </div>
-      <van-button  style="width:7.08rem;height:.64rem;margin-left:.11rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" class="updataPwdBtn">保存</van-button>
+      <van-button  style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;" size="large" type="primary" @click="thirdStep()" v-show="thirdStepBool" class="updataPwdBtn">保存</van-button>
     </div>
   </div>
 </template>
