@@ -123,7 +123,16 @@
     },
     deactivated() {
       // 地图页面不需要被缓存
-      this.$destroy();
+      // this.$destroy();
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.name === 'releaseOrders') {
+        to.meta.isUseCache = true;
+      }
+      if (to.name === 'againRelease') {
+        to.meta.isUseCache = true;
+      }
+      next();
     }
   };
 </script>

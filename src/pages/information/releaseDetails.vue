@@ -133,7 +133,6 @@
           });
           return
         }
-        console.log(self.compInfoA);
         // this.message.Toast(this,'loading','正在努力抢单中...',true);
         this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,this.detailInfo.pubercompid,
           new IceCallback(

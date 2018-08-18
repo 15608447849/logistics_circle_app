@@ -186,7 +186,6 @@
         return cont
       },
       tabItemClick(item) {
-        debugger
         this.tabList.forEach((value, index, arr) => {
           value.isSelected = false
         });
