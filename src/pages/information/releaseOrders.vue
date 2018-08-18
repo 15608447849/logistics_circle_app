@@ -194,7 +194,6 @@
         insureamt: 0, // 保价金额
         codamt: 0, // 代收金额
         isReleaseOrder: false,
-
         displayDic: {},
         startc: '', // 出发地
         arriarc: '', // 目的地
@@ -256,6 +255,9 @@
         if(this.compInfo.verify === 0) {
           this.isReleaseOrder = false;
           this.$vux.toast.text('当前企业未认证，无法进行发单操作!', 'top');
+          setTimeout(()=> {
+            this.$router.go(-1);
+          },1500);
         }else {
           this.isReleaseOrder = true;
         }
@@ -453,27 +455,27 @@
         if (this.validator()) {
           Toast.loading({
             mask: true,
-            message: '加载中...'
+            message: '发单中...'
           });
-          self.OrderDetail.codamt = self.codamt;
-          self.OrderDetail.insureamt = self.insureamt ;
-          self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
-            function (result) {
-              self.$vux.toast.text(result.msg, 'top');
-              if (result.code === 0) {
-                setTimeout(() => {
+          setTimeout(()=>{
+            self.OrderDetail.codamt = self.codamt;
+            self.OrderDetail.insureamt = self.insureamt ;
+            self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
+              function (result) {
+                Toast.clear();
+                if (result.code === 0) {
+                  Toast.success(result.msg);
                   self.$router.go(-1);
-                }, 1500);
-              } else {
-                // 发送失败
-                self.$dialog.loading.close();
+                } else {
+                  Toast.fail(result.msg);
+                }
+              },
+              function (error) {
+                Toast.clear();
+                Toast.fail('服务器连接失败, 请稍后重试!');
               }
-            },
-            function (error) {
-              self.$dialog.loading.close();
-              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
-            }
-          ));
+            ));
+          },1000);
         }
       },
       validator() {

@@ -55,7 +55,7 @@
         getOrderTrajectory() {
           let self = this;
           debugger
-          this.$Ice_myOrderService.getOrderTrajectory(this.userId,this.order.orderno,new IceCallback(
+          this.$Ice_myOrderService.getOrderTrajectory(this.userId,this.order.revicompid,this.order.orderno,new IceCallback(
             function(result){
               if (result.code === 0) {
                 if(result.obj.length === 0) {

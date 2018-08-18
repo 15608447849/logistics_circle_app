@@ -31,9 +31,6 @@
             </li>
         </ul>
     </div>
-
-
-
     <div class="homeContent">
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
@@ -73,8 +70,11 @@
       <!--</ul>-->
       <ul class="order_boxIndex">
         <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
-          <div class="order_time"><span class="site">{{item.startAddr}}</span><span class="site">—</span><span
-            class="site">{{item.destAddr}}</span><span class="time">{{dateConversion(item.time)}}</span></div>
+          <div class="order_time">
+            <span class="site">{{changeStrRed(item.startAddr)}}</span>
+            <span class="site">—</span>
+            <span class="site">{{changeStrRed(item.destAddr)}}</span>
+            <span class="time">{{dateConversion(item.time)}}</span></div>
           <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
             class="carWeight"></span><span
             class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
@@ -111,8 +111,6 @@
       return {
         infoList: [],
         pageSize: '10', // 订单数
-        // avatar: '../../assets/images/small/bussiness-man.png',
-        // avatarDefault: "../../assets/images/small/moren.png",
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
@@ -162,6 +160,20 @@
 
             }
           ))
+      },
+      // 搜索条件标红
+      changeStrRed(str) {
+        // 是否包含h2
+        if(str.match(RegExp(/<h2>/))) {
+          // 获取字符串中内容
+          let strA = str;
+          str = str.match(/<h2>(\S*)<\/h2>/)[1];
+          // 清除str中标签
+          strA= strA.replace("<h2>","").replace("</h2>","");
+          let regA = new RegExp("(" + str + ")", "g");
+          return strA.replace(regA, "$1");
+        }
+        return str
       },
       skipOrder() {
         this.$router.push({

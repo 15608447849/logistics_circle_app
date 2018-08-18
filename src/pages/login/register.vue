@@ -66,7 +66,7 @@
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left" class="span">邀请码：</span>
-          <yd-input slot="right" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填></yd-input>
+          <yd-input slot="right" type="number" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
 
           <!--<yd-button size=" large
           " type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
@@ -301,6 +301,7 @@
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
+              self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
               let redirect = decodeURIComponent(self.$route.query.redirect || '/information');
               self.$router.push({
                 path: redirect

@@ -51,7 +51,7 @@
         geocoder: null,
         events: {
           init: (map) => {
-            this.map = map
+            this.map = map;
             // map.setCity(this.searchOption.city)
             this.setCity();
           }
@@ -60,6 +60,11 @@
     },
     mounted() {
       this.initData();
+    },
+    activated() {
+      if(this.map !== null) {
+        this.setCity();
+      }
     },
     methods: {
       setCity() {
@@ -122,8 +127,7 @@
       }
     },
     deactivated() {
-      // 地图页面不需要被缓存
-      // this.$destroy();
+
     },
     beforeRouteLeave (to, from, next) {
       if (to.name === 'releaseOrders') {

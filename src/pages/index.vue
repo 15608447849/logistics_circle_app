@@ -117,7 +117,6 @@
     activated() {
       this.compId = this.$app_store.getters.compId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
-
       if(this.compInfo !== undefined && this.compInfo !== null) {
         this.compName = this.compInfo.fname;
         this.avatar = this.compInfo.logoPath;

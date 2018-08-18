@@ -164,7 +164,9 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                result.obj.logoPath = result.obj.logoPath + '?' + new Date().getSeconds();
+                if(result.obj.logoPath !== '') {
+                  result.obj.logoPath = result.obj.logoPath + '?' + new Date().getSeconds();
+                }
                 self.compInfo = result.obj;
                 self.computeLevel();
                 if(self.isYourCompInfo) {
@@ -198,27 +200,27 @@
         let imgPath = ['', '', '', '', '', '', '', ''];
         imgPath[imgId] = url;
         let self = this;
-        this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
+        this.$Ice_InfoService.feedbackCredentRelpath(this.compInfo.compid, imgPath,
           new IceCallback(
             function (result) {
+              self.$vux.toast.text('头像上传成功!', 'top');
               self.$app_store.commit(COMP_INFO, JSON.stringify(self.compInfo));
               self.$app_store.commit(AVATAR_URL,self.compInfo.logoPath);
-              console.log(self.$app_store.state.avatar)
             },
             function (error) {
+              self.$vux.toast.text('头像上传失败!', 'top');
             }
           )
         );
       },
       filesError(files) {
-        this.$vux.toast.text('头像上传失败!', 'top');
+
       },
       filesSuccess(files) {
         this.$vux.toast.text(files.response.msg, 'top');
         if (files.response.code === 0) {
-          this.$vux.toast.text('头像上传成功!', 'top');
-          const file = this.files[0]
-          file && this.$refs.upload.removeFile(file)
+          const file = this.files[0];
+          file && this.$refs.upload.removeFile(file);
           this.compInfo.logoPath = files.response.data.nginx+""+ files.response.data.relativeAddr + '?' + new Date().getSeconds();
           this.loadImage(7,files.response.data.nginx+""+ files.response.data.relativeAddr);
         }

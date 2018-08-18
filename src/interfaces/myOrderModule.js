@@ -25,8 +25,8 @@ module.exports = {
 	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'queryMyRecvOrder', token,queryParam,callback);
 	},
 	/** 获取行程单轨迹 getOrderTrajectory */
-	getOrderTrajectory:(token,orderId,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderTrajectory', token,orderId,callback);
+	getOrderTrajectory:(token,revicompid,orderId,callback)=>{
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderTrajectory', token,revicompid,orderId,callback);
 	},
 	/** 获取行程单轨迹 getOrderTraByOrderid (orderid:订单号 type:0-走货轨迹 1-地图轨迹)*/
 	getOrderTraByOrderid:(orderId,type,callback)=>{

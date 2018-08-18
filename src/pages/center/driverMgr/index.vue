@@ -134,7 +134,7 @@
               }
             } else {
               self.finished = true;
-              self.$vux.toast.text('司机管理列表获取失败, 请稍后重试', 'top');
+              self.$vux.toast.text(result.msg, 'top');
             }
           },
           function (error) {

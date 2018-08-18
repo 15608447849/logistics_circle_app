@@ -60,7 +60,6 @@
               if (result.code === 0) {
                 self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                 self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
-                debugger
                 console.log(self.$app_store.state.userId);
                 if (result.obj.comps.length === 1) {
                   self.$app_store.commit(ROID,result.obj.comps[0].roid);
@@ -135,6 +134,7 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
+                debugger
                 self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
                 self.$router.push({
                   path: '/information'

@@ -103,6 +103,7 @@
 </template>
 
 <script>
+  import { Toast } from 'vant';
   import { stringIsNotNull } from '@/utils/stringUtil'
   export default {
     data() {
@@ -133,23 +134,33 @@
           });
           return
         }
-        // this.message.Toast(this,'loading','正在努力抢单中...',true);
-        this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,this.detailInfo.pubercompid,
-          new IceCallback(
-            function (result) {
-              self.$vux.toast.text(result.msg, 'top');
-              if(result.code === 0) {
+        Toast.loading({
+          mask: true,
+          message: '抢单中...'
+        });
+        setTimeout(()=>{
+          // this.message.Toast(this,'loading','正在努力抢单中...',true);
+          this.$Ice_OrderService.robbingOrder(this.$app_store.getters.userId,this.$route.query.id,this.detailInfo.pubercompid,
+            new IceCallback(
+              function (result) {
+                Toast.clear();
+                if(result.code === 0) {
+                  Toast.success(result.msg);
+                } else {
+                  Toast.fail(result.msg);
+                }
+                self.$router.go(-1);
+              },
+              function (error) {
+                Toast.clear();
+                Toast.fail('服务器连接失败, 请稍后重试!');
                 // 刷新订单数据
-                self.getOrderDetailInfo();
+                self.getOrderDetailInfo()
               }
-            },
-            function (error) {
-              self.$vux.toast.text('服务器连接失败, 请稍后重试!', 'top');
-              // 刷新订单数据
-              self.getOrderDetailInfo()
-            }
-          )
-        );
+            )
+          );
+        },1000);
+
       },
       fallback() {
         this.$router.go(-1)

@@ -221,13 +221,13 @@
         // 保存信息
         let self = this;
         let compJson = new comp.CompInfo();
+        debugger
         compJson.compid = this.compInfo.compid;
         compJson.uoid = this.userId;
         compJson.fname = this.compInfo.fname;
         compJson.sname = this.compInfo.sname;
         compJson.ctype = this.compInfo.ctype;
         compJson.csale = this.compInfo.csale;
-        // compJson.contact = num2jlong(Number(this.compInfo.contact));
         compJson.postcode = this.compInfo.postcode;
         compJson.pho = num2jlong(Number(this.compInfo.pho));
         compJson.pht = num2jlong(Number(this.compInfo.pht));
@@ -236,7 +236,7 @@
         compJson.invtitle = this.compInfo.invtitle;
         compJson.invtype = this.compInfo.invtype;
         compJson.taxno = this.compInfo.taxno;
-        compJson.phone = this.compInfo.pho + '-' + this.compInfo.pht;
+        compJson.phone = this.compInfo.phone;
         // compJson.landline = this.compInfo.landline;
         compJson.openbank = this.compInfo.openbank;
         compJson.openaccount = this.compInfo.openaccount.toString();
@@ -249,6 +249,7 @@
             if (result.code === 0) {
               // 保存数据
               self.$app_store.commit(COMP_INFO, JSON.stringify(self.compInfo))
+              self.$router.go(-1);
             }
           },
           function (error) {

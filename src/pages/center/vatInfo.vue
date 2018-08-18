@@ -219,6 +219,7 @@
             if(result.code === 0){
               // 保存数据
               self.$app_store.commit(COMP_INFO, JSON.stringify(self.compInfo))
+              self.$router.go(-1);
             }
           },
           function (error) {

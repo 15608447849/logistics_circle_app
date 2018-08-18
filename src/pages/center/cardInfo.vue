@@ -187,7 +187,7 @@
         let imgPath = ['', '', '', '', '', '', '', ''];
         imgPath[imgId] = url;
         let self = this;
-        this.$Ice_InfoService.feedbackCredentRelpath(this.userId, imgPath,
+        this.$Ice_InfoService.feedbackCredentRelpath(this.compInfo.compid, imgPath,
           new IceCallback(
             function (result) {
               self.updateComp();
@@ -215,7 +215,7 @@
         compJson.invtitle = this.compInfo.invtitle;
         compJson.invtype = this.compInfo.invtype;
         compJson.taxno = this.compInfo.taxno;
-        compJson.phone = this.compInfo.pho + '-' + this.compInfo.pht;
+        compJson.phone = this.compInfo.phone;
         compJson.landline = this.compInfo.landline;
         compJson.openbank = this.compInfo.openbank;
         compJson.openaccount = this.compInfo.openaccount.toString();

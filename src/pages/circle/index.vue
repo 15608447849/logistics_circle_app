@@ -121,6 +121,7 @@
             }
             return
           }
+          self.startTimeStr = result[0].time;
           self.endTimeStr = result[result.length - 1].time;
           // 原有数组与新数组连接
           self.infoList = self.infoList.concat(result);
