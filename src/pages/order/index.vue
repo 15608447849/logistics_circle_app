@@ -10,7 +10,8 @@
           <span>我的发布</span>
         </div>
         <div class="width20">
-          <div class="alignCenter floatright"></div>
+          <i class="orderTime">2018年</i>
+          <i class="icon iconfont icon-xiala sanjiao"></i>
         </div>
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
       </div>

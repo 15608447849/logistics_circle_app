@@ -1596,6 +1596,7 @@ input[type="radio"] {
 .width20{
   position:relative;
   width:20%;
+  height:auto;
 }
 .width60{
   width:60%;
@@ -3226,7 +3227,20 @@ circleListAdd li .circlePic{
   letter-spacing: 0px;
   color: #666666;
 }
-
+.orderTime{
+  margin-left:.2rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .22rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+.sanjiao{
+  margin-top:2vh;
+  font-size:.2rem;
+  color:#ffffff;
+}
 .releaseMenu{
   display:flex;
   justify-content: space-between;

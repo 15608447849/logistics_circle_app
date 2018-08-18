@@ -9,7 +9,8 @@
           <span>我的接收</span>
         </div>
         <div class="width20">
-          <div class="alignCenter floatright"></div>
+          <i class="orderTime">2018年</i>
+          <i class="icon iconfont icon-xiala sanjiao"></i>
         </div>
 
 
