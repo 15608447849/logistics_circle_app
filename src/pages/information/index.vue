@@ -46,6 +46,7 @@
 </template>
 <script>
   import Conversion from '@/utils/conversion'
+  import { page } from '@/utils/config'
   import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
 
@@ -64,7 +65,7 @@
       return {
         isShowNoData: false, // 无数据显示
         infoList: [],
-        pageSize: '50', // 订单数
+        pageSize: page.pageSize, // 每次获取订单条数
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识

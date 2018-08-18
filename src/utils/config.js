@@ -5,3 +5,7 @@ export const searchState = {
   DRIVER: 5, // 司机搜索
   CIRCLE_ADD: 7
 };
+
+export const page = {
+  pageSize: '20'
+};

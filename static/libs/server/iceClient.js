@@ -89,8 +89,7 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
     )
     .then(
       function(remoteProxy) {
-        console.log("ICE : ",moduleName,methodName,params);
-        if (params.length>0) {
+        if (params.length > 0) {
           result = remoteProxy[methodName].apply(remoteProxy,params)
         }else{
           result = remoteProxy[methodName].apply(remoteProxy)

@@ -11,8 +11,6 @@
         <div class="alignCenter floatright"></div>
       </div>
 
-
-
     </div>
     <div class="downfixed havedownfixed">
       <div class="releaseStateBox">

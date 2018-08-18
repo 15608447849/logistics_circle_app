@@ -46,6 +46,7 @@
 <script>
   import Conversion from '@/utils/conversion'
   import {IS_SHOW_SIDEBAR, TABBAR_INDEX} from "../../store/mutation-types";
+  import { page } from '@/utils/config'
 
   export default {
     computed: {
@@ -64,7 +65,7 @@
         avatar: this.$app_store.state.avatar,// 头像
         userId: this.$app_store.state.userId,
         infoList: [],
-        pageSize: '50', // 订单数
+        pageSize: page.pageSize, // 每次获取条数
         address: this.$app_store.getters.currentCity, // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
