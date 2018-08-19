@@ -8,8 +8,8 @@
         <div class="width60">
           <span>我的接收</span>
         </div>
-        <div class="width20">
-          <i class="orderTime">2018年</i>
+        <div class="width20" @click="showPicker">
+          <i class="orderTime">{{QueryParam.year}}年</i>
           <i class="icon iconfont icon-xiala sanjiao"></i>
         </div>
 
@@ -52,7 +52,7 @@
 
               <li class="pickGoods marginBottom15">
                 <div>
-                  <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
+                  <span v-show="item.pusdate !== ''">取货时间：</span> <span>{{item.pusdate}}</span><span> {{item.pustime}}</span>
                 </div>
                 <!--<span class="underPay">线下付款</span>-->
                 <!--线上付款-->
@@ -122,6 +122,8 @@
     },
     data() {
       return {
+        index: '0',
+        year: '',
         isShowNoData: false, // 无数据显示
         avatar: this.$app_store.state.avatarUrl,
         QueryParam: new redundancy.QueryParam(),
@@ -133,8 +135,8 @@
         finished: false,
         // 0 发布 1/2 抢单 3 取货 4 5 签收  6 待评价 8 评价 20 取消
         tabList: [{
-          name: '抢单', // 取消 -> 扔了 //
           value: '1',
+          name: '抢单',
           isSelected: true
         }, {
           name: '取货',
@@ -153,10 +155,44 @@
     },
     mounted() {
       this.$app_store.commit(TABBAR_INDEX, 3);
+      this.year = new Date().getFullYear();
+      this.col1Data = [];
+      for(let i = 0;i<10;i++) {
+        let year = this.year - i;
+        let obj = {
+          value: year,
+          text: year
+        };
+        this.col1Data.push(obj);
+      }
       // 初始化列表查询条件
       this.initQueryConditions('1');
+      this.picker = this.$createPicker({
+        title: '选择年份',
+        data: [this.col1Data],
+        onSelect: (selectedVal, selectedIndex, selectedText) => {
+          this.year = selectedVal[0];
+          // 重置搜索条件
+          this.initQueryConditions(this.index);
+
+          // 清空数据
+          this.releaseList = [];
+          // 隐藏无数据显示
+          this.isShowNoData = false;
+          // 刷新列表
+          // this.queryMyPublishOrder();
+          this.onLoad();
+        },
+        onCancel: () => {
+
+        }
+      })
+
     },
     methods: {
+      showPicker () {
+        this.picker.show()
+      },
       statusToChinese(status) {
         let cont = '';
         switch (status) {
@@ -244,6 +280,8 @@
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
         this.QueryParam.tstatus = status;
+        this.QueryParam.year = this.year;
+
       },
       // 跳转企业详情
       toComPInfo(item) {
@@ -307,7 +345,7 @@
               self.page.pageIndex += 1;
               if(result.obj !== '[]') {
                 self.releaseList = self.releaseList.concat(JSON.parse(result.obj));
-                console.log(self.releaseList)
+                self.finished = false;
               } else{
                 self.finished = true;
               }

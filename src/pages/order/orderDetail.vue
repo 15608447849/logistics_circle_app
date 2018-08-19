@@ -174,16 +174,17 @@
           <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="receiveOrder()">接受</a>
           <!--拒绝-->
           <a v-show="detailInfo.tstatus === 1" class="colorsixnine" @click.stop="refuseOrder()">拒绝</a>
+
           <!--取货照片-->
-          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>
+          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(0)">取货照片</a>
           <a v-show="detailInfo.tstatus === 7 && detailInfo.ptdictc === 21" class="colorLightBlue" @click.stop ="OrderPay()">支付</a>
           <!--取货码-->
           <a v-show="detailInfo.tstatus === 7" class="colorBlue marginright13" @click.stop ="toPickGoodsCode()">取货码</a>
           <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 || detailInfo.tstatus === 3"  class="colorsixnine"  @click.stop="toCompInfo()">查看调度</a>
           <!--查看行程-->
-          <a v-show="detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
+          <a v-show="detailInfo.tstatus === 2 || detailInfo.tstatus === 3 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--签收照片-->
-          <a v-show="detailInfo.tstatus === 4 || detailInfo.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>
+          <a v-show="detailInfo.tstatus === 4 || detailInfo.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(1)">签收照片</a>
           <!--确认签收-->
           <a v-show="detailInfo.tstatus === 4" class="colorBlue marginright13" @click.stop="conReceipt()">确认签收</a>
           <!--评价-->
@@ -200,14 +201,10 @@
         <div class="operationA" v-show="type === 1">
           <!--接受-->
           <a v-show="detailInfo.tstatus === 1" class="colorBlue" @click.stop="cancelRobbing()">取消抢单</a>
-          <!--取货照片-->
-          <!--<a v-show="detailInfo.tstatus === 3" class="colorsixsix" @click.stop="toPickGoodsPic()">取货照片</a>-->
           <!--取货码-->
-          <a v-show="detailInfo.tstatus === 7 || detailInfo.tstatus === 6 "  class="colorsixsix"  @click.stop="toCompInfo()">查看调度</a>
+          <a v-show="detailInfo.tstatus === 6 || detailInfo.tstatus === 7"  class="colorsixsix"  @click.stop="toCompInfo()">查看调度</a>
           <!--查看行程-->
-          <a v-show="detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
-          <!--签收照片-->
-          <!--<a v-show="detailInfo.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic()">签收照片</a>-->
+          <a v-show="detailInfo.tstatus === 2 || detailInfo.tstatus === 4 || detailInfo.tstatus === 6 || detailInfo.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack()">行程回放</a>
           <!--转发布-->
           <a v-show="detailInfo.tstatus === 7" class="colorsixsix"  @click.stop="toAgainRelease()">转发布</a>
           <!-- 录入行程 -->
@@ -262,7 +259,6 @@
           <button class="yesPay" @click="show2 = false">确认支付</button>
         </ul>
       </yd-popup>
-
   </div>
 </template>
 
@@ -280,14 +276,14 @@
         order: {},
         pubcompid: '',
         revicompid: '',
-        puimg: '',
+        puimg: '',// 取货照片
+        retuimg: '', // 签收照片
         compInfo: {}// 企业详情
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
       }
     },
     // activated() {
-    //   debugger
     //   this.order = this.$route.params;
     //   this.pubcompid = this.order.pubcompid;
     //   this.revicompid = this.order.revicompid;
@@ -301,6 +297,7 @@
       this.revicompid = this.order.revicompid;
       this.queryCompByCid(this.pubcompid);
       this.puimg = this.order.puimg;
+      this.retuimg = this.order.retuimg;
       this.type = this.order.type;
       this.getOrderInfo();
     },
@@ -348,6 +345,7 @@
               self.detailInfo.pubcompid = self.pubcompid;
               self.detailInfo.revicompid = self.revicompid;
               self.detailInfo.puimg = self.puimg;
+              self.detailInfo.retuimg = self.retuimg;
               if(self.detailInfo.eaedatetime == '' || self.detailInfo.easdatetime == ''){
                 self.isDisplayTime == true
               }
@@ -459,7 +457,6 @@
       },
       // 转发不
       toAgainRelease(){
-        debugger
         this.$router.push({
           name: 'againRelease',
           query: {
@@ -543,11 +540,12 @@
           })
       },
       // 取货照片
-      toPickGoodsPic() {
+      toPickGoodsPic(type) {
         if(self.detailInfo === '0') {
           this.$vux.toast.text('暂无取货照片', 'top');
           return
         }
+        this.detailInfo.qhType = type;
         this.$router.push({
           name: 'pickGoodsPic',
           params: this.detailInfo

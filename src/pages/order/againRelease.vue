@@ -333,8 +333,8 @@
             that.OrderDetail.eaedatetime = orderData.eaedatetime; //期望到货结束时间
             //orderData.phone1 == 0 ? that.formValidate.phone1 = '' : that.formValidate.phone1 = orderData.phone1; //发布人电话1
             //orderData.phone2 == 0 ? that.formValidate.phone2 = '' : that.formValidate.phone2 = orderData.phone2; //发布人电话2
-            that.OrderDetail.phone1 = that.compInfo.pho===0 ? '' : that.compInfo.pho; //发布人电话1
-            that.OrderDetail.phone2 = that.compInfo.pht===0 ? '' : that.compInfo.pht; //发布人电话2
+            that.OrderDetail.phone1 = that.compInfo.pho === 0 ? '' : that.compInfo.pho; //发布人电话1
+            that.OrderDetail.phone2 = that.compInfo.pht === 0 ? '' : that.compInfo.pht; //发布人电话2
 //	                    that.formValidate.phone2 = orderData.phone2; //发布人电话2
             that.pubdatetime = orderData.pubdatetime; //发布时间
             that.changeNum();
@@ -494,14 +494,14 @@
       fallback() {
         this.$router.go(-1)
       },
-      // 转发不
+      // 转发布
       saveTransOrder() {
         let self = this;
         if(this.validator()) {
           let jsonObj = new myOrder.OrderICE();
           jsonObj.puberid = this.userId;				//收货人
-          jsonObj.phone1 = (self.OrderDetail.check ? self.OrderDetail.phone1.toString() : '0'); 			// 手机号码1
-          jsonObj.phone2 = (self.OrderDetail.check ? self.OrderDetail.phone2.toString() : '0'); 			// 手机号码2
+          jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 :  self.OrderDetail.phone1; 			// 手机号码1
+          jsonObj.phone2 = self.OrderDetail.phone2 === '' ? 0 :  self.OrderDetail.phone2;  			// 手机号码2
           jsonObj.billno = self.OrderDetail.billno;						// TMS运单号
           jsonObj.orderno = self.OrderDetail.orderno.toString();					// 订单号
           // var startcArr = self.OrderDetail.startcArr[self.OrderDetail.startcArr.length - 1],
@@ -539,7 +539,6 @@
           jsonObj.easdatetime = self.OrderDetail.easdatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
           jsonObj.eaedatetime = self.OrderDetail.eaedatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
           jsonObj.pmdictc = self.OrderDetail.pmdictc.toString();				//运费度量单位
-          debugger
           self.$Ice_myOrderService.transOrder(self.userId,jsonObj,new IceCallback(
             function(data){
               self.$vux.toast.text(data.msg, 'top');

@@ -1755,11 +1755,14 @@ input[type="radio"] {
   display:block;
   width:7.08rem;
   margin:.3rem auto 0 auto;
-  height:4vh;
-  background:#31bff5;
+  height:6vh;
+  background:#3190f5;
   color:#ffffff;
   border:1px solid transparent;
   border-radius: 3px;
+}
+.colorBlack{
+  color:black;
 }
 .test-textarea {
   width: 400px;
@@ -3906,7 +3909,6 @@ circleListAdd li .circlePic{
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
-  color: #999999;
 }
 .pingjiaPic{
   width:6.3rem;
@@ -4004,6 +4006,12 @@ circleListAdd li .circlePic{
   width:7.5rem;
   height:2.2rem;
   padding:0rem .21rem 0rem .21rem;
+}
+.height29{
+  height:29vh;
+}
+.marginBottom10VH{
+  margin-bottom:10vh;
 }
 .evaluateTextarea{
   float:right;

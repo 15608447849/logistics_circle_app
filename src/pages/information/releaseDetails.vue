@@ -41,7 +41,7 @@
              <span class="issueText">时间信息</span><span class="textMargin-right10">{{detailInfo.puedatetime}}</span><span>取货</span>
            </li>
            <li class="issueDetailsLiText" v-if="detailInfo.phone1 === 0 && detailInfo.phone2 === 0">
-             <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
+             <span class="issueText">联系方式</span><span class="textMargin-right10"> {{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
            </li>
          </ul>
        </div>
@@ -51,7 +51,7 @@
            <li class="issueDetailsLiText">
              <span class="Consignee">收货人</span>
              <span class="marginright3">{{detailInfo.consignee}}</span>
-             <span class="marginright3">{{detailInfo.consphone}}</span>
+             <span class="marginright3">{{subStrPhone(detailInfo.consphone)}}</span>
              <span class="marginright3">{{detailInfo.dmdictc}}</span>
              <span class="marginright3"></span>
            </li>
@@ -114,7 +114,7 @@
         orderId: '',
         puberId: '',
         pubercompid: '',
-        compInfo: {},
+        compInfo: null,
         compInfoA: {}
       }
     },
@@ -188,6 +188,9 @@
         this.$Ice_CompService.querygetCompByCid(compId,
           new IceCallback(
             function (result) {
+              if(result.code === -1) {
+                return
+              }
               self.compInfoA = result.obj;
             },
             function (error) {
@@ -196,15 +199,20 @@
           )
         );
       },
+      subStrPhone(tel) {
+        return  tel.toString().substr(0, 3) + '****' + tel.toString().substr(7);
+      },
     },
     activated() {
       this.orderId = this.$route.query.id || '';
       this.puberId = this.$route.query.puberid || '';
       this.pubercompid = this.$route.query.pubercompid || '';
-      this.compInfo = JSON.parse(this.$app_store.state.compInfo);
-      if(this.pubercompid !== this.compInfo.compid) {
-        // 当前本人订单
-        this.isRob = true
+      if(this.$app_store.state.compInfo!== undefined) {
+        this.compInfo = JSON.parse(this.$app_store.state.compInfo);
+        if(this.pubercompid !== this.compInfo.compid) {
+          // 当前本人订单
+          this.isRob = true
+        }
       }
       // 根据发布人企业id 获取企业认证信息
       this.queryCompByCid(this.pubercompid);

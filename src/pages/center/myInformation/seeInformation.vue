@@ -117,7 +117,6 @@
         querygetCompByUid: function () {
         let self = this;
         this.$Ice_CompService.querygetCompByCid(self.details.sender, new IceCallback(function (result) {
-          debugger
           if (result.code !== 0) {
             self.$vux.toast.text(result.msg, 'top');
           } else {
@@ -173,7 +172,6 @@
         let content = '';
         let self = this;
         if (self.details.msgtype === 1) {
-        debugger
           content = alertContent. CIRCLE_REFUSE_DISPATHCHER;
         } else if (self.details.msgtype === 2) {
           content = alertContent.CIRCLE_REFUSE_SOURCE;
@@ -182,10 +180,8 @@
         }
         this.message.showAlert(this, content)
           .then(() => {
-            debugger
             self.$Ice_CircleService.agreeOrRefuse(self.details.msgid,2, new IceCallback(
               function (result) {
-                debugger
                 if (result.code === 0) {
                   self.isOperation = false;
                   self.$vux.toast.text('已拒绝对方的好友圈', 'top');

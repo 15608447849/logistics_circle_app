@@ -36,7 +36,11 @@
     },
     mounted() {
       this.detailInfo = this.$route.params;
-      this.viewPhoto(this.detailInfo.orderno,this.detailInfo.revicompid,this.detailInfo.puimg);
+      if(this.detailInfo.qhType === 0) {
+        this.viewPhoto(this.detailInfo.orderno,this.detailInfo.revicompid,this.detailInfo.puimg);
+      }else {
+        this.viewPhoto(this.detailInfo.orderno,this.detailInfo.revicompid,this.detailInfo.retuimg);
+      }
     },
     methods: {
       // 点击查看大图
@@ -72,7 +76,6 @@
           console.log(imgName[i]);
           imgUrlList.push(this.pickupUrl + imgName[i])
         }
-        console.log(imgUrlList);
         this.imgList = imgUrlList;
       },
       //获取图片地址

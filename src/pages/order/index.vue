@@ -4,97 +4,111 @@
       <div class="issueHeaderNav">
         <div class="width20">
           <img :src="isAvatar" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="isAvatar !== ''">
-          <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="isAvatar === ''">
+          <img src="../../assets/images/small/moren.png" alt="" @click="avatarClick"
+               class="loginPictureDefault floatleft" v-if="isAvatar === ''">
         </div>
         <div class="width60">
           <span>我的发布</span>
         </div>
-        <div class="width20">
-          <i class="orderTime">2018年</i>
+        <div class="width20" @click="showPicker">
+          <i class="orderTime">{{QueryParam.year}}年</i>
           <i class="icon iconfont icon-xiala sanjiao"></i>
         </div>
         <!--<i class="icon iconfont icon-sousuo white" @click="toreleaseSearchpage"></i>-->
       </div>
-        <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
-        <div class="releaseMenu">
-          <span class="releaseState" :class="{'activecircle ziTiColorBlue' : item.isSelected}" v-for="(item , index) in tabList"
+      <!--<div class="releaseAccept">发布订单{{total}}条</div>-->
+      <div class="releaseMenu">
+          <span class="releaseState" :class="{'activecircle ziTiColorBlue' : item.isSelected}"
+                v-for="(item , index) in tabList"
                 :key="index" @click.stop="tabItemClick(item)">{{item.name}}</span>
-        </div>
-       <div class="orderList">
-         <div v-show="isShowNoData" class="noDataBox">
-           <img src="../../assets/images/small/nodate.png"/>
-         </div>
-         <van-list
-           style="margin-top:7vh;"
-           v-model="loading"
-           :finished="finished"
-           @load="onLoad"
-         >
-           <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails(item)">
-             <div class="releaseCompany">
-               <div class="companyBox">
-                 <i class="icon iconfont icon-qiyexinxi"></i>
-                 <span>{{strSub(fName,14) }}</span>
-                 <i class="icon iconfont icon-icon-test"></i>
-               </div>
-               <!--<span class="releasetext">发布</span>-->
-               <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
-             </div>
-             <li class="address marginBottom15">
-               <div class="addressList"><span>{{addressSubStr(item.startn)}}</span>-<span>{{addressSubStr(item.arriarn)}}</span></div>
-             </li>
-             <li class="collection marginBottom15">
-               <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
-             </li>
-             <li class="specifications marginBottom15">
-               <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictn}}</span>
-             </li>
+      </div>
+      <div class="orderList">
+        <!--<div v-show="isShowNoData" class="noDataBox">-->
+        <!--<img src="../../assets/images/small/nodate.png"/>-->
+        <!--</div>-->
+        <van-list
+          style="margin-top:7vh;"
+          v-model="loading"
+          :finished="finished"
+          @load="onLoad"
+        >
+          <ul class="myReleaseList" v-for="(item, index) in releaseList" :key="index" @click="toReleaseDetails(item)">
+            <div class="releaseCompany">
+              <div class="companyBox">
+                <i class="icon iconfont icon-qiyexinxi"></i>
+                <span>{{strSub(fName,14) }}</span>
+                <i class="icon iconfont icon-icon-test"></i>
+              </div>
+              <!--<span class="releasetext">发布</span>-->
+              <span class="releasetext">{{statusToChinese(item.tstatus)}}</span>
+            </div>
+            <li class="address marginBottom15">
+              <div class="addressList">
+                <span>{{addressSubStr(item.startn)}}</span>-<span>{{addressSubStr(item.arriarn)}}</span></div>
+            </li>
+            <li class="collection marginBottom15">
+              <span>{{showCodamt(item.codamt,item.insureamt)}}</span>
+            </li>
+            <li class="specifications marginBottom15">
+              <span>{{item.ctdictn}}，{{item.wm}}{{item.wmdictn}}</span>
+            </li>
 
-             <li class="pickGoods marginBottom15">
-               <div>
-                 <span>取货时间：</span> <span>{{item.revidate}}</span><span> {{item.revitime}}</span>
-               </div>
-               <!--<span class="underPay">线下付款</span>-->
-               <!--线上付款-->
-               <span class="underPay">{{item.ptdictn}}</span>
-             </li>
-             <li class="goodsTotalPrice">
-               <div></div>
-               <div><span class="Totaltext">合计：</span><span class="yang">￥</span><span class="yangNum">{{item.carriage}}</span></div>
-             </li>
-             <div class="cancelRefres">
-               <div class="operationA">
-                 <!--刷新-->
-                 <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
-                 <!--取消-->
-                 <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消</a>
-                 <!--接受-->
-                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
-                 <!--拒绝-->
-                 <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
-                 <!--取货照片-->
-                 <a v-show="item.tstatus === 2 || item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>
-                 <!-- 支付 -->
-                 <a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue" @click.stop="OrderPay()">支付</a>
-                 <!--取货码-->
-                 <a v-show="item.tstatus === 7" class="colorLightBlue" @click.stop ="toPickGoodsCode(item.orderno)">取货码</a>
-                 <a v-show="item.tstatus === 7 || item.tstatus === 6 "  class="colorsixsix"  @click.stop="toComPInfo(item)">查看调度</a>
-                 <!--查看行程-->
-                 <a v-show="item.tstatus === 2 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8" class="colorsixsix"  @click.stop="toSchedulePlayBack(item)">行程回放</a>
-                 <!--签收照片-->
-                 <a v-show="item.tstatus === 4 || item.tstatus === 8" class="colorsixsix" @click.stop="toPickGoodsPic(item)">签收照片</a>
-                 <!--确认签收-->
-                 <a v-show="item.tstatus === 4" class="colorLightBlue" @click.stop="conReceipt(item.orderno,index)">确认签收</a>
-                 <!--评价-->
-                 <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>-->
-                 <a  v-show="item.tstatus === 6" class="colorLightBlue"  @click.stop="toEvaluatePage(item)">待评价</a>
-                 <!--重新发布-->
-                 <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"  class="colorLightBlue">重新发布</a>
-               </div>
-             </div>
-           </ul>
-         </van-list>
-       </div>
+            <li class="pickGoods marginBottom15">
+              <div>
+                <span v-show="item.pusdate !== ''">取货时间：</span>
+                <span>{{item.pusdate}}</span><span> {{item.pustime}}</span>
+              </div>
+              <!--<span class="underPay">线下付款</span>-->
+              <!--线上付款-->
+              <span class="underPay">{{item.ptdictn}}</span>
+            </li>
+            <li class="goodsTotalPrice">
+              <div></div>
+              <div><span class="Totaltext">合计：</span><span class="yang">￥</span><span
+                class="yangNum">{{item.carriage}}</span></div>
+            </li>
+            <div class="cancelRefres">
+              <div class="operationA">
+                <!--刷新-->
+                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="refreshOrder(item, index)">刷新</a>
+                <!--取消-->
+                <a v-show="item.tstatus === 0" class="colorsixsix" @click.stop="cancelOrder(item, index)">取消</a>
+                <!--接受-->
+                <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="receiveOrder(item,index)">接受</a>
+                <!--拒绝-->
+                <a v-show="item.tstatus === 1" class="colorsixsix" @click.stop="refuseOrder(item,index)">拒绝</a>
+                <!--取货照片-->
+                <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 8"
+                   class="colorsixsix" @click.stop="toPickGoodsPic(item,0)">取货照片</a>
+                <!-- 支付 -->
+                <a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue"
+                   @click.stop="OrderPay()">支付</a>
+                <!--取货码-->
+                <a v-show="item.tstatus === 7" class="colorLightBlue"
+                   @click.stop="toPickGoodsCode(item.orderno)">取货码</a>
+                <a v-show="item.tstatus === 7 || item.tstatus === 6 " class="colorsixsix"
+                   @click.stop="toComPInfo(item)">查看调度</a>
+                <!--查看行程-->
+                <a
+                  v-show="item.tstatus === 2 ||item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 6 || item.tstatus === 8"
+                  class="colorsixsix" @click.stop="toSchedulePlayBack(item)">行程回放</a>
+                <!--签收照片-->
+                <a v-show="item.tstatus === 4 || item.tstatus === 8" class="colorsixsix"
+                   @click.stop="toPickGoodsPic(item,1)">签收照片</a>
+                <!--确认签收-->
+                <a v-show="item.tstatus === 4" class="colorLightBlue"
+                   @click.stop="conReceipt(item.orderno,index)">确认签收</a>
+                <!--评价-->
+                <!--<a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>-->
+                <a v-show="item.tstatus === 6" class="colorLightBlue" @click.stop="toEvaluatePage(item)">待评价</a>
+                <!--重新发布-->
+                <a v-show="item.tstatus === 20" @click.stop="repubOrder(item.orderno,index)"
+                   class="colorLightBlue">重新发布</a>
+              </div>
+            </div>
+          </ul>
+        </van-list>
+      </div>
     </div>
   </div>
 
@@ -106,7 +120,6 @@
   import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
   import {subString} from "../../utils/stringUtil"
-
   export default {
     components: {
       Tab,
@@ -124,6 +137,9 @@
     },
     data() {
       return {
+        year: '',
+        index: '0',
+        col1Data: [],
         fName: '',
         isShowNoData: false, // 无数据显示
         QueryParam: new redundancy.QueryParam(),
@@ -163,12 +179,43 @@
     },
     mounted() {
       this.fName = JSON.parse(this.$app_store.state.compInfo).fname;
-      console.log(this.$app_store.state.compInfo);
       this.$app_store.commit(TABBAR_INDEX, 3);
+      this.year = new Date().getFullYear();
+      this.col1Data = [];
+      for(let i = 0;i<10;i++) {
+        let year = this.year - i;
+        let obj = {
+          value: year,
+          text: year
+        };
+        this.col1Data.push(obj);
+      }
       // 初始化列表查询条件
       this.initQueryConditions('0');
+      this.picker = this.$createPicker({
+        title: '选择年份',
+        data: [this.col1Data],
+        onSelect: (selectedVal, selectedIndex, selectedText) => {
+          this.year = selectedVal[0];
+          // 重置搜索条件
+          this.initQueryConditions(this.index);
+          // 清空数据
+          this.releaseList = [];
+          // 隐藏无数据显示
+          this.isShowNoData = false;
+          // 刷新列表
+          this.queryMyPublishOrder();
+          // this.onLoad();
+        },
+        onCancel: () => {
+
+        }
+      });
     },
     methods: {
+      showPicker () {
+        this.picker.show()
+      },
       statusToChinese(status) {
         let cont = '';
         switch (status) {
@@ -217,7 +264,7 @@
         // 清空数据
         this.releaseList = [];
         // 隐藏无数据显示
-        this.isShowNoData = false
+        this.isShowNoData = false;
         // 刷新列表
         // this.queryMyPublishOrder();
         this.onLoad();
@@ -238,11 +285,10 @@
         this.QueryParam.destination = '';
         this.QueryParam.time = '';
         this.QueryParam.tstatus = status;
-        // 重置下拉刷新
-        this.finished = false;
+        this.QueryParam.year = this.year;
       },
       // 确认签收
-      conReceipt(orderId, index){
+      conReceipt(orderId, index) {
         let self = this;
         this.message.showAlert(this, alertContent.RECEIVING)
           .then(() => {
@@ -264,11 +310,11 @@
 
           })
       },
-      strSub(str,len) {
-        return subString(str,len)
+      strSub(str, len) {
+        return subString(str, len)
       },
       // 重新发布订单
-      repubOrder(orderid,index){
+      repubOrder(orderid, index) {
         let self = this;
         this.message.showAlert(this, alertContent.CANCEL_ORDER)
           .then(() => {
@@ -388,14 +434,15 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
-        this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam,this.page, new IceCallback(
+        this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam, this.page, new IceCallback(
           function (result) {
             self.loading = false;
             if (result.code === 0) {
               self.page.pageIndex += 1;
-              if(result.obj !== '[]') {
+              if (result.obj !== '[]') {
+                self.finished = false;
                 self.releaseList = self.releaseList.concat(JSON.parse(result.obj));
-              } else{
+              } else {
                 self.finished = true;
               }
               self.total = result.totalItems;
@@ -418,31 +465,25 @@
         ))
       },
       onLoad() {
-        console.log(123123)
-        // this.isShowNoData = false;
-        // setTimeout(()=>{
-          // 获取我的发布列表
-        console.log(123123);
-          this.queryMyPublishOrder();
-        // },500);
+        this.queryMyPublishOrder();
       },
       toReleaseDetails(item) {
         item.type = 0;
         this.$router.push({
           name: 'orderDetail',
           query: {
-            params : JSON.stringify(item)
+            params: JSON.stringify(item)
           },
         })
       },
-      showCodamt(codamt,insureamt) {
+      showCodamt(codamt, insureamt) {
         let str = '';
-        if(codamt > 0) {
-          str = '代收金额: '+ codamt
-        }else {
+        if (codamt > 0) {
+          str = '代收金额: ' + codamt
+        } else {
           str = '无代收'
         }
-        if(insureamt > 0) {
+        if (insureamt > 0) {
           str += ',保价金额: ' + insureamt
         } else {
           str += ',无保价'
@@ -450,11 +491,19 @@
         return str
       },
       // 取货照片
-      toPickGoodsPic(item) {
-        if(item.puimg === '0') {
-          this.$vux.toast.text('暂无取货照片', 'top');
-          return
+      toPickGoodsPic(item,type) {
+        if(type === 0) {
+          if (item.puimg === '0') {
+            this.$vux.toast.text('暂无取货照片', 'top');
+            return
+          }
+        }else {
+          if (item.retuimg === '0') {
+            this.$vux.toast.text('暂无签收照片', 'top');
+            return
+          }
         }
+        item.qhType = type;
         this.$router.push({
           name: 'pickGoodsPic',
           params: item
@@ -496,14 +545,14 @@
         })
       },
       // 查看取货照片
-      getPickupPhotosUrl(orderId,compId,imgArr){
-        console.log(orderId,compId);
-        console.log(this.getImgUrl(orderId,compId));
-        let imgUrl = this.getImgUrl(orderId,compId);
-        let imgName = eval ("(" + imgArr + ")");
+      getPickupPhotosUrl(orderId, compId, imgArr) {
+        console.log(orderId, compId);
+        console.log(this.getImgUrl(orderId, compId));
+        let imgUrl = this.getImgUrl(orderId, compId);
+        let imgName = eval("(" + imgArr + ")");
         let imgUrlList = [];
         console.log(imgName);
-        for(let i=0;i<imgName.length;i++){
+        for (let i = 0; i < imgName.length; i++) {
           console.log(imgName[i]);
           imgUrlList.push('http://192.168.1.110:8029/' + imgUrl + '/' + imgName[i])
         }
@@ -511,9 +560,9 @@
         this.imgUrl = imgUrlList;
       },
       // 获取图片地址
-      getImgUrl(orderId,compId){
+      getImgUrl(orderId, compId) {
         let dirs = [];
-        if(compId){
+        if (compId) {
           let dir1 = compId % 100;
           console.log(dir1);
           dir1 = dir1 < 10 ? ("0" + dir1) : dir1;
@@ -521,12 +570,12 @@
           dirs.push(dir1);
           let dir2 = compId;
           dirs.push(dir2);
-          if(orderId && orderId.length > 6){
-            let dir3 = orderId.substr(0,4);
+          if (orderId && orderId.length > 6) {
+            let dir3 = orderId.substr(0, 4);
             dirs.push(dir3);
-            let dir4 = orderId.substr(4,2);
+            let dir4 = orderId.substr(4, 2);
             dirs.push(dir4);
-            let dir5 = orderId.substr(6,2);
+            let dir5 = orderId.substr(6, 2);
             dirs.push(dir5);
             let dir6 = orderId;
             dirs.push(dir6);
@@ -536,15 +585,15 @@
       },
       // 字符串截取
       addressSubStr(str) {
-        return  str.split(',')[1]
+        return str.split(',')[1]
       }
     },
     watch: {
       releaseList: {
         handler: function (newVal) {
-          if(newVal.length === 0) {
+          if (newVal.length === 0) {
             this.isShowNoData = true
-          } else  {
+          } else {
             this.isShowNoData = false
           }
         },

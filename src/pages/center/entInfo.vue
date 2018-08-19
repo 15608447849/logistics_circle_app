@@ -221,7 +221,6 @@
         // 保存信息
         let self = this;
         let compJson = new comp.CompInfo();
-        debugger
         compJson.compid = this.compInfo.compid;
         compJson.uoid = this.userId;
         compJson.fname = this.compInfo.fname;

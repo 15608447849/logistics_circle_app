@@ -51,7 +51,7 @@
       </div>
       <div class="textareaBox">
         <span class="evaluateTitle margin-top22">描述</span>
-        <textarea v-model="remarks" class="evaluateTextarea" placeholder="说说你对本次服务的感受吧~"></textarea>
+        <textarea maxlength="200" v-model="remarks" class="evaluateTextarea" placeholder="说说你对本次服务的感受吧~"></textarea>
       </div>
       <!--isEditor 控制当前是编辑 还是预览-->
 

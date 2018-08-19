@@ -538,23 +538,26 @@
      * 订单详情数据格式
      **/
     myOrder.OrderInfoDetail = Slice.defineStruct(
-        function(orderifo, ordereva)
+        function(orderifo, ordereva, logPath)
         {
             this.orderifo = orderifo !== undefined ? orderifo : new myOrder.OrderICE();
             this.ordereva = ordereva !== undefined ? ordereva : new myOrder.OrderEvaluate();
+            this.logPath = logPath !== undefined ? logPath : "";
         },
         false,
         function(__os)
         {
             myOrder.OrderICE.write(__os, this.orderifo);
             myOrder.OrderEvaluate.write(__os, this.ordereva);
+            __os.writeString(this.logPath);
         },
         function(__is)
         {
             this.orderifo = myOrder.OrderICE.read(__is, this.orderifo);
             this.ordereva = myOrder.OrderEvaluate.read(__is, this.ordereva);
+            this.logPath = __is.readString();
         },
-        143, 
+        144, 
         false);
 
     /**
@@ -575,8 +578,8 @@
     {
         "queryMyPublishOrder": [, , , , , [7], [[7], [myOrder.QueryParam]], , , , ],
         "queryMyRecvOrder": [, , , , , [7], [[7], [myOrder.QueryParam]], , , , ],
-        "getOrderTrajectory": [, , , , , [7], [[3], [7]], , , , ],
-        "getOrderTraByOrderid": [, , , , , [7], [[3], [7], [3]], , , , ],
+        "getOrderTrajectory": [, , , , , [7], [[3], [3], [7]], , , , ],
+        "getOrderTraByOrderid": [, , , , , [7], [[3], ["cstruct.stringSeqHelper"], [3]], , , , ],
         "getAreaData": [, , , , , [myOrder.AreaData], [[7]], , , , ],
         "acceptTravel": [, , , , , [3], [[4], [3], [4], [7]], , , , ],
         "acceptTravelCorrect": [, , , , , [3], [[4], [3], [4], [7]], , , , ],
@@ -598,7 +601,8 @@
         "closeOrder": [, , , , , [7], [[7], [3]], , , , ],
         "cancelRobbing": [, , , , , [7], [[7], [3]], , , , ],
         "getOrderEvaluate": [, , , , , ["myOrder.OrderEvaluateSeqHelper"], [[3]], , , , ],
-        "getTrancCode": [, , , , , [7], [[3], [7], [3]], , , , ]
+        "getTrancCode": [, , , , , [7], [[3], [7], [3]], , , , ],
+        "getAllReceiver": [, , , , , ["cstruct.intSeqHelper"], [[7]], , , , ]
     });
     exports.myOrder = myOrder;
 }

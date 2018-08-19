@@ -56,7 +56,7 @@
      * 接收订单。
      **/
     redundancy.RecOrder = Slice.defineStruct(
-        function(oid, orderno, pubcompid, puberid, revicompid, revierid, pubdate, pubtime, revidate, revitime, tstatus, cstatus, ctdictc, wm, wmdictc, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, vldictn, vtdictn, arriarn, startn, wmdictn, ctdictn, carriage, pubcompname, pubphone, numdictc, numdictn, unum, num, codamt, insureamt, ptdictc, ptdictn)
+        function(oid, orderno, pubcompid, puberid, revicompid, revierid, pubdate, pubtime, revidate, revitime, tstatus, cstatus, ctdictc, wm, wmdictc, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, vldictn, vtdictn, arriarn, startn, wmdictn, ctdictn, carriage, pubcompname, pubphone, numdictc, numdictn, unum, num, codamt, insureamt, ptdictc, ptdictn, actdelidate, actdelitime, arridate, arritime, pusdate, pustime, puedate, puetime, easdate, eastime, eaedate, eaetime)
         {
             this.oid = oid !== undefined ? oid : 0;
             this.orderno = orderno !== undefined ? orderno : "";
@@ -96,6 +96,18 @@
             this.insureamt = insureamt !== undefined ? insureamt : 0.0;
             this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
             this.ptdictn = ptdictn !== undefined ? ptdictn : "";
+            this.actdelidate = actdelidate !== undefined ? actdelidate : "";
+            this.actdelitime = actdelitime !== undefined ? actdelitime : "";
+            this.arridate = arridate !== undefined ? arridate : "";
+            this.arritime = arritime !== undefined ? arritime : "";
+            this.pusdate = pusdate !== undefined ? pusdate : "";
+            this.pustime = pustime !== undefined ? pustime : "";
+            this.puedate = puedate !== undefined ? puedate : "";
+            this.puetime = puetime !== undefined ? puetime : "";
+            this.easdate = easdate !== undefined ? easdate : "";
+            this.eastime = eastime !== undefined ? eastime : "";
+            this.eaedate = eaedate !== undefined ? eaedate : "";
+            this.eaetime = eaetime !== undefined ? eaetime : "";
         },
         false,
         function(__os)
@@ -138,6 +150,18 @@
             __os.writeDouble(this.insureamt);
             __os.writeInt(this.ptdictc);
             __os.writeString(this.ptdictn);
+            __os.writeString(this.actdelidate);
+            __os.writeString(this.actdelitime);
+            __os.writeString(this.arridate);
+            __os.writeString(this.arritime);
+            __os.writeString(this.pusdate);
+            __os.writeString(this.pustime);
+            __os.writeString(this.puedate);
+            __os.writeString(this.puetime);
+            __os.writeString(this.easdate);
+            __os.writeString(this.eastime);
+            __os.writeString(this.eaedate);
+            __os.writeString(this.eaetime);
         },
         function(__is)
         {
@@ -179,16 +203,29 @@
             this.insureamt = __is.readDouble();
             this.ptdictc = __is.readInt();
             this.ptdictn = __is.readString();
+            this.actdelidate = __is.readString();
+            this.actdelitime = __is.readString();
+            this.arridate = __is.readString();
+            this.arritime = __is.readString();
+            this.pusdate = __is.readString();
+            this.pustime = __is.readString();
+            this.puedate = __is.readString();
+            this.puetime = __is.readString();
+            this.easdate = __is.readString();
+            this.eastime = __is.readString();
+            this.eaedate = __is.readString();
+            this.eaetime = __is.readString();
         },
-        117, 
+        129, 
         false);
 
     /**
      * 发布订单。
      **/
     redundancy.PubOrder = Slice.defineStruct(
-        function(orderno, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, pubdate, pubtime, revidate, revitime, tstatus, pubcompid, revicompid, ctdictc, wm, wmdictc, puimg, retuimg, numdictc, unum, num, carriage, codamt, insureamt, ptdictc, startn, arriarn, vtdictn, vldictn, ctdictn, wmdictn, numdictn, ptdictn)
+        function(oid, orderno, startc, startaddr, arriarc, arriaddr, vtdictc, vldictc, pubdate, pubtime, revidate, revitime, tstatus, pubcompid, revicompid, ctdictc, wm, wmdictc, puimg, retuimg, numdictc, unum, num, carriage, codamt, insureamt, ptdictc, actdelidate, actdelitime, arridate, arritime, pusdate, pustime, puedate, puetime, easdate, eastime, eaedate, eaetime, startn, arriarn, vtdictn, vldictn, ctdictn, wmdictn, numdictn, ptdictn)
         {
+            this.oid = oid !== undefined ? oid : 0;
             this.orderno = orderno !== undefined ? orderno : "";
             this.startc = startc !== undefined ? startc : 0;
             this.startaddr = startaddr !== undefined ? startaddr : "";
@@ -215,6 +252,18 @@
             this.codamt = codamt !== undefined ? codamt : 0.0;
             this.insureamt = insureamt !== undefined ? insureamt : 0.0;
             this.ptdictc = ptdictc !== undefined ? ptdictc : 0;
+            this.actdelidate = actdelidate !== undefined ? actdelidate : "";
+            this.actdelitime = actdelitime !== undefined ? actdelitime : "";
+            this.arridate = arridate !== undefined ? arridate : "";
+            this.arritime = arritime !== undefined ? arritime : "";
+            this.pusdate = pusdate !== undefined ? pusdate : "";
+            this.pustime = pustime !== undefined ? pustime : "";
+            this.puedate = puedate !== undefined ? puedate : "";
+            this.puetime = puetime !== undefined ? puetime : "";
+            this.easdate = easdate !== undefined ? easdate : "";
+            this.eastime = eastime !== undefined ? eastime : "";
+            this.eaedate = eaedate !== undefined ? eaedate : "";
+            this.eaetime = eaetime !== undefined ? eaetime : "";
             this.startn = startn !== undefined ? startn : "";
             this.arriarn = arriarn !== undefined ? arriarn : "";
             this.vtdictn = vtdictn !== undefined ? vtdictn : "";
@@ -227,6 +276,7 @@
         false,
         function(__os)
         {
+            __os.writeInt(this.oid);
             __os.writeString(this.orderno);
             __os.writeInt(this.startc);
             __os.writeString(this.startaddr);
@@ -253,6 +303,18 @@
             __os.writeDouble(this.codamt);
             __os.writeDouble(this.insureamt);
             __os.writeInt(this.ptdictc);
+            __os.writeString(this.actdelidate);
+            __os.writeString(this.actdelitime);
+            __os.writeString(this.arridate);
+            __os.writeString(this.arritime);
+            __os.writeString(this.pusdate);
+            __os.writeString(this.pustime);
+            __os.writeString(this.puedate);
+            __os.writeString(this.puetime);
+            __os.writeString(this.easdate);
+            __os.writeString(this.eastime);
+            __os.writeString(this.eaedate);
+            __os.writeString(this.eaetime);
             __os.writeString(this.startn);
             __os.writeString(this.arriarn);
             __os.writeString(this.vtdictn);
@@ -264,6 +326,7 @@
         },
         function(__is)
         {
+            this.oid = __is.readInt();
             this.orderno = __is.readString();
             this.startc = __is.readInt();
             this.startaddr = __is.readString();
@@ -290,6 +353,18 @@
             this.codamt = __is.readDouble();
             this.insureamt = __is.readDouble();
             this.ptdictc = __is.readInt();
+            this.actdelidate = __is.readString();
+            this.actdelitime = __is.readString();
+            this.arridate = __is.readString();
+            this.arritime = __is.readString();
+            this.pusdate = __is.readString();
+            this.pustime = __is.readString();
+            this.puedate = __is.readString();
+            this.puetime = __is.readString();
+            this.easdate = __is.readString();
+            this.eastime = __is.readString();
+            this.eaedate = __is.readString();
+            this.eaetime = __is.readString();
             this.startn = __is.readString();
             this.arriarn = __is.readString();
             this.vtdictn = __is.readString();
@@ -299,20 +374,21 @@
             this.numdictn = __is.readString();
             this.ptdictn = __is.readString();
         },
-        101, 
+        117, 
         false);
 
     /**
      * 查询信息
      **/
     redundancy.QueryParam = Slice.defineStruct(
-        function(revicompid, origin, destination, time, tstatus)
+        function(revicompid, origin, destination, time, tstatus, year)
         {
             this.revicompid = revicompid !== undefined ? revicompid : "";
             this.origin = origin !== undefined ? origin : "";
             this.destination = destination !== undefined ? destination : "";
             this.time = time !== undefined ? time : "";
             this.tstatus = tstatus !== undefined ? tstatus : "";
+            this.year = year !== undefined ? year : "";
         },
         true,
         function(__os)
@@ -322,6 +398,7 @@
             __os.writeString(this.destination);
             __os.writeString(this.time);
             __os.writeString(this.tstatus);
+            __os.writeString(this.year);
         },
         function(__is)
         {
@@ -330,8 +407,9 @@
             this.destination = __is.readString();
             this.time = __is.readString();
             this.tstatus = __is.readString();
+            this.year = __is.readString();
         },
-        5, 
+        6, 
         false);
     Slice.defineSequence(redundancy, "stringSeqHelper", "Ice.StringHelper", false);
 
@@ -380,6 +458,7 @@
         ], , ],
         "queryMyRecvOrder": [, , , , , [7], [[3], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
         "queryMyPubOrder": [, , , , , [7], [[3], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
+        "queryEnterpriseDynamics": [, , , , , [7], [[3], [redundancy.Page]], [[redundancy.Page]], , , ],
         "handleReceive": [, , , , , [3], [[3], [7], ["redundancy.stringSeqHelper"]], , , , ],
         "getPickCode": [, , , , , [7], [[3], [7]], , , , ],
         "checkPickPassword": [, , , , , [1], [[3], [7], [7]], , , , ],
