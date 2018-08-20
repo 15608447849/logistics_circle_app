@@ -136,6 +136,9 @@
       if (to.name === 'againRelease') {
         to.meta.isUseCache = true;
       }
+      if (to.name === 'repuborder') {
+        to.meta.isUseCache = true;
+      }
       next();
     }
   };

@@ -112,7 +112,7 @@
         files: [],
         cLevel: [],// 认证等级
         compInfo: {},// 企业详情
-        isYourCompInfo: true,
+        isYourCompInfo: false,
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7 消息 8 订单
         userId: '',
       }
@@ -120,7 +120,7 @@
     activated() {
       this.userId = this.$app_store.state.userId;
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
-      if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo)) {
+      if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo.toString())) {
           this.compInfo = JSON.parse(this.$app_store.state.compInfo);
           this.status = 0;
         this.queryCompByCid(this.compInfo.compid);
@@ -130,7 +130,7 @@
         this.status = this.$route.query.status;
       }
       // 判断当前登录角色
-      if(this.isYourCompInfo) {
+      if(this.verifyUtil.stringIsBoolean(this.isYourCompInfo.toString())) {
         this.isYourCompInfo  =  Number(this.$app_store.state.roid) !== 132;
       }
       // 根据企业id获取企业信息
@@ -169,7 +169,7 @@
                 }
                 self.compInfo = result.obj;
                 self.computeLevel();
-                if(self.isYourCompInfo) {
+                if(self.verifyUtil.stringIsBoolean(self.isYourCompInfo.toString())) {
                   self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
                   self.$app_store.commit(AVATAR_URL,result.obj.logoPath);
                 }

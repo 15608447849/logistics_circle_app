@@ -18,6 +18,14 @@ module.exports =  {
     queryIce(user.UserServicePrx, 'UserService', 'verifyPhone', str2jlong(phone), callback);
   },
 
+  /** 检测手机号码是否重复(全覆盖版本)
+   * int verifyPhone(long phone);
+   */
+  verifyPhone4App: function (phone, callback) {
+    queryIce(user.UserServicePrx, 'UserService', 'verifyPhone4App', str2jlong(phone), callback);
+  },
+
+
   /** 发送手机验证码
    * list<String>
    * 第一个参数:register(注册), (登录),forgotpw(忘记密码),changephone(更换手机)...后续添加

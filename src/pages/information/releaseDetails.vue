@@ -115,7 +115,8 @@
         puberId: '',
         pubercompid: '',
         compInfo: null,
-        compInfoA: {}
+        compInfoA: {},
+        ostatus: 0,
       }
     },
     methods: {
@@ -174,6 +175,7 @@
                 self.$vux.toast.text(result.msg, 'top');
               }
               self.detailInfo = result.obj;
+              self.detailInfo.ostatus =  Number(self.ostatus);
               console.log(self.detailInfo.phone1)
               console.log(self.detailInfo.phone2)
             },
@@ -207,6 +209,7 @@
       this.orderId = this.$route.query.id || '';
       this.puberId = this.$route.query.puberid || '';
       this.pubercompid = this.$route.query.pubercompid || '';
+      this.ostatus = this.$route.query.ostatus || '';
       if(this.$app_store.state.compInfo!== undefined) {
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
         if(this.pubercompid !== this.compInfo.compid) {

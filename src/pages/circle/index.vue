@@ -157,7 +157,8 @@
           query: {
             id: item.id,
             puberid: item.puberid,
-            pubercompid: item.pubercompid
+            pubercompid: item.pubercompid,
+            ostatus: item.ostatus
           }
         })
       },

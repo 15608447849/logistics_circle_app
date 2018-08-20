@@ -89,6 +89,8 @@ import CURRENCY from '@/pages/center/setting/currency'
 import ACCOUNTSECURITY from '@/pages/center/setting/accountSecurity'
 import TOACCOUNT from '@/pages/center/setting/toaccountUpdataPwd'
 import UPDATAPHONE from '@/pages/center/setting/updataPhone'
+import REPUBORDER from '@/pages/order/repubOrder'
+
 // 城市选择
 import CITY from '@/components/citySelector'
 // 高德地图
@@ -390,7 +392,10 @@ const vueRouter = new Router({
     },
     {
       path: '/order/acceptOrders',
-      component: ACCEPT
+      component: ACCEPT,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/order/acceptDetails',
@@ -419,6 +424,14 @@ const vueRouter = new Router({
       name: 'entryTravel',
       path: '/order/entryTravel',
       component: ENTRY_TRAVEL
+    },
+    {
+      name: 'repuborder',
+      path: '/order/repuborder',
+      component: REPUBORDER,
+      meta: {
+        keepAlive: true,
+      }
     }
   ]
 });

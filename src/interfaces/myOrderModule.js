@@ -102,7 +102,6 @@ module.exports = {
 	},
   /** 取消订单 */
   cancelRobbing:(orderid,oid,callback)=>{
-      debugger
       queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelRobbing',orderid, oid,callback);
  },
   /** 转发布 */
@@ -112,5 +111,9 @@ module.exports = {
   /** 打印转运单 (OrderICE order, int uoid)*/
   getTrancCode:(oid,order,status,callback)=>{
     queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getTrancCode',oid,order,status,callback);
+  },
+  /** 重新发布获取详情 (orderid 订单id，uoid 用户id，type:0:我发布的)*/
+  getOrderDetailByRepub:(oid,orderid,callback)=>{
+    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'getOrderDetailByRepub',orderid,oid,0,callback);
   },
 };

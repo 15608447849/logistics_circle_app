@@ -5,23 +5,22 @@
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
       <div class="width60">
-        <span>转发布</span>
+        <span>重新发布</span>
       </div>
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
     </div>
 
-
     <ul class="liNumThree margintop80">
-      <li class="inputNumOne needBorder">
+      <li class="inputNumOne needBorder" >
         <span class="waybillNum">运单号</span>
         <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号" style="width:6.25rem;">
       </li>
-      <li class="tworow needBorder noEdit" >
+      <li class="tworow needBorder" :class = "isEditor ?'' : 'noEdit' " >
         <span class="textRed">*</span>
         <span>目的地</span>
-        <textarea v-model="arriarc" rows="2" @click="toPageGeo(2)" placeholder="请输入详细地址，精确到街道，社会区及门牌号，支持地图定位" class="textarea" disabled="disabled" style="background:#f3f3f3;"></textarea>
+        <textarea v-model="arriarc" rows="2" @click="toPageGeo(2)" placeholder="请输入详细地址，精确到街道，社会区及门牌号，支持地图定位" class="textarea" :disabled="!isEditor"  :class = "isEditor ?'' : 'orderDisable' "></textarea>
         <i class="icon iconfont icon-dituzadian iblue"></i>
       </li>
       <li class="tworow" @click="toPageGeo(1)">
@@ -31,55 +30,55 @@
         <i class="icon iconfont icon-dituzadian iblue"></i>
       </li>
     </ul>
-    <ul class="liNumThree noEdit">
-      <li class="inputLong needBorder noEdit">
+    <ul class="liNumThree" :class = "isEditor ?'' : 'noEdit' ">
+      <li class="inputLong needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span>货物大小</span>
-        <input v-model="OrderDetail.wm" type="text" placeholder="重量/体积" disabled="disabled">
+        <input v-model="OrderDetail.wm" type="text" placeholder="重量/体积" :disabled="!isEditor">
       </li>
-      <li class="inputShort needBorder noEdit">
-        <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text" disabled="disabled">
+      <li class="inputShort needBorder" :class = "isEditor ?'' : 'noEdit' ">
+        <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text" :disabled="!isEditor">
       </li>
-      <li class="inputLong needBorder noEdit">
+      <li class="inputLong needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span>货物数量</span>
-        <input v-model="OrderDetail.num" type="text" placeholder="货物数量" disabled="disabled">
+        <input v-model="OrderDetail.num" type="text" placeholder="货物数量" :disabled="!isEditor">
       </li>
-      <li class="inputShort needBorder noEdit">
+      <li class="inputShort needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
-      <li class="inputLong noEdit">
+      <li class="inputLong" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span>货物信息</span>
         <input type="text" v-model="displayDic.disCtLabel" @click="showPicker('ct')" placeholder="货物类别"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
-      <li class="inputShort noEdit">
+      <li class="inputShort" :class = "isEditor ?'' : 'noEdit' ">
         <input type="text" v-model="displayDic.disPaLabel" @click="showPicker('pa')" placeholder="是否包装"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
     </ul>
-    <ul class="liNumThreeCompany noEdit">
-      <li class="inputLong needBorder noEdit">
+    <ul class="liNumThreeCompany" :class = "isEditor ?'' : 'noEdit' ">
+      <li class="inputLong needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="liNumThreeCompanySpan">车辆大小</span>
-        <input v-model="OrderDetail.vnum" type="number" placeholder="数量" disabled="disabled">
+        <input v-model="OrderDetail.vnum" type="number" placeholder="数量" :disabled="!isEditor">
       </li>
       <span class="carNum">台</span>
-      <li class="inputShort needBorder noEdit">
+      <li class="inputShort needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <input v-model="displayDic.disVlLabel" @click="showPicker('vl')" type="text" placeholder="长度"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
       <span class="carNum">米</span>
-      <li class="inputNumOneC needBorder noEdit">
+      <li class="inputNumOneC needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="liNumThreeCompanySpan">车辆要求</span>
         <input v-model="displayDic.disVtLabel" @click="showPicker('vt')" type="text" placeholder="请选择车辆型号"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
-      <li class="inputNumOneC noEdit">
+      <li class="inputNumOneC" :class = "isEditor ?'' : 'noEdit' ">
         <span class="liNumThreeCompanySpan">运输要求</span>
         <input v-model="displayDic.disTnLabel" @click="showPicker('tn')" type="text" placeholder="请选择运输要求"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
     </ul>
     <ul class="liNumFour">
@@ -96,31 +95,31 @@
         <span>付款方式</span>
         <input v-model="displayDic.disPtLabel" @click="showPicker('pt')" type="text" placeholder="请选择">
       </li>
-      <li class="inputShorter needBorder noEdit">
+      <li class="inputShorter needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span class="size10">声明保价</span>
-        <input type="text" v-model="insureamt" disabled="disabled">
+        <input type="text" v-model="insureamt" :disabled="!isEditor">
         <span>元</span>
         <span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>
       </li>
-      <li class="inputShorter needBorder noEdit">
+      <li class="inputShorter needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span class="size10">代收货款</span>
-        <input v-model="codamt" type="text" disabled="disabled">
+        <input v-model="codamt" type="text" :disabled="!isEditor">
         <span>元</span>
         <span class="textRed size10 def">有代收不支持线上支付，不填默认为0</span>
       </li>
     </ul>
     <ul class="liNumSixA">
-      <li class="inputNumOne needBorder noEdit">
+      <li class="inputNumOne needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span class="marginright13">收货人</span>
-        <input type="text" v-model="OrderDetail.consignee" placeholder="请输入联系人" style="width:6.2rem;" disabled="disabled">
+        <input type="text" v-model="OrderDetail.consignee" placeholder="请输入联系人" style="width:6.2rem;" :disabled="!isEditor">
       </li>
-      <li class="inputNumOne needBorder noEdit">
+      <li class="inputNumOne needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span>联系方式</span>
-        <input v-model="OrderDetail.consphone" type="number" placeholder="请输入联系方式" disabled="disabled">
+        <input v-model="OrderDetail.consphone" type="number" placeholder="请输入联系方式" :disabled="!isEditor">
       </li>
       <!--<li class="inputNumOne needBorder">-->
       <!--<span class="textRed">*</span>-->
@@ -134,17 +133,17 @@
         <span>/</span>
         <input type="number" v-model="OrderDetail.phone2" placeholder="请输入发布人联系方式" class="sendOrderPhone">
       </li>
-      <li class="inputNumOne needBorder noEdit">
+      <li class="inputNumOne needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span>取货方式</span>
         <input v-model="displayDic.disDmLabel" @click="showPicker('dm')" type="text" placeholder="请选择取货方式"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
-      <li class="inputNumOne noEdit">
+      <li class="inputNumOne" :class = "isEditor ?'' : 'noEdit' ">
         <span class="textRed">*</span>
         <span>回单要求</span>
         <input v-model="displayDic.disReLabel" @click="showPicker('re')" type="text" placeholder="请请选择回单要求"
-               disabled="disabled">
+               :disabled="!isEditor">
       </li>
     </ul>
     <ul class="liNumTwo">
@@ -159,23 +158,23 @@
                placeholder="预计提货时间止" class="goodsTime">
       </li>
     </ul>
-    <ul class="liNumTwo noEdit">
-      <li class="inputNumOne needBorder noEdit">
+    <ul class="liNumTwo" :class = "isEditor ?'' : 'noEdit' ">
+      <li class="inputNumOne needBorder" :class = "isEditor ?'' : 'noEdit' ">
         <span class="noStart">到货时间</span>
         <input v-model="OrderDetail.easdatetime" @click="showDatePicker('easdatetime')" type="text"
-               placeholder="预计到达时间起" disabled="disabled">
+               placeholder="预计到达时间起" :disabled="!isEditor">
       </li>
-      <li class="inputNumOneLong noEdit">
+      <li class="inputNumOneLong" :class = "isEditor ?'' : 'noEdit' ">
         <span class="noStart">预计到达时间</span>
         <input v-model="OrderDetail.eaedatetime" @click="showDatePicker('eaedatetime')" type="text"
-               placeholder="预计到达时间止" class="goodsTime" disabled="disabled">
+               placeholder="预计到达时间止" class="goodsTime" :disabled="!isEditor">
       </li>
     </ul>
     <div class="totalPrice marginBottom65">
       <span class="floatleft marginBottom60">订单总价</span><span
       class="floatright textRed size14 textBlod marginBottom60">￥{{sunPrice}}元</span>
     </div>
-    <button class="releaseBtn" v-show="isReleaseOrder" @click="saveTransOrder">转发布</button>
+    <button class="releaseBtn" v-show="isReleaseOrder" @click="reReleaseOrder">重新发布</button>
   </div>
 </template>
 <script>
@@ -194,7 +193,7 @@
         insureamt: 0, // 保价金额
         codamt: 0, // 代收金额
         isReleaseOrder: false,
-
+        isEditor: true,
         displayDic: { // 用于展示用户
           disWmLabel: '',// 货物大小
           disCtLabel: '',// 货物类型
@@ -236,12 +235,12 @@
 
       } else {
         this.OrderDetail = new order.OrderICE();
-        // this.generateOrderNo();
+        this.generateOrderNo();
         this.initData();
       }
     },
     mounted() {
-      // this.generateOrderNo();
+
       this.initData();
     },
     methods: {
@@ -259,12 +258,15 @@
         }
         this.getOrderDetail();
       },
-
       getOrderDetail(){
         let that = this;
-        that.$Ice_myOrderService.getOrderDetail(this.orderid,that.userId,1,new IceCallback(
+        that.$Ice_myOrderService.getOrderDetailByRepub(that.userId,this.orderid,new IceCallback(
           function(data){
             let orderData = data.obj;
+            that.isEditor = !orderData.istrans;
+            if(!that.isEditor) {
+              // that.generateOrderNo();
+            }
             that.OrderDetail.billno = orderData.billno; // 运单号
             that.OrderDetail.orderno = orderData.orderno; // 自动生成的订单号
             that.OrderDetail.arriarc = orderData.arriarc; // 目的地编码
@@ -355,7 +357,7 @@
             }
           },
           function(error) {
-            this.$vux.toast.text(error, 'top');
+            that.$vux.toast.text(error, 'top');
           }
         ))
       },
@@ -494,6 +496,69 @@
       fallback() {
         this.$router.go(-1)
       },
+      reReleaseOrder() {
+        if(this.isEditor) {
+          // 重新发布
+          this.saveChangeOrder();
+        } else {
+          // 转发布
+          this.saveTransOrder();
+        }
+      },
+      // 重新发布
+      saveChangeOrder() {
+        let self = this;
+        if(this.validator()) {
+          let jsonObj = new myOrder.OrderICE();
+          jsonObj.puberid = this.userId;				//收货人
+          jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 :  self.OrderDetail.phone1; 			// 手机号码1
+          jsonObj.phone2 = self.OrderDetail.phone2 === '' ? 0 :  self.OrderDetail.phone2;  			// 手机号码2
+          jsonObj.billno = self.OrderDetail.billno;						// TMS运单号
+          jsonObj.orderno = self.OrderDetail.orderno.toString();					// 订单号
+          jsonObj.startcext = self.OrderDetail.startcext;
+          jsonObj.startaddr =self.OrderDetail.startaddr;  			 // 出发地详细地址
+          jsonObj.arriarcext =  self.OrderDetail.arriarcext;
+          jsonObj.arriaddr =self.OrderDetail.arriaddr; 				 // 到达地详细地址
+          jsonObj.wm = parseFloat(self.OrderDetail.wm); 	//货物重量/体积
+          jsonObj.wmdictc = self.OrderDetail.wmdictc.toString(); 	//货物重量/体积单位字典码id
+          jsonObj.num = Number(self.OrderDetail.num); //件数
+          jsonObj.numdictc = self.OrderDetail.numdictc.toString();					//件数单位字典码id
+          jsonObj.padictc = self.OrderDetail.padictc.toString();					//包装要求字典码id
+          jsonObj.ctdictc =self.OrderDetail.ctdictc.toString();					//货物类型字典码id
+          jsonObj.vnum = Number(self.OrderDetail.vnum);							//车数量
+          jsonObj.vldictc = self.OrderDetail.vldictc.toString();					//车长字典码id
+          jsonObj.vtdictc = self.OrderDetail.vtdictc.toString();					//车型字典码id
+          if(self.OrderDetail.tndictc.length === 0){
+            self.OrderDetail.tndictc.push(71)
+          }
+          jsonObj.tndictarr = [];					//运输要求字典码id
+          jsonObj.tndictc = self.OrderDetail.tndictc.toString();
+          jsonObj.price = parseFloat(self.OrderDetail.price);					//价格(元)
+          jsonObj.codamt = parseFloat(self.OrderDetail.codamt);					//代收货款金额(元)
+          jsonObj.insureamt = parseFloat(self.OrderDetail.insureamt);				//声明保价金额(元)
+          jsonObj.ptdictc = self.OrderDetail.ptdictc.toString();				//付款方式字典码id
+          jsonObj.consignee = self.OrderDetail.consignee; 					// 收货人
+          jsonObj.consphone = self.OrderDetail.consphone; 	 			// 收货联系方式
+          jsonObj.dmdictc = self.OrderDetail.dmdictc.toString(); 	 			//提货方式字典码id
+          jsonObj.redictc = self.OrderDetail.redictc.toString(); 	 			//回单要求字典码id
+          jsonObj.pusdatetime = self.OrderDetail.pusdatetime;	//取货时间开始 yyyy-MM-dd hh:mm:ss
+          jsonObj.puedatetime = self.OrderDetail.puedatetime;			//取货结束时间 yyyy-MM-dd hh:mm:ss
+          jsonObj.easdatetime = self.OrderDetail.easdatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
+          jsonObj.eaedatetime = self.OrderDetail.eaedatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
+          jsonObj.pmdictc = self.OrderDetail.pmdictc.toString();				//运费度量单位
+          self.$Ice_myOrderService.updateMyPublishOrder(jsonObj,self.userId,new IceCallback(
+            function(data){
+              self.$vux.toast.text(data.msg, 'top');
+              if (data.code === 0) {
+                self.$router.go(-1);
+              }
+            },
+            function (error) {
+              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
+            }
+          ))
+        }
+      },
       // 转发布
       saveTransOrder() {
         let self = this;
@@ -503,11 +568,7 @@
           jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 :  self.OrderDetail.phone1; 			// 手机号码1
           jsonObj.phone2 = self.OrderDetail.phone2 === '' ? 0 :  self.OrderDetail.phone2;  			// 手机号码2
           jsonObj.billno = self.OrderDetail.billno;						// TMS运单号
-          jsonObj.orderno = self.OrderDetail.orderno.toString();					// 订单号
-          // var startcArr = self.OrderDetail.startcArr[self.OrderDetail.startcArr.length - 1],
-          //   arriarcArr = self.OrderDetail.arriarcArr[self.OrderDetail.arriarcArr.length - 1];
-          // jsonObj.startc = startcArr.toString();  					// 出发地地区码
-          // jsonObj.arriarc = arriarcArr.toString();  			// 到达地地区码
+          jsonObj.orderno = self.OrderDetail.orderno.toString();
           jsonObj.startcext = self.OrderDetail.startcext;
           jsonObj.startaddr =self.OrderDetail.startaddr;  			 // 出发地详细地址
           jsonObj.arriarcext =  self.OrderDetail.arriarcext;

@@ -81,6 +81,7 @@
         },
         set: function () {
           this.$app_store.commit(IS_SHOW_SIDEBAR, false);
+          this.isUnreadMsg();
         }
       },
       isAvatar: {
@@ -144,9 +145,9 @@
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
           function(result){
-            self.isNewMsg = result.__state;
             self.isNewMsg = false;
         },function(error){
+            self.isNewMsg = true;
           //失败
         }))
       },
@@ -160,7 +161,6 @@
               } else {
                 self.$vux.toast.text('货物类型获取失败', 'top');
               }
-
 
             },
             function (error) {

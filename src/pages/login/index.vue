@@ -134,7 +134,6 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                debugger
                 self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
                 self.$router.push({
                   path: '/information'

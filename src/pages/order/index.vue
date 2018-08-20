@@ -315,26 +315,32 @@
       },
       // 重新发布订单
       repubOrder(orderid, index) {
-        let self = this;
-        this.message.showAlert(this, alertContent.CANCEL_ORDER)
-          .then(() => {
-            self.$Ice_myOrderService.repubOrder(orderid, self.userId, new IceCallback(
-              function (result) {
-                if (result.code === 0) {
-                  self.releaseList[index].tstatus = 0;
-                  self.$vux.toast.text('订单重新发布成功 !', 'top');
-                } else {
-                  self.$vux.toast.text(result.msg, 'top');
-                }
-              },
-              function (error) {
-                self.$vux.toast.text('服务器连接失败, 请稍后重试 !', 'top');
-              }
-            ))
-          })
-          .catch(() => {
-
-          })
+        this.$router.push({
+          name: 'repuborder',
+          query: {
+            orderId: orderid
+          }
+        });
+        // let self = this;
+        // this.message.showAlert(this, alertContent.CANCEL_ORDER)
+        //   .then(() => {
+        //     self.$Ice_myOrderService.repubOrder(orderid, self.userId, new IceCallback(
+        //       function (result) {
+        //         if (result.code === 0) {
+        //           self.releaseList[index].tstatus = 0;
+        //           self.$vux.toast.text('订单重新发布成功 !', 'top');
+        //         } else {
+        //           self.$vux.toast.text(result.msg, 'top');
+        //         }
+        //       },
+        //       function (error) {
+        //         self.$vux.toast.text('服务器连接失败, 请稍后重试 !', 'top');
+        //       }
+        //     ))
+        //   })
+        //   .catch(() => {
+        //
+        //   })
       },
       // 订单取消发布
       cancelOrder(item, index) {
@@ -434,6 +440,7 @@
       // 获取我的发布列表
       queryMyPublishOrder() {
         let self = this;
+        console.log(this.page);
         this.$Ice_redundancyService.queryMyPubOrder(this.userId, this.QueryParam, this.page, new IceCallback(
           function (result) {
             self.loading = false;

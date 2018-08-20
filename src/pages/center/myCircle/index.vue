@@ -11,8 +11,6 @@
         <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toaddFriend"></i>
       </div>
 
-
-
     </div>
       <!--<div class="driverBox" @click="tosearchFriend">-->
         <!--<div class="searchDriverBox">-->

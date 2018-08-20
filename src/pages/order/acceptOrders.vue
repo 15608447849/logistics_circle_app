@@ -174,14 +174,13 @@
           this.year = selectedVal[0];
           // 重置搜索条件
           this.initQueryConditions(this.index);
-
+          console.log(this.page)
           // 清空数据
           this.releaseList = [];
-          // 隐藏无数据显示
-          this.isShowNoData = false;
           // 刷新列表
           // this.queryMyPublishOrder();
-          this.onLoad();
+          // this.onLoad();
+          this.queryMyRecvOrder();
         },
         onCancel: () => {
 
@@ -273,7 +272,6 @@
         this.page.pageIndex = 1; // 当前页
         this.page.totalItems = 0;
         this.page.totalPageCount = 0;
-
         // 初始化搜索条件
         this.QueryParam.revicompid = '';
         this.QueryParam.origin = '';
@@ -281,7 +279,6 @@
         this.QueryParam.time = '';
         this.QueryParam.tstatus = status;
         this.QueryParam.year = this.year;
-
       },
       // 跳转企业详情
       toComPInfo(item) {
@@ -369,11 +366,7 @@
         ))
       },
       onLoad() {
-        // this.isShowNoData = false;
-        // setTimeout(()=>{
-        // 获取我的发布列表
         this.queryMyRecvOrder();
-        // },500);
       },
       showCodamt(codamt,insureamt) {
         let str = '';

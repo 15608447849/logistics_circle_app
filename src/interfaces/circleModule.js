@@ -39,11 +39,9 @@ module.exports = {
   /**确认/拒绝添加
    */
   agreeOrRefuse:(msgid,targetid,callback) => {
-    debugger
     queryIce(mycircle.CircleServicePrx, 'CircleService', 'agreeOrRefuse' ,str2jlong(msgid),targetid,callback);
   },
   YesagreeOrRefuse:(msgid,targetid,callback) => {
-  debugger
   queryIce(mycircle.CircleServicePrx, 'CircleService', 'agreeOrRefuse' ,str2jlong(msgid),targetid,callback);
 },
 };

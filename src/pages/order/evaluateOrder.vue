@@ -37,15 +37,15 @@
         <ul class="evaluateStart">
           <li>
             <span class="evaluateTitle margin-right31">服务态度</span>
-            <van-rate style="display:inline-block;width:3rem;"  v-model="star1"/>
+            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"  v-model="star1"/>
           </li>
           <li>
             <span class="evaluateTitle margin-right31">运输质量</span>
-            <van-rate style="display:inline-block;width:3rem;"   v-model="star2" />
+            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"   v-model="star2" />
           </li>
           <li>
-            <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
-            <van-rate style="display:inline-block;width:3rem;"  v-model="star3" />
+            <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
+            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"  v-model="star3" />
           </li>
         </ul>
       </div>

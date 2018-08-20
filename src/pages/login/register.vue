@@ -184,17 +184,18 @@
           this.$vux.toast.text('手机号格式错误, 请重新输入', 'top');
           return false
         }
-        // 验证手机短信
-        this.$Ice_UserService.checkPhoneRepetition(this.phone, new IceCallback(
+        this.$Ice_UserService.verifyPhone4App(this.phone, new IceCallback(
           function (result) {
             self.$vux.toast.text(result.msg, 'top');
             if (result.code === 0) {
+              debugger
               self.sendSMSV();
             } else {
               self.$vux.toast.text(result.msg, 'top');
             }
           },
           function (error) {
+            debugger
             self.$dialog.loading.close();
             self.$vux.toast.text(error, 'top');
           }

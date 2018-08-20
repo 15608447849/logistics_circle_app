@@ -147,7 +147,7 @@
      * 订单实体
      **/
     myOrder.OrderICE = Slice.defineStruct(
-        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, actdatetime, tstatus, priority, revierid, compname, phone, carriage, wmdictcn, numdictcn, padictcn, ctdictcn, vldictcn, vtdictcn, tndictcn, pmdictcn, ptdictcn, dmdictcn, redictcn)
+        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, actdatetime, tstatus, priority, revierid, compname, phone, carriage, wmdictcn, numdictcn, padictcn, ctdictcn, vldictcn, vtdictcn, tndictcn, pmdictcn, ptdictcn, dmdictcn, redictcn, istrans)
         {
             this.puberid = puberid !== undefined ? puberid : "";
             this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
@@ -206,6 +206,7 @@
             this.ptdictcn = ptdictcn !== undefined ? ptdictcn : "";
             this.dmdictcn = dmdictcn !== undefined ? dmdictcn : "";
             this.redictcn = redictcn !== undefined ? redictcn : "";
+            this.istrans = istrans !== undefined ? istrans : false;
         },
         false,
         function(__os)
@@ -267,6 +268,7 @@
             __os.writeString(this.ptdictcn);
             __os.writeString(this.dmdictcn);
             __os.writeString(this.redictcn);
+            __os.writeBool(this.istrans);
         },
         function(__is)
         {
@@ -327,8 +329,9 @@
             this.ptdictcn = __is.readString();
             this.dmdictcn = __is.readString();
             this.redictcn = __is.readString();
+            this.istrans = __is.readBool();
         },
-        104, 
+        105, 
         false);
 
     /**
@@ -557,7 +560,7 @@
             this.ordereva = myOrder.OrderEvaluate.read(__is, this.ordereva);
             this.logPath = __is.readString();
         },
-        144, 
+        145, 
         false);
 
     /**
@@ -592,6 +595,7 @@
         "insertOrderEvaluate": [, , , , , [7], [[myOrder.OrderEvaluate]], , , , ],
         "conReceipt": [, , , , , [7], [[7], [3]], , , , ],
         "getOrderDetail": [, , , , , [7], [[7], [3], [3]], , , , ],
+        "getOrderDetailByRepub": [, , , , , [7], [[7], [3], [3]], , , , ],
         "updateMyPublishOrder": [, , , , , [7], [[myOrder.OrderICE], [3]], , , , ],
         "transOrder": [, , , , , [7], [[myOrder.OrderICE], [3]], , , , ],
         "getOrderInfo": [, , , , , [7], [[7], [3], [3]], , , , ],

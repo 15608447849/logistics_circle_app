@@ -203,6 +203,7 @@
         this.circleQueryParamA.starPlace = '';
         this.circleQueryParamA.endPlace = '';
         this.circleQueryParamA.cname = this.cName;
+        this.circleQueryParamA.uoid = this.userId;
 
         this.circleQueryParamB.pageSize = this.page.pageSize;
         this.circleQueryParamB.pageIndex = this.page.pageIndex;
@@ -210,6 +211,7 @@
         this.circleQueryParamB.starPlace = '';
         this.circleQueryParamB.endPlace = '';
         this.circleQueryParamB.cname = this.cName;
+        this.circleQueryParamB.uoid = this.userId;
       },
       onLoadA() {
         let self = this;
