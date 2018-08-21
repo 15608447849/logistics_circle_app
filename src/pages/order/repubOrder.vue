@@ -235,7 +235,7 @@
 
       } else {
         this.OrderDetail = new order.OrderICE();
-        this.generateOrderNo();
+        // this.generateOrderNo();
         this.initData();
       }
     },
@@ -264,9 +264,6 @@
           function(data){
             let orderData = data.obj;
             that.isEditor = !orderData.istrans;
-            if(!that.isEditor) {
-              // that.generateOrderNo();
-            }
             that.OrderDetail.billno = orderData.billno; // 运单号
             that.OrderDetail.orderno = orderData.orderno; // 自动生成的订单号
             that.OrderDetail.arriarc = orderData.arriarc; // 目的地编码
@@ -486,13 +483,8 @@
         this.$router.go(-1)
       },
       reReleaseOrder() {
-        if(this.isEditor) {
-          // 重新发布
-          this.saveChangeOrder();
-        } else {
-          // 转发布
-          this.saveTransOrder();
-        }
+        // 重新发布
+        this.saveChangeOrder();
       },
       // 重新发布
       saveChangeOrder() {
@@ -536,60 +528,6 @@
           jsonObj.eaedatetime = self.OrderDetail.eaedatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
           jsonObj.pmdictc = self.OrderDetail.pmdictc.toString();				//运费度量单位
           self.$Ice_myOrderService.updateMyPublishOrder(jsonObj,self.userId,new IceCallback(
-            function(data){
-              self.$vux.toast.text(data.msg, 'top');
-              if (data.code === 0) {
-                self.$router.go(-1);
-              }
-            },
-            function (error) {
-              self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
-            }
-          ))
-        }
-      },
-      // 转发布
-      saveTransOrder() {
-        let self = this;
-        if(this.validator()) {
-          let jsonObj = new myOrder.OrderICE();
-          jsonObj.puberid = this.userId;				//收货人
-          jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 :  self.OrderDetail.phone1; 			// 手机号码1
-          jsonObj.phone2 = self.OrderDetail.phone2 === '' ? 0 :  self.OrderDetail.phone2;  			// 手机号码2
-          jsonObj.billno = self.OrderDetail.billno;						// TMS运单号
-          jsonObj.orderno = self.OrderDetail.orderno.toString();
-          jsonObj.startcext = self.OrderDetail.startcext;
-          jsonObj.startaddr =self.OrderDetail.startaddr;  			 // 出发地详细地址
-          jsonObj.arriarcext =  self.OrderDetail.arriarcext;
-          jsonObj.arriaddr =self.OrderDetail.arriaddr; 				 // 到达地详细地址
-          jsonObj.wm = parseFloat(self.OrderDetail.wm); 	//货物重量/体积
-          jsonObj.wmdictc = self.OrderDetail.wmdictc.toString(); 	//货物重量/体积单位字典码id
-          jsonObj.num = Number(self.OrderDetail.num); //件数
-          jsonObj.numdictc = self.OrderDetail.numdictc.toString();					//件数单位字典码id
-          jsonObj.padictc = self.OrderDetail.padictc.toString();					//包装要求字典码id
-          jsonObj.ctdictc =self.OrderDetail.ctdictc.toString();					//货物类型字典码id
-          jsonObj.vnum = Number(self.OrderDetail.vnum);							//车数量
-          jsonObj.vldictc = self.OrderDetail.vldictc.toString();					//车长字典码id
-          jsonObj.vtdictc = self.OrderDetail.vtdictc.toString();					//车型字典码id
-          if(self.OrderDetail.tndictc.length === 0){
-            self.OrderDetail.tndictc.push(71)
-          }
-          jsonObj.tndictarr = [];					//运输要求字典码id
-          jsonObj.tndictc = self.OrderDetail.tndictc.toString();
-          jsonObj.price = parseFloat(self.OrderDetail.price);					//价格(元)
-          jsonObj.codamt = parseFloat(self.OrderDetail.codamt);					//代收货款金额(元)
-          jsonObj.insureamt = parseFloat(self.OrderDetail.insureamt);				//声明保价金额(元)
-          jsonObj.ptdictc = self.OrderDetail.ptdictc.toString();				//付款方式字典码id
-          jsonObj.consignee = self.OrderDetail.consignee; 					// 收货人
-          jsonObj.consphone = self.OrderDetail.consphone; 	 			// 收货联系方式
-          jsonObj.dmdictc = self.OrderDetail.dmdictc.toString(); 	 			//提货方式字典码id
-          jsonObj.redictc = self.OrderDetail.redictc.toString(); 	 			//回单要求字典码id
-          jsonObj.pusdatetime = self.OrderDetail.pusdatetime;	//取货时间开始 yyyy-MM-dd hh:mm:ss
-          jsonObj.puedatetime = self.OrderDetail.puedatetime;			//取货结束时间 yyyy-MM-dd hh:mm:ss
-          jsonObj.easdatetime = self.OrderDetail.easdatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
-          jsonObj.eaedatetime = self.OrderDetail.eaedatetime;			//期望到货时间起始 yyyy-MM-dd hh:mm:ss
-          jsonObj.pmdictc = self.OrderDetail.pmdictc.toString();				//运费度量单位
-          self.$Ice_myOrderService.transOrder(self.userId,jsonObj,new IceCallback(
             function(data){
               self.$vux.toast.text(data.msg, 'top');
               if (data.code === 0) {
