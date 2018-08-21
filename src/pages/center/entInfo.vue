@@ -50,12 +50,14 @@
       <van-cell-group v-show="isEditor">
         <!--<van-cell @click="showPicker" title="发票类型" is-link :value="invoiceType"/>-->
         <van-field
+          maxlength="100"
           v-model="compInfo.fname"
           label="企业名称"
           placeholder="请输入企业名称"
           :error-message="v1"
         />
         <van-field
+          maxlength="100"
           v-model="compInfo.sname"
           label="企业简称"
           placeholder="请输入企业简称"
@@ -84,20 +86,24 @@
           <!--:error-message="v5"-->
         <!--/>-->
         <van-field
-          maxlength="11"
-          type="number"
+          maxlength="6"
+          type="tel"
           v-model="compInfo.postcode"
           label="邮编"
           placeholder="请填写邮编"
           :error-message="v6"
         />
         <van-field
+          maxlength="11"
+          type="tel"
           v-model="compInfo.pho"
           label="业务员手机1"
           placeholder="请填写业务员手机1"
           :error-message="v7"
         />
         <van-field
+          maxlength="11"
+          type="tel"
           v-model="compInfo.pht"
           label="业务员手机2"
           placeholder="请填写业务员手机2"
@@ -112,9 +118,10 @@
           :error-message="v9"
         />
         <van-field
+          maxlength="500"
+          type="textarea"
           v-model="compInfo.address"
           label="详细地址"
-          type="textarea"
           placeholder="请输入详细地址"
           :error-message="v10"
           rows="1"

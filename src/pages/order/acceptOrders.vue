@@ -153,8 +153,10 @@
         }]
       }
     },
+    created() {
+
+    },
     mounted() {
-      this.$app_store.commit(TABBAR_INDEX, 3);
       this.year = new Date().getFullYear();
       this.col1Data = [];
       for(let i = 0;i<10;i++) {
@@ -286,7 +288,7 @@
           path: '/userInfo',
           query: {
             isYourCompInfo: false,
-            id: item.revierid,
+            id: item.pubcompid,
             status: 6
           }
         })

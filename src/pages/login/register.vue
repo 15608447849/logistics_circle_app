@@ -22,7 +22,7 @@
       <yd-cell-group v-show="firstStepBool">
         <yd-cell-item>
           <!--<yd-icon class="span" slot="icon" name="phone3" size=".45rem"></yd-icon>-->
-          <input type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
+          <input maxlength="11" type="text" slot="right" v-model="phone" placeholder="请输入手机号码">
           <yd-sendcode slot="right"
                        v-model="start1"
                        @click.native="sendCode"
@@ -63,19 +63,19 @@
       <yd-cell-group v-show="thirdStepBool">
         <yd-cell-item>
           <span slot="left" class="span">用户名：</span>
-          <yd-input slot="right" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
+          <yd-input slot="right" max="30" v-model="account" :debug="true" placeholder="请输入用户名"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left" class="span">密码：</span>
-          <yd-input slot="right" type="password" v-model="password" placeholder="请设置登录密码"></yd-input>
+          <yd-input slot="right" max="16" type="password" v-model="password" placeholder="请设置登录密码"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left" class="span">确认密码：</span>
-          <yd-input slot="right" type="password" v-model="rPassword" placeholder="请确认登录密码"></yd-input>
+          <yd-input slot="right" max="16" type="password" v-model="rPassword" placeholder="请确认登录密码"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left" class="span">邀请码：</span>
-          <yd-input slot="right" type="number" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
+          <yd-input slot="right" max="12" type="number" v-model="invitationCode" placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
 
           <!--<yd-button size=" large
           " type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->

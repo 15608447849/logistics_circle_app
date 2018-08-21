@@ -43,12 +43,14 @@
     </ul>
     <van-cell-group v-show="isEditor">
       <van-field
+        maxlength="100"
         v-model="compInfo.invtitle"
         label="发票抬头"
         placeholder="请输入发票抬头"
         :error-message="v1"
       />
       <van-field
+        maxlength="36"
         v-model="compInfo.taxno"
         label="发票税号"
         placeholder="请输入发票税号"
@@ -62,17 +64,18 @@
       <!--/>-->
       <div class="zuoji">
         <span class="zuojiNum">电话号码</span>
-        <input type="number" v-model="phoneArea" placeholder="请填写区号" class="quhao"> <span class="fengefu">-</span><input type="number" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
+        <input type="tel" maxlength="4" v-model="phoneArea" placeholder="请填写区号" class="quhao"> <span class="fengefu">-</span><input type="tel" maxlength="36" v-model="landline" placeholder="请填写座机号码" class="haoma floatright">
       </div>
 
       <van-field
-        maxlength="36"
+        maxlength="100"
         v-model="compInfo.openbank"
         label="开户银行"
         placeholder="请填写开户银行"
         :error-message="v4"
       />
       <van-field
+        maxlength="36"
         v-model="compInfo.openaccount"
         label="开户账号"
         placeholder="请填写开户账号"
@@ -96,9 +99,9 @@
       />
       <!--billaddr-->
       <van-field
+        maxlength="200"
         v-model="compInfo.billaddr"
         label="详细地址"
-        type="textarea"
         placeholder="请输入详细地址"
         :error-message="v8"
         rows="1"

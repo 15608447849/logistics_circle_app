@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="goBackPage"></i>
       </div>
@@ -11,8 +11,6 @@
         <i @click="addDriver" class="icon iconfont icon-gengduo1 dropdowngengduo colorWhite floatright"></i>
       </div>
     </div>
-    <div class="downfixed">
-
       <div class="searchDriverBox">
         <div class="searchDriver">
           <div class="driverSearchBtn" @click="toPageSearch">
@@ -23,6 +21,10 @@
             <div class="width10"></div>
           </div>
         </div>
+      </div>
+    <div class="myselfList">
+      <div v-show="isShowNoData" class="noMyselfCenter">
+        <img src="../../../assets/images/icon/no_driver.png" class="placeAddDri"/>
       </div>
       <van-list
         style="background:#ffffff;"
@@ -44,7 +46,10 @@
           </li>
         </ul>
       </van-list>
+
     </div>
+
+
   </div>
 </template>
 
@@ -66,7 +71,8 @@
         searchInputVal: '司机名称搜索',
         loading: false, // 控制加载动画
         finished: false, // 控制是否执行上推加载
-        isEidtor: false
+        isEidtor: false,
+        isShowNoData: false
       }
     },
     mounted() {
@@ -135,6 +141,9 @@
             } else {
               self.finished = true;
               self.$vux.toast.text(result.msg, 'top');
+            }
+            if(self.drivers.length === 0) {
+              self.isShowNoData = true
             }
           },
           function (error) {

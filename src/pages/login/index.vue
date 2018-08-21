@@ -3,13 +3,13 @@
     <div class="login">
       <img src="../../assets/images/small/login_logo.png" alt="" class="loginPic">
       <div class="login_input">
-        <input type="text" v-model="account" placeholder="用户名/手机号码" class="userNameBorderBottom">
-        <input type="password" v-model="password" placeholder="密码" class="userPwd">
+        <input type="text" maxlength="30" v-model="account" placeholder="用户名/手机号码" class="userNameBorderBottom">
+        <input type="password" maxlength="16" v-model="password" placeholder="密码" class="userPwd">
       </div>
       <div class="Flogin_input displayNone">
-        <input type="text" v-model="account" placeholder="注册的手机号" class="FuserNameBorderBottom">
+        <input type="tel" maxlength="11" v-model="account" placeholder="注册的手机号" class="FuserNameBorderBottom">
         <div>
-          <input type="password" v-model="password" placeholder="验证码" class="FuserPwd">
+          <input type="password" maxlength="16" v-model="password" placeholder="验证码" class="FuserPwd">
           <a class="getVerificationCode">获取验证码</a>
         </div>
       </div>

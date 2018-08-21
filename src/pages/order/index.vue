@@ -81,8 +81,8 @@
                 <a v-show="item.tstatus === 3 || item.tstatus === 4 || item.tstatus === 8"
                    class="colorsixsix" @click.stop="toPickGoodsPic(item,0)">取货照片</a>
                 <!-- 支付 -->
-                <a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue"
-                   @click.stop="OrderPay()">支付</a>
+                <!--<a v-show="item.tstatus === 7 && item.ptdictc === 21" class="colorLightBlue"-->
+                   <!--@click.stop="OrderPay()">支付</a>-->
                 <!--取货码-->
                 <a v-show="item.tstatus === 7" class="colorLightBlue"
                    @click.stop="toPickGoodsCode(item.orderno)">取货码</a>

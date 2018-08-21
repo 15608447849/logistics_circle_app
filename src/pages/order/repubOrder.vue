@@ -339,7 +339,6 @@
             that.OrderDetail.phone2 = that.compInfo.pht === 0 ? '' : that.compInfo.pht; //发布人电话2
 //	                    that.formValidate.phone2 = orderData.phone2; //发布人电话2
             that.pubdatetime = orderData.pubdatetime; //发布时间
-            that.changeNum();
 
             // 添加发布人联系方式
             if (that.compInfo.pho !== 0 && that.compInfo.pht !== 0) {
@@ -361,16 +360,6 @@
           }
         ))
       },
-      changeNum(e){
-        if (Number(this.OrderDetail.insureamt) > 0 || Number(this.OrderDetail.codamt) > 0){
-          // this.fkDisabled = true;
-          this.OrderDetail.ptdictc = 22;
-        } else {
-          // this.fkDisabled = false;
-          this.OrderDetail.ptdictc = 21;
-        }
-      },
-
       showPicker(category) {
         if (category === 'pm') {
           this.setPicker(this.disPmList);
