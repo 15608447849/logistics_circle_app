@@ -1215,6 +1215,7 @@ input[type="radio"] {
   height:.65rem;
   text-align: center;
   margin-top:.05rem;
+  background:#3189f5;
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
@@ -1275,7 +1276,10 @@ input[type="radio"] {
   width:5.8rem;
   height:.74rem;
   margin:0 auto;
-  border:none;
+  border-bottom:1px solid #ebeff5;
+}
+.yd-btn{
+  background-color:#3189f5;
 }
 .loginBut{
   display:block;
@@ -1382,6 +1386,9 @@ input[type="radio"] {
   background: blue;
   color: white;
   margin: 0 auto;
+}
+.yd-btn-warning{
+  background-color:#3189f5;
 }
 .span {
   width: 1.5rem;
@@ -1909,14 +1916,18 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:.3rem;
-  margin-top:.15rem;
-  margin-bottom:.25rem;
+  margin-top:.2rem;
+  margin-bottom:.2rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
   color: #333333;
+}
+.height6{
+  position:relative;
+  height:.7rem;
 }
 .issueDetailsLiTextLi{
   display:block;
@@ -1931,19 +1942,37 @@ input[type="radio"] {
   color: #333333;
 }
 .rderCost{
-  margin-right:.65rem;
+  margin-right:.52rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .24rem;
   letter-spacing: 0px;
   color: #666666;
 }
-.rderCostA{
-  margin-right:.6rem;
+.yang{
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 0px;
+  color: #ff3b30;
+}
+.orderTotal{
+  font-family: PingFang-SC-Regular;
+  font-size: .4rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .24rem;
+  letter-spacing: 0px;
+  color: #ff3b30;
+}
+.rderCostA{
+  margin-right:.45rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   line-height: .24rem;
@@ -2001,7 +2030,7 @@ input[type="radio"] {
   width:.95rem;
   margin-right:.64rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -2017,6 +2046,10 @@ input[type="radio"] {
   color: #999999;
 }
 .arrivalTimeRel{
+  display:inline-block;
+  position:absolute;
+  top:.1rem;
+  height:.7rem;
   margin-right:.62rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
@@ -2024,6 +2057,14 @@ input[type="radio"] {
   font-stretch: normal;
   letter-spacing: 0px;
   color: #999999;
+}
+.heightAuto{
+  display:inline-block;
+  position:absolute;
+  left:1.67rem;
+  width:5rem;
+  height:auto;
+  line-height:.4rem;
 }
 .logisticsNameBox .logisticsName{
   display:inline-block;
@@ -2049,9 +2090,9 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:auto;
-  margin-bottom:.25rem;
+  margin-bottom:.2rem;
   font-family: PingFang-SC-Regular;
-  font-size: .2rem;
+  font-size: .26rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -2063,7 +2104,7 @@ input[type="radio"] {
   width:7.5rem;
   padding:0rem .2rem 0rem .2rem;
   font-family: PingFang-SC-Regular;
-  margin-bottom:.3rem;
+  margin-bottom:.4rem;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -2098,7 +2139,7 @@ input[type="radio"] {
   width:1.2rem;
   margin-right:.45rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -2109,7 +2150,7 @@ input[type="radio"] {
   width:1.2rem;
   margin-right:.38rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -2120,13 +2161,14 @@ input[type="radio"] {
   width:1.2rem;
   margin-right:.42rem;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
   color: #999999;
 }
 .marginright3{
+  font-size:.28rem;
   margin-right:.03rem;
 }
 .marginright13{
@@ -2142,14 +2184,15 @@ input[type="radio"] {
 
 }
 .marginright70{
-  font-size:.24rem;
   margin-right:.67rem;
+}
+.marginright60{
+  margin-right:.42rem;
 }
 .marginright95{
   margin-right:.95rem;
 }
 .marginright90{
-  font-size:.24rem;
   margin-right:.92rem;
 }
 .textMargin-right10{
@@ -2199,7 +2242,7 @@ input[type="radio"] {
 }
 .textRed{
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  /*font-size: .24rem;*/
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -2273,6 +2316,7 @@ input[type="radio"] {
   width:5.9rem;
   height:.87rem;
   vertical-align: middle;
+  text-align: right;
   border:none;
   line-height:.76rem;
   white-space: pre;
@@ -2281,15 +2325,19 @@ input[type="radio"] {
 }
 .textarea::-webkit-input-placeholder{
   height: .43rem;line-height: .43rem;
+  text-align: left;
 }    /* 使用webkit内核的浏览器 */
 .textarea:-moz-placeholder{
   height: .43rem;line-height: .43rem;
+  text-align: left;
 }                  /* Firefox版本4-18 */
 .textarea::-moz-placeholder{
   height: .43rem;line-height: .43rem;
+  text-align: left;
 }                  /* Firefox版本19+ */
 .textarea:-ms-input-placeholder{
   height: .43rem;line-height:.43rem;
+  text-align: left;
 }
 .haveBorderBottom{
   border-bottom:1px solid #dce0e6;

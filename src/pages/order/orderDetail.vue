@@ -141,16 +141,16 @@
     <div class="RobbingBox">
       <div class="Robbing floatleft">
         <span class="rderCostA">订单费用</span>
-        <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}元</span>
+        <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}</span>
       </div>
 
       <ul class="ulWidth100">
         <li class="orderinfo">
-          <span class="marginright90">订单号</span>
+          <span class="marginright60 issueTextOrder">订单号</span>
           <span>{{detailInfo.orderno}}</span>
         </li>
         <li class="orderinfo">
-          <span class="marginright70">发单时间</span>
+          <span class="marginright60 issueTextOrder">发单时间</span>
           <span>{{detailInfo.pubdatetime}}</span>
         </li>
         <li class="orderinfo" v-if="detailInfo.revidatetime !== ''">

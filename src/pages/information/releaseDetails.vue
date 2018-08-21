@@ -55,18 +55,21 @@
              <span class="marginright3">{{detailInfo.dmdictc}}</span>
              <span class="marginright3"></span>
            </li>
-           <li class="issueDetailsLiText" v-if="detailInfo.easdatetime !== ''">
-             <span class="arrivalTimeRel">到货时间</span>
-             <span>{{detailInfo.easdatetime}}</span>
-             <span>至</span>
-             <span>{{detailInfo.eaedatetime}}</span>
+           <li class="issueDetailsLiText height6" v-if="detailInfo.easdatetime !== ''">
+             <div class="arrivalTimeRel">到货时间</div>
+             <span class="heightAuto">
+               <span>{{detailInfo.easdatetime}}</span>
+               <span>至</span>
+               <span>{{detailInfo.eaedatetime}}</span>
+             </span>
+
            </li>
          </ul>
        </div>
        <div class="RobbingBox">
          <div class="Robbing floatleft" >
            <span class="floatleft rderCost">订单费用</span>
-           <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}元</span>
+           <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
          </div>
          <div class="floatleft ulWidth100">
            <ul class="ulWidth100">
