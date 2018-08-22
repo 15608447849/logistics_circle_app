@@ -137,12 +137,32 @@
         </li>
       </ul>
     </div>
-    <div class="RobbingBoxOrder">
-      <div class="Robbing floatleft">
-        <span class="rderCostA">订单费用</span>
-        <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
-      </div>
 
+    <div class="orderEvaluateBox">
+      <div class="textareaBox">
+        <span class="addEvaluateTitle">评&nbsp&nbsp&nbsp价</span>
+        <div class="evaluateTextarea noBorder" readonly="readonly" placeholder="暂无订单评价">
+          送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，
+        </div>
+      </div>
+        <div class="evaluatePicBox noBorder">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+        </div>
+      <!--<van-dialog-->
+        <!--v-model="show"-->
+        <!--show-cancel-button-->
+        <!--:before-close="beforeClose"-->
+        <!--title:请选择地址-->
+      <!--&gt;-->
+      <!--</van-dialog>-->
+    </div>
+    <div class="robbingAdd floatleft">
+      <span class="rderCostA">订单费用</span>
+      <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
+    </div>
+    <div class="RobbingBoxOrder">
       <ul class="ulWidth100">
         <li class="orderinfo">
           <span class="marginright60 issueTextOrder">订单号</span>
@@ -167,64 +187,6 @@
       </ul>
 
     </div>
-    <div class="orderEvaluateBox">
-      <ul class="evaluateList">
-        <li class="expressionList">
-          <span class="evaluateTitle margin-right63">评价</span>
-          <div v-for="(item, index) in evaluateList" :key="index" @click='appraiseBtn(item,index)' class="evaluateExpression">
-            <img v-show="item.isSelected" src="../../assets/images/small/evaluate_07.png" alt="" class="marginright13">
-            <img v-show="!item.isSelected" src="../../assets/images/small/evaluate_09.png" alt="" class="marginright13">
-            <span class="evaluateTitle">{{item.name}}</span>
-          </div>
-
-          <!--<img src="../../assets/images/small/evaluate_09.png" alt="" class="marginright13">-->
-          <!--<span class="evaluateTitle margin-right56">中评</span>-->
-          <!--<img src="../../assets/images/small/evaluate_10.png" alt="" class="marginright13">-->
-          <!--<span class="evaluateTitle">差评</span>-->
-        </li>
-      </ul>
-      <div class="evaluateDiv">
-        <span class="pingfeng evaluateTitle">评分</span>
-        <ul class="evaluateStart">
-          <li>
-            <span class="evaluateTitle margin-right31">服务态度</span>
-            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"  v-model="star1"/>
-          </li>
-          <li>
-            <span class="evaluateTitle margin-right31">运输质量</span>
-            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"   v-model="star2" />
-          </li>
-          <li>
-            <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
-            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"  v-model="star3" />
-          </li>
-        </ul>
-      </div>
-      <div class="textareaBox">
-        <span class="evaluateTitle margin-top22">描述</span>
-        <textarea maxlength="200" v-model="remarks" class="evaluateTextarea" placeholder="说说你对本次服务的感受吧~"></textarea>
-      </div>
-
-      <div class="evaluatePic">
-        <span class="evaluaePhoto">评价照片</span>
-        <div class="evaluatePicBox">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-        </div>
-
-      </div>
-
-      <div class="SubmissionBox">
-        <button>提交评价</button>
-      </div>
-
-
-    </div>
-
     <div class="orderOperationBtn">
       <div class="operationA" v-show="type === 0">
         <!--刷新-->
@@ -299,8 +261,6 @@
     <!--<a @click="toseeDispatch">查看调度</a>-->
     <!--</div>-->
     <!--</a>-->
-
-
     <yd-popup v-model="show2" position="bottom" height="52%" @click="show2 = false">
       <div class="closePayment">
         <i class="icon iconfont icon-guanbi1" @click="show2 = false"></i>
@@ -341,6 +301,7 @@
         type: 0, // 0 发布 1 接受
         show2: false,
         detailInfo: {},
+        // show: false,
         userId: this.$app_store.getters.userId,
         order: {},
         pubcompid: '',
@@ -351,19 +312,6 @@
         remarks: '', //描述内容
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
-        evaluateList: [{
-          name : '好评',
-          value: 3,
-          isSelected: true
-        },{
-          name : '中评',
-          value: 2,
-          isSelected: false
-        },{
-          name : '差评',
-          value: 1,
-          isSelected: false
-        }],
         OrderEvaluate: new myOrder.OrderEvaluate(),
         star1: 5, //服务态度
         star2: 5, //运输质量
@@ -391,6 +339,14 @@
       this.getOrderInfo();
     },
     methods: {
+      // beforeClose(action, done) {
+      //   if (action === 'confirm') {
+      //     setTimeout(done, 1000);
+      //   } else {
+      //     done();
+      //   }
+      // },
+
       // 跳转企业详情
       toCompInfo(type) {
         let compId = '';

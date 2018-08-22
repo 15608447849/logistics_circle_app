@@ -9,6 +9,9 @@ import Cube from 'cube-ui'
 import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 import VueAMap from 'vue-amap';
+import { Dialog } from 'vant';
+
+
 import  {
   ToastPlugin
 } from 'vux'
@@ -29,6 +32,8 @@ Vue.use(Cube);
 Vue.use(VueAMap);
 Vue.use(ToastPlugin);
 Vue.use(PasswordInput).use(NumberKeyboard);
+Vue.use(Dialog);
+
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;
