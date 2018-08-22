@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background:#ffffff;">
     <div class="issueHeaderNav">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
@@ -142,28 +142,22 @@
       <div class="textareaBox">
         <span class="addEvaluateTitle">评&nbsp&nbsp&nbsp价</span>
         <div class="evaluateTextareaA" readonly="readonly" placeholder="暂无订单评价">
-          送货时间很快，货物没有损坏送货时间很快，
+          送货时间很快，货物没有损坏送货时间很快，送货时间很快，
+
         </div>
       </div>
-        <div class="evaluatePicBox noBorder">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-        </div>
-      <!--<van-dialog-->
-        <!--v-model="show"-->
-        <!--show-cancel-button-->
-        <!--:before-close="beforeClose"-->
-        <!--title:请选择地址-->
-      <!--&gt;-->
-      <!--</van-dialog>-->
+    </div>
+    <div class="evaluatePicBox noBorder">
+      <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
     </div>
     <div class="robbingAdd floatleft">
       <span class="rderCostA">订单费用</span>
       <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
     </div>
     <div class="RobbingBoxOrder">
-      <ul class="ulWidth100">
+      <ul class="ulWidth100 auto">
         <li class="orderinfo">
           <span class="marginright60 issueTextOrder">订单号</span>
           <span>{{detailInfo.orderno}}</span>
