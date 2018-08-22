@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderLog">
+    <div class="issueHeaderNav">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
@@ -75,15 +75,15 @@
       <!--取货-->
       <!--<i class="icon iconfont icon-quhuo"></i>-->
     </div>
-    <div class="orderPadding10 backFF">
-      <div class="logisticsNameBox">
+    <div class="backgroundwhite">
+      <div class="logisticsNameBox paddingLeft21">
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser"
              v-if="compInfo.logoPath === ''">
         <span class="logisticsName">{{compInfo.fname}}</span>
       </div>
 
-      <ul class="backFF">
+      <ul class="paddingLeft21 marginBottom15 dingdan">
         <li class="issueDetailsLiText">
           <span class="issueText">运单号</span><span>{{detailInfo.billno}}</span>
         </li>
@@ -114,15 +114,14 @@
           class="textMargin-right10">{{detailInfo.puedatetime}}</span><span>取货</span>
 
         </li>
-        <li class="issueDetailsLiTextLi">
-          <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span>{{detailInfo.phone2}}</span>
+        <li class="issueDetailsLiTextLi margintop3">
+          <span class="issueText">联系方式</span><span class="textMargin-right10">{{detailInfo.phone1}}</span><span class="textMargin-right10">{{detailInfo.phone2}}</span>
         </li>
       </ul>
     </div>
-    <div class="lineHeight10"></div>
-    <div class="orderPadding10 backFF ">
-      <ul>
-        <li class="issueDetailsLiText">
+    <div class="backgroundwhite">
+      <ul class="paddingTop3 paddingBottom2">
+        <li class="issueDetailsLiTextA paddingLeft21">
           <span class="issueTextA">收货人</span>
           <span class="marginright3">{{detailInfo.consignee}}</span>
           <span class="marginright3">{{detailInfo.consphone}}</span>
@@ -138,10 +137,10 @@
         </li>
       </ul>
     </div>
-    <div class="RobbingBox">
+    <div class="RobbingBoxOrder">
       <div class="Robbing floatleft">
         <span class="rderCostA">订单费用</span>
-        <span class="textRed textBlod rderCost">￥{{detailInfo.carriage}}</span>
+        <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
       </div>
 
       <ul class="ulWidth100">
@@ -154,18 +153,75 @@
           <span>{{detailInfo.pubdatetime}}</span>
         </li>
         <li class="orderinfo" v-if="detailInfo.revidatetime !== ''">
-          <span class="marginright70">抢单时间</span>
+          <span class="marginright65">抢单时间</span>
           <span>{{detailInfo.revidatetime}}</span>
         </li>
         <li class="orderinfo" v-if="detailInfo.pusdatetime !== ''">
-          <span class="marginright70">取货时间</span>
+          <span class="marginright65">取货时间</span>
           <span>{{detailInfo.pusdatetime}}</span>
         </li>
         <li class="orderinfo" v-if="detailInfo.arridatetime !== ''">
-          <span class="marginright70">签收时间</span>
+          <span class="marginright65">签收时间</span>
           <span>{{detailInfo.arridatetime}}</span>
         </li>
       </ul>
+
+    </div>
+    <div class="orderEvaluateBox">
+      <ul class="evaluateList">
+        <li class="expressionList">
+          <span class="evaluateTitle margin-right63">评价</span>
+          <div v-for="(item, index) in evaluateList" :key="index" @click='appraiseBtn(item,index)' class="evaluateExpression">
+            <img v-show="item.isSelected" src="../../assets/images/small/evaluate_07.png" alt="" class="marginright13">
+            <img v-show="!item.isSelected" src="../../assets/images/small/evaluate_09.png" alt="" class="marginright13">
+            <span class="evaluateTitle">{{item.name}}</span>
+          </div>
+
+          <!--<img src="../../assets/images/small/evaluate_09.png" alt="" class="marginright13">-->
+          <!--<span class="evaluateTitle margin-right56">中评</span>-->
+          <!--<img src="../../assets/images/small/evaluate_10.png" alt="" class="marginright13">-->
+          <!--<span class="evaluateTitle">差评</span>-->
+        </li>
+      </ul>
+      <div class="evaluateDiv">
+        <span class="pingfeng evaluateTitle">评分</span>
+        <ul class="evaluateStart">
+          <li>
+            <span class="evaluateTitle margin-right31">服务态度</span>
+            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"  v-model="star1"/>
+          </li>
+          <li>
+            <span class="evaluateTitle margin-right31">运输质量</span>
+            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"   v-model="star2" />
+          </li>
+          <li>
+            <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
+            <van-rate style="display:inline-block;width:3rem;vertical-align: middle;"  v-model="star3" />
+          </li>
+        </ul>
+      </div>
+      <div class="textareaBox">
+        <span class="evaluateTitle margin-top22">描述</span>
+        <textarea maxlength="200" v-model="remarks" class="evaluateTextarea" placeholder="说说你对本次服务的感受吧~"></textarea>
+      </div>
+
+      <div class="evaluatePic">
+        <span class="evaluaePhoto">评价照片</span>
+        <div class="evaluatePicBox">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+        </div>
+
+      </div>
+
+      <div class="SubmissionBox">
+        <button>提交评价</button>
+      </div>
+
 
     </div>
 
@@ -291,9 +347,29 @@
         revicompid: '',
         puimg: '',// 取货照片
         retuimg: '', // 签收照片
-        compInfo: {}// 企业详情
+        compInfo: {},// 企业详情
+        remarks: '', //描述内容
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功  8：已完成  20:取消发布
         // 0：已发布，1：已抢单,2：已中转, 3:已取货, 4:已签收, 5：纠纷中, 6:待评价 ,7:抢单成功 8：已完成 20:取消发布
+        evaluateList: [{
+          name : '好评',
+          value: 3,
+          isSelected: true
+        },{
+          name : '中评',
+          value: 2,
+          isSelected: false
+        },{
+          name : '差评',
+          value: 1,
+          isSelected: false
+        }],
+        OrderEvaluate: new myOrder.OrderEvaluate(),
+        star1: 5, //服务态度
+        star2: 5, //运输质量
+        star3: 5, //运输时效
+        current: 3, // 好评 中评 差评
+        type: 0 // 0 列表  1 详情
       }
     },
     // activated() {

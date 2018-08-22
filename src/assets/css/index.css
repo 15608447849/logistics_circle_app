@@ -1916,8 +1916,52 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:.3rem;
-  margin-top:.2rem;
+  margin-top:.3rem;
+  /*margin-bottom:.2rem;*/
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.issueDetailsLiTextA{
+  display:block;
+  width:7.5rem;
+  height:.3rem;
+  /*margin-top:.3rem;*/
+  /*margin-bottom:.2rem;*/
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.dingdan{
+  padding:0rem .21rem .3rem .21rem;
   margin-bottom:.2rem;
+}
+.padding3{
+  padding-bottom:.3rem;
+}
+.paddingTop3{
+  display:block;
+  width:7.5rem;
+  padding-top:.3rem;
+}
+.paddingLeft21{
+  padding-left:.21rem;
+}
+.paddingBottom2{
+  padding-bottom:.3rem;
+}
+.issueDetailsLiTextNo{
+  display:block;
+  width:7.5rem;
+  height:.3rem;
+  /*margin-top:.2rem;*/
+  /*margin-bottom:.2rem;*/
   font-family: PingFang-SC-Regular;
   font-size: .28rem;
   font-weight: normal;
@@ -1929,11 +1973,13 @@ input[type="radio"] {
   position:relative;
   height:.7rem;
 }
+.margintop3{
+  margin-top:.2rem;
+}
 .issueDetailsLiTextLi{
   display:block;
   width:7.5rem;
   height:.3rem;
-  margin-bottom:.1rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
@@ -2006,6 +2052,11 @@ input[type="radio"] {
   width:7.5rem;
   height:2rem;
 }
+.RobbingBoxOrder{
+  display:block;
+  width:7.5rem;
+  height:24vh;
+}
 .issueDetailsBox{
   display:block;
   width:7.5rem;
@@ -2061,7 +2112,7 @@ input[type="radio"] {
 .heightAuto{
   display:inline-block;
   position:absolute;
-  left:1.67rem;
+  left:1.86rem;
   width:5rem;
   height:auto;
   line-height:.4rem;
@@ -2090,9 +2141,9 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:auto;
-  margin-bottom:.2rem;
+  margin-bottom:.3rem;
   font-family: PingFang-SC-Regular;
-  font-size: .26rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
@@ -2104,6 +2155,7 @@ input[type="radio"] {
   width:7.5rem;
   padding:0rem .2rem 0rem .2rem;
   font-family: PingFang-SC-Regular;
+  margin-top:.2rem;
   margin-bottom:.4rem;
   font-size: 12px;
   font-weight: normal;
@@ -2186,8 +2238,11 @@ input[type="radio"] {
 .marginright70{
   margin-right:.67rem;
 }
+.marginright65{
+  margin-right:.48rem;
+}
 .marginright60{
-  margin-right:.42rem;
+  margin-right:.4rem;
 }
 .marginright95{
   margin-right:.95rem;
@@ -2196,6 +2251,7 @@ input[type="radio"] {
   margin-right:.92rem;
 }
 .textMargin-right10{
+  font-size:.28rem;
   margin-right:10px;
 }
 .lineHeight10{
@@ -2203,7 +2259,6 @@ input[type="radio"] {
   width:100%;
   height:10px;
   background:#e6e6e6;
-  margin-bottom:.05rem;
 }
 .RobbingOrderWhite{
   display:block;
@@ -2264,7 +2319,7 @@ input[type="radio"] {
   font-weight: bold;
 }
 .orderPadding10{
-  padding:0px 10px 0px 10px;
+  padding:0px 0px 0px 0px;
 }
 /*发布订单模块*************************************************************************************/
 .issueOrder{
@@ -3530,6 +3585,7 @@ circleListAdd li .circlePic{
   align-items:center;
   width:7.5rem;
   height:1rem;
+  margin-top:6vh;
   padding:0rem 1.2rem 0rem .61rem;
   background: -webkit-linear-gradient(-90deg,  #a7bafa,#a7d3fb); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-90deg, #a7bafa,#a7d3fb); /* Opera 11.1 - 12.0 */
@@ -3557,6 +3613,45 @@ circleListAdd li .circlePic{
   font-stretch: normal;
   letter-spacing: 0px;
   color: #ffffff;
+}
+.evaluaePhoto{
+  margin-top:.3rem;
+  margin-left:.21rem;
+  margin-right:.08rem;
+}
+.evaluatePic{
+  display:block;
+  width:7.5rem;
+  height:40vh;
+  padding-top:.3rem;
+  margin:4vh auto 2rem 0;
+  background:#ffffff;
+}
+.evaluatePicBox{
+  position:relative;
+  top:-.4rem;
+  left:.55rem;
+  display:flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  align-content:space-between;
+  width:5.98rem;
+  height:29.3vh;
+  margin:0 auto;
+  border:1px solid #e0e0e0;
+}
+.evaluatePicBox img{
+  display:inline-block;
+  width:1.9rem;s
+  height:14vh;
+  background-color:pink;
+}
+.orderEvaluateBox{
+  display:block;
+  width:7.5rem;
+  height:96vh;
+  margin:0 auto;
+  background-color:#ffffff;
 }
 .orderOperationBtn{
   position:fixed;

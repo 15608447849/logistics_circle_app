@@ -23,6 +23,10 @@
             </div>
           </div>
         </div>
+      <div style="height:95vh;background:#ffffff;overflow: auto">
+        <div v-show="isShowNoData" class="noMyselfCenter">
+          <img src="../../assets/images/icon/no_driver.png" class="placeAddDri"/>
+        </div>
         <van-list
           style="background:#f5f5f5;"
           v-model="loading"
@@ -44,6 +48,7 @@
           </ul>
         </van-list>
       </div>
+      </div>
   </div>
 </template>
 
@@ -60,6 +65,7 @@
         driverType: 132, //  1,司机;132,业务员
         userId: this.$app_store.getters.userId,
         // pageSize: '1'// 当前页数
+        isShowNoData: false,
         page: new cstruct.Page(),
         searchInputVal: '业务员名称搜索',
         loading: false, // 控制加载动画
@@ -134,7 +140,10 @@
             } else {
               self.finished = true;
               self.$vux.toast.text(result.msg, 'top');
+              self.isShowNoData =true;
             }
+
+
           },
           function (error) {
             self.finished = true;
@@ -170,6 +179,7 @@
                   } else {
                     self.message.Toast(self, 'correct', '业务员停用成功', false);
                   }
+
                   // 更新item
                   self.drivers[index].status = status;
                 }

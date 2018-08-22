@@ -12,7 +12,7 @@
        </div>
      </div>
      <div class="issueDetailsBox">
-       <div class="orderPadding10">
+       <div class="backgroundwhite dingdan">
          <div class="logisticsNameBox">
            <img :src="compInfoA.logoPath" v-if="compInfoA.logoPath !== ''">
            <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfoA.logoPath === ''">
@@ -45,17 +45,16 @@
            </li>
          </ul>
        </div>
-       <div class="lineHeight10"></div>
        <div class="orderPadding10">
-         <ul>
-           <li class="issueDetailsLiText">
+         <ul class="backgroundwhite paddingTop3 paddingBottom2">
+           <li class="issueDetailsLiTextNo paddingLeft21">
              <span class="Consignee">收货人</span>
              <span class="marginright3">{{detailInfo.consignee}}</span>
              <span class="marginright3">{{subStrPhone(detailInfo.consphone)}}</span>
              <span class="marginright3">{{detailInfo.dmdictc}}</span>
              <span class="marginright3"></span>
            </li>
-           <li class="issueDetailsLiText height6" v-if="detailInfo.easdatetime !== ''">
+           <li class="issueDetailsLiText height6 paddingLeft21" v-if="detailInfo.easdatetime !== ''">
              <div class="arrivalTimeRel">到货时间</div>
              <span class="heightAuto">
                <span>{{detailInfo.easdatetime}}</span>

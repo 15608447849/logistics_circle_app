@@ -22,6 +22,9 @@
       <!--</div>-->
     <!--</div>-->
  <div style="height:95vh;background:#ffffff;overflow: auto">
+   <div v-show="isShowNoData" class="noMyselfCenter">
+     <img src="../../../assets/images/icon/no_driver.png" class="placeAddDri"/>
+   </div>
    <van-list
      v-model="loading"
      :finished="finished"
@@ -53,7 +56,8 @@
         state: '',// 线路状态
         total: 0,
         loading: false,
-        finished: false
+        finished: false,
+        isShowNoData: false
       }
     },
     mounted() {
@@ -85,6 +89,8 @@
               self.routeList = self.routeList.concat(result.obj);
               if (self.routeList.length >= result.totalItems) {
                 self.finished = true;
+              }if(self.routeList.length === 0){
+                self.isShowNoData = true
               }
             }
           },

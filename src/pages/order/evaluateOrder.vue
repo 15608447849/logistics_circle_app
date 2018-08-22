@@ -49,6 +49,7 @@
           </li>
         </ul>
       </div>
+
       <div class="textareaBox">
         <span class="evaluateTitle margin-top22">描述</span>
         <textarea maxlength="200" v-model="remarks" class="evaluateTextarea" placeholder="说说你对本次服务的感受吧~"></textarea>
