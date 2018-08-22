@@ -141,8 +141,8 @@
     <div class="orderEvaluateBox">
       <div class="textareaBox">
         <span class="addEvaluateTitle">评&nbsp&nbsp&nbsp价</span>
-        <div class="evaluateTextarea noBorder" readonly="readonly" placeholder="暂无订单评价">
-          送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，
+        <div class="evaluateTextareaA" readonly="readonly" placeholder="暂无订单评价">
+          送货时间很快，货物没有损坏送货时间很快，
         </div>
       </div>
         <div class="evaluatePicBox noBorder">

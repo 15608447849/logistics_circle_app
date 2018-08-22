@@ -3630,28 +3630,24 @@ circleListAdd li .circlePic{
   background:#ffffff;
 }
 .evaluatePicBox{
-  position:relative;
-  top:-.4rem;
-  left:.55rem;
   display:flex;
   justify-content: space-between;
   flex-wrap:wrap;
   align-content:space-between;
-  width:5.98rem;
-  height:29.3vh;
-  margin:0 auto;
-  border:1px solid #e0e0e0;
+  width:4.5rem;
+  height:1.36rem;
+  margin-left:1.85rem;
 }
 .evaluatePicBox img{
   display:inline-block;
-  width:1.9rem;
-  height:14vh;
+  width:1.36rem;
+  height:1.36rem;
   background-color:pink;
 }
 .orderEvaluateBox{
   display:block;
   width:7.5rem;
-  height:96vh;
+  height:18vh;
   margin:0 auto;
   background-color:#ffffff;
 }
@@ -4175,7 +4171,8 @@ circleListAdd li .circlePic{
 .textareaBox{
   display:block;
   width:7.5rem;
-  height:2.2rem;
+  max-height:.5rem;
+  margin-bottom:.45rem;
   padding:0rem .21rem 0rem .21rem;
 }
 .height29{
@@ -4187,15 +4184,33 @@ circleListAdd li .circlePic{
 .evaluateTextarea{
   float:right;
   width:5.95rem;
-  height:2.2rem;
-  padding:.17rem .16rem .17rem .16rem;
-  border:1px solid #e0e0e0;
+  height:auto;
   font-family: PingFang-SC-Regular;
-  font-size: .24rem;
+  font-size: .28rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
-  color: #d9d9d9;
+  color: #333333;
+}
+.evaluateTextareaA{
+  float:right;
+  width:5.45rem;
+  height:auto;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.addEvaluateTitle{
+  margin-right:.4rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
 }
 .addPhoto{
   display:inline-block;
