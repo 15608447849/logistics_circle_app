@@ -133,9 +133,13 @@
     mounted() {
       // this.$app_store.commit(CURRENT_CITY, '长沙');
       this.initLocatingCity();
-      this.isUnreadMsg();// 是否有新的消息
+      // 是否有新的消息
+      this.isUnreadMsg();
+      // 初始化基础数据字典
       this.initBaseData();
+      // 初始化地区
       this.initAreaData();
+      // 初始化
       this.initAreaH5Data();
     },
     methods: {
@@ -172,7 +176,6 @@
               } else {
                 self.$vux.toast.text('货物类型获取失败', 'top');
               }
-
             },
             function (error) {
               setTimeout(() => {

@@ -10,9 +10,6 @@
       <div class="width20">
         <div class="alignCenter floatright"></div>
       </div>
-
-
-
     </div>
 
       <div class="addRouterBox">
@@ -35,7 +32,7 @@
           <li class="needBorder" @click="showCascadePicker(3)">
             <span class="routeTitle">中转点</span>
             <span v-for="(item, index) in TransitP" :key="index"><badge
-              :text=item.placename @click.native="removeBadge(64,index)" @click.native.stop="removeBadge"/></span>
+              :text=item.placename  @click.native.stop="removeBadge(128,index)"/></span>
           </li>
         </ul>
         <button class="nextStep" @click="saveRoutes">保 存</button>
@@ -182,8 +179,20 @@
         let obj = new enterprise.Routeviap();
         switch (this.pickerType) {
           case 0:
-            this.routerInfo.endpn = selectedText[2];
-            this.routerInfo.endpc = selectedVal[2];
+            // debugger
+            // let areas = '';
+            // for(let i=0;i<selectedText.length;i++) {
+            //   if(areas === '') {
+            //     areas = selectedText[i]
+            //   } else {
+            //     areas += ','+ selectedText[i]
+            //   }
+            // }
+            // this.compInfo.areas = areas;
+            // this.compInfo.area = selectedVal[selectedVal.length-1];
+
+            this.routerInfo.endpn = selectedText[1];
+            this.routerInfo.endpc = selectedVal[1];
             // 清空途径点
             this.wayPs = [];
             // 清空中转点
@@ -194,8 +203,8 @@
             this.getTransferPoint(this.routerInfo.endpc);
             break;
           case 1:
-            this.routerInfo.startpn = selectedText[2];
-            this.routerInfo.startpc = selectedVal[2];
+            this.routerInfo.startpn = selectedText[1];
+            this.routerInfo.startpc = selectedVal[1];
             // 清空途径点
             this.wayPs = [];
             // 获取途径点选择列表
@@ -203,8 +212,8 @@
             break;
           case 2:
             obj.cstatus = 64;
-            obj.place = selectedVal[2];
-            obj.placename = selectedText[2];
+            obj.place = selectedVal[1];
+            obj.placename = selectedText[1];
             this.wayPs.push(obj);
             break;
           case 3:

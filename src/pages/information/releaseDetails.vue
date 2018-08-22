@@ -16,7 +16,7 @@
          <div class="logisticsNameBox">
            <img :src="compInfoA.logoPath" v-if="compInfoA.logoPath !== ''">
            <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfoA.logoPath === ''">
-           <span class="logisticsName">{{detailInfo.puberCarrier}}</span>
+           <span class="logisticsName">{{subStr(detailInfo.puberCarrier,12)}}</span>
          </div>
          <ul>
            <li class="issueDetailsLiText">
@@ -106,7 +106,7 @@
 
 <script>
   import { Toast } from 'vant';
-  import { stringIsNotNull } from '@/utils/stringUtil'
+  import { subString } from '../../utils/stringUtil'
   export default {
     data() {
       return {
@@ -206,6 +206,10 @@
       subStrPhone(tel) {
         return  tel.toString().substr(0, 3) + '****' + tel.toString().substr(7);
       },
+      subStr(str,len) {
+        return subString(str, len)
+      }
+
     },
     activated() {
       this.orderId = this.$route.query.id || '';

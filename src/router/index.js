@@ -212,10 +212,7 @@ const vueRouter = new Router({
     },
     {
       path: '/geo',
-      component: GEOLOCATION,
-      meta: {
-        keepAlive: true,
-      }
+      component: GEOLOCATION
     },
     {
       name: 'simpleSearch',

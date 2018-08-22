@@ -17,7 +17,7 @@
         <el-amap-search-box :default="searchDefault" class="search" :search-option="searchOption"
                             :on-search-result="onSearchResult">
         </el-amap-search-box>
-        <el-amap vid="amapDemo" :center="mapCenter" :zoom="cZoom" class="amap-demo" :events="events">
+        <el-amap vid="amapDemo" :zoom="cZoom" class="amap-demo" :events="events">
           <el-amap-marker v-for="marker in markers" :icon="marker.icon" :position="marker"
                           :key="marker"></el-amap-marker>
         </el-amap>
@@ -62,28 +62,28 @@
     mounted() {
       this.initData();
     },
-    activated() {
-      debugger
-      if(this.map !== null) {
-        this.setCity();
-      }
-      // 清空搜索列表
-      this.searchDefault = ' ';
-      this.pList = [];
-    },
+    // activated() {
+    //   debugger
+    //   if(this.map !== null) {
+    //     this.setCity();
+    //   }
+    //   // 清空搜索列表
+    //   this.searchDefault = ' ';
+    //   this.pList = [];
+    // },
     methods: {
       setCity() {
         if (this.$app_store.state.receiptCity !== '') {
-          this.searchOption.city = this.$app_store.state.receiptCity || '长沙';
+          this.searchOption.city = this.$app_store.state.receiptCity;
         } else {
-          this.searchOption.city = this.$app_store.state.receiptCity || '长沙';
+          this.searchOption.city = '长沙市';
         }
         if (this.map !== null) {
           this.map.setCity(this.searchOption.city);
         }
       },
       initData() {
-        this.mapCenter = [113.0068368, 28.212332300000003];
+        // this.mapCenter = [113.0068368, 28.212332300000003];
       },
       selectCity() {
         this.$router.push({

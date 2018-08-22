@@ -16,7 +16,7 @@
     <ul class="liNumThree margintop80">
       <li class="inputNumOne needBorder">
         <span class="waybillNum">运单号</span>
-        <input v-model="OrderDetail.billno" type="text" placeholder="请填写运单号" style="width:6.25rem;">
+        <input maxlength="20" v-model="OrderDetail.billno" type="text" placeholder="请填写运单号" style="width:6.25rem;">
       </li>
       <li class="tworow needBorder noEdit" >
         <span class="textRed">*</span>
@@ -35,7 +35,7 @@
       <li class="inputLong needBorder noEdit">
         <span class="textRed">*</span>
         <span>货物大小</span>
-        <input v-model="OrderDetail.wm" type="text" placeholder="重量/体积" disabled="disabled">
+        <input maxlength="7" v-model="OrderDetail.wm" type="tel" placeholder="重量/体积" disabled="disabled">
       </li>
       <li class="inputShort needBorder noEdit">
         <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text" disabled="disabled">
@@ -43,7 +43,7 @@
       <li class="inputLong needBorder noEdit">
         <span class="textRed">*</span>
         <span>货物数量</span>
-        <input v-model="OrderDetail.num" type="text" placeholder="货物数量" disabled="disabled">
+        <input maxlength="7" v-model="OrderDetail.num" type="tel" placeholder="货物数量" disabled="disabled">
       </li>
       <li class="inputShort needBorder noEdit">
         <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"
@@ -63,7 +63,7 @@
     <ul class="liNumThreeCompany noEdit">
       <li class="inputLong needBorder noEdit">
         <span class="liNumThreeCompanySpan">车辆大小</span>
-        <input v-model="OrderDetail.vnum" type="number" placeholder="数量" disabled="disabled">
+        <input maxlength="2" v-model="OrderDetail.vnum" type="tel" placeholder="数量" disabled="disabled">
       </li>
       <span class="carNum">台</span>
       <li class="inputShort needBorder noEdit">
@@ -86,7 +86,7 @@
       <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物运费</span>
-        <input v-model="OrderDetail.price" type="text" placeholder="费用"> /元
+        <input maxlength="10" v-model="OrderDetail.price" type="tel" placeholder="费用"> /元
       </li>
       <li class="inputShort needBorder">
         <input v-model="displayDic.disPmLabel" @click="showPicker('pm')" type="text" placeholder="单">
@@ -99,14 +99,14 @@
       <li class="inputShorter needBorder noEdit">
         <span class="textRed">*</span>
         <span class="size10">声明保价</span>
-        <input type="text" v-model="insureamt" disabled="disabled">
+        <input maxlength="10" type="tel"  v-model="insureamt" disabled="disabled">
         <span>元</span>
         <span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>
       </li>
       <li class="inputShorter needBorder noEdit">
         <span class="textRed">*</span>
         <span class="size10">代收货款</span>
-        <input v-model="codamt" type="text" disabled="disabled">
+        <input maxlength="10" type="tel"  v-model="codamt" disabled="disabled">
         <span>元</span>
         <span class="textRed size10 def">有代收不支持线上支付，不填默认为0</span>
       </li>
@@ -115,12 +115,12 @@
       <li class="inputNumOne needBorder noEdit">
         <span class="textRed">*</span>
         <span class="marginright13">收货人</span>
-        <input type="text" v-model="OrderDetail.consignee" placeholder="请输入联系人" style="width:6.2rem;" disabled="disabled">
+        <input  maxlength="10" type="tel" v-model="OrderDetail.consignee" placeholder="请输入联系人" style="width:6.2rem;" disabled="disabled">
       </li>
       <li class="inputNumOne needBorder noEdit">
         <span class="textRed">*</span>
         <span>联系方式</span>
-        <input v-model="OrderDetail.consphone" type="number" placeholder="请输入联系方式" disabled="disabled">
+        <input type="tel" maxlength="11"  v-model="OrderDetail.consphone" placeholder="请输入联系方式" disabled="disabled">
       </li>
       <!--<li class="inputNumOne needBorder">-->
       <!--<span class="textRed">*</span>-->
@@ -130,9 +130,9 @@
       <li class="inputNumOneSend needBorder">
         <span class="textRed">*</span>
         <span>发布人联系方式</span>
-        <input type="number" v-model="OrderDetail.phone1" placeholder="请输入发布人联系方式" class="sendOrderPhone">
+        <input type="tel" maxlength="11"  v-model="OrderDetail.phone1" placeholder="请输入发布人联系方式" class="sendOrderPhone">
         <span>/</span>
-        <input type="number" v-model="OrderDetail.phone2" placeholder="请输入发布人联系方式" class="sendOrderPhone">
+        <input type="tel" maxlength="11" v-model="OrderDetail.phone2" placeholder="请输入发布人联系方式" class="sendOrderPhone">
       </li>
       <li class="inputNumOne needBorder noEdit">
         <span class="textRed">*</span>
@@ -226,11 +226,13 @@
         }
         if (this.$app_store.getters.geoState === 1) {
           this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.startc = this.$app_store.state.cityCode;
+          this.OrderDetail.startcext = '';
           this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
         } else if (this.$app_store.getters.geoState === 2) {
           this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.arriarcext = '';
+          this.OrderDetail.arriarc = this.$app_store.state.cityCode;
           this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
         }
 

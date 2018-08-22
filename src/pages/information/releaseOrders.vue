@@ -33,7 +33,7 @@
       <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物大小</span>
-        <input  maxlength="10" v-model="OrderDetail.wm" type="tel" placeholder="重量/体积">
+        <input  maxlength="7" v-model="OrderDetail.wm" type="tel" placeholder="重量/体积">
       </li>
       <li class="inputShort needBorder">
         <input v-model="displayDic.disWmLabel" @click="showPicker('wm')" type="text" readonly="readonly">
@@ -41,7 +41,7 @@
       <li class="inputLong needBorder">
         <span class="textRed">*</span>
         <span>货物数量</span>
-        <input maxlength="10" v-model="OrderDetail.num" type="tel" placeholder="货物数量">
+        <input maxlength="7" v-model="OrderDetail.num" type="tel" placeholder="货物数量">
       </li>
       <li class="inputShort needBorder">
         <input v-model="displayDic.disNumLabel" @click="showPicker('num')" type="text" placeholder="单位"
@@ -101,14 +101,14 @@
         <span class="size10">声明保价</span>
         <input maxlength="10" type="tel" v-model="insureamt">
         <span>元</span>
-        <span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>
+        <!--<span class="textRed size10f def">有保价不支持线上支付，不填默认为0</span>-->
       </li>
       <li class="inputShorter needBorder">
         <span class="textRed">*</span>
         <span class="size10">代收货款</span>
         <input maxlength="10" v-model="codamt" type="tel">
         <span>元</span>
-        <span class="textRed size10 def">有代收不支持线上支付，不填默认为0</span>
+        <!--<span class="textRed size10 def">有代收不支持线上支付，不填默认为0</span>-->
       </li>
     </ul>
     <ul class="liNumSix">
