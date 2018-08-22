@@ -11,7 +11,11 @@ import {
   USER_ID,
   COMP_ID,
   ROID,
-  COMP_INFO, DICT, AREA, USER_INFO,
+  COMP_INFO,
+  DICT,
+  AREA,
+  CITYS,
+  USER_INFO,
 } from './mutation-types'
 
 let getUserInfo =  function () {
@@ -91,6 +95,17 @@ let getArea =  function () {
   return undefined;
 };
 
+let getCitys =  function () {
+  if (localStorage.getItem(CITYS)) {
+    try {
+      return localStorage.getItem(CITYS)
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 const state = {
   userInfo: getUserInfo(), // 用户信息
   compInfo: getCompInfo(), // 企业信息
@@ -99,6 +114,8 @@ const state = {
   roid: getRoid(),// 132：业务员 66：管理员
   // userId: getUserId(), // 用户ouid
   userId: getUserId(), // 用户ouid
+  citys: getCitys(), // 城市列表
+  cityCode: '', // 城市编号
   openId: '',
   searchContent: '', // 搜索内容
   searchState: '', // 搜索类型

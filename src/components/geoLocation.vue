@@ -14,7 +14,7 @@
       </div>
     </div>
       <div class="amap-container">
-        <el-amap-search-box class="search" :search-option="searchOption"
+        <el-amap-search-box :default="searchDefault" class="search" :search-option="searchOption"
                             :on-search-result="onSearchResult">
         </el-amap-search-box>
         <el-amap vid="amapDemo" :center="mapCenter" :zoom="cZoom" class="amap-demo" :events="events">
@@ -44,8 +44,9 @@
         map: null,
         searchOption: {
           city: '',
-          citylimit: false
+          citylimit: true
         },
+        searchDefault: '',
         markers: [], // 搜索标记
         mapCenter: [], // 地图中心点
         geocoder: null,
@@ -62,9 +63,13 @@
       this.initData();
     },
     activated() {
+      debugger
       if(this.map !== null) {
         this.setCity();
       }
+      // 清空搜索列表
+      this.searchDefault = ' ';
+      this.pList = [];
     },
     methods: {
       setCity() {

@@ -2157,20 +2157,8 @@ input[type="radio"] {
   width:7.5rem;
   padding:0rem .2rem 0rem .2rem;
   font-family: PingFang-SC-Regular;
-  background-color:#ffffff;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  letter-spacing: 0px;
-  color: #666666;
-}
-.robbingAdd{
-  display:block;
-  height:.6rem;
-  width:7.5rem;
-  padding:0rem .2rem 0rem .2rem;
-  font-family: PingFang-SC-Regular;
-  background-color:#ffffff;
+  margin-top:.2rem;
+  margin-bottom:.4rem;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -3638,30 +3626,32 @@ circleListAdd li .circlePic{
   width:7.5rem;
   height:40vh;
   padding-top:.3rem;
-  margin:.16rem auto .4rem 0rem;
+  margin:4vh auto 2rem 0;
   background:#ffffff;
 }
 .evaluatePicBox{
+  position:relative;
+  top:-.4rem;
+  left:.55rem;
   display:flex;
   justify-content: space-between;
   flex-wrap:wrap;
   align-content:space-between;
-  width:4.4rem;
-  height:10.3vh;
-  float:right;
-  margin-right:1.25rem;
+  width:5.98rem;
+  height:29.3vh;
+  margin:0 auto;
   border:1px solid #e0e0e0;
 }
 .evaluatePicBox img{
   display:inline-block;
-  width:1.36rem;
-  height:1.36rem;
+  width:1.9rem;
+  height:14vh;
   background-color:pink;
 }
 .orderEvaluateBox{
   display:block;
   width:7.5rem;
-  height:28vh;
+  height:96vh;
   margin:0 auto;
   background-color:#ffffff;
 }
@@ -4091,15 +4081,6 @@ circleListAdd li .circlePic{
   font-stretch: normal;
   letter-spacing: 0px;
 }
-.addEvaluateTitle{
-  display:inline-block;
-  font-family: PingFang-SC-Regular;
-  font-size: .28rem;
-  font-weight: normal;
-  font-stretch: normal;
-  letter-spacing: 0px;
-  color:#999999;
-}
 .pingjiaPic{
   width:6.3rem;
   max-height:4.85rem;
@@ -4194,7 +4175,7 @@ circleListAdd li .circlePic{
 .textareaBox{
   display:block;
   width:7.5rem;
-  min-height:.5rem;
+  height:2.2rem;
   padding:0rem .21rem 0rem .21rem;
 }
 .height29{
@@ -4205,19 +4186,16 @@ circleListAdd li .circlePic{
 }
 .evaluateTextarea{
   float:right;
-  width:5.45rem;
-  min-height:.5rem;
-  margin-bottom:.16rem;
+  width:5.95rem;
+  height:2.2rem;
+  padding:.17rem .16rem .17rem .16rem;
   border:1px solid #e0e0e0;
   font-family: PingFang-SC-Regular;
-  font-size: .28rem;
+  font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
   letter-spacing: 0px;
   color: #d9d9d9;
-}
-.noBorder{
-  border:none;
 }
 .addPhoto{
   display:inline-block;

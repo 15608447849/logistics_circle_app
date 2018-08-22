@@ -13,6 +13,7 @@ import {
   AREA,
   CURRENT_CITY,
   GEOSTATE,
+  CITY_CODE,
   ADDRESSCOM, TABBAR_INDEX, IS_SHOW_SIDEBAR
 } from './mutation-types'
 
@@ -47,8 +48,6 @@ export default {
     state.avatar = v;
     localStorage.setItem(AVATAR_URL, v);
   },
-
-
   // 侧边栏显示
   [IS_SHOW_SIDEBAR] (state, isShowSidebar) {
     state.isShowSidebar = isShowSidebar
@@ -78,6 +77,11 @@ export default {
   [AREA](state, v) {
     state.area = v;
     localStorage.setItem(AREA, v);
+  },
+  // 城市编码
+  [CITY_CODE] (state, v) {
+    state.cityCode = v;
+    localStorage.setItem(CITY_CODE, v);
   },
   // 当前城市
   [CURRENT_CITY](state, v) {

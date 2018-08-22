@@ -70,6 +70,7 @@
   import {
     DICT,
     AREA,
+    CITYS,
     CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL
   } from '../store/mutation-types'
 
@@ -77,11 +78,11 @@
     computed: {
       isShowSidebar: {
         get: function () {
+          this.isUnreadMsg();
           return this.$app_store.state.isShowSidebar
         },
         set: function () {
           this.$app_store.commit(IS_SHOW_SIDEBAR, false);
-          this.isUnreadMsg();
         }
       },
       isAvatar: {
@@ -116,6 +117,7 @@
       }
     },
     activated() {
+      this.isUnreadMsg();
       this.compId = this.$app_store.getters.compId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
       if(this.compInfo !== undefined && this.compInfo !== null) {
@@ -129,15 +131,24 @@
       }
     },
     mounted() {
-      // 获取当前定位城市
-      this.$app_store.commit(CURRENT_CITY, '长沙');
+      // this.$app_store.commit(CURRENT_CITY, '长沙');
+      this.initLocatingCity();
       this.isUnreadMsg();// 是否有新的消息
       this.initBaseData();
       this.initAreaData();
+      this.initAreaH5Data();
     },
     methods: {
+      initLocatingCity() {
+        // 获取当前城市 如无: 默认选择长沙
+
+        // 如本地未保存默认城市, 弹出城市选择框
+
+        // 如本地保存城市,默认选择当前城市
+
+      },
       tabItemClick(index) {
-        console.log(index)
+        console.log(index);
         this.active = index
       },
       isUnreadMsg() {
@@ -178,6 +189,24 @@
             function (result) {
               self.$app_store.commit(AREA, JSON.stringify(result.children));
               // localStorage.setItem("area", JSON.stringify(result.children));
+            },
+            function (error) {
+              setTimeout(() => {
+                self.initAreaData();
+              }, 15000);
+            }
+          )
+        );
+      },
+      initAreaH5Data() {
+        let self = this;
+        self.$Ice_SystemService.getAreaH5Data(
+          new IceCallback(
+            function (result) {
+              if(result.code === 0) {
+                debugger
+                self.$app_store.commit(CITYS, JSON.stringify(result));
+              }
             },
             function (error) {
               setTimeout(() => {

@@ -187,37 +187,43 @@
   export default {
     data() {
       return {
-        OrderDetail: new order.OrderICE(),
-        compInfo: {},
+        OrderDetail: new order.OrderICE(),// 订单对象
+        compInfo: {}, // 企业信息
         dicData: {},// 选择器字典数据, store中获取
         selectDataPicker: '',
         insureamt: 0, // 保价金额
         codamt: 0, // 代收金额
         isReleaseOrder: false,
-        displayDic: {},
+        displayDic: {},// 数据字典
         startc: '', // 出发地
         arriarc: '', // 目的地
         pmList: [],
         disPmList: [],
-        sunPrice: 0,
-        userId: this.$app_store.getters.userId,
+        sunPrice: 0,// 总价
+        userId: this.$app_store.getters.userId,// 用户id
       }
     },
     activated() {
-      // 是否页面需要缓存
+      // 是否页面需要缓存 （A->B->C  页面前进缓存, 后退销毁）
       if(this.$route.meta.isUseCache){
         this.$route.meta.isUseCache = false;
         let addressCom = this.$app_store.getters.addressCom || null;
         if (addressCom === null || addressCom.province === undefined || addressCom.province === null) {
           return
         }
+        // 1 出发地 2 目的地
         if (this.$app_store.getters.geoState === 1) {
+          // 获取选择城市省市区编码
           this.startc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.startc = this.$app_store.state.cityCode;
+          // this.OrderDetail.startcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.startcext = '';
           this.OrderDetail.startaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
         } else if (this.$app_store.getters.geoState === 2) {
           this.arriarc = addressCom.province + addressCom.city + addressCom.district + addressCom.township + addressCom.street + addressCom.streetNumber
-          this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          // this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
+          this.OrderDetail.arriarcext = '';
+          this.OrderDetail.arriarc = this.$app_store.state.cityCode;
           this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
         }
       } else {
@@ -227,11 +233,12 @@
       }
     },
     mounted() {
+      // 获取订单号
       this.generateOrderNo();
+      // 初始化页面数据
       this.initData();
     },
     methods: {
-      // 初始化页面数据
       initData() {
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
         this.arriarc = '';
@@ -372,6 +379,7 @@
           }
         });
       },
+      // 设置选择器
       setPicker(pickerList) {
         this.picker = this.$createPicker({
           title: pickerList.remark,
@@ -436,6 +444,7 @@
           }
         })
       },
+      // 获取订单号
       generateOrderNo() {
         let self = this;
         this.$Ice_OrderService.generateOrderNo(new IceCallback(
@@ -450,6 +459,7 @@
           }
         ));
       },
+      // 订单发布
       releaseOrder() {
         let self = this;
         if (this.validator()) {
@@ -458,6 +468,7 @@
             message: '发单中...'
           });
           setTimeout(()=>{
+            debugger
             self.OrderDetail.codamt = self.codamt;
             self.OrderDetail.insureamt = self.insureamt ;
             self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(
@@ -478,6 +489,7 @@
           },1000);
         }
       },
+      // 输入框字段验证
       validator() {
         // 目的地
         if (this.verifyUtil.isNull(this.arriarc)) {
@@ -517,12 +529,14 @@
         }
         return true
       },
+      // 跳转到高德地图
       toPageGeo(state) {
         this.$app_store.commit(GEOSTATE, state);
         this.$router.push({
           path: '/geo'
         })
       },
+      // 计算订单价格
       sumPrice() {
         if (this.displayDic.disPmLabel[0] === '整单') {
           this.sunPrice = this.OrderDetail.price
@@ -530,7 +544,7 @@
           this.sunPrice = Number(this.OrderDetail.price) * Number(this.OrderDetail.wm)
         }
       },
-      // 转发不
+      // 转发布
       saveTransOrder() {
         let self = this;
         self.$Ice_myOrderService.transOrder(self.OrderDetail,new IceCallback(

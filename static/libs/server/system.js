@@ -80,6 +80,7 @@
         "getChineseAllAreasByPc": [, , , , , [7], , , , , ],
         "getTransferPoint": [, , , , , [7], [[3]], , , , ],
         "getCityAreaAll": [, , , , , [7], , , , , ],
+        "getCityAreaAll4H5": [, , , , , [7], , , , , ],
         "getProperties": [, , , , , [7], , , , , ]
     });
     exports.system = system;

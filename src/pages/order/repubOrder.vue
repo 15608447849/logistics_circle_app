@@ -232,10 +232,8 @@
           this.OrderDetail.arriarcext = addressCom.province + '#' + addressCom.city + '#' + addressCom.district;
           this.OrderDetail.arriaddr = addressCom.township + addressCom.street + addressCom.streetNumber;
         }
-
       } else {
         this.OrderDetail = new order.OrderICE();
-        // this.generateOrderNo();
         this.initData();
       }
     },

@@ -28,6 +28,10 @@ export const UPDATE_LOADING_STATUS  = 'UPDATE_LOADING_STATUS'
 export const DICT  = 'DICT'
 // 地区
 export const AREA = 'AREA'
+// 城市列表
+export const CITYS = 'CITYS'
+// 所在地区编码
+export const CITY_CODE = 'CITY_CODE'
 // 所在地区
 export const CURRENT_CITY = 'CURRENT_CITY'
 // 发单地区
