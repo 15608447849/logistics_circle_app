@@ -209,7 +209,6 @@
       subStr(str,len) {
         return subString(str, len)
       }
-
     },
     activated() {
       this.orderId = this.$route.query.id || '';

@@ -17,7 +17,7 @@
         <li class="enterpriseLi needBorder" @click="show1 = true">
           <span class="invoiceTitle">企业名称</span>
           <span class="invoiceContent floatright">
-      {{compInfo.fname}}
+      {{subStr(compInfo.fname,10)}}
       </span>
         </li>
         <li class="enterpriseLi needBorder">
@@ -146,7 +146,7 @@
 
 <script>
   import {COMP_INFO} from "../../store/mutation-types";
-
+  import { subString } from '../../utils/stringUtil'
   export default {
     data: function () {
       return {
@@ -190,6 +190,9 @@
           onSelect: this.selectHandle,
           onCancel: this.cancelHandle
         });
+      },
+      subStr: function (str, len) {
+        return subString(str, len)
       },
       showCascadePicker() {
         this.cascadePicker.setData(this.cascadeData);

@@ -10,6 +10,7 @@ import verifyUtil from './utils/verifyUtil'
 import message from './utils/message'
 import VueAMap from 'vue-amap';
 import { Dialog } from 'vant';
+import { Popup } from 'vant';
 
 
 import  {
@@ -33,7 +34,7 @@ Vue.use(VueAMap);
 Vue.use(ToastPlugin);
 Vue.use(PasswordInput).use(NumberKeyboard);
 Vue.use(Dialog);
-
+Vue.use(Popup);
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;

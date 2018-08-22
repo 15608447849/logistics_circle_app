@@ -28,7 +28,7 @@
           </cube-upload>
 
       </div>
-      <span class="pLabel">{{compInfo.fname}}</span>
+      <span class="pLabel">{{subStr(compInfo.fname,10)}}</span>
       <span class="creditGrade">信用等级</span>
       <ul class="startBoxCredit">
         <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
@@ -101,6 +101,7 @@
 <script>
   import { uploadUrl,cardUrl ,delCardUrl} from '../../../static/libs/server/config'
   import {AVATAR_URL, COMP_INFO} from "../../store/mutation-types";
+  import { subString } from '../../utils/stringUtil'
   export default {
     data() {
       return {
@@ -183,6 +184,9 @@
             }
           )
         );
+      },
+      subStr: function (str, len) {
+        return subString(str, len)
       },
       fallback() {
         this.$router.go(-1)

@@ -23,7 +23,7 @@
           <div class="portrait">
             <img :src="isAvatar" alt="" v-if="isAvatar !== ''">
             <img src="../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="isAvatar === ''">
-            <span class="logisticsMing">{{compName}}</span>
+            <span class="logisticsMing">{{subStr(compName, 10)}}</span>
           </div>
           <ul class="startBox">
             <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
@@ -63,6 +63,17 @@
         </div>
       </div>
     </yd-popup>
+    <van-popup v-model="popShow">
+      <p class="placePickCity">请选择城市</p>
+      <!--<div class="defaultCity">默认城市:北京市</div>-->
+      <div class="placePicBtn">
+        <van-cell-group>
+          <van-cell title="默认城市" is-link value="长沙市" />
+        </van-cell-group>
+        <div class="tishiyu">首页、圈子订单会根据订单目的地或出发地所在城市默认筛选</div>
+      </div>
+    </van-popup>
+
   </div>
 </template>
 
@@ -73,7 +84,7 @@
     CITYS,
     CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL
   } from '../store/mutation-types'
-
+  import { subString } from '../utils/stringUtil'
   export default {
     computed: {
       isShowSidebar: {
@@ -105,6 +116,7 @@
     },
     data() {
       return {
+        popShow: false,
         isNewMsg:true,// 是否有新的消息
         cLevel: [],// 认证等级
         avatar: '',// 头像
@@ -131,6 +143,7 @@
       }
     },
     mounted() {
+      this.popShow = true
       // this.$app_store.commit(CURRENT_CITY, '长沙');
       this.initLocatingCity();
       // 是否有新的消息
@@ -234,6 +247,9 @@
           result.push(require('../assets/images/small/star36_off@2x.png'));
         }
         this.cLevel = result;
+      },
+      subStr: function (str, len) {
+        return subString(str, len)
       },
       toDriverAmd() {
         this.$router.push({

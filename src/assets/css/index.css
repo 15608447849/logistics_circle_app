@@ -2059,6 +2059,40 @@ input[type="radio"] {
   background:#ffffff;
   margin-bottom:.2rem;
 }
+.placePickCity{
+  height:1rem;
+  line-height:1rem;
+  font-size:.28rem;
+  color:#ffffff;
+  background-color:#3189f5;
+  text-align: center;
+}
+.van-popup{
+  display:block;
+  width:5rem;
+  height:3rem;
+  background:#ffffff;
+  border:1px solid transparent;
+  border-radius: 3px;
+}
+.defaultCity{
+  height:1.5rem;
+  text-align: center;
+  line-height:1.5rem;
+  font-size:.28rem;
+}
+.tishiyu{
+  background-color:#ffffff;
+  font-size:.28rem;
+  color:orangered;
+  line-height:.5rem;
+}
+.placePicBtn{
+  height:1rem;
+  text-align: center;
+  line-height:1rem;
+  font-size:.28rem;
+}
 .RobbingBoxOrder{
   display:block;
   width:7.5rem;
