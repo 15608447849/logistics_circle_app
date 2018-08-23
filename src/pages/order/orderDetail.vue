@@ -1,5 +1,5 @@
 <template>
-  <div style="background:#ffffff;">
+  <div style="background-color:#ffffff;">
     <div class="issueHeaderNav">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
@@ -142,7 +142,7 @@
       <div class="textareaBox">
         <span class="addEvaluateTitle">评&nbsp&nbsp&nbsp价</span>
         <div class="evaluateTextareaA" readonly="readonly" placeholder="暂无订单评价">
-          送货时间很快，货物没有损坏送货时间很快，送货时间很快，
+          送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，
 
         </div>
       </div>
@@ -151,8 +151,14 @@
       <img src="" alt="">
       <img src="" alt="">
       <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
+
+
+
     </div>
-    <div class="robbingAdd floatleft">
+    <div class="robbingAdd">
       <span class="rderCostA">订单费用</span>
       <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
     </div>

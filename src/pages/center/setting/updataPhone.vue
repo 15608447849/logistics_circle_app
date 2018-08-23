@@ -64,7 +64,7 @@
              init-str="获取验证码"
            ></yd-sendcode>
          </div>
-         <van-button style="width:7.08rem;height:.64rem;margin-left:.21rem;line-height:.64rem;margin-top:.5rem;" size="large" type="primary" @click="changePhone">确 定</van-button>
+         <van-button style="width:7.08rem;height:6vh;margin-left:.21rem;line-height:6vh;margin-top:.5rem;background-color:#3189f5;border:1px solid transparent;" size="large" type="primary" @click="changePhone">确 定</van-button>
        </div>
 
      <!--<div class="updataPwdinputBox" v-show="thirdStepBool">-->

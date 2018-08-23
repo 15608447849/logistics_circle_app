@@ -9,7 +9,7 @@
         <span>信息大厅</span>
       </div>
       <div class="width20">
-        <i class="icon iconfont icon-gengduo1 colorWhite floatright" @click="toPageIssue"></i>
+        <span @click="toPageIssue" class="floatright">发布</span>
       </div>
 
       <!--<span @click="toPageIssue">发单</span>-->

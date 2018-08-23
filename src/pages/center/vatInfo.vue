@@ -111,10 +111,13 @@
 
     <van-button :disabled=disabled @click="updateComp" size="large" v-show="isEditor"
       style="
-      background: #31bff5;
       width:7.08rem;
+      height:6vh;
+      background:#3189f5;
+      line-height:6vh;
       margin-left:.21rem;
-      margin-top:10vh;margin-top:12vh;
+      margin-top:10vh;
+      margin-top:12vh;
       color:#ffffff;"
     >
       保存

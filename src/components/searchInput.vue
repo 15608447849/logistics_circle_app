@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%;height: 100%">
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i @click="fallback" class="icon iconfont icon-btngoback back floatleft"></i>
       </div>
@@ -14,7 +14,6 @@
 
 
     </div>
-    <div class="downfixed havedownfixed">
       <yd-search v-model="inputVal" :on-submit="submitInput" :on-cancel="returnToPage"></yd-search>
       <ul class="searchHistory">
         <li class="historyRecord needBorder" @click="itemClick(item)" v-for="(item, index)  in historyList" :key="index"> {{item}}
@@ -22,7 +21,6 @@
         </li>
       </ul>
       <button class="allEmpty" @click="clearHistoryList">全部清空</button>
-    </div>
   </div>
 </template>
 <script>
