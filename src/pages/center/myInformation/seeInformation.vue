@@ -16,7 +16,7 @@
       <!--<img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser widthHeight140 floatleft" v-if="logoPath == ''">-->
       <!--<img src="../../../assets/images/small/moren.png" alt="" @click="avatarClick" class="loginPictureDefault floatleft" v-if="logoPath === ''">-->
     </div>
-    <span class="pLabel">{{compByUid.fname}}</span>
+    <span class="pLabel">{{subStr(compByUid.fname,10)}}</span>
     <span class="creditGrade">信用等级</span>
     <ul class="startBoxCredit">
       <li v-for="(item, index) in cLevel" :key="index"><img :src= "item" alt=""></li>
@@ -55,6 +55,7 @@
 
 <script>
   import {alertContent} from "../../../utils/enum";
+  import { subString } from '../../../utils/stringUtil'
   export default {
     data(){
       return {
@@ -95,6 +96,9 @@
           //失败
         }))
 
+      },
+      subStr: function (str, len) {
+        return subString(str, len)
       },
       // 已处理的消息
       YesHandleMessage() {

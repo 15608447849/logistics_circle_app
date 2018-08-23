@@ -68,7 +68,7 @@
       <!--<div class="defaultCity">默认城市:北京市</div>-->
       <div class="placePicBtn">
         <van-cell-group>
-          <van-cell title="默认城市" is-link value="长沙市" />
+           <van-cell title="默认城市:" is-link value="长沙市" />
         </van-cell-group>
         <div class="tishiyu">首页、圈子订单会根据订单目的地或出发地所在城市默认筛选</div>
       </div>
