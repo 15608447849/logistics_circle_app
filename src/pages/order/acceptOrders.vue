@@ -34,7 +34,7 @@
               <div class="releaseCompany">
                 <div class="companyBox">
                   <i class="icon iconfont icon-qiyexinxi"></i>
-                  <span>{{item.pubcompname}}</span>
+                  <span>{{subStr(item.pubcompname,10)}}</span>
                   <i class="icon iconfont icon-icon-test"></i>
                 </div>
                 <!--<span class="releasetext">发布</span>-->
@@ -114,7 +114,7 @@
   import {alertContent} from "../../utils/enum";
   import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
-
+  import { subString } from '../../utils/stringUtil'
   export default {
     components: {
       Tab,
@@ -193,6 +193,9 @@
     methods: {
       showPicker () {
         this.picker.show()
+      },
+      subStr: function (str, len) {
+        return subString(str, len)
       },
       statusToChinese(status) {
         let cont = '';

@@ -80,7 +80,7 @@
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser"
              v-if="compInfo.logoPath === ''">
-        <span class="logisticsName">{{compInfo.fname}}</span>
+        <span class="logisticsName">{{subStr(compInfo.fname,10)}}</span>
       </div>
 
       <ul class="paddingLeft21 marginBottom15 dingdan">
@@ -287,7 +287,7 @@
 
 <script>
   import {alertContent} from "../../utils/enum";
-
+  import { subString } from '../../utils/stringUtil'
   export default {
     data() {
       return {
@@ -340,7 +340,9 @@
       //     done();
       //   }
       // },
-
+     subStr: function (str,len) {
+       return  subString(str,len)
+     },
       // 跳转企业详情
       toCompInfo(type) {
         let compId = '';
