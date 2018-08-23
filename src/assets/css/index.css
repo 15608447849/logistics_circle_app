@@ -2060,8 +2060,8 @@ input[type="radio"] {
   margin-bottom:.2rem;
 }
 .placePickCity{
-  height:1rem;
-  line-height:1rem;
+  height:.8rem;
+  line-height:.8rem;
   font-size:.28rem;
   color:#ffffff;
   background-color:#3189f5;
