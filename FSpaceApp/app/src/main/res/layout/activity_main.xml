@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fsapce.webx5.X5WebView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/x5WebView"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="@android:color/transparent"
+    />

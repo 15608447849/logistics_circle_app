@@ -59,18 +59,6 @@
         }
       }
     },
-    mounted() {
-      this.initData();
-    },
-    // activated() {
-    //   debugger
-    //   if(this.map !== null) {
-    //     this.setCity();
-    //   }
-    //   // 清空搜索列表
-    //   this.searchDefault = ' ';
-    //   this.pList = [];
-    // },
     methods: {
       setCity() {
         if (this.$app_store.state.receiptCity !== '') {
@@ -81,9 +69,6 @@
         if (this.map !== null) {
           this.map.setCity(this.searchOption.city);
         }
-      },
-      initData() {
-        // this.mapCenter = [113.0068368, 28.212332300000003];
       },
       selectCity() {
         this.$router.push({

@@ -13,24 +13,33 @@
   </div>
 </template>
 <script>
+  import { Toast } from 'vant';
   import {
     CURRENT_CITY,
     RECEIPT_CITY,
     CITY_CODE
   } from '../store/mutation-types'
+
   export default {
     data() {
       return {
-        cityData: '', // 城市数据
+        cityData: [], // 城市数据
         currentCity: '', // 当前选中城市
         status: 0
       }
     },
     mounted() {
-
+      this.initCityList(0).then((resolve) => {
+        console.log('数据开始渲染' + new Date());
+        this.cityData = resolve;
+        this.$nextTick(function(){
+          console.log('数据渲染完毕拉~' + new Date());
+          // 关闭下拉框
+          Toast.clear();
+        });
+      });
     },
     activated(){
-      this.cityData =  JSON.parse(this.$app_store.state.citys);
       // status: 0 定位城市 1 发单定位
       this.status = this.$route.query.status;
       if (this.status === 0) {
@@ -40,6 +49,17 @@
       }
     },
     methods: {
+      initCityList(ms) {
+        Toast.loading({
+          mask: true,
+          message: '加载中...'
+        });
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(JSON.parse(this.$app_store.state.citys));
+          },ms);
+        });
+      },
       selectItem(item) {
         // 设置城市名称
         if (this.status === 0) {

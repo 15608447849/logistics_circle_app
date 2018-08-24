@@ -130,7 +130,7 @@
       }
     },
     activated() {
-      this.isUnreadMsg();
+      // this.isUnreadMsg();
       this.compId = this.$app_store.getters.compId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
       if(this.compInfo !== undefined && this.compInfo !== null) {
@@ -149,14 +149,27 @@
       // this.initLocatingCity();
       // 是否有新的消息
       this.isUnreadMsg();
-      // 初始化基础数据字典
-      this.initBaseData();
-      // 初始化地区
-      this.initAreaData();
-      // 初始化
-      this.initAreaH5Data();
+      // 初始化数据
+      this.initData();
+
     },
     methods: {
+      initData() {
+        // 判断本地是否存在基础字典数据
+        if(this.$app_store.state.dict === undefined) {
+          // 初始化基础数据字典
+          this.initBaseData();
+        }
+        if(this.$app_store.state.area === undefined) {
+          // 初始化地区
+          this.initAreaData();
+        }
+        if(this.$app_store.state.citys === undefined) {
+          // 初始化城市列表
+          this.initAreaH5Data();
+        }
+        // 判断字典是否具有更新
+      },
       initLocatingCity() {
         // 获取当前城市 如无: 默认选择长沙
         let info =  localStorage.getItem('cityInfo') || null;
