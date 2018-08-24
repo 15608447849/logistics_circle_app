@@ -73,6 +73,7 @@
                   <!-- 录入行程 -->
                   <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="entryTrip(item.orderno)">录入行程</a>
                   <a v-show="item.tstatus === 3" class="colorsixsix" @click.stop="printOrder(item, index)">查看中转单</a>
+                  <!--<a class="colorsixsix" @click.stop="printOrder(item, index)">查看中转单</a>-->
 
                   <!-- 签收 -->
                   <!--<a v-show="item.tstatus === 4" class="colorsixsix" @click.stop="toPickGoodsPic(item)">取货照片</a>-->
@@ -257,7 +258,7 @@
         this.$Ice_myOrderService.getTrancCode(this.userId,item.orderno,item.tstatus,new IceCallback(
           function(result){
             if (result.code === 0) {
-              let data = JSON.parse(result.obj[0]);
+              let data = JSON.parse(result.obj.trancCode);
               let	dataImg = data.data.nginx + data.data.relativeAddr;
               self.$router.push({
                 name: 'preview',

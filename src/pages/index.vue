@@ -82,7 +82,7 @@
     DICT,
     AREA,
     CITYS,
-    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL
+    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL, CITY_CODE
   } from '../store/mutation-types'
   import { subString } from '../utils/stringUtil'
   export default {
@@ -125,7 +125,8 @@
         transitionName: '',
         compInfo: null,
         userId: this.$app_store.getters.userId,
-        active: 1
+        active: 1,
+        cityInfo: {}
       }
     },
     activated() {
@@ -143,9 +144,9 @@
       }
     },
     mounted() {
-      this.popShow = true
-      // this.$app_store.commit(CURRENT_CITY, '长沙');
-      this.initLocatingCity();
+      this.$app_store.commit(CURRENT_CITY, '长沙市');
+      this.$app_store.commit(CITY_CODE, '104301');
+      // this.initLocatingCity();
       // 是否有新的消息
       this.isUnreadMsg();
       // 初始化基础数据字典
@@ -158,14 +159,21 @@
     methods: {
       initLocatingCity() {
         // 获取当前城市 如无: 默认选择长沙
-
-        // 如本地未保存默认城市, 弹出城市选择框
-
-        // 如本地保存城市,默认选择当前城市
-
+        let info =  localStorage.getItem('cityInfo') || null;
+        if(info!== null) {
+          this.cityInfo = JSON.parse(info);
+        } else {
+          let obj = {
+            currentCity: '长沙',
+            cityCode: '104301'
+          };
+          this.cityInfo = localStorage.setItem('cityInfo',JSON.stringify(obj));
+          this.popShow = true
+        }
+        this.$app_store.commit(CURRENT_CITY, this.cityInfo.currentCity);
+        this.$app_store.commit(CITY_CODE, this.cityInfo.cityCode);
       },
       tabItemClick(index) {
-        console.log(index);
         this.active = index
       },
       isUnreadMsg() {
@@ -173,9 +181,13 @@
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
           function(result){
-            self.isNewMsg = false;
+            if(result>0) {
+              self.isNewMsg = false;
+            }else {
+              self.isNewMsg = true;
+            }
+
         },function(error){
-            self.isNewMsg = true;
           //失败
         }))
       },
@@ -203,8 +215,9 @@
         self.$Ice_SystemService.getAreaCode(
           new IceCallback(
             function (result) {
-              self.$app_store.commit(AREA, JSON.stringify(result.children));
-              // localStorage.setItem("area", JSON.stringify(result.children));
+              if(result.code === 0) {
+                self.$app_store.commit(AREA, JSON.stringify(result.data.children));
+              }
             },
             function (error) {
               setTimeout(() => {
@@ -220,8 +233,7 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                debugger
-                self.$app_store.commit(CITYS, JSON.stringify(result));
+                self.$app_store.commit(CITYS, result.obj);
               }
             },
             function (error) {

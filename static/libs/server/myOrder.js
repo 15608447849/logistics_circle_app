@@ -147,7 +147,7 @@
      * 订单实体
      **/
     myOrder.OrderICE = Slice.defineStruct(
-        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, actdatetime, tstatus, priority, revierid, compname, phone, carriage, wmdictcn, numdictcn, padictcn, ctdictcn, vldictcn, vtdictcn, tndictcn, pmdictcn, ptdictcn, dmdictcn, redictcn, istrans)
+        function(puberid, puberCarrier, phone1, phone2, pubdatetime, billno, orderno, startc, startaddr, arriarc, arriaddr, startcext, arriarcext, wm, wmdictc, num, numdictc, padictc, ctdictc, vnum, vldictc, vtdictc, tndictc, tndictarr, price, pmdictc, codamt, insureamt, ptdictc, consignee, consphone, dmdictc, redictc, pusdatetime, puedatetime, easdatetime, eaedatetime, revidatetime, arridatetime, actdatetime, tstatus, priority, revierid, compname, phone, carriage, wmdictcn, numdictcn, padictcn, ctdictcn, vldictcn, vtdictcn, tndictcn, pmdictcn, ptdictcn, dmdictcn, redictcn, istrans, pubcompid, ext1, ext2, ext3)
         {
             this.puberid = puberid !== undefined ? puberid : "";
             this.puberCarrier = puberCarrier !== undefined ? puberCarrier : "";
@@ -207,6 +207,10 @@
             this.dmdictcn = dmdictcn !== undefined ? dmdictcn : "";
             this.redictcn = redictcn !== undefined ? redictcn : "";
             this.istrans = istrans !== undefined ? istrans : false;
+            this.pubcompid = pubcompid !== undefined ? pubcompid : "";
+            this.ext1 = ext1 !== undefined ? ext1 : "";
+            this.ext2 = ext2 !== undefined ? ext2 : "";
+            this.ext3 = ext3 !== undefined ? ext3 : "";
         },
         false,
         function(__os)
@@ -269,6 +273,10 @@
             __os.writeString(this.dmdictcn);
             __os.writeString(this.redictcn);
             __os.writeBool(this.istrans);
+            __os.writeString(this.pubcompid);
+            __os.writeString(this.ext1);
+            __os.writeString(this.ext2);
+            __os.writeString(this.ext3);
         },
         function(__is)
         {
@@ -330,8 +338,12 @@
             this.dmdictcn = __is.readString();
             this.redictcn = __is.readString();
             this.istrans = __is.readBool();
+            this.pubcompid = __is.readString();
+            this.ext1 = __is.readString();
+            this.ext2 = __is.readString();
+            this.ext3 = __is.readString();
         },
-        105, 
+        109, 
         false);
 
     /**
@@ -560,7 +572,48 @@
             this.ordereva = myOrder.OrderEvaluate.read(__is, this.ordereva);
             this.logPath = __is.readString();
         },
-        145, 
+        149, 
+        false);
+
+    /**
+     * 订单生成转运码
+     **/
+    myOrder.OrderTrancQR = Slice.defineStruct(
+        function(trancCode, startc, startcn, arriarc, arriarcn, num, numdict, numtxt)
+        {
+            this.trancCode = trancCode !== undefined ? trancCode : "";
+            this.startc = startc !== undefined ? startc : "";
+            this.startcn = startcn !== undefined ? startcn : "";
+            this.arriarc = arriarc !== undefined ? arriarc : "";
+            this.arriarcn = arriarcn !== undefined ? arriarcn : "";
+            this.num = num !== undefined ? num : 0;
+            this.numdict = numdict !== undefined ? numdict : "";
+            this.numtxt = numtxt !== undefined ? numtxt : "";
+        },
+        true,
+        function(__os)
+        {
+            __os.writeString(this.trancCode);
+            __os.writeString(this.startc);
+            __os.writeString(this.startcn);
+            __os.writeString(this.arriarc);
+            __os.writeString(this.arriarcn);
+            __os.writeInt(this.num);
+            __os.writeString(this.numdict);
+            __os.writeString(this.numtxt);
+        },
+        function(__is)
+        {
+            this.trancCode = __is.readString();
+            this.startc = __is.readString();
+            this.startcn = __is.readString();
+            this.arriarc = __is.readString();
+            this.arriarcn = __is.readString();
+            this.num = __is.readInt();
+            this.numdict = __is.readString();
+            this.numtxt = __is.readString();
+        },
+        11, 
         false);
 
     /**

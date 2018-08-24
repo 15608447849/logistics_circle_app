@@ -267,15 +267,18 @@
             that.isEditor = !orderData.istrans;
             that.OrderDetail.billno = orderData.billno; // 运单号
             that.OrderDetail.orderno = orderData.orderno; // 自动生成的订单号
+
             that.OrderDetail.arriarc = orderData.arriarc; // 目的地编码
             that.arriarc = orderData.arriarcext + orderData.arriaddr; // 目的地
-            that.startc = orderData.startcext + orderData.startaddr;
+            that.OrderDetail.arriaddr = orderData.arriaddr;// 目的地详细地址
 
-            that.OrderDetail.startcext = orderData.startcext;
-            that.OrderDetail.startaddr = orderData.startaddr;
+            that.startc = orderData.startcext + orderData.startaddr;// 出发地地址
+            // that.OrderDetail.startcext = orderData.startcext;// 页面展示地址
+            that.OrderDetail.startc = orderData.startc;// 出发地编码
+            that.OrderDetail.startaddr = orderData.startaddr;// 出发地详细地址
 
             that.OrderDetail.arriarcext =  orderData.arriarcext;
-            that.OrderDetail.arriaddr = orderData.arriaddr;
+
 
             that.OrderDetail.wm = orderData.wm; // 货物内容(重量/体积) 数量
 
@@ -352,6 +355,8 @@
               that.OrderDetail.phone1 = that.compInfo.contact;
               that.OrderDetail.phone2 = '';
             }
+            // 计算总价
+            that.sumPriceA();
           },
           function(error) {
             that.$vux.toast.text(error, 'top');
@@ -457,7 +462,7 @@
               case '费用度量':
                 this.OrderDetail.pmdictc = selectedVal;
                 this.displayDic.disPmLabel = selectedText;
-                this.sumPrice();
+                this.sumPriceB();
                 break;
             }
           },
@@ -492,15 +497,21 @@
         let self = this;
         if(this.validator()) {
           let jsonObj = new myOrder.OrderICE();
+          debugger
           jsonObj.puberid = this.userId;				//收货人
           jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 :  self.OrderDetail.phone1; 			// 手机号码1
           jsonObj.phone2 = self.OrderDetail.phone2 === '' ? 0 :  self.OrderDetail.phone2;  			// 手机号码2
           jsonObj.billno = self.OrderDetail.billno;						// TMS运单号
           jsonObj.orderno = self.OrderDetail.orderno.toString();					// 订单号
-          jsonObj.startcext = self.OrderDetail.startcext;
-          jsonObj.startaddr =self.OrderDetail.startaddr;  			 // 出发地详细地址
-          jsonObj.arriarcext =  self.OrderDetail.arriarcext;
-          jsonObj.arriaddr =self.OrderDetail.arriaddr; 				 // 到达地详细地址
+
+          jsonObj.startcext = '';
+          jsonObj.startaddr =self.OrderDetail.startaddr;// 出发地详细地址
+          jsonObj.startc =  self.OrderDetail.startc;// 出发地编码
+
+          jsonObj.arriarc =   self.OrderDetail.arriarc;// 出发地编码
+          jsonObj.arriaddr =self.OrderDetail.arriaddr; // 到达地详细地址
+          jsonObj.arriarcext =  '';
+
           jsonObj.wm = parseFloat(self.OrderDetail.wm); 	//货物重量/体积
           jsonObj.wmdictc = self.OrderDetail.wmdictc.toString(); 	//货物重量/体积单位字典码id
           jsonObj.num = Number(self.OrderDetail.num); //件数
@@ -581,8 +592,15 @@
           path: '/geo'
         })
       },
-      sumPrice() {
+      sumPriceB() {
         if (this.displayDic.disPmLabel[0] === '整单') {
+          this.sunPrice = this.OrderDetail.price
+        } else {
+          this.sunPrice = Number(this.OrderDetail.price) * Number(this.OrderDetail.wm)
+        }
+      },
+      sumPriceA() {
+        if (this.displayDic.disPmLabel === '整单') {
           this.sunPrice = this.OrderDetail.price
         } else {
           this.sunPrice = Number(this.OrderDetail.price) * Number(this.OrderDetail.wm)
@@ -611,15 +629,6 @@
           this.OrderDetail.ptdictc = 22;
           this.displayDic.disPtLabel = '线下支付';
         }
-      },
-      //
-      wm(newValue, oldValue) {
-        // 计算总价
-        this.sumPrice()
-      },
-      price(newValue, oldValue) {
-        // 计算总价
-        this.sumPrice()
       }
     }
   }

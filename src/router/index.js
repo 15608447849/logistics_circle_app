@@ -144,7 +144,6 @@ const vueRouter = new Router({
           path: '/order',
           component: ORDER,
           meta: {
-            keepAlive: true,
             requireAuth: true
           },
         }
@@ -390,9 +389,6 @@ const vueRouter = new Router({
     {
       path: '/order/acceptOrders',
       component: ACCEPT,
-      meta: {
-        keepAlive: true
-      }
     },
     {
       path: '/order/acceptDetails',

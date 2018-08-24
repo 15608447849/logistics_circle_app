@@ -131,9 +131,6 @@
         this.$router.go(-1);
       }
     },
-    deactivated() {
-
-    },
     beforeRouteLeave (to, from, next) {
       if (to.name === 'releaseOrders') {
         to.meta.isUseCache = true;

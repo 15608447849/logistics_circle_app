@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#ffffff;">
+  <div style="background:#ffffff;">
     <div class="issueHeaderNav">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
@@ -80,7 +80,7 @@
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser"
              v-if="compInfo.logoPath === ''">
-        <span class="logisticsName">{{subStr(compInfo.fname,10)}}</span>
+        <span class="logisticsName">{{subStr(compInfo.fname,12)}}</span>
       </div>
 
       <ul class="paddingLeft21 marginBottom15 dingdan">
@@ -138,27 +138,18 @@
       </ul>
     </div>
 
-    <div class="orderEvaluateBox">
+    <div class="orderEvaluateBox" v-show="isShowEvaluation">
       <div class="textareaBox">
         <span class="addEvaluateTitle">评&nbsp&nbsp&nbsp价</span>
         <div class="evaluateTextareaA" readonly="readonly" placeholder="暂无订单评价">
-          送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，送货时间很快，货物没有损坏送货时间很快，
-
+         {{orderEva.remarks}}
         </div>
       </div>
     </div>
-    <div class="evaluatePicBox noBorder">
-      <img src="" alt="">
-      <img src="" alt="">
-      <img src="" alt="">
-      <img src="" alt="">
-      <img src="" alt="">
-      <img src="" alt="">
-
-
-
+    <div class="evaluatePicBox noBorder" v-show="isShowEvaluation">
+      <img :src="item" v-for="(item,index) in picurlarr" @click="imagePreview(index)">
     </div>
-    <div class="robbingAdd">
+    <div class="robbingAdd floatleft">
       <span class="rderCostA">订单费用</span>
       <span class="yang">￥</span><span class="orderTotal textRed textBlod">{{detailInfo.carriage}}</span>
     </div>
@@ -293,14 +284,18 @@
 
 <script>
   import {alertContent} from "../../utils/enum";
-  import { subString } from '../../utils/stringUtil'
+  import { subString } from '../../utils/stringUtil';
+  import {ImagePreview} from 'vant';
   export default {
     data() {
       return {
         isDisplayTime: false,
         type: 0, // 0 发布 1 接受
         show2: false,
-        detailInfo: {},
+        detailInfo: {},// 订单详情
+        orderEva: {},// 评价详情
+        isShowEvaluation: false, // 是否显示评价
+        picurlarr: [], // 评价图片
         // show: false,
         userId: this.$app_store.getters.userId,
         order: {},
@@ -402,6 +397,11 @@
               if (self.detailInfo.eaedatetime == '' || self.detailInfo.easdatetime == '') {
                 self.isDisplayTime == true
               }
+              if(result.obj.ordereva !== undefined) {
+                self.isShowEvaluation = true;
+                self.orderEva = result.obj.ordereva;
+                self.picurlarr = JSON.parse(self.orderEva.picurlarr);
+              }
             } else {
               self.$vux.toast.text(result.msg, 'top');
             }
@@ -454,6 +454,10 @@
 
           })
 
+      },
+      // 点击查看大图
+      imagePreview(index) {
+        ImagePreview(this.picurlarr, index);
       },
       // 录入行程
       entryTrip() {
@@ -578,8 +582,10 @@
           .catch(() => {
 
           })
-      }
-      ,
+      },
+      subStr(str,len) {
+        return subString(str, len)
+      },
       // 取货照片
       toPickGoodsPic(type) {
         if (self.detailInfo === '0') {

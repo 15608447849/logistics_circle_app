@@ -11,9 +11,6 @@
         <div class="width20">
           <div class="alignCenter floatright"></div>
         </div>
-
-
-
       </div>
       <!--<div class="issueHeaderLog">-->
       <!--<i @click="fallback" class="icon iconfont icon-btngoback back"></i>-->
@@ -188,14 +185,12 @@
           function (result) {
             self.$vux.toast.text(result.msg, 'top');
             if (result.code === 0) {
-              debugger
               self.sendSMSV();
             } else {
               self.$vux.toast.text(result.msg, 'top');
             }
           },
           function (error) {
-            debugger
             self.$dialog.loading.close();
             self.$vux.toast.text(error, 'top');
           }

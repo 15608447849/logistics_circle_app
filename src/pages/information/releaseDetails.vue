@@ -178,8 +178,6 @@
               }
               self.detailInfo = result.obj;
               self.detailInfo.ostatus =  Number(self.ostatus);
-              console.log(self.detailInfo.phone1)
-              console.log(self.detailInfo.phone2)
             },
             function (error) {
               self.$vux.toast.text('订单详情获取失败, 请稍后重试', 'top');
@@ -204,6 +202,9 @@
         );
       },
       subStrPhone(tel) {
+        if(tel === undefined) {
+          return
+        }
         return  tel.toString().substr(0, 3) + '****' + tel.toString().substr(7);
       },
       subStr(str,len) {

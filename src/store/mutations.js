@@ -10,6 +10,7 @@ import {
   SEARCH_CONTENT,
   UPDATE_LOADING_STATUS,
   DICT,
+  CITYS,
   AREA,
   CURRENT_CITY,
   GEOSTATE,
@@ -82,6 +83,11 @@ export default {
   [CITY_CODE] (state, v) {
     state.cityCode = v;
     localStorage.setItem(CITY_CODE, v);
+  },
+  // 城市列表
+  [CITYS] (state, v) {
+    state.citys = v;
+    localStorage.setItem(CITYS, v);
   },
   // 当前城市
   [CURRENT_CITY](state, v) {

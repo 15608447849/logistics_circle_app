@@ -95,6 +95,7 @@
   } from '../../store/mutation-types'
   import {searchState} from "../../utils/config";
   import Conversion from '@/utils/conversion';
+  import { Swipe, SwipeItem } from 'vant';
 
   export default {
     computed: {
