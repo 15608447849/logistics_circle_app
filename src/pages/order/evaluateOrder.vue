@@ -209,6 +209,15 @@
       fallback() {
         this.$router.go(-1)
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.name === 'order') {
+        to.meta.isUseCache = true;
+      }
+      if (to.name === 'acceptOrders') {
+        to.meta.isUseCache = true;
+      }
+      next();
     }
   }
 </script>

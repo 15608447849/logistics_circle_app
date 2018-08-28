@@ -41,6 +41,14 @@ export default {
   receiptCity: state => {
     return state.receiptCity
   },
+  // 路线出发地
+  startCity: state => {
+    return state.startCity
+  },
+  // 路线目的地
+  bournCity: state => {
+    return state.bournCity
+  },
   // 高德地图状态
   geoState: state => {
     return state.geoState

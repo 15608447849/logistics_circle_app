@@ -111,7 +111,7 @@
 </template>
 <script>
   import {
-    COMP_INFO, USER_ID,
+    COMP_INFO, CSTATUS, USER_ID,
     USER_INFO,
     USER_TOKEN
   } from '../../store/mutation-types'
@@ -272,6 +272,7 @@
                       self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                       self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
                       // self.getCompList(result.obj.oid);
+                      self.$app_store.commit(CSTATUS,result.obj.comps[0].cstatus);
                       self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
                     } else {
                       self.$vux.toast.text(result.msg, 'top');

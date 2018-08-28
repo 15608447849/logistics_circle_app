@@ -157,41 +157,51 @@
     created() {
 
     },
-    mounted() {
-      this.year = new Date().getFullYear();
-      this.col1Data = [];
-      for(let i = 0;i<10;i++) {
-        let year = this.year - i;
-        let obj = {
-          value: year,
-          text: year
-        };
-        this.col1Data.push(obj);
+    activated() {
+      if(this.$route.meta.isUseCache){
+        this.$route.meta.isUseCache = false;
+        // 啥也不动
+      }else {
+        this.initData();
       }
-      // 初始化列表查询条件
-      this.initQueryConditions('1');
-      this.picker = this.$createPicker({
-        title: '选择年份',
-        data: [this.col1Data],
-        onSelect: (selectedVal, selectedIndex, selectedText) => {
-          this.year = selectedVal[0];
-          // 重置搜索条件
-          this.initQueryConditions(this.index);
-          console.log(this.page)
-          // 清空数据
-          this.releaseList = [];
-          // 刷新列表
-          // this.queryMyPublishOrder();
-          // this.onLoad();
-          this.queryMyRecvOrder();
-        },
-        onCancel: () => {
-
-        }
-      })
-
+    },
+    mounted() {
+      this.initData();
     },
     methods: {
+      initData() {
+        this.releaseList = [];
+        this.year = new Date().getFullYear();
+        this.col1Data = [];
+        for(let i = 0;i<10;i++) {
+          let year = this.year - i;
+          let obj = {
+            value: year,
+            text: year
+          };
+          this.col1Data.push(obj);
+        }
+        this.initQueryConditions('1');
+        this.picker = this.$createPicker({
+          title: '选择年份',
+          data: [this.col1Data],
+          onSelect: (selectedVal, selectedIndex, selectedText) => {
+            this.year = selectedVal[0];
+            // 重置搜索条件
+            this.initQueryConditions(this.index);
+            console.log(this.page)
+            // 清空数据
+            this.releaseList = [];
+            // 刷新列表
+            // this.queryMyPublishOrder();
+            // this.onLoad();
+            this.queryMyRecvOrder();
+          },
+          onCancel: () => {
+
+          }
+        })
+      },
       showPicker () {
         this.picker.show()
       },

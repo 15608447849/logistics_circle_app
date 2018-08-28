@@ -47,6 +47,7 @@
   import Conversion from '@/utils/conversion'
   import {IS_SHOW_SIDEBAR, TABBAR_INDEX} from "../../store/mutation-types";
   import { page } from '@/utils/config'
+  import { Toast } from 'vant';
 
   export default {
     computed: {

@@ -23,7 +23,7 @@ export default class verifyUtil {
    * @returns {boolean}
    */
   static isEffPwd(str) {
-    return str === null || str === '' || str.length < 6
+    return str === null || str === '' || str.length < 5
   }
 
   /**

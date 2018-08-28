@@ -502,7 +502,6 @@
       saveTransOrder() {
         let self = this;
         if(this.validator()) {
-          debugger
           let jsonObj = new myOrder.OrderICE();
           jsonObj.puberid = this.userId;				//收货人
           jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 : Number(self.OrderDetail.phone1) ; 			// 手机号码1

@@ -661,6 +661,15 @@
         let address = str.replace(/#/g, ",");
         return address
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.name === 'order') {
+        to.meta.isUseCache = true;
+      }
+      if (to.name === 'acceptOrders') {
+        to.meta.isUseCache = true;
+      }
+      next();
     }
   }
 </script>

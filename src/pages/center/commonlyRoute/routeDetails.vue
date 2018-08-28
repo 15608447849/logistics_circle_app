@@ -14,11 +14,11 @@
 
       <div class="addRouterBox">
         <ul class="addRouteList">
-          <li class="needBorder" @click="showCascadePicker(0)">
+          <li class="needBorder" @click="skipCityPage(3)">
             <span class="routeTitle">目的地</span>
             <input v-model="routerInfo.endpn" type="text" readonly="readonly" value="">
           </li>
-          <li class="needBorder" @click="showCascadePicker(1)">
+          <li class="needBorder" @click="skipCityPage(2)">
             <span class="routeTitle">出发地</span>
             <input v-model="routerInfo.startpn" type="text" readonly="readonly" value="">
           </li>
@@ -50,6 +50,7 @@
     },
     data() {
       return {
+        routeCityStatus: 0,// 2 出发地 3 目的地
         routerInfo: new enterprise.RouteInfo(),
         areaList: [],
         userId: this.$app_store.getters.userId,
@@ -68,45 +69,71 @@
         pickerDataList: [],
       }
     },
-    mounted() {
-      this.routerInfo = this.$route.params;
-      if (this.routerInfo.oid) {
-        this.isEditor = true;
-        // 获取途径点选择列表
-        this.getPassingPoint(this.routerInfo.startpc, this.routerInfo.endpc);
-        // 获取中转点选择列表
-        this.getTransferPoint(this.routerInfo.endpc);
-        // 获取中转、途径点数据
-        let routevias = this.routerInfo.routevias;
-        // 获取途径点、中转数据
-        if (routevias !== null && routevias.length > 0) {
-          routevias.forEach((item, index, arr) => {
-            var obj = new enterprise.Routeviap();
-            obj.cstatus = item.cstatus;
-            obj.place = item.place;
-            obj.placename = item.placename;
-            if (item.cstatus === 128) {
-              this.TransitP.push(obj);
-            } else {
-              this.wayPs.push(obj);
-            }
-          });
+    activated() {
+      if(this.$route.meta.isUseCache){
+        this.$route.meta.isUseCache = false;
+        if(this.routeCityStatus === 2) {
+          this.routerInfo.startpn = this.$app_store.state.startCity;
+          this.routerInfo.startpc = this.$app_store.state.startCityCode;
+          // 清空途径点
+          this.wayPs = [];
+          // 获取途径点选择列表
+          this.getPassingPoint(this.routerInfo.startpc, this.routerInfo.endpc);
+        }else if(this.routeCityStatus === 3) {
+          this.routerInfo.endpn =  this.$app_store.state.bournCity;
+          this.routerInfo.endpc = this.$app_store.state.bournCityCode;
+          // 清空途径点
+          this.wayPs = [];
+          // 清空中转点
+          this.TransitP = [];
+          // 获取途径点选择列表
+          this.getPassingPoint(this.routerInfo.startpc, this.routerInfo.endpc);
+          // 获取中转点选择列表
+          this.getTransferPoint(this.routerInfo.endpc);
         }
+      }else {
+        this.routerInfo = this.$route.params;
+        // 清空途径点
+        this.wayPs = [];
+        // 清空中转点
+        this.TransitP = [];
+        if (this.routerInfo.oid) {
+          this.isEditor = true;
+          // 获取途径点选择列表
+          this.getPassingPoint(this.routerInfo.startpc, this.routerInfo.endpc);
+          // 获取中转点选择列表
+          this.getTransferPoint(this.routerInfo.endpc);
+          // 获取中转、途径点数据
+          let routevias = this.routerInfo.routevias;
+          // 获取途径点、中转数据
+          if (routevias !== null && routevias.length > 0) {
+            routevias.forEach((item, index, arr) => {
+              var obj = new enterprise.Routeviap();
+              obj.cstatus = item.cstatus;
+              obj.place = item.place;
+              obj.placename = item.placename;
+              if (item.cstatus === 128) {
+                this.TransitP.push(obj);
+              } else {
+                this.wayPs.push(obj);
+              }
+            });
+          }
+        }
+        // 初始化地区选择数据
+        this.cascadeData = JSON.parse(this.$app_store.getters.area);
+        // 初始化地区选择器
+        this.cascadePicker = this.$createCascadePicker({
+          title: '地区选择',
+          onSelect: this.selectHandle,
+          onCancel: this.cancelHandle
+        });
+        this.aliasPicker = this.$createPicker({
+          title: '中转地选择',
+          onSelect: this.selectHandle,
+          onCancel: this.cancelHandle
+        })
       }
-
-      // 初始化地区选择数据
-      this.cascadeData = JSON.parse(this.$app_store.getters.area);
-      // 初始化地区选择器
-      this.cascadePicker = this.$createCascadePicker({
-        title: '地区选择',
-        onSelect: this.selectHandle,
-        onCancel: this.cancelHandle
-      });
-      this.aliasPicker = this.$createPicker({
-        title: '中转地选择',
-        onSelect: this.selectHandle,
-        onCancel: this.cancelHandle
-      })
     },
     methods: {
       // 设置目的地
@@ -179,18 +206,6 @@
         let obj = new enterprise.Routeviap();
         switch (this.pickerType) {
           case 0:
-            // debugger
-            // let areas = '';
-            // for(let i=0;i<selectedText.length;i++) {
-            //   if(areas === '') {
-            //     areas = selectedText[i]
-            //   } else {
-            //     areas += ','+ selectedText[i]
-            //   }
-            // }
-            // this.compInfo.areas = areas;
-            // this.compInfo.area = selectedVal[selectedVal.length-1];
-
             this.routerInfo.endpn = selectedText[1];
             this.routerInfo.endpc = selectedVal[1];
             // 清空途径点
@@ -223,6 +238,15 @@
             this.TransitP.push(obj);
             break;
         }
+      },
+      skipCityPage(status) {
+        this.routeCityStatus = status;
+        this.$router.push({
+          path: '/city',
+          query: {
+            status: status
+          }
+        })
       },
       cancelHandle() {
 
@@ -260,7 +284,6 @@
             }
           },
           function (error) {
-            debugger
           }
         ))
       },

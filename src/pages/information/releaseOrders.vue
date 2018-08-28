@@ -468,7 +468,6 @@
             message: '发单中...'
           });
           setTimeout(()=>{
-            debugger
             self.OrderDetail.codamt = self.codamt;
             self.OrderDetail.insureamt = self.insureamt ;
             self.$Ice_OrderService.releaseOrder(self.userId, self.OrderDetail, new IceCallback(

@@ -11,7 +11,9 @@
         <div class="alignCenter floatright"></div>
       </div>
     </div>
-
+    <van-notice-bar v-if="isShowNotice" mode="closeable">
+      当前登录企业未进行认证(无法进行发单、抢单操作) 完善企业名称与上传营业执照后即可完成企业认证。
+    </van-notice-bar>
       <div class="enterprisePic">
         <img :src="compInfo.logoPath" alt="" v-if="compInfo.logoPath !== ''">
         <img src="../../assets/images/small/moren.png" alt="" class="loginPictureDefaultUser" v-if="compInfo.logoPath === ''">
@@ -102,6 +104,8 @@
   import { uploadUrl,cardUrl ,delCardUrl} from '../../../static/libs/server/config'
   import {AVATAR_URL, COMP_INFO} from "../../store/mutation-types";
   import { subString } from '../../utils/stringUtil'
+  import { NoticeBar } from 'vant';
+
   export default {
     data() {
       return {
@@ -116,9 +120,11 @@
         isYourCompInfo: false,
         status: 0, // 0 自己编辑 1 货源圈 2 调度圈  5 黑名单 6 调度 7 消息 8 订单
         userId: '',
+        isShowNotice: false
       }
     },
     activated() {
+      this.isShowNotice = false;
       this.userId = this.$app_store.state.userId;
       this.isYourCompInfo = this.$route.query.isYourCompInfo;
       if (this.verifyUtil.stringIsBoolean(this.isYourCompInfo.toString())) {
@@ -171,6 +177,11 @@
                 self.compInfo = result.obj;
                 self.computeLevel();
                 if(self.verifyUtil.stringIsBoolean(self.isYourCompInfo.toString())) {
+
+                  if(result.obj.creadit === 0) {
+                    // 当前企业未认证
+                    self.isShowNotice = true
+                  }
                   self.$app_store.commit(COMP_INFO, JSON.stringify(result.obj));
                   self.$app_store.commit(AVATAR_URL,result.obj.logoPath);
                 }

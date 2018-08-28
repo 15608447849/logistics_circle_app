@@ -85,6 +85,8 @@
     CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL, CITY_CODE
   } from '../store/mutation-types'
   import { subString } from '../utils/stringUtil'
+  import { Toast } from 'vant';
+
   export default {
     computed: {
       isShowSidebar: {
@@ -121,24 +123,21 @@
         cLevel: [],// 认证等级
         avatar: '',// 头像
         compName: '',// 企业名
-        compId: '',
         transitionName: '',
         compInfo: null,
-        userId: this.$app_store.getters.userId,
+        userId: '',
         active: 1,
         cityInfo: {}
       }
     },
     activated() {
-      // this.isUnreadMsg();
-      this.compId = this.$app_store.getters.compId;
+      this.userId = this.$app_store.getters.userId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
       if(this.compInfo !== undefined && this.compInfo !== null) {
         this.compName = this.compInfo.fname;
         this.avatar = this.compInfo.logoPath;
         this.$app_store.commit(AVATAR_URL,this.avatar);
         this.computeLevel();
-        console.log(this.compName);
       } else {
         this.avatar = require('../assets/images/small/avatar.png');
       }
@@ -277,48 +276,64 @@
         return subString(str, len)
       },
       toDriverAmd() {
-        this.$router.push({
-          path: '/center/driverMgr/index'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/center/driverMgr/index'
+          })
+        }
       },
       // 业务员管理
       toSalesManage() {
-        this.$router.push({
-          name: 'salesManages'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            name: 'salesManages'
+          })
+        }
       },
       toMyCircle() {
-        this.$router.push({
-          path: '/center/myCircle/index'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/center/myCircle/index'
+          })
+        }
       },
       toMyRelease() {
-        this.$router.push({
-          path: '/order/acceptOrders'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/order/acceptOrders'
+          })
+        }
       },
       tocommonlyRoute() {
-        this.$router.push({
-          path: '/center/commonlyRoute/index'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/center/commonlyRoute/index'
+          })
+        }
       },
       toblacklist() {
-        this.$router.push({
-          path: '/center/blacklist/index'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/center/blacklist/index'
+          })
+        }
       },
       tomyInformation() {
-        this.$router.push({
-          path: '/center/myInformation/index'
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/center/myInformation/index'
+          })
+        }
       },
       jUserInfo() {
-        this.$router.push({
-          path: '/userInfo',
-          query: {
-            isYourCompInfo: true,    //row.hid为变量
-          }
-        })
+        if(this.isUserOutService()) {
+          this.$router.push({
+            path: '/userInfo',
+            query: {
+              isYourCompInfo: true,    //row.hid为变量
+            }
+          })
+        }
       },
       toSetting() {
         this.$router.push({
@@ -333,6 +348,15 @@
       handleActive(position) {
         this.$app_store.commit(TABBAR_INDEX, position);
       },
+      // 判断当前用户是否停用
+      isUserOutService() {
+        let cStatus = Number(this.$app_store.state.cstatus);
+        if(cStatus !== 0) {
+          Toast.fail('账号已停用');
+          return false
+        }
+        return true
+      }
       // navBarClick(index) {
       //   let path = '/';
       //   switch (index) {

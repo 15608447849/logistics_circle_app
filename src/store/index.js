@@ -12,6 +12,7 @@ import {
   COMP_ID,
   ROID,
   COMP_INFO,
+  CSTATUS,
   DICT,
   AREA,
   CITYS,
@@ -44,6 +45,17 @@ let getUserId =  function () {
   if (localStorage.getItem(USER_ID)) {
     try {
       return localStorage.getItem(USER_ID)
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
+let getCstatus =  function () {
+  if (localStorage.getItem(CSTATUS)) {
+    try {
+      return localStorage.getItem(CSTATUS)
     } catch (e) {
       return undefined;
     }
@@ -115,6 +127,7 @@ const state = {
   // userId: getUserId(), // 用户ouid
   userId: getUserId(), // 用户ouid
   citys: getCitys(), // 城市列表
+  cstatus: getCstatus(),// 启用停用
   cityCode: '', // 城市编号
   openId: '',
   searchContent: '', // 搜索内容
@@ -124,6 +137,10 @@ const state = {
   area: getArea(), // 城市地区json数据
   currentCity: '', // 当前定位地区
   receiptCity: '', // 发单地区
+  startCity: '',// 路线出发地
+  bournCity: '',// 路线目的地
+  startCityCode: '',// 路线出发地编码
+  bournCityCode: '',// 路线目的地编码
   geoState: 0, // 0: 出发地 1: 目的地
   addressCom: {}, // 地理编码信息列表
   tabBarIndex: 0,

@@ -27,7 +27,7 @@
 <script>
   import {
     USER_INFO,
-    USER_ID, COMP_INFO, ROID
+    USER_ID, COMP_INFO, ROID, CSTATUS
   } from '../../store/mutation-types'
 
   export default {
@@ -60,9 +60,9 @@
               if (result.code === 0) {
                 self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                 self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
-                console.log(self.$app_store.state.userId);
                 if (result.obj.comps.length === 1) {
                   self.$app_store.commit(ROID,result.obj.comps[0].roid);
+                  self.$app_store.commit(CSTATUS,result.obj.comps[0].cstatus);
                   self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
                   return
                 }
@@ -70,7 +70,8 @@
                   compList.push({
                     content: currentValue.fname,
                     compid: currentValue.compid,
-                    roid: currentValue.roid
+                    roid: currentValue.roid,
+                    cstatus: currentValue.cstatus
                   });
                 });
                 self.showActive(result.obj, compList);
@@ -106,6 +107,7 @@
           data: dataList,
           onSelect: (item, index) => {
             this.$app_store.commit(ROID,item.roid);
+            this.$app_store.commit(CSTATUS,item.cstatus);
             this.setCompIdByRedis(obj.oid, item.compid);
           },
           onCancel: () => {
@@ -184,11 +186,11 @@
       // },
       validator() {
         if (this.verifyUtil.isNull(this.account)) {
-          self.$vux.toast.text('账号不能为空', 'top');
+          this.$vux.toast.text('账号不能为空', 'top');
           return false
         }
         if (this.verifyUtil.isEffPwd(this.password)) {
-          self.$vux.toast.text('密码为空或长度小于6位,请完善输入', 'top');
+          this.$vux.toast.text('密码为空或长度小于5位,请完善输入', 'top');
           return false
         }
         return true

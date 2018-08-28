@@ -3,9 +3,12 @@ import {
   USER_ID,
   ROID,
   COMP_ID,
+  CSTATUS,
   COMP_INFO,
   AVATAR_URL,
   RECEIPT_CITY,
+  START_CITY,
+  BOURN_CITY,
   SEARCH_STATE,
   SEARCH_CONTENT,
   UPDATE_LOADING_STATUS,
@@ -15,7 +18,7 @@ import {
   CURRENT_CITY,
   GEOSTATE,
   CITY_CODE,
-  ADDRESSCOM, TABBAR_INDEX, IS_SHOW_SIDEBAR
+  ADDRESSCOM, TABBAR_INDEX, IS_SHOW_SIDEBAR, START_CITY_CODE, BOURN_CITY_CODE
 } from './mutation-types'
 
 export default {
@@ -38,6 +41,11 @@ export default {
   [ROID] (state, v) {
     state.roid = v;
     localStorage.setItem(ROID, v);
+  },
+  // 是否启用
+  [CSTATUS] (state, v) {
+    state.cstatus = v;
+    localStorage.setItem(CSTATUS, v);
   },
   // 企业信息
   [COMP_INFO] (state, v) {
@@ -96,6 +104,24 @@ export default {
   // 当前城市
   [RECEIPT_CITY](state, v) {
     state.receiptCity = v;
+  },
+  // 路线出发地城市
+  [START_CITY](state, v) {
+    state.startCity = v;
+  },
+  // 出发地编码
+  [START_CITY_CODE] (state, v) {
+    state.startCityCode = v;
+    localStorage.setItem(START_CITY_CODE, v);
+  },
+  // 路线目的地城市
+  [BOURN_CITY](state, v) {
+    state.bournCity = v;
+  },
+  // 目的地编码
+  [BOURN_CITY_CODE] (state, v) {
+    state.bournCityCode = v;
+    localStorage.setItem(BOURN_CITY_CODE, v);
   },
   // 高德地图状态
   [GEOSTATE](state, v) {
