@@ -80,7 +80,7 @@
             class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
           </div>
         </li>
-        <div v-show="isShowNoData" class="noDataBox">
+        <div v-show="isShowNoData" class="noDataBoxIndex">
           <img src="../../assets/images/small/nodate.png"/>
         </div>
       </ul>

@@ -95,9 +95,18 @@
       <!--</yd-button>-->
       <!--<yd-button size="large" type="primary" @click.native="thirdStep()" v-show="thirdStepBool"-->
       <!--:disabled='isFirstStepDis'>注 册-->
-      <!--</yd-button>--></div>
+      <!--</yd-button>-->
 
+    </div>
 
+    <van-checkbox v-model="checked">
+      <span class="fontSize28">我已阅读并同意</span> <span class="fontSize28 colorBlueSan" @click.stop="toServiceStatement">服务声明</span>
+      <img
+        slot="passed"
+        slot-scope="props"
+        :src="props.checked ? icon.active : icon.normal"
+      >
+    </van-checkbox>
   </div>
 </template>
 <script>
@@ -110,9 +119,14 @@
   export default {
     data() {
       return {
+        checked: true,
+        icon: {
+          normal: '//img.yzcdn.cn/icon-normal.png',
+          active: '//img.yzcdn.cn/icon-active.png'
+        },//用户注册声明及相关政策同意相关条款
         firstStepBool: true, // 第一步
-        secondStepBool: false, // 第二步
-        thirdStepBool: false, // 第三步
+        secondStepBool: true, // 第二步
+        thirdStepBool: true, // 第三步
         isFirstStepDis: true,
         secondStepDis: true,
         thirdStepDis: true,
@@ -149,6 +163,11 @@
       },
       fallback(){
         this.$router.go(-1);
+      },
+      toServiceStatement(){
+        this.$router.push({
+          path:'/login/serviceStatement'
+        })
       },
       // 验证账号输入格式
       registerValidator() {
