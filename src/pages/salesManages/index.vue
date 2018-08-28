@@ -23,9 +23,9 @@
             </div>
           </div>
         </div>
-      <div style="height:95vh;background:#ffffff;overflow: auto">
+      <div class="salesmanList">
         <div v-show="isShowNoData" class="noMyselfCenter">
-          <img src="../../assets/images/icon/no_driver.png" class="placeAddDri"/>
+          <img src="../../assets/images/small/noSalesman.png" class="placeAddDri"/>
         </div>
         <van-list
           style="background:#f5f5f5;"

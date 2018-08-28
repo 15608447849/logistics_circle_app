@@ -34,7 +34,9 @@
         </tab>
 
 
-
+        <div v-show="isShowNoData" class="noMyselfCenterCircle">
+          <img src="../../../assets/images/small/noFriend.png" class="placeAddDri"/>
+        </div>
         <ul class="circleList" v-show="selectOneTab">
           <li class="needBorderF5" @click="toComPInfo(item)" v-for="(item, index) in sCircleList" :key="index">
             <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== ''">
@@ -76,6 +78,7 @@
     },
     data() {
       return {
+        isShowNoData:false,
         selectOneTab: true, // true 货运圈 false 调度圈
         sCircleList: [], // 货运圈列表
         SchedulingCircle: [],// 调度圈列表

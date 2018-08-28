@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="issueHeaderNav">
+    <div class="issueHeaderLog">
       <div class="width20">
         <i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i>
       </div>
@@ -11,19 +11,19 @@
         <div class="alignCenter floatright"></div>
       </div>
     </div>
-    <div style="margin-top:6vh;">
-      <!--<div class="blackList">-->
-      <!--<div class="blackListNum">2个黑名单</div>-->
-
-      <!--</div>-->
+    <div class="blackListBox">
       <van-list
         v-model="loading"
         :finished="finished"
         @load="onLoad"
       >
-        <ul class="circleList">
-          <li class="needBorder" @click="toComPInfo(item)" v-for="(item, index) in blackList" :key="index">
-            <img :src="item.logoPath" alt="" class="circlePic" v-if="item.logoPath !== 'undefined'">
+
+        <ul class="circleListBlack">
+          <div v-show="isShowNoData" class="noDataBox">
+            <img src="../../../assets/images/small/nodate.png"/>
+          </div>
+          <li class="needBorderF5" @click="toComPInfo(item)" v-for="(item, index) in blackList" :key="index">
+            <img :src="item.logoPath" alt="" class="blackPic" v-if="item.logoPath !== 'undefined'">
             <img src="../../../assets/images/small/moren.png" alt="" class="loginPictureDefaultCircle widthHeight90 floatleft" v-if="item.logoPath === 'undefined'">
             <div class="companyNamePhone"><span class="companyName floatleft">{{item.fname}}</span></div>
             <div class="lineName"><span class="lineInfo">加入时间：{{item.addTime}}</span></div>
@@ -43,7 +43,8 @@
         page: new cstruct.Page(),
         userId: this.$app_store.getters.userId,
         loading: false,
-        finished: false
+        finished: false,
+        isShowNoData: false
       }
     },
     mounted() {
@@ -60,7 +61,6 @@
       onLoad() {
         let self = this;
         this.queryMyCircleBlackList(function (result) {
-          debugger
           self.page.pageIndex += 1; // 页码增加
           // result.circleSeq.forEach((item, index, arr) => {
           //   let disRoute = '';
@@ -88,6 +88,7 @@
               // 关闭上推加载
               self.finished = true;
               // 显示列表无数据
+              self.isShowNoData = true;
               self.$vux.toast.text(result.msg, 'top');
               return
             }

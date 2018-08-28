@@ -30,6 +30,9 @@
          </tab>
          <ul class="circleList" v-show="isShow" style="height:88.5vh;">
            <!--<p>这是未处理消息</p>-->
+           <div v-show="isShowNoData" class="noMyselfCenterCircle">
+             <img src="../../../assets/images/small/noInformation.png" class="placeAddDri"/>
+           </div>
            <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in messageList" :key="index">
              <img src="../../../assets/images/small/yikuai.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
@@ -40,6 +43,9 @@
          <!--已处理-->
          <ul class="circleList" v-show="!isShow" style="height:88.5vh;">
            <!--<p>这是已经处理消息</p>-->
+           <div v-show="isShowNoDataYes" class="noMyselfCenterCircle">
+             <img src="../../../assets/images/small/noInformation.png" class="placeAddDri"/>
+           </div>
            <li class="needBorder" @click.stop="seeDetails(item,index)" v-for="(item, index) in readyHandMsg" :key="index" v-if="item.isread !== 0">
              <img src="../../../assets/images/small/yikuai.png" alt="" class="circlePic">
              <div class="companyNamePhone"><span class="companyName floatleft">{{item.sendName}}</span></div>
@@ -75,6 +81,8 @@
         userId: this.$app_store.state.userId,//vuex存储的用户id
         read: true,//已阅读显示与否
         isNewMsg:{},//是否有新的消息
+        isShowNoDataYes: false, // 已处理列表无数据图片是否显示
+        isShowNoData: false // 未处理列表无数据图片是否显示
       }
 
     },
@@ -149,7 +157,9 @@
             // 成功
             self.messageList = result.obj;
             console.log(self.messageList);
-          } else {
+          } else if (self.messageList.length === 0){
+            self.isShowNoData = true;
+          }else {
             self.$vux.toast.text(result.msg, 'top');
           }
         }, function (error) {
@@ -167,7 +177,9 @@
             self.readyHandMsg = result.obj;
 
             console.log(self.readyHandMsg)
-          } else {
+          } else if (self.readyHandMsg.length === 0){
+            self.isShowNoDataYes = true;
+          }else {
             self.$vux.toast.text(result.msg, 'top');
           }
         }, function (error) {

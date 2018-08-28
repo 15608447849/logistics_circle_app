@@ -24,7 +24,7 @@
       </div>
     <div class="myselfList">
       <div v-show="isShowNoData" class="noMyselfCenter">
-        <img src="../../../assets/images/icon/no_driver.png" class="placeAddDri"/>
+        <img src="../../../assets/images/small/noDriver.png" class="placeAddDri"/>
       </div>
       <van-list
         style="background:#ffffff;"

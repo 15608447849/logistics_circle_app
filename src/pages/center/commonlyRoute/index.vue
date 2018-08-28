@@ -21,9 +21,9 @@
         <!--</div>-->
       <!--</div>-->
     <!--</div>-->
- <div style="height:95vh;background:#ffffff;overflow: auto">
+ <div class="routerList">
    <div v-show="isShowNoData" class="noMyselfCenter">
-     <img src="../../../assets/images/icon/no_driver.png" class="placeAddDri"/>
+     <img src="../../../assets/images/small/noRouter.png" class="placeAddDri"/>
    </div>
    <van-list
      v-model="loading"
