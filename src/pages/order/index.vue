@@ -120,6 +120,7 @@
   import {TABBAR_INDEX} from "../../store/mutation-types";
   import {IS_SHOW_SIDEBAR} from "../../store/mutation-types";
   import {subString} from "../../utils/stringUtil"
+  import { Toast } from 'vant';
   export default {
     components: {
       Tab,
@@ -178,41 +179,54 @@
       }
     },
     mounted() {
-      this.fName = JSON.parse(this.$app_store.state.compInfo).fname;
-      this.$app_store.commit(TABBAR_INDEX, 3);
-      this.year = new Date().getFullYear();
-      this.col1Data = [];
-      for(let i = 0;i<10;i++) {
-        let year = this.year - i;
-        let obj = {
-          value: year,
-          text: year
-        };
-        this.col1Data.push(obj);
+      this.initData();
+    },
+    activated() {
+      if(this.$route.meta.isUseCache){
+        this.$route.meta.isUseCache = false;
+        // 啥也不动
+      }else {
+        this.initData();
       }
-      // 初始化列表查询条件
-      this.initQueryConditions('0');
-      this.picker = this.$createPicker({
-        title: '选择年份',
-        data: [this.col1Data],
-        onSelect: (selectedVal, selectedIndex, selectedText) => {
-          this.year = selectedVal[0];
-          // 重置搜索条件
-          this.initQueryConditions(this.index);
-          // 清空数据
-          this.releaseList = [];
-          // 隐藏无数据显示
-          this.isShowNoData = false;
-          // 刷新列表
-          this.queryMyPublishOrder();
-          // this.onLoad();
-        },
-        onCancel: () => {
-
-        }
-      });
     },
     methods: {
+      initData() {
+        this.releaseList = [];
+        // 初始化列表查询条件
+        this.fName = JSON.parse(this.$app_store.state.compInfo).fname;
+        this.$app_store.commit(TABBAR_INDEX, 3);
+        this.year = new Date().getFullYear();
+        this.col1Data = [];
+        for(let i = 0;i<10;i++) {
+          let year = this.year - i;
+          let obj = {
+            value: year,
+            text: year
+          };
+          this.col1Data.push(obj);
+        }
+        // 初始化列表查询条件
+        this.initQueryConditions('0');
+        this.picker = this.$createPicker({
+          title: '选择年份',
+          data: [this.col1Data],
+          onSelect: (selectedVal, selectedIndex, selectedText) => {
+            this.year = selectedVal[0];
+            // 重置搜索条件
+            this.initQueryConditions(this.index);
+            // 清空数据
+            this.releaseList = [];
+            // 隐藏无数据显示
+            this.isShowNoData = false;
+            // 刷新列表
+            this.queryMyPublishOrder();
+            // this.onLoad();
+          },
+          onCancel: () => {
+
+          }
+        });
+      },
       showPicker () {
         this.picker.show()
       },
@@ -458,6 +472,7 @@
               }
             } else {
               self.finished = true;
+              self.$vux.toast.text(result.msg, 'top');
             }
             if (self.releaseList !== null && self.releaseList.length > 0) {
               self.isShowNoData = false;

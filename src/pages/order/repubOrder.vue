@@ -336,25 +336,28 @@
             that.OrderDetail.eaedatetime = orderData.eaedatetime; //期望到货结束时间
             //orderData.phone1 == 0 ? that.formValidate.phone1 = '' : that.formValidate.phone1 = orderData.phone1; //发布人电话1
             //orderData.phone2 == 0 ? that.formValidate.phone2 = '' : that.formValidate.phone2 = orderData.phone2; //发布人电话2
-            that.OrderDetail.phone1 = that.compInfo.pho === 0 ? '' : that.compInfo.pho; //发布人电话1
-            that.OrderDetail.phone2 = that.compInfo.pht === 0 ? '' : that.compInfo.pht; //发布人电话2
+            that.OrderDetail.phone1 = orderData.phone1; //发布人电话1
+            that.OrderDetail.phone2 = orderData.phone2; //发布人电话2
 //	                    that.formValidate.phone2 = orderData.phone2; //发布人电话2
             that.pubdatetime = orderData.pubdatetime; //发布时间
-
-            // 添加发布人联系方式
-            if (that.compInfo.pho !== 0 && that.compInfo.pht !== 0) {
-              that.OrderDetail.phone1 = that.compInfo.pho;
-              that.OrderDetail.phone2 = that.compInfo.pht;
-            }else if(that.compInfo.pho !== 0 && that.compInfo.pht === 0) {
+            if(that.OrderDetail.phone1 === 0) {
               that.OrderDetail.phone1 = that.compInfo.contact;
-              that.OrderDetail.phone2 = that.compInfo.pho;
-            } else if(that.compInfo.pho === 0 && that.compInfo.pht !== 0) {
-              that.OrderDetail.phone1 = that.compInfo.contact;
-              that.OrderDetail.phone2 = that.compInfo.pht;
-            } else {
-              that.OrderDetail.phone1 = that.compInfo.contact;
-              that.OrderDetail.phone2 = '';
             }
+
+            // // 添加发布人联系方式
+            // if (that.OrderDetail.phone1 !== 0 && that.OrderDetail.phone2 !== 0) {
+            //   that.OrderDetail.phone1 = that.compInfo.pho;
+            //   that.OrderDetail.phone2 = that.compInfo.pht;
+            // }else if(that.OrderDetail.phone1 !== 0 && that.OrderDetail.phone2 === 0) {
+            //   that.OrderDetail.phone1 = that.compInfo.contact;
+            //   that.OrderDetail.phone2 = that.compInfo.pho;
+            // } else if(that.OrderDetail.phone1 === 0 && that.OrderDetail.phone2 !== 0) {
+            //   that.OrderDetail.phone1 = that.compInfo.contact;
+            //   that.OrderDetail.phone2 = that.compInfo.pht;
+            // } else {
+            //   that.OrderDetail.phone1 = that.compInfo.contact;
+            //   that.OrderDetail.phone2 = '';
+            // }
             // 计算总价
             that.sumPriceA();
           },
@@ -630,6 +633,15 @@
           this.displayDic.disPtLabel = '线下支付';
         }
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.name === 'order') {
+        to.meta.isUseCache = true;
+      }
+      if (to.name === 'acceptOrders') {
+        to.meta.isUseCache = true;
+      }
+      next();
     }
   }
 </script>

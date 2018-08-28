@@ -17,7 +17,7 @@
   import {
     CURRENT_CITY,
     RECEIPT_CITY,
-    CITY_CODE
+    CITY_CODE, START_CITY, BOURN_CITY, START_CITY_CODE, BOURN_CITY_CODE
   } from '../store/mutation-types'
 
   export default {
@@ -40,12 +40,21 @@
       });
     },
     activated(){
-      // status: 0 定位城市 1 发单定位
+      // status: 0 定位城市 1 发单定位 2 路线出发地 3路线目的地
       this.status = this.$route.query.status;
-      if (this.status === 0) {
-        this.currentCity = this.$app_store.getters.currentCity;
-      } else {
-        this.currentCity = this.$app_store.getters.receiptCity;
+      switch (this.status) {
+        case 0:
+          this.currentCity = this.$app_store.getters.currentCity;
+          break
+        case 1:
+          this.currentCity = this.$app_store.getters.receiptCity;
+          break
+        case 2:
+          this.currentCity = this.$app_store.getters.startCity;
+          break
+        case 3:
+          this.currentCity = this.$app_store.getters.bournCity;
+          break
       }
     },
     methods: {
@@ -62,17 +71,30 @@
       },
       selectItem(item) {
         // 设置城市名称
-        if (this.status === 0) {
-          this.$app_store.commit(CURRENT_CITY,item.name);
-          let obj = {
-            currentCity: item.name,
-            cityCode: item.value
-          };
-          localStorage.setItem('cityInfo',JSON.stringify(obj));
-        } else {
-          // 设置城市编码
-          this.$app_store.commit(CITY_CODE,item.value);
-          this.$app_store.commit(RECEIPT_CITY,item.name);
+        switch (this.status) {
+          case 0:
+            this.$app_store.commit(CURRENT_CITY,item.name);
+            let obj = {
+              currentCity: item.name,
+              cityCode: item.value
+            };
+            localStorage.setItem('cityInfo',JSON.stringify(obj));
+            break;
+          case 1:
+            // 设置城市编码
+            this.$app_store.commit(CITY_CODE,item.value);
+            this.$app_store.commit(RECEIPT_CITY,item.name);
+            break;
+          case 2:
+            // 设置城市编码
+            this.$app_store.commit(START_CITY_CODE,item.value);
+            this.$app_store.commit(START_CITY,item.name);
+            break;
+          case 3:
+            // 设置城市编码
+            this.$app_store.commit(BOURN_CITY_CODE,item.value);
+            this.$app_store.commit(BOURN_CITY,item.name);
+            break;
         }
         this.$router.go(-1);
       },
@@ -82,6 +104,12 @@
       fallback() {
         this.$router.go(-1);
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.name === 'routeDetails') {
+        to.meta.isUseCache = true;
+      }
+      next();
     }
   }
 </script>

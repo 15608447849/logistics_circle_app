@@ -94,6 +94,7 @@
     SEARCH_STATE, TABBAR_INDEX
   } from '../../store/mutation-types'
   import {searchState} from "../../utils/config";
+  import { Toast } from 'vant';
   import Conversion from '@/utils/conversion';
   import { Swipe, SwipeItem } from 'vant';
 

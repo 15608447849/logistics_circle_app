@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
+import { Toast } from 'vant';
 import {
   UPDATE_LOADING_STATUS
 } from '@/store/mutation-types'
@@ -144,7 +145,9 @@ const vueRouter = new Router({
           path: '/order',
           component: ORDER,
           meta: {
-            requireAuth: true
+            requireAuth: true,
+            keepAlive: true,
+            isUseCache: false
           },
         }
       ]
@@ -230,10 +233,7 @@ const vueRouter = new Router({
     },
     {
       path: '/information/releaseDetails',
-      component: RELEASE_DETAILS,
-      meta: {
-        keepAlive: true,
-      }
+      component: RELEASE_DETAILS
     },
     {
       path: '/city',
@@ -339,7 +339,11 @@ const vueRouter = new Router({
     {
       name: 'routeDetails',
       path: '/center/commonlyRoute/routeDetails',
-      component: ROUTEDETAILS
+      component: ROUTEDETAILS,
+      meta: {
+        keepAlive: true,
+        isUseCache: false
+      }
     },
     {
       path: '/center/blacklist/index',
@@ -387,8 +391,13 @@ const vueRouter = new Router({
       component: ORDER_DETAIL
     },
     {
+      name: 'acceptOrders',
       path: '/order/acceptOrders',
       component: ACCEPT,
+      meta: {
+        keepAlive: true,
+        isUseCache: false
+      }
     },
     {
       path: '/order/acceptDetails',
@@ -450,8 +459,14 @@ const vueRouter = new Router({
 vueRouter.beforeEach(function (to, from, next) {
   // 判断该路由是否需要登录权限
   if (to.meta.requireAuth) {
-    // 通过vuex state获取当前的token是否存在
+    // 1.通过vuex state获取当前的token是否存在
+    // 2.如果当前业务员处于停用状态等同于游客 不能获得相关企业信息，不能发单、接单；
     if (store.state.userId) {
+      let cStatus = Number(store.state.cstatus);
+      if(cStatus !== 0) {
+        Toast.fail('账号已停用');
+        return
+      }
       next();
     } else {
       next({

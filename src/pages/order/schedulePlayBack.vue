@@ -88,6 +88,15 @@
           }
           this.center = [this.mapPath[0].longitude,this.mapPath[0].latitude];
         }
+      },
+      beforeRouteLeave (to, from, next) {
+        if (to.name === 'order') {
+          to.meta.isUseCache = true;
+        }
+        if (to.name === 'acceptOrders') {
+          to.meta.isUseCache = true;
+        }
+        next();
       }
     }
 </script>
