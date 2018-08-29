@@ -101,9 +101,11 @@ function queryIce (moduleProxy,moduleName,methodName,args) {
         function (args0,args1) {
           // console.log(args0);
           let result;
-
           if(args0){
             if(typeof (args0)==="string") args0 = JSON.parse(args0);
+            result = args0;
+          }
+          if(args0 === 0) {
             result = args0;
           }
           if(args1){

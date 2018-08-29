@@ -212,7 +212,7 @@
         pmList: [],
         disPmList: [],
         sunPrice: 0,
-        userId: this.$app_store.getters.userId,
+        userId: '',
         orderid: ''
       }
     },
@@ -247,6 +247,8 @@
     methods: {
       // 初始化页面数据
       initData() {
+        this.userId = this.$app_store.state.userId;
+        console.log(this.userId);
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
         this.orderid = this.$route.query.orderId;
         this.dicData = JSON.parse(this.$app_store.getters.dict) || null;
@@ -585,6 +587,11 @@
         // 联系方式
         if (this.verifyUtil.isNull(this.OrderDetail.consphone)) {
           this.$vux.toast.text('请填写联系方式', 'top');
+          return false
+        }
+        // 发布人联系方式
+        if (this.verifyUtil.isNull(this.OrderDetail.phone1) && this.verifyUtil.isNull(this.OrderDetail.phone2)) {
+          this.$vux.toast.text('请填写发布人联系方式', 'top');
           return false
         }
         return true

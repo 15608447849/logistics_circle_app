@@ -400,7 +400,9 @@
               if(result.obj.ordereva !== undefined) {
                 self.isShowEvaluation = true;
                 self.orderEva = result.obj.ordereva;
-                self.picurlarr = JSON.parse(self.orderEva.picurlarr);
+                if(self.orderEva.picurlarr !== '') {
+                  self.picurlarr = JSON.parse(self.orderEva.picurlarr);
+                }
               }
             } else {
               self.$vux.toast.text(result.msg, 'top');

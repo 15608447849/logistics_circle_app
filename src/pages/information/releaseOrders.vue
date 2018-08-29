@@ -200,7 +200,7 @@
         pmList: [],
         disPmList: [],
         sunPrice: 0,// 总价
-        userId: this.$app_store.getters.userId,// 用户id
+        userId: '',// 用户id
       }
     },
     activated() {
@@ -240,6 +240,8 @@
     },
     methods: {
       initData() {
+        this.userId = this.$app_store.getters.userId;// 用户id
+        console.log('userId:'+ this.userId);
         this.compInfo = JSON.parse(this.$app_store.state.compInfo);
         this.arriarc = '';
         this.startc = '';

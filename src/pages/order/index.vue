@@ -191,7 +191,7 @@
     },
     methods: {
       initData() {
-        this.userId = this.$app_store.getters.userId
+        this.userId = this.$app_store.getters.userId;
         this.releaseList = [];
         // 初始化列表查询条件
         this.fName = JSON.parse(this.$app_store.state.compInfo).fname;

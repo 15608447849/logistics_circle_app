@@ -64,7 +64,7 @@
       return {
         isShowNoData: false, // 无数据显示
         avatar: this.$app_store.state.avatar,// 头像
-        userId: this.$app_store.state.userId,
+        userId: '',
         infoList: [],
         pageSize: page.pageSize, // 每次获取条数
         address: this.$app_store.getters.currentCity, // 地址
@@ -79,6 +79,9 @@
         finished: false,
         isLoading: false // 下拉刷新
       }
+    },
+    activated() {
+      this.userId = this.$app_store.state.userId;
     },
     mounted() {
       this.$app_store.commit(TABBAR_INDEX, 2);

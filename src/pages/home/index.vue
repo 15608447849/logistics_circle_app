@@ -121,7 +121,7 @@
         isMember: true,
         direction: '',
         tipStyle: '',
-        oid: this.$app_store.getters.userId || '0',
+        oid: '0',
         isShowMore: false, // 显示更多
         isShowNoData: false // 无数据
         // 信息大厅数据
@@ -135,6 +135,8 @@
     },
     activated() {
       this.$app_store.commit(TABBAR_INDEX,0);
+      debugger
+      this.oid = this.$app_store.getters.userId || '0';
       // 搜索框搜索内容
       if (this.$app_store.getters.searchState === searchState.INFORMATION) {
         this.key = this.$app_store.getters.searchContent;

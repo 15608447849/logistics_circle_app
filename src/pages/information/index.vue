@@ -71,7 +71,7 @@
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
         requestState: 0, // 获取最新 0, 获取历史1
-        oid: this.$app_store.getters.userId || '0',
+        oid: '0',
         pullingMessage: '',
         isShowMessage: false,
         loading: false,
@@ -81,6 +81,7 @@
     },
     activated() {
       this.$app_store.commit(TABBAR_INDEX,1);
+      this.oid = this.$app_store.getters.userId || '0';
     },
     methods: {
       toPageIssue() {

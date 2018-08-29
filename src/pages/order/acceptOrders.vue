@@ -129,7 +129,7 @@
         avatar: this.$app_store.state.avatarUrl,
         QueryParam: new redundancy.QueryParam(),
         page: new redundancy.Page(),
-        userId: this.$app_store.state.userId,
+        userId: '',
         releaseList: [], // 订单发布列表
         total: 0,// 发布订单总条数
         loading: false,
@@ -167,6 +167,7 @@
     methods: {
       initData() {
         this.userId = this.$app_store.state.userId;
+        console.log(this.userId)
         this.releaseList = [];
         this.year = new Date().getFullYear();
         this.col1Data = [];

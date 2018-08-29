@@ -53,7 +53,7 @@
         routeCityStatus: 0,// 2 出发地 3 目的地
         routerInfo: new enterprise.RouteInfo(),
         areaList: [],
-        userId: this.$app_store.getters.userId,
+        userId: '',
         origin: '',// 目的地地区码
         destination: '',// 出发地地区码
         state: '',// 线路状态
@@ -92,6 +92,7 @@
           this.getTransferPoint(this.routerInfo.endpc);
         }
       }else {
+        this.userId = this.$app_store.state.userId;
         this.routerInfo = this.$route.params;
         // 清空途径点
         this.wayPs = [];

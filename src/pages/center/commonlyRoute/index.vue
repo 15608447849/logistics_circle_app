@@ -48,7 +48,7 @@
   export default {
     data() {
       return {
-        userId: this.$app_store.getters.userId,
+        userId: '',
         routeList: [],
         page: new cstruct.Page(),
         origin: '',// 目的地地区码
@@ -61,6 +61,7 @@
       }
     },
     mounted() {
+      this.userId = this.$app_store.state.userId;
       this.initData();
     },
     methods: {
@@ -89,9 +90,12 @@
               self.routeList = self.routeList.concat(result.obj);
               if (self.routeList.length >= result.totalItems) {
                 self.finished = true;
-              }if(self.routeList.length === 0){
-                self.isShowNoData = true
               }
+            }else {
+              self.finished = true;
+            }
+            if(self.routeList.length === 0){
+              self.isShowNoData = true
             }
           },
           function (error) {
