@@ -577,7 +577,6 @@
           this.$vux.toast.text('请填写货物运费，并且金额不能为零', 'top');
           return false
         }
-
         // 收货人
         if (this.verifyUtil.isNull(this.OrderDetail.consignee)) {
           this.$vux.toast.text('请填写收货人信息', 'top');
@@ -634,6 +633,15 @@
           this.displayDic.disPtLabel = '线下支付';
         }
       }
+    },
+    beforeRouteLeave (to, from, next) {
+      if (to.name === 'order') {
+        to.meta.isUseCache = true;
+      }
+      if (to.name === 'acceptOrders') {
+        to.meta.isUseCache = true;
+      }
+      next();
     }
   }
 </script>

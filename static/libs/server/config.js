@@ -3,7 +3,7 @@ export const iceGridInstanceName = "WLQ";
 // export const serverIp = "192.168.1.240";
 // export const serverPort = 7062;
 
-// // 测试环境
+// 测试环境
 export const serverIp = "192.168.1.241";
 export const serverPort = 7062;
 
@@ -14,7 +14,7 @@ export const cardUrl = 'http://192.168.1.241:8090/getCompPic?compId='; // 证件
 export const delCardUrl = 'http://192.168.1.241:8090/delCompPic?compId='; // 证件删除
 export const pickupUrl = 'http://192.168.1.241:8080/wlq/'; // 取货照片
 
-// 生成环境
+// // 生成环境
 // export const serverIp = "39.108.85.159";
 // export const serverPort = 4062;
 //

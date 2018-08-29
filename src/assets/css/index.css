@@ -1393,6 +1393,13 @@ input[type="radio"] {
 .span {
   width: 1.5rem;
 }
+.defaultPwd{
+  height:2vh;
+  text-align: center;
+  font-size:.26rem;
+  line-height:2vh;
+  color:red;
+}
 .userClause{
   display:block;
   width:7.5rem;

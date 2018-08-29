@@ -97,6 +97,11 @@ module.exports =  {
    * */
   userVerifyByToken: function (token, callback) {
     queryIce(user.UserServicePrx, 'UserService', 'loginByToken', token, callback);
-  }
-
+  },
+  /** 检测手机号码是否重复(返回增加-密码，返回msg)
+   * int verifyPhone(long phone);
+   */
+  verifyByPhone: function (phone, callback) {
+    queryIce(user.UserServicePrx, 'UserService', 'verifyByPhone', str2jlong(phone), callback);
+  },
 };

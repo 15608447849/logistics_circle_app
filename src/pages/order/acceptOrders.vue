@@ -129,7 +129,7 @@
         avatar: this.$app_store.state.avatarUrl,
         QueryParam: new redundancy.QueryParam(),
         page: new redundancy.Page(),
-        userId: this.$app_store.getters.userId,
+        userId: this.$app_store.state.userId,
         releaseList: [], // 订单发布列表
         total: 0,// 发布订单总条数
         loading: false,
@@ -154,22 +154,19 @@
         }]
       }
     },
-    created() {
-
-    },
     activated() {
+      debugger
       if(this.$route.meta.isUseCache){
         this.$route.meta.isUseCache = false;
         // 啥也不动
       }else {
         this.initData();
+        // this.queryMyRecvOrder();
       }
-    },
-    mounted() {
-      this.initData();
     },
     methods: {
       initData() {
+        this.userId = this.$app_store.state.userId;
         this.releaseList = [];
         this.year = new Date().getFullYear();
         this.col1Data = [];
@@ -189,7 +186,6 @@
             this.year = selectedVal[0];
             // 重置搜索条件
             this.initQueryConditions(this.index);
-            console.log(this.page)
             // 清空数据
             this.releaseList = [];
             // 刷新列表
@@ -200,7 +196,8 @@
           onCancel: () => {
 
           }
-        })
+        });
+        this.finished = false;
       },
       showPicker () {
         this.picker.show()
@@ -246,8 +243,6 @@
         this.initQueryConditions(item.value);
         // 清空数据
         this.releaseList = [];
-        // 刷新列表
-        // this.queryMyRecvOrder();
         this.onLoad();
       },
       avatarClick() {

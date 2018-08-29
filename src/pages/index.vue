@@ -193,14 +193,7 @@
         let self = this;
         this.$Ice_MessageService.isUnreadMsg(self.userId,new IceCallback(
           function(result){
-            if(result>0) {
-              self.isNewMsg = false;
-            }else {
-              self.isNewMsg = true;
-            }
-
-        },function(error){
-          //失败
+            console.log(result)
         }))
       },
       initBaseData() {

@@ -155,7 +155,6 @@
         "getUserByOid": [, , , , , [user.UserIce], [[3]], , , , ],
         "verifyUserName": [, , , , , [7], [[7]], , , , ],
         "verifyPhone": [, , , , , [7], [[4]], , , , ],
-        "verifyPhone4App": [, , , , , [7], [[4]], , , , ],
         "verifyByPhone": [, , , , , [7], [[4]], , , , ],
         "sendSms": [, , , , , [7], [["user.stringListHelper"]], , , , ],
         "verifyCode": [, , , , , [7], [[4], [7]], , , , ],

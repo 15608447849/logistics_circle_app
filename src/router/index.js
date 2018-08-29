@@ -182,8 +182,13 @@ const vueRouter = new Router({
       component: FIRSTLONG
     },
     {
+      name: 'register',
       path: '/register',
-      component: REGISTER
+      component: REGISTER,
+      meta: {
+        keepAlive: true,
+        isUseCache: false,
+      }
     },
     {
       path: '/login/serviceStatement',
