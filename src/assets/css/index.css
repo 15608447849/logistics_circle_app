@@ -112,6 +112,106 @@ a {
 /*color: blue;*/
 /*}*/
 /*首页*/
+/*首页遮罩*/
+.guide{
+  display:block;
+  width:7.5rem;
+  height:100vh;
+  position:fixed;
+  top:0vh;
+  background:black;
+  opacity: 0.5;
+  z-index:9999;
+}
+.guidePic{
+  display:inline-block;
+  width:4.3rem;
+  height:20vh;
+  margin-left:.39rem;
+  margin-top:6.2vh;
+  opacity: 0.89;
+  background:url("../images/small/guide.png");
+  background-size:100% 100%;
+}
+.closeGuide{
+  display:inline-block;
+  position:fixed;
+  top:22.3vh;
+  left:2.6rem;
+  width:1.8rem;
+  height:4vh;
+  border:1px solid transparent;
+  border-radius: 5px;
+  background:red;
+}
+/*.guide img{*/
+  /*display:inline-block;*/
+  /*width:4.3rem;*/
+  /*height:16vh;*/
+  /*margin-left:.39rem;*/
+  /*margin-top:6.2vh;*/
+  /*opacity: 0.89;*/
+/*}*/
+.pickCityInfo{
+  display:block;
+  width:7.5rem;
+  height:100vh;
+  position:fixed;
+  padding-top:46%;
+  top:0vh;
+  background:rgba(0, 0, 0, 0.5);
+  z-index:9999;
+}
+.pickCityInfoBox{
+  display:block;
+  width:4.82rem;
+  height:20vh;
+  margin:0 auto;
+  padding:.4rem;
+  background:#ffffff;
+  opacity:1;
+  border:1px solid #ffffff;
+  border-radius: 4px;
+}
+.pickCityInfoBox p{
+  margin-bottom:.6rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .32rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.infoCityPicBox{
+  width:4.02rem;
+  height:.72rem;
+  border:1px solid #e0e0e0;
+  border-radius: 4px;
+}
+.infoCityPicBox input{
+  width:3rem;
+  height:.72rem;
+  text-indent: .2rem;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
+}
+.infoCityPicBox i{
+  margin-left:.4rem;
+}
+.cityDisplay{
+  width:1.2rem;
+  height:5vh;
+  position:fixed;
+  top:6.7vh;
+  left:.25rem;
+  border:1px solid transparent;
+  border-radius: 50%;
+  background:#f2f2f2;
+}
 .shangmian{
   position:absolute;
   top:.8rem;
@@ -285,13 +385,12 @@ a {
 }
 .cityName{
   display:inline-block;
-  margin-top:.06rem;
-  height:.2rem;
+  height:.62rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
   font-weight: normal;
   font-stretch: normal;
-  line-height: 24px;
+  line-height: .62rem;
   letter-spacing: 0px;
   color: #999999;
 }

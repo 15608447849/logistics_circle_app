@@ -1,6 +1,22 @@
 <template>
   <div>
     <!--页头-->
+    <div class="guide" v-show="!isGuide">
+      <div class="cityDisplay"></div>
+      <div class="guidePic">
+        <!--<img src="../../assets/images/small/guide.png" alt="">-->
+      </div>
+      <div class="closeGuide"></div>
+    </div>
+    <div class="pickCityInfo" v-show="isPickCityInfo">
+      <div class="pickCityInfoBox">
+        <p>213213213</p>
+        <div class="infoCityPicBox">
+          <input type="text" readonly="readonly" :value="cityName"/>
+          <i class="icon iconfont icon-icon-test"></i>
+        </div>
+      </div>
+    </div>
     <div class="issueHeaderNav">
       <div class="width20">
         <!--<img src="../../assets/images/small/快速发单@2x.png" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">-->
@@ -123,8 +139,11 @@
         tipStyle: '',
         oid: '0',
         isShowMore: false, // 显示更多
-        isShowNoData: false // 无数据
+        isShowNoData: false,// 无数据
         // 信息大厅数据
+        isGuide:false,
+        isPickCityInfo:false,
+        cityName:'北京'
       }
     },
     mounted() {
