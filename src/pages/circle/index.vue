@@ -80,10 +80,8 @@
         isLoading: false // 下拉刷新
       }
     },
-    activated() {
-      this.userId = this.$app_store.state.userId;
-    },
     mounted() {
+      this.userId = this.$app_store.state.userId;
       this.$app_store.commit(TABBAR_INDEX, 2);
     },
     methods: {
