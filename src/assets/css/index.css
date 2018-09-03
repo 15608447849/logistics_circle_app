@@ -410,6 +410,16 @@ a {
   vertical-align: top;
   text-align: center;
 }
+.searchBtnCity{
+  position:absolute;
+  top:0rem;
+  left:0rem;
+  width:4rem;
+  height:.62rem;
+  font-size:.24rem;
+  vertical-align: top;
+  text-align: center;
+}
 .cityInput{
   display:inline-block;
   width:80%;
@@ -994,7 +1004,29 @@ a {
   color: #999999;
 }
 .van-field__control{
-  text-align:right;
+  text-align:left;
+}
+.van-search__cancel{
+  color:#999999!important;
+}
+.citySearchPageas{
+  display:block;
+  width:7.5rem;
+  height:90vh;
+  padding:0 .21rem 0 .21rem;
+}
+.citySearchPageas li{
+  display:block;
+  width:7.08rem;
+  height:.8rem;
+  border-bottom:1px solid #f7f7f7;
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: .8rem;
+  letter-spacing: 0px;
+  color: #666666;
 }
 /*首面个人中心基本信息的企业信息*****************************************************************************/
 .enterpriseBox{
@@ -3322,9 +3354,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   width:7.08rem;
   height:1.5rem;
   padding:0rem .21rem 0rem .21rem;
-}
-.margintop6{
-  margin-top:6vh;
 }
 .circleListAdd{
   display:block;

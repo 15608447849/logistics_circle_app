@@ -13,6 +13,7 @@ import { Dialog } from 'vant';
 import { Popup } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
 import { Icon } from 'vant';
+import { Search } from 'vant';
 
 import  {
   ToastPlugin
@@ -38,6 +39,7 @@ Vue.use(Dialog);
 Vue.use(Popup);
 Vue.use(Checkbox).use(CheckboxGroup);
 Vue.use(Icon);
+Vue.use(Search);
 
 Vue.config.productionTip = false;
 Vue.prototype.verifyUtil = verifyUtil;

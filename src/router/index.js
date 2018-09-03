@@ -47,7 +47,8 @@ import ORDER from '@/pages/order/index'
 import SEARCH from '@/components/searchInput'
 // 信息大厅发布订单模块
 import RELEASE_ORDERS from '@/pages/information/releaseOrders'
-
+// 城市搜索页面
+import SEARCH_CITY from '@/components/searchCity'
 // 订单 发布/接受 详情
 import ORDER_DETAIL from '@/pages/order/orderDetail.vue'
 
@@ -230,6 +231,11 @@ const vueRouter = new Router({
       name: 'simpleSearch',
       path: '/search',
       component: SEARCH
+    },
+    {
+      name: 'searchCity',
+      path: '/searchCity',
+      component: SEARCH_CITY
     },
     {
       name: 'releaseOrders',

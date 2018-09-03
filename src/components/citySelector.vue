@@ -2,11 +2,18 @@
   <div style="height: 100%;">
     <div class="issueHeaderNav">
       <div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>
-      <div  class="width60"><span>城市选择</span></div>
+      <div class="width60"><span>城市选择</span></div>
       <div class="width20"><div class="alignCenter floatright"></div></div>
     </div>
+    <div class="searchBox margintop6">
+      <div class="selectRegion">
+        <div class="searchBtnCity floatleft">
+          <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
+          <input type="text"  class="cityInput" placeholder="请输入城市" readonly="readonly" @click="toSearchCity">
+        </div>
+      </div>
+    </div>
     <cube-index-list
-      style="margin-top:.8rem;"
       :data="cityData"
       @select="selectItem"
       @title-click="clickTitle"></cube-index-list>
@@ -23,6 +30,7 @@
   export default {
     data() {
       return {
+        cityNameSeach:'',//搜索框值
         cityData: [], // 城市数据
         currentCity: '', // 当前选中城市
         status: 0
@@ -69,6 +77,11 @@
           },ms);
         });
       },
+      toSearchCity(){
+        this.$router.push({
+          name: 'searchCity',
+        })
+      },
       selectItem(item) {
         // 设置城市名称
         switch (this.status) {
@@ -103,7 +116,7 @@
       },
       fallback() {
         this.$router.go(-1);
-      }
+      },
     },
     beforeRouteLeave (to, from, next) {
       if (to.name === 'routeDetails') {
