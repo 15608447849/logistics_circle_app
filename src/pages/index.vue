@@ -3,6 +3,23 @@
     <transition :name="transitionName">
       <router-view class="child-view"></router-view>
     </transition>
+    <!--页头-->
+    <div class="guide" v-show="isGuide">
+      <div class="cityDisplay"></div>
+      <div class="guidePic">
+        <!--<img src="../../assets/images/small/guide.png" alt="">-->
+      </div>
+      <div class="closeGuide" @click="closeGuide"></div>
+    </div>
+    <div class="pickCityInfo" v-show="isPickCityInfo">
+      <div class="pickCityInfoBox">
+        <p>请选择所在地区</p>
+        <div class="infoCityPicBox" @click="skipCityPage">
+          <input type="text" readonly="readonly" :value="cityName"/>
+          <i class="icon iconfont icon-icon-test"></i>
+        </div>
+      </div>
+    </div>
     <div class="nav-bar">
       <!--<yd-tabbar active-color="#1E90FF">-->
         <!--<yd-tabbar-item :title=item.title link="#" v-for="(item,index) in activeList" :key="index"-->
@@ -127,10 +144,15 @@
         compInfo: null,
         userId: '',
         active: 1,
-        cityInfo: {}
+        cityInfo: {},
+        isGuide: false,
+        isPickCityInfo: false,
+        cityName: '',
       }
     },
     activated() {
+      // 从本地获取所在城市
+      this.initLocatingCity();
       this.userId = this.$app_store.getters.userId;
       this.compInfo = JSON.parse(this.$app_store.state.compInfo);
       if(this.compInfo !== undefined && this.compInfo !== null) {
@@ -143,9 +165,8 @@
       }
     },
     mounted() {
-      this.$app_store.commit(CURRENT_CITY, '长沙市');
-      this.$app_store.commit(CITY_CODE, '104301');
-      // this.initLocatingCity();
+      // 从本地获取所在城市
+      this.initLocatingCity();
       // 是否有新的消息
       this.isUnreadMsg();
       // 初始化数据
@@ -170,20 +191,23 @@
         // 判断字典是否具有更新
       },
       initLocatingCity() {
-        // 获取当前城市 如无: 默认选择长沙
+        // 获取当前城市 如无: 弹出所在城市选择框
         let info =  localStorage.getItem('cityInfo') || null;
-        if(info!== null) {
+        if(info !== null) {
           this.cityInfo = JSON.parse(info);
-        } else {
-          let obj = {
-            currentCity: '长沙',
-            cityCode: '104301'
-          };
-          this.cityInfo = localStorage.setItem('cityInfo',JSON.stringify(obj));
-          this.popShow = true
+          this.$app_store.commit(CURRENT_CITY, this.cityInfo.currentCity);
+          this.$app_store.commit(CITY_CODE, this.cityInfo.cityCode);
+          return
         }
-        this.$app_store.commit(CURRENT_CITY, this.cityInfo.currentCity);
-        this.$app_store.commit(CITY_CODE, this.cityInfo.cityCode);
+        this.isGuide = false;
+        // 弹出框让用户选择所在地
+        this.isPickCityInfo = true
+          // let obj = {
+          //   currentCity: '长沙',
+          //   cityCode: '104301'
+          // };
+          // this.cityInfo = localStorage.setItem('cityInfo',JSON.stringify(obj));
+          // this.popShow = true
       },
       tabItemClick(index) {
         this.active = index
@@ -345,6 +369,16 @@
       handleActive(position) {
         this.$app_store.commit(TABBAR_INDEX, position);
       },
+      skipCityPage() {
+        this.isGuide = true;
+        this.isPickCityInfo = false;
+        this.$router.push({
+          path: '/city',
+          query: {
+            status: 0
+          }
+        })
+      },
       // 判断当前用户是否停用
       isUserOutService() {
         let cStatus = Number(this.$app_store.state.cstatus);
@@ -353,6 +387,9 @@
           return false
         }
         return true
+      },
+      closeGuide() {
+        this.isGuide = false;
       }
       // navBarClick(index) {
       //   let path = '/';

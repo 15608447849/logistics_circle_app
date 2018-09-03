@@ -1,22 +1,5 @@
 <template>
   <div>
-    <!--页头-->
-    <div class="guide" v-show="!isGuide">
-      <div class="cityDisplay"></div>
-      <div class="guidePic">
-        <!--<img src="../../assets/images/small/guide.png" alt="">-->
-      </div>
-      <div class="closeGuide"></div>
-    </div>
-    <div class="pickCityInfo" v-show="isPickCityInfo">
-      <div class="pickCityInfoBox">
-        <p>213213213</p>
-        <div class="infoCityPicBox">
-          <input type="text" readonly="readonly" :value="cityName"/>
-          <i class="icon iconfont icon-icon-test"></i>
-        </div>
-      </div>
-    </div>
     <div class="issueHeaderNav">
       <div class="width20">
         <!--<img src="../../assets/images/small/快速发单@2x.png" alt="" @click="avatarClick" class="loginPicture floatleft" v-if="avatar !== ''">-->
@@ -58,6 +41,7 @@
             <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
             <input type="text" :value="key" class="cityInput" placeholder="请输入关键词搜索订单">
           </div>
+          <i class="icon iconfont icon-guanbi floatright lineHeight64 marginright13" @click.stop ="cleanKey()"></i>
         </div>
       </div>
       <div class="orderOperation">
@@ -75,7 +59,6 @@
           </div>
         </div>
       </div>
-
       <!--<ul class="order_boxIndex">-->
       <!--<li class="order_list">-->
       <!--<div class="order_time"><span class="site">长沙</span><span class="site">—</span><span class="site">广州</span><span-->
@@ -106,13 +89,11 @@
 </template>
 <script>
   import {
-    IS_SHOW_SIDEBAR,
+    IS_SHOW_SIDEBAR, SEARCH_CONTENT,
     SEARCH_STATE, TABBAR_INDEX
   } from '../../store/mutation-types'
   import {searchState} from "../../utils/config";
-  import { Toast } from 'vant';
   import Conversion from '@/utils/conversion';
-  import { Swipe, SwipeItem } from 'vant';
 
   export default {
     computed: {
@@ -129,7 +110,7 @@
       return {
         infoList: [],
         pageSize: '10', // 订单数
-        address: this.$app_store.getters.currentCity, // 地址
+        address: '', // 地址
         startTimeStr: '', // 起始订单标识
         endTimeStr: '', // 结束订单标识
         key: '',// 关键词
@@ -139,22 +120,11 @@
         tipStyle: '',
         oid: '0',
         isShowMore: false, // 显示更多
-        isShowNoData: false,// 无数据
-        // 信息大厅数据
-        isGuide:false,
-        isPickCityInfo:false,
-        cityName:'北京'
+        isShowNoData: false// 无数据
       }
-    },
-    mounted() {
-      if(this.address !== this.$app_store.state.currentCity) {
-        this.address =  this.$app_store.state.currentCity;
-      }
-      this.requestInfoList();
     },
     activated() {
       this.$app_store.commit(TABBAR_INDEX,0);
-      debugger
       this.oid = this.$app_store.getters.userId || '0';
       // 搜索框搜索内容
       if (this.$app_store.getters.searchState === searchState.INFORMATION) {
@@ -269,6 +239,13 @@
       },
       dateConversion(time) {
         return Conversion.formatMsgTime(time)
+      },
+      cleanKey() {
+        // 清空关键词
+        this.key = '';
+        // 清空STORE 中保存的搜索内容
+        this.$app_store.commit(SEARCH_CONTENT, '');
+        this.requestInfoList();
       }
     },
     watch: {

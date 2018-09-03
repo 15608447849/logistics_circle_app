@@ -142,7 +142,6 @@ a {
   height:4vh;
   border:1px solid transparent;
   border-radius: 5px;
-  background:red;
 }
 /*.guide img{*/
   /*display:inline-block;*/
@@ -382,6 +381,9 @@ a {
   margin-top:.1rem;
   margin-right:.1rem;
   font-size:.2rem;
+}
+.lineHeight64{
+  line-height:.64rem;
 }
 .cityName{
   display:inline-block;
