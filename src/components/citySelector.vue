@@ -33,7 +33,10 @@
         cityNameSeach:'',//搜索框值
         cityData: [], // 城市数据
         currentCity: '', // 当前选中城市
-        status: 0
+        status: 0,
+        options : {
+          probeType: 1
+        }
       }
     },
     mounted() {
@@ -80,6 +83,9 @@
       toSearchCity(){
         this.$router.push({
           name: 'searchCity',
+          query: {
+            status: this.status
+          }
         })
       },
       selectItem(item) {

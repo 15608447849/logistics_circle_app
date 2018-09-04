@@ -265,7 +265,9 @@
           this.isReleaseOrder = false;
           this.$vux.toast.text('当前企业未认证，无法进行发单操作!', 'top');
           setTimeout(()=> {
-            this.$router.go(-1);
+            this.$router.push({
+              name: 'information'
+            })
           },1500);
         }else {
           this.isReleaseOrder = true;
@@ -358,7 +360,15 @@
         this.dateTimePicker.show()
       },
       fallback() {
-        this.$router.go(-1);
+        if(this.$route.query.status == 0) {
+          this.$router.push({
+            name: 'home'
+          })
+        } else {
+          this.$router.push({
+            name: 'home'
+          })
+        }
       },
       selectHandle(date, selectedVal, selectedText, type) {
         this.OrderDetail[this.selectDataPicker] = selectedVal[0] + '-' + selectedVal[1] + '-' + selectedVal[2] + ' ' + selectedVal[3] + ':' + selectedVal[4] + ':' + selectedVal[5]
@@ -477,7 +487,7 @@
                 Toast.clear();
                 if (result.code === 0) {
                   Toast.success(result.msg);
-                  self.$router.go(-1);
+                  self.fallback()
                 } else {
                   Toast.fail(result.msg);
                 }

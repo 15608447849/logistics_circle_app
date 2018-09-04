@@ -305,11 +305,10 @@
           .then(() => {
             self.$Ice_CircleService.removeCircle(this.userId, this.compInfo.compid, type, new IceCallback(
               function (result) {
+                self.$vux.toast.text(result.msg, 'top');
                 if (result.code === 0) {
-                  self.$vux.toast.text('好友圈移除成功', 'top');
+                  // self.$vux.toast.text('好友圈移除成功', 'top');
                   self.status = 10;
-                } else {
-                  self.$vux.toast.text('好友圈移除失败', 'top');
                 }
               },
               function (error) {
@@ -333,15 +332,12 @@
           .then(() => {
             self.$Ice_CircleService.sendAddMyCircleMsg(this.userId, this.compInfo.compid, ctype, new IceCallback(
               function (result) {
+                self.$vux.toast.text(result.msg, 'top');
                 if (result.code === 0) {
                   if (ctype === 2) {
                     // self.routeList[index].cstatus = 32;
-                    self.$vux.toast.text('货源圈好友添加成功', 'top');
-                  } else {
-                    self.$vux.toast.text('调度圈好友添加成功', 'top');
+
                   }
-                } else {
-                  self.$vux.toast.text('好友圈添加失败', 'top');
                 }
               },
               function (error) {

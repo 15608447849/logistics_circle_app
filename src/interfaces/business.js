@@ -40,6 +40,9 @@ exports.install = function (Vue) {
     },
     getAreaH5Data:(callback) => {
       queryIce(system.SystemServicePrx , 'SystemService', 'getCityAreaAll4H5', callback);
+    },
+    getCityByName:(cityName,callback) => {
+      queryIce(system.SystemServicePrx , 'SystemService', 'getCityByName',cityName, callback);
     }
   };
 

@@ -155,7 +155,6 @@
       }
     },
     activated() {
-      debugger
       if(this.$route.meta.isUseCache){
         this.$route.meta.isUseCache = false;
         // 啥也不动
@@ -413,7 +412,10 @@
         })
       },
       fallback() {
-        this.$router.go(-1)
+        // this.$router.go(-1)
+        this.$router.push({
+          name: 'home'
+        });
       },
       // 字符串截取
       addressSubStr(str) {

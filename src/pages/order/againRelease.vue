@@ -498,7 +498,9 @@
         ));
       },
       fallback() {
-        this.$router.go(-1)
+        this.$router.push({
+          name: 'acceptOrders'
+        })
       },
       // 转发布
       saveTransOrder() {
@@ -549,7 +551,9 @@
             function(data){
               self.$vux.toast.text(data.msg, 'top');
               if (data.code === 0) {
-                self.$router.go(-1);
+                self.$router.push({
+                  name: 'acceptOrders'
+                })
               }
             },
             function (error) {
@@ -599,7 +603,10 @@
       toPageGeo(state) {
         this.$app_store.commit(GEOSTATE, state);
         this.$router.push({
-          path: '/geo'
+          path: '/geo',
+          query: {
+            state: 1
+          }
         })
       },
       sumPriceB() {
