@@ -370,13 +370,19 @@ a {
   border-radius: 4px;
 }
 .searchBox .addressCity{
-  position:absolute;
-  top:0rem;
-  left:.15rem;
+  float:left;
+  margin-left:.2rem;
   width:auto;
   height:.62rem;
 }
 .cityNameI{
+  display:inline-block;
+  float:left;
+  margin-left:.1rem;
+  margin-top:.2rem;
+  font-size:.2rem;
+}
+.cityNameF{
   display:inline-block;
   margin-top:.1rem;
   margin-right:.1rem;
@@ -387,6 +393,7 @@ a {
 }
 .cityName{
   display:inline-block;
+  min-width:.6rem;
   height:.62rem;
   font-family: PingFang-SC-Regular;
   font-size: .24rem;
@@ -2016,13 +2023,13 @@ input[type="radio"] {
 }
 .noDataBoxIndex img{
   display:block;
-  height:18vh;
+  height:25vh;
   margin:0 auto;
 }
 .noDataBox img{
   display:block;
   /*width:3rem;*/
-  height:18vh;
+  height:25vh;
   margin:0 auto 0 auto;
 }
 .order_boxIndex{
@@ -3135,7 +3142,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .placeAddDri{
   display:block;
-  height:18vh;
+  height:25vh;
   /*position: absolute;*/
   margin-left: auto;
   margin-right: auto;
