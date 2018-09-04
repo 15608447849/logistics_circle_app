@@ -101,7 +101,7 @@ import GEOLOCATION from '@/components/geoLocation'
 
 Vue.use(Router);
 
-/**
+/**L
  * 嵌套的路由/视图表
  * 模块化的、基于组件的路由配置
  * 路由参数、查询、通配符
@@ -119,6 +119,7 @@ const vueRouter = new Router({
       component: INDEX,
       children: [
         {
+          name: 'home',
           path: '',
           component: HOME,
           meta: {
@@ -127,6 +128,7 @@ const vueRouter = new Router({
           },
         },
         {
+          name: 'circle',
           path: '/circle',
           component: CIRCLE,
           meta: {
@@ -224,6 +226,7 @@ const vueRouter = new Router({
       component: SMSLOGIN
     },
     {
+      name: 'geo',
       path: '/geo',
       component: GEOLOCATION
     },
@@ -345,6 +348,7 @@ const vueRouter = new Router({
     },
 
     {
+      name: 'routerIndex',
       path: '/center/commonlyRoute/index',
       component: COMMONLYROUTE
     },

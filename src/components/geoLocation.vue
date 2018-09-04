@@ -105,7 +105,9 @@
           if (status === "complete" && result.info === "OK") {
             if (result && result.regeocode) {
               self.$app_store.commit(ADDRESSCOM, result.regeocode.addressComponent);
-              self.$router.go(-1);
+              self.$router.push({
+                name: 'releaseOrders'
+              })
             }
           }
         });
@@ -113,7 +115,16 @@
       goBack() {
         // 内容初始化
         this.$app_store.commit(ADDRESSCOM,null);
-        this.$router.go(-1);
+        if(this.$route.query.state == 1) {
+          this.$router.push({
+            name: 'againRelease'
+          })
+
+        }else {
+          this.$router.push({
+            name: 'releaseOrders'
+          })
+        }
       }
     },
     beforeRouteLeave (to, from, next) {

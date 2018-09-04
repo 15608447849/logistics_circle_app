@@ -114,7 +114,9 @@
 
       },
       fallback() {
-        this.$router.go(-1)
+        this.$router.push({
+          name: 'home'
+        })
       },
       /** 是否启用 */
       isEnable(item, index) {

@@ -70,6 +70,7 @@
       }
     },
     activated() {
+      debugger
       if(this.$route.meta.isUseCache){
         this.$route.meta.isUseCache = false;
         if(this.routeCityStatus === 2) {
@@ -169,7 +170,9 @@
         }
       },
       fallback() {
-        this.$router.go(-1)
+        this.$router.push({
+          name: 'routerIndex'
+        })
       },
       // 获取途经点
       getPassingPoint(start, end) {
@@ -279,7 +282,8 @@
           function (result) {
             if (result.code === 0) {
               self.$vux.toast.text('路线保存成功', 'top');
-              self.$router.go(-1);
+              self.fallback();
+
             }else {
               self.$vux.toast.text(result.msg, 'top');
             }
