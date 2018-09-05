@@ -188,11 +188,11 @@
           self.loading = false;
           if (result.length === 0) {
             self.finished = true;
-            if (self.infoList !== null && self.infoList.length > 0) {
-              self.isShowNoData = false;
-            } else {
-              self.isShowNoData = true;
-            }
+            // if (self.infoList !== null && self.infoList.length > 0) {
+            //   self.isShowNoData = false;
+            // } else {
+            //   self.isShowNoData = true;
+            // }
           }else {
             self.startTimeStr = result[0].time;
             self.endTimeStr = result[result.length - 1].time;
@@ -200,11 +200,11 @@
             self.infoList = self.infoList.concat(result);
           }
         }, function (error) {
-          if (self.infoList !== null && self.infoList.length > 0) {
-            self.isShowNoData = false;
-          } else {
-            self.isShowNoData = true;
-          }
+          // if (self.infoList !== null && self.infoList.length > 0) {
+          //   self.isShowNoData = false;
+          // } else {
+          //   self.isShowNoData = true;
+          // }
           self.loading = false;
           self.finished = true;
         });
@@ -216,7 +216,14 @@
             function (result) {
               if (result.code !== 0) {
                 self.$vux.toast.text(result.msg, 'top');
-                return
+              }
+              debugger
+              if(result.obj.length === 0) {
+                if (self.infoList !== null && self.infoList.length > 0) {
+                  self.isShowNoData = false;
+                } else {
+                  self.isShowNoData = true;
+                }
               }
               successCallback(result.obj);
             }, function (err) {

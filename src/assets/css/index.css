@@ -226,6 +226,7 @@ a {
   height:87.5vh;
   z-index:9999;
   margin-top:6vh;
+  background:#ffffff;
 }
 .searchBox{
   display:flex;
@@ -1745,7 +1746,7 @@ input[type="radio"] {
   top:0rem;
   width:7.5rem;
   height:6vh;
-  z-index:1;
+  z-index:9999;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
@@ -1999,7 +2000,7 @@ input[type="radio"] {
 .circleLists{
   width:7.5rem;
   height:87.5vh;
-  margin-top:5.5vh;
+  margin-top:6vh;
   background:#ffffff;
 }
 .order_box{
@@ -2035,10 +2036,32 @@ input[type="radio"] {
 .order_boxIndex{
   display:block;
   width:7.5rem;
-  height:58vh;
+  height:auto;
   background:#ffffff;
   overflow: auto;
   margin-bottom:11vh;
+}
+.pickGoods{
+  display:block;
+  width:7.5rem;
+  height:.8rem;
+  padding-left:.05rem;
+}
+.pickGoods img{
+  display:inline-block;
+  width:.55rem;
+  height:.55rem;
+  margin-top:.05rem;
+  vertical-align: top;
+}
+.pickGoods span{
+  font-family: PingFang-SC-Regular;
+  font-size: .28rem;
+  font-weight: bold;
+  font-stretch: normal;
+  line-height: .8rem;
+  letter-spacing: 1px;
+  color: #333333;
 }
 .order_list{
   display:block;
@@ -3079,7 +3102,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .xiala{
   margin-left:.1rem;
- font-size:.1rem;
+  line-height:6vh;
+  font-size:.1rem;
+  color:#ffffff;
 }
 /*司机管理模块****************************************************************************************************/
 .driverBox{
@@ -4613,11 +4638,15 @@ circleListAdd li .circlePic{
   border:1px solid #f5f5f5;
   padding:0rem .21rem 0rem .21rem;
 }
+.lineListDiv a{
+  margin-top:2.3vh;
+}
 .lineListDiv img{
   width:.7rem;
   height:.7rem;
   vertical-align: middle;
-  margin-bottom:.25rem;
+  margin-bottom:.06rem;
+  margin-right:.1rem;
 }
 .lineList li{
   display:table;
