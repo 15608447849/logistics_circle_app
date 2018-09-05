@@ -321,13 +321,13 @@
     Slice.defineOperations(order.OrderService, order.OrderServicePrx,
     {
         "generateOrderNo": [, , , , , [7], , , , , ],
-        "queryOrderByCurdate": [, , , , , [7], [[7], [7], [7], [order.FilterConditionICE]], , , , ],
-        "queryCircleOrderByCurdate": [, , , , , [7], [[7], [7], [7], [order.FilterConditionICE]], , , , ],
-        "queryAppOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "queryAppCircleOrderByCurdate": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ],
-        "addOrder": [, , , , , [7], [[7], [order.OrderICE]], , , , ],
+        "queryOrderByCurdate": [, , , , , [7], [[cstruct.UserParam], [7], [7], [order.FilterConditionICE]], , , , ],
+        "queryCircleOrderByCurdate": [, , , , , [7], [[cstruct.UserParam], [7], [7], [order.FilterConditionICE]], , , , ],
+        "queryAppOrderByCurdate": [, , , , , [7], [[cstruct.UserParam], ["cstruct.stringSeqHelper"]], , , , ],
+        "queryAppCircleOrderByCurdate": [, , , , , [7], [[cstruct.UserParam], ["cstruct.stringSeqHelper"]], , , , ],
+        "addOrder": [, , , , , [7], [[cstruct.UserParam], [order.OrderICE]], , , , ],
         "getOrderDetail": [, , , , , [7], [["cstruct.stringSeqHelper"]], , , , ],
-        "robbingOrder": [, , , , , [7], [[7], ["cstruct.stringSeqHelper"]], , , , ]
+        "robbingOrder": [, , , , , [7], [[cstruct.UserParam], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.order = order;
 }

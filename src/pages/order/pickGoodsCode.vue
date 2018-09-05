@@ -11,8 +11,6 @@
         <div class="alignCenter floatright"></div>
       </div>
 
-
-
     </div>
     <div class="pickGoodsCodePic" >
       <!--<qrcode :value="qrCode" :fg-color="fgColor"></qrcode>-->

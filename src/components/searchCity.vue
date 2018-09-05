@@ -2,7 +2,7 @@
   <div class="backgroundwhite">
     <van-search
       v-model="value"
-      placeholder="请输入搜索关键词"
+      placeholder="请输入城市名称 如:北京/BJ"
       show-action
       @search="onSearch"
       @cancel="onCancel"
@@ -84,8 +84,11 @@
             new IceCallback(
               function (result) {
                 if(result.code === 0) {
+                  debugger
                   self.cityList = result.obj;
-                  console.log(self.cityList)
+                  if(self.cityList === undefined) {
+
+                  }
                 }
               },
               function (error) {

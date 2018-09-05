@@ -77,6 +77,32 @@
         },
         16, 
         true);
+
+    /**
+     * @descrption:新增公用
+     * @auth:jiangwenguang
+     * @time:2018/09/04
+     * @version:
+     **/
+    cstruct.UserParam = Slice.defineStruct(
+        function(uid, compid)
+        {
+            this.uid = uid !== undefined ? uid : "";
+            this.compid = compid !== undefined ? compid : "";
+        },
+        true,
+        function(__os)
+        {
+            __os.writeString(this.uid);
+            __os.writeString(this.compid);
+        },
+        function(__is)
+        {
+            this.uid = __is.readString();
+            this.compid = __is.readString();
+        },
+        2, 
+        false);
     Slice.defineSequence(cstruct, "longSeqHelper", "Ice.LongHelper", true);
     Slice.defineSequence(cstruct, "intSeqHelper", "Ice.IntHelper", true);
     Slice.defineSequence(cstruct, "byteSeqHelper", "Ice.ByteHelper", true);

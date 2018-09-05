@@ -326,12 +326,13 @@
      * 企业logo的基本信息模型
      **/
     comp.BasicInfo = Slice.defineStruct(
-        function(compid, fname, verify, creadit)
+        function(compid, fname, verify, creadit, logoPath)
         {
             this.compid = compid !== undefined ? compid : "";
             this.fname = fname !== undefined ? fname : "";
             this.verify = verify !== undefined ? verify : 0;
             this.creadit = creadit !== undefined ? creadit : 0;
+            this.logoPath = logoPath !== undefined ? logoPath : "";
         },
         true,
         function(__os)
@@ -340,6 +341,7 @@
             __os.writeString(this.fname);
             __os.writeInt(this.verify);
             __os.writeInt(this.creadit);
+            __os.writeString(this.logoPath);
         },
         function(__is)
         {
@@ -347,8 +349,9 @@
             this.fname = __is.readString();
             this.verify = __is.readInt();
             this.creadit = __is.readInt();
+            this.logoPath = __is.readString();
         },
-        10, 
+        11, 
         false);
 
     comp.PhoneInfo = Slice.defineStruct(
@@ -387,23 +390,22 @@
 
     Slice.defineOperations(comp.CompService, comp.CompServicePrx,
     {
-        "querygetCompByUid": [, , , , , [7], [[7]], , , , ],
+        "querygetCompByUid": [, , , , , [7], [[cstruct.UserParam]], , , , ],
         "querygetCompByCid": [, , , , , [7], [[7]], , , , ],
-        "updateComp": [, , , , , [7], [[comp.CompInfo]], , , , ],
-        "queryCompByBasicUid": [, , , , , [7], [[7]], , , , ],
+        "updateComp": [, , , , , [7], [[cstruct.UserParam], [comp.CompInfo]], , , , ],
+        "queryCompByBasicUid": [, , , , , [7], [[cstruct.UserParam]], , , , ],
         "insertCompUser": [, , , , , [7], [[3], [4]], , , , ],
         "selectCompUserByUid": [, , , , , [7], [[3], ["cstruct.intSeqHelper"]], , , , ],
+        "querygetCompAll": [, , , , , [7], [[7]], , , , ],
         "addLoginCompByRedis": [, , , , , [7], [[3], [3]], , , , ],
         "selectStaffInfo": [, , , , , [7], [[7], [7], [7], [3], [3], [cstruct.Page]], [[cstruct.Page]], , , ],
-        "querygetCompAll": [, , , , , [7], [[7]], , , , ],
-        "searchDriver4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
-        "searchStaff4App": [, , , , , [7], [[3], [7], [3], [3]], , , , ],
+        "searchDriver4App": [, , , , , [7], [[cstruct.UserParam], [7], [3], [3]], , , , ],
+        "searchStaff4App": [, , , , , [7], [[cstruct.UserParam], [7], [3], [3]], , , , ],
         "searchEnterprise4App": [, , , , , [7], [[7], [3], [3]], , , , ],
-        "addStaffInfo": [, , , , , [7], [[7], [7], [3], [3]], , , , ],
-        "updateStaffInfo": [, , , , , [7], [[7], [7], [3], [3], [3]], , , , ],
-        "updateStaffstatus": [, , , , , [7], [[3], [3], [3], [3]], , , , ],
+        "addStaffInfo": [, , , , , [7], [[cstruct.UserParam], [7], [7], [3], [3]], , , , ],
+        "updateStaffInfo": [, , , , , [7], [[cstruct.UserParam], [7], [7], [3], [3], [3]], , , , ],
+        "updateStaffstatus": [, , , , , [7], [[cstruct.UserParam], [3], [3], [3]], , , , ],
         "updateCompPhone": [, , , , , [3], [[4], [4]], , , , ],
-        "selectPhoAndPht": [, , , , , [7], [[3]], , , , ],
         "feedbackCredentRelpath": [, , , , , [7], [[3], ["cstruct.stringSeqHelper"]], , , , ]
     });
     exports.comp = comp;

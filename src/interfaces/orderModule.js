@@ -106,7 +106,16 @@ struct OrderDetail{
 		int priority; //优先级  0:普通; 1:高(代表优先圈子的人)
 	 };
  */
+
+
 module.exports = {
+
+  getUserParam:()=>{
+    let userParam = new cstruct.UserParam();
+    userParam.uid = localStorage.getItem('USER_ID') === null ? 0 : localStorage.getItem('USER_ID');
+    userParam.compid = localStorage.getItem('COMP_ID')  === null ? 0 : localStorage.getItem('COMP_ID');
+    return userParam;
+  },
    /* 全文检索出当天的订单(App)
    OrderSeq queryAppOrderByCurdate(string token,cstruct::stringSeq params);
    参数数组定义:
@@ -118,14 +127,14 @@ module.exports = {
    订单发布时间
    */
   queryOrderByApp: (oid,size,addr,key,op,timeStr,callback)=> {
-    queryIce(order.OrderServicePrx , 'OrderService', 'queryAppOrderByCurdate', oid,[size,addr,key,op,timeStr],callback);
+    queryIce(order.OrderServicePrx , 'OrderService', 'queryAppOrderByCurdate', module.exports.getUserParam(),[size,addr,key,op,timeStr],callback);
   },
   /**
    * 全文检索出当天的圈子订单(APP)
    OrderSeq queryAppCircleOrderByCurdate(string token,cstruct::stringSeq params);
    */
   queryCircleOrderByApp: (token,size,addr,key,op,timeStr,callback)=> {
-    queryIce(order.OrderServicePrx , 'OrderService', 'queryAppCircleOrderByCurdate', token,[size,addr,key,op,timeStr],callback);
+    queryIce(order.OrderServicePrx , 'OrderService', 'queryAppCircleOrderByCurdate', module.exports.getUserParam(),[size,addr,key,op,timeStr],callback);
   },
   /**生成订单订单号 */
   generateOrderNo:(callback)=>{
@@ -133,7 +142,7 @@ module.exports = {
   },
   /**发布订单 OrderICE */
   releaseOrder:(oid,OrderICE,callback)=>{
-    queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', oid,OrderICE,callback);
+    queryIce(order.OrderServicePrx , 'OrderService', 'addOrder', module.exports.getUserParam(),OrderICE,callback);
   },
   /** 传入订单号 获取订单详情 OrderDetail */
   getOrderDetail:(orderNo,puberid,pubercompid,callback)=>{
@@ -144,6 +153,6 @@ module.exports = {
   int robbingOrder(string token,cstruct::stringSeq params);
    */
   robbingOrder:(token,orderNo,compId,callback)=>{
-    queryIce(order.OrderServicePrx , 'OrderService', 'robbingOrder', token,[orderNo,compId],callback);
+    queryIce(order.OrderServicePrx , 'OrderService', 'robbingOrder', module.exports.getUserParam(),[orderNo,compId],callback);
   }
 };

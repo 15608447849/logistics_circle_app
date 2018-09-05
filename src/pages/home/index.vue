@@ -127,14 +127,7 @@
         isShowNoData: false// 无数据
       }
     },
-    mounted() {
-      if(this.address !== this.$app_store.state.currentCity) {
-        this.address =  this.$app_store.state.currentCity;
-      }
-    },
     activated() {
-      this.$app_store.commit(TABBAR_INDEX,0);
-      this.oid = this.$app_store.getters.userId || '0';
       // 搜索框搜索内容
       if (this.$app_store.getters.searchState === searchState.INFORMATION) {
         this.key = this.$app_store.getters.searchContent;
@@ -143,6 +136,20 @@
         this.address =  this.$app_store.state.currentCity;
       }
       this.requestInfoList();
+    },
+    mounted() {
+      setTimeout(() => {
+        this.$app_store.commit(TABBAR_INDEX,0);
+        this.oid = this.$app_store.getters.userId || '0';
+        // 搜索框搜索内容
+        if (this.$app_store.getters.searchState === searchState.INFORMATION) {
+          this.key = this.$app_store.getters.searchContent;
+        }
+        if(this.address !== this.$app_store.state.currentCity) {
+          this.address =  this.$app_store.state.currentCity;
+        }
+        this.requestInfoList();
+      },50);
     },
     methods: {
       requestInfoList() {

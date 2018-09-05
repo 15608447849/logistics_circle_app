@@ -47,6 +47,14 @@
   };
 */
 module.exports = {
+
+  getUserParam:()=>{
+    let userParam = new cstruct.UserParam();
+    userParam.uid = localStorage.getItem('USER_ID') === null ? 0 : localStorage.getItem('USER_ID');
+    userParam.compid = localStorage.getItem('COMP_ID')  === null ? 0 : localStorage.getItem('COMP_ID');
+    return userParam;
+  },
+
   /**
    * 修改承运商信息
   int updateCarrier(CarrierInfo carrier);
@@ -59,20 +67,20 @@ module.exports = {
   CarrierInfo querygetCarrierByToken(string token);
   */
   querySelfCarrier:(token,callback)=>{
-    queryIce(carriers.CarrierServicePrx, 'CarrierService', 'querygetCarrierByToken', token,callback);
+    queryIce(carriers.CarrierServicePrx, 'CarrierService', 'querygetCarrierByToken', module.exports.getUserParam(),callback);
   },
   /**
    * 根据用户ID查询指定承运商信息
    CarrierInfo querygetCarrierByUid(string uno);
    */
   updateCarrier:(uid,callback)=>{
-    queryIce(carriers.CarrierServicePrx, 'CarrierService', 'querygetCarrierByUid', uid,callback);
+    queryIce(carriers.CarrierServicePrx, 'CarrierService', 'querygetCarrierByUid', module.exports.getUserParam(),callback);
   },
   /**
    * 上传logoURL
   int updateLogocarrier(string token,string url);
    */
   updateCarrier:(token,url,callback)=>{
-    queryIce(carriers.CarrierServicePrx, 'CarrierService', 'updateLogocarrier', token,url,callback);
+    queryIce(carriers.CarrierServicePrx, 'CarrierService', 'updateLogocarrier', module.exports.getUserParam(),url,callback);
   },
 };
