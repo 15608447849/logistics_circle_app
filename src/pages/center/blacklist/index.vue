@@ -20,7 +20,7 @@
 
         <ul class="circleListBlack">
           <div v-show="isShowNoData" class="noDataBox">
-            <img src="../../../assets/images/small/nodate.png"/>
+            <img src="../../../assets/images/small/noFriend.png"/>
           </div>
           <li class="needBorderF5" @click="toComPInfo(item)" v-for="(item, index) in blackList" :key="index">
             <img :src="item.logoPath" alt="" class="blackPic" v-if="item.logoPath !== 'undefined'">

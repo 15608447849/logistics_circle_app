@@ -35,10 +35,10 @@
         <div class="selectRegion" @click="skipSearchPage">
           <div class="addressCity" @click.stop="skipCityPage">
             <span class="cityName">{{address}}</span>
-            <i class="icon iconfont icon-xiala cityNameI"></i>
           </div>
+          <i class="icon iconfont icon-xiala cityNameI"></i>
           <div class="searchBtn">
-            <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
+            <i class="icon iconfont icon-sousuo magnifierziti cityNameF"></i>
             <input type="text" :value="key" class="cityInput" placeholder="请输入关键词搜索订单">
           </div>
           <i class="icon iconfont icon-guanbi floatright lineHeight64 marginright13" @click.stop ="cleanKey()"></i>
