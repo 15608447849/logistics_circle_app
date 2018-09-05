@@ -22,6 +22,7 @@
 {
     var Ice = require("ice").Ice;
     var __M = Ice.__M;
+    var cstruct = require("cstruct").cstruct;
     var Slice = Ice.Slice;
 
     var mycircle = __M.module("mycircle");
@@ -140,7 +141,7 @@
      * 圈子查询条件
      **/
     mycircle.CircleQueryParam = Slice.defineStruct(
-        function(starPlace, endPlace, cname, phone, cType, uoid, pageIndex, pageSize)
+        function(starPlace, endPlace, cname, phone, cType, uoid, compid, pageIndex, pageSize)
         {
             this.starPlace = starPlace !== undefined ? starPlace : 0;
             this.endPlace = endPlace !== undefined ? endPlace : 0;
@@ -148,6 +149,7 @@
             this.phone = phone !== undefined ? phone : "";
             this.cType = cType !== undefined ? cType : 0;
             this.uoid = uoid !== undefined ? uoid : 0;
+            this.compid = compid !== undefined ? compid : 0;
             this.pageIndex = pageIndex !== undefined ? pageIndex : 0;
             this.pageSize = pageSize !== undefined ? pageSize : 0;
         },
@@ -160,6 +162,7 @@
             __os.writeString(this.phone);
             __os.writeInt(this.cType);
             __os.writeInt(this.uoid);
+            __os.writeInt(this.compid);
             __os.writeInt(this.pageIndex);
             __os.writeInt(this.pageSize);
         },
@@ -171,10 +174,11 @@
             this.phone = __is.readString();
             this.cType = __is.readInt();
             this.uoid = __is.readInt();
+            this.compid = __is.readInt();
             this.pageIndex = __is.readInt();
             this.pageSize = __is.readInt();
         },
-        26, 
+        30, 
         false);
 
     /**
@@ -193,14 +197,14 @@
 
     Slice.defineOperations(mycircle.CircleService, mycircle.CircleServicePrx,
     {
-        "queryMyCircleByUser": [, , , , , [7], [[3], [3], [3], [3]], , , , ],
+        "queryMyCircleByUser": [, , , , , [7], [[cstruct.UserParam], [3], [3], [3]], , , , ],
         "queryCanAddMyCircle": [, , , , , [7], [[mycircle.CircleQueryParam]], , , , ],
-        "queryMyCircleBlackList": [, , , , , [7], [[3], [3], [3]], , , , ],
-        "sendAddMyCircleMsg": [, , , , , [7], [[3], [3], [3]], , , , ],
-        "addBlackList": [, , , , , [7], [[3], [3]], , , , ],
-        "removeCircle": [, , , , , [7], [[3], [3], [3]], , , , ],
-        "getMyCircleUser": [, , , , , [7], [[3], [3]], , , , ],
-        "getBlackBySet": [, , , , , [7], [[3]], , , , ],
+        "queryMyCircleBlackList": [, , , , , [7], [[cstruct.UserParam], [3], [3]], , , , ],
+        "sendAddMyCircleMsg": [, , , , , [7], [[cstruct.UserParam], [3], [3]], , , , ],
+        "addBlackList": [, , , , , [7], [[cstruct.UserParam], [3]], , , , ],
+        "removeCircle": [, , , , , [7], [[cstruct.UserParam], [3], [3]], , , , ],
+        "getMyCircleUser": [, , , , , [7], [[cstruct.UserParam], [3]], , , , ],
+        "getBlackBySet": [, , , , , [7], [[cstruct.UserParam]], , , , ],
         "agreeOrRefuse": [, , , , , [7], [[4], [3]], , , , ]
     });
     exports.mycircle = mycircle;

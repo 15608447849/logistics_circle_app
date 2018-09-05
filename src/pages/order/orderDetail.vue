@@ -388,7 +388,9 @@
         let self = this;
         self.$Ice_myOrderService.getOrderInfo(self.order.orderno, self.userId, self.type, new IceCallback(
           function (result) {
+
             if (result.code === 0) {
+
               self.detailInfo = result.obj.orderifo;
               self.detailInfo.pubcompid = self.pubcompid;
               self.detailInfo.revicompid = self.revicompid;
@@ -409,6 +411,7 @@
             }
           },
           function (error) {
+            debugger
             self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
           }
         ))

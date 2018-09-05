@@ -22,6 +22,7 @@
 {
     var Ice = require("ice").Ice;
     var __M = Ice.__M;
+    var cstruct = require("cstruct").cstruct;
     var Slice = Ice.Slice;
 
     var redundancy = __M.module("redundancy");
@@ -456,8 +457,8 @@
         [
             redundancy.SynOrderException
         ], , ],
-        "queryMyRecvOrder": [, , , , , [7], [[3], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
-        "queryMyPubOrder": [, , , , , [7], [[3], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
+        "queryMyRecvOrder": [, , , , , [7], [[cstruct.UserParam], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
+        "queryMyPubOrder": [, , , , , [7], [[cstruct.UserParam], [redundancy.QueryParam], [redundancy.Page]], [[redundancy.Page]], , , ],
         "queryEnterpriseDynamics": [, , , , , [7], [[3], [redundancy.Page]], [[redundancy.Page]], , , ],
         "handleReceive": [, , , , , [3], [[3], [7], ["redundancy.stringSeqHelper"]], , , , ],
         "getPickCode": [, , , , , [7], [[3], [7]], , , , ],

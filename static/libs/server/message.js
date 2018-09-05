@@ -22,6 +22,7 @@
 {
     var Ice = require("ice").Ice;
     var __M = Ice.__M;
+    var cstruct = require("cstruct").cstruct;
     var Slice = Ice.Slice;
 
     var message = __M.module("message");
@@ -90,12 +91,12 @@
 
     Slice.defineOperations(message.MessageService, message.MessageServicePrx,
     {
-        "queryMsgListByUno": [, , , , , [7], [[3]], , , , ],
-        "queryMsgListByUid": [, , , , , [7], [[3], [3]], , , , ],
+        "queryMsgListByUno": [, , , , , [7], [[cstruct.UserParam]], , , , ],
+        "queryMsgListByUid": [, , , , , [7], [[cstruct.UserParam], [3]], , , , ],
         "sendMsg": [, , , , , [7], [[3], [7], [3], [3], [7]], , , , ],
         "addMessage": [, , , , , [7], [[message.Msg]], , , , ],
         "updateMessage": [, , , , , [3], [[message.Msg]], , , , ],
-        "isUnreadMsg": [, , , , , [3], [[3]], , , , ],
+        "isUnreadMsg": [, , , , , [3], [[cstruct.UserParam]], , , , ],
         "delOldMsg": [, , , , , , , , , , ],
         "updateReadStatus": [, , , , , [7], [[4]], , , , ]
     });

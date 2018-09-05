@@ -11,6 +11,13 @@
 */
 module.exports = {
 
+  getUserParam:()=>{
+    let userParam = new cstruct.UserParam();
+    userParam.uid = localStorage.getItem('USER_ID') === null ? 0 : localStorage.getItem('USER_ID');
+    userParam.compid = localStorage.getItem('COMP_ID')  === null ? 0 : localStorage.getItem('COMP_ID');
+    return userParam;
+  },
+
   /**
    * 新增司机
    *
@@ -71,14 +78,14 @@ module.exports = {
    * params:查询参数数组[目的地地区码，出发地地区码，线路状态]
    */
   queryRoutes: function (oid, origin, destination, state, page, callback) {
-    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'queryRoutes', oid, [origin, destination, state], page, callback);
+    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'queryRoutes', module.exports.getUserParam(), [origin, destination, state], page, callback);
   },
   /**
    * 保存线路
    *  string saveRoute(RouteInfo route, long uphone);
    */
   saveRoute: function (routeInfo, oid, callback) {
-    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'saveRoute', routeInfo,oid, callback);
+    queryIce(enterprise.EnterpriseServerPrx, 'EnterpriseServer', 'saveRoute', routeInfo,module.exports.getUserParam(), callback);
   },
   /**
    * 停用线路

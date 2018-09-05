@@ -105,9 +105,20 @@
           if (status === "complete" && result.info === "OK") {
             if (result && result.regeocode) {
               self.$app_store.commit(ADDRESSCOM, result.regeocode.addressComponent);
-              self.$router.push({
-                name: 'releaseOrders'
-              })
+              if(self.$route.query.state == 1) {
+                self.$router.push({
+                  name: 'againRelease'
+                })
+
+              }else if(self.$route.query.state == 2){
+                self.$router.push({
+                  name: 'releaseOrders'
+                })
+              }else {
+                self.$router.push({
+                  name: 'repuborder'
+                })
+              }
             }
           }
         });
@@ -119,10 +130,13 @@
           this.$router.push({
             name: 'againRelease'
           })
-
-        }else {
+        }else if(this.$route.query.state == 2){
           this.$router.push({
             name: 'releaseOrders'
+          })
+        }else {
+          this.$router.push({
+            name: 'repuborder'
           })
         }
       }

@@ -544,7 +544,10 @@
       toPageGeo(state) {
         this.$app_store.commit(GEOSTATE, state);
         this.$router.push({
-          path: '/geo'
+          path: '/geo',
+          query: {
+            state: 2
+          }
         })
       },
       // 计算订单价格

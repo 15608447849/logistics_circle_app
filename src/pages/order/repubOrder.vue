@@ -485,13 +485,18 @@
           function (error) {
             self.$vux.toast.text('服务器连接失败, 请稍后重试', 'top');
             setTimeout(() => {
-              self.$router.go(-1);
+              self.$router.push({
+                name: 'order'
+              })
             }, 1500)
           }
         ));
       },
       fallback() {
-        this.$router.go(-1)
+        // this.$router.go(-1)
+        this.$router.push({
+          name: 'order'
+        })
       },
       reReleaseOrder() {
         // 重新发布
@@ -502,7 +507,6 @@
         let self = this;
         if(this.validator()) {
           let jsonObj = new myOrder.OrderICE();
-          debugger
           jsonObj.puberid = this.userId;				//收货人
           jsonObj.phone1 = self.OrderDetail.phone1 === '' ? 0 :  self.OrderDetail.phone1; 			// 手机号码1
           jsonObj.phone2 = self.OrderDetail.phone2 === '' ? 0 :  self.OrderDetail.phone2;  			// 手机号码2
@@ -548,7 +552,9 @@
             function(data){
               self.$vux.toast.text(data.msg, 'top');
               if (data.code === 0) {
-                self.$router.go(-1);
+                self.$router.push({
+                  name: 'order'
+                })
               }
             },
             function (error) {
@@ -599,7 +605,10 @@
       toPageGeo(state) {
         this.$app_store.commit(GEOSTATE, state);
         this.$router.push({
-          path: '/geo'
+          path: '/geo',
+          query: {
+            state: 3
+          }
         })
       },
       sumPriceB() {

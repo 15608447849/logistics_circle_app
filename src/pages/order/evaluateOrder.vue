@@ -127,6 +127,7 @@
       },
       // 保存评价信息
       saveEvaluate() {
+        debugger
         let self = this;
         this.OrderEvaluate.pubcompid = this.orderInfo.pubcompid; //发布企业
         this.OrderEvaluate.revicompid = this.orderInfo.revicompid; //运输企业

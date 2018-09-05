@@ -27,7 +27,7 @@
 <script>
   import {
     USER_INFO,
-    USER_ID, COMP_INFO, ROID, CSTATUS
+    USER_ID,COMP_ID, COMP_INFO, ROID, CSTATUS
   } from '../../store/mutation-types'
 
   export default {
@@ -54,6 +54,7 @@
       loginClick() {
         let self = this;
         if (this.validator()) {
+          debugger
           let compList = [];
           this.$Ice_UserService.login(this.account, this.password, new IceCallback(
             function (result) {
@@ -63,6 +64,7 @@
                 if (result.obj.comps.length === 1) {
                   self.$app_store.commit(ROID,result.obj.comps[0].roid);
                   self.$app_store.commit(CSTATUS,result.obj.comps[0].cstatus);
+                  self.$app_store.commit(COMP_ID,result.obj.comps[0].compid);
                   self.setCompIdByRedis(result.obj.oid, result.obj.comps[0].compid);
                   return
                 }
@@ -108,6 +110,7 @@
           onSelect: (item, index) => {
             this.$app_store.commit(ROID,item.roid);
             this.$app_store.commit(CSTATUS,item.cstatus);
+            this.$app_store.commit(COMP_ID,item.compid);
             this.setCompIdByRedis(obj.oid, item.compid);
           },
           onCancel: () => {

@@ -66,7 +66,8 @@
         time:'',
         state:'',
         address:'',
-        userId: this.$app_store.getters.userId,
+        userId: '',
+        compId: '',
         entryTripForm:{
           driverid:'',
           status:'',
@@ -81,6 +82,8 @@
       }
     },
     mounted() {
+      this.userId = this.$app_store.getters.userId;
+      this.compId = this.$app_store.state.compId;
       this.entryTripForm.orderno = this.$route.query.orderno;
       this.asyncPicker = this.$createCascadePicker({
         title: '请选择地点',
@@ -177,7 +180,9 @@
           "status":this.entryTripForm.status
         }
         tracinfoJson.orderno = this.entryTripForm.orderno;
-        tracinfoJson.trancompid = this.userId;
+        // 企业id
+        tracinfoJson.trancompid = this.compId;
+        tracinfoJson.driverid = this.userId;
         tracinfoJson.content = JSON.stringify(content);
         tracinfoJson.cstatus = 32;
         let self = this;
