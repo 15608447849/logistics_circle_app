@@ -16,7 +16,7 @@
       <!--<li @click="tocurrency" class="needBorder1">通用</li>-->
       <!--<li class="needBorder1">关于我们</li>-->
       <!--<li class="needBorder1">帮助与反馈</li>-->
-      <li class="needBorder1"><span>关于一块物流</span><span class="floatright">版本号：v1.0.1</span></li>
+      <li class="needBorder1"><span>关于一块物流</span><span class="floatright">版本号：v1.1.9</span></li>
       <li class="needBorder1" @click="exitLogin">退出</li>
     </ul>
   </div>

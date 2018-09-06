@@ -66,8 +66,33 @@
     },
     mounted() {
       this.initCityList(0).then((resolve) => {
-        console.log('数据开始渲染' + new Date());
+        console.log('数据开始过滤' + new Date());
+        // 城市列表数据过滤
+        let countyList = [];// 区县列表
+        for(let i=0;i<resolve.length;i++) {
+          for(let j=0;j<resolve[i].items.length;j++) {
+            if(resolve[i].items[j].value.length > 6) {
+              countyList.push(resolve[i].items[j]);
+              // 移除区县
+              resolve[i].items.splice(j,1);
+              j--;
+            }
+          }
+        }
+
+        for(let i=0 ;i<resolve.length;i++) {
+          for(let j=0;j<resolve[i].items.length;j++) {
+            resolve[i].items[j].children =[];
+            let value = resolve[i].items[j].value;
+            for(let k=0;k<countyList.length;k++) {
+              if(countyList[k].value.slice(0,6) === value) {
+                resolve[i].items[j].children.push(countyList[k]);
+              }
+            }
+          }
+        }
         this.cityData = resolve;
+        console.log(this.cityData);
         this.$nextTick(function(){
           console.log('数据渲染完毕拉~' + new Date());
           // 关闭下拉框
@@ -109,7 +134,8 @@
         this.$router.push({
           name: 'searchCity',
           query: {
-            status: this.status
+            status: this.status,
+            state: this.$route.query.state
           }
         })
       },

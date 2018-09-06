@@ -99,11 +99,11 @@ module.exports = {
 	},
 	/** 关闭订单  repubOrder (orderid:订单号 uoid:用户id)*/
 	closeOrder:(orderid,callback)=>{
-	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'closeOrder',orderid,module.exports.token(),callback);
+	    queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'closeOrder',orderid,module.exports.getUserParam(),callback);
 	},
   /** 取消订单 */
   cancelRobbing:(orderid,oid,callback)=>{
-      queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelRobbing',orderid, module.exports.token(),callback);
+      queryIce(myOrder.MyOrderServerPrx, 'MyOrderServer', 'cancelRobbing',orderid, module.exports.getUserParam(),callback);
  },
   /** 转发布 */
   transOrder:(oid,orderDetail,callback) => {

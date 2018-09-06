@@ -74,7 +74,8 @@
         this.$router.push({
           path: '/city',
           query: {
-            status: 1
+            status: 1,
+            state: this.$route.query.state
           }
         })
       },
@@ -124,6 +125,7 @@
         });
       },
       goBack() {
+        debugger
         // 内容初始化
         this.$app_store.commit(ADDRESSCOM,null);
         if(this.$route.query.state == 1) {

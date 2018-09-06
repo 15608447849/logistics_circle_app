@@ -600,7 +600,23 @@
           this.$vux.toast.text('请填写发布人联系方式', 'top');
           return false
         }
+        if(this.OrderDetail.pusdatetime !== '' && this.OrderDetail.puedatetime !== '') {
+          if(!this.compareDate(this.OrderDetail.puedatetime,this.OrderDetail.pusdatetime)) {
+            this.$vux.toast.text('提货日期起始时间大于结束时间', 'top');
+            return false
+          }
+        }
+        if(this.OrderDetail.easdatetime !== '' && this.OrderDetail.eaedatetime !== '') {
+          if(!this.compareDate(this.OrderDetail.eaedatetime,this.OrderDetail.easdatetime)) {
+            this.$vux.toast.text('收货日期起始时间大于结束时间', 'top');
+            return false
+          }
+        }
         return true
+      },
+
+      compareDate(d1,d2) {
+        return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
       },
       toPageGeo(state) {
         this.$app_store.commit(GEOSTATE, state);

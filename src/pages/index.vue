@@ -13,17 +13,18 @@
     </div>
     <div class="pickCityInfo" v-show="isPickCityInfo">
       <div class="pickCityInfoBox">
-        <p>请选择所在地区</p>
+        <p>请先选择您所在城市</p>
         <div class="infoCityPicBox" @click="skipCityPage">
           <input type="text" readonly="readonly" :value="cityName"/>
           <i class="icon iconfont icon-icon-test"></i>
         </div>
+        <button class="cityPicBtn" @click="confirmCity">确定</button>
       </div>
     </div>
     <div class="nav-bar">
       <!--<yd-tabbar active-color="#1E90FF">-->
         <!--<yd-tabbar-item :title=item.title link="#" v-for="(item,index) in activeList" :key="index"-->
-                        <!--@click.native="navBarClick(index)" :active="tabBarIndex === index">-->
+                        <!--@click.native="navBar不Click(index)" :active="tabBarIndex === index">-->
           <!--<yd-icon :name=item.name slot="icon" size="0.54rem"></yd-icon>-->
         <!--</yd-tabbar-item>-->
       <!--</yd-tabbar>-->
@@ -147,7 +148,7 @@
         cityInfo: {},
         isGuide: false,
         isPickCityInfo: false,
-        cityName: '',
+        cityName: '长沙市',
       }
     },
     activated() {
@@ -242,6 +243,15 @@
             }
           )
         );
+      },
+      confirmCity() {
+        this.isPickCityInfo = false;
+        let obj = {
+          currentCity: '长沙市',
+          cityCode: 104301
+        };
+        localStorage.setItem('cityInfo',JSON.stringify(obj));
+
       },
       initAreaData() {
         let self = this;

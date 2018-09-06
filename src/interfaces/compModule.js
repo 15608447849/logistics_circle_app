@@ -37,7 +37,7 @@ module.exports = {
   },
   /*** 查询司机、业务员信息(type 查询类型 1,司机;132,业务员;) */
   selectStaffInfo: (name, phone, status, type, cuid, page, callback) => {
-    queryIce(comp.CompServicePrx, 'CompService', 'selectStaffInfo', name, phone, status, type, cuid, page, callback);
+    queryIce(comp.CompServicePrx, 'CompService', 'selectStaffInfo',module.exports.getUserParam(), name, phone, status, type, cuid, page, callback);
   },
   /*** 新增司机、业务员信息(type 人员对象：1,添加司机;132,添加业务员; ) */
   addStaffInfo: (name, phone, cuid, type, callback) => {
