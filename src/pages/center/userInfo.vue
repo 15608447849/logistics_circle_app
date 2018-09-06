@@ -356,11 +356,10 @@
           .then(() => {
             self.$Ice_CircleService.addBlackList(this.userId, this.compInfo.compid, new IceCallback(
               function (result) {
+                self.$vux.toast.text(result.msg, 'top');
                 if (result.code === 0) {
-                  self.$vux.toast.text('黑名单添加成功', 'top');
+
                   self.status = 10;
-                } else {
-                  self.$vux.toast.text('黑名单添加失败', 'top');
                 }
               },
               function (error) {

@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;background:#ffffff;">
+  <div style="height: 100%;">
     <div class="issueHeaderNav">
       <div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>
       <div class="width60"><span>城市选择</span></div>
@@ -13,68 +13,10 @@
         </div>
       </div>
     </div>
-    <van-collapse v-model="activeNames">
-      <span class="pickCountyBox">选择区县</span>
-      <van-collapse-item :title="looking" name="1" style="position:relative;">
-          <span class="pickCount">全城</span>
-          <span class="pickCount backgroundNine">长沙县</span>
-          <span class="pickCount">浏阳市</span>
-          <span class="pickCount">望城区</span>
-          <span class="pickCount">宁乡县</span>
-          <span class="pickCount">雨花区</span>
-          <span class="pickCount">岳麓区</span>
-          <span class="pickCount">近效</span>
-          <span class="pickCount">芙蓉区</span>
-          <span class="pickCount">开福区</span>
-          <span class="pickCount">天心区</span>
-      </van-collapse-item>
-    </van-collapse>
-    <div class="latelyCity">
-      <p>最近访问</p>
-      <span class="pickCount"><img src="./../assets/images/small/dingwei.png" alt="">长沙</span>
-      <span class="pickCount">成都</span>
-      <span class="pickCount">深圳</span>
-    </div>
-
-    <div class="cityAggregate">
-      <p class="rollLetter">A</p>
-      <ul class="cityNameAggregate">
-        <li>安顺</li>
-        <li>阿富汗</li>
-      </ul>
-      <ul class="letter">
-        <li>定位</li>
-        <li>热门</li>
-        <li class="colorBlueSan">A</li>
-        <li>B</li>
-        <li>C</li>
-        <li>D</li>
-        <li>E</li>
-        <li>F</li>
-        <li>G</li>
-        <li>H</li>
-        <li>J</li>
-        <li>K</li>
-        <li>L</li>
-        <li>M</li>
-        <li>N</li>
-        <li>P</li>
-        <li>Q</li>
-        <li>R</li>
-        <li>S</li>
-        <li>T</li>
-        <li>W</li>
-        <li>X</li>
-        <li>Y</li>
-        <li>Z</li>
-      </ul>
-    </div>
-    <!--<cube-index-list-->
-      <!--:data="cityData"-->
-      <!--@select="selectItem"-->
-      <!--@title-click="clickTitle">-->
-
-    <!--</cube-index-list>-->
+    <!-- 城市选择列表 -->
+    <fs-cities></fs-cities>
+    <!-- 侧边索引栏 -->
+    <fs-side-nav-index></fs-side-nav-index>
   </div>
 </template>
 <script>
@@ -84,13 +26,16 @@
     RECEIPT_CITY,
     CITY_CODE, START_CITY, BOURN_CITY, START_CITY_CODE, BOURN_CITY_CODE
   } from '../store/mutation-types'
+  import fsSideNavIndex from './index/sideNavIndex'
+  import fsCities from './index/cities'
 
   export default {
+    components: {
+      fsSideNavIndex,
+      fsCities
+    },
     data() {
       return {
-        looking:'你正在看：长沙',
-        activeNames:['1'],
-        cityNameSeach:'',//搜索框值
         cityData: [], // 城市数据
         currentCity: '', // 当前选中城市
         status: 0,
@@ -114,6 +59,7 @@
             }
           }
         }
+
         for(let i=0 ;i<resolve.length;i++) {
           for(let j=0;j<resolve[i].items.length;j++) {
             resolve[i].items[j].children =[];
