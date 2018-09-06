@@ -68,6 +68,10 @@
       <!--</li>-->
       <!--</ul>-->
       <ul class="order_boxIndex">
+        <li class="pickGoods">
+          <img src="../../assets/images/small/goods.png" alt="">
+          <span>精选好单</span>
+        </li>
         <li class="order_list" @click="toPageIssueDetail(item)" v-for="(item,index) in infoList" :key="index">
           <div class="order_time">
             <span class="site">{{changeStrRed(item.startAddr)}}</span>

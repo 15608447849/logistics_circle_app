@@ -7,10 +7,10 @@
       <div class="width60">
         <span style="font-size:.36rem;">选择地址</span>
       </div>
-      <div class="width20">
-        <button @click="selectCity" class="selectCityBtn floatright">{{searchOption.city}}
-          <i class="icon iconfont icon-xiala xiala"></i>
+      <div class="width20" @click="selectCity">
+        <button class="selectCityBtn floatleft">{{searchOption.city}}
         </button>
+        <i class="icon iconfont icon-xiala xiala"></i>
       </div>
     </div>
       <div class="amap-container">
