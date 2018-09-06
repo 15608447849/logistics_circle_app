@@ -1,5 +1,5 @@
 <template>
-  <div class="citiesBox">
+  <div>
     <van-collapse v-model="activeNames" class="collapse">
       <span class="pickCountyBox">选择区县</span>
       <van-collapse-item :title="looking" name="1" style="position:relative;">
@@ -144,11 +144,7 @@
     text-align: center;
   }
   .collapse{
-    height:1rem;
+    height:auto;
     margin-bottom:.05rem;
-  }
-  .citiesBox{
-    height:100%;
-    background:#ffffff;
   }
 </style>
