@@ -138,8 +138,8 @@
       }
     },
     methods: {
-      // 设置目的地
       showCascadePicker(type) {
+        debugger
         this.pickerType = type;
         switch (type) {
           case 0:
@@ -207,6 +207,7 @@
         ))
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
+        debugger
         let obj = new enterprise.Routeviap();
         switch (this.pickerType) {
           case 0:
