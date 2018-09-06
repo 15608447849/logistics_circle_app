@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%;">
+  <div style="height: 100%;background:#ffffff;">
     <div class="issueHeaderNav">
       <div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>
       <div class="width60"><span>城市选择</span></div>
@@ -36,6 +36,39 @@
       <span class="pickCount">深圳</span>
     </div>
 
+    <div class="cityAggregate">
+      <p class="rollLetter">A</p>
+      <ul class="cityNameAggregate">
+        <li>安顺</li>
+        <li>阿富汗</li>
+      </ul>
+      <ul class="letter">
+        <li>定位</li>
+        <li>热门</li>
+        <li class="colorBlueSan">A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+        <li>F</li>
+        <li>G</li>
+        <li>H</li>
+        <li>J</li>
+        <li>K</li>
+        <li>L</li>
+        <li>M</li>
+        <li>N</li>
+        <li>P</li>
+        <li>Q</li>
+        <li>R</li>
+        <li>S</li>
+        <li>T</li>
+        <li>W</li>
+        <li>X</li>
+        <li>Y</li>
+        <li>Z</li>
+      </ul>
+    </div>
     <!--<cube-index-list-->
       <!--:data="cityData"-->
       <!--@select="selectItem"-->

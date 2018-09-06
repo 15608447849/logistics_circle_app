@@ -479,7 +479,7 @@ a {
 }
 .pickCount{
   display:inline-block;
-  width:2rem;
+  width:1.9rem;
   height:.6rem;
   margin-right:.2rem;
   margin-bottom:.24rem;
@@ -505,6 +505,51 @@ a {
   height:.6rem;
   line-height:.6rem;
   color:#999999;
+}
+.cityAggregate{
+  display:block;
+  position:relative;
+  width:7.08rem;
+  height:74vh;
+  margin:.21rem  auto;
+  overflow: auto;
+}
+.cityNameAggregate{
+  position:absolute;
+  top:.6rem;
+   width:7.08rem;
+   height:auto;
+   overflow: auto;
+ }
+.cityNameAggregate li{
+  width:6.5rem;
+  height:.9rem;
+  line-height:.9rem;
+  border-bottom:1px solid #e0e0e0;
+}
+.letter{
+  position:fixed;
+  top:26vh;
+  left:6.79rem;
+  width:.5rem;
+  height:66vh;
+}
+.rollLetter{
+  position:absolute;
+  top:0rem;
+  width:6.5rem;
+  height:.6rem;
+  text-indent: .21rem;
+  background:#efefef;
+  line-height:.6rem;
+  font-size:.32rem;
+  color:#999999;
+  z-index:2;
+}
+.letter li{
+  width:.6rem;
+  height:.37rem;
+  text-align: center;
 }
 .cityInput{
   display:inline-block;
@@ -548,7 +593,6 @@ a {
   width:7.5rem;
   height:3rem;
   background:#ffffff;
-  margin-bottom:.16rem;
 }
 .banner{
   display:block;
@@ -2118,6 +2162,7 @@ input[type="radio"] {
   background:#ffffff;
   overflow: auto;
   margin-bottom:11vh;
+  margin-top:.16rem;
 }
 .pickGoods{
   display:block;
