@@ -29,11 +29,13 @@
         return {
           value: '',
           cityList: [],
-          status: 0
+          status: 0,
+          state: ''
         }
       },
       mounted() {
         this.status = this.$route.query.status;
+        this.state = this.$route.query.state;
       },
       methods:{
         onSearch() {
@@ -60,7 +62,13 @@
               this.$app_store.commit(CITY_CODE,item.areac);
               this.$app_store.commit(RECEIPT_CITY,item.arean);
               pathName = 'geo';
-              break;
+              this.$router.push({
+                name: pathName,
+                query: {
+                  state: this.state
+                }
+              });
+              return;
             case 2:
               this.$app_store.commit(START_CITY_CODE,item.areac);
               this.$app_store.commit(START_CITY,item.arean);
@@ -72,11 +80,9 @@
               pathName = 'routeDetails';
               break;
           }
-
           this.$router.push({
             name: pathName
           })
-
         },
         requestCityList(condition) {
           let self = this;
@@ -84,7 +90,6 @@
             new IceCallback(
               function (result) {
                 if(result.code === 0) {
-                  debugger
                   self.cityList = result.obj;
                   if(self.cityList === undefined) {
 

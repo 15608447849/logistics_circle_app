@@ -74,9 +74,9 @@
             <span class="site">—</span>
             <span class="site">{{changeStrRed(item.destAddr)}}</span>
             <span class="time">{{dateConversion(item.time)}}</span></div>
-          <div class="order_price"><span class="carWeight">{{item.goodsType}}</span><span
+          <div class="order_price"><span class="carWeight">{{changeStrRed(item.goodsType)}}</span><span
             class="carWeight"></span><span
-            class="carWeight">{{item.vt}}</span><span class="carWeight">{{item.wm}}</span><span class="total_price">￥{{item.cost}}元</span>
+            class="carWeight">{{changeStrRed(item.vt)}}</span><span class="carWeight">{{changeStrRed(item.wm)}}</span><span class="total_price">￥{{changeStrRed(item.cost)}}元</span>
           </div>
         </li>
         <div v-show="isShowNoData" class="noDataBoxIndex">
@@ -128,6 +128,7 @@
       if (this.$app_store.getters.searchState === searchState.INFORMATION) {
         this.key = this.$app_store.getters.searchContent;
       }
+
       if(this.address !== this.$app_store.state.currentCity) {
         this.address =  this.$app_store.state.currentCity;
       }
@@ -143,6 +144,9 @@
         }
         if(this.address !== this.$app_store.state.currentCity) {
           this.address =  this.$app_store.state.currentCity;
+        }
+        if (this.address === '') {
+          this.address = '长沙市'
         }
         this.requestInfoList();
       },50);

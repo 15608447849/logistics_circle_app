@@ -12,20 +12,14 @@
       </div>
     </div>
     <div>
-      <div class="addFriendBox">
-        <div class="searchFriendBox">
-          <div class="searchFriend">
-            <div class="friendSearchBtn" @click="toPageSearch">
-              <div class="magnifier floatleft">
-                <i class="icon iconfont icon-sousuo"></i>
-              </div>
-              <input v-model="searchInputVal" type="text" class="friendSousuo" placeholder="输入企业名称查询">
-              <div class="width10 floatright">
-              </div>
-            </div>
+      <div class="searchBox" @click="toPageSearch">
+        <div class="selectRegion">
+          <div class="searchFriendBtn">
+            <i class="icon iconfont icon-sousuo magnifierziti cityNameF"></i>
+            <input v-model="searchInputVal" type="text" placeholder="请输入关键词搜索伙伴">
           </div>
+          <i @click.stop="cleanSearchCont" class="icon iconfont icon-guanbi floatright lineHeight64 marginright13"></i>
         </div>
-        <span class="friendCanle" @click="">取消</span>
       </div>
 
       <p class="maybe">可能认识的伙伴</p>
@@ -88,7 +82,7 @@
 <script>
   import {Tab, TabItem} from 'vux'
   import {searchState} from "../../../utils/config";
-  import {SEARCH_STATE} from "../../../store/mutation-types";
+  import {SEARCH_CONTENT, SEARCH_STATE} from "../../../store/mutation-types";
 
   export default {
     components: {
@@ -102,6 +96,7 @@
         circleQueryParamB: new mycircle.CircleQueryParam(),
         page: new cstruct.Page(),
         userId: this.$app_store.getters.userId,
+        compId: this.$app_store.getters.compId,
         circleList: [],
         sCircleList: [], // 货源圈
         SchedulingCircle: [],
@@ -130,15 +125,13 @@
           .then(() => {
             self.$Ice_CircleService.addBlackList(this.userId, item.compId, new IceCallback(
               function (result) {
+                self.$vux.toast.text(result.msg, 'top');
                 if (result.code === 0) {
-                  self.$vux.toast.text('黑名单添加成功', 'top');
                   if (ctype === 2) {
                     self.sCircleList.splice(index, 1)
                   } else {
                     self.SchedulingCircle.splice(index, 1)
                   }
-                } else {
-                  self.$vux.toast.text('黑名单添加失败', 'top');
                 }
               },
               function (error) {
@@ -193,7 +186,7 @@
         this.page.totalPageCount = 0;
 
         if (this.$app_store.getters.searchState === searchState.CIRCLE_ADD) {
-          this.searchInputVal = this.$app_store.getters.searchContent;
+          this.searchInputVal = this.$app_store.state.searchContent;
           this.cName = this.searchInputVal;
         }
 
@@ -204,6 +197,7 @@
         this.circleQueryParamA.endPlace = '';
         this.circleQueryParamA.cname = this.cName;
         this.circleQueryParamA.uoid = this.userId;
+        this.circleQueryParamA.compid = this.compId;
 
         this.circleQueryParamB.pageSize = this.page.pageSize;
         this.circleQueryParamB.pageIndex = this.page.pageIndex;
@@ -212,6 +206,7 @@
         this.circleQueryParamB.endPlace = '';
         this.circleQueryParamB.cname = this.cName;
         this.circleQueryParamB.uoid = this.userId;
+        this.circleQueryParamB.compid = this.compId;
       },
       onLoadA() {
         let self = this;
@@ -288,6 +283,14 @@
       },
       fallback() {
         this.$router.go(-1)
+      },
+      cleanSearchCont() {
+        this.$app_store.commit(SEARCH_CONTENT, '');
+        this.initData();
+        this.sCircleList = [];
+        this.SchedulingCircle = [];
+        this.onLoadA();
+        this.onLoadB();
       }
     }
   }

@@ -65,10 +65,10 @@
         if(this.isEditor) {
           this.$Ice_InfoService.updateStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId,this.uid, this.type, new IceCallback(
             function (result) {
+              debugger
+              self.$vux.toast.text(result.msg, 'top');
               if(result.code === 0) {
                 self.goBackPage();
-              } else {
-                self.$vux.toast.text(result.msg, 'top');
               }
             },
             function (error) {
@@ -78,10 +78,9 @@
         }else {
           this.$Ice_InfoService.addStaffInfo(this.dName, this.dPhone, this.$app_store.getters.userId, this.type, new IceCallback(
             function (result) {
+              self.$vux.toast.text(result.msg, 'top');
               if(result.code === 0) {
                 self.goBackPage();
-              } else {
-                self.$vux.toast.text(result.msg, 'top');
               }
             },
             function (error) {

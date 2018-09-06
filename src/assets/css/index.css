@@ -164,7 +164,7 @@ a {
 .pickCityInfoBox{
   display:block;
   width:4.82rem;
-  height:20vh;
+  height:25vh;
   margin:0 auto;
   padding:.4rem;
   background:#ffffff;
@@ -186,6 +186,18 @@ a {
   height:.72rem;
   border:1px solid #e0e0e0;
   border-radius: 4px;
+  margin-bottom:4vh;
+}
+.cityPicBtn{
+  display:block;
+  width:4rem;
+  height:5vh;
+  border:1px solid transparent;
+  border-radius: 2px;
+  background:#3189f5;
+  text-align: center;
+  font-size:.32rem;
+  color:#ffffff;
 }
 .infoCityPicBox input{
   width:3rem;
@@ -416,6 +428,22 @@ a {
   font-size:.24rem;
   vertical-align: top;
   text-align: center;
+}
+.searchFriendBtn{
+  position:absolute;
+  top:0rem;
+  left:21%;
+  width:4rem;
+  height:.62rem;
+  font-size:.24rem;
+  vertical-align: top;
+  text-align: center;
+}
+.searchFriendBtn input{
+  height:.6rem;
+}
+.searchFriendBtn input::-webkit-input-placeholder{
+  color:#666666;
 }
 .searchBtnCity{
   position:absolute;
