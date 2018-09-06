@@ -14,7 +14,7 @@
       </div>
     </div>
     <!-- 城市选择列表 -->
-    <fs-cities></fs-cities>
+    <fs-cities :cities="cityData"></fs-cities>
     <!-- 侧边索引栏 -->
     <fs-side-nav-index></fs-side-nav-index>
   </div>
@@ -26,7 +26,7 @@
     RECEIPT_CITY,
     CITY_CODE, START_CITY, BOURN_CITY, START_CITY_CODE, BOURN_CITY_CODE
   } from '../store/mutation-types'
-  import fsSideNavIndex from './index/sideNavIndex'
+  import fsSideNavIndex from './index/side-nav-index'
   import fsCities from './index/cities'
 
   export default {
@@ -71,9 +71,9 @@
             }
           }
         }
+        // 根据所选城市拼接列表
+        
         this.cityData = resolve;
-
-        console.log(this.cityData);
         this.$nextTick(function(){
           console.log('数据渲染完毕拉~' + new Date());
           // 关闭下拉框

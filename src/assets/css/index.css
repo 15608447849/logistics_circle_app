@@ -510,16 +510,20 @@ a {
   display:block;
   position:relative;
   width:7.08rem;
-  height:74vh;
+  height:auto;
   margin:.21rem  auto;
+}
+.cityAggregateBox{
+  display:block;
+  position:relative;
+  width:7.5rem;
+  padding:0 .21rem;
+  height:auto;
   overflow: auto;
 }
 .cityNameAggregate{
-  position:absolute;
-  top:.6rem;
    width:7.08rem;
    height:auto;
-   overflow: auto;
  }
 .cityNameAggregate li{
   width:6.5rem;

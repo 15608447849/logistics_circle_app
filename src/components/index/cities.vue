@@ -22,13 +22,15 @@
       <span class="pickCount">成都</span>
       <span class="pickCount">深圳</span>
     </div>
-    <div class="cityAggregate">
-      <p class="rollLetter">A</p>
-      <ul class="cityNameAggregate">
-        <li>安顺</li>
-        <li>阿富汗</li>
-      </ul>
+    <div class="cityAggregateBox">
+      <div class="cityAggregate" v-for="(item, index) in cities" :key="index">
+        <p class="rollLetter">{{item.name}}</p>
+        <ul class="cityNameAggregate">
+          <li v-for="(itemA, indexA) in item.items" @click="itemClick(itemA)">{{itemA.name}}</li>
+        </ul>
+      </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -43,6 +45,11 @@
         activeNames:['1'],
         cityNameSeach:'',//搜索框值
         looking:'你正在看：长沙',
+      }
+    },
+    methods: {
+      itemClick(item) {
+        console.log(item)
       }
     }
   }
@@ -102,16 +109,14 @@
     display:block;
     position:relative;
     width:7.08rem;
-    height:74vh;
+    height:auto;
     margin:.21rem  auto;
     overflow: auto;
+    background:#ffffff;
   }
   .cityNameAggregate{
-    position:absolute;
-    top:.6rem;
     width:7.08rem;
     height:auto;
-    overflow: auto;
   }
   .cityNameAggregate li{
     width:6.5rem;
@@ -136,7 +141,7 @@
     line-height:.6rem;
     font-size:.32rem;
     color:#999999;
-    z-index:2;
+    z-index:1;
   }
   .letter li{
     width:.6rem;
@@ -144,7 +149,7 @@
     text-align: center;
   }
   .collapse{
-    height:1rem;
+    height:auto;
     margin-bottom:.05rem;
   }
   .citiesBox{
