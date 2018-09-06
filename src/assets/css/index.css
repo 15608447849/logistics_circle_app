@@ -428,6 +428,56 @@ a {
   vertical-align: top;
   text-align: center;
 }
+.pickCountyBox{
+  position:absolute;
+  top:.15rem;
+  left:5.7rem;
+  width:1.2rem;
+  height:.62rem;
+  text-align: center;
+  line-height:.62rem;
+  font-size:.28rem;
+  color:#666666;
+  z-index:1;
+}
+.CountyBox{
+  display:block;
+  width:7.5rem;
+  height:auto;
+  padding:.21rem;
+}
+.backgroundNine{
+  background:#efefef;
+}
+.pickCount{
+  display:inline-block;
+  width:2rem;
+  height:.6rem;
+  margin-right:.2rem;
+  margin-bottom:.24rem;
+  text-align: center;
+  border:1px solid #efefef;
+  border-radius: 3px;
+  line-height:.6rem;
+}
+.pickCount img{
+  display:inline-block;
+  width:.3rem;
+  height:.3rem;
+  vertical-align: middle;
+}
+.latelyCity{
+  display:block;
+  width:7.5rem;
+  height:auto;
+  padding:0 .21rem 0 .21rem;
+  background:#ffffff;
+}
+.latelyCity p{
+  height:.6rem;
+  line-height:.6rem;
+  color:#999999;
+}
 .cityInput{
   display:inline-block;
   width:80%;
@@ -1746,7 +1796,7 @@ input[type="radio"] {
   top:0rem;
   width:7.5rem;
   height:6vh;
-  z-index:9999;
+  z-index:2;
   padding:0px .21rem 0px .21rem;
   background: -webkit-linear-gradient(-45deg,  #3190f5,#31bff5); /* Safari 5.1 - 6.0 */
   background: -o-linear-gradient(-45deg, #3190f5,#31bff5); /* Opera 11.1 - 12.0 */
@@ -2020,7 +2070,7 @@ input[type="radio"] {
   display:block;
   width:7.5rem;
   height:52vh;
-  padding-top:29%;
+  padding-top:20%;
 }
 .noDataBoxIndex img{
   display:block;

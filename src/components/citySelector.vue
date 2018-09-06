@@ -13,6 +13,29 @@
         </div>
       </div>
     </div>
+    <van-collapse v-model="activeNames">
+      <span class="pickCountyBox">选择区县</span>
+      <van-collapse-item :title="looking" name="1" style="position:relative;">
+
+          <span class="pickCount">全城</span>
+          <span class="pickCount backgroundNine">长沙县</span>
+          <span class="pickCount">浏阳市</span>
+          <span class="pickCount">望城区</span>
+          <span class="pickCount">宁乡县</span>
+          <span class="pickCount">雨花区</span>
+          <span class="pickCount">岳麓区</span>
+          <span class="pickCount">近效</span>
+          <span class="pickCount">芙蓉区</span>
+          <span class="pickCount">开福区</span>
+          <span class="pickCount">天心区</span>
+      </van-collapse-item>
+    </van-collapse>
+    <div class="latelyCity">
+      <p>定位/最近访问</p>
+      <span class="pickCount"><img src="./../assets/images/small/dingwei.png" alt="">长沙</span>
+      <span class="pickCount">成都</span>
+      <span class="pickCount">深圳</span>
+    </div>
     <cube-index-list
       :data="cityData"
       @select="selectItem"
@@ -30,6 +53,8 @@
   export default {
     data() {
       return {
+        looking:'你正在看：长沙',
+        activeNames:['1'],
         cityNameSeach:'',//搜索框值
         cityData: [], // 城市数据
         currentCity: '', // 当前选中城市
