@@ -9,14 +9,13 @@
       <div class="selectRegion">
         <div class="searchBtnCity floatleft">
           <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
-          <input type="text"  class="cityInput" placeholder="请输入城市" readonly="readonly" @click="toSearchCity">
+          <input type="text"  class="cityInput" placeholder="城市名/首字母" readonly="readonly" @click="toSearchCity">
         </div>
       </div>
     </div>
     <van-collapse v-model="activeNames">
       <span class="pickCountyBox">选择区县</span>
       <van-collapse-item :title="looking" name="1" style="position:relative;">
-
           <span class="pickCount">全城</span>
           <span class="pickCount backgroundNine">长沙县</span>
           <span class="pickCount">浏阳市</span>
@@ -31,15 +30,18 @@
       </van-collapse-item>
     </van-collapse>
     <div class="latelyCity">
-      <p>定位/最近访问</p>
+      <p>最近访问</p>
       <span class="pickCount"><img src="./../assets/images/small/dingwei.png" alt="">长沙</span>
       <span class="pickCount">成都</span>
       <span class="pickCount">深圳</span>
     </div>
-    <cube-index-list
-      :data="cityData"
-      @select="selectItem"
-      @title-click="clickTitle"></cube-index-list>
+
+    <!--<cube-index-list-->
+      <!--:data="cityData"-->
+      <!--@select="selectItem"-->
+      <!--@title-click="clickTitle">-->
+
+    <!--</cube-index-list>-->
   </div>
 </template>
 <script>
@@ -79,7 +81,6 @@
             }
           }
         }
-
         for(let i=0 ;i<resolve.length;i++) {
           for(let j=0;j<resolve[i].items.length;j++) {
             resolve[i].items[j].children =[];
@@ -92,6 +93,7 @@
           }
         }
         this.cityData = resolve;
+
         console.log(this.cityData);
         this.$nextTick(function(){
           console.log('数据渲染完毕拉~' + new Date());
