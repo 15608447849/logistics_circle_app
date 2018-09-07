@@ -70,7 +70,7 @@
   .pickCountyBox {
     position: absolute;
     top: .15rem;
-    left: 5.7rem;
+    left: 5.2rem;
     width: 1.2rem;
     height: .62rem;
     text-align: center;
@@ -118,7 +118,6 @@
     position: relative;
     width: 7.08rem;
     height: auto;
-    margin: .21rem auto;
     overflow: auto;
     background: #ffffff;
   }
@@ -136,8 +135,6 @@
   }
 
   .rollLetter {
-    position: absolute;
-    top: 0rem;
     width: 6.5rem;
     height: .6rem;
     text-indent: .21rem;
