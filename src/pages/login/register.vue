@@ -67,7 +67,7 @@
         <yd-cell-group>
           <yd-cell-item>
             <span slot="left" class="span">密码：</span>
-            <yd-input slot="right" max="16" :disabled="isMultiUserRegister" type="password" v-model="password"
+            <yd-input slot="right" max="16" :readonly="isMultiUserRegister" :disabled="isMultiUserRegister" type="password" v-model="password"
                       placeholder="请设置登录密码"></yd-input>
             <!--<p class="defaultPwd">默认使用业务员账号的密码</p>-->
 
@@ -79,9 +79,8 @@
         <yd-cell-group>
           <yd-cell-item>
             <span slot="left" class="span">确认密码：</span>
-            <yd-input slot="right" max="16" :disabled="isMultiUserRegister" type="password" v-model="rPassword"
+            <yd-input slot="right" max="16" :readonly="isMultiUserRegister" :disabled="isMultiUserRegister" type="password" v-model="rPassword"
                       placeholder="请确认登录密码"></yd-input>
-
           </yd-cell-item>
           <div v-show="isMultiUserRegister">
             <p slot="bottom" style="color:#F00;padding: 0 .3rem;">当前手机号码已在平台注册, 默认是使用原密码</p>
@@ -89,7 +88,7 @@
         </yd-cell-group>
         <yd-cell-item>
           <span slot="left" class="span">邀请码：</span>
-          <yd-input slot="right" max="12" type="number" v-model="invitationCode"
+          <yd-input slot="right"  max="11" type="tel" v-model="invitationCode"
                     placeholder="请输入您收到的邀请码，没有可不填"></yd-input>
 
           <!--<yd-button size=" large
@@ -216,13 +215,16 @@
           this.$vux.toast.text('账号不能为空', 'top');
           return false
         }
-        // 密码 字母+数字
-        let pwdReg = /(?=^.*?\d)(?=^.*?[a-zA-Z])^[0-9a-zA-Z]{6,16}$/;
-        if (!pwdReg.test(this.password)) {
-          this.$vux.toast.text('请输入字母或数字组成的密码', 'top');
-          this.password = '';
-          this.rPassword = '';
-          return false
+        // 业务员注册
+        if(!this.isMultiUserRegister) {
+          // 密码 字母+数字
+          let pwdReg = /(?=^.*?\d)(?=^.*?[a-zA-Z])^[0-9a-zA-Z]{6,16}$/;
+          if (!pwdReg.test(this.password)) {
+            this.$vux.toast.text('请输入字母或数字组成的密码', 'top');
+            this.password = '';
+            this.rPassword = '';
+            return false
+          }
         }
 
         if (this.verifyUtil.isEffPwd(this.password)) {
@@ -247,7 +249,6 @@
         }
         this.$Ice_UserService.verifyByPhone(this.phone, new IceCallback(
           function (result) {
-            debugger
             if (result.code === 0) {
               self.sendSMSV();
             }
@@ -257,7 +258,7 @@
             if (result.code === -2) {
               self.$vux.toast.text(result.msg, 'top');
               // 设置默认密码
-              self.password = self.rPassword = '123aaa';
+              self.password = self.rPassword = '*******';
               // 设置密码不可输入
               self.isMultiUserRegister = true;
               self.sendSMSV();
@@ -308,7 +309,7 @@
       secondStep() {
         let self = this;
         // 校验验证码
-        this.$Ice_UserService.verifySms(this.phone, this.verificationCode, new IceCallback(
+        this.$Ice_UserService.verifySms(this.phone, this.verificationCode,1, new IceCallback(
           function (result) {
             if (result.code === 0) {
               self.secondStepBool = false;
@@ -333,6 +334,7 @@
                 // 用户名不存在, 注册用户
                 self.$Ice_UserService.userRegister(self.account, self.phone, self.password, self.invitationCode, self.verificationCode, new IceCallback(
                   function (result) {
+                    debugger
                     if (result.code === 0) {
                       self.$app_store.commit(USER_ID, JSON.stringify(result.obj.oid));
                       self.$app_store.commit(USER_INFO, JSON.stringify(result.obj));
@@ -358,6 +360,7 @@
                     }
                   },
                   function (error) {
+                    debugger
                     self.$vux.toast.text('注册失败', 'top');
                   }
                 ))

@@ -16,7 +16,7 @@ import {
   DICT,
   AREA,
   CITYS,
-  USER_INFO,
+  USER_INFO, CURRENT_CITY_CODE,
 } from './mutation-types'
 
 let getUserInfo =  function () {
@@ -118,6 +118,17 @@ let getCitys =  function () {
   return undefined;
 };
 
+let getCityCode =  function () {
+  if (localStorage.getItem(CURRENT_CITY_CODE)) {
+    try {
+      return localStorage.getItem(CURRENT_CITY_CODE)
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 const state = {
   userInfo: getUserInfo(), // 用户信息
   compInfo: getCompInfo(), // 企业信息
@@ -136,6 +147,7 @@ const state = {
   dict: getDict(), // 字典
   area: getArea(), // 城市地区json数据
   currentCity: '', // 当前定位地区
+  currentCityCode: getCityCode(),
   receiptCity: '', // 发单地区
   startCity: '',// 路线出发地
   bournCity: '',// 路线目的地

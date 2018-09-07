@@ -1,30 +1,7 @@
 <template>
   <div style="height: 100%;">
     <ul class="letter">
-      <li>定位</li>
-      <li>热门</li>
-      <li class="colorBlueSan">A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
-      <li>E</li>
-      <li>F</li>
-      <li>G</li>
-      <li>H</li>
-      <li>J</li>
-      <li>K</li>
-      <li>L</li>
-      <li>M</li>
-      <li>N</li>
-      <li>P</li>
-      <li>Q</li>
-      <li>R</li>
-      <li>S</li>
-      <li>T</li>
-      <li>W</li>
-      <li>X</li>
-      <li>Y</li>
-      <li>Z</li>
+      <li class="colorBlueSan" v-for="item in citiesIndexer">{{item}}</li>
     </ul>
   </div>
 </template>
@@ -43,5 +20,7 @@
   }
 </script>
 <style>
-
+.colorBlueSan{
+  color:#3189f5;
+}
 </style>

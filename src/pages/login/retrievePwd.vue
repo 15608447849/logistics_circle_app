@@ -11,8 +11,6 @@
         <div class="alignCenter floatright"></div>
       </div>
 
-
-
     </div>
     <div class="phoneNum" v-show="firstStepBool">
       <span class="numText">手机号码</span>
@@ -95,12 +93,9 @@
       secondStep() {
         let self = this;
         // 验证短信号码
-
-        this.$Ice_UserService.verifySms(this.userPhone,this.smsCode, new IceCallback(
+        this.$Ice_UserService.verifySms(this.userPhone,this.smsCode,3, new IceCallback(
           function (result) {
-
             if (result.code === 0) {
-
               self.secondStepBool = false;
               self.thirdStepBool = true;
             } else {

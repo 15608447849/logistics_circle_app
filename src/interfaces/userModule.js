@@ -42,8 +42,8 @@ module.exports =  {
    * 效验短信
    * int verifySms(long phone,string sms );
    */
-  verifySms:function(phone,sms,callback){
-    queryIce(user.UserServicePrx, 'UserService', 'verifyCode', str2jlong(phone),sms, callback);
+  verifySms:function(phone,sms,type,callback){
+    queryIce(user.UserServicePrx, 'UserService', 'verifyCode', str2jlong(phone),sms,type, callback);
   },
 //////////////////////////////////////////////////////////////////////////////////////
   /**通过手机号码,短信 修改密码

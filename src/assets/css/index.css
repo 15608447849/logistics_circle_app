@@ -1697,11 +1697,11 @@ input[type="radio"] {
 .van-checkbox{
   padding-left:.21rem;
 }
-.fontSize28{
-  font-size:.28rem;
-}
 .colorBlueSan{
   color:#3189f5;
+}
+.fontSize28{
+  font-size:.28rem;
 }
 /*修改密码填写手机号页面********************************************************************/
 .phoneNum{

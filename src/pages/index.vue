@@ -100,7 +100,7 @@
     DICT,
     AREA,
     CITYS,
-    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL, CITY_CODE
+    CURRENT_CITY, IS_SHOW_SIDEBAR, TABBAR_INDEX, AVATAR_URL, CITY_CODE, CURRENT_CITY_CODE
   } from '../store/mutation-types'
   import { subString } from '../utils/stringUtil'
   import { Toast } from 'vant';
@@ -196,6 +196,7 @@
         let info =  localStorage.getItem('cityInfo') || null;
         if(info !== null) {
           this.cityInfo = JSON.parse(info);
+          this.$app_store.commit(CURRENT_CITY_CODE,this.cityInfo.cityCode);
           this.$app_store.commit(CURRENT_CITY, this.cityInfo.currentCity);
           this.$app_store.commit(CITY_CODE, this.cityInfo.cityCode);
           return

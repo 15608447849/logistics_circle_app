@@ -14,9 +14,7 @@
       </div>
     </div>
     <!-- 城市选择列表 -->
-    <fs-cities :cities="cityData"></fs-cities>
-    <!-- 侧边索引栏 -->
-    <fs-side-nav-index></fs-side-nav-index>
+    <fs-cities :cities="cities"></fs-cities>
   </div>
 </template>
 <script>
@@ -24,7 +22,7 @@
   import {
     CURRENT_CITY,
     RECEIPT_CITY,
-    CITY_CODE, START_CITY, BOURN_CITY, START_CITY_CODE, BOURN_CITY_CODE
+    CITY_CODE, START_CITY, BOURN_CITY, START_CITY_CODE, BOURN_CITY_CODE, CURRENT_CITY_CODE
   } from '../store/mutation-types'
   import fsSideNavIndex from './index/side-nav-index'
   import fsCities from './index/cities'
@@ -36,7 +34,9 @@
     },
     data() {
       return {
-        cityData: [], // 城市数据
+        cities: [], // 城市数据
+        selectCities: {}, // 当前选中城市
+        recentlyUsed: {}, // 最近使用
         currentCity: '', // 当前选中城市
         status: 0,
         options : {
@@ -71,9 +71,45 @@
             }
           }
         }
-        // 根据所选城市拼接列表
-        
-        this.cityData = resolve;
+
+        // 因为从搜索返回只有城市名+城市码且多处使用该页面
+        // so, 根据城市名称获取当前选中地区区县 (〒︿〒)
+        for(let i=0;i<resolve.length;i++) {
+          for(let j=0;j<resolve[i].items.length;j++) {
+            if(this.cityCode.toString().substring(0,6) === resolve[i].items[j].value) {
+              this.selectCities.type = 'current';
+              this.selectCities.items = resolve[i].items[j];
+              this.selectCities.name = '区县';
+            }
+          }
+        }
+        // 字母列表
+        this.cities = resolve;
+        // 最近使用，先写死展示数据
+        this.recentlyUsed.type = 'recently';
+        this.recentlyUsed.items = {
+          checked: false,
+          children: [{
+            value: '10430121',
+            name: '长沙县',
+            checked: 'false'
+          },{
+            value: '10430181',
+            name: '浏阳市',
+            checked: 'false'
+          },{
+            value: '10430182',
+            name: '宁乡市',
+            checked: 'false'
+          }],
+          name: '长沙市',
+          value: '104301'
+        };
+        this.recentlyUsed.name = '最近';
+        this.cities.unshift(this.recentlyUsed);
+        // 区县
+        this.cities.unshift(this.selectCities);
+        console.log(this.cities);
         this.$nextTick(function(){
           console.log('数据渲染完毕拉~' + new Date());
           // 关闭下拉框
@@ -84,18 +120,22 @@
     activated(){
       // status: 0 定位城市 1 发单定位 2 路线出发地 3路线目的地
       this.status = this.$route.query.status;
-      switch (this.status) {
+      switch (Number(this.status)) {
         case 0:
           this.currentCity = this.$app_store.getters.currentCity;
+          this.cityCode = this.$app_store.state.currentCityCode;
           break
         case 1:
           this.currentCity = this.$app_store.getters.receiptCity;
+          this.cityCode = this.$app_store.state.cityCode;
           break
         case 2:
           this.currentCity = this.$app_store.getters.startCity;
+          this.cityCode = this.$app_store.getters.startCityCode;
           break
         case 3:
           this.currentCity = this.$app_store.getters.bournCity;
+          this.cityCode = this.$app_store.getters.bournCityCode;
           break
       }
     },
@@ -124,6 +164,7 @@
         // 设置城市名称
         switch (this.status) {
           case 0:
+            this.$app_store.commit(CURRENT_CITY_CODE,item.value);
             this.$app_store.commit(CURRENT_CITY,item.name);
             let obj = {
               currentCity: item.name,

@@ -158,7 +158,7 @@
         "verifyPhone4App": [, , , , , [7], [[4]], , , , ],
         "verifyByPhone": [, , , , , [7], [[4]], , , , ],
         "sendSms": [, , , , , [7], [["user.stringListHelper"]], , , , ],
-        "verifyCode": [, , , , , [7], [[4], [7]], , , , ],
+        "verifyCode": [, , , , , [7], [[4], [7], [3]], , , , ],
         "custRegister": [, , , , , [7], [[7], [4], [7], [7], [7]], , , , ],
         "forgetUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],
         "updateUserPassword": [, , , , , [7], [[4], [7], [7]], , , , ],

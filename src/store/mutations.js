@@ -15,6 +15,7 @@ import {
   DICT,
   CITYS,
   AREA,
+  CURRENT_CITY_CODE,
   CURRENT_CITY,
   GEOSTATE,
   CITY_CODE,
@@ -96,6 +97,11 @@ export default {
   [CITYS] (state, v) {
     state.citys = v;
     localStorage.setItem(CITYS, v);
+  },
+  // 所在地编码
+  [CURRENT_CITY_CODE](state, v) {
+    state.currentCityCode = v;
+    localStorage.setItem(CURRENT_CITY_CODE, v);
   },
   // 当前城市
   [CURRENT_CITY](state, v) {

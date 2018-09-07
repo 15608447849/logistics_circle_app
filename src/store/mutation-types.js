@@ -33,11 +33,13 @@ export const AREA = 'AREA'
 // 城市列表
 export const CITYS = 'CITYS'
 // 所在地区编码
-export const CITY_CODE = 'CITY_CODE'
+export const CURRENT_CITY_CODE = 'CURRENT_CITY_CODE'
 // 所在地区
 export const CURRENT_CITY = 'CURRENT_CITY'
 // 发单地区
 export const RECEIPT_CITY =  'RECEIPT_CITY'
+// 发单地区编码
+export const CITY_CODE = 'CITY_CODE'
 // 路线目的地城市
 export const BOURN_CITY = 'BOURN_CITY'
 // 编码
