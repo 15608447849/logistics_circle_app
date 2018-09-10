@@ -19,6 +19,8 @@ import {
   CURRENT_CITY,
   GEOSTATE,
   CITY_CODE,
+  CURRENT_CITIES,
+  ALPHABET_INDEX,
   ADDRESSCOM, TABBAR_INDEX, IS_SHOW_SIDEBAR, START_CITY_CODE, BOURN_CITY_CODE
 } from './mutation-types'
 
@@ -103,6 +105,11 @@ export default {
     state.currentCityCode = v;
     localStorage.setItem(CURRENT_CITY_CODE, v);
   },
+  // 当前定位地区信息
+  [CURRENT_CITIES](state,v) {
+    state.currentCities = v;
+    localStorage.setItem(CURRENT_CITIES, v);
+  },
   // 当前城市
   [CURRENT_CITY](state, v) {
     state.currentCity = v;
@@ -136,6 +143,9 @@ export default {
   // 地理编码信息列表
   [ADDRESSCOM](state, v) {
     state.addressCom = v;
+  },
+  // 地区字母表索引
+  [ALPHABET_INDEX](state, v) {
+    state.alphabetIndex = v;
   }
-
 }

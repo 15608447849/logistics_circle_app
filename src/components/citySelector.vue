@@ -1,4 +1,5 @@
 <template>
+
   <div style="height: 100%;">
     <div class="issueHeaderNav">
       <div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>
@@ -14,7 +15,10 @@
       </div>
     </div>
     <!-- 城市选择列表 -->
-    <fs-cities :cities="cities"></fs-cities>
+    <fs-cities
+      :cities="cities"
+      @recently='recentlyClick'
+    />
   </div>
 </template>
 <script>
@@ -24,8 +28,8 @@
     RECEIPT_CITY,
     CITY_CODE, START_CITY, BOURN_CITY, START_CITY_CODE, BOURN_CITY_CODE, CURRENT_CITY_CODE
   } from '../store/mutation-types'
-  import fsSideNavIndex from './index/side-nav-index'
-  import fsCities from './index/cities'
+  import fsSideNavIndex from './cities-list/side-nav-index'
+  import fsCities from './cities-list/cities'
 
   export default {
     components: {
@@ -45,45 +49,55 @@
       }
     },
     mounted() {
-      this.initCityList(0).then((resolve) => {
-        console.log('数据开始过滤' + new Date());
-        // 城市列表数据过滤
-        let countyList = [];// 区县列表
-        for(let i=0;i<resolve.length;i++) {
-          for(let j=0;j<resolve[i].items.length;j++) {
-            if(resolve[i].items[j].value.length > 6) {
-              countyList.push(resolve[i].items[j]);
-              // 移除区县
-              resolve[i].items.splice(j,1);
-              j--;
-            }
-          }
-        }
 
-        for(let i=0 ;i<resolve.length;i++) {
-          for(let j=0;j<resolve[i].items.length;j++) {
-            resolve[i].items[j].children =[];
-            let value = resolve[i].items[j].value;
-            for(let k=0;k<countyList.length;k++) {
-              if(countyList[k].value.slice(0,6) === value) {
-                resolve[i].items[j].children.push(countyList[k]);
-              }
-            }
-          }
-        }
+    },
+    activated(){
+      // status: 0 定位城市 1 发单定位 2 路线出发地 3路线目的地
+      this.status = this.$route.query.status;
+      switch (Number(this.status)) {
+        case 0:
+          this.currentCity = this.$app_store.getters.currentCity;
+          this.cityCode = this.$app_store.state.currentCityCode;
+          break
+        case 1:
+          this.currentCity = this.$app_store.getters.receiptCity;
+          this.cityCode = this.$app_store.state.cityCode;
+          break
+        case 2:
+          this.currentCity = this.$app_store.getters.startCity;
+          this.cityCode = this.$app_store.getters.startCityCode;
+          break
+        case 3:
+          this.currentCity = this.$app_store.getters.bournCity;
+          this.cityCode = this.$app_store.getters.bournCityCode;
+          break
+      }
+    },
+    methods: {
+      recentlyClick(item,index) {
+        console.log(item,index)
+      },
+      initCityList() {
 
+        // 判断本地是否保存城市选择信息
         // 因为从搜索返回只有城市名+城市码且多处使用该页面
         // so, 根据城市名称获取当前选中地区区县 (〒︿〒)
         for(let i=0;i<resolve.length;i++) {
           for(let j=0;j<resolve[i].items.length;j++) {
             if(this.cityCode.toString().substring(0,6) === resolve[i].items[j].value) {
               this.selectCities.type = 'current';
+              let cityObj = resolve[i].items[j];
+              cityObj.children.unshift({
+                checked: true,
+                name: cityObj.name,
+                values: cityObj.value
+              });
               this.selectCities.items = resolve[i].items[j];
               this.selectCities.name = '区县';
             }
           }
         }
-        // 字母列表
+        // 加载字母列表
         this.cities = resolve;
         // 最近使用，先写死展示数据
         this.recentlyUsed.type = 'recently';
@@ -109,47 +123,6 @@
         this.cities.unshift(this.recentlyUsed);
         // 区县
         this.cities.unshift(this.selectCities);
-        console.log(this.cities);
-        this.$nextTick(function(){
-          console.log('数据渲染完毕拉~' + new Date());
-          // 关闭下拉框
-          Toast.clear();
-        });
-      });
-    },
-    activated(){
-      // status: 0 定位城市 1 发单定位 2 路线出发地 3路线目的地
-      this.status = this.$route.query.status;
-      switch (Number(this.status)) {
-        case 0:
-          this.currentCity = this.$app_store.getters.currentCity;
-          this.cityCode = this.$app_store.state.currentCityCode;
-          break
-        case 1:
-          this.currentCity = this.$app_store.getters.receiptCity;
-          this.cityCode = this.$app_store.state.cityCode;
-          break
-        case 2:
-          this.currentCity = this.$app_store.getters.startCity;
-          this.cityCode = this.$app_store.getters.startCityCode;
-          break
-        case 3:
-          this.currentCity = this.$app_store.getters.bournCity;
-          this.cityCode = this.$app_store.getters.bournCityCode;
-          break
-      }
-    },
-    methods: {
-      initCityList(ms) {
-        Toast.loading({
-          mask: true,
-          message: '加载中...'
-        });
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(JSON.parse(this.$app_store.state.citys));
-          },ms);
-        });
       },
       toSearchCity(){
         this.$router.push({

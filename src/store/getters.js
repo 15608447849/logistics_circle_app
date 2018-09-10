@@ -56,6 +56,9 @@ export default {
   // 地理编码信息列表
   addressCom: state => {
     return state.addressCom
+  },
+  currentCities: state => {
+    return state.currentCities
   }
 
 }

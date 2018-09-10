@@ -141,7 +141,6 @@
         this.isYourCompInfo  =  Number(this.$app_store.state.roid) !== 132;
       }
       // 根据企业id获取企业信息
-
     },
     methods: {
       /**
@@ -358,7 +357,6 @@
               function (result) {
                 self.$vux.toast.text(result.msg, 'top');
                 if (result.code === 0) {
-
                   self.status = 10;
                 }
               },

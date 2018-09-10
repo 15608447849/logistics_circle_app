@@ -16,6 +16,7 @@ import {
   DICT,
   AREA,
   CITYS,
+  CURRENT_CITIES,
   USER_INFO, CURRENT_CITY_CODE,
 } from './mutation-types'
 
@@ -129,6 +130,17 @@ let getCityCode =  function () {
   return undefined;
 };
 
+let getCurrentCities = function () {
+  if (localStorage.getItem(CURRENT_CITIES)) {
+    try {
+      return localStorage.getItem(CURRENT_CITIES)
+    } catch (e) {
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 const state = {
   userInfo: getUserInfo(), // 用户信息
   compInfo: getCompInfo(), // 企业信息
@@ -146,6 +158,7 @@ const state = {
   isLoading: false, // 网络加载等待框
   dict: getDict(), // 字典
   area: getArea(), // 城市地区json数据
+  currentCities: getCurrentCities(),// 当前地区信息
   currentCity: '', // 当前定位地区
   currentCityCode: getCityCode(),
   receiptCity: '', // 发单地区
@@ -156,7 +169,8 @@ const state = {
   geoState: 0, // 0: 出发地 1: 目的地
   addressCom: {}, // 地理编码信息列表
   tabBarIndex: 0,
-  isShowSidebar: false // 侧边栏
+  isShowSidebar: false, // 侧边栏
+  alphabetIndex: ''
 };
 
 export default new Vuex.Store({

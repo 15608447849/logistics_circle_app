@@ -204,12 +204,6 @@
         this.isGuide = false;
         // 弹出框让用户选择所在地
         this.isPickCityInfo = true
-          // let obj = {
-          //   currentCity: '长沙',
-          //   cityCode: '104301'
-          // };
-          // this.cityInfo = localStorage.setItem('cityInfo',JSON.stringify(obj));
-          // this.popShow = true
       },
       tabItemClick(index) {
         this.active = index
@@ -277,16 +271,59 @@
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                self.$app_store.commit(CITYS, result.obj);
+                // 处理城市数据
+                self.initCityList(0,result.obj).then((resolve) => {
+                  console.log('数据开始过滤' + new Date());
+                  // 城市列表数据过滤
+                  let countyList = [];// 区县列表
+                  for(let i=0;i<resolve.length;i++) {
+                    for(let j=0;j<resolve[i].items.length;j++) {
+                      if(resolve[i].items[j].value.length > 6) {
+                        countyList.push(resolve[i].items[j]);
+                        // 移除区县
+                        resolve[i].items.splice(j,1);
+                        j--;
+                      }
+                    }
+                  }
+
+                  for(let i=0 ;i<resolve.length;i++) {
+                    for(let j=0;j<resolve[i].items.length;j++) {
+                      resolve[i].items[j].children =[];
+                      let value = resolve[i].items[j].value;
+                      for(let k=0;k<countyList.length;k++) {
+                        if(countyList[k].value.slice(0,6) === value) {
+                          resolve[i].items[j].children.push(countyList[k]);
+                        }
+                      }
+                    }
+                  }
+                  self.$app_store.commit(CITYS, JSON.stringify(resolve) );
+                  self.$nextTick(function(){
+                    console.log('数据渲染完毕拉~' + new Date());
+                    Toast.clear();
+                  });
+                });
               }
             },
             function (error) {
               setTimeout(() => {
-                self.initAreaData();
+                self.initAreaH5Data();
               }, 15000);
             }
           )
         );
+      },
+      initCityList(ms,cityList) {
+        Toast.loading({
+          mask: true,
+          message: '加载中...'
+        });
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(JSON.parse(cityList));
+          },ms);
+        });
       },
       computeLevel() {
         let result = []; // 返回的是一个数组,用来遍历输出星星
@@ -383,10 +420,12 @@
       skipCityPage() {
         this.isGuide = true;
         this.isPickCityInfo = false;
+
         this.$router.push({
           path: '/city',
           query: {
-            status: 0
+            status: 0,
+            // cityInfo:
           }
         })
       },

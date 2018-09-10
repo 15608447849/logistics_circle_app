@@ -52,3 +52,7 @@ export const START_CITY_CODE = 'START_CITY_CODE'
 export const GEOSTATE = 'GEOSTATE'
 // 地理编码信息列表
 export const ADDRESSCOM = 'ADDRESSCOM'
+// 当前选中地区信息
+export const CURRENT_CITIES = 'CURRENT_CITIES'
+// 地区侧边栏索引
+export const ALPHABET_INDEX = 'ALPHABET_INDEX'

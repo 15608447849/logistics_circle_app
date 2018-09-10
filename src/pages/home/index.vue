@@ -33,7 +33,7 @@
     <div class="homeContent">
       <div class="searchBox">
         <div class="selectRegion" @click="skipSearchPage">
-          <div class="addressCity" @click.stop="skipCityPage">
+          <div class="addressCity" @click.stop="isShowCitiesPopup = true">
             <span class="cityName">{{address}}</span>
           </div>
           <i class="icon iconfont icon-xiala cityNameI"></i>
@@ -89,17 +89,29 @@
       </ul>
     </div>
     <div class="seeMore" v-show="!isShowMore" @click="skipInformation">查看更多</div>
+    <van-popup class="popup" v-model="isShowCitiesPopup" position="right" :overlay="false">
+      <fs-cities
+        :citiesIndexer='citiesIndexer'
+        :disCities='disCitiesList'
+        @onChange='onClickItem'
+      />
+    </van-popup>
   </div>
 </template>
 <script>
   import {
+    CURRENT_CITIES,
     IS_SHOW_SIDEBAR, SEARCH_CONTENT,
     SEARCH_STATE, TABBAR_INDEX
   } from '../../store/mutation-types'
   import {searchState} from "../../utils/config";
   import Conversion from '@/utils/conversion';
+  import fsCities from '../../components/cities-list/cities'
 
   export default {
+    components: {
+      fsCities
+    },
     computed: {
       isAvatar: {
         get: function () {
@@ -124,17 +136,18 @@
         tipStyle: '',
         oid: '0',
         isShowMore: false, // 显示更多
-        isShowNoData: false// 无数据
+        isShowNoData: false,// 无数据
+        isShowCitiesPopup: false,
+        cities: [],
+        selectCities: {},// 当前地区
+        citiesIndexer: {},// 城市列表索引
+        disCitiesList: {}// 城市列表数据
       }
     },
     activated() {
       // 搜索框搜索内容
       if (this.$app_store.getters.searchState === searchState.INFORMATION) {
         this.key = this.$app_store.getters.searchContent;
-      }
-
-      if(this.address !== this.$app_store.state.currentCity) {
-        this.address =  this.$app_store.state.currentCity;
       }
       this.requestInfoList();
     },
@@ -146,16 +159,41 @@
         if (this.$app_store.getters.searchState === searchState.INFORMATION) {
           this.key = this.$app_store.getters.searchContent;
         }
-        if(this.address !== this.$app_store.state.currentCity) {
-          this.address =  this.$app_store.state.currentCity;
-        }
-        if (this.address === '') {
-          this.address = '长沙市'
-        }
-        this.requestInfoList();
-      },50);
+        this.setCitiesData();
+
+      },300);
     },
     methods: {
+      setCitiesData() {
+        let citiesList = JSON.parse(this.$app_store.state.citys);
+        this.currentCities = this.$app_store.getters.currentCities || undefined;
+        // 城市数据, 最近 , 区县合并
+        this.disCitiesList = citiesList;
+        if(this.historyList !== undefined) {
+          this.disCitiesList.unshift(this.historyList);
+        }
+        if(this.currentCities !== undefined) {
+          // console.log(this.currentCities)
+          let obj = JSON.parse(this.currentCities);
+          this.disCitiesList.unshift(obj);
+          for(let i = 0;i<obj.children.length;i++) {
+            if(obj.children[i].checked) {
+              this.address = obj.children[i].name;
+              break;
+            }
+          }
+        }
+        // 获取侧滑栏信息
+        let temporary = [];
+        for (let i=0;i<this.disCitiesList.length;i++) {
+          temporary.push(this.disCitiesList[i].name);
+        }
+        // 获取侧边栏索引列表
+        this.citiesIndexer = temporary;
+        // 设置城市
+
+        this.requestInfoList();
+      },
       requestInfoList() {
         let self = this;
         this.$Ice_OrderService.queryOrderByApp(self.oid, self.pageSize, self.address, self.key, 1, this.endTimeStr,
@@ -207,14 +245,6 @@
           path: '/search'
         })
       },
-      skipCityPage() {
-        this.$router.push({
-          path: '/city',
-          query: {
-            status: 0
-          }
-        })
-      },
       toPageIssueDetail(item) {
         this.$router.push({
           path: '/information/releaseDetails',
@@ -263,6 +293,12 @@
         // 清空STORE 中保存的搜索内容
         this.$app_store.commit(SEARCH_CONTENT, '');
         this.requestInfoList();
+      },
+      onClickItem(item) {
+        this.isShowCitiesPopup = false;
+        this.$app_store.commit(CURRENT_CITIES,JSON.stringify(item));
+        // 保存至区县
+        this.setCitiesData();
       }
     },
     watch: {
@@ -286,4 +322,8 @@
   }
 </script>
 <style>
+  .popup {
+    width: 100%;
+    height: 100%;
+  }
 </style>

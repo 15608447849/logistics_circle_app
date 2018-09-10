@@ -217,7 +217,6 @@
               if (result.code !== 0) {
                 self.$vux.toast.text(result.msg, 'top');
               }
-              debugger
               if(result.obj.length === 0) {
                 if (self.infoList !== null && self.infoList.length > 0) {
                   self.isShowNoData = false;
