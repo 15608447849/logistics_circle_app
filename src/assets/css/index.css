@@ -164,7 +164,7 @@ a {
 .pickCityInfoBox{
   display:block;
   width:4.82rem;
-  height:25vh;
+  height:27vh;
   margin:0 auto;
   padding:.4rem;
   background:#ffffff;
@@ -456,18 +456,6 @@ a {
   vertical-align: top;
   text-align: center;
 }
-.pickCountyBox{
-  position:absolute;
-  top:.15rem;
-  left:5.7rem;
-  width:1.2rem;
-  height:.62rem;
-  text-align: center;
-  line-height:.62rem;
-  font-size:.28rem;
-  color:#666666;
-  z-index:1;
-}
 .CountyBox{
   display:block;
   width:7.5rem;
@@ -487,6 +475,7 @@ a {
   border:1px solid #efefef;
   border-radius: 3px;
   line-height:.6rem;
+  background:#ffffff;
 }
 .pickCount img{
   display:inline-block;
@@ -511,7 +500,7 @@ a {
   position:relative;
   width:7.08rem;
   height:auto;
-  margin:.21rem  auto;
+  /*margin:.21rem  auto;*/
 }
 .cityAggregateBox{
   display:block;
@@ -520,6 +509,7 @@ a {
   padding:0 .21rem;
   height:auto;
   overflow: auto;
+  background:#ffffff;
 }
 .cityNameAggregate{
    width:7.08rem;
@@ -539,8 +529,6 @@ a {
   height:66vh;
 }
 .rollLetter{
-  position:absolute;
-  top:0rem;
   width:6.5rem;
   height:.6rem;
   text-indent: .21rem;
