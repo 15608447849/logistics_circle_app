@@ -21,7 +21,7 @@
   export default {
     name: 'fsSideNav',
     props: {
-      citiesIndexer: Object
+      citiesIndexer: [Array,Object]
     },
     data() {
       return {
@@ -49,17 +49,18 @@
       },
       handleTouchMove(e) {
         if(this.touchStatus) {
-          if(this.timer) {
-            clearTimeout(this.timer)
-          }
-          this.timer = setTimeout(() => {
-            const startY = this.$refs[this.alphaBetIndex()[0]][0].offsetTop;
-            const touchY = e.touches[0].clientY - 40;
-            const index = Math.floor((touchY - startY)/20);
-            if(index >= 0 && index < this.alphaBetIndex.length) {
-              this.$app_store.commit(ALPHABET_INDEX,e.target.innerText);
-            }
-          }, 16);
+          this.$app_store.commit(ALPHABET_INDEX,e.target.innerText);
+          // if(this.timer) {
+          //   clearTimeout(this.timer)
+          // }
+          // this.timer = setTimeout(() => {
+          //   const startY = this.$refs[this.alphaBetIndex()[0]][0].offsetTop;
+          //   const touchY = e.touches[0].clientY - 40;
+          //   const index = Math.floor((touchY - startY)/20);
+          //   if(index >= 0 && index < this.alphaBetIndex.length) {
+          //     this.$app_store.commit(ALPHABET_INDEX,e.target.innerText);
+          //   }
+          // }, 16);
         }
       },
       handleTouchEnd() {

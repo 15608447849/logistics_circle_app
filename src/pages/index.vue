@@ -246,7 +246,6 @@
           cityCode: 104301
         };
         localStorage.setItem('cityInfo',JSON.stringify(obj));
-
       },
       initAreaData() {
         let self = this;

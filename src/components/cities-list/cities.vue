@@ -1,35 +1,38 @@
 <template>
-  <div style="height: 100%;" ref="wrapper">
-    <div class="searchCityBox positionFixed">
+  <div>
+    <div class="searchCityBox positionFixed" >
       <i class="icon iconfont icon-guanbi1 closeCity"></i>
       <div class="selectRegion">
         <div class="searchBtnCity floatleft">
           <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
-          <input type="text"  class="cityInput" placeholder="城市名/首字母" readonly="readonly">
+          <input type="text" class="cityInput" placeholder="城市名/首字母" readonly="readonly">
         </div>
       </div>
     </div>
-    <div class="citiesBox">
-      <div v-for="(item, index) in disCities" :key="index" :ref="item.name">
-        <div class="cityAggregateBox">
-          <div class="cityAggregate">
+    <div class="citiesBox" ref="wrapper">
+      <div class="cityAggregateBox">
+        <div >
+          <div class="cityAggregate" v-for="(item, index) in disCities" :key="index" :ref="item.name">
             <p class="rollLetter" v-if="item.type !== 'current'&&item.type !== 'recently'">{{item.name}}</p>
             <van-collapse v-model="activeNames" class="collapse" v-if="item.type === 'current'">
-              <span class="seeCity">您正在查看：长沙市</span>
+              <span class="seeCity">当前：{{item.children[0].name}}</span>
               <span class="pickCountyBox">选择区县</span>
               <van-collapse-item name="1" style="position:relative;">
-                <span class="pickCount" :class="itemA.checked === true ? 'backgroundNine': ''" @click="onChange(item,index,0)" v-for="(itemA,index) in item.children">{{itemA.name}}</span>
+                <span class="pickCount" :class="itemA.checked === true ? 'backgroundNine': ''"
+                      @click="onChange(item,index,0)" v-for="(itemA,index) in item.children">{{itemA.name}}</span>
               </van-collapse-item>
             </van-collapse>
             <div class="latelyCity" v-if="item.type === 'recently'">
               <p>{{item.name}}</p>
-              <span class="pickCount" v-for="item in item.items.children"><img src="./../../assets/images/small/dingwei.png" alt="">{{item.name}}</span>
+              <span class="pickCount" v-for="item in item.items.children"><img
+                src="./../../assets/images/small/dingwei.png" alt="">{{item.name}}</span>
             </div>
             <ul class="cityNameAggregate" v-if="item.type === undefined">
               <li v-for="item in item.items" @click="onChange(item)">{{item.name}}</li>
             </ul>
           </div>
         </div>
+
       </div>
       <!-- 侧边索引栏 -->
       <fs-side-nav-index :citiesIndexer=citiesIndexer></fs-side-nav-index>
@@ -40,11 +43,12 @@
 <script>
   import fsSideNavIndex from './side-nav-index'
   import Bscroll from 'better-scroll'
+
   export default {
     name: 'fsCities',
     props: {
-      disCities: Object,
-      citiesIndexer: Object
+      disCities: [Object, Array],
+      citiesIndexer: [Object, Array]
     },
     components: {
       fsSideNavIndex
@@ -66,13 +70,13 @@
       }
     },
     mounted() {
-      this.scroll = new Bscroll(this.$refs.wrapper,{
+      this.scroll = new Bscroll(this.$refs.wrapper, {
         click: true
       })
     },
     methods: {
-      onChange(item,index,type) {
-        if(type === undefined) {
+      onChange(item, index, type) {
+        if (type === undefined) {
           item.children.unshift({
             checked: true,
             name: item.name,
@@ -80,8 +84,8 @@
           });
           item.type = 'current'
           item.name = '区县'
-        }else {
-          for(let i=0;i<item.children.length;i++) {
+        } else {
+          for (let i = 0; i < item.children.length; i++) {
             if (index === i) {
               item.children[i].checked = true
             } else {
@@ -89,49 +93,68 @@
             }
           }
         }
-        this.$emit('onChange',item)
+        this.$emit('onChange', item)
+      },
+      // 通过字母表索引获取偏移高度
+      offset(el) {
+        let left = 0;
+        let top = 0;
+        while (el) {
+          left -= el.offsetLeft;
+          top -= el.offsetTop;
+          el = el.offsetParent;
+        }
+        return {
+          left: left,
+          top: top + 463 // 添加头部高度
+        };
       }
     },
     watch: {
       alphaBetIndex() {
-        if(this.alphaBetIndex) {
+        if (this.alphaBetIndex) {
           const elment = this.$refs[this.alphaBetIndex][0];
-          this.scroll.scrollToElement(elment);
+          console.log(this.offset(elment))
+          this.scroll.scrollTo(0,this.offset(elment).top,0);
         }
       }
     }
   }
 </script>
 <style>
-  .searchCityBox{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:7.5rem;
-    height:7vh;
+  .searchCityBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.5rem;
+    height: 6vh;
     background-color: #efefef;
-    z-index:9999;
+    z-index: 9999;
   }
-  .searchCityBox .selectRegion{
-    position:relative;
-    top:0rem;
-    left:0rem;
-    width:5rem;
-    height:.64rem;
+
+  .searchCityBox .selectRegion {
+    position: relative;
+    top: 0rem;
+    left: 0rem;
+    width: 5rem;
+    height: .64rem;
     background-color: #e3e3e3;
-    border:1px solid #e3e3e3;
+    border: 1px solid #e3e3e3;
     border-radius: 4px;
   }
-  .searchCityBox i{
+
+  .searchCityBox i {
     font-family: PingFang-SC-Regular;
     /*color: #999999;*/
   }
-  .closeCity{
-    position:relative;
-    top:0;
-    left:-.9rem;
-    color:#3189f5;
+
+  .closeCity {
+    position: relative;
+    top: 0;
+    left: -.9rem;
+    color: #3189f5;
   }
+
   .pickCountyBox {
     position: absolute;
     top: .15rem;
@@ -144,7 +167,8 @@
     color: #666666;
     z-index: 1;
   }
-  .seeCity{
+
+  .seeCity {
     position: absolute;
     top: .15rem;
     left: .21rem;
@@ -155,11 +179,13 @@
     color: #666666;
     z-index: 1;
   }
-  .positionFixed{
-    position:fixed;
-    top:0vh;
-    z-index:2;
+
+  .positionFixed {
+    position: fixed;
+    top: 0vh;
+    z-index: 2;
   }
+
   .pickCount {
     display: inline-block;
     width: 1.9rem;
@@ -199,14 +225,14 @@
     width: 7.5rem;
     height: auto;
     margin: 0 auto;
-    overflow: auto;
+    /*overflow: auto;*/
     background: #ffffff;
   }
 
   .cityNameAggregate {
     width: 7.08rem;
     height: auto;
-    padding-left:.21rem;
+    padding-left: .21rem;
   }
 
   .cityNameAggregate li {
@@ -219,7 +245,7 @@
   .rollLetter {
     /*position: absolute;*/
     /*top: 0rem;*/
-    display:inline-block;
+    display: inline-block;
     width: 6.7rem;
     height: .6rem;
     text-indent: .21rem;
@@ -243,8 +269,11 @@
 
   .citiesBox {
     height: 93vh;
-    margin-top:7vh;
+    margin-top: 6vh;
     background: #ffffff;
-    overflow: auto;
+    /*overflow: auto;*/
+  }
+  [class*=van-hairline]::after{
+    border:none;
   }
 </style>
