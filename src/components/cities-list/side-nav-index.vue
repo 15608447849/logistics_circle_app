@@ -39,10 +39,9 @@
     },
     methods: {
       updated() {
-        this.startY = this.$refs['A'][0].offsetTop
+        this.startY = this.$refs[this.alphaBetIndex()[0]][0].offsetTop
       },
       handleItemClick(e) {
-        debugger
         this.$app_store.commit(ALPHABET_INDEX,e.target.innerText);
       },
       handleTouchStart() {
@@ -50,12 +49,11 @@
       },
       handleTouchMove(e) {
         if(this.touchStatus) {
-          // 函数节流
           if(this.timer) {
             clearTimeout(this.timer)
           }
           this.timer = setTimeout(() => {
-            const startY = this.$refs['A'][0].offsetTop;
+            const startY = this.$refs[this.alphaBetIndex()[0]][0].offsetTop;
             const touchY = e.touches[0].clientY - 40;
             const index = Math.floor((touchY - startY)/20);
             if(index >= 0 && index < this.alphaBetIndex.length) {
