@@ -247,6 +247,7 @@ a {
   width:7.5rem;
   height:.88rem;
   background-color: #efefef;
+  z-index:1;
 }
 .dropdowngengduo{
   position:relative;
@@ -464,84 +465,6 @@ a {
 }
 .backgroundNine{
   background:#efefef;
-}
-.pickCount{
-  display:inline-block;
-  width:1.9rem;
-  height:.6rem;
-  margin-right:.2rem;
-  margin-bottom:.24rem;
-  text-align: center;
-  border:1px solid #efefef;
-  border-radius: 3px;
-  line-height:.6rem;
-  background:#ffffff;
-}
-.pickCount img{
-  display:inline-block;
-  width:.3rem;
-  height:.3rem;
-  vertical-align: middle;
-}
-.latelyCity{
-  display:block;
-  width:7.5rem;
-  height:auto;
-  padding:0 .21rem 0 .21rem;
-  background:#ffffff;
-}
-.latelyCity p{
-  height:.6rem;
-  line-height:.6rem;
-  color:#999999;
-}
-.cityAggregate{
-  display:block;
-  position:relative;
-  width:7.08rem;
-  height:auto;
-  /*margin:.21rem  auto;*/
-}
-.cityAggregateBox{
-  display:block;
-  position:relative;
-  width:7.5rem;
-  padding:0 .21rem;
-  height:auto;
-  overflow: auto;
-  background:#ffffff;
-}
-.cityNameAggregate{
-   width:7.08rem;
-   height:auto;
- }
-.cityNameAggregate li{
-  width:6.5rem;
-  height:.9rem;
-  line-height:.9rem;
-  border-bottom:1px solid #e0e0e0;
-}
-.letter{
-  position:fixed;
-  top:26vh;
-  left:6.79rem;
-  width:.5rem;
-  height:66vh;
-}
-.rollLetter{
-  width:6.5rem;
-  height:.6rem;
-  text-indent: .21rem;
-  background:#efefef;
-  line-height:.6rem;
-  font-size:.32rem;
-  color:#999999;
-  z-index:2;
-}
-.letter li{
-  width:.6rem;
-  height:.37rem;
-  text-align: center;
 }
 .cityInput{
   display:inline-block;

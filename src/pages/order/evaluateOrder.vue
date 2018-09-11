@@ -45,7 +45,7 @@
           <van-rate style="display:inline-block;width:3rem;vertical-align: middle;" v-model="star2"/>
         </li>
         <li>
-          <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
+          <span class="evaluateTitle margin-right31">时&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp效</span>
           <van-rate style="display:inline-block;width:3rem;vertical-align: middle;" v-model="star3"/>
         </li>
       </ul>

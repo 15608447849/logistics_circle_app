@@ -1,11 +1,11 @@
 <template>
 
   <div style="height: 100%;">
-    <div class="issueHeaderNav">
-      <div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>
-      <div class="width60"><span>城市选择</span></div>
-      <div class="width20"><div class="alignCenter floatright"></div></div>
-    </div>
+    <!--<div class="issueHeaderNav">-->
+      <!--<div class="width20"><i class="icon iconfont icon-btngoback back floatleft" @click="fallback"></i></div>-->
+      <!--<div class="width60"><span>城市选择</span></div>-->
+      <!--<div class="width20"><div class="alignCenter floatright"></div></div>-->
+    <!--</div>-->
     <div class="searchBox margintop6">
       <div class="selectRegion">
         <div class="searchBtnCity floatleft">
@@ -19,6 +19,7 @@
       :cities="cities"
       @recently='recentlyClick'
     />
+
   </div>
 </template>
 <script>

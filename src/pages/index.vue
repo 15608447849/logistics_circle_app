@@ -265,45 +265,49 @@
           )
         );
       },
+      reCityList(cityList) {
+        // 处理城市数据
+        this.initCityList(0,cityList).then((resolve) => {
+          console.log('数据开始过滤' + new Date());
+          // 城市列表数据过滤
+          let countyList = [];// 区县列表
+          for(let i=0;i<resolve.length;i++) {
+            for(let j=0;j<resolve[i].items.length;j++) {
+              if(resolve[i].items[j].value.length > 6) {
+                countyList.push(resolve[i].items[j]);
+                // 移除区县
+                resolve[i].items.splice(j,1);
+                j--;
+              }
+            }
+          }
+          debugger
+          for(let i=0 ;i<resolve.length;i++) {
+            for(let j=0;j<resolve[i].items.length;j++) {
+              resolve[i].items[j].children =[];
+              let value = resolve[i].items[j].value;
+              for(let k=0;k<countyList.length;k++) {
+                if(countyList[k].value.slice(0,6) === value) {
+                  resolve[i].items[j].children.push(countyList[k]);
+                }
+              }
+            }
+          }
+          debugger
+          this.$app_store.commit(CITYS, JSON.stringify(resolve) );
+          this.$nextTick(function(){
+            console.log('数据渲染完毕拉~' + new Date());
+            Toast.clear();
+          });
+        });
+      },
       initAreaH5Data() {
         let self = this;
         self.$Ice_SystemService.getAreaH5Data(
           new IceCallback(
             function (result) {
               if(result.code === 0) {
-                // 处理城市数据
-                self.initCityList(0,result.obj).then((resolve) => {
-                  console.log('数据开始过滤' + new Date());
-                  // 城市列表数据过滤
-                  let countyList = [];// 区县列表
-                  for(let i=0;i<resolve.length;i++) {
-                    for(let j=0;j<resolve[i].items.length;j++) {
-                      if(resolve[i].items[j].value.length > 6) {
-                        countyList.push(resolve[i].items[j]);
-                        // 移除区县
-                        resolve[i].items.splice(j,1);
-                        j--;
-                      }
-                    }
-                  }
-
-                  for(let i=0 ;i<resolve.length;i++) {
-                    for(let j=0;j<resolve[i].items.length;j++) {
-                      resolve[i].items[j].children =[];
-                      let value = resolve[i].items[j].value;
-                      for(let k=0;k<countyList.length;k++) {
-                        if(countyList[k].value.slice(0,6) === value) {
-                          resolve[i].items[j].children.push(countyList[k]);
-                        }
-                      }
-                    }
-                  }
-                  self.$app_store.commit(CITYS, JSON.stringify(resolve) );
-                  self.$nextTick(function(){
-                    console.log('数据渲染完毕拉~' + new Date());
-                    Toast.clear();
-                  });
-                });
+                self.reCityList(result.obj);
               }
             },
             function (error) {

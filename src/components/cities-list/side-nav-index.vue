@@ -21,7 +21,7 @@
   export default {
     name: 'fsSideNav',
     props: {
-      citiesIndexer: Array
+      citiesIndexer: Object
     },
     data() {
       return {
@@ -71,5 +71,17 @@
 <style>
   .colorBlueSan {
     color: #3189f5;
+  }
+  .letter li{
+    width:.6rem;
+    height:.37rem;
+    text-align: center;
+  }
+  .letter{
+    position:fixed;
+    top:26vh;
+    left:6.79rem;
+    width:.5rem;
+    height:66vh;
   }
 </style>

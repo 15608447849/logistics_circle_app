@@ -1,11 +1,7 @@
 <template>
   <div style="height: 100%;" ref="wrapper">
-    <div class="issueHeaderNav">
-      <div class="width20"><i class="icon iconfont icon-btngoback back floatleft"></i></div>
-      <div class="width60"><span>城市选择</span></div>
-      <div class="width20"><div class="alignCenter floatright"></div></div>
-    </div>
-    <div class="searchBox margintop6">
+    <div class="searchCityBox positionFixed">
+      <i class="icon iconfont icon-guanbi1 closeCity"></i>
       <div class="selectRegion">
         <div class="searchBtnCity floatleft">
           <i class="icon iconfont icon-sousuo magnifierziti cityNameI"></i>
@@ -19,6 +15,7 @@
           <div class="cityAggregate">
             <p class="rollLetter" v-if="item.type !== 'current'&&item.type !== 'recently'">{{item.name}}</p>
             <van-collapse v-model="activeNames" class="collapse" v-if="item.type === 'current'">
+              <span class="seeCity">您正在查看：长沙市</span>
               <span class="pickCountyBox">选择区县</span>
               <van-collapse-item name="1" style="position:relative;">
                 <span class="pickCount" :class="itemA.checked === true ? 'backgroundNine': ''" @click="onChange(item,index,0)" v-for="(itemA,index) in item.children">{{itemA.name}}</span>
@@ -46,8 +43,8 @@
   export default {
     name: 'fsCities',
     props: {
-      disCities: Array,
-      citiesIndexer: Array
+      disCities: Object,
+      citiesIndexer: Object
     },
     components: {
       fsSideNavIndex
@@ -97,7 +94,6 @@
     },
     watch: {
       alphaBetIndex() {
-        debugger
         if(this.alphaBetIndex) {
           const elment = this.$refs[this.alphaBetIndex][0];
           this.scroll.scrollToElement(elment);
@@ -107,10 +103,39 @@
   }
 </script>
 <style>
+  .searchCityBox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:7.5rem;
+    height:7vh;
+    background-color: #efefef;
+    z-index:9999;
+  }
+  .searchCityBox .selectRegion{
+    position:relative;
+    top:0rem;
+    left:0rem;
+    width:5rem;
+    height:.64rem;
+    background-color: #e3e3e3;
+    border:1px solid #e3e3e3;
+    border-radius: 4px;
+  }
+  .searchCityBox i{
+    font-family: PingFang-SC-Regular;
+    /*color: #999999;*/
+  }
+  .closeCity{
+    position:relative;
+    top:0;
+    left:-.9rem;
+    color:#3189f5;
+  }
   .pickCountyBox {
     position: absolute;
     top: .15rem;
-    left: 5.7rem;
+    left: 5.2rem;
     width: 1.2rem;
     height: .62rem;
     text-align: center;
@@ -119,7 +144,22 @@
     color: #666666;
     z-index: 1;
   }
-
+  .seeCity{
+    position: absolute;
+    top: .15rem;
+    left: .21rem;
+    height: .62rem;
+    text-align: center;
+    line-height: .62rem;
+    font-size: .28rem;
+    color: #666666;
+    z-index: 1;
+  }
+  .positionFixed{
+    position:fixed;
+    top:0vh;
+    z-index:2;
+  }
   .pickCount {
     display: inline-block;
     width: 1.9rem;
@@ -155,10 +195,10 @@
 
   .cityAggregate {
     display: block;
-    position: relative;
-    width: 7.08rem;
+    /*position: relative;*/
+    width: 7.5rem;
     height: auto;
-    margin: .21rem auto;
+    margin: 0 auto;
     overflow: auto;
     background: #ffffff;
   }
@@ -166,6 +206,7 @@
   .cityNameAggregate {
     width: 7.08rem;
     height: auto;
+    padding-left:.21rem;
   }
 
   .cityNameAggregate li {
@@ -176,9 +217,10 @@
   }
 
   .rollLetter {
-    position: absolute;
-    top: 0rem;
-    width: 6.5rem;
+    /*position: absolute;*/
+    /*top: 0rem;*/
+    display:inline-block;
+    width: 6.7rem;
     height: .6rem;
     text-indent: .21rem;
     background: #efefef;
@@ -200,7 +242,9 @@
   }
 
   .citiesBox {
-    height: 100%;
+    height: 93vh;
+    margin-top:7vh;
     background: #ffffff;
+    overflow: auto;
   }
 </style>
