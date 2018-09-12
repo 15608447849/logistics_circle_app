@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="searchCityBox positionFixed" >
+    <div class="searchCityBox positionFixed" ref="title">
       <i class="icon iconfont icon-guanbi1 closeCity"></i>
       <div class="selectRegion">
         <div class="searchBtnCity floatleft">
@@ -9,19 +9,24 @@
         </div>
       </div>
     </div>
+
+
     <div class="citiesBox" ref="wrapper">
       <div class="cityAggregateBox">
         <div >
           <div class="cityAggregate" v-for="(item, index) in disCities" :key="index" :ref="item.name">
             <p class="rollLetter" v-if="item.type !== 'current'&&item.type !== 'recently'">{{item.name}}</p>
-            <van-collapse v-model="activeNames" class="collapse" v-if="item.type === 'current'">
-              <span class="seeCity">当前：{{item.children[0].name}}</span>
-              <span class="pickCountyBox">选择区县</span>
-              <van-collapse-item name="1" style="position:relative;">
+            <div ref="flag">
+              <van-collapse v-model="activeNames" class="collapse" v-if="item.type === 'current'">
+                <span class="seeCity">当前：{{item.children[0].name}}</span>
+                <span class="pickCountyBox">选择区县</span>
+                <van-collapse-item name="1" style="position:relative;">
                 <span class="pickCount" :class="itemA.checked === true ? 'backgroundNine': ''"
                       @click="onChange(item,index,0)" v-for="(itemA,index) in item.children">{{itemA.name}}</span>
-              </van-collapse-item>
-            </van-collapse>
+                </van-collapse-item>
+              </van-collapse>
+            </div>
+
             <div class="latelyCity" v-if="item.type === 'recently'">
               <p>{{item.name}}</p>
               <span class="pickCount" v-for="item in item.items.children"><img
@@ -34,7 +39,7 @@
         </div>
 
       </div>
-      <!-- 侧边索引栏 -->
+      <!--&lt;!&ndash; 侧边索引栏 &ndash;&gt;-->
       <fs-side-nav-index :citiesIndexer=citiesIndexer></fs-side-nav-index>
     </div>
   </div>
@@ -99,14 +104,19 @@
       offset(el) {
         let left = 0;
         let top = 0;
+        let collapse = 0;
         while (el) {
           left -= el.offsetLeft;
           top -= el.offsetTop;
           el = el.offsetParent;
+          collapse = el === null? collapse :el.clientWidth
         }
+        console.log('当前屏幕高度:' + document.documentElement.clientHeight);
+        console.log('当前计算出来的高度:'+collapse);
+        console.log('当前top高度:' + top);
         return {
           left: left,
-          top: top + 463 // 添加头部高度
+          top: top + collapse
         };
       }
     },
@@ -276,4 +286,5 @@
   [class*=van-hairline]::after{
     border:none;
   }
+
 </style>
