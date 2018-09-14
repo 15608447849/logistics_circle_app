@@ -6,7 +6,7 @@
         <input type="text" maxlength="30" v-model="account" placeholder="用户名/手机号码" class="userNameBorderBottom">
         <input type="password" maxlength="16" v-model="password" placeholder="密码" class="userPwd">
       </div>
-      <div class="Flogin_input displayNone">
+      <div class="login_input displayNone">
         <input type="tel" maxlength="11" v-model="account" placeholder="注册的手机号" class="FuserNameBorderBottom">
         <div>
           <input type="password" maxlength="16" v-model="password" placeholder="验证码" class="FuserPwd">

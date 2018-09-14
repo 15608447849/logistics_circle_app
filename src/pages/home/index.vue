@@ -295,10 +295,10 @@
         this.requestInfoList();
       },
       onClickItem(item) {
-        // this.isShowCitiesPopup = false;
-        // this.$app_store.commit(CURRENT_CITIES,JSON.stringify(item));
-        // // 保存至区县
-        // this.setCitiesData();
+        this.isShowCitiesPopup = false;
+        this.$app_store.commit(CURRENT_CITIES,JSON.stringify(item));
+        // 保存至区县
+        this.setCitiesData();
       }
     },
     watch: {

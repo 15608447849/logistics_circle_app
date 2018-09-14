@@ -10,22 +10,20 @@
       </div>
     </div>
 
-
     <div class="citiesBox" ref="wrapper">
-      <div class="cityAggregateBox">
+      <!--<div class="cityAggregateBox">-->
         <div >
           <div class="cityAggregate" v-for="(item, index) in disCities" :key="index" :ref="item.name">
             <p class="rollLetter" v-if="item.type !== 'current'&&item.type !== 'recently'">{{item.name}}</p>
-            <div ref="flag">
-              <van-collapse v-model="activeNames" class="collapse" v-if="item.type === 'current'">
+
+            <van-collapse v-model="activeNames" class="collapse" v-if="item.type === 'current'">
                 <span class="seeCity">当前：{{item.children[0].name}}</span>
                 <span class="pickCountyBox">选择区县</span>
                 <van-collapse-item name="1" style="position:relative;">
                 <span class="pickCount" :class="itemA.checked === true ? 'backgroundNine': ''"
                       @click="onChange(item,index,0)" v-for="(itemA,index) in item.children">{{itemA.name}}</span>
                 </van-collapse-item>
-              </van-collapse>
-            </div>
+            </van-collapse>
 
             <div class="latelyCity" v-if="item.type === 'recently'">
               <p>{{item.name}}</p>
@@ -38,7 +36,7 @@
           </div>
         </div>
 
-      </div>
+      <!--</div>-->
       <!--&lt;!&ndash; 侧边索引栏 &ndash;&gt;-->
       <fs-side-nav-index :citiesIndexer=citiesIndexer></fs-side-nav-index>
     </div>
@@ -71,13 +69,26 @@
     data() {
       return {
         activeNames: ['1'],// 控制折叠列表显示/隐藏
-        showToast: false
+        showToast: false,
+        scroll: null
       }
     },
     mounted() {
-      this.scroll = new Bscroll(this.$refs.wrapper, {
-        click: true
-      })
+      let _this = this;
+      setTimeout(()=>{
+        _this.$nextTick(()=>{
+          if(_this.scroll === null) {
+            _this.scroll = new Bscroll(_this.$refs.wrapper, {
+              click: true,
+              preventDefault: false
+            });
+            console.log( _this.scroll)
+          } else {
+            _this.scroll.finishPullUp();
+            _this.scroll.refresh();
+          }
+        });
+      },500);
     },
     methods: {
       onChange(item, index, type) {
@@ -124,8 +135,10 @@
       alphaBetIndex() {
         if (this.alphaBetIndex) {
           const elment = this.$refs[this.alphaBetIndex][0];
-          console.log(this.offset(elment))
-          this.scroll.scrollTo(0,this.offset(elment).top,0);
+          this.$nextTick(function () {
+            console.log(this.scroll)
+            this.scroll.scrollTo(0,this.offset(elment).top)
+          })
         }
       }
     }
@@ -253,8 +266,6 @@
   }
 
   .rollLetter {
-    /*position: absolute;*/
-    /*top: 0rem;*/
     display: inline-block;
     width: 6.7rem;
     height: .6rem;
@@ -278,10 +289,14 @@
   }
 
   .citiesBox {
-    height: 93vh;
-    margin-top: 6vh;
-    background: #ffffff;
-    /*overflow: auto;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    /*height: 750px;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:100%;
   }
   [class*=van-hairline]::after{
     border:none;
